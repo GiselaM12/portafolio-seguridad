@@ -1,0 +1,25 @@
+import Header from './components/Header'
+import Hero from './components/Hero'
+import About from './components/About'
+import Profile from './components/Profile'
+import TechStack from './components/TechStack'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
+
+function App() {
+  return (
+    <div className="min-h-screen bg-cyber-dark">
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Profile />
+        <TechStack />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+export default App
