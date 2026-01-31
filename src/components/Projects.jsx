@@ -46,7 +46,9 @@ const Projects = () => {
                 title: "Criptografía Aplicada",
                 description: "Espacio reservado para evidencias del tercer parcial.",
                 status: "Bloqueado"
-            },
+            }
+        ],
+        final: [
             {
                 icon: <FaShieldAlt />,
                 title: "Proyecto Final",
@@ -60,6 +62,7 @@ const Projects = () => {
         { id: 'parcial1', label: 'Parcial 1' },
         { id: 'parcial2', label: 'Parcial 2' },
         { id: 'parcial3', label: 'Parcial 3' },
+        { id: 'final', label: 'Final' },
     ];
 
     return (
@@ -90,8 +93,8 @@ const Projects = () => {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`px-6 py-3 rounded-full font-mono text-sm transition-all duration-300 border ${activeTab === tab.id
-                                        ? 'bg-cyber-primary/20 border-cyber-primary text-cyber-primary shadow-[0_0_15px_rgba(99,102,241,0.3)]'
-                                        : 'bg-cyber-surface/50 border-white/10 text-gray-400 hover:border-white/30 hover:text-white'
+                                    ? 'bg-cyber-primary/20 border-cyber-primary text-cyber-primary shadow-[0_0_15px_rgba(99,102,241,0.3)]'
+                                    : 'bg-cyber-surface/50 border-white/10 text-gray-400 hover:border-white/30 hover:text-white'
                                     }`}
                             >
                                 {tab.label}
@@ -116,8 +119,8 @@ const Projects = () => {
                             >
                                 <div className="absolute top-4 right-4">
                                     <span className={`px-3 py-1 rounded-full text-xs font-mono border ${project.status === 'Bloqueado'
-                                            ? 'bg-red-500/10 text-red-400 border-red-500/20'
-                                            : 'bg-white/5 text-cyber-accent border-white/10'
+                                        ? 'bg-red-500/10 text-red-400 border-red-500/20'
+                                        : 'bg-white/5 text-cyber-accent border-white/10'
                                         }`}>
                                         {project.status}
                                     </span>
