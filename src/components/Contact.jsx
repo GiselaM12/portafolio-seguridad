@@ -4,41 +4,6 @@ import { useState, useEffect } from 'react';
 import { FaEnvelope, FaUser, FaPaperPlane, FaCheckCircle, FaTerminal, FaExclamationTriangle, FaFingerprint, FaLock, FaServer, FaUserSecret } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
 
-// Matrix rain effect component
-const MatrixRain = () => {
-    const columns = 30;
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-            {Array.from({ length: columns }).map((_, i) => (
-                <div
-                    key={i}
-                    className="absolute text-green-500 font-mono text-xs animate-pulse"
-                    style={{
-                        left: `${(i / columns) * 100}%`,
-                        animationDelay: `${Math.random() * 2}s`,
-                        animationDuration: `${2 + Math.random() * 3}s`
-                    }}
-                >
-                    {Array.from({ length: 20 }).map((_, j) => (
-                        <div
-                            key={j}
-                            className="opacity-70"
-                            style={{
-                                opacity: 1 - (j * 0.05),
-                                animationDelay: `${j * 0.1}s`
-                            }}
-                        >
-                            {chars[Math.floor(Math.random() * chars.length)]}
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </div>
-    );
-};
-
 const Contact = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -96,20 +61,13 @@ const Contact = () => {
     };
 
     return (
-        <section id="contacto" className="min-h-screen py-20 px-4 md:px-6 bg-[#000a0f] relative overflow-hidden">
-            {/* Matrix Rain Background */}
-            <MatrixRain />
-
+        <section id="contacto" className="min-h-screen py-20 px-4 md:px-6 bg-[#030712] relative overflow-hidden">
             {/* Scanlines overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-5 z-10"
-                style={{
-                    backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,128,0.03) 2px, rgba(0,255,128,0.03) 4px)'
-                }}
-            />
+            <div className="absolute inset-0 scanlines pointer-events-none opacity-50 z-10" />
 
             {/* Glowing orbs */}
-            <div className="absolute top-20 left-10 w-64 h-64 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+            <div className="absolute top-20 left-10 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
 
             <div className="container mx-auto relative z-20">
                 <motion.div
@@ -120,18 +78,18 @@ const Contact = () => {
                     className="text-center mb-12"
                 >
                     {/* Forensic Header */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full mb-6">
-                        <FaFingerprint className="text-green-400 animate-pulse" />
-                        <span className="font-mono text-green-400 text-sm tracking-wider">FORENSIC_TERMINAL_v2.0</span>
-                        <div className="w-2 h-2 bg-green-500 rounded-full animate-ping" />
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full mb-6">
+                        <FaFingerprint className="text-violet-400 animate-pulse" />
+                        <span className="font-mono text-violet-400 text-sm tracking-wider">SECURE_CHANNEL_v2.0</span>
+                        <div className="w-2 h-2 bg-violet-500 rounded-full animate-ping" />
                     </div>
 
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">
                         <span className="text-gray-100">Secure </span>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">Communication</span>
+                        <span className="text-gradient">Communication</span>
                     </h2>
 
-                    <p className="text-green-500/80 font-mono text-sm mb-2">
+                    <p className="text-violet-500/80 font-mono text-sm mb-2">
                         {typingText}<span className="animate-ping">_</span>
                     </p>
                 </motion.div>
@@ -145,38 +103,38 @@ const Contact = () => {
                         className="relative"
                     >
                         {/* Terminal glow effect */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-green-500/20 via-cyan-500/20 to-green-500/20 rounded-lg blur-xl opacity-50" />
+                        <div className="absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-violet-500/20 rounded-lg blur-xl opacity-50" />
 
-                        <div className="relative bg-[#0a1a1f]/95 backdrop-blur-xl border border-green-500/30 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(34,197,94,0.15)]">
+                        <div className="relative bg-[#0a0f1a]/95 backdrop-blur-xl border border-violet-500/30 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(139,92,246,0.15)]">
                             {/* Terminal Header */}
-                            <div className="bg-[#0d2027] px-6 py-3 border-b border-green-500/20 flex items-center justify-between">
+                            <div className="bg-[#0d1321] px-6 py-3 border-b border-violet-500/20 flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors cursor-pointer" />
                                     <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors cursor-pointer" />
                                     <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors cursor-pointer" />
                                 </div>
-                                <div className="flex items-center gap-4 text-xs font-mono text-green-500/60">
+                                <div className="flex items-center gap-4 text-xs font-mono text-violet-500/60">
                                     <span className="flex items-center gap-1">
                                         <FaLock className="text-[10px]" /> SSL/TLS
                                     </span>
                                     <span className="flex items-center gap-1">
                                         <FaServer className="text-[10px]" /> SECURE
                                     </span>
-                                    <span>forensic@terminal:~/contact</span>
+                                    <span>secops@terminal:~/contact</span>
                                 </div>
                             </div>
 
                             {/* Terminal Info Bar */}
-                            <div className="bg-green-500/5 px-6 py-2 border-b border-green-500/10 flex items-center justify-between text-xs font-mono">
-                                <div className="flex items-center gap-4 text-green-500/60">
+                            <div className="bg-violet-500/5 px-6 py-2 border-b border-violet-500/10 flex items-center justify-between text-xs font-mono">
+                                <div className="flex items-center gap-4 text-violet-500/60">
                                     <span className="flex items-center gap-1">
                                         <FaUserSecret /> Agente: GiselaM
                                     </span>
                                     <span>|</span>
                                     <span>Acceso: NIVEL-5</span>
                                 </div>
-                                <div className="text-cyan-400/60">
-                                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" />
+                                <div className="text-violet-400/60">
+                                    <span className="inline-block w-2 h-2 bg-violet-500 rounded-full mr-2 animate-pulse" />
                                     ACTIVO
                                 </div>
                             </div>
@@ -214,13 +172,13 @@ const Contact = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {/* Nombre */}
                                         <div className="group">
-                                            <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                            <label className="block text-violet-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
                                                 <FaUser className="inline mr-2" />Identificador
                                             </label>
                                             <input
                                                 type="text"
                                                 {...register('name', { required: true, minLength: 3 })}
-                                                className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all"
+                                                className="w-full bg-[#020617] border border-violet-500/20 rounded px-4 py-3 text-violet-100 font-mono placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
                                                 placeholder="Nombre de usuario..."
                                             />
                                             {errors.name && <p className="text-red-400 text-xs mt-1 font-mono">! Campo requerido</p>}
@@ -228,7 +186,7 @@ const Contact = () => {
 
                                         {/* Email */}
                                         <div className="group">
-                                            <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                            <label className="block text-violet-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
                                                 <FaEnvelope className="inline mr-2" />Canal de Respuesta
                                             </label>
                                             <input
@@ -237,7 +195,7 @@ const Contact = () => {
                                                     required: true,
                                                     pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                                 })}
-                                                className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all"
+                                                className="w-full bg-[#020617] border border-violet-500/20 rounded px-4 py-3 text-violet-100 font-mono placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
                                                 placeholder="correo@dominio.com"
                                             />
                                             {errors.email && <p className="text-red-400 text-xs mt-1 font-mono">! Email inválido</p>}
@@ -246,13 +204,13 @@ const Contact = () => {
 
                                     {/* Asunto */}
                                     <div className="group">
-                                        <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                        <label className="block text-violet-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
                                             <FaTerminal className="inline mr-2" />Asunto del Mensaje
                                         </label>
                                         <input
                                             type="text"
                                             {...register('subject', { required: true })}
-                                            className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all"
+                                            className="w-full bg-[#020617] border border-violet-500/20 rounded px-4 py-3 text-violet-100 font-mono placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
                                             placeholder="Clasificación del mensaje..."
                                         />
                                         {errors.subject && <p className="text-red-400 text-xs mt-1 font-mono">! Campo requerido</p>}
@@ -260,13 +218,13 @@ const Contact = () => {
 
                                     {/* Mensaje */}
                                     <div className="group">
-                                        <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
-                                            <span className="text-cyan-400">&gt;</span> Payload del Mensaje
+                                        <label className="block text-violet-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                            <span className="text-purple-400">&gt;</span> Payload del Mensaje
                                         </label>
                                         <textarea
                                             {...register('message', { required: true, minLength: 10 })}
                                             rows="5"
-                                            className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all resize-none"
+                                            className="w-full bg-[#020617] border border-violet-500/20 rounded px-4 py-3 text-violet-100 font-mono placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all resize-none"
                                             placeholder="Ingrese los datos a transmitir..."
                                         />
                                         {errors.message && <p className="text-red-400 text-xs mt-1 font-mono">! Mínimo 10 caracteres</p>}
@@ -280,7 +238,7 @@ const Contact = () => {
                                         whileTap={{ scale: 0.99 }}
                                         className={`w-full py-4 rounded font-mono font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 border-2 ${isSubmitting
                                                 ? 'bg-gray-800/50 border-gray-700 text-gray-500 cursor-not-allowed'
-                                                : 'bg-green-500/10 border-green-500/50 text-green-400 hover:bg-green-500/20 hover:border-green-400 hover:text-green-300 hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]'
+                                                : 'bg-violet-500/10 border-violet-500/50 text-violet-400 hover:bg-violet-500/20 hover:border-violet-400 hover:text-violet-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]'
                                             }`}
                                     >
                                         {isSubmitting ? (
@@ -299,7 +257,7 @@ const Contact = () => {
                             </div>
 
                             {/* Terminal Footer */}
-                            <div className="bg-[#0d2027] px-6 py-3 border-t border-green-500/20 flex justify-between items-center text-[10px] text-green-500/50 font-mono">
+                            <div className="bg-[#0d1321] px-6 py-3 border-t border-violet-500/20 flex justify-between items-center text-[10px] text-violet-500/50 font-mono">
                                 <div className="flex items-center gap-4">
                                     <span>PROTOCOLO: HTTPS</span>
                                     <span>|</span>
@@ -308,7 +266,7 @@ const Contact = () => {
                                     <span>HASH: SHA-512</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-cyan-400">⬤</span>
+                                    <span className="text-violet-400">⬤</span>
                                     <span>PUERTO: 443</span>
                                 </div>
                             </div>

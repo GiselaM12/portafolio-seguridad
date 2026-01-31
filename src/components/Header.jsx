@@ -1,17 +1,30 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaShieldAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { FaShieldAlt, FaBars, FaTimes, FaTerminal, FaLock } from 'react-icons/fa';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [currentTime, setCurrentTime] = useState('');
 
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        // Update time
+        const updateTime = () => {
+            const now = new Date();
+            setCurrentTime(now.toLocaleTimeString('en-US', { hour12: false }));
+        };
+        updateTime();
+        const timeInterval = setInterval(updateTime, 1000);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearInterval(timeInterval);
+        };
     }, []);
 
     const navItems = [
@@ -28,29 +41,36 @@ const Header = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-strong shadow-lg' : 'bg-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+                    ? 'bg-[#030712]/95 backdrop-blur-xl border-b border-violet-500/20 shadow-lg shadow-violet-500/5'
+                    : 'bg-transparent'
                 }`}
         >
-            <nav className="container mx-auto px-6 py-4">
+            <nav className="container mx-auto px-6 py-3">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <motion.div
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.02 }}
                         className="flex items-center space-x-3"
                     >
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-primary to-cyber-secondary flex items-center justify-center text-white text-xl">
-                            <FaShieldAlt />
+                        <div className="relative">
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center text-white text-lg shadow-lg shadow-violet-600/30">
+                                <FaShieldAlt />
+                            </div>
+                            <div className="absolute -top-1 -right-1 w-3 h-3 bg-violet-400 rounded-full animate-pulse" />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-white tracking-wide">
+                            <h1 className="text-lg font-bold text-white tracking-wide font-mono">
                                 Gisela Moreno
                             </h1>
-                            <p className="text-xs text-cyber-primary font-mono">SecOps Portfolio</p>
+                            <p className="text-[10px] text-violet-400 font-mono flex items-center gap-1">
+                                <FaTerminal /> SecOps Portfolio
+                            </p>
                         </div>
                     </motion.div>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden md:flex items-center space-x-1">
                         {navItems.map((item, index) => (
                             <motion.a
                                 key={item.name}
@@ -58,18 +78,30 @@ const Header = () => {
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.1 }}
-                                className="text-cyber-text hover:text-cyber-primary transition-colors duration-300 font-medium"
+                                whileHover={{ scale: 1.05 }}
+                                className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10"
                             >
                                 {item.name}
                             </motion.a>
                         ))}
                     </div>
 
+                    {/* Right side - Status */}
+                    <div className="hidden md:flex items-center gap-4 text-xs font-mono">
+                        <span className="text-gray-600 flex items-center gap-1">
+                            <FaLock className="text-violet-400" />
+                            {currentTime}
+                        </span>
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 border border-violet-500/20 rounded-full">
+                            <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+                            <span className="text-violet-400">ONLINE</span>
+                        </div>
+                    </div>
+
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="md:hidden text-cyber-primary text-2xl"
+                        className="md:hidden text-violet-400 text-2xl p-2 hover:bg-violet-500/10 rounded-lg transition-colors"
                     >
                         {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
                     </button>
@@ -81,15 +113,16 @@ const Header = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden mt-4 glass-strong rounded-lg p-4"
+                        className="md:hidden mt-4 bg-[#0a0f1a]/95 backdrop-blur-xl border border-violet-500/20 rounded-lg p-4"
                     >
                         {navItems.map((item) => (
                             <a
                                 key={item.name}
                                 href={item.href}
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="block py-3 text-cyber-text hover:text-cyber-primary transition-colors duration-300"
+                                className="block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm"
                             >
+                                <span className="text-violet-500 mr-2">&gt;</span>
                                 {item.name}
                             </a>
                         ))}
