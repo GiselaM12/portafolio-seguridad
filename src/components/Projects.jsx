@@ -1,61 +1,29 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFolderPlus, FaShieldAlt, FaCode, FaLock, FaBug, FaNetworkWired } from 'react-icons/fa';
+import { FaFolderPlus, FaShieldAlt, FaCode, FaLock, FaBug, FaNetworkWired, FaHourglassHalf } from 'react-icons/fa';
 
 const Projects = () => {
     const [activeTab, setActiveTab] = useState('parcial1');
 
+    const lockedCard = {
+        icon: <FaLock />,
+        title: "Acceso Restringido",
+        description: "Contenido encriptado. Se desbloqueará al finalizar el periodo correspondiente.",
+        status: "Locked"
+    };
+
+    const comingSoonCard = {
+        icon: <FaHourglassHalf />,
+        title: "En Progreso",
+        description: "Decodificando información... Los datos estarán disponibles próximamente.",
+        status: "Loading"
+    };
+
     const projectsData = {
-        parcial1: [
-            {
-                icon: <FaShieldAlt />,
-                title: "Evidencia de Aprendizaje 1",
-                description: "Próximamente: Resultados de análisis de vulnerabilidades y seguridad lógica.",
-                status: "En desarrollo"
-            },
-            {
-                icon: <FaCode />,
-                title: "Laboratorios Técnicos",
-                description: "Próximamente: Documentación de prácticas de pentesting y hardening.",
-                status: "Pendiente"
-            },
-            {
-                icon: <FaFolderPlus />,
-                title: "Proyecto Integrador",
-                description: "Próximamente: Solución integral de seguridad para entorno corporativo simulado.",
-                status: "Planificación"
-            }
-        ],
-        parcial2: [
-            {
-                icon: <FaBug />,
-                title: "Análisis de Malware",
-                description: "Espacio reservado para evidencias del segundo parcial.",
-                status: "Bloqueado"
-            },
-            {
-                icon: <FaNetworkWired />,
-                title: "Seguridad en Redes",
-                description: "Prácticas futuras sobre configuración segura de redes.",
-                status: "Bloqueado"
-            }
-        ],
-        parcial3: [
-            {
-                icon: <FaLock />,
-                title: "Criptografía Aplicada",
-                description: "Espacio reservado para evidencias del tercer parcial.",
-                status: "Bloqueado"
-            }
-        ],
-        final: [
-            {
-                icon: <FaShieldAlt />,
-                title: "Proyecto Final",
-                description: "Defensa integral de infraestructura crítica.",
-                status: "Bloqueado"
-            }
-        ]
+        parcial1: [comingSoonCard, lockedCard, lockedCard],
+        parcial2: [lockedCard, lockedCard, lockedCard],
+        parcial3: [lockedCard, lockedCard, lockedCard],
+        final: [lockedCard, lockedCard, lockedCard]
     };
 
     const tabs = [
@@ -115,46 +83,46 @@ const Projects = () => {
                         {projectsData[activeTab].map((project, index) => (
                             <div
                                 key={index}
-                                className="glass-card rounded-2xl p-8 border border-white/5 relative overflow-hidden group hover:border-cyber-primary/30 transition-all duration-300"
+                                className={`glass-card rounded-2xl p-8 border relative overflow-hidden group transition-all duration-500 ${project.status === 'Locked'
+                                        ? 'border-red-500/10 hover:border-red-500/30'
+                                        : 'border-cyber-primary/20 hover:border-cyber-primary/50'
+                                    }`}
                             >
+                                {/* Scanline effect */}
+                                <div className="absolute inset-0 bg-scanline opacity-5 pointer-events-none"></div>
+
                                 <div className="absolute top-4 right-4">
-                                    <span className={`px-3 py-1 rounded-full text-xs font-mono border ${project.status === 'Bloqueado'
-                                        ? 'bg-red-500/10 text-red-400 border-red-500/20'
-                                        : 'bg-white/5 text-cyber-accent border-white/10'
+                                    <span className={`px-3 py-1 rounded-full text-xs font-mono border flex items-center gap-2 ${project.status === 'Locked'
+                                            ? 'bg-red-500/10 text-red-400 border-red-500/20'
+                                            : 'bg-cyber-primary/10 text-cyber-primary border-cyber-primary/20'
                                         }`}>
+                                        {project.status === 'Locked' ? <FaLock className="text-[10px]" /> : <div className="w-2 h-2 bg-cyber-primary rounded-full animate-pulse"></div>}
                                         {project.status}
                                     </span>
                                 </div>
 
-                                <div className="w-14 h-14 bg-cyber-surface rounded-xl flex items-center justify-center mb-6 text-2xl text-cyber-primary group-hover:scale-110 transition-transform duration-300">
+                                <div className={`w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-3xl transition-transform duration-300 group-hover:scale-110 ${project.status === 'Locked'
+                                        ? 'bg-red-500/5 text-red-500/50'
+                                        : 'bg-cyber-primary/10 text-cyber-primary'
+                                    }`}>
                                     {project.icon}
                                 </div>
 
-                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyber-secondary transition-colors">
+                                <h3 className={`text-xl font-bold mb-3 transition-colors ${project.status === 'Locked' ? 'text-gray-500' : 'text-white group-hover:text-cyber-primary'
+                                    }`}>
                                     {project.title}
                                 </h3>
 
-                                <p className="text-gray-400 mb-6 leading-relaxed">
-                                    {project.description}
+                                <p className="text-gray-500 mb-6 leading-relaxed font-mono text-sm">
+                                    {project.status === 'Locked' ? '>>> ENCRYPTED_DATA_PACKET_v2.0' : project.description}
                                 </p>
 
-                                <div className="flex items-center gap-2 text-sm text-cyber-muted font-mono opacity-50">
-                                    {project.status !== 'Bloqueado' && (
-                                        <>
-                                            <div className="w-2 h-2 rounded-full bg-cyber-accent animate-pulse"></div>
-                                            Coming Soon
-                                        </>
-                                    )}
-                                    {project.status === 'Bloqueado' && (
-                                        <>
-                                            <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                                            Bloqueado
-                                        </>
-                                    )}
+                                <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                    <div className={`h-full ${project.status === 'Locked'
+                                            ? 'bg-red-900/30 w-full'
+                                            : 'bg-cyber-primary w-2/3 animate-pulse'
+                                        }`}></div>
                                 </div>
-
-                                {/* Decorative gradient line */}
-                                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyber-primary to-cyber-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                             </div>
                         ))}
                     </motion.div>
