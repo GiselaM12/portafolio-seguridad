@@ -50,20 +50,13 @@ const About = () => {
                     className="glass-card rounded-2xl p-8 md:p-12 mb-12"
                 >
                     <h3 className="text-2xl md:text-3xl font-bold text-cyber-primary mb-6">
-                        Propósito del Portafolio Digital
+                        ¿Qué es este sitio?
                     </h3>
                     <p className="text-cyber-text text-lg leading-relaxed mb-6">
-                        Este portafolio digital funciona como la{' '}
-                        <span className="text-cyber-secondary font-semibold">portada técnica</span> de mi
-                        trayectoria académica en Seguridad Informática. Su propósito es documentar y presentar
-                        de manera organizada las evidencias de aprendizaje adquiridas a lo largo del curso.
+                        Este es mi espacio personal donde voy a ir subiendo todo lo que aprenda en mi clase de <span className="text-cyber-secondary font-semibold">Seguridad Informática</span>. Lo uso para guardar mis prácticas y tareas importantes.
                     </p>
                     <p className="text-cyber-text text-lg leading-relaxed">
-                        Cada apartado refleja el proceso de aprendizaje, desde los fundamentos teóricos hasta
-                        la aplicación práctica de técnicas de{' '}
-                        <span className="text-cyber-primary font-semibold">ciberseguridad</span>,{' '}
-                        <span className="text-cyber-primary font-semibold">ethical hacking</span> y{' '}
-                        <span className="text-cyber-primary font-semibold">análisis de vulnerabilidades</span>.
+                        Aquí vas a encontrar desde lo básico que voy viendo en teoría, hasta ejercicios prácticos donde intento aplicar técnicas de <span className="text-cyber-primary font-semibold">ciberseguridad</span> y <span className="text-cyber-primary font-semibold">hacking ético</span> que vemos en el curso.
                     </p>
                 </motion.div>
 
@@ -110,14 +103,10 @@ const About = () => {
                     className="glass-card rounded-2xl p-8 md:p-12"
                 >
                     <h3 className="text-2xl md:text-3xl font-bold text-cyber-accent mb-6">
-                        Evidencias del Proceso de Aprendizaje
+                        Mis Evidencias
                     </h3>
                     <p className="text-cyber-text text-lg leading-relaxed">
-                        Este portafolio documenta mi progreso a través de diferentes apartados (PF01, PF02, PF03
-                        y entrega final), cada uno representando una etapa del proceso de aprendizaje. Las
-                        evidencias incluyen investigaciones, prácticas de laboratorio, análisis de casos de
-                        estudio y proyectos aplicados que demuestran la comprensión y aplicación de los
-                        principios de seguridad informática en escenarios reales.
+                        Aquí iré poniendo mis reportes (PF01, PF02, PF03). Son básicamente las tareas grandes y el proyecto final que demuestran que le estoy entendiendo a la materia. Verás investigaciones, laboratorios que hago en clase y análisis de casos reales.
                     </p>
                 </motion.div>
             </div>

@@ -74,13 +74,13 @@ const Profile = () => {
 
                             <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
                                 <p>
-                                    Estudiante apasionada por la <span className="text-white font-semibold">Ciberseguridad</span> y la protección de activos digitales.
-                                    Actualmente cursando la materia de <span className="text-white font-semibold">Seguridad Informática</span>, donde desarrollo
-                                    competencias clave para identificar, analizar y mitigar riesgos en entornos tecnológicos.
+                                    Hola! Soy estudiante de <span className="text-white font-semibold">Ingeniería en Tecnologías de la Información</span> y me encanta todo lo que tiene que ver con proteger sistemas y datos.
                                 </p>
                                 <p>
-                                    Mi objetivo es especializarme en la defensa proactiva de sistemas y contribuir a crear entornos digitales más seguros
-                                    mediante la aplicación de estándares internacionales y mejores prácticas de la industria.
+                                    Ahora mismo estoy cursando <span className="text-white font-semibold">Seguridad Informática</span>. Me da mucha curiosidad entender cómo funcionan los ataques para saber cómo prevenirlos.
+                                </p>
+                                <p>
+                                    Quiero aprender mucho sobre ciberseguridad, defensa de sistemas y las mejores formas de mantener segura la información en internet. ¡Apenas voy empezando pero con muchas ganas de aprender!
                                 </p>
                             </div>
                         </div>
