@@ -11,7 +11,7 @@ const Contact = () => {
     const form = useRef();
 
     // EMAILJS CONFIGURATION
-    const SERVICE_ID = 'service_z79j8ij'; // Reemplaza con tu Service ID real (ej. service_zvi...)
+    const SERVICE_ID = 'service_rvgwlp8';
     const TEMPLATE_ID = 'template_le5udpj';
     const PUBLIC_KEY = 'oW7EVDlsttEgzi1tR';
 
@@ -204,8 +204,8 @@ const Contact = () => {
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.99 }}
                                     className={`w-full py-4 rounded font-mono font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 border ${isSubmitting
-                                            ? 'bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed'
-                                            : 'bg-cyber-primary/10 border-cyber-primary text-cyber-primary hover:bg-cyber-primary hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]'
+                                        ? 'bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed'
+                                        : 'bg-cyber-primary/10 border-cyber-primary text-cyber-primary hover:bg-cyber-primary hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]'
                                         }`}
                                 >
                                     {isSubmitting ? (
