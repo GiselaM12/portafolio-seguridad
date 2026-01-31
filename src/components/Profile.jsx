@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaUserShield, FaNetworkWired, FaUserSecret, FaBug, FaLaptopCode, FaFingerprint, FaLock, FaServer } from 'react-icons/fa';
+import profileImage from '../assets/profile.png';
 
 const Profile = () => {
     const interests = [
@@ -54,10 +55,14 @@ const Profile = () => {
                     className="glass-card rounded-3xl p-8 md:p-12 mb-20 max-w-5xl mx-auto border-t border-white/10"
                 >
                     <div className="flex flex-col md:flex-row items-center gap-10">
-                        <div className="relative group">
+                        <div className="relative group shrink-0">
                             <div className="absolute inset-0 bg-gradient-to-r from-cyber-primary to-cyber-secondary rounded-full blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
-                            <div className="w-40 h-40 bg-cyber-surface rounded-full flex items-center justify-center relative z-10 border-4 border-white/5 group-hover:scale-105 transition-transform duration-300">
-                                <FaLaptopCode className="text-6xl text-gray-300" />
+                            <div className="w-48 h-48 rounded-full overflow-hidden relative z-10 border-4 border-white/10 group-hover:scale-105 transition-transform duration-300">
+                                <img
+                                    src={profileImage}
+                                    alt="Gisela Moreno"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                         </div>
 
