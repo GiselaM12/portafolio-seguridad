@@ -1,14 +1,64 @@
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { useState, useRef } from 'react';
-import { FaEnvelope, FaUser, FaPaperPlane, FaCheckCircle, FaTerminal, FaShieldAlt, FaExclamationTriangle, FaCode } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaEnvelope, FaUser, FaPaperPlane, FaCheckCircle, FaTerminal, FaExclamationTriangle, FaFingerprint, FaLock, FaServer, FaUserSecret } from 'react-icons/fa';
 import emailjs from 'emailjs-com';
+
+// Matrix rain effect component
+const MatrixRain = () => {
+    const columns = 30;
+    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+            {Array.from({ length: columns }).map((_, i) => (
+                <div
+                    key={i}
+                    className="absolute text-green-500 font-mono text-xs animate-pulse"
+                    style={{
+                        left: `${(i / columns) * 100}%`,
+                        animationDelay: `${Math.random() * 2}s`,
+                        animationDuration: `${2 + Math.random() * 3}s`
+                    }}
+                >
+                    {Array.from({ length: 20 }).map((_, j) => (
+                        <div
+                            key={j}
+                            className="opacity-70"
+                            style={{
+                                opacity: 1 - (j * 0.05),
+                                animationDelay: `${j * 0.1}s`
+                            }}
+                        >
+                            {chars[Math.floor(Math.random() * chars.length)]}
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+};
 
 const Contact = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
-    const form = useRef();
+    const [typingText, setTypingText] = useState('');
+
+    const fullText = "> Iniciando canal seguro... conexión establecida.";
+
+    useEffect(() => {
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i <= fullText.length) {
+                setTypingText(fullText.slice(0, i));
+                i++;
+            } else {
+                clearInterval(timer);
+            }
+        }, 50);
+        return () => clearInterval(timer);
+    }, []);
 
     // EMAILJS CONFIGURATION
     const SERVICE_ID = 'service_rvgwlp8';
@@ -46,38 +96,43 @@ const Contact = () => {
     };
 
     return (
-        <section id="contacto" className="min-h-screen py-20 px-4 md:px-6 bg-[#020617] relative overflow-hidden">
-            {/* Background Binary Rain Effect (Static for now, could be animated) */}
-            <div className="absolute inset-0 opacity-5 pointer-events-none font-mono text-xs overflow-hidden select-none text-cyber-primary">
-                {Array.from({ length: 100 }).map((_, i) => (
-                    <div key={i} className="absolute" style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        opacity: Math.random()
-                    }}>
-                        {Math.random() > 0.5 ? '1' : '0'}
-                    </div>
-                ))}
-            </div>
+        <section id="contacto" className="min-h-screen py-20 px-4 md:px-6 bg-[#000a0f] relative overflow-hidden">
+            {/* Matrix Rain Background */}
+            <MatrixRain />
 
-            <div className="container mx-auto relative z-10">
+            {/* Scanlines overlay */}
+            <div className="absolute inset-0 pointer-events-none opacity-5 z-10"
+                style={{
+                    backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,128,0.03) 2px, rgba(0,255,128,0.03) 4px)'
+                }}
+            />
+
+            {/* Glowing orbs */}
+            <div className="absolute top-20 left-10 w-64 h-64 bg-green-500/10 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+
+            <div className="container mx-auto relative z-20">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-12"
                 >
-                    <div className="flex items-center justify-center gap-3 mb-4 text-cyber-primary">
-                        <FaTerminal />
-                        <span className="font-mono text-sm tracking-widest">SECURE_CHANNEL_ESTABLISHED</span>
+                    {/* Forensic Header */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full mb-6">
+                        <FaFingerprint className="text-green-400 animate-pulse" />
+                        <span className="font-mono text-green-400 text-sm tracking-wider">FORENSIC_TERMINAL_v2.0</span>
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-ping" />
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        <span className="text-white">Contact & </span>
-                        <span className="text-cyber-primary">Uplink</span>
+
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                        <span className="text-gray-100">Secure </span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">Communication</span>
                     </h2>
-                    <p className="text-gray-400 text-lg max-w-2xl mx-auto font-mono">
-                        // Envía un mensaje encriptado directamente a mi terminal.
+
+                    <p className="text-green-500/80 font-mono text-sm mb-2">
+                        {typingText}<span className="animate-ping">_</span>
                     </p>
                 </motion.div>
 
@@ -87,150 +142,175 @@ const Contact = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="bg-[#0f172a]/80 backdrop-blur-xl border border-cyber-primary/30 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(99,102,241,0.15)]"
+                        className="relative"
                     >
-                        {/* Terminal Header */}
-                        <div className="bg-[#1e293b]/50 px-6 py-3 border-b border-cyber-primary/20 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        {/* Terminal glow effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-green-500/20 via-cyan-500/20 to-green-500/20 rounded-lg blur-xl opacity-50" />
+
+                        <div className="relative bg-[#0a1a1f]/95 backdrop-blur-xl border border-green-500/30 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(34,197,94,0.15)]">
+                            {/* Terminal Header */}
+                            <div className="bg-[#0d2027] px-6 py-3 border-b border-green-500/20 flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors cursor-pointer" />
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors cursor-pointer" />
+                                    <div className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors cursor-pointer" />
+                                </div>
+                                <div className="flex items-center gap-4 text-xs font-mono text-green-500/60">
+                                    <span className="flex items-center gap-1">
+                                        <FaLock className="text-[10px]" /> SSL/TLS
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                        <FaServer className="text-[10px]" /> SECURE
+                                    </span>
+                                    <span>forensic@terminal:~/contact</span>
+                                </div>
                             </div>
-                            <div className="text-xs font-mono text-cyber-muted lowercase">
-                                root@portfolio:~/send-message.sh
+
+                            {/* Terminal Info Bar */}
+                            <div className="bg-green-500/5 px-6 py-2 border-b border-green-500/10 flex items-center justify-between text-xs font-mono">
+                                <div className="flex items-center gap-4 text-green-500/60">
+                                    <span className="flex items-center gap-1">
+                                        <FaUserSecret /> Agente: GiselaM
+                                    </span>
+                                    <span>|</span>
+                                    <span>Acceso: NIVEL-5</span>
+                                </div>
+                                <div className="text-cyan-400/60">
+                                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" />
+                                    ACTIVO
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="p-8 md:p-12">
-                            {submitStatus === 'success' && (
-                                <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    className="mb-8 p-4 bg-green-500/10 border border-green-500/30 rounded font-mono text-green-400 flex items-start gap-3"
-                                >
-                                    <FaCheckCircle className="mt-1" />
-                                    <div>
-                                        <p className="font-bold">TRANSMISSION_COMPLETE</p>
-                                        <p className="text-sm opacity-80">El mensaje ha sido encriptado y enviado exitosamente.</p>
-                                    </div>
-                                </motion.div>
-                            )}
+                            <div className="p-8 md:p-10">
+                                {submitStatus === 'success' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="mb-8 p-4 bg-green-500/10 border border-green-500/40 rounded font-mono text-green-400 flex items-start gap-3"
+                                    >
+                                        <FaCheckCircle className="mt-1 text-lg" />
+                                        <div>
+                                            <p className="font-bold text-green-300">[ TRANSMISIÓN EXITOSA ]</p>
+                                            <p className="text-sm opacity-80">Paquete de datos encriptado y enviado. Recibirás confirmación en breve.</p>
+                                        </div>
+                                    </motion.div>
+                                )}
 
-                            {submitStatus === 'error' && (
-                                <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    className="mb-8 p-4 bg-red-500/10 border border-red-500/30 rounded font-mono text-red-400 flex items-start gap-3"
-                                >
-                                    <FaExclamationTriangle className="mt-1" />
-                                    <div>
-                                        <p className="font-bold">CONNECTION_ERROR</p>
-                                        <p className="text-sm opacity-80">Fallo en la transmisión. Verifique sus credenciales (Service ID) o intente más tarde.</p>
-                                    </div>
-                                </motion.div>
-                            )}
+                                {submitStatus === 'error' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="mb-8 p-4 bg-red-500/10 border border-red-500/40 rounded font-mono text-red-400 flex items-start gap-3"
+                                    >
+                                        <FaExclamationTriangle className="mt-1 text-lg" />
+                                        <div>
+                                            <p className="font-bold text-red-300">[ ERROR DE TRANSMISIÓN ]</p>
+                                            <p className="text-sm opacity-80">Fallo en el protocolo. Reintente la conexión.</p>
+                                        </div>
+                                    </motion.div>
+                                )}
 
-                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {/* Nombre */}
-                                    <div className="group">
-                                        <label className="block text-cyber-primary text-xs font-mono mb-2 group-focus-within:text-white transition-colors">
-                                            &lt;input type="name" /&gt;
-                                        </label>
-                                        <div className="relative">
-                                            <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 group-focus-within:text-cyber-primary transition-colors" />
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {/* Nombre */}
+                                        <div className="group">
+                                            <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                                <FaUser className="inline mr-2" />Identificador
+                                            </label>
                                             <input
                                                 type="text"
                                                 {...register('name', { required: true, minLength: 3 })}
-                                                className="w-full bg-[#020617] border border-gray-800 rounded px-12 py-3 text-white font-mono focus:outline-none focus:border-cyber-primary focus:shadow-[0_0_15px_rgba(99,102,241,0.2)] transition-all"
-                                                placeholder="Nombre de Usuario"
+                                                className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all"
+                                                placeholder="Nombre de usuario..."
                                             />
+                                            {errors.name && <p className="text-red-400 text-xs mt-1 font-mono">! Campo requerido</p>}
                                         </div>
-                                    </div>
 
-                                    {/* Email */}
-                                    <div className="group">
-                                        <label className="block text-cyber-primary text-xs font-mono mb-2 group-focus-within:text-white transition-colors">
-                                            &lt;input type="email" /&gt;
-                                        </label>
-                                        <div className="relative">
-                                            <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 group-focus-within:text-cyber-primary transition-colors" />
+                                        {/* Email */}
+                                        <div className="group">
+                                            <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                                <FaEnvelope className="inline mr-2" />Canal de Respuesta
+                                            </label>
                                             <input
                                                 type="email"
                                                 {...register('email', {
                                                     required: true,
                                                     pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                                 })}
-                                                className="w-full bg-[#020617] border border-gray-800 rounded px-12 py-3 text-white font-mono focus:outline-none focus:border-cyber-primary focus:shadow-[0_0_15px_rgba(99,102,241,0.2)] transition-all"
+                                                className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all"
                                                 placeholder="correo@dominio.com"
                                             />
+                                            {errors.email && <p className="text-red-400 text-xs mt-1 font-mono">! Email inválido</p>}
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Asunto */}
-                                <div className="group">
-                                    <label className="block text-cyber-primary text-xs font-mono mb-2 group-focus-within:text-white transition-colors">
-                                        &lt;input type="subject" /&gt;
-                                    </label>
-                                    <div className="relative">
-                                        <FaCode className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 group-focus-within:text-cyber-primary transition-colors" />
+                                    {/* Asunto */}
+                                    <div className="group">
+                                        <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                            <FaTerminal className="inline mr-2" />Asunto del Mensaje
+                                        </label>
                                         <input
                                             type="text"
                                             {...register('subject', { required: true })}
-                                            className="w-full bg-[#020617] border border-gray-800 rounded px-12 py-3 text-white font-mono focus:outline-none focus:border-cyber-primary focus:shadow-[0_0_15px_rgba(99,102,241,0.2)] transition-all"
-                                            placeholder="Asunto de la transmisión"
+                                            className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all"
+                                            placeholder="Clasificación del mensaje..."
                                         />
+                                        {errors.subject && <p className="text-red-400 text-xs mt-1 font-mono">! Campo requerido</p>}
                                     </div>
-                                </div>
 
-                                {/* Mensaje */}
-                                <div className="group">
-                                    <label className="block text-cyber-primary text-xs font-mono mb-2 group-focus-within:text-white transition-colors">
-                                        &lt;textarea&gt;
-                                    </label>
-                                    <textarea
-                                        {...register('message', { required: true, minLength: 10 })}
-                                        rows="6"
-                                        className="w-full bg-[#020617] border border-gray-800 rounded px-4 py-3 text-white font-mono focus:outline-none focus:border-cyber-primary focus:shadow-[0_0_15px_rgba(99,102,241,0.2)] transition-all resize-none"
-                                        placeholder="Ingrese el payload del mensaje..."
-                                    />
-                                </div>
+                                    {/* Mensaje */}
+                                    <div className="group">
+                                        <label className="block text-green-500/70 text-xs font-mono mb-2 uppercase tracking-wider">
+                                            <span className="text-cyan-400">&gt;</span> Payload del Mensaje
+                                        </label>
+                                        <textarea
+                                            {...register('message', { required: true, minLength: 10 })}
+                                            rows="5"
+                                            className="w-full bg-[#001a1f] border border-green-500/20 rounded px-4 py-3 text-green-100 font-mono placeholder-green-500/30 focus:outline-none focus:border-green-400 focus:shadow-[0_0_15px_rgba(34,197,94,0.2)] transition-all resize-none"
+                                            placeholder="Ingrese los datos a transmitir..."
+                                        />
+                                        {errors.message && <p className="text-red-400 text-xs mt-1 font-mono">! Mínimo 10 caracteres</p>}
+                                    </div>
 
-                                {/* Submit Button */}
-                                <motion.button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    whileHover={{ scale: 1.01 }}
-                                    whileTap={{ scale: 0.99 }}
-                                    className={`w-full py-4 rounded font-mono font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 border ${isSubmitting
-                                        ? 'bg-gray-800 border-gray-700 text-gray-500 cursor-not-allowed'
-                                        : 'bg-cyber-primary/10 border-cyber-primary text-cyber-primary hover:bg-cyber-primary hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.4)]'
-                                        }`}
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                                            Encrypting & Sending...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <FaPaperPlane />
-                                            EXECUTE_TRANSMISSION
-                                        </>
-                                    )}
-                                </motion.button>
-                            </form>
-                        </div>
-
-                        {/* Terminal Footer */}
-                        <div className="bg-[#020617] px-6 py-3 border-t border-cyber-primary/20 flex justify-between items-center text-[10px] text-gray-500 font-mono">
-                            <div className="flex gap-4">
-                                <span>STATUS: ONLINE</span>
-                                <span>ENCRYPTION: AES-256</span>
+                                    {/* Submit Button */}
+                                    <motion.button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        whileHover={{ scale: 1.01 }}
+                                        whileTap={{ scale: 0.99 }}
+                                        className={`w-full py-4 rounded font-mono font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 border-2 ${isSubmitting
+                                                ? 'bg-gray-800/50 border-gray-700 text-gray-500 cursor-not-allowed'
+                                                : 'bg-green-500/10 border-green-500/50 text-green-400 hover:bg-green-500/20 hover:border-green-400 hover:text-green-300 hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]'
+                                            }`}
+                                    >
+                                        {isSubmitting ? (
+                                            <>
+                                                <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                                <span className="animate-pulse">Encriptando transmisión...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaPaperPlane />
+                                                INICIAR TRANSMISIÓN
+                                            </>
+                                        )}
+                                    </motion.button>
+                                </form>
                             </div>
-                            <div>
-                                PORT: 443
+
+                            {/* Terminal Footer */}
+                            <div className="bg-[#0d2027] px-6 py-3 border-t border-green-500/20 flex justify-between items-center text-[10px] text-green-500/50 font-mono">
+                                <div className="flex items-center gap-4">
+                                    <span>PROTOCOLO: HTTPS</span>
+                                    <span>|</span>
+                                    <span>CIFRADO: AES-256-GCM</span>
+                                    <span>|</span>
+                                    <span>HASH: SHA-512</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-cyan-400">⬤</span>
+                                    <span>PUERTO: 443</span>
+                                </div>
                             </div>
                         </div>
                     </motion.div>
