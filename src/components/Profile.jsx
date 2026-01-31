@@ -31,11 +31,11 @@ const Profile = () => {
     ];
 
     return (
-        <section id="perfil" className="min-h-screen py-20 px-6 relative bg-[#030712] overflow-hidden">
+        <section id="perfil" className="min-h-screen py-16 sm:py-20 px-4 sm:px-6 relative bg-[#030712] overflow-hidden">
             {/* Background effects */}
             <div className="absolute inset-0 scanlines pointer-events-none opacity-50" />
-            <div className="absolute top-40 left-0 w-[500px] h-[500px] bg-violet-600/5 rounded-full blur-[180px]" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600/5 rounded-full blur-[150px]" />
+            <div className="absolute top-20 left-0 w-64 sm:w-[500px] h-64 sm:h-[500px] bg-violet-600/5 rounded-full blur-[120px] sm:blur-[180px]" />
+            <div className="absolute bottom-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-purple-600/5 rounded-full blur-[100px] sm:blur-[150px]" />
 
             <div className="container mx-auto relative z-10">
                 <motion.div
@@ -43,18 +43,18 @@ const Profile = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-10 sm:mb-16"
                 >
                     {/* Terminal badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full mb-6">
-                        <FaUserSecret className="text-violet-400" />
-                        <span className="font-mono text-violet-400 text-sm tracking-wider">AGENT_PROFILE</span>
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-violet-500/10 border border-violet-500/30 rounded-full mb-4 sm:mb-6">
+                        <FaUserSecret className="text-violet-400 text-xs sm:text-sm" />
+                        <span className="font-mono text-violet-400 text-[10px] sm:text-sm tracking-wider">AGENT_PROFILE</span>
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
                         <span className="text-gradient">Perfil del Estudiante</span>
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-to-r from-violet-600 to-purple-600 mx-auto rounded-full" />
+                    <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-violet-600 to-purple-600 mx-auto rounded-full" />
                 </motion.div>
 
                 {/* Semblanza Académica - Terminal Style */}
@@ -63,28 +63,28 @@ const Profile = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="mb-20 max-w-5xl mx-auto"
+                    className="mb-12 sm:mb-20 max-w-5xl mx-auto"
                 >
                     <div className="bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg overflow-hidden backdrop-blur-sm">
                         {/* Terminal Header */}
-                        <div className="bg-[#0d1321] px-6 py-3 border-b border-violet-500/20 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                                <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                        <div className="bg-[#0d1321] px-3 sm:px-6 py-2 sm:py-3 border-b border-violet-500/20 flex items-center justify-between">
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                                <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-red-500/70" />
+                                <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-yellow-500/70" />
+                                <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-green-500/70" />
                             </div>
-                            <span className="text-xs font-mono text-gray-500">agent_profile.config</span>
+                            <span className="text-[10px] sm:text-xs font-mono text-gray-500">agent_profile.config</span>
                         </div>
 
-                        <div className="p-8 md:p-12">
-                            <div className="flex flex-col md:flex-row items-center gap-10">
+                        <div className="p-4 sm:p-8 md:p-12">
+                            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-10">
                                 <div className="relative group shrink-0">
                                     {/* Glow effect */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
 
-                                    {/* Hexagonal frame effect */}
+                                    {/* Profile image */}
                                     <div className="relative">
-                                        <div className="w-48 h-48 rounded-full overflow-hidden relative z-10 border-4 border-violet-500/30 group-hover:border-violet-400/50 group-hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+                                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden relative z-10 border-4 border-violet-500/30 group-hover:border-violet-400/50 group-hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
                                             <img
                                                 src={profileImage}
                                                 alt="Gisela Moreno"
@@ -92,9 +92,9 @@ const Profile = () => {
                                             />
                                         </div>
                                         {/* Status indicator */}
-                                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-violet-500/20 border border-violet-500/30 rounded-full">
-                                            <span className="flex items-center gap-1 text-xs font-mono text-violet-400">
-                                                <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+                                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 sm:px-3 py-0.5 sm:py-1 bg-violet-500/20 border border-violet-500/30 rounded-full">
+                                            <span className="flex items-center gap-1 text-[10px] sm:text-xs font-mono text-violet-400">
+                                                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-violet-400 rounded-full animate-pulse" />
                                                 ACTIVO
                                             </span>
                                         </div>
@@ -102,23 +102,21 @@ const Profile = () => {
                                 </div>
 
                                 <div className="text-center md:text-left flex-1">
-                                    <div className="text-xs font-mono text-violet-500/60 mb-2">[ID: AGENT-001]</div>
-                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 font-mono">
+                                    <div className="text-[10px] sm:text-xs font-mono text-violet-500/60 mb-1 sm:mb-2">[ID: AGENT-001]</div>
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 font-mono">
                                         Gisela Geraldine Moreno Solis
                                     </h3>
-                                    <p className="text-violet-400 text-xl font-mono mb-6 flex items-center gap-2 justify-center md:justify-start">
-                                        <FaCode /> Ingeniería en Tecnologías de la Información
+                                    <p className="text-violet-400 text-sm sm:text-lg md:text-xl font-mono mb-4 sm:mb-6 flex items-center gap-2 justify-center md:justify-start flex-wrap">
+                                        <FaCode className="shrink-0" />
+                                        <span>Ingeniería en TI</span>
                                     </p>
 
-                                    <div className="space-y-4 text-gray-400 text-lg leading-relaxed font-mono">
+                                    <div className="space-y-3 sm:space-y-4 text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed font-mono">
                                         <p>
                                             <span className="text-violet-400">$</span> Estudiante apasionada por la <span className="text-white font-semibold">Ciberseguridad</span> y la protección de activos digitales.
-                                            Actualmente cursando la materia de <span className="text-white font-semibold">Seguridad Informática</span>, donde desarrollo
-                                            competencias clave para identificar, analizar y mitigar riesgos en entornos tecnológicos.
                                         </p>
-                                        <p>
-                                            <span className="text-violet-400">$</span> Mi objetivo es especializarme en la defensa proactiva de sistemas y contribuir a crear entornos digitales más seguros
-                                            mediante la aplicación de estándares internacionales y mejores prácticas de la industria.
+                                        <p className="hidden sm:block">
+                                            <span className="text-violet-400">$</span> Mi objetivo es especializarme en la defensa proactiva de sistemas y crear entornos digitales más seguros.
                                         </p>
                                     </div>
                                 </div>
@@ -133,16 +131,16 @@ const Profile = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-8 sm:mb-12"
                 >
-                    <h3 className="text-2xl md:text-3xl font-bold text-purple-400 font-mono flex items-center justify-center gap-3">
-                        <FaTerminal />
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-400 font-mono flex items-center justify-center gap-2 sm:gap-3">
+                        <FaTerminal className="text-lg sm:text-xl" />
                         Áreas de Interés
                     </h3>
                 </motion.div>
 
                 {/* Intereses Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
                     {interests.map((interest, index) => (
                         <motion.div
                             key={index}
@@ -151,19 +149,19 @@ const Profile = () => {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
                             whileHover={{ y: -10 }}
-                            className="bg-[#0a0f1a]/80 border border-violet-500/20 p-8 rounded-lg hover:border-violet-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-300 group backdrop-blur-sm"
+                            className="bg-[#0a0f1a]/80 border border-violet-500/20 p-5 sm:p-8 rounded-lg hover:border-violet-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-300 group backdrop-blur-sm"
                         >
                             {/* Code badge */}
-                            <div className="text-xs font-mono text-violet-500/60 mb-4">
+                            <div className="text-[10px] sm:text-xs font-mono text-violet-500/60 mb-3 sm:mb-4">
                                 [{interest.code}]
                             </div>
-                            <div className="text-4xl text-violet-400 mb-6 group-hover:text-violet-300 transition-colors">
+                            <div className="text-3xl sm:text-4xl text-violet-400 mb-4 sm:mb-6 group-hover:text-violet-300 transition-colors">
                                 {interest.icon}
                             </div>
-                            <h4 className="text-xl font-bold text-white mb-3 font-mono">
+                            <h4 className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-3 font-mono">
                                 {interest.title}
                             </h4>
-                            <p className="text-gray-500 text-sm leading-relaxed">
+                            <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
                                 {interest.description}
                             </p>
                         </motion.div>
