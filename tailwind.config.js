@@ -9,13 +9,15 @@ export default {
             colors: {
                 // Paleta de ciberseguridad
                 'cyber-dark': '#0a0e27',
-                'cyber-darker': '#060913',
-                'cyber-surface': '#1a1f3a',
-                'cyber-primary': '#00ff88',
-                'cyber-secondary': '#00d4ff',
-                'cyber-accent': '#ff0080',
-                'cyber-text': '#e0e6ed',
-                'cyber-muted': '#8892a6',
+                cyber: {
+                    dark: '#030712',      // Azul noche profundo
+                    surface: '#111827',   // Gris azulado
+                    primary: '#6366f1',   // Indigo vibrante
+                    secondary: '#a855f7', // Púrpura neón
+                    accent: '#14b8a6',    // Teal/Turquesa
+                    text: '#f3f4f6',      // Blanco humo
+                    muted: '#9ca3af',     // Gris medio
+                },
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],

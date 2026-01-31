@@ -69,7 +69,7 @@ const TechStack = () => {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 viewport={{ once: true }}
                                 whileHover={{ scale: 1.1, y: -10 }}
-                                className="glass rounded-xl p-6 flex flex-col items-center justify-center gap-3 hover:glass-strong transition-all duration-300 hover:glow-primary"
+                                className="glass-card rounded-xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-cyber-surface/80 transition-all duration-300 hover:glow-primary"
                             >
                                 <div className={`text-5xl ${tech.color}`}>
                                     {tech.icon}
@@ -91,7 +91,7 @@ const TechStack = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: index * 0.2 }}
                             viewport={{ once: true }}
-                            className="glass-strong rounded-xl p-6 hover:glow-secondary transition-all duration-300"
+                            className="glass-card rounded-xl p-6 hover:glow-secondary transition-all duration-300"
                         >
                             <div className="text-4xl text-cyber-primary mb-4">
                                 {info.icon}
@@ -117,7 +117,7 @@ const TechStack = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="glass-strong rounded-2xl p-8 md:p-12 max-w-4xl mx-auto"
+                    className="glass-card rounded-2xl p-8 md:p-12 max-w-4xl mx-auto"
                 >
                     <h3 className="text-2xl md:text-3xl font-bold text-cyber-accent mb-6 text-center">
                         Despliegue y Seguridad

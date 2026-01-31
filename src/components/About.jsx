@@ -36,7 +36,7 @@ const About = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        <span className="text-gradient">Presentación del Portafolio</span>
+                        <span className="text-gradient">Sobre el Portafolio</span>
                     </h2>
                     <div className="w-20 h-1 bg-gradient-cyber mx-auto mb-8"></div>
                 </motion.div>
@@ -47,7 +47,7 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="glass-strong rounded-2xl p-8 md:p-12 mb-12"
+                    className="glass-card rounded-2xl p-8 md:p-12 mb-12"
                 >
                     <h3 className="text-2xl md:text-3xl font-bold text-cyber-primary mb-6">
                         Propósito del Portafolio Digital
@@ -87,7 +87,7 @@ const About = () => {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 viewport={{ once: true }}
                                 whileHover={{ scale: 1.05, y: -5 }}
-                                className="glass rounded-xl p-6 text-center hover:glass-strong transition-all duration-300 hover:glow-primary"
+                                className="glass-card rounded-xl p-6 text-center hover:bg-cyber-surface/80 transition-all duration-300 hover:glow-primary"
                             >
                                 <div className="text-5xl text-cyber-primary mb-4 flex justify-center">
                                     {feature.icon}
@@ -107,7 +107,7 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
                     viewport={{ once: true }}
-                    className="glass-strong rounded-2xl p-8 md:p-12"
+                    className="glass-card rounded-2xl p-8 md:p-12"
                 >
                     <h3 className="text-2xl md:text-3xl font-bold text-cyber-accent mb-6">
                         Evidencias del Proceso de Aprendizaje

@@ -60,7 +60,7 @@ const Contact = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         viewport={{ once: true }}
-                        className="glass-strong rounded-2xl p-8 md:p-12"
+                        className="glass-card rounded-2xl p-8 md:p-12"
                     >
                         {submitStatus === 'success' && (
                             <motion.div
@@ -180,8 +180,8 @@ const Contact = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 className={`w-full py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-3 transition-all duration-300 ${isSubmitting
-                                        ? 'bg-cyber-muted cursor-not-allowed'
-                                        : 'bg-gradient-cyber text-cyber-dark hover:shadow-lg hover:shadow-cyber-primary/50'
+                                    ? 'bg-cyber-muted cursor-not-allowed'
+                                    : 'bg-gradient-cyber text-cyber-dark hover:shadow-lg hover:shadow-cyber-primary/50'
                                     }`}
                             >
                                 {isSubmitting ? (
