@@ -13,7 +13,7 @@ const Contact = () => {
     // EMAILJS CONFIGURATION
     const SERVICE_ID = 'service_rvgwlp8';
     const TEMPLATE_ID = 'template_le5udpj';
-    const PUBLIC_KEY = 'oW7EVDlsttEgzi1tR';
+    const PUBLIC_KEY = 'bKBUrJaMgGD-9ZX65';
 
     const onSubmit = async (data) => {
         setIsSubmitting(true);
@@ -37,7 +37,7 @@ const Contact = () => {
                 setTimeout(() => setSubmitStatus(null), 8000);
             }
         } catch (error) {
-            console.error("Error sending email:", error);
+            console.error("EmailJS Error:", error);
             setSubmitStatus('error');
             setTimeout(() => setSubmitStatus(null), 8000);
         } finally {
