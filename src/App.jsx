@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Activities from './pages/Activities'
 import ActivityDetail from './pages/ActivityDetail'
 import Footer from './components/Footer'
+import HackingGame from './components/HackingGame'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/actividades/:id" element={<ActivityDetail />} />
           </Routes>
         </main>
+        <HackingGame />
         <Footer />
       </div>
     </HashRouter>
