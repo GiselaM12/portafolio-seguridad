@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaShieldAlt, FaLock, FaTerminal, FaServer } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     const quickLinks = [
-        { name: 'Inicio', href: '#inicio' },
-        { name: 'Proyectos', href: '#proyectos' },
-        { name: 'Perfil', href: '#perfil' },
-        { name: 'Contacto', href: '#contacto' },
+        { name: 'Inicio', path: '/' },
+        { name: 'Proyectos', path: '/#proyectos' },
+        { name: 'Perfil', path: '/#perfil' },
+        { name: 'Contacto', path: '/#contacto' },
     ];
 
     return (
@@ -53,14 +54,14 @@ const Footer = () => {
                         </h4>
                         <div className="flex flex-wrap gap-2 sm:gap-0 sm:flex-col sm:space-y-1.5 justify-center sm:justify-start font-mono text-xs sm:text-sm">
                             {quickLinks.map((link, index) => (
-                                <a
+                                <Link
                                     key={index}
-                                    href={link.href}
+                                    to={link.path}
                                     className="text-gray-500 hover:text-violet-400 transition-colors px-2 sm:px-0"
                                 >
                                     <span className="text-violet-500/50 hidden sm:inline mr-1">▸</span>
                                     {link.name}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </motion.div>

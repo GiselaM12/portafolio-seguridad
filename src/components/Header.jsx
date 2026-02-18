@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaShieldAlt, FaBars, FaTimes, FaTerminal, FaLock } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -28,13 +30,43 @@ const Header = () => {
     }, []);
 
     const navItems = [
-        { name: 'Inicio', href: '#inicio' },
-        { name: 'Presentación', href: '#presentacion' },
-        { name: 'Perfil', href: '#perfil' },
-        { name: 'Proyectos', href: '#proyectos' },
-        { name: 'Tecnologías', href: '#tecnologias' },
-        { name: 'Contacto', href: '#contacto' },
+        { name: 'Inicio', path: '/' },
+        { name: 'Actividades', path: '/actividades' },
+        { name: 'Presentación', path: '/#presentacion' },
+        { name: 'Perfil', path: '/#perfil' },
+        { name: 'Proyectos', path: '/#proyectos' },
+        { name: 'Tecnologías', path: '/#tecnologias' },
+        { name: 'Contacto', path: '/#contacto' },
     ];
+
+    const isHome = location.pathname === '/';
+
+    const getLinkComponent = (item) => {
+        const isHash = item.path.startsWith('/#');
+
+        if (isHash) {
+            if (isHome) {
+                return (
+                    <a href={item.path.substring(1)} className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10">
+                        {item.name}
+                    </a>
+                );
+            } else {
+                return (
+                    <Link to={item.path} className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10">
+                        {item.name}
+                    </Link>
+                );
+            }
+        }
+
+        // Regular link
+        return (
+            <Link to={item.path} className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10">
+                {item.name}
+            </Link>
+        );
+    };
 
     return (
         <motion.header
@@ -42,47 +74,47 @@ const Header = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-[#030712]/95 backdrop-blur-xl border-b border-violet-500/20 shadow-lg shadow-violet-500/5'
-                    : 'bg-transparent'
+                ? 'bg-[#030712]/95 backdrop-blur-xl border-b border-violet-500/20 shadow-lg shadow-violet-500/5'
+                : 'bg-transparent'
                 }`}
         >
             <nav className="container mx-auto px-6 py-3">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="flex items-center space-x-3"
-                    >
-                        <div className="relative">
-                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center text-white text-lg shadow-lg shadow-violet-600/30">
-                                <FaShieldAlt />
+                    <Link to="/">
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            className="flex items-center space-x-3 cursor-pointer"
+                        >
+                            <div className="relative">
+                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center text-white text-lg shadow-lg shadow-violet-600/30">
+                                    <FaShieldAlt />
+                                </div>
+                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-violet-400 rounded-full animate-pulse" />
                             </div>
-                            <div className="absolute -top-1 -right-1 w-3 h-3 bg-violet-400 rounded-full animate-pulse" />
-                        </div>
-                        <div>
-                            <h1 className="text-lg font-bold text-white tracking-wide font-mono">
-                                Gisela Moreno
-                            </h1>
-                            <p className="text-[10px] text-violet-400 font-mono flex items-center gap-1">
-                                <FaTerminal /> SecOps Portfolio
-                            </p>
-                        </div>
-                    </motion.div>
+                            <div>
+                                <h1 className="text-lg font-bold text-white tracking-wide font-mono">
+                                    Gisela Moreno
+                                </h1>
+                                <p className="text-[10px] text-violet-400 font-mono flex items-center gap-1">
+                                    <FaTerminal /> SecOps Portfolio
+                                </p>
+                            </div>
+                        </motion.div>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-1">
                         {navItems.map((item, index) => (
-                            <motion.a
+                            <motion.div
                                 key={item.name}
-                                href={item.href}
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ scale: 1.05 }}
-                                className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10"
                             >
-                                {item.name}
-                            </motion.a>
+                                {getLinkComponent(item)}
+                            </motion.div>
                         ))}
                     </div>
 
@@ -116,15 +148,25 @@ const Header = () => {
                         className="md:hidden mt-4 bg-[#0a0f1a]/95 backdrop-blur-xl border border-violet-500/20 rounded-lg p-4"
                     >
                         {navItems.map((item) => (
-                            <a
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm"
-                            >
-                                <span className="text-violet-500 mr-2">&gt;</span>
-                                {item.name}
-                            </a>
+                            <div key={item.name} onClick={() => setIsMobileMenuOpen(false)}>
+                                {isHome && item.path.startsWith('/#') ? (
+                                    <a
+                                        href={item.path.substring(1)}
+                                        className="block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm"
+                                    >
+                                        <span className="text-violet-500 mr-2">&gt;</span>
+                                        {item.name}
+                                    </a>
+                                ) : (
+                                    <Link
+                                        to={item.path}
+                                        className="block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm"
+                                    >
+                                        <span className="text-violet-500 mr-2">&gt;</span>
+                                        {item.name}
+                                    </Link>
+                                )}
+                            </div>
                         ))}
                     </motion.div>
                 )}
