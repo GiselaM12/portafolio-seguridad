@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite'
+import { defineConfig } 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/portafolio-seguridad/',
   base: '/portafolio-seguridad/',
 })
