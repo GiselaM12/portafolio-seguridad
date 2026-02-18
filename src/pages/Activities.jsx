@@ -5,9 +5,16 @@ const Activities = () => {
     return (
         <div className="pt-24 pb-16 min-h-screen">
             <div className="max-w-7xl mx-auto px-6">
-                <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent mb-12 text-center animate-pulse">
-                    Actividades del Curso
-                </h1>
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent mb-4 animate-pulse">
+                        Actividades del Curso
+                    </h1>
+                    <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full">
+                        <h2 className="text-blue-400 font-mono text-sm md:text-base tracking-wider">
+                            PARCIAL 1: FUNDAMENTOS DEL HACKING ÉTICO
+                        </h2>
+                    </div>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {activities.map((activity) => (
