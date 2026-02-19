@@ -137,7 +137,7 @@ const ActivityDetail = () => {
                     {fileUrl ? (
                         <a
                             href={fileUrl}
-                            download
+                            download={`Act${activity.id}-176522${fileUrl.substring(fileUrl.lastIndexOf('.'))}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group relative px-6 py-2 bg-transparent overflow-hidden rounded border border-red-500/50 text-red-500 font-mono text-sm tracking-widest hover:text-white hover:border-red-500 transition-all"
