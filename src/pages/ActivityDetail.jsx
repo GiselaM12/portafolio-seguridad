@@ -141,98 +141,11 @@ const ActivityDetail = () => {
         }
     `;
 
-    // Estilos para la versión Impresa (Documento Formal)
-    const printStyles = `
-        .print-container {
-            font-family: 'Times New Roman', Times, serif;
-            color: #000000;
-            line-height: 1.5;
-            background-color: white;
-            padding: 20mm; /* Márgenes estándar */
-            width: 210mm; /* Ancho A4 */
-            min-height: 297mm;
-            box-sizing: border-box;
-        }
-        .print-container h1 {
-            font-size: 24pt;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-            color: #1a202c;
-            text-transform: uppercase;
-        }
-        .print-container .subtitle {
-            text-align: center;
-            font-size: 14pt;
-            margin-bottom: 30px;
-            color: #4a5568;
-            font-style: italic;
-        }
-        .print-container .metadata-box {
-            border: 1px solid #000;
-            padding: 15px;
-            margin-bottom: 30px;
-            background-color: #f8f9fa;
-        }
-        .print-container .metadata-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 11pt;
-        }
-        .print-content h2 {
-            font-size: 16pt;
-            font-weight: bold;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            color: #2d3748;
-            border-bottom: 2px solid #2d3748;
-            padding-bottom: 5px;
-        }
-        .print-content p {
-            margin-bottom: 12px;
-            text-align: justify;
-            font-size: 12pt;
-        }
-        .print-content ul {
-            margin-bottom: 15px;
-            padding-left: 25px;
-            list-style-type: disc;
-        }
-        .print-content li {
-            margin-bottom: 5px;
-            font-size: 12pt;
-        }
-        .print-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 10pt;
-            page-break-inside: avoid;
-        }
-        .print-content th {
-            background-color: #e2e8f0;
-            color: #000;
-            font-weight: bold;
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-        }
-        .print-content td {
-            border: 1px solid #000;
-            padding: 8px;
-            color: #000;
-        }
-        .print-content strong {
-            font-weight: bold;
-            color: #000;
-        }
-    `;
+
 
     return (
         <div className="pt-24 pb-16 min-h-screen bg-[#050505] text-gray-200 font-sans selection:bg-red-900 selection:text-white">
             <style>{customStyles}</style>
-            <style>{printStyles}</style>
 
             {/* Background Grid & Noise */}
             <div className="fixed inset-0 pointer-events-none z-0">

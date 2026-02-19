@@ -3,7 +3,7 @@ export const activities = [
     id: 1,
     title: "ACTIVIDAD 01 - Análisis en grupo de un ciberataque real y su impacto empresarial (Caso Equifax 2017)",
     description: "Análisis forense y estratégico del ciberataque a Equifax, evaluando vulnerabilidades, impacto financiero y cumplimiento normativo bajo estándares ISO 27001, NIST y GDPR.",
-    date: "2024-02-10",
+    date: "2026-02-18",
     tags: ["Equifax", "CVE-2017-5638", "Impacto Económico", "Análisis Forense", "ISO 27001"],
     content: `
       <h2>Introducción</h2>
