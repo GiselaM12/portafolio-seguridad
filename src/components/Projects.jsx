@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt } from 'react-icons/fa';
+import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { activities } from '../data/activities';
 
 const Projects = () => {
     const [activeTab, setActiveTab] = useState('parcial1');
@@ -13,43 +14,31 @@ const Projects = () => {
         status: "Locked"
     };
 
-    // Tarjetas principales para Parcial 1 (ya que hay 2 cuadros libres)
-    // Vamos a dividir las actividades en 2 grupos: Actividades Técnicas y Actividades de Gestión/Investigación
-    // O simplemente listar las más recientes.
-    // Dado que el usuario dijo "agrega las actividades porque tengo dos cuadros que no voy a ocupar",
-    // asumiré que quiere ver accesos directos específicos o divididos.
-
-    // Opción A: Mantener "Repositorio General" y agregar accesos a actividad específica.
-    // Opción B: Convertir los 3 cuadros en enlaces directos a actividades del Parcial 1.
-    // El usuario tiene 6 actividades. 3 cuadros no son suficientes para todas.
-    // Lo mejor es hacer 3 cuadros que agrupen o destaquen las actividades clave.
-
-    const activitiesRepoCard = {
-        icon: <FaFolderPlus />,
-        title: "Repositorio Completo",
-        description: "Acceso al listado completo de todas las actividades y evidencias del Parcial.",
-        status: "Available",
-        link: "/actividades"
+    // Helper to select icon based on activity ID or keyword
+    const getIconForActivity = (id) => {
+        switch (id) {
+            case 1: return <FaBug />; // Ciberataque
+            case 2: return <FaShieldAlt />; // X.800
+            case 3: return <FaTerminal />; // IPTables
+            case 4: return <FaServer />; // Defensa en Red
+            case 5: return <FaUserSecret />; // Pentesting
+            case 6: return <FaNetworkWired />; // VPN
+            default: return <FaFolderPlus />;
+        }
     };
 
-    const highlightsCard1 = {
-        icon: <FaShieldAlt />,
-        title: "Análisis de Ciberataques",
-        description: "Estudios de caso sobre incidentes reales e impacto empresarial (Actividad 01).",
+    // Transform activities to project card format
+    const parcial1Activities = activities.map(act => ({
+        icon: getIconForActivity(act.id),
+        title: act.title, // Keep full title
+        description: act.description,
         status: "Available",
-        link: "/actividades/1"
-    };
-
-    const highlightsCard2 = {
-        icon: <FaTerminal />,
-        title: "Seguridad en Redes",
-        description: "Configuración de IPTables, X.800 y defensa en profundidad (Actividades 02-04).",
-        status: "Available",
-        link: "/actividades/3" // Link to iptables activity as representative
-    };
+        link: `/actividades/${act.id}`,
+        isActivity: true
+    }));
 
     const projectsData = {
-        parcial1: [activitiesRepoCard, highlightsCard1, highlightsCard2],
+        parcial1: parcial1Activities,
         parcial2: [lockedCard, lockedCard, lockedCard],
         parcial3: [lockedCard, lockedCard, lockedCard],
         final: [lockedCard, lockedCard, lockedCard]
@@ -131,10 +120,10 @@ const Projects = () => {
                                     className={`bg-[#0a0f1a]/80 backdrop-blur-sm rounded-lg border relative overflow-hidden group transition-all duration-500 ${project.status === 'Locked'
                                         ? 'border-red-500/20 hover:border-red-500/40'
                                         : 'border-violet-500/20 hover:border-violet-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] cursor-pointer'
-                                        } block`} // Added 'block' for Link styling
+                                        } block h-full flex flex-col`} // Added h-full and flex-col for consistent height
                                 >
                                     {/* Terminal Header */}
-                                    <div className="bg-[#0d1321] px-3 sm:px-4 py-1.5 sm:py-2 border-b border-violet-500/10 flex items-center justify-between">
+                                    <div className="bg-[#0d1321] px-3 sm:px-4 py-1.5 sm:py-2 border-b border-violet-500/10 flex items-center justify-between flex-shrink-0">
                                         <div className="flex items-center gap-1 sm:gap-1.5">
                                             <div className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${project.status === 'Locked' ? 'bg-red-500/70' : 'bg-green-500/70'}`} />
                                             <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-yellow-500/70" />
@@ -149,11 +138,16 @@ const Projects = () => {
                                         </span>
                                     </div>
 
-                                    <div className="p-4 sm:p-6">
+                                    <div className="p-4 sm:p-6 flex-grow flex flex-col">
                                         {/* Code identifier */}
                                         <div className="text-[10px] sm:text-xs font-mono text-violet-500/50 mb-3 sm:mb-4 flex justify-between">
-                                            <span>[PROJ-{String(index + 1).padStart(3, '0')}]</span>
-                                            {isLink && <FaExternalLinkAlt className="opacity-0 group-hover:opacity-100 transition-opacity" />}
+                                            <span>
+                                                {project.isActivity
+                                                    ? `[ACT-${String(index + 1).padStart(3, '0')}]`
+                                                    : `[PROJ-${String(index + 1).padStart(3, '0')}]`
+                                                }
+                                            </span>
+                                            {isLink && <FaExternalLinkAlt className="opacity-0 group-hover:opacity-100 transition-opacity text-violet-400" />}
                                         </div>
 
                                         <div className={`w-10 sm:w-14 h-10 sm:h-14 rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-xl sm:text-2xl transition-all duration-300 group-hover:scale-110 ${project.status === 'Locked'
@@ -163,19 +157,19 @@ const Projects = () => {
                                             {project.icon}
                                         </div>
 
-                                        <div className="flex items-center justify-between group-hover:translate-x-1 transition-transform">
-                                            <h3 className={`text-sm sm:text-lg font-bold mb-1.5 sm:mb-2 font-mono transition-colors ${project.status === 'Locked' ? 'text-gray-500' : 'text-white group-hover:text-violet-400'
+                                        <div className="flex items-center justify-between group-hover:translate-x-1 transition-transform mb-2">
+                                            <h3 className={`text-sm sm:text-base font-bold font-mono transition-colors line-clamp-2 ${project.status === 'Locked' ? 'text-gray-500' : 'text-white group-hover:text-violet-400'
                                                 }`}>
                                                 {project.title}
                                             </h3>
                                         </div>
 
-                                        <p className="text-gray-600 mb-3 sm:mb-4 font-mono text-[10px] sm:text-xs leading-relaxed">
+                                        <p className="text-gray-600 mb-4 font-mono text-[10px] sm:text-xs leading-relaxed line-clamp-3 flex-grow">
                                             {project.status === 'Locked' ? '>>> ENCRYPTED' : project.description}
                                         </p>
 
                                         {/* Progress bar */}
-                                        <div className="w-full h-0.5 sm:h-1 bg-gray-800 rounded-full overflow-hidden">
+                                        <div className="w-full h-0.5 sm:h-1 bg-gray-800 rounded-full overflow-hidden mt-auto">
                                             <div className={`h-full transition-all duration-500 ${project.status === 'Locked'
                                                 ? 'bg-red-900/50 w-full'
                                                 : 'bg-violet-500 w-full animate-pulse'
@@ -199,7 +193,7 @@ const Projects = () => {
                     <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg backdrop-blur-sm">
                         <FaTerminal className="text-violet-400 text-xs sm:text-sm" />
                         <span className="text-gray-500 font-mono text-[10px] sm:text-xs">
-                            <span className="text-violet-400">$</span> ls /{activeTab}
+                            <span className="text-violet-400">$</span> ls /{activeTab} -la
                         </span>
                     </div>
                 </motion.div>
