@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaShieldAlt, FaBars, FaTimes, FaTerminal, FaLock } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -41,30 +41,53 @@ const Header = () => {
 
     const isHome = location.pathname === '/';
 
-    const getLinkComponent = (item) => {
-        const isHash = item.path.startsWith('/#');
+    const navigate = useNavigate();
 
-        if (isHash) {
-            if (isHome) {
-                return (
-                    <a href={item.path.substring(1)} className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10">
-                        {item.name}
-                    </a>
-                );
-            } else {
-                return (
-                    <Link to={item.path} className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10">
-                        {item.name}
-                    </Link>
-                );
-            }
+    const handleNavigation = (e, item) => {
+        e.preventDefault();
+
+        // Handle Mobile Menu Close
+        if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+
+        // Case 1: External/Standard Route (Actividades)
+        if (!item.path.startsWith('/#') && item.path !== '/') {
+            navigate(item.path);
+            return;
         }
 
-        // Regular link
+        // Case 2: Home Page (Scroll to Top)
+        if (item.path === '/') {
+            if (location.pathname === '/') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                navigate('/');
+            }
+            return;
+        }
+
+        // Case 3: Section Anchor (/#section)
+        const targetId = item.path.substring(2);
+        if (location.pathname === '/') {
+            const element = document.getElementById(targetId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            navigate('/', { state: { targetId } });
+        }
+    };
+
+    const NavLink = ({ item, isMobile = false }) => {
+        // Base classes
+        const baseClasses = isMobile
+            ? "block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm cursor-pointer"
+            : "px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10 cursor-pointer";
+
         return (
-            <Link to={item.path} className="px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10">
+            <div onClick={(e) => handleNavigation(e, item)} className={baseClasses}>
+                {isMobile && <span className="text-violet-500 mr-2">&gt;</span>}
                 {item.name}
-            </Link>
+            </div>
         );
     };
 
@@ -113,7 +136,7 @@ const Header = () => {
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ scale: 1.05 }}
                             >
-                                {getLinkComponent(item)}
+                                <NavLink item={item} />
                             </motion.div>
                         ))}
                     </div>
@@ -148,24 +171,8 @@ const Header = () => {
                         className="md:hidden mt-4 bg-[#0a0f1a]/95 backdrop-blur-xl border border-violet-500/20 rounded-lg p-4"
                     >
                         {navItems.map((item) => (
-                            <div key={item.name} onClick={() => setIsMobileMenuOpen(false)}>
-                                {isHome && item.path.startsWith('/#') ? (
-                                    <a
-                                        href={item.path.substring(1)}
-                                        className="block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm"
-                                    >
-                                        <span className="text-violet-500 mr-2">&gt;</span>
-                                        {item.name}
-                                    </a>
-                                ) : (
-                                    <Link
-                                        to={item.path}
-                                        className="block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm"
-                                    >
-                                        <span className="text-violet-500 mr-2">&gt;</span>
-                                        {item.name}
-                                    </Link>
-                                )}
+                            <div key={item.name}>
+                                <NavLink item={item} isMobile={true} />
                             </div>
                         ))}
                     </motion.div>
