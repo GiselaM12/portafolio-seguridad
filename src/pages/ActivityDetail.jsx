@@ -21,16 +21,18 @@ const ActivityDetail = () => {
         );
     }
 
+    const printRef = useRef(null);
+
     const handleExportPDF = async () => {
-        if (!contentRef.current) return;
+        if (!printRef.current) return;
 
         setIsExporting(true);
-        const element = contentRef.current;
+        const element = printRef.current;
 
         try {
             const canvas = await html2canvas(element, {
                 scale: 2,
-                backgroundColor: '#0a0f1a', // Match card background
+                backgroundColor: '#ffffff',
                 useCORS: true,
                 logging: false,
                 windowWidth: element.scrollWidth,
@@ -50,22 +52,20 @@ const ActivityDetail = () => {
             let heightLeft = imgHeight;
             let position = 0;
 
-            // First page
             pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
             heightLeft -= pageHeight;
 
-            // Subsequent pages
             while (heightLeft > 0) {
-                position -= pageHeight; // Move image up by one page height
+                position -= pageHeight;
                 pdf.addPage();
                 pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
             }
 
-            pdf.save(`Actividad_${activity.id}_Reporte_Completo.pdf`);
+            pdf.save(`Reporte_Formal_Actividad_${activity.id}.pdf`);
         } catch (error) {
             console.error("PDF Export failed:", error);
-            alert("Hubo un error al generar el PDF. Por favor intenta de nuevo.");
+            alert("Hubo un error al generar el PDF.");
         }
 
         setIsExporting(false);
@@ -141,9 +141,98 @@ const ActivityDetail = () => {
         }
     `;
 
+    // Estilos para la versión Impresa (Documento Formal)
+    const printStyles = `
+        .print-container {
+            font-family: 'Times New Roman', Times, serif;
+            color: #000000;
+            line-height: 1.5;
+            background-color: white;
+            padding: 20mm; /* Márgenes estándar */
+            width: 210mm; /* Ancho A4 */
+            min-height: 297mm;
+            box-sizing: border-box;
+        }
+        .print-container h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1a202c;
+            text-transform: uppercase;
+        }
+        .print-container .subtitle {
+            text-align: center;
+            font-size: 14pt;
+            margin-bottom: 30px;
+            color: #4a5568;
+            font-style: italic;
+        }
+        .print-container .metadata-box {
+            border: 1px solid #000;
+            padding: 15px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+        }
+        .print-container .metadata-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 11pt;
+        }
+        .print-content h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #2d3748;
+            border-bottom: 2px solid #2d3748;
+            padding-bottom: 5px;
+        }
+        .print-content p {
+            margin-bottom: 12px;
+            text-align: justify;
+            font-size: 12pt;
+        }
+        .print-content ul {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            list-style-type: disc;
+        }
+        .print-content li {
+            margin-bottom: 5px;
+            font-size: 12pt;
+        }
+        .print-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+        .print-content th {
+            background-color: #e2e8f0;
+            color: #000;
+            font-weight: bold;
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        .print-content td {
+            border: 1px solid #000;
+            padding: 8px;
+            color: #000;
+        }
+        .print-content strong {
+            font-weight: bold;
+            color: #000;
+        }
+    `;
+
     return (
         <div className="pt-24 pb-16 min-h-screen bg-[#050505] text-gray-200 font-sans selection:bg-red-900 selection:text-white">
             <style>{customStyles}</style>
+            <style>{printStyles}</style>
 
             {/* Background Grid & Noise */}
             <div className="fixed inset-0 pointer-events-none z-0">
@@ -256,6 +345,33 @@ const ActivityDetail = () => {
                         </footer>
                     </div>
                 </motion.article>
+
+                {/* HIDDEN PRINT VERSION (Formal Document Style) */}
+                <div style={{ position: 'absolute', top: '-10000px', left: 0 }}>
+                    <div ref={printRef} className="print-container">
+                        {/* Formal Header */}
+                        <div style={{ borderBottom: '3px solid black', paddingBottom: '20px', marginBottom: '30px', textAlign: 'center' }}>
+                            <h1 style={{ fontSize: '18pt', margin: 0 }}>PORTAFOLIO DE EVIDENCIAS</h1>
+                            <p style={{ fontSize: '14pt', margin: '5px 0' }}>SEGURIDAD INFORMÁTICA - CNO V</p>
+                        </div>
+
+                        <div className="metadata-box">
+                            <div className="metadata-row"><strong>Actividad:</strong> <span>{activity.title}</span></div>
+                            <div className="metadata-row"><strong>Alumno:</strong> <span>Gisela Geraldine Moreno Solis</span></div>
+                            <div className="metadata-row"><strong>Fecha:</strong> <span>{activity.date}</span></div>
+                            <div className="metadata-row"><strong>ID Reporte:</strong> <span>EQX-2017-{String(activity.id).padStart(3, '0')}</span></div>
+                        </div>
+
+                        {/* Formal Content */}
+                        <div className="print-content" dangerouslySetInnerHTML={{ __html: activity.content }} />
+
+                        {/* Formal Footer */}
+                        <div style={{ marginTop: '50px', borderTop: '1px solid #ccc', paddingTop: '10px', fontSize: '10pt', textAlign: 'center', color: '#666' }}>
+                            <p>Documento generado digitalmente - Portafolio Académico 2024</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );
