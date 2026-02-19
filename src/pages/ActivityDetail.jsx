@@ -25,7 +25,7 @@ const ActivityDetail = () => {
             3: "ACT 03.jfif", // Image
             4: "1765222-act04.pdf",
             5: "176522_Act 5.pdf",
-            6: "176658-act06.docx", // Word Doc
+            6: "176658-act06.pdf", // Expected PDF
         };
         const fileName = fileMap[id];
         return fileName ? `/${fileName}` : null;
