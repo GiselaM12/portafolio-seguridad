@@ -21,8 +21,6 @@ const ActivityDetail = () => {
         );
     }
 
-
-
     const handleExportPDF = async () => {
         if (!contentRef.current) return;
 
@@ -141,8 +139,6 @@ const ActivityDetail = () => {
         }
     `;
 
-
-
     return (
         <div className="pt-24 pb-16 min-h-screen bg-[#050505] text-gray-200 font-sans selection:bg-red-900 selection:text-white">
             <style>{customStyles}</style>
@@ -258,33 +254,6 @@ const ActivityDetail = () => {
                         </footer>
                     </div>
                 </motion.article>
-
-                {/* HIDDEN PRINT VERSION (Formal Document Style) */}
-                <div style={{ position: 'absolute', top: '-10000px', left: 0 }}>
-                    <div ref={printRef} className="print-container">
-                        {/* Formal Header */}
-                        <div style={{ borderBottom: '3px solid black', paddingBottom: '20px', marginBottom: '30px', textAlign: 'center' }}>
-                            <h1 style={{ fontSize: '18pt', margin: 0 }}>PORTAFOLIO DE EVIDENCIAS</h1>
-                            <p style={{ fontSize: '14pt', margin: '5px 0' }}>SEGURIDAD INFORMÁTICA - CNO V</p>
-                        </div>
-
-                        <div className="metadata-box">
-                            <div className="metadata-row"><strong>Actividad:</strong> <span>{activity.title}</span></div>
-                            <div className="metadata-row"><strong>Alumno:</strong> <span>Gisela Geraldine Moreno Solis</span></div>
-                            <div className="metadata-row"><strong>Fecha:</strong> <span>{activity.date}</span></div>
-                            <div className="metadata-row"><strong>ID Reporte:</strong> <span>EQX-2017-{String(activity.id).padStart(3, '0')}</span></div>
-                        </div>
-
-                        {/* Formal Content */}
-                        <div className="print-content" dangerouslySetInnerHTML={{ __html: activity.content }} />
-
-                        {/* Formal Footer */}
-                        <div style={{ marginTop: '50px', borderTop: '1px solid #ccc', paddingTop: '10px', fontSize: '10pt', textAlign: 'center', color: '#666' }}>
-                            <p>Documento generado digitalmente - Portafolio Académico 2024</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     );
