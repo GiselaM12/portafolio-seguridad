@@ -24,15 +24,15 @@ const ActivityDetail = () => {
 
 
     const handleExportPDF = async () => {
-        if (!printRef.current) return;
+        if (!contentRef.current) return;
 
         setIsExporting(true);
-        const element = printRef.current;
+        const element = contentRef.current;
 
         try {
             const canvas = await html2canvas(element, {
                 scale: 2,
-                backgroundColor: '#ffffff',
+                backgroundColor: '#0a0a0a', // Cyberpunk background
                 useCORS: true,
                 logging: false,
                 windowWidth: element.scrollWidth,
@@ -62,7 +62,7 @@ const ActivityDetail = () => {
                 heightLeft -= pageHeight;
             }
 
-            pdf.save(`Reporte_Formal_Actividad_${activity.id}.pdf`);
+            pdf.save(`Reporte_Forense_Actividad_${activity.id}.pdf`);
         } catch (error) {
             console.error("PDF Export failed:", error);
             alert("Hubo un error al generar el PDF.");
