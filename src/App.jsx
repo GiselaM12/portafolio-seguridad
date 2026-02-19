@@ -19,9 +19,6 @@ function App() {
           </Routes>
         </main>
         <HackingGame />
-        <div className="fixed bottom-2 right-2 z-50 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded opacity-75 pointer-events-none">
-          V2.0 - LIVE (18 FEB)
-        </div>
         <Footer />
       </div>
     </HashRouter>
