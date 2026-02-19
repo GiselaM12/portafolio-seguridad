@@ -34,7 +34,7 @@ const Header = () => {
         { name: 'Actividades', path: '/actividades' },
         { name: 'Presentación', path: '/#presentacion' },
         { name: 'Perfil', path: '/#perfil' },
-        { name: 'Proyectos', path: '/#proyectos' },
+
         { name: 'Tecnologías', path: '/#tecnologias' },
         { name: 'Contacto', path: '/#contacto' },
     ];
