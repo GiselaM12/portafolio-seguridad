@@ -255,7 +255,62 @@ export const activities = [
     tags: ["Estándares", "X.800", "RFC 4949", "Teoría"],
     content: `
       <h2>Introducción</h2>
-      <p>Los estándares internacionales definen el marco de trabajo para la seguridad en redes. Aquí exploramos X.800 y RFC 4949.</p>
+      <p>La seguridad en redes de computadoras se basa en estándares internacionales que definen un lenguaje y una arquitectura común. Esta actividad analiza la arquitectura de seguridad OSI definida en la recomendación <strong>X.800 de la UIT-T</strong> y el glosario de seguridad de Internet <strong>RFC 4949</strong>.</p>
+      
+      <h2>Arquitectura de Seguridad OSI (X.800)</h2>
+      <p>La norma X.800 proporciona una descripción general de los servicios de seguridad y los mecanismos necesarios para proporcionarlos. Se divide fundamentalmente en tres conceptos clave: ataques, servicios y mecanismos.</p>
+      
+      <h3 class="text-violet-400 font-mono text-lg mt-6 mb-2">Servicios de Seguridad (X.800)</h3>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-violet-300">
+                <tr>
+                    <th class="p-3 border border-gray-700">Servicio</th>
+                    <th class="p-3 border border-gray-700">Descripción</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-300">
+                <tr><td class="p-3 border border-gray-700 font-bold">Autenticación</td><td class="p-3 border border-gray-700">Garantiza que la entidad de comunicación es quien dice ser. Incluye autenticación de entidad par y autenticación de origen de datos.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">Control de Acceso</td><td class="p-3 border border-gray-700">Protección contra el uso no autorizado de recursos. Decide quién puede acceder a qué.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">Confidencialidad de Datos</td><td class="p-3 border border-gray-700">Protección de los datos contra la divulgación no autorizada.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">Integridad de Datos</td><td class="p-3 border border-gray-700">Garantía de que los datos recibidos son exactamente los enviados por una entidad autorizada (sin modificación, inserción, eliminación ni repetición).</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">No Repudio</td><td class="p-3 border border-gray-700">Protección contra la negación por parte de una de las entidades involucradas en una comunicación de haber participado en toda o parte de la comunicación.</td></tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h3 class="text-violet-400 font-mono text-lg mt-6 mb-2">Mecanismos de Seguridad</h3>
+      <ul class="list-disc pl-6 space-y-2 mb-8">
+        <li><strong>Cifrado (Encipherment):</strong> Uso de algoritmos matemáticos para transformar datos en una forma ininteligible.</li>
+        <li><strong>Firma Digital:</strong> Datos añadidos a una unidad de datos que permiten al receptor probar el origen y la integridad de la unidad.</li>
+        <li><strong>Control de Acceso:</strong> Mecanismos que hacen cumplir los derechos de acceso a los recursos.</li>
+        <li><strong>Integridad de Datos:</strong> Uso de códigos de comprobación (hash) para validar la integridad de una unidad de datos o flujo.</li>
+        <li><strong>Intercambio de Autenticación:</strong> Protocolo para asegurar la identidad de las entidades.</li>
+      </ul>
+
+      <h2>RFC 4949: Glosario de Seguridad de Internet</h2>
+      <p>El RFC 4949 es un documento informativo que consolida la terminología utilizada en el campo de la seguridad de la información. Su objetivo es reducir la ambigüedad y facilitar la comunicación técnica.</p>
+      
+      <div class="bg-gray-900 border border-gray-700 rounded p-4 mb-8">
+        <h4 class="text-blue-400 font-bold mb-2">Conceptos Clave del RFC 4949</h4>
+        <dl class="space-y-4 text-sm">
+            <div>
+                <dt class="font-bold text-gray-200">Adversario (Adversary)</dt>
+                <dd class="text-gray-400 ml-4">Una entidad que ataca, o es una amenaza para, un sistema. Puede ser un hacker, un insider malintencionado, o malware.</dd>
+            </div>
+            <div>
+                <dt class="font-bold text-gray-200">Contramedida (Countermeasure)</dt>
+                <dd class="text-gray-400 ml-4">Una acción, dispositivo, procedimiento o técnica que reduce una amenaza, una vulnerabilidad o un ataque eliminándolo o previniéndolo, minimizando el daño que puede causar, o descubriéndolo y reportándolo de manera que se puedan tomar medidas correctivas.</dd>
+            </div>
+            <div>
+                <dt class="font-bold text-gray-200">Riesgo (Risk)</dt>
+                <dd class="text-gray-400 ml-4">Una expectativa de pérdida expresada como la probabilidad de que una amenaza particular explote una vulnerabilidad particular con una consecuencia dañina particular.</dd>
+            </div>
+        </dl>
+      </div>
+
+      <h2>Conclusión</h2>
+      <p>Comprender la norma X.800 y el RFC 4949 es fundamental para cualquier profesional de seguridad. X.800 proporciona el marco arquitectónico ("el mapa"), mientras que RFC 4949 proporciona el vocabulario preciso ("el diccionario") para diseñar y discutir sistemas seguros de manera efectiva.</p>
     `
   },
   {
@@ -265,8 +320,87 @@ export const activities = [
     date: "2024-02-20",
     tags: ["Linux", "Firewall", "Iptables", "Seguridad de Red"],
     content: `
-      <h2>Introducción</h2>
-      <p>Iptables es una herramienta esencial para la seguridad en servidores Linux. Veremos cómo configurar reglas básicas y avanzadas.</p>
+      <h2>Introducción a Netfilter e Iptables</h2>
+      <p><strong>Iptables</strong> es la herramienta de espacio de usuario utilizada para configurar las tablas de filtrado de paquetes del kernel de Linux (Netfilter). Es la primera línea de defensa en servidores Linux, permitiendo definir reglas granulares para aceptar, rechazar o modificar el tráfico de red.</p>
+
+      <h2>Estructura Básica</h2>
+      <p>Iptables organiza las reglas en <strong>Tablas</strong> y <strong>Cadenas (Chains)</strong>. Las tablas más comunes son:</p>
+      <ul class="list-disc pl-6 space-y-2 mb-6">
+        <li><strong>Filter:</strong> Tabla por defecto. Se usa para decidir si dejar pasar un paquete. (Cadenas: INPUT, OUTPUT, FORWARD).</li>
+        <li><strong>Nat:</strong> Usada para la traducción de direcciones de red (Network Address Translation). (Cadenas: PREROUTING, POSTROUTING, OUTPUT).</li>
+        <li><strong>Mangle:</strong> Usada para la modificación especializada de paquetes.</li>
+      </ul>
+
+      <h2>Políticas de Seguridad y su Traducción a Reglas</h2>
+      <p>A continuación se presentan ejemplos de cómo traducir políticas de seguridad escritas en lenguaje natural a comandos técnicos de iptables.</p>
+
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-green-400">
+                <tr>
+                    <th class="p-3 border border-gray-700 w-1/3">Política de Seguridad</th>
+                    <th class="p-3 border border-gray-700">Comando Iptables</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-300 font-mono">
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans text-gray-200">1. Política por defecto: Bloquear todo el tráfico entrante a menos que se permita explícitamente.</td>
+                    <td class="p-3 border border-gray-700">iptables -P INPUT DROP</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans text-gray-200">2. Permitir conexiones SSH entrantes (Puerto 22).</td>
+                    <td class="p-3 border border-gray-700">iptables -A INPUT -p tcp --dport 22 -j ACCEPT</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans text-gray-200">3. Permitir tráfico Web (HTTP y HTTPS).</td>
+                    <td class="p-3 border border-gray-700">
+                        iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
+                        iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+                    </td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans text-gray-200">4. Permitir tráfico de loopback (localhost).</td>
+                    <td class="p-3 border border-gray-700">iptables -A INPUT -i lo -j ACCEPT</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans text-gray-200">5. Bloquear una IP maliciosa específica (ej. 192.168.1.100).</td>
+                    <td class="p-3 border border-gray-700">iptables -A INPUT -s 192.168.1.100 -j DROP</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Script de Configuración Básica</h2>
+      <p>Es común agrupar estas reglas en un script de bash para facilitar su aplicación. Un ejemplo de script de "Hardening" básico sería:</p>
+
+      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 overflow-x-auto mb-8">
+        <pre>
+#!/bin/bash
+# Limpiar reglas existentes
+iptables -F
+iptables -X
+
+# Establecer políticas por defecto
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+
+# Permitir conexiones establecidas relacionadas (Stateful)
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Permitir loopback
+iptables -A INPUT -i lo -j ACCEPT
+
+# Permitir SSH
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+# Loggear paquetes droppeados (Opcional, para auditoría)
+iptables -A INPUT -j LOG --log-prefix "IPTABLES-DROP: "
+        </pre>
+      </div>
+
+      <h2>Conclusión</h2>
+      <p>Iptables es una herramienta poderosa y flexible. Una configuración correcta es vital para la seguridad del servidor; un error (como bloquear el puerto 22 sin tener acceso físico) puede dejar al administrador fuera del sistema. La práctica de "Default DROP" es la más segura, obligando a abrir explícitamente solo lo que es necesario.</p>
     `
   },
   {
@@ -276,8 +410,48 @@ export const activities = [
     date: "2024-02-25",
     tags: ["Defensa en Profundidad", "IDS/IPS", "Honeypots"],
     content: `
-      <h2>Introducción</h2>
-      <p>La defensa de red requiere múltiples capas de seguridad. Analizaremos IDS, IPS y otras tecnologías.</p>
+      <h2>Defensa en Profundidad (Defense in Depth)</h2>
+      <p>El concepto de defensa en profundidad se basa en la premisa de que <strong>ninguna medida de seguridad es infalible</strong>. Por lo tanto, se deben implementar múltiples capas de controles de seguridad (redundancia) para proteger los activos de información.</p>
+
+      <h2>Sistemas de Detección y Prevención de Intrusos (IDS vs IPS)</h2>
+      <p>Ambos sistemas monitorizan el tráfico de red en busca de firmas de ataques conocidos o anomalías, pero difieren en su reacción.</p>
+      
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-blue-300">
+                <tr>
+                    <th class="p-3 border border-gray-700">Característica</th>
+                    <th class="p-3 border border-gray-700">IDS (Intrusion Detection System)</th>
+                    <th class="p-3 border border-gray-700">IPS (Intrusion Prevention System)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-300">
+                <tr><td class="p-3 border border-gray-700 font-bold">Función Principal</td><td class="p-3 border border-gray-700">Detectar y alertar.</td><td class="p-3 border border-gray-700">Detectar, alertar y <strong>bloquear</strong>.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">Ubicación en la Red</td><td class="p-3 border border-gray-700">Fuera de línea (Promiscuous Mode / SPAN Port). No afecta el flujo.</td><td class="p-3 border border-gray-700">En línea (Inline). Todo el tráfico pasa a través de él.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">Impacto en Rendimiento</td><td class="p-3 border border-gray-700">Nulo o mínimo en la latencia de la red.</td><td class="p-3 border border-gray-700">Puede introducir latencia; si falla, puede cortar la red.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">Riesgo</td><td class="p-3 border border-gray-700">Falsos negativos (no detectar un ataque).</td><td class="p-3 border border-gray-700">Falsos positivos (bloquear tráfico legítimo).</td></tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Honeypots y Honeynets</h2>
+      <p>Un <strong>Honeypot</strong> es un recurso de sistema de información cuyo valor radica en el uso no autorizado e ilícito de ese recurso. Es una trampa, diseñada para parecer un objetivo real (servidor de base de datos, servidor web vulnerable) para atraer a los atacantes.</p>
+      
+      <ul class="list-disc pl-6 space-y-3 mb-8">
+        <li><strong>Objetivo:</strong> Desviar la atención de los activos críticos reales, estudiar las tácticas, técnicas y procedimientos (TTPs) del atacante, y generar alertas tempranas de alta fidelidad (cualquier tráfico hacia un honeypot es sospechoso por definición).</li>
+        <li><strong>Tipos:</strong>
+            <ul class="list-circle pl-6 mt-2 text-gray-400">
+                <li><em>Baja interacción:</em> Simulan servicios (puertos abiertos, banners) pero no un sistema operativo completo. Menos riesgo, menos datos.</li>
+                <li><em>Alta interacción:</em> Son sistemas reales con vulnerabilidades intencionales y mucha instrumentación. Alto riesgo, muchos datos valiosos.</li>
+            </ul>
+        </li>
+      </ul>
+
+      <h2>Firewalls de Nueva Generación (NGFW)</h2>
+      <p>A diferencia de los firewalls tradicionales que filtran por puerto y protocolo (Capa 3 y 4), los NGFW operan hasta la <strong>Capa 7 (Aplicación)</strong>. Pueden inspeccionar el contenido del paquete, identificar la aplicación específica (ej. "Facebook Games" vs "Facebook Chat") y descifrar tráfico SSL/TLS.</p>
+
+      <h2>Conclusión</h2>
+      <p>Una estrategia de seguridad robusta combina estas tecnologías: Firewalls para segmentar, IPS para bloquear ataques conocidos en tiempo real, IDS para visibilidad profunda, y Honeypots para inteligencia de amenazas activa.</p>
     `
   },
   {
@@ -287,8 +461,80 @@ export const activities = [
     date: "2024-03-01",
     tags: ["Pentesting", "Metodologías", "Ethical Hacking"],
     content: `
-      <h2>Introducción</h2>
-      <p>Comparativa de metodologías estándar para realizar pruebas de penetración éticas y efectivas.</p>
+      <h2>La importancia de una Metodología</h2>
+      <p>El hacking ético no es un proceso caótico; requiere estructura, repetibilidad y documentación. Existen varios estándares internacionales que guían a los auditores de seguridad para asegurar que las pruebas sean exhaustivas y seguras.</p>
+
+      <h2>Comparativa de Metodologías</h2>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-purple-300">
+                <tr>
+                    <th class="p-3 border border-gray-700">Metodología</th>
+                    <th class="p-3 border border-gray-700">Nombre Completo</th>
+                    <th class="p-3 border border-gray-700">Enfoque Principal</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-300">
+                <tr>
+                    <td class="p-3 border border-gray-700 font-bold">PTES</td>
+                    <td class="p-3 border border-gray-700">Penetration Testing Execution Standard</td>
+                    <td class="p-3 border border-gray-700">Enfoque técnico muy detallado. Cubre desde el acuerdo inicial hasta el reporte técnico. Es el estándar "de facto" para la ejecución técnica.</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-bold">OSSTMM</td>
+                    <td class="p-3 border border-gray-700">Open Source Security Testing Methodology Manual</td>
+                    <td class="p-3 border border-gray-700">Enfoque científico y métrico. Se centra en medir la seguridad operativa (OpSec) y cuantificar el nivel de seguridad. Menos enfocado en "cómo hackear" y más en "cómo medir".</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-bold">ISSAF</td>
+                    <td class="p-3 border border-gray-700">Information Systems Security Assessment Framework</td>
+                    <td class="p-3 border border-gray-700">Muy granular, vincula herramientas específicas a cada paso de la prueba. Actualmente está algo desactualizado pero sigue siendo una buena referencia de checklist.</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-bold">NIST SP 800-115</td>
+                    <td class="p-3 border border-gray-700">Technical Guide to Information Security Testing and Assessment</td>
+                    <td class="p-3 border border-gray-700">Estándar del gobierno de EE.UU. Muy formal, orientado a cumplimiento y gestión de riesgos en agencias federales y corporaciones grandes.</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Desglose del PTES (Penetration Testing Execution Standard)</h2>
+      <p>PTES es comúnmente aceptado como el flujo de trabajo estándar para pentesters. Sus fases son:</p>
+      
+      <ol class="list-decimal pl-6 space-y-4 mb-8 text-gray-300">
+        <li>
+            <strong class="text-white">Pre-engagement Interactions (Interacciones Previas):</strong>
+            <p class="text-sm text-gray-400">Definición del alcance (Scope), Reglas de Compromiso (RoE), ventanas de tiempo, ip's permitidas y gestión de emergencias.</p>
+        </li>
+        <li>
+            <strong class="text-white">Intelligence Gathering (Recolección de Información):</strong>
+            <p class="text-sm text-gray-400">OSINT (Open Source Intelligence). Obtener dominios, correos, IPs, tecnologías usadas sin tocar el objetivo directamente.</p>
+        </li>
+        <li>
+            <strong class="text-white">Threat Modeling (Modelado de Amenazas):</strong>
+            <p class="text-sm text-gray-400">Identificar activos críticos y pensar como el atacante: ¿Cuál es el camino más probable de ataque?</p>
+        </li>
+        <li>
+            <strong class="text-white">Vulnerability Analysis (Análisis de Vulnerabilidades):</strong>
+            <p class="text-sm text-gray-400">Escaneo activo y pasivo para encontrar fallos conocidos (ej. versiones antiguas de software, malas configuraciones).</p>
+        </li>
+        <li>
+            <strong class="text-white">Exploitation (Explotación):</strong>
+            <p class="text-sm text-gray-400">El "hackeo" real. Intentar explotar las vulnerabilidades encontradas para ganar acceso al sistema.</p>
+        </li>
+        <li>
+            <strong class="text-white">Post Exploitation (Post-Explotación):</strong>
+            <p class="text-sm text-gray-400">Determinar el valor del sistema comprometido. Movimiento lateral, escalada de privilegios y persistencia.</p>
+        </li>
+        <li>
+            <strong class="text-white">Reporting (Reporte):</strong>
+            <p class="text-sm text-gray-400">La parte más importante para el cliente. Se divide en Reporte Ejecutivo (para gerencia) y Reporte Técnico (para TI).</p>
+        </li>
+      </ol>
+
+      <h2>Conclusión</h2>
+      <p>Seguir una metodología garantiza que ninguna piedra quede sin remover. Un pentest no es solo correr herramientas automáticas; es un proceso sistemático de validación de seguridad.</p>
     `
   },
   {
@@ -298,8 +544,55 @@ export const activities = [
     date: "2024-03-05",
     tags: ["VPN", "IPSec", "Criptografía", "Redes"],
     content: `
-      <h2>Introducción</h2>
-      <p>IPSec es el estándar para VPNs seguras. En esta actividad documentamos su implementación paso a paso.</p>
+      <h2>Introducción a IPSec</h2>
+      <p><strong>IPSec (Internet Protocol Security)</strong> es un conjunto de protocolos que asegura las comunicaciones IP autenticando y cifrando cada paquete IP de una sesión. Es el estándar de facto para construir VPNs (Virtual Private Networks) robustas sitio-a-sitio (Site-to-Site).</p>
+
+      <h2>Arquitectura de IPSec</h2>
+      <p>IPSec no es un protocolo único, sino un marco que utiliza varios protocolos para diferentes funciones:</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+        <div class="bg-gray-900 p-4 border border-blue-900 rounded">
+            <h4 class="text-blue-400 font-bold mb-2">AH (Authentication Header)</h4>
+            <p class="text-sm text-gray-400">Provee integridad de datos y autenticación de origen. Protege contra ataques de repetición (Replay Attacks). <strong>NO cifra los datos</strong> del payload, por lo que la información viaja en texto claro pero firmada.</p>
+        </div>
+        <div class="bg-gray-900 p-4 border border-green-900 rounded">
+            <h4 class="text-green-400 font-bold mb-2">ESP (Encapsulating Security Payload)</h4>
+            <p class="text-sm text-gray-400">Provee confidencialidad (cifrado), integridad y autenticación. Es el protocolo más común en VPNs porque oculta los datos reales.</p>
+        </div>
+      </div>
+
+      <h2>Modos de Cifrado</h2>
+      <ul class="list-disc pl-6 space-y-3 mb-8">
+        <li><strong>Modo Transporte:</strong> Solo cifra el payload (carga útil) del paquete IP. El encabezado IP original se mantiene. Se usa generalmente para comunicaciones End-to-End (ej. Admin a Servidor).</li>
+        <li><strong>Modo Túnel:</strong> Cifra todo el paquete IP original y le añade un nuevo encabezado IP. Se usa para VPNs Site-to-Site (ej. Router a Router), donde las redes internas son privadas.</li>
+      </ul>
+
+      <h2>Fases de IKE (Internet Key Exchange)</h2>
+      <p>Para establecer un túnel IPSec, los dispositivos deben negociar claves y políticas. Esto ocurre en dos fases:</p>
+      
+      <div class="overflow-x-auto mb-8">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-white">
+                <tr>
+                    <th class="p-3 border border-gray-700">Fase</th>
+                    <th class="p-3 border border-gray-700">Objetivo</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-300">
+                <tr>
+                    <td class="p-3 border border-gray-700 font-bold">Fase 1 (Main Mode / Aggressive Mode)</td>
+                    <td class="p-3 border border-gray-700">Autenticar los peers (routers) y negociar parámetros básicos para establecer un canal seguro inicial (ISAKMP SA).</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-bold">Fase 2 (Quick Mode)</td>
+                    <td class="p-3 border border-gray-700">Negociar los parámetros específicos de IPSec (SA) que se usarán para cifrar el tráfico de datos real (algoritmos de cifrado, hash, tiempos de vida).</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Conclusión</h2>
+      <p>IPSec es complejo de configurar debido a la gran cantidad de parámetros que deben coincidir exactamente en ambos extremos (algoritmos, claves pre-compartidas, selectores de tráfico). Sin embargo, una vez establecido, ofrece uno de los niveles más altos de seguridad para la transmisión de datos sobre redes públicas inseguras como Internet.</p>
     `
   }
 ];
