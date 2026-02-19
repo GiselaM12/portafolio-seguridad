@@ -26,37 +26,48 @@ const ActivityDetail = () => {
 
         setIsExporting(true);
         const element = contentRef.current;
-        const canvas = await html2canvas(element, {
-            scale: 2,
-            backgroundColor: '#030712', // Match background color
-            useCORS: true,
-            logging: false,
-        });
 
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4',
-        });
+        try {
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                backgroundColor: '#0a0f1a', // Match card background
+                useCORS: true,
+                logging: false,
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight
+            });
 
-        const imgWidth = 210; // A4 width in mm
-        const pageHeight = 297; // A4 height in mm
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-        let position = 0;
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4',
+            });
 
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+            const imgWidth = 210;
+            const pageHeight = 297;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
 
-        while (heightLeft >= 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
+            // First page
             pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
             heightLeft -= pageHeight;
+
+            // Subsequent pages
+            while (heightLeft > 0) {
+                position -= pageHeight; // Move image up by one page height
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            pdf.save(`Actividad_${activity.id}_Reporte_Completo.pdf`);
+        } catch (error) {
+            console.error("PDF Export failed:", error);
+            alert("Hubo un error al generar el PDF. Por favor intenta de nuevo.");
         }
 
-        pdf.save(`Actividad_${activity.id}_${activity.title.substring(0, 20).replace(/\s+/g, '_')}.pdf`);
         setIsExporting(false);
     };
 
