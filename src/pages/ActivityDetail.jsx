@@ -21,7 +21,7 @@ const ActivityDetail = () => {
         );
     }
 
-    const printRef = useRef(null);
+
 
     const handleExportPDF = async () => {
         if (!printRef.current) return;
