@@ -2,15 +2,10 @@ import { useParams, Link } from 'react-router-dom';
 import { activities } from '../data/activities';
 import { FaFilePdf, FaArrowLeft, FaTerminal, FaShieldAlt, FaCalendarAlt, FaUserSecret } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
-import { useRef, useState } from 'react';
 
 const ActivityDetail = () => {
     const { id } = useParams();
     const activity = activities.find(a => a.id === parseInt(id));
-    const contentRef = useRef(null);
-    const [isExporting, setIsExporting] = useState(false);
 
     if (!activity) {
         return (
@@ -21,53 +16,9 @@ const ActivityDetail = () => {
         );
     }
 
-    const handleExportPDF = async () => {
-        if (!contentRef.current) return;
-
-        setIsExporting(true);
-        const element = contentRef.current;
-
-        try {
-            const canvas = await html2canvas(element, {
-                scale: 2,
-                backgroundColor: '#0a0a0a', // Cyberpunk background
-                useCORS: true,
-                logging: false,
-                windowWidth: element.scrollWidth,
-                windowHeight: element.scrollHeight
-            });
-
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: 'a4',
-            });
-
-            const imgWidth = 210;
-            const pageHeight = 297;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft > 0) {
-                position -= pageHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-
-            pdf.save(`Reporte_Forense_Actividad_${activity.id}.pdf`);
-        } catch (error) {
-            console.error("PDF Export failed:", error);
-            alert("Hubo un error al generar el PDF.");
-        }
-
-        setIsExporting(false);
-    };
+    // Path to the static PDF file in public/docs/
+    // Checks for specific file naming convention: Reporte_Actividad_XX.pdf
+    const pdfPath = `/docs/Reporte_Actividad_${String(activity.id).padStart(2, '0')}.pdf`;
 
     // Custom styles for the dynamic content
     const customStyles = `
@@ -161,21 +112,19 @@ const ActivityDetail = () => {
                         <span className="text-red-500 truncate max-w-[200px]">CASE_{String(activity.id).padStart(3, '0')}</span>
                     </nav>
 
-                    <button
-                        onClick={handleExportPDF}
-                        disabled={isExporting}
-                        className="group relative px-6 py-2 bg-transparent overflow-hidden rounded border border-red-500/50 text-red-500 font-mono text-sm tracking-widest hover:text-white hover:border-red-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    <a
+                        href={pdfPath}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative px-6 py-2 bg-transparent overflow-hidden rounded border border-red-500/50 text-red-500 font-mono text-sm tracking-widest hover:text-white hover:border-red-500 transition-all"
                     >
                         <div className="absolute inset-0 w-full h-full bg-red-600/0 group-hover:bg-red-600/10 transition-colors"></div>
                         <div className="relative flex items-center gap-3">
-                            {isExporting ? (
-                                <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
-                            ) : (
-                                <FaFilePdf className="text-lg" />
-                            )}
-                            <span>{isExporting ? 'ENCRYPTING...' : 'EXPORT_REPORT.PDF'}</span>
+                            <FaFilePdf className="text-lg" />
+                            <span>DOWNLOAD_REPORT.PDF</span>
                         </div>
-                    </button>
+                    </a>
                 </div>
 
                 {/* Main Forensic Report Container */}
