@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Projects = () => {
@@ -13,23 +13,43 @@ const Projects = () => {
         status: "Locked"
     };
 
-    const comingSoonCard = {
-        icon: <FaHourglassHalf />,
-        title: "En Progreso",
-        description: "Decodificando información... Los datos estarán disponibles próximamente.",
-        status: "Loading"
-    };
+    // Tarjetas principales para Parcial 1 (ya que hay 2 cuadros libres)
+    // Vamos a dividir las actividades en 2 grupos: Actividades Técnicas y Actividades de Gestión/Investigación
+    // O simplemente listar las más recientes.
+    // Dado que el usuario dijo "agrega las actividades porque tengo dos cuadros que no voy a ocupar",
+    // asumiré que quiere ver accesos directos específicos o divididos.
 
-    const activitiesCard = {
+    // Opción A: Mantener "Repositorio General" y agregar accesos a actividad específica.
+    // Opción B: Convertir los 3 cuadros en enlaces directos a actividades del Parcial 1.
+    // El usuario tiene 6 actividades. 3 cuadros no son suficientes para todas.
+    // Lo mejor es hacer 3 cuadros que agrupen o destaquen las actividades clave.
+
+    const activitiesRepoCard = {
         icon: <FaFolderPlus />,
-        title: "Actividades de Aprendizaje",
-        description: "Repositorio de evidencias del Parcial 1: Ciberataques, X.800, Iptables, VPNs y más.",
+        title: "Repositorio Completo",
+        description: "Acceso al listado completo de todas las actividades y evidencias del Parcial.",
         status: "Available",
         link: "/actividades"
     };
 
+    const highlightsCard1 = {
+        icon: <FaShieldAlt />,
+        title: "Análisis de Ciberataques",
+        description: "Estudios de caso sobre incidentes reales e impacto empresarial (Actividad 01).",
+        status: "Available",
+        link: "/actividades/1"
+    };
+
+    const highlightsCard2 = {
+        icon: <FaTerminal />,
+        title: "Seguridad en Redes",
+        description: "Configuración de IPTables, X.800 y defensa en profundidad (Actividades 02-04).",
+        status: "Available",
+        link: "/actividades/3" // Link to iptables activity as representative
+    };
+
     const projectsData = {
-        parcial1: [activitiesCard, lockedCard, lockedCard],
+        parcial1: [activitiesRepoCard, highlightsCard1, highlightsCard2],
         parcial2: [lockedCard, lockedCard, lockedCard],
         parcial3: [lockedCard, lockedCard, lockedCard],
         final: [lockedCard, lockedCard, lockedCard]
@@ -167,6 +187,22 @@ const Projects = () => {
                         })}
                     </motion.div>
                 </AnimatePresence>
+
+                {/* Bottom Info */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="text-center mt-8 sm:mt-12"
+                >
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg backdrop-blur-sm">
+                        <FaTerminal className="text-violet-400 text-xs sm:text-sm" />
+                        <span className="text-gray-500 font-mono text-[10px] sm:text-xs">
+                            <span className="text-violet-400">$</span> ls /{activeTab}
+                        </span>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );
