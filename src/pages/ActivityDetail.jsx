@@ -183,7 +183,6 @@ const ActivityDetail = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    ref={contentRef}
                     className="relative bg-[#0a0a0a] border border-gray-800 shadow-2xl overflow-hidden"
                 >
                     {/* Decorative Top Bar */}
