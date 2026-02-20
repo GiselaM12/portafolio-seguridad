@@ -1,0 +1,2313 @@
+--- Act01 ---
+ 
+ACTIVIDAD  01  
+ANÁLISIS  EN  GRUPO  DE  UN  CIBERATAQUE  REAL  Y  SU  IMPACTO  EMPRESARIAL.  
+ 
+Jasso  Dávila  Pedro  Damián  -  176658  Moreno  Solís  Gisela  Geraldine  -   176522  Palomo  Cerdá  José  Armando  -  17593  Zarate  Domínguez  David   -  175842  Zorrilla  Rivera  Eduardo  -  175877     
+       Mtro.  Servando  López  Contreras  
+
+Introducción.  El  presente  reporte  documenta  el  ciberataque  sufrido  por  Equifax  en  2017,  considerado  uno  de  
+los
+ 
+incidentes
+ 
+de
+ 
+ex-filtración
+ 
+masiva
+ 
+más
+ 
+graves
+ 
+en
+ 
+el
+ 
+sector
+ 
+financiero.
+ 
+El
+ 
+ataque
+ 
+fue
+ 
+posible
+ 
+mediante
+ 
+la
+ 
+explotación
+ 
+de
+ 
+la
+ 
+vulnerabilidad
+ 
+CVE-2017-5638
+ 
+en
+ 
+Apache
+ 
+Struts,
+ 
+la
+ 
+cual
+ 
+permitió
+ 
+la
+ 
+ejecución
+ 
+remota
+ 
+de
+ 
+código
+ 
+(RCE)
+ 
+debido
+ 
+a
+ 
+la
+ 
+omisión
+ 
+de
+ 
+un
+ 
+parche
+ 
+de
+ 
+seguridad
+ 
+disponible
+ 
+meses
+ 
+antes
+ 
+del
+ 
+incidente.
+ La  brecha  expuso  deficiencias  críticas  en  la  gestión  de  activos  y  la  visibilidad  operativa,  
+destacando
+ 
+el
+ 
+vencimiento
+ 
+de
+ 
+certificados
+ 
+SSL
+ 
+que
+ 
+impidieron
+ 
+la
+ 
+detección
+ 
+del
+ 
+tráfico
+ 
+malicioso
+ 
+durante
+ 
+76
+ 
+días.
+ 
+Con
+ 
+un
+ 
+impacto
+ 
+que
+ 
+afectó
+ 
+a
+ 
+147.5
+ 
+millones
+ 
+de
+ 
+víctimas
+ 
+y
+ 
+resultó
+ 
+en
+ 
+un
+ 
+acuerdo
+ 
+judicial
+ 
+de
+ 
+$1.4
+ 
+mil
+ 
+millones
+ 
+de
+ 
+USD
+.
+ Este  estudio  tiene  el  propósito  de  evaluar  las  consecuencias  bajo  el  modelo  CIA  
+(Confidencialidad,
+ 
+Integridad
+ 
+y
+ 
+Disponibilidad)
+ 
+para
+ 
+comprender
+ 
+la
+ 
+relación
+ 
+entre
+ 
+la
+ 
+ciberseguridad
+ 
+y
+ 
+la
+ 
+sostenibilidad
+ 
+organizacional.
+ 
+Línea  de  Tiempo  
+CRONOLOGÍA  DETALLADA  DE  LA  INVESTIGACIÓN  (EXPEDIENTE  EQX-2017)  
+Fecha                      
+Hora               
+Evento  
+07  de  marzo  de  2017  
+10:00  hrs  El  Departamento  de  Seguridad  Nacional  de  EE.  UU.  (DHS)  emite  una  alerta  crítica  sobre  la  vulnerabilidad  CVE-2017-5638  en  Apache  Struts.  
+08  de  marzo  de  2017  
+09:00  hrs  El  equipo  de  seguridad  global  de  Equifax  recibe  la  notificación  oficial  y  clasifica  el  riesgo  como  "Inminente  y  Crítico".  
+09  de  marzo  de  2017  
+08:30  hrs  Se  distribuye  un  correo  interno  a  todos  los  administradores  de  sistemas  ordenando  la  aplicación  del  parche  en  un  periodo  máximo  de  48  horas.  
+10  de  marzo  de  2017  
+15:00  hrs  El  equipo  de  TI  ejecuta  un  escaneo  de  vulnerabilidades  automatizado  en  la  red  externa.  
+10  de  marzo  de  2017  
+17:00  hrs  Fallo  operativo:  el  escaneo  no  identifica  el  portal  de  disputas  de  consumidores  como  sistema  vulnerable  debido  a  una  configuración  de  red  errónea.  
+12  de  marzo  de  2017  
+00:00  hrs  Vence  el  plazo  interno  para  el  parcheo.  El  servidor  crítico  queda  expuesto  y  sin  protección  en  el  puerto  443.  
+13  de  mayo  de  2017  
+21:15  hrs  Intrusión  inicial:  actores  de  amenaza  detectan  el  vector  de  entrada.  Se  registra  el  primer  comando  de  ejecución  remota  (RCE)  exitoso.  
+13  de  mayo  de  2017  
+23:50  hrs  Los  atacantes  instalan  una  Web  Shell  (puerta  trasera)  para  asegurar  la  persistencia  en  el  servidor  comprometido.  
+14  de  mayo  de  2017  
+04:00  hrs  Comienza  el  reconocimiento  de  la  red  interna.  Los  atacantes  buscan  archivos  de  configuración  locales.  
+15  de  mayo  de  2017  
+11:20  hrs  Hallazgo  de  evidencia  crítica:  los  atacantes  localizan  un  archivo  con  credenciales  de  bases  de  datos  en  texto  plano.  
+16  de  mayo  de  2017  
+02:00  hrs  Inicia  el  movimiento  lateral.  Los  atacantes  acceden  a  los  servidores  de  bases  de  datos  centrales.  
+20  de  mayo  de  2017  
+14:00  hrs  Los  perpetradores  realizan  consultas  de  prueba  para  medir  la  velocidad  de  respuesta  de  la  base  de  datos  de  crédito.  
+25  de  mayo  de  2017  
+09:00  hrs  Se  establece  un  canal  de  exfiltración  cifrado.  La  empresa  no  detecta  el  tráfico  saliente  porque  las  herramientas  de  inspección  están  inactivas.  
+01  de  junio  de  2017  
+00:00  hrs  Comienza  la  extracción  masiva  de  PII  (Información  de  Identificación  Personal).  Se  estima  la  salida  de  5  millones  de  registros  por  día.  
+10  de  junio  de  2017  
+10:30  hrs  Los  atacantes  expanden  su  presencia  instalando  más  de  30  web  shells  adicionales  en  distintos  servidores.  
+20  de  junio  de  2017  
+18:00  hrs  La  extracción  continúa  sin  interrupciones.  El  volumen  de  datos  ex  infiltrados  supera  los  200  GB.  
+01  de  julio  de  2017  
+08:00  hrs  El  ataque  se  vuelve  selectivo;  se  extraen  datos  específicos  de  tarjetas  de  crédito  y  documentos  de  identidad  escaneados.  
+15  de  julio  de  2017  
+23:00  hrs  Se  registra  actividad  desde  direcciones  IP  vinculadas  a  infraestructuras  de  inteligencia  extranjera.  
+28  de  julio  de  2017  
+16:00  hrs  El  equipo  de  seguridad  de  red  nota  una  anomalía  en  el  rendimiento  de  un  servidor  durante  una  revisión  de  rutina.  
+29  de  julio  de  2017  
+10:15  hrs  Detección  del  incidente:  se  identifica  tráfico  sospechoso  hacia  una  dirección  IP  externa  no  autorizada.  
+29  de  julio  de  2017  
+11:30  hrs  El  equipo  técnico  descubre  que  el  certificado  SSL  de  la  herramienta  de  monitoreo  venció  en  septiembre  de  2016.  
+29  de  julio  de  2017  
+14:00  hrs  Se  bloquea  el  acceso  al  portal  de  disputas.  Los  atacantes  pierden  la  conexión  activa.  
+30  de  julio  de  2017  
+09:00  hrs  Se  activa  el  Protocolo  de  Respuesta  a  Incidentes.  Se  contrata  a  la  firma  externa  Mandiant  para  realizar  el  peritaje  forense.  
+02  de  agosto  de  2017  
+12:00  hrs  El  análisis  forense  confirma  la  exfiltración  masiva.  El  conteo  inicial  es  de  130  millones  de  víctimas.  
+15  de  agosto  de  2017  
+17:00  hrs  La  alta  dirección  es  informada  de  la  magnitud  del  desastre.  Se  discute  la  estrategia  de  comunicación  legal.  
+24  de  agosto  de  2017  
+10:00  hrs  Tres  altos  ejecutivos  de  Equifax  venden  acciones  de  la  empresa  por  un  valor  de  $1.8  millones.  
+Análisis  técnico,  impacto  económico  y  estratégico  
+Tras  la  reconstrucción  de  los  hechos,  el  equipo  pericial  concluye  que  el  éxito  de  la  intrusión  se  
+debió
+ 
+a
+ 
+una
+ 
+pérdida
+ 
+de
+ 
+control
+ 
+del
+ 
+ciclo
+ 
+de
+ 
+vida
+ 
+de
+ 
+los
+ 
+activos.
+ 
+No
+ 
+se
+ 
+trata
+ 
+únicamente
+ 
+de
+ 
+un
+ 
+servidor
+ 
+olvidado;
+ 
+se
+ 
+trata
+ 
+de
+ 
+una
+ 
+ruptura
+ 
+en
+ 
+la
+ 
+Cadena
+ 
+de
+ 
+Mando
+ 
+de
+ 
+TI.
+ 
+●  Omisión  de  Mantenimiento  Crítico:  La  vulnerabilidad  CVE-2017-5638  fue  pública  y  
+tuvo
+ 
+una
+ 
+solución
+ 
+técnica
+ 
+inmediata
+ 
+(parche)
+ 
+desde
+ 
+marzo.
+ 
+La
+ 
+incapacidad
+ 
+de
+ 
+Equifax
+ 
+para
+ 
+identificar
+ 
+qué
+ 
+servidores
+ 
+corrían
+ 
+dicho
+ 
+software
+ 
+demuestra
+ 
+una
+ 
+falta
+ 
+de
+ 
+inventario
+ 
+de
+ 
+activos,
+ 
+violando
+ 
+los
+ 
+principios
+ 
+básicos
+ 
+de
+ 
+marcos
+ 
+internacionales
+ 
+como
+ 
+ISO
+ 
+27001.
+ ●  Falla  de  Visibilidad  Operativa:  El  hecho  de  que  un  Certificado  SSL  estuviera  vencido  
+por
+ 
+10
+ 
+meses
+ 
+no
+ 
+es
+ 
+un
+ 
+error
+ 
+menor;
+ 
+es
+ 
+una
+ 
+negligencia
+ 
+grave.
+ 
+En
+ 
+términos
+ 
+policiales,
+ 
+es
+ 
+equivalente
+ 
+a
+ 
+tener
+ 
+cámaras
+ 
+de
+ 
+seguridad
+ 
+en
+ 
+un
+ 
+banco,
+ 
+pero
+ 
+no
+ 
+tener
+ 
+a
+ 
+nadie
+ 
+mirando
+ 
+el
+ 
+monitor
+ 
+porque
+ 
+el
+ 
+cable
+ 
+está
+ 
+desconectado.
+ 
+Los
+ 
+atacantes
+ 
+filtraron
+ 
+gigabytes
+ 
+de
+ 
+información
+ 
+a
+ 
+plena
+ 
+vista,
+ 
+protegidos
+ 
+por
+ 
+el
+ 
+mismo
+ 
+cifrado
+ 
+que
+ 
+la
+ 
+empresa
+ 
+debía
+ 
+supervisar.
+ ●  Higiene  de  Datos  Deficiente:  Una  vez  que  el  perímetro  fue  vulnerado,  los  atacantes  no  
+enfrentaron
+ 
+resistencia
+ 
+interna.
+ 
+El
+ 
+hallazgo
+ 
+de
+ 
+credenciales
+ 
+de
+ 
+bases
+ 
+de
+ 
+datos
+ 
+en
+ 
+texto
+ 
+plano
+ 
+eliminó
+ 
+la
+ 
+necesidad
+ 
+de
+ 
+realizar
+ 
+ataques
+ 
+de
+ 
+fuerza
+ 
+bruta
+ 
+complejos.
+ 
+Esto
+ 
+permitió
+ 
+que
+ 
+una
+ 
+intrusión
+ 
+web
+ 
+se
+ 
+transformara
+ 
+en
+ 
+un
+ 
+acceso
+ 
+total
+ 
+a
+ 
+la
+ 
+"joyería"
+ 
+de
+ 
+la
+ 
+empresa:
+ 
+los
+ 
+datos
+ 
+crediticios.
+ 
+Tablas  técnicas  y  de  costos   
+Tabla  Técnica  del  Ataque:  
+Elemento  Descripción  
+Tipo  de  ataque  Explotación  de  vulnerabilidad  de  ejecución  remota  de  código  (RCE)  y  exfiltración  masiva  de  datos.  
+Actor  o  grupo  atacante  Actores  vinculados  a  infraestructuras  de  inteligencia  extranjera.  
+Vector  de  entrada  Portal  de  disputas  de  consumidores  expuesto  a  través  del  puerto  443.  
+Vulnerabilidad  explotada   CVE-2017-5638  en  Apache  Struts,  con  una  gravedad  de  10.0  (Crítico).  
+Etapas  del  ataque  (MITRE  ATT&CK)  
+1.   Intrusión  inicial.  2.  Persistencia  (instalación  de  Web  Shells).  3.  Reconocimiento  interno.  4.  Movimiento  lateral  a  bases  de  datos.  5.  Exfiltración  cifrada  de  datos.  
+Sistemas  o  servicios  comprometidos  
+Servidor  web  del  portal  de  disputas  y  servidores  de  bases  de  datos  centrales  de  crédito.  
+Duración  del  incidente  76  días  de  actividad  maliciosa  activa  (del  13  de  mayo  al  29  de  julio  de  2017).  
+Mecanismos  de  detección  y  respuesta  
+ Identificación  de  tráfico  sospechoso  durante  revisión  de  rutina.  Bloqueo  del  portal,  activación  de  protocolo  de  respuesta  y  contratación  de  Mandiant  para  peritaje  forense.  
+Evaluación  del  impacto(ModeloCIA):  
+Principio  Descripción  del  impacto  Evidencia  del  caso  
+Confidencialidad  ¿Qué  información  fue  expuesta  o  robada?  
+ Robo  de  registros  de  147.5  millones  de  personas ,  incluyendo  nombres,  números  de  seguro  social,  fechas  de  nacimiento  y  datos  de  tarjetas  de  crédito.  
+Integridad  ¿Qué  datos  o  sistemas  fueron  alterados?  
+ Localización  de  archivos  con  credenciales  en  texto  plano  y  ejecución  de  "queries"  de  prueba  para  medir  la  respuesta  de  la  base  de  datos  de  crédito.  
+Disponibilidad  ¿Qué  servicios  se  interrumpieron  o  paralizaron?  
+ Bloqueo  total  del  acceso  al  portal  de  disputas  el  29  de  julio  y  caída  del  sitio  web  de  ayuda  tras  el  anuncio  público  debido  a  la  saturación.  
+Cálculo  del  costo  total  del  ciberataque:  Tipo  de  cambio  promedio  2017:  ≈  $18.50  MXN  por  1  USD  (Banxico,  promedio  anual  aproximado)  
+Tipo  de  costo  Descripción  Estimación  (MXN)  
+Pérdidas  operativas  
+Interrupción  de  servicios,  suspensión  del  portal  de  disputas,  horas  hombre  en  contención,  caída  de  productividad  interna  durante  respuesta  al  incidente.  Estimado  ≈  $90  M  USD  en  operación  y  respuesta  inicial.  
+ $1,665,000,000  MXN  
+Daños  reputacionales  
+Pérdida  de  confianza,  clientes  que  dejaron  de  usar  servicios,  caída  del  valor  de  acciones  tras  el  anuncio  (la  empresa  perdió  miles  de  millones  en  valor  de  mercado  en  días  posteriores).  Impacto  reputacional  estimado  conservador  ≈  $4,000  M  USD  en  valor  de  marca/mercado.  
+ $74,000,000,000  MXN  
+Costos  técnicos  Investigación  forense  (Mandiant),  renovación  de  infraestructura,  monitoreo  de  crédito  para  víctimas,  mejoras  en  ciberseguridad.  Reportes  estiman  más  de  $1,000  M  USD  en  gastos  tecnológicos  y  remediación.  
+ $18,500,000,000  MXN  
+Costos  legales  /  regulatorios  
+Acuerdo  judicial  con  la  FTC,  CFPB  y  estados  de  EE.UU.  por  hasta  $700  M  USD  inicialmente  (luego  aumentó  con  demandas  adicionales).  
+ $12,950,000,000  MXN  
+Pago  de  rescate  o  extorsión  
+En  caso  de  ransomware,  monto  pagado  o  solicitado.  
+No  aplicable  —  no  fue  ransomware,  fue  robo  y  exfiltración  de  datos.  
+ $0  MXN  
+TOTAL  ESTIMADO  
+Suma  total  en  pesos  mexicanos  (MXN)   $107,115,000,000  MXN  
+Relación
+ 
+con
+ 
+marcos
+ 
+normativos
+ A  continuación,  se  presenta  el  análisis  de  los  controles  de  seguridad  fallidos  basándonos  en  los  
+estándares
+ 
+ISO
+ 
+27001,
+ 
+el
+ 
+Marco
+ 
+de
+ 
+Ciberseguridad
+ 
+del
+ 
+NIST
+ 
+(NIST
+ 
+CSF)
+ 
+y
+ 
+el
+ 
+Reglamento
+ 
+General
+ 
+de
+ 
+Protección
+ 
+de
+ 
+Datos
+ 
+(GDPR),
+ 
+explicando
+ 
+cómo
+ 
+su
+ 
+correcta
+ 
+implementación
+ 
+habría
+ 
+cambiado
+ 
+el
+ 
+curso
+ 
+del
+ 
+incidente
+ 
+Marco  Normativo  
+Control  /  Artículo  Relacionado  
+Descripción  del  Fallo  en  Equifax  
+Cómo  hubiera  prevenido  o  mitigado  el  impacto  
+ISO  27001:2013  
+A.12.6.1  Gestión  de  vulnerabilidades  técnicas  
+Equifax  no  identificó  ni  parchó  la  vulnerabilidad  CVE-2017-5638  a  tiempo,  a  pesar  de  que  el  parche  existía  desde  marzo.  
+Prevención:  Si  se  hubiera  aplicado  el  parche  dentro  de  las  48  horas  posteriores  a  la  alerta,  el  vector  de  ataque  RCE  habría  sido  ineficaz  en  
+mayo,  impidiendo  la  intrusión  inicial.  
+ISO  27001:2013  
+A.8.1.1  Inventario  de  activos  
+La  empresa  no  sabía  que  el  "Portal  de  Disputas"  ejecutaba  Apache  Struts,  por  lo  que  quedó  fuera  del  alcance  del  mantenimiento.  
+Prevención:  Un  inventario  actualizado  habría  alertado  a  los  administradores  de  que  ese  servidor  específico  requiera  atención  inmediata,  asegurando  que  no  quedaran  "puntos  ciegos"  en  la  red.  
+NIST  CSF  DE.CM-1  (Detección  /  Monitoreo  Continuo)  
+El  tráfico  malicioso  no  fue  detectado  durante  76  días  debido  a  que  el  certificado  SSL  del  dispositivo  de  inspección  (IDS/IPS)  estaba  vencido.  
+Mitigación:  Si  el  certificado  SSL  hubiera  estado  vigente,  el  sistema  de  inspección  habría  descifrado  el  tráfico,  detectado  las  firmas  de  las  Web  Shells  y  alertado  al  equipo  de  seguridad  en  horas,  no  en  meses.  
+NIST  CSF  PR.AC-1  (Protección  /  Control  de  Acceso)  
+Los  atacantes  encontraron  credenciales  de  bases  de  datos  almacenadas  en  texto  plano  dentro  de  los  servidores  comprometidos.  
+Mitigación:  Si  las  credenciales  hubieran  estado  cifradas  o  gestionadas  mediante  una  bóveda  (PAM),  el  movimiento  lateral  hacia  las  bases  de  datos  críticas  habría  sido  extremadamente  difícil,  limitando  el  alcance  del  robo.  
+GDPR  Art.  32  Seguridad  del  tratamiento  
+Se  falló  en  implementar  medidas  técnicas  apropiadas  (seudonimización  y  cifrado)  para  garantizar  la  confidencialidad  de  los  datos  personales.  
+Mitigación:  Si  la  base  de  datos  hubiera  estado  cifrada  en  reposo  (Data  at  Rest  Encryption)  y  separada  lógicamente  de  la  aplicación  web,  los  datos  exfiltrados  habrían  sido  ilegibles  e  inútiles  para  los  atacantes.  
+Conclusiones  El  ciberataque  a  Equifax  no  fue  el  resultado  de  una  técnica  de  hackeo  sofisticada  e  inevitable,  
+sino
+ 
+la
+ 
+consecuencia
+ 
+de
+ 
+una
+ 
+serie
+ 
+de
+ 
+fallas
+ 
+operativas
+ 
+y
+ 
+negligencias
+ 
+en
+ 
+la
+ 
+gestión
+ 
+de
+ 
+seguridad.
+ 
+A
+ 
+continuación,
+ 
+se
+ 
+presentan
+ 
+los
+ 
+aprendizajes
+ 
+clave
+ 
+y
+ 
+las
+ 
+acciones
+ 
+preventivas
+ 
+necesarias
+ 
+para
+ 
+cualquier
+ 
+organización:
+ ●  La  visibilidad  es  la  base  de  la  protección:  No  se  puede  proteger  lo  que  no  se  sabe  
+que
+ 
+existe.
+ 
+El
+ 
+desconocimiento
+ 
+de
+ 
+que
+ 
+el
+ 
+"Portal
+ 
+de
+ 
+Disputas"
+ 
+utilizaba
+ 
+Apache
+ 
+Struts
+ 
+dejó
+ 
+una
+ 
+brecha
+ 
+crítica
+ 
+fuera
+ 
+del
+ 
+alcance
+ 
+de
+ 
+las
+ 
+políticas
+ 
+de
+ 
+mantenimiento.
+ 
+●  Un  parche  omitido  es  una  puerta  abierta:  La  existencia  de  una  solución  técnica  
+(parche)
+ 
+desde
+ 
+marzo
+ 
+para
+ 
+la
+ 
+vulnerabilidad
+ 
+CVE-2017-5638
+ 
+subraya
+ 
+que
+ 
+la
+ 
+velocidad
+ 
+de
+ 
+respuesta
+ 
+es
+ 
+tan
+ 
+vital
+ 
+como
+ 
+la
+ 
+detección
+ 
+misma.
+ ●  El  cifrado  sin  monitoreo  es  un  punto  ciego:  Contar  con  herramientas  de  inspección  
+es
+ 
+inútil
+ 
+si
+ 
+no
+ 
+se
+ 
+gestionan
+ 
+sus
+ 
+componentes
+ 
+básicos.
+ 
+El
+ 
+vencimiento
+ 
+de
+ 
+un
+ 
+certificado
+ 
+SSL
+ 
+por
+ 
+10
+ 
+meses
+ 
+permitió
+ 
+que
+ 
+los
+ 
+atacantes
+ 
+exfiltraran
+ 
+datos
+ 
+masivos
+ 
+sin
+ 
+ser
+ 
+detectados,
+ 
+ocultos
+ 
+tras
+ 
+el
+ 
+propio
+ 
+cifrado
+ 
+de
+ 
+la
+ 
+empresa.
+ ●  La  higiene  de  datos  interna  es  crítica:  Una  vez  superado  el  perímetro,  la  falta  de  
+seguridad
+ 
+interna
+ 
+(como
+ 
+credenciales
+ 
+en
+ 
+texto
+ 
+plano)
+ 
+facilitó
+ 
+un
+ 
+acceso
+ 
+total
+ 
+a
+ 
+la
+ 
+base
+ 
+de
+ 
+datos
+ 
+central
+ 
+sin
+ 
+necesidad
+ 
+de
+ 
+ataques
+ 
+complejos.
+ 
+Recomendaciones  estratégicas: 
+●  Implementar  un  Inventario  de  Activos  Dinámico:  Mantener  un  registro  automatizado  
+y
+ 
+actualizado
+ 
+de
+ 
+todo
+ 
+el
+ 
+software,
+ 
+versiones
+ 
+y
+ 
+hardware
+ 
+en
+ 
+la
+ 
+red
+ 
+para
+ 
+eliminar
+ 
+"puntos
+ 
+ciegos"
+ 
+operativos.
+ ●  Establecer  una  Política  de  Gestión  de  Parches  Críticos:  Definir  tiempos  de  
+respuesta
+ 
+obligatorios
+ 
+(ej.
+ 
+24-48
+ 
+horas)
+ 
+para
+ 
+vulnerabilidades
+ 
+con
+ 
+severidad
+ 
+alta
+ 
+o
+ 
+crítica
+ 
+(CVSS
+ 
+10.0),
+ 
+asegurando
+ 
+su
+ 
+cumplimiento
+ 
+en
+ 
+todos
+ 
+los
+ 
+niveles
+ 
+de
+ 
+la
+ 
+infraestructura.
+ ●  Automatizar  la  Gestión  de  Certificados:  Utilizar  herramientas  que  alerten  y  renueven  
+automáticamente
+ 
+los
+ 
+certificados
+ 
+SSL/TLS
+ 
+para
+ 
+garantizar
+ 
+que
+ 
+la
+ 
+visibilidad
+ 
+y
+ 
+el
+ 
+monitoreo
+ 
+del
+ 
+tráfico
+ 
+(IDS/IPS)
+ 
+nunca
+ 
+se
+ 
+interrumpan.
+ ●  Adoptar  el  Principio  de  Privilegio  Mínimo  y  Cifrado  de  Credenciales:  Prohibir  
+estrictamente
+ 
+el
+ 
+almacenamiento
+ 
+de
+ 
+contraseñas
+ 
+en
+ 
+texto
+ 
+plano
+ 
+y
+ 
+utilizar
+ 
+soluciones
+ 
+de
+ 
+Gestión
+ 
+de
+ 
+Acceso
+ 
+Privilegiado
+ 
+(PAM)
+ 
+para
+ 
+dificultar
+ 
+el
+ 
+movimiento
+ 
+lateral
+ 
+de
+ 
+un
+ 
+atacante.
+ ●  S egregación  y  Cifrado  de  Datos  en  Reposo:  Aplicar  técnicas  de  seudonimización  y  
+cifrado
+ 
+directamente
+ 
+en
+ 
+las
+ 
+bases
+ 
+de
+ 
+datos
+ 
+para
+ 
+que,
+ 
+en
+ 
+caso
+ 
+de
+ 
+una
+ 
+exfiltración
+ 
+exitosa,
+ 
+la
+ 
+información
+ 
+sea
+ 
+ilegible
+ 
+y
+ 
+carezca
+ 
+de
+ 
+valor
+ 
+para
+ 
+el
+ 
+perpetrador.
+ 
+El  análisis  del  caso  Equifax  revela  que  la  magnitud  de  una  brecha  de  seguridad  no  depende  
+únicamente
+ 
+de
+ 
+la
+ 
+habilidad
+ 
+del
+ 
+atacante,
+ 
+sino
+ 
+de
+ 
+la
+ 
+madurez
+ 
+operativa
+ 
+de
+ 
+la
+ 
+organización.
+ 
+El
+ 
+incidente
+ 
+de
+ 
+2017
+ 
+dejó
+ 
+de
+ 
+ser
+ 
+un
+ 
+simple
+ 
+fallo
+ 
+técnico
+ 
+para
+ 
+convertirse
+ 
+en
+ 
+un
+ 
+caso
+ 
+de
+ 
+estudio
+ 
+sobre
+ 
+negligencia
+ 
+sistémica.
+ 
+La
+ 
+exposición
+ 
+de
+ 
+datos
+ 
+de
+ 
+147.5
+ 
+millones
+ 
+de
+ 
+personas
+ 
+y
+ 
+un
+ 
+costo
+ 
+total
+ 
+estimado
+ 
+de
+ 
+$107,115,000,000
+ 
+MXN
+ 
+demuestran
+ 
+que
+ 
+el
+ 
+ahorro
+ 
+en
+ 
+mantenimiento
+ 
+preventivo
+ 
+es
+ 
+ínfimo
+ 
+comparado
+ 
+con
+ 
+las
+ 
+pérdidas
+ 
+operativas,
+ 
+legales
+ 
+y
+ 
+reputacionales
+ 
+que
+ 
+genera
+ 
+un
+ 
+ataque
+ 
+exitoso.
+ 
+La
+ 
+ciberseguridad
+ 
+no
+ 
+puede
+ 
+gestionarse
+ 
+de
+ 
+forma
+ 
+aislada;
+ 
+debe
+ 
+estar
+ 
+integrada
+ 
+en
+ 
+la
+ 
+Cadena
+ 
+de
+ 
+Mando
+ 
+de
+ 
+TI.
+ 
+El  caso  Equifax  es  un  recordatorio  de  que  marcos  como  ISO  27001  y  NIST  CSF  no  son  solo  
+requisitos
+ 
+de
+ 
+cumplimiento,
+ 
+sino
+ 
+herramientas
+ 
+de
+ 
+supervivencia.
+ 
+Para
+ 
+una
+ 
+organización
+ 
+moderna,
+ 
+la
+ 
+ciberseguridad
+ 
+es
+ 
+una
+ 
+responsabilidad
+ 
+ética
+ 
+y
+ 
+financiera:
+ 
+la
+ 
+confianza
+ 
+del
+ 
+cliente,
+ 
+una
+ 
+vez
+ 
+perdida
+ 
+por
+ 
+fallos
+ 
+evitables
+ 
+como
+ 
+la
+ 
+falta
+ 
+de
+ 
+un
+ 
+parche
+ 
+o
+ 
+un
+ 
+certificado
+ 
+vencido,
+ 
+es
+ 
+el
+ 
+activo
+ 
+más
+ 
+difícil
+ 
+y
+ 
+costoso
+ 
+de
+ 
+recuperar
+ 
+Glosario  FICHA  TÉCNICA:  CVE-2017-5638:  ●  Nombre  Clave :  Apache  Struts  RCE  (Remote  Code  Execution).  ●  Gravedad:  10.0  Crítico  (Máxima  prioridad  en  la  escala  CVSS).  ●  Definición:  Vulnerabilidad  de  ejecución  remota  de  código  que  permite  a  un  atacante  
+tomar
+ 
+control
+ 
+total
+ 
+de
+ 
+un
+ 
+servidor
+ 
+web
+ 
+sin
+ 
+necesidad
+ 
+de
+ 
+usuario
+ 
+ni
+ 
+contraseña.
+ ●  Modus  Operandi:  El  atacante  envía  una  petición  HTTP  con  código  malicioso  oculto  en  el  
+encabezado.
+ 
+El
+ 
+servidor,
+ 
+al
+ 
+intentar
+ 
+procesar
+ 
+un
+ 
+error
+ 
+de
+ 
+este
+ 
+encabezado,
+ 
+termina
+ 
+ejecutando
+ 
+los
+ 
+comandos
+ 
+del
+ 
+atacante.
+ ●  Relación  con  Equifax:  Fue  la  puerta  de  entrada  principal.  El  parche  existía  desde  marzo  
+de
+ 
+2017,
+ 
+pero
+ 
+Equifax
+ 
+no
+ 
+lo
+ 
+aplicó,
+ 
+dejando
+ 
+la
+ 
+vulnerabilidad
+ 
+expuesta
+ 
+durante
+ 
+meses.
+ ●  Impacto  Legal:  Su  aprovechamiento  permitió  el  robo  de  datos  de  147.5  millones  de  
+personas,
+ 
+lo
+ 
+que
+ 
+constituye
+ 
+una
+ 
+falla
+ 
+crítica
+ 
+en
+ 
+los
+ 
+controles
+ 
+de
+ 
+seguridad
+ 
+exigidos
+ 
+por
+ 
+la
+ 
+ISO
+ 
+27001
+ 
+y
+ 
+el
+ 
+marco
+ 
+NIST.
+ 
+Bibliografía  
+●  U.S.  Government  Accountability  Office  (GAO):  Reporte  GAO-18-559,  "Data  
+Protection:
+ 
+Actions
+ 
+Taken
+ 
+by
+ 
+Equifax
+ 
+and
+ 
+Federal
+ 
+Agencies
+ 
+in
+ 
+Response
+ 
+to
+ 
+the
+ 
+2017
+ 
+Breach"
+.
+ 
+Es
+ 
+el
+ 
+documento
+ 
+más
+ 
+completo
+ 
+que
+ 
+detalla
+ 
+los
+ 
+fallos
+ 
+de
+ 
+parcheo
+ 
+y
+ 
+la
+ 
+falta
+ 
+de
+ 
+visibilidad
+ 
+técnica.
+ ●  House  of  Representatives  (Committee  on  Oversight  and  Government  Reform):  Reporte  
+final
+ 
+de
+ 
+96
+ 
+páginas
+ 
+titulado
+ 
+"The
+ 
+Equifax
+ 
+Data
+ 
+Breach"
+.
+ 
+Este
+ 
+informe
+ 
+concluye
+ 
+que
+ 
+el
+ 
+ataque
+ 
+fue
+ 
+"completamente
+ 
+evitable"
+ 
+y
+ 
+detalla
+ 
+el
+ 
+uso
+ 
+de
+ 
+las
+ 
+web
+ 
+shells
+ 
+y
+ 
+el
+ 
+robo
+ 
+de
+ 
+credenciales
+ 
+en
+ 
+texto
+ 
+plano.
+ ●  Federal  Trade  Commission  (FTC):  Documentación  sobre  el  acuerdo  judicial  (settlement)  
+y
+ 
+las
+ 
+sanciones
+ 
+económicas
+ 
+impuestas
+ 
+por
+ 
+la
+ 
+falta
+ 
+de
+ 
+protección
+ 
+de
+ 
+datos
+ 
+personales.
+ 
+
+==================================================
+--- Act02 ---
+Moreno Solís Gisela Geraldine  176522 
+Mtro. Servando López Contreras
+ACTIVIDAD 02 ANÁLISIS DE
+SERVICIOS DE SEGURIDAD (X.800
+Y RFC 4949)
+CNO V SEGURIDAD INFORMATICA
+Introducción 
+Por otro lado, el marco ITU-T X.800 establece “que” servicios de seguridad se deben garantizar 
+(Autenticación, Control de Acceso, Confidencialidad de datos, Integridad de datos, Disponibilidad y 
+No repudio), mientras que el RFC proporciona el vocabulario estándar para describir “cómo” y 
+“por que” fallaron (tipos de ataques y vulnerabilidades). La unión de ambos permite pasar de una 
+descripción anecdótica a un informe técnico profesional. 
+Escenario 01.  
+En múltiples incidentes atribuidos al grupo LockBit, organizaciones públicas y privadas han sufrido 
+el cifrado masivo de servidores tras un acceso inicial no autorizado. Antes de ejecutar el 
+ransomware, los atacantes exfiltraron información sensible y posteriormente amenazaron con su 
+publicación, evidenciando un compromiso simultáneo de la confidencialidad, la integridad y la 
+disponibilidad. Desde el enfoque del RFC 4949, el incidente se clasifica como un multi-stage attack 
+con data breach y availability attack, donde la indisponibilidad del sistema es solo una fase final 
+del daño. La ausencia de respaldos inmutables y de detección temprana permitió que el impacto 
+fuera total. 
+ 
+ELEMENTO RESPUESTA  
+SERVICIOS X.800 
+COMPROMETIDOS 
+Confidencialidad (por la exfiltración), Integridad (datos 
+cifrados/modificados), Disponibilidad (servidores inaccesibles). 
+DEFINICIÓN(ES) RFC 4949 Availability Attack 
+TIPO DE AMENAZA Externa (Maliciosa deliberada). 
+VECTOR DE ATAQUE Intrusión inicial no autorizada seguida de Lateral Movement. 
+IMPACTO TÉCNICO / 
+OPERATIVO 
+Parada total de operaciones, daño reputacional por fuga de 
+información sensible. 
+MEDIDA DE CONTROL 
+RECOMENDADA 
+Respaldos inmutables (offline), segmentación de red y 
+herramientas DLP (Data Loss Prevention). 
+ 
+Escenario 02.  
+En diversos casos documentados, bases de datos completas quedaron accesibles públicamente 
+debido a errores de configuración en servicios de almacenamiento en la nube. No existió una 
+explotación técnica sofisticada, sino una falla en el control de acceso, lo que derivó directamente 
+en la pérdida de confidencialidad de los datos. El RFC 4949 describe este tipo de incidentes como 
+misconfiguration y exposure, subrayando que la amenaza no siempre implica malware o intrusión 
+activa. El impacto suele ser legal y reputacional, aun cuando no se pueda demostrar acceso 
+malicioso. 
+ 
+ 
+ 
+ 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Confidencialidad (datos públicos), Control de acceso (permisos 
+abiertos a "Everyone"). 
+Definición(es) RFC 4949 Exposure. 
+Tipo de amenaza Interna (Involuntaria / Error humano). 
+Vector de ataque Error de configuración en permisos de almacenamiento (ej. S3 
+bucket abierto). 
+Impacto técnico / 
+operativo 
+Violación de normativas de privacidad (GDPR/LFPDPPP), sanciones 
+legales. 
+Medida de control 
+recomendada 
+Implementación de CSPM (Cloud Security Posture Management) y 
+auditoría continua de permisos. 
+ 
+Escenario 03.  
+Un proveedor legítimo de software fue comprometido y distribuyó una actualización que incluía 
+código malicioso, afectando a cientos de organizaciones que confiaban en él. Este escenario refleja 
+una violación grave de la integridad de los sistemas y, en muchos casos, de la confidencialidad, al 
+permitir accesos no autorizados posteriores. El RFC 4949 lo identifica como supply chain attack, 
+destacando el abuso de relaciones de confianza. El daño es particularmente crítico porque rompe 
+el supuesto de legitimidad del software firmado 
+ 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Integridad (software alterado), Autenticación (se confió en la firma 
+del proveedor comprometido). 
+Definición(es) RFC 4949 Supply Chain Attack, Trojan Horse, Malicious Logic. 
+Tipo de amenaza Externa (estructural/sistémica). 
+Vector de ataque Compromiso de la infraestructura de desarrollo del proveedor 
+(CI/CD). 
+Impacto técnico / 
+operativo 
+Compromiso masivo de clientes confiados; acceso persistente 
+(backdoor). 
+Medida de control 
+recomendada 
+Verificación de firmas, sandboxing de actualizaciones antes de 
+despliegue en producción. 
+ 
+Escenario 04. 
+ Mediante campañas de phishing, atacantes obtuvieron credenciales válidas y accedieron a 
+sistemas corporativos durante meses sin levantar alertas. Aunque la autenticación funcionó 
+técnicamente, el servicio de autenticación fue comprometido al basarse en credenciales robadas, 
+afectando también el control de acceso. Según el RFC 4949, se trata de un credential compromise 
+con authentication failure conceptual, no técnica. La falta de MFA y de monitoreo de 
+comportamiento facilitó la persistencia del atacante 
+ 
+ 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Autenticación (vulnerada por robo), Control de acceso (acceso 
+ilegítimo autorizado por el sistema). 
+Definición(es) RFC 4949 Credential Compromise, Advanced Persistent Threat (APT). 
+Tipo de amenaza Externa (Ingeniería Social). 
+Vector de ataque Phishing dirigido (Spear Phishing). 
+Impacto técnico / 
+operativo 
+Espionaje corporativo prolongado, exfiltración silenciosa. 
+Medida de control 
+recomendada 
+MFA (Autenticación Multifactor) obligatorio y monitoreo de 
+comportamiento (UEBA). 
+ 
+Escenario 05.  
+En ataques de ransomware avanzados, los atacantes eliminaron o cifraron los respaldos antes de 
+afectar los sistemas productivos. Este hecho compromete directamente la disponibilidad y la 
+integridad de la información, al impedir la recuperación. El RFC 4949 clasifica este 
+comportamiento como data destruction y availability attack, evidenciando intención deliberada de 
+maximizar el daño. La inexistencia de respaldos offline o inmutables convierte el incidente en 
+catastrófico. 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Disponibilidad (imposibilidad de recuperar), Integridad 
+(destrucción de activos). 
+Definición(es) RFC 4949 Data Destruction, Sabotage, Availability Attack. 
+Tipo de amenaza Externa (Maliciosa destructiva). 
+Vector de ataque Escalación de privilegios para alcanzar repositorios de respaldo. 
+Impacto técnico / operativo Pérdida total de datos, posible quiebra operativa de la 
+organización. 
+Medida de control 
+recomendada 
+Regla 3-2-1 de respaldos, almacenamiento en cinta o air-gapped 
+(desconectado). 
+ 
+Escenario 06.  
+Un empleado con acceso legítimo extrajo bases de datos completas y las vendió a terceros, sin 
+explotar vulnerabilidades técnicas. El servicio afectado fue principalmente la confidencialidad, 
+junto con fallas en el control de acceso por exceso de privilegios. El RFC 4949 define este escenario 
+como insider threat, destacando que el riesgo interno puede ser tan grave como el externo. La 
+carencia de monitoreo y de políticas de mínimo privilegio fue determinante. 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Confidencialidad, Control de Acceso (exceso de privilegios 
+otorgados). 
+Definición(es) RFC 4949 Insider Threat, Theft (robo), Unauthorized Disclosure. 
+Tipo de amenaza Interna (Maliciosa). 
+Vector de ataque Abuso de confianza y privilegios legítimos. 
+Impacto técnico / operativo Fuga de propiedad intelectual, pérdida de ventaja competitiva. 
+Medida de control 
+recomendada 
+Principio de Mínimo Privilegio (PoLP) y monitoreo de actividad 
+de usuarios internos. 
+ 
+Escenario 07.  
+Tras un ataque, los registros del sistema quedaron cifrados o alterados, impidiendo reconstruir la 
+secuencia de eventos. Esto compromete la integridad de los datos y el no repudio, ya que no es 
+posible demostrar qué ocurrió ni quién fue responsable. Desde el RFC 4949, se trata de una 
+violación de evidentiary integrity y del audit trail. El impacto no solo es técnico, sino también 
+probatorio y legal. 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+No Repudio (no se puede probar quién lo hizo), Integridad (de la 
+evidencia). 
+Definición(es) RFC 4949 Deception, Audit Trail modification, Accountability failure. 
+Tipo de amenaza Externa o Interna (Anti-forense). 
+Vector de ataque Manipulación directa de archivos de sistema (log tampering). 
+Impacto técnico / 
+operativo 
+Imposibilidad legal de imputar responsabilidad o entender el 
+alcance del ataque. 
+Medida de control 
+recomendada 
+Envío de logs en tiempo real a un servidor remoto (SIEM) con 
+escritura WORM (Write Once Read Many). 
+ 
+Escenario 08.  
+Una actualización mal ejecutada provocó la caída simultánea de múltiples servicios críticos a nivel 
+global. Aunque no existió un atacante, el servicio de disponibilidad fue gravemente afectado. El 
+RFC 4949 contempla estos eventos como operational failure, recordando que la seguridad 
+también se ve afectada por errores internos. La falta de pruebas previas y planes de reversión 
+amplificó el impacto.  
+Elemento Respuesta Sugerida 
+Servicios X.800 
+comprometidos 
+Disponibilidad (interrupción del servicio). 
+Definición(es) RFC 4949 Operational Failure, Human Error, System Crash. 
+Tipo de amenaza Interna (No maliciosa / Accidental). 
+Vector de ataque N/A (Fallo en procesos de QA/Control de calidad). 
+Impacto técnico / 
+operativo 
+Interrupción masiva de negocio, pérdidas financieras por tiempo 
+de inactividad. 
+Medida de control 
+recomendada 
+Pruebas exhaustivas en entorno staging y despliegue escalonado 
+(Canary deployment). 
+ 
+Escenario 09.  
+Atacantes replicaron sitios y correos oficiales para engañar a ciudadanos y obtener información 
+sensible. Este escenario afecta la autenticación, al suplantar identidades legítimas, y la 
+confidencialidad de los datos recolectados. El RFC 4949 lo clasifica como masquerade y phishing, 
+subrayando el componente de ingeniería social. La ausencia de mecanismos de autenticación del 
+dominio y de concientización facilitó el éxito del ataque.  
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Autenticación de origen de datos (suplantada), Confidencialidad 
+(datos entregados al atacante). 
+Definición(es) RFC 4949 Spoofing, Phishing, Social Engineering. 
+Tipo de amenaza Externa (Fraude). 
+Vector de ataque Correos masivos y dominios typosquatting (similares al real). 
+Impacto técnico / 
+operativo 
+Robo de identidad de usuarios, pérdida de confianza en la 
+institución. 
+Medida de control 
+recomendada 
+Implementación de DMARC/SPF/DKIM en correos y monitoreo de 
+marca (Brand Protection). 
+ 
+Escenario 10.  
+En algunos incidentes, tras exfiltrar información, los atacantes ejecutaron acciones destructivas 
+para borrar sistemas completos y eliminar rastros. Se produce un compromiso total de la 
+confidencialidad, la integridad y la disponibilidad, configurando uno de los peores escenarios 
+posibles. El RFC 4949 describe este patrón como destructive attack, donde el objetivo no es solo el 
+lucro, sino el daño irreversible. La detección tardía impidió cualquier contención efectiva. 
+Elemento Respuesta  
+Servicios X.800 
+comprometidos 
+Confidencialidad, Integridad, Disponibilidad (Compromiso total). 
+Definición(es) RFC 4949 Destructive Attack, Wiper Malware, Sabotage. 
+Tipo de amenaza Externa (Ciberwarfare o Hacktivismo destructivo). 
+Vector de ataque Ejecución de malware tipo Wiper tras obtener control total. 
+Impacto técnico / 
+operativo 
+Destrucción irreversible de infraestructura lógica y datos. 
+Medida de control 
+recomendada 
+Segmentación estricta de red y planes de Recuperación ante 
+Desastres (DRP) probados. 
+ 
+Conclusión 
+Al analizar estos diez escenarios, me queda claro que el estándar X.800 y el RFC 4949 se 
+complementan: uno nos dice qué debemos proteger (como la autenticación y el acceso) y el otro 
+nos ayuda a ponerle el nombre correcto a las amenazas cuando esas protecciones fallan. 
+Lo que más me llamó la atención es que, en la mayoría de estos casos, el problema no fue que los 
+hackers usaran una tecnología imposible de detener, sino que aprovecharon errores humanos y 
+descuidos básicos, como contraseñas robadas (phishing) o configuraciones equivocadas en la 
+nube. 
+Pensando en el entorno de Latinoamérica, creo que la lección más importante es que no siempre 
+se necesita el software más caro para estar seguros. Muchas veces, basta con aplicar bien los 
+fundamentos, como activar la autenticación de dos pasos (MFA) y revisar bien los permisos antes 
+de salir a producción. Si cuidamos esos detalles básicos, podemos evitar la mayoría de los 
+incidentes graves que vimos en la actividad. 
+ 
+Referencias Bibliográficas 
+ 
+1. Shirey, R. (2007). RFC 4949: Internet Security Glossary, Version 2. Internet Engineering Task 
+Force (IETF). https://www.rfc-editor.org/rfc/rfc4949 
+2. López Contreras, S. (2025). Apuntes de clase: Fundamentos del Hacking Ético - Parcial I. 
+[Material de clase]. 
+3. International Telecommunication Union (ITU). (1991). Recommendation X.800: Security 
+architecture for Open Systems Interconnection for CCITT applications. ITU-T. 
+https://www.itu.int/rec/T-REC-X.800 
+ 
+
+==================================================
+--- Act04 ---
+ACT 4 
+1. iptables -P FORWARD DROP 
+2. iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT 
+3. iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 53 -m state --state NEW -j ACCEPT 
+4. iptables -A FORWARD -d 192.1.2.10 -p tcp --dport 25 -m state --state NEW -j ACCEPT 
+5. iptables -A FORWARD -s 192.1.2.10 -p tcp --dport 25 -m state --state NEW -j ACCEPT  
+6. iptables -A FORWARD -d 192.1.2.11 -p tcp --dport 80 -m state --state NEW -j ACCEPT  
+7. iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j ACCEPT  
+ 
+
+==================================================
+--- Act05 ---
+Moreno Solís Gisela Geraldine  176522 
+CARTOGRAFIANDO EL
+PENTESTING: ANÁLISIS
+COMPARATIVO DE
+METODOLOGÍAS DE SEGURIDAD
+INFORMÁTICA 
+SEGURIDAD INFORMATICA
+Criterio
+1. MITRE ATT&CK 2. OWASP WSTG 3. NIST SP 800-115 4. OSSTMM 5. PTES 6. ISSAF
+A. Descripción
+Base de conocimientos global sobre
+tácticas y técnicas de adversarios
+basada en observaciones del mundo
+real.
+Guía técnica principal para pruebas
+de seguridad en aplicaciones web,
+enfocada en vulnerabilidades
+comunes.
+Guía técnica de seguridad de la
+información para realizar
+evaluaciones y pruebas de
+penetración en sistemas federales
+(EE. UU.).
+Metodología científica y basada en
+métricas para evaluar la seguridad
+operativa a través de diferentes
+canales.
+Estándar diseñado para ofrecer un
+lenguaje común y un marco de
+trabajo para la ejecución de pruebas
+de penetración comerciales.
+Framework (ya descontinuado) que
+ofrecía una guía muy detallada y
+estructurada para la evaluación de
+seguridad de sistemas.
+B. Fases de implementación
+Matrices (Enterprise, Mobile, ICS)
+divididas en 14 Tácticas  (ej.
+Reconocimiento, Acceso Inicial,
+Persistencia, Exfiltración).
+1. Recopilación de info.
+2. Gestión de config.
+3. Gestión de identidad.
+4. Autenticación.
+5. Autorización.
+6. Gestión de sesiones.
+7. Validación de datos.
+1. Planificación.
+2. Descubrimiento.
+3. Ataque.
+4. Reporte.
+Fases:  Inducción, Interacción,
+Inquisición, Intervención.
+Canales:  Humano, Físico,
+Inalámbrico, Telecom, Redes de
+datos.
+1. Pre-acuerdo.
+2. Recolección de Inteligencia.
+3. Modelado de Amenazas.
+4. Análisis de Vulnerabilidades.
+5. Explotación.
+6. Post-Explotación.
+7. Reporte.
+1. Planificación y preparación.
+2. Evaluación.
+3. Tratamiento.
+4. Acreditación.
+C. Objetivo principal
+Clasificar y describir ciberataques
+para mejorar la detección, la
+inteligencia de amenazas y la
+emulación de adversarios.
+Proporcionar un marco exhaustivo
+para probar la seguridad de
+aplicaciones y servicios web.
+Orientar a organizaciones
+(especialmente gubernamentales)
+sobre cómo planificar y ejecutar
+evaluaciones técnicas de seguridad.
+Proporcionar una medición
+científica y cuantificable (RAVs) de la
+seguridad operativa.
+Estandarizar la ejecución  de un
+pentest para garantizar calidad y
+consistencia en el servicio.
+Evaluar controles de seguridad con
+un nivel de detalle técnico muy
+granular y específico.
+D. Escenarios de uso
+Threat Hunting, Red Teaming,
+mejora de SOCs, emulación de
+adversarios.
+Auditorías de aplicaciones web,
+desarrollo seguro (SDLC), pruebas
+de cumplimiento (PCI-DSS).
+Auditorías de cumplimiento (FISMA),
+evaluaciones de seguridad en
+agencias federales o corporativos.
+Auditorías que requieren métricas
+exactas de seguridad y
+cumplimiento normativo estricto.
+Pentesting comercial (caja
+negra/blanca/gris), consultoría de
+seguridad ofensiva estándar.
+Evaluaciones técnicas profundas y
+complejas (aunque su uso ha
+disminuido por falta de
+actualización).
+E. Orientación
+Defensa / Ataque  (Emulación y
+Detección).
+Evaluación  (Enfoque en AppSec y
+Bugs).
+Evaluación  (Cumplimiento y
+Auditoría).
+Evaluación / Defensa  (Métricas de
+seguridad).
+Ataque  (Ofensiva / Pentesting puro). Evaluación  (Auditoría técnica).
+F. Autores / Organismos
+MITRE Corporation .
+OWASP Foundation  (Open Web
+Application Security Project).
+NIST  (National Institute of Standards
+and Technology).
+ISECOM  (Institute for Security and
+Open Methodologies) - Pete Herzog.
+Grupo de expertos en seguridad
+(Nickerson, et al.).
+OISSG  (Open Information Systems
+Security Group).
+G. URL Oficial
+attack.mitre.org
+owasp.org/www-project-web-
+security-testing-guide
+csrc.nist.gov/publications/detail/sp/
+800-115/final
+isecom.org/research.html pentest-standard.org
+(Sitio inactivo, archivos en
+sourceforge.net/projects/issaf)
+H. Certificaciones
+MITRE ATT&CK Defender (MAD).
+No directa (usada en OSWE, GWAPT,
+etc.).
+No directa (referencia clave en CISA,
+CISM, CEH).
+OPST  (OSSTMM Professional
+Security Tester), OPSA .
+Referencia para eCPPT
+(eLearnSecurity) y OSCP .
+Anteriormente CPT (Certified
+Penetration Tester) de IACRB
+(legado).
+I. Versiones vigentes
+v16 (se actualiza semestralmente). v4.2 (Estable) / v5.0 (En desarrollo).
+Rev 1 (2008) - Aún vigente como
+estándar base.
+v3.0 (Vigente) / v4
+(Borrador/Investigación).
+v1.0 (Estándar continuo). v0.2.1 (2006) - Descontinuado /
+Legado .
+
+==================================================
+--- Act06 ---
+Configuración Inicial
+Para hacer la configuración inicial en packet Tracer usamos 3 Routers 1941, 2 Switches 2960 y dos PC’s para iniciar.
+
+Ahora conectamos de la siguiente manera.
+
+Ahora desde la terminal del Router 1 vamos a hacer la siguiente configuración inicial.
+
+Quedando de la siguiente manera.
+
+Ahora vamos con la configuración del Router 2.
+
+Ahora quedando de la siguiente manera.
+
+Ahora vamos a configurar el router ISP (Router 0).
+
+Al final quedando así.
+
+Licencia de seguridad Habilitada
+Estas licencias se activan en el router 1 y router 2 con el siguiente comando
+#license boot module c1900 technology-package securityk9
+R1
+
+
+R2
+
+
+
+
+Implementación ACLs
+
+
+Phase 01: ISAKMP policy
+
+
+Phase 02: IPSec transform-set
+
+
+Crear el mapa criptográfico
+
+
+
+Aplicar el mapa criptográfico 
+
+
+
+
+==================================================
