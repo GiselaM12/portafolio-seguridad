@@ -254,27 +254,29 @@ export const activities = [
     date: "2026-02-19",
     tags: ["X.800", "RFC 4949", "Amenazas", "Controles", "Análisis Forense"],
     content: `
-      <h2>Introducción</h2>
-      <p>La seguridad informática requiere de un lenguaje técnico común y un marco de referencia sólido. Esta actividad integra los servicios de seguridad definidos en el estándar <strong>ITU-T X.800</strong> con el vocabulario técnico del <strong>RFC 4949</strong> para analizar 10 escenarios reales y proponer medidas de control efectivas.</p>
-
-      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-6 mb-10">
-        <p class="text-gray-300 italic">"La unión de ambos permite pasar de una descripción anecdótica a un informe técnico profesional."</p>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine (176522)</p>
+        <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
       </div>
+
+      <h2>Introducción</h2>
+      <p>El marco <strong>ITU-T X.800</strong> establece qué servicios de seguridad se deben garantizar (Autenticación, Control de Acceso, Confidencialidad de datos, Integridad de datos, Disponibilidad y No repudio), mientras que el <strong>RFC 4949</strong> proporciona el vocabulario estándar para describir cómo y por qué fallaron. La unión de ambos permite pasar de una descripción anecdótica a un informe técnico profesional.</p>
 
       <div class="space-y-12">
         <!-- Escenario 01 -->
         <div class="border-l-4 border-red-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-red-400 mb-4 uppercase font-mono tracking-wider text-shadow-sm">Escenario 01: LockBit Ransomware</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Acceso inicial no autorizado, exfiltración de datos y cifrado masivo de servidores.</p>
+          <h3 class="text-xl font-bold text-red-400 mb-4 uppercase font-mono tracking-wider">Escenario 01: LockBit Ransomware</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">En múltiples incidentes atribuidos al grupo LockBit, organizaciones públicas y privadas han sufrido el cifrado masivo de servidores tras un acceso inicial no autorizado.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Integridad, Disponibilidad.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad (por la exfiltración), Integridad (datos cifrados/modificados), Disponibilidad (servidores inaccesibles).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Multi-stage attack, Data Breach, Availability Attack.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Availability Attack.</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
@@ -282,32 +284,32 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Intrusión inicial seguido de Movimiento Lateral (Lateral Movement).</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Intrusión inicial no autorizada seguida de Lateral Movement.</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Parada total de operaciones y fuga masiva de información sensible.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Parada total de operaciones, daño reputacional por fuga de información sensible.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Respaldos inmutables (offline), segmentación de red y herramientas DLP.</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Respaldos inmutables (offline), segmentación de red y herramientas DLP (Data Loss Prevention).</p>
             </div>
           </div>
         </div>
 
         <!-- Escenario 02 -->
-        <div class="border-l-4 border-blue-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl text-shadow-sm">
+        <div class="border-l-4 border-blue-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-blue-400 mb-4 uppercase font-mono tracking-wider">Escenario 02: Misconfiguración Cloud</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Bases de datos accesibles públicamente por errores de configuración en la nube.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Bases de datos completas quedaron accesibles públicamente debido a errores de configuración en servicios en la nube.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Control de Acceso.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad (datos públicos), Control de acceso (permisos abiertos a "Everyone").</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Misconfiguration, Exposure.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Exposure.</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
@@ -315,15 +317,15 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">S3 bucket abierto (Permisos "Everyone" activos).</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Error de configuración en permisos de almacenamiento (ej. S3 bucket abierto).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Violación de normativas de privacidad (GDPR/LFPDPPP).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Violación de normativas de privacidad (GDPR/LFPDPPP), sanciones legales.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Implementación de CSPM (Cloud Security Posture Management).</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Implementación de CSPM (Cloud Security Posture Management) y auditoría continua de permisos.</p>
             </div>
           </div>
         </div>
@@ -331,12 +333,12 @@ export const activities = [
         <!-- Escenario 03 -->
         <div class="border-l-4 border-yellow-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-yellow-500 mb-4 uppercase font-mono tracking-wider">Escenario 03: Supply Chain Attack</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Proveedor comprometido distribuye actualizaciones con código malicioso.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Un proveedor legítimo de software fue comprometido y distribuyó una actualización que incluía código malicioso.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Integridad, Autenticación.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Integridad (software alterado), Autenticación (se confió en la firma del proveedor comprometido).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
@@ -344,19 +346,19 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Estructural/Sistémica).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (estructural/sistémica).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Compromiso de infraestructura CI/CD del proveedor.</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Compromiso de la infraestructura de desarrollo del proveedor (CI/CD).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Compromiso masivo de clientes y acceso persistente (Backdoor).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Compromiso masivo de clientes confiados; acceso persistente (backdoor).</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Verificación de firmas y sandboxing de actualizaciones.</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Verificación de firmas, sandboxing de actualizaciones antes de despliegue en producción.</p>
             </div>
           </div>
         </div>
@@ -364,12 +366,12 @@ export const activities = [
         <!-- Escenario 04 -->
         <div class="border-l-4 border-purple-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-purple-400 mb-4 uppercase font-mono tracking-wider">Escenario 04: Spear Phishing</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Atacantes obtienen credenciales válidas mediante ingeniería social.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Mediante campañas de phishing, atacantes obtieron credenciales válidas y accedieron a sistemas corporativos durante meses.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación, Control de Acceso.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación (vulnerada por robo), Control de acceso (acceso ilegítimo autorizado por el sistema).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
@@ -385,11 +387,11 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Espionaje corporativo prolongado y exfiltración silenciosa.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Espionaje corporativo prolongado, exfiltración silenciosa.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">MFA obligatorio y monitoreo de comportamiento (UEBA).</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">MFA (Autenticación Multifactor) obligatorio y monitoreo de comportamiento (UEBA).</p>
             </div>
           </div>
         </div>
@@ -397,7 +399,7 @@ export const activities = [
         <!-- Escenario 05 -->
         <div class="border-l-4 border-orange-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-orange-400 mb-4 uppercase font-mono tracking-wider">Escenario 05: Backup Sabotage</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Atacantes eliminan respaldos antes de ejecutar ransomware para impedir recuperación.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">En ataques de ransomware avanzados, los atacantes eliminaron o cifraron los respaldos antes de afectar los sistemas productivos.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
@@ -418,11 +420,11 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Pérdida total de datos y posible quiebra operativa de la organización.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Pérdida total de datos, posible quiebra operativa de la organización.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Regla 3-2-1 de respaldos y almacenamiento air-gapped (desconectado).</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Regla 3-2-1 de respaldos, almacenamiento en cinta o air-gapped (desconectado).</p>
             </div>
           </div>
         </div>
@@ -430,7 +432,7 @@ export const activities = [
         <!-- Escenario 06 -->
         <div class="border-l-4 border-emerald-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-emerald-400 mb-4 uppercase font-mono tracking-wider">Escenario 06: Insider Threat</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Empleado con acceso legítimo extrae y vende propiedad intelectual.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Un empleado con acceso legítimo extrae bases de datos completas y las vendió a terceros, sin explotar vulnerabilidades técnicas.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
@@ -447,15 +449,15 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Abuso de confianza y privilegios legítimos de usuario interno.</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Abuso de confianza y privilegios legítimos.</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Fuga de propiedad intelectual y pérdida de ventaja competitiva.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Fuga de propiedad intelectual, pérdida de ventaja competitiva.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Principio de Mínimo Privilegio (PoLP) y monitoreo de actividad (UEBA).</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Principio de Mínimo Privilegio (PoLP) and monitoreo de actividad de usuarios internos.</p>
             </div>
           </div>
         </div>
@@ -463,12 +465,12 @@ export const activities = [
         <!-- Escenario 07 -->
         <div class="border-l-4 border-gray-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl shadow-gray-900/40">
           <h3 class="text-xl font-bold text-gray-400 mb-4 uppercase font-mono tracking-wider">Escenario 07: Log Tampering</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Registros del sistema cifrados o alterados para impedir el análisis forense.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Tras un ataque, los registros del sistema quedaron cifrados o alterados, impidiendo reconstruir la secuencia de eventos.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">No Repudio (no se puede probar autoría), Integridad (de la evidencia).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">No Repudio (no se puede probar quién lo hizo), Integridad (de la evidencia).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
@@ -480,15 +482,15 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Manipulación directa de archivos de sistema (Log Tampering).</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Manipulación directa de archivos de sistema (log tampering).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Imposibilidad legal de imputar responsabilidad o entender el alcance.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Imposibilidad legal de imputar responsabilidad o entender el alcance del ataque.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Envío de logs en tiempo real a SIEM con escritura WORM.</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Envío de logs en tiempo real a SIEM con escritura WORM (Write Once Read Many).</p>
             </div>
           </div>
         </div>
@@ -496,12 +498,12 @@ export const activities = [
         <!-- Escenario 08 -->
         <div class="border-l-4 border-cyan-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-cyan-400 mb-4 uppercase font-mono tracking-wider">Escenario 08: Operational Failure</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Actualización mal ejecutada provoca caída global de servicios críticos.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Una actualización mal ejecutada provocó la caída simultánea de múltiples servicios críticos a nivel global.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Disponibilidad (interrupción del servicio crítico).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Disponibilidad (interrupción del servicio).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
@@ -513,15 +515,15 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">N/A (Fallo en procesos de QA / Control de Calidad).</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">N/A (Fallo en procesos de QA/Control de calidad).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interrupción masiva de negocio y grandes pérdidas financieras.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interrupción masiva de negocio, pérdidas financieras por tiempo de inactividad.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Pruebas en entorno staging y despliegue escalonado (Canary).</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Pruebas exhaustivas en entorno staging and despliegue escalonado (Canary deployment).</p>
             </div>
           </div>
         </div>
@@ -529,12 +531,12 @@ export const activities = [
         <!-- Escenario 09 -->
         <div class="border-l-4 border-indigo-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-indigo-400 mb-4 uppercase font-mono tracking-wider">Escenario 09: Brand Spoofing</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Sitios replicados para engañar a ciudadanos y obtener datos sensibles.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Atacantes replicaron sitios y correos oficiales para engañar a ciudadanos y obtener información sensible.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación de origen de datos (suplantada), Confidencialidad.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación de origen de datos (suplantada), Confidencialidad (datos entregados al atacante).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
@@ -542,7 +544,7 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Fraude / Phishing).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Fraude).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
@@ -550,11 +552,11 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Robo de identidad de usuarios y pérdida de confianza institucional.</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Robo de identidad de usuarios, pérdida de confianza en la institución.</p>
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">DMARC/SPF/DKIM y monitoreo de marca (Brand Protection).</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Implementación de DMARC/SPF/DKIM and monitoreo de marca (Brand Protection).</p>
             </div>
           </div>
         </div>
@@ -562,7 +564,7 @@ export const activities = [
         <!-- Escenario 10 -->
         <div class="border-l-4 border-pink-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
           <h3 class="text-xl font-bold text-pink-400 mb-4 uppercase font-mono tracking-wider">Escenario 10: Destructive Attack</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Acciones destructivas para borrar sistemas y eliminar rastros.</p>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">En algunos incidentes, tras exfiltrar información, los atacantes ejecutaron acciones destructivas para borrar sistemas completos y eliminar rastros.</p>
           
           <div class="space-y-4">
             <div class="border-b border-gray-800/30 pb-3">
@@ -575,11 +577,11 @@ export const activities = [
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Ciberwarfare / Hacktivismo destructivo).</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Ciberwarfare o Hacktivismo destructivo).</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Ejecución de malware tipo Wiper tras obtener control total.</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Ejecución de malware tipo Wiper tras obtener control total.</p>
             </div>
             <div class="border-b border-gray-800/30 pb-3">
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
@@ -587,20 +589,22 @@ export const activities = [
             </div>
             <div>
               <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Segmentación estricta de red y planes DRP probados.</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Segmentación estricta de red and planes de Recuperación ante Desastres (DRP) probados.</p>
             </div>
           </div>
         </div>
       </div>
 
       <h2 class="mt-12">Conclusión</h2>
-      <p>El análisis revela que la mayoría de los incidentes graves no requieren tecnologías imposibles de detener, sino que aprovechan errores humanos y descuidos básicos. La aplicación de fundamentos como <strong>MFA</strong>, <strong>Mínimo Privilegio</strong> y <strong>Auditoría de Permisos</strong> puede prevenir el impacto catastrófico documentado en estos escenarios.</p>
+      <p>Al analizar estos diez escenarios, me queda claro que el estándar X.800 y el RFC 4949 se complementan: uno nos dice qué debemos proteger (como la autenticación y el acceso) y el otro nos ayuda a ponerle el nombre correcto a las amenazas cuando esas protecciones fallan.</p>
+      <p>Lo que más me llamó la atención es que, en la mayoría de estos casos, el problema no fue que los hackers usaran una tecnología imposible de detener, sino que aprovecharon errores humanos y descuidos básicos, como contraseñas robadas (phishing) o configuraciones equivocadas en la nube.</p>
+      <p>Pensando en el entorno de Latinoamérica, creo que la lección más importante es que no siempre se necesita el software más caro para estar seguros. Muchas veces, basta con aplicar bien los fundamentos, como activar la autenticación de dos pasos (MFA) y revisar bien los permisos antes de salir a producción. Si cuidamos esos detalles básicos, podemos evitar la mayoría de los incidentes graves que vimos en la actividad.</p>
 
       <h2 class="mt-12">Referencias Bibliográficas</h2>
       <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
-        <li>Shirey, R. (2007). <strong>RFC 4949: Internet Security Glossary, Version 2</strong>. IETF. <a href="https://www.rfc-editor.org/rfc/rfc4949" class="text-blue-400 hover:underline">rfc-editor.org/rfc/rfc4949</a></li>
-        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Fundamentos del Hacking Ético</strong>. [Material de clase].</li>
-        <li>International Telecommunication Union (ITU). (1991). <strong>Recommendation X.800: Security architecture for OSI</strong>. <a href="https://www.itu.int/rec/T-REC-X.800" class="text-blue-400 hover:underline">itu.int/rec/T-REC-X.800</a></li>
+        <li>Shirey, R. (2007). <strong>RFC 4949: Internet Security Glossary, Version 2</strong>. Internet Engineering Task Force (IETF). <a href="https://www.rfc-editor.org/rfc/rfc4949" class="text-blue-400 hover:underline">rfc-editor.org/rfc/rfc4949</a></li>
+        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Fundamentos del Hacking Ético - Parcial I</strong>. [Material de clase].</li>
+        <li>International Telecommunication Union (ITU). (1991). <strong>Recommendation X.800: Security architecture for Open Systems Interconnection for CCITT applications</strong>. ITU-T. <a href="https://www.itu.int/rec/T-REC-X.800" class="text-blue-400 hover:underline">itu.int/rec/T-REC-X.800</a></li>
       </ul>
     `
   },
