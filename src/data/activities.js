@@ -250,349 +250,837 @@ export const activities = [
   {
     id: 2,
     title: "ACTIVIDAD 02 - Análisis de servicios de seguridad (X.800 y RFC 4949)",
-    description: "Estudio profundo de los estándares X.800 y RFC 4949, definiendo servicios y mecanismos de seguridad fundamentales.",
-    date: "2024-02-15",
-    tags: ["Estándares", "X.800", "RFC 4949", "Teoría"],
+    description: "Análisis exhaustivo de 10 escenarios de ciberseguridad aplicando el marco X.800 (servicios) y el glosario RFC 4949 (terminología).",
+    date: "2026-02-19",
+    tags: ["X.800", "RFC 4949", "Amenazas", "Controles", "Análisis Forense"],
     content: `
       <h2>Introducción</h2>
-      <p>La seguridad en redes de computadoras se basa en estándares internacionales que definen un lenguaje y una arquitectura común. Esta actividad analiza la arquitectura de seguridad OSI definida en la recomendación <strong>X.800 de la UIT-T</strong> y el glosario de seguridad de Internet <strong>RFC 4949</strong>.</p>
-      
-      <h2>Arquitectura de Seguridad OSI (X.800)</h2>
-      <p>La norma X.800 proporciona una descripción general de los servicios de seguridad y los mecanismos necesarios para proporcionarlos. Se divide fundamentalmente en tres conceptos clave: ataques, servicios y mecanismos.</p>
-      
-      <h3 class="text-violet-400 font-mono text-lg mt-6 mb-2">Servicios de Seguridad (X.800)</h3>
-      <div class="overflow-x-auto my-6">
-        <table class="w-full text-left border-collapse border border-gray-700">
-            <thead class="bg-[#1a1f2e] text-violet-300">
-                <tr>
-                    <th class="p-3 border border-gray-700">Servicio</th>
-                    <th class="p-3 border border-gray-700">Descripción</th>
-                </tr>
-            </thead>
-            <tbody class="text-sm text-gray-300">
-                <tr><td class="p-3 border border-gray-700 font-bold">Autenticación</td><td class="p-3 border border-gray-700">Garantiza que la entidad de comunicación es quien dice ser. Incluye autenticación de entidad par y autenticación de origen de datos.</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">Control de Acceso</td><td class="p-3 border border-gray-700">Protección contra el uso no autorizado de recursos. Decide quién puede acceder a qué.</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">Confidencialidad de Datos</td><td class="p-3 border border-gray-700">Protección de los datos contra la divulgación no autorizada.</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">Integridad de Datos</td><td class="p-3 border border-gray-700">Garantía de que los datos recibidos son exactamente los enviados por una entidad autorizada (sin modificación, inserción, eliminación ni repetición).</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">No Repudio</td><td class="p-3 border border-gray-700">Protección contra la negación por parte de una de las entidades involucradas en una comunicación de haber participado en toda o parte de la comunicación.</td></tr>
-            </tbody>
-        </table>
+      <p>La seguridad informática requiere de un lenguaje técnico común y un marco de referencia sólido. Esta actividad integra los servicios de seguridad definidos en el estándar <strong>ITU-T X.800</strong> con el vocabulario técnico del <strong>RFC 4949</strong> para analizar 10 escenarios reales y proponer medidas de control efectivas.</p>
+
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-6 mb-10">
+        <p class="text-gray-300 italic">"La unión de ambos permite pasar de una descripción anecdótica a un informe técnico profesional."</p>
       </div>
 
-      <h3 class="text-violet-400 font-mono text-lg mt-6 mb-2">Mecanismos de Seguridad</h3>
-      <ul class="list-disc pl-6 space-y-2 mb-8">
-        <li><strong>Cifrado (Encipherment):</strong> Uso de algoritmos matemáticos para transformar datos en una forma ininteligible.</li>
-        <li><strong>Firma Digital:</strong> Datos añadidos a una unidad de datos que permiten al receptor probar el origen y la integridad de la unidad.</li>
-        <li><strong>Control de Acceso:</strong> Mecanismos que hacen cumplir los derechos de acceso a los recursos.</li>
-        <li><strong>Integridad de Datos:</strong> Uso de códigos de comprobación (hash) para validar la integridad de una unidad de datos o flujo.</li>
-        <li><strong>Intercambio de Autenticación:</strong> Protocolo para asegurar la identidad de las entidades.</li>
+      <div class="space-y-12">
+        <!-- Escenario 01 -->
+        <div class="border-l-4 border-red-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-red-400 mb-4 uppercase font-mono tracking-wider text-shadow-sm">Escenario 01: LockBit Ransomware</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Acceso inicial no autorizado, exfiltración de datos y cifrado masivo de servidores.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Integridad, Disponibilidad.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Multi-stage attack, Data Breach, Availability Attack.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Maliciosa deliberada).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Intrusión inicial seguido de Movimiento Lateral (Lateral Movement).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Parada total de operaciones y fuga masiva de información sensible.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Respaldos inmutables (offline), segmentación de red y herramientas DLP.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 02 -->
+        <div class="border-l-4 border-blue-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl text-shadow-sm">
+          <h3 class="text-xl font-bold text-blue-400 mb-4 uppercase font-mono tracking-wider">Escenario 02: Misconfiguración Cloud</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Bases de datos accesibles públicamente por errores de configuración en la nube.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Control de Acceso.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Misconfiguration, Exposure.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interna (Involuntaria / Error humano).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">S3 bucket abierto (Permisos "Everyone" activos).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Violación de normativas de privacidad (GDPR/LFPDPPP).</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Implementación de CSPM (Cloud Security Posture Management).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 03 -->
+        <div class="border-l-4 border-yellow-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-yellow-500 mb-4 uppercase font-mono tracking-wider">Escenario 03: Supply Chain Attack</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Proveedor comprometido distribuye actualizaciones con código malicioso.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Integridad, Autenticación.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Supply Chain Attack, Trojan Horse, Malicious Logic.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Estructural/Sistémica).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Compromiso de infraestructura CI/CD del proveedor.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Compromiso masivo de clientes y acceso persistente (Backdoor).</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Verificación de firmas y sandboxing de actualizaciones.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 04 -->
+        <div class="border-l-4 border-purple-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-purple-400 mb-4 uppercase font-mono tracking-wider">Escenario 04: Spear Phishing</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Atacantes obtienen credenciales válidas mediante ingeniería social.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación, Control de Acceso.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Credential Compromise, Advanced Persistent Threat (APT).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Ingeniería Social).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Phishing dirigido (Spear Phishing).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Espionaje corporativo prolongado y exfiltración silenciosa.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">MFA obligatorio y monitoreo de comportamiento (UEBA).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 05 -->
+        <div class="border-l-4 border-orange-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-orange-400 mb-4 uppercase font-mono tracking-wider">Escenario 05: Backup Sabotage</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Atacantes eliminan respaldos antes de ejecutar ransomware para impedir recuperación.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Disponibilidad (imposibilidad de recuperar), Integridad (destrucción de activos).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Data Destruction, Sabotage, Availability Attack.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Maliciosa destructiva).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Escalación de privilegios para alcanzar repositorios de respaldo.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Pérdida total de datos y posible quiebra operativa de la organización.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Regla 3-2-1 de respaldos y almacenamiento air-gapped (desconectado).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 06 -->
+        <div class="border-l-4 border-emerald-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-emerald-400 mb-4 uppercase font-mono tracking-wider">Escenario 06: Insider Threat</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Empleado con acceso legítimo extrae y vende propiedad intelectual.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Control de Acceso (exceso de privilegios otorgados).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Insider Threat, Theft (robo), Unauthorized Disclosure.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interna (Maliciosa).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Abuso de confianza y privilegios legítimos de usuario interno.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Fuga de propiedad intelectual y pérdida de ventaja competitiva.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Principio de Mínimo Privilegio (PoLP) y monitoreo de actividad (UEBA).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 07 -->
+        <div class="border-l-4 border-gray-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl shadow-gray-900/40">
+          <h3 class="text-xl font-bold text-gray-400 mb-4 uppercase font-mono tracking-wider">Escenario 07: Log Tampering</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Registros del sistema cifrados o alterados para impedir el análisis forense.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">No Repudio (no se puede probar autoría), Integridad (de la evidencia).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Deception, Audit Trail modification, Accountability failure.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa o Interna (Anti-forense).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Manipulación directa de archivos de sistema (Log Tampering).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Imposibilidad legal de imputar responsabilidad o entender el alcance.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Envío de logs en tiempo real a SIEM con escritura WORM.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 08 -->
+        <div class="border-l-4 border-cyan-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-cyan-400 mb-4 uppercase font-mono tracking-wider">Escenario 08: Operational Failure</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Actualización mal ejecutada provoca caída global de servicios críticos.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Disponibilidad (interrupción del servicio crítico).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Operational Failure, Human Error, System Crash.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interna (No maliciosa / Accidental).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">N/A (Fallo en procesos de QA / Control de Calidad).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interrupción masiva de negocio y grandes pérdidas financieras.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Pruebas en entorno staging y despliegue escalonado (Canary).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 09 -->
+        <div class="border-l-4 border-indigo-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-indigo-400 mb-4 uppercase font-mono tracking-wider">Escenario 09: Brand Spoofing</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Sitios replicados para engañar a ciudadanos y obtener datos sensibles.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación de origen de datos (suplantada), Confidencialidad.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Spoofing, Phishing, Social Engineering.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Fraude / Phishing).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Correos masivos y dominios typosquatting (similares al real).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Robo de identidad de usuarios y pérdida de confianza institucional.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">DMARC/SPF/DKIM y monitoreo de marca (Brand Protection).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escenario 10 -->
+        <div class="border-l-4 border-pink-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
+          <h3 class="text-xl font-bold text-pink-400 mb-4 uppercase font-mono tracking-wider">Escenario 10: Destructive Attack</h3>
+          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Acciones destructivas para borrar sistemas y eliminar rastros.</p>
+          
+          <div class="space-y-4">
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Integridad, Disponibilidad (Compromiso total).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Destructive Attack, Wiper Malware, Sabotage.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Ciberwarfare / Hacktivismo destructivo).</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
+              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Ejecución de malware tipo Wiper tras obtener control total.</p>
+            </div>
+            <div class="border-b border-gray-800/30 pb-3">
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
+              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Destrucción irreversible de infraestructura lógica y datos.</p>
+            </div>
+            <div>
+              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
+              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Segmentación estricta de red y planes DRP probados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="mt-12">Conclusión</h2>
+      <p>El análisis revela que la mayoría de los incidentes graves no requieren tecnologías imposibles de detener, sino que aprovechan errores humanos y descuidos básicos. La aplicación de fundamentos como <strong>MFA</strong>, <strong>Mínimo Privilegio</strong> y <strong>Auditoría de Permisos</strong> puede prevenir el impacto catastrófico documentado en estos escenarios.</p>
+
+      <h2 class="mt-12">Referencias Bibliográficas</h2>
+      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
+        <li>Shirey, R. (2007). <strong>RFC 4949: Internet Security Glossary, Version 2</strong>. IETF. <a href="https://www.rfc-editor.org/rfc/rfc4949" class="text-blue-400 hover:underline">rfc-editor.org/rfc/rfc4949</a></li>
+        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Fundamentos del Hacking Ético</strong>. [Material de clase].</li>
+        <li>International Telecommunication Union (ITU). (1991). <strong>Recommendation X.800: Security architecture for OSI</strong>. <a href="https://www.itu.int/rec/T-REC-X.800" class="text-blue-400 hover:underline">itu.int/rec/T-REC-X.800</a></li>
       </ul>
-
-      <h2>RFC 4949: Glosario de Seguridad de Internet</h2>
-      <p>El RFC 4949 es un documento informativo que consolida la terminología utilizada en el campo de la seguridad de la información. Su objetivo es reducir la ambigüedad y facilitar la comunicación técnica.</p>
-      
-      <div class="bg-gray-900 border border-gray-700 rounded p-4 mb-8">
-        <h4 class="text-blue-400 font-bold mb-2">Conceptos Clave del RFC 4949</h4>
-        <dl class="space-y-4 text-sm">
-            <div>
-                <dt class="font-bold text-gray-200">Adversario (Adversary)</dt>
-                <dd class="text-gray-400 ml-4">Una entidad que ataca, o es una amenaza para, un sistema. Puede ser un hacker, un insider malintencionado, o malware.</dd>
-            </div>
-            <div>
-                <dt class="font-bold text-gray-200">Contramedida (Countermeasure)</dt>
-                <dd class="text-gray-400 ml-4">Una acción, dispositivo, procedimiento o técnica que reduce una amenaza, una vulnerabilidad o un ataque eliminándolo o previniéndolo, minimizando el daño que puede causar, o descubriéndolo y reportándolo de manera que se puedan tomar medidas correctivas.</dd>
-            </div>
-            <div>
-                <dt class="font-bold text-gray-200">Riesgo (Risk)</dt>
-                <dd class="text-gray-400 ml-4">Una expectativa de pérdida expresada como la probabilidad de que una amenaza particular explote una vulnerabilidad particular con una consecuencia dañina particular.</dd>
-            </div>
-        </dl>
-      </div>
-
-      <h2>Conclusión</h2>
-      <p>Comprender la norma X.800 y el RFC 4949 es fundamental para cualquier profesional de seguridad. X.800 proporciona el marco arquitectónico ("el mapa"), mientras que RFC 4949 proporciona el vocabulario preciso ("el diccionario") para diseñar y discutir sistemas seguros de manera efectiva.</p>
     `
   },
   {
     id: 3,
     title: "ACTIVIDAD 03 - Interpretación y traducción de políticas de filtrado en iptables",
-    description: "Ejercicio práctico de configuración de firewalls en Linux utilizando iptables, traduciendo políticas de seguridad a reglas técnicas.",
-    date: "2024-02-20",
-    tags: ["Linux", "Firewall", "Iptables", "Seguridad de Red"],
+    description: "Ejercicio práctico de configuración de firewalls en Linux utilizando iptables, traduciendo políticas de seguridad a reglas técnicas y analizando la anatomía de los comandos.",
+    date: "2026-02-20",
+    tags: ["Linux", "Firewall", "Iptables", "Políticas de Red", "Security Hardening"],
     content: `
       <h2>Introducción a Netfilter e Iptables</h2>
       <p><strong>Iptables</strong> es la herramienta de espacio de usuario utilizada para configurar las tablas de filtrado de paquetes del kernel de Linux (Netfilter). Es la primera línea de defensa en servidores Linux, permitiendo definir reglas granulares para aceptar, rechazar o modificar el tráfico de red.</p>
 
-      <h2>Estructura Básica</h2>
-      <p>Iptables organiza las reglas en <strong>Tablas</strong> y <strong>Cadenas (Chains)</strong>. Las tablas más comunes son:</p>
-      <ul class="list-disc pl-6 space-y-2 mb-6">
-        <li><strong>Filter:</strong> Tabla por defecto. Se usa para decidir si dejar pasar un paquete. (Cadenas: INPUT, OUTPUT, FORWARD).</li>
-        <li><strong>Nat:</strong> Usada para la traducción de direcciones de red (Network Address Translation). (Cadenas: PREROUTING, POSTROUTING, OUTPUT).</li>
-        <li><strong>Mangle:</strong> Usada para la modificación especializada de paquetes.</li>
-      </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+        <div class="bg-[#0a0f1a] border border-red-900/30 rounded-lg overflow-hidden shadow-2xl transition-transform hover:scale-[1.02]">
+          <div class="bg-red-900/20 px-4 py-2 border-b border-red-900/30 text-xs font-mono text-red-100">EVIDENCE_IMG_01</div>
+          <img src="/ACT 03.jfif" alt="Iptables Worksheet 1" class="w-full h-auto opacity-80 hover:opacity-100 transition-opacity" />
+        </div>
+        <div class="bg-[#0a0f1a] border border-red-900/30 rounded-lg overflow-hidden shadow-2xl transition-transform hover:scale-[1.02]">
+          <div class="bg-red-900/20 px-4 py-2 border-b border-red-900/30 text-xs font-mono text-red-100">EVIDENCE_IMG_02</div>
+          <img src="/ACT 03.2.jfif" alt="Iptables Worksheet 2" class="w-full h-auto opacity-80 hover:opacity-100 transition-opacity" />
+        </div>
+      </div>
 
-      <h2>Políticas de Seguridad y su Traducción a Reglas</h2>
-      <p>A continuación se presentan ejemplos de cómo traducir políticas de seguridad escritas en lenguaje natural a comandos técnicos de iptables.</p>
-
+      <h2>Conceptos Fundamentales</h2>
+      <p>Iptables organiza las reglas en <strong>Tablas</strong> y <strong>Cadenas (Chains)</strong>. El flujo del paquete sigue un orden lógico: primero pasa por una <strong>tabla</strong>, después por una <strong>cadena</strong> y finalmente se ejecuta una <strong>acción</strong> (regla).</p>
+      
       <div class="overflow-x-auto my-6">
         <table class="w-full text-left border-collapse border border-gray-700">
-            <thead class="bg-[#1a1f2e] text-green-400">
+            <thead class="bg-[#1a1f2e] text-violet-300">
                 <tr>
-                    <th class="p-3 border border-gray-700 w-1/3">Política de Seguridad</th>
-                    <th class="p-3 border border-gray-700">Comando Iptables</th>
+                    <th class="p-3 border border-gray-700">Tabla</th>
+                    <th class="p-3 border border-gray-700">Propósito Principal</th>
+                    <th class="p-3 border border-gray-700">Ejemplo de Uso</th>
                 </tr>
             </thead>
-            <tbody class="text-sm text-gray-300 font-mono">
-                <tr>
-                    <td class="p-3 border border-gray-700 font-sans text-gray-200">1. Política por defecto: Bloquear todo el tráfico entrante a menos que se permita explícitamente.</td>
-                    <td class="p-3 border border-gray-700">iptables -P INPUT DROP</td>
-                </tr>
-                <tr>
-                    <td class="p-3 border border-gray-700 font-sans text-gray-200">2. Permitir conexiones SSH entrantes (Puerto 22).</td>
-                    <td class="p-3 border border-gray-700">iptables -A INPUT -p tcp --dport 22 -j ACCEPT</td>
-                </tr>
-                <tr>
-                    <td class="p-3 border border-gray-700 font-sans text-gray-200">3. Permitir tráfico Web (HTTP y HTTPS).</td>
-                    <td class="p-3 border border-gray-700">
-                        iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
-                        iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-                    </td>
-                </tr>
-                <tr>
-                    <td class="p-3 border border-gray-700 font-sans text-gray-200">4. Permitir tráfico de loopback (localhost).</td>
-                    <td class="p-3 border border-gray-700">iptables -A INPUT -i lo -j ACCEPT</td>
-                </tr>
-                <tr>
-                    <td class="p-3 border border-gray-700 font-sans text-gray-200">5. Bloquear una IP maliciosa específica (ej. 192.168.1.100).</td>
-                    <td class="p-3 border border-gray-700">iptables -A INPUT -s 192.168.1.100 -j DROP</td>
-                </tr>
+            <tbody class="text-sm text-gray-300">
+                <tr><td class="p-3 border border-gray-700 font-bold">FILTER</td><td class="p-3 border border-gray-700">Filtrado de paquetes (por defecto).</td><td class="p-3 border border-gray-700">Permitir / Bloquear tráfico.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">NAT</td><td class="p-3 border border-gray-700">Traducción de direcciones.</td><td class="p-3 border border-gray-700">Uso de diferentes dispositivos.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">MANGLE</td><td class="p-3 border border-gray-700">Modificación avanzada de paquetes.</td><td class="p-3 border border-gray-700">Cambio de cabeceras.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">RAW</td><td class="p-3 border border-gray-700">Excepciones al seguimiento de conexiones.</td><td class="p-3 border border-gray-700">Paquetes no inspeccionados.</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold">SECURITY</td><td class="p-3 border border-gray-700">Aplica paquetes de seguridad.</td><td class="p-3 border border-gray-700">Seguridad avanzada.</td></tr>
             </tbody>
         </table>
       </div>
 
-      <h2>Script de Configuración Básica</h2>
-      <p>Es común agrupar estas reglas en un script de bash para facilitar su aplicación. Un ejemplo de script de "Hardening" básico sería:</p>
-
-      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 overflow-x-auto mb-8">
-        <pre>
-#!/bin/bash
-# Limpiar reglas existentes
-iptables -F
-iptables -X
-
-# Establecer políticas por defecto
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-
-# Permitir conexiones establecidas relacionadas (Stateful)
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# Permitir loopback
-iptables -A INPUT -i lo -j ACCEPT
-
-# Permitir SSH
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-
-# Loggear paquetes droppeados (Opcional, para auditoría)
-iptables -A INPUT -j LOG --log-prefix "IPTABLES-DROP: "
-        </pre>
+      <h2>Anatomía de un comando iptables</h2>
+      <div class="bg-black border border-violet-900/50 rounded p-6 font-mono text-sm mb-8">
+        <p class="text-violet-400 mb-2"># Estructura básica analizada:</p>
+        <p class="text-white">iptables <span class="text-red-400">-A INPUT</span> -p tcp -m multiport <span class="text-yellow-400">--dports 80,443</span> -j <span class="text-green-400">ACCEPT</span></p>
+        <div class="mt-4 text-xs text-gray-400 space-y-1">
+          <p>• <span class="text-red-400">-A INPUT</span>: Añadir regla a la cadena de entrada.</p>
+          <p>• <span class="text-white">-p tcp</span>: Protocolo TCP.</p>
+          <p>• <span class="text-white">-m multiport</span>: Módulo para múltiples puertos en una sola regla.</p>
+          <p>• <span class="text-yellow-400">--dports 80,443</span>: Puertos de destino (HTTP y HTTPS).</p>
+          <p>• <span class="text-green-400">-j ACCEPT</span>: Acción (Target) de permitir el paquete.</p>
+        </div>
       </div>
 
+      <h2>Traducción de Políticas</h2>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-green-400">
+                <tr>
+                    <th class="p-3 border border-gray-700 w-1/3">Descripción del Filtro</th>
+                    <th class="p-3 border border-gray-700">Comando Iptables</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-300 font-mono">
+                <tr><td class="p-3 border border-gray-700 font-sans">Permitir tráfico HTTP entrante</td><td class="p-3 border border-gray-700">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-sans">Permitir todo el tráfico saliente</td><td class="p-3 border border-gray-700">iptables -P OUTPUT ACCEPT</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-sans">Permitir SSH solo desde la IP 192.168.1.50</td><td class="p-3 border border-gray-700">iptables -A INPUT -p tcp -s 192.168.1.50 --dport 22 -j ACCEPT</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-sans">Permitir tráfico TCP a puertos 80 y 443 solo si es conexión establecida o relacionada</td><td class="p-3 border border-gray-700">iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state ESTABLISHED,RELATED -j ACCEPT</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-sans text-white">Permitir tráfico TCP entrante por eth0 a puertos 22, 80 y 443 (Nuevas y Establecidas)</td><td class="p-3 border border-gray-700 text-xs">iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT</td></tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h2>Variables y Opciones Comunes</h2>
+      <ul class="space-y-4 mb-10">
+        <li class="flex items-start gap-4 bg-white/5 p-4 rounded border border-gray-800">
+          <span class="bg-red-900/30 text-red-500 px-2 py-1 rounded font-mono text-xs">--limit 5/minute</span>
+          <div>
+            <p class="font-bold text-gray-200">Limitar intentos por minuto</p>
+            <p class="text-sm text-gray-500">Previene ataques de fuerza bruta o inundaciones.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4 bg-white/5 p-4 rounded border border-gray-800">
+          <span class="bg-blue-900/30 text-blue-400 px-2 py-1 rounded font-mono text-xs">-s 192.168.1.0/24</span>
+          <div>
+            <p class="font-bold text-gray-200">Filtrar por IP de origen</p>
+            <p class="text-sm text-gray-500">Acepta o rechaza tráfico basándose en la subred de origen.</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-4 bg-white/5 p-4 rounded border border-gray-800">
+          <span class="bg-green-900/30 text-green-400 px-2 py-1 rounded font-mono text-xs">-L -n -v</span>
+          <div>
+            <p class="font-bold text-gray-200">Visualización Detallada</p>
+            <p class="text-sm text-gray-500">Muestra reglas con contadores de paquetes y bytes sin resolución de DNS para mayor velocidad.</p>
+          </div>
+        </li>
+      </ul>
+
       <h2>Conclusión</h2>
-      <p>Iptables es una herramienta poderosa y flexible. Una configuración correcta es vital para la seguridad del servidor; un error (como bloquear el puerto 22 sin tener acceso físico) puede dejar al administrador fuera del sistema. La práctica de "Default DROP" es la más segura, obligando a abrir explícitamente solo lo que es necesario.</p>
+      <p>Iptables es una herramienta poderosa y flexible. Una configuración correcta es vital para la seguridad del servidor; un error (como bloquear el puerto 22 sin tener acceso físico) puede dejar al administrador fuera del sistema. La práctica de <strong>"Default DROP"</strong> es la más segura, obligando a abrir explícitamente solo lo que es necesario.</p>
+
+      <h2 class="mt-12 text-violet-400 font-mono">Referencias Bibliográficas</h2>
+      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
+        <li>Purdy, G. (2004). <strong>Linux iptables Pocket Reference</strong>. O'Reilly Media.</li>
+        <li>Netfilter Project. (2024). <strong>Iptables documentation and HOWTOs</strong>. <a href="https://www.netfilter.org/documentation/" class="text-blue-400 hover:underline">netfilter.org</a></li>
+        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Seguridad en Redes y Firewalls</strong>.</li>
+      </ul>
     `
   },
   {
     id: 4,
     title: "ACTIVIDAD 04 - Mecanismos de defensa en red",
     description: "Exploración de diversas estrategias y herramientas para proteger infraestructuras de red contra accesos no autorizados.",
-    date: "2024-02-25",
+    date: "2026-02-21",
     tags: ["Defensa en Profundidad", "IDS/IPS", "Honeypots"],
     content: `
-      <h2>Defensa en Profundidad (Defense in Depth)</h2>
-      <p>El concepto de defensa en profundidad se basa en la premisa de que <strong>ninguna medida de seguridad es infalible</strong>. Por lo tanto, se deben implementar múltiples capas de controles de seguridad (redundancia) para proteger los activos de información.</p>
+      <h2>Introducción a la Cadena FORWARD</h2>
+      <p>A diferencia de la cadena INPUT (tráfico dirigido al host local), la cadena <strong>FORWARD</strong> procesa el tráfico que simplemente pasa a través del firewall desde una interfaz hacia otra. Es la base de un firewall perimetral que protege una red interna o una DMZ.</p>
 
-      <h2>Sistemas de Detección y Prevención de Intrusos (IDS vs IPS)</h2>
-      <p>Ambos sistemas monitorizan el tráfico de red en busca de firmas de ataques conocidos o anomalías, pero difieren en su reacción.</p>
-      
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-6 mb-10">
+        <p class="text-gray-300 italic">"La cadena FORWARD permite que el firewall actúe como un guardia entre diferentes zonas de confianza, filtrando el tráfico que fluye entre ellas."</p>
+      </div>
+
+      <h2>Traducción de Políticas de Perímetro</h2>
       <div class="overflow-x-auto my-6">
         <table class="w-full text-left border-collapse border border-gray-700">
             <thead class="bg-[#1a1f2e] text-blue-300">
                 <tr>
-                    <th class="p-3 border border-gray-700">Característica</th>
-                    <th class="p-3 border border-gray-700">IDS (Intrusion Detection System)</th>
-                    <th class="p-3 border border-gray-700">IPS (Intrusion Prevention System)</th>
+                    <th class="p-3 border border-gray-700 w-1/3">Escenario de Red</th>
+                    <th class="p-3 border border-gray-700">Comando Iptables (FORWARD)</th>
                 </tr>
             </thead>
-            <tbody class="text-sm text-gray-300">
-                <tr><td class="p-3 border border-gray-700 font-bold">Función Principal</td><td class="p-3 border border-gray-700">Detectar y alertar.</td><td class="p-3 border border-gray-700">Detectar, alertar y <strong>bloquear</strong>.</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">Ubicación en la Red</td><td class="p-3 border border-gray-700">Fuera de línea (Promiscuous Mode / SPAN Port). No afecta el flujo.</td><td class="p-3 border border-gray-700">En línea (Inline). Todo el tráfico pasa a través de él.</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">Impacto en Rendimiento</td><td class="p-3 border border-gray-700">Nulo o mínimo en la latencia de la red.</td><td class="p-3 border border-gray-700">Puede introducir latencia; si falla, puede cortar la red.</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-bold">Riesgo</td><td class="p-3 border border-gray-700">Falsos negativos (no detectar un ataque).</td><td class="p-3 border border-gray-700">Falsos positivos (bloquear tráfico legítimo).</td></tr>
+            <tbody class="text-sm text-gray-300 font-mono">
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans">Bloquear tráfico entre dos redes internas (eth1 a eth2)</td>
+                    <td class="p-3 border border-gray-700">iptables -A FORWARD -i eth1 -o eth2 -j DROP</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans">Permitir tráfico desde Internet (eth0) a un servidor Web en la DMZ (eth1)</td>
+                    <td class="p-3 border border-gray-700">iptables -A FORWARD -i eth0 -o eth1 -p tcp --dport 80 -j ACCEPT</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans">Permitir solo tráfico SSH desde la red interna (eth2) a la DMZ (eth1)</td>
+                    <td class="p-3 border border-gray-700">iptables -A FORWARD -i eth2 -o eth1 -p tcp --dport 22 -j ACCEPT</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans">Permitir tráfico de respuesta (ESTABLISHED) desde DMZ a Internet</td>
+                    <td class="p-3 border border-gray-700">iptables -A FORWARD -i eth1 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 font-sans text-red-300">Rechazar todo tráfico que intente salir por la interfaz externa (eth0) sin origen autorizado</td>
+                    <td class="p-3 border border-gray-700">iptables -A FORWARD -o eth0 -s ! 192.168.1.0/24 -j REJECT</td>
+                </tr>
             </tbody>
         </table>
       </div>
 
-      <h2>Honeypots y Honeynets</h2>
-      <p>Un <strong>Honeypot</strong> es un recurso de sistema de información cuyo valor radica en el uso no autorizado e ilícito de ese recurso. Es una trampa, diseñada para parecer un objetivo real (servidor de base de datos, servidor web vulnerable) para atraer a los atacantes.</p>
-      
-      <ul class="list-disc pl-6 space-y-3 mb-8">
-        <li><strong>Objetivo:</strong> Desviar la atención de los activos críticos reales, estudiar las tácticas, técnicas y procedimientos (TTPs) del atacante, y generar alertas tempranas de alta fidelidad (cualquier tráfico hacia un honeypot es sospechoso por definición).</li>
-        <li><strong>Tipos:</strong>
-            <ul class="list-circle pl-6 mt-2 text-gray-400">
-                <li><em>Baja interacción:</em> Simulan servicios (puertos abiertos, banners) pero no un sistema operativo completo. Menos riesgo, menos datos.</li>
-                <li><em>Alta interacción:</em> Son sistemas reales con vulnerabilidades intencionales y mucha instrumentación. Alto riesgo, muchos datos valiosos.</li>
-            </ul>
-        </li>
-      </ul>
+      <h2>Mecanismos de Defensa Complementarios</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+        <div class="bg-white/5 p-6 rounded-lg border border-gray-800">
+          <h3 class="text-lg font-bold text-violet-400 mb-3">Sistemas de Detección (IDS)</h3>
+          <p class="text-sm text-gray-400">Monitorizan el tráfico en busca de anomalías. En la cadena FORWARD, un IDS puede detectar intentos de movimiento lateral entre segmentos de red.</p>
+        </div>
+        <div class="bg-white/5 p-6 rounded-lg border border-gray-800">
+          <h3 class="text-lg font-bold text-green-400 mb-3">Sistemas de Prevención (IPS)</h3>
+          <p class="text-sm text-gray-400">Actúan bloqueando paquetes en tiempo real. Un IPS configurado con iptables puede usar el target REJECT para informar al atacante o DROP para ser silencioso.</p>
+        </div>
+      </div>
 
-      <h2>Firewalls de Nueva Generación (NGFW)</h2>
-      <p>A diferencia de los firewalls tradicionales que filtran por puerto y protocolo (Capa 3 y 4), los NGFW operan hasta la <strong>Capa 7 (Aplicación)</strong>. Pueden inspeccionar el contenido del paquete, identificar la aplicación específica (ej. "Facebook Games" vs "Facebook Chat") y descifrar tráfico SSL/TLS.</p>
+      <h2>Caso Práctico: Segmentación DMZ</h2>
+      <p>En una arquitectura típica, el tráfico de Internet <strong>nunca</strong> debe llegar directamente a la red interna. Debe pasar por una DMZ donde se encuentran los servicios públicos. Si un servidor en la DMZ es comprometido, la cadena FORWARD debe impedir que el atacante salte a la red interna (Movimiento Lateral).</p>
+
+      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 overflow-x-auto my-8">
+        <pre>
+# Política por defecto: Cerramos todo el tráfico de paso
+iptables -P FORWARD DROP
+
+# Permitimos que la red interna salga a Internet (eth2 -> eth0)
+iptables -A FORWARD -i eth2 -o eth0 -j ACCEPT
+
+# Permitimos respuestas de Internet a la red interna
+iptables -A FORWARD -i eth0 -o eth2 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Permitimos acceso Web desde Internet a la DMZ (eth0 -> eth1)
+iptables -A FORWARD -i eth0 -o eth1 -p tcp --dport 80 -j ACCEPT
+        </pre>
+      </div>
+
+      <h3 class="text-xl font-bold text-violet-400 mb-6">Políticas de la Cadena FORWARD (Taller Práctico)</h3>
+      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 mb-8 overflow-x-auto">
+        <pre>
+# 1. Denegar todo el tráfico de reenvío por defecto (Política de Seguridad)
+iptables -P FORWARD DROP
+
+# 2. Permitir tráfico de sesiones ya establecidas y relacionadas
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# 3. Permitir consultas DNS (puerto 53) desde la red local
+iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 53 -m state --state NEW -j ACCEPT
+
+# 4. Permitir tráfico SMTP (puerto 25) entrante al servidor de correo (192.1.2.10)
+iptables -A FORWARD -d 192.1.2.10 -p tcp --dport 25 -m state --state NEW -j ACCEPT
+
+# 5. Permitir tráfico SMTP saliente desde el servidor de correo
+iptables -A FORWARD -s 192.1.2.10 -p tcp --dport 25 -m state --state NEW -j ACCEPT
+
+# 6. Permitir tráfico HTTP (puerto 80) al servidor web en la DMZ (192.1.2.11)
+iptables -A FORWARD -d 192.1.2.11 -p tcp --dport 80 -m state --state NEW -j ACCEPT
+
+# 7. Permitir navegación web HTTP (puerto 80) desde la LAN
+iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j ACCEPT
+        </pre>
+      </div>
+
+      <h3 class="text-xl font-bold text-violet-400 mb-6">Mecanismos de Defensa Complementarios</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white/5 p-4 rounded-lg border border-gray-800">
+          <h4 class="font-bold text-violet-300 mb-2 underline selection:bg-violet-500">IDS / IPS</h4>
+          <p class="text-xs text-gray-400">Sistemas de detección y prevención que analizan firmas y anomalías para bloquear ataques en la cadena FORWARD en tiempo real.</p>
+        </div>
+        <div class="bg-white/5 p-4 rounded-lg border border-gray-800">
+          <h4 class="font-bold text-orange-400 mb-2 underline selection:bg-orange-500">Honeypots</h4>
+          <p class="text-xs text-gray-400">Sistemas señuelo (como Cowrie o Dionaea) diseñados para ser atacados, permitiendo estudiar técnicas del adversario sin riesgo operativo.</p>
+        </div>
+        <div class="bg-white/5 p-4 rounded-lg border border-gray-800">
+          <h4 class="font-bold text-blue-400 mb-2 underline selection:bg-blue-500">NGFW</h4>
+          <p class="text-xs text-gray-400">Firewalls de Nueva Generación que operan en Capa 7, permitiendo filtrar tráfico por aplicación y contenido, no solo por puertos.</p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-bold text-violet-400 mb-6 font-mono">COMPARATIVA TÉCNICA DE DEFENSA</h3>
+      <div class="overflow-x-auto mb-10">
+        <table class="w-full text-left border-collapse border border-gray-700">
+            <thead class="bg-[#1a1f2e] text-violet-200">
+                <tr>
+                    <th class="p-3 border border-gray-700">Mecanismo</th>
+                    <th class="p-3 border border-gray-700">Capa OSI</th>
+                    <th class="p-3 border border-gray-700">Función Clave</th>
+                    <th class="p-3 border border-gray-700">Modo de Operación</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm text-gray-400">
+                <tr><td class="p-3 border border-gray-700 font-bold text-violet-300">IDS</td><td class="p-3 border border-gray-700 text-center">3, 4, 7</td><td class="p-3 border border-gray-700">Detección y Alerta</td><td class="p-3 border border-gray-700">Pasivo (Sniffing)</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold text-violet-300">IPS</td><td class="p-3 border border-gray-700 text-center">3, 4, 7</td><td class="p-3 border border-gray-700">Bloqueo en tiempo real</td><td class="p-3 border border-gray-700">En línea (In-line)</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold text-violet-300">Honeypot</td><td class="p-3 border border-gray-700 text-center">Todas</td><td class="p-3 border border-gray-700">Inteligencia de Amenazas</td><td class="p-3 border border-gray-700">Señuelo (Decepción)</td></tr>
+                <tr><td class="p-3 border border-gray-700 font-bold text-violet-300">NGFW</td><td class="p-3 border border-gray-700 text-center">7</td><td class="p-3 border border-gray-700">Filtrado de Aplicación</td><td class="p-3 border border-gray-700">Activo (Deep Packet Inspection)</td></tr>
+            </tbody>
+        </table>
+      </div>
 
       <h2>Conclusión</h2>
-      <p>Una estrategia de seguridad robusta combina estas tecnologías: Firewalls para segmentar, IPS para bloquear ataques conocidos en tiempo real, IDS para visibilidad profunda, y Honeypots para inteligencia de amenazas activa.</p>
+      <p>La correcta configuración de la cadena FORWARD es fundamental para la seguridad de red a gran escala. Permite implementar el principio de <strong>Defensa en Profundidad</strong>, asegurando que incluso si el perímetro falla, las barreras internas siguen protegiendo los activos más valiosos del negocio.</p>
+
+      <h2 class="mt-12 text-blue-400 font-mono">Referencias Bibliográficas</h2>
+      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
+        <li>Stallings, W. (2017). <strong>Network Security Essentials: Applications and Standards</strong>. Pearson.</li>
+        <li>Cisco Networking Academy. (2023). <strong>Introduction to Cybersecurity: Network Defense</strong>.</li>
+        <li>Roesch, M. (1999). <strong>Snort: Lightweight Intrusion Detection for Networks</strong>. USENIX.</li>
+      </ul>
     `
   },
   {
     id: 5,
     title: "ACTIVIDAD 05 - Cartografiando el pentesting",
-    description: "Análisis comparativo de las principales metodologías de pruebas de penetración (PTES, OSSTMM, ISSAF).",
-    date: "2024-03-01",
-    tags: ["Pentesting", "Metodologías", "Ethical Hacking"],
+    description: "Análisis comparativo de las principales metodologías de pruebas de penetración (PTES, OSSTMM, ISSAF, NIST, MITRE).",
+    date: "2026-02-22",
+    tags: ["Pentesting", "Metodologías", "Ethical Hacking", "MITRE ATT&CK"],
     content: `
-      <h2>La importancia de una Metodología</h2>
-      <p>El hacking ético no es un proceso caótico; requiere estructura, repetibilidad y documentación. Existen varios estándares internacionales que guían a los auditores de seguridad para asegurar que las pruebas sean exhaustivas y seguras.</p>
+      <h2>Análisis Comparativo Maestro</h2>
+      <p>A continuación se presenta el mapeo completo de las metodologías evaluadas, detallando desde su fundamentación científica hasta las certificaciones asociadas.</p>
 
-      <h2>Comparativa de Metodologías</h2>
-      <div class="overflow-x-auto my-6">
-        <table class="w-full text-left border-collapse border border-gray-700">
-            <thead class="bg-[#1a1f2e] text-purple-300">
+      <div class="overflow-x-auto my-10 border border-gray-800 rounded-lg">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-[#1a1f2e] text-purple-300 text-xs uppercase tracking-wider">
                 <tr>
-                    <th class="p-3 border border-gray-700">Metodología</th>
-                    <th class="p-3 border border-gray-700">Nombre Completo</th>
-                    <th class="p-3 border border-gray-700">Enfoque Principal</th>
+                    <th class="p-4 border border-gray-700 font-black">Criterio / Marco</th>
+                    <th class="p-4 border border-gray-700">1. MITRE ATT&CK</th>
+                    <th class="p-4 border border-gray-700">2. OWASP WSTG</th>
+                    <th class="p-4 border border-gray-700">3. NIST SP 800-115</th>
+                    <th class="p-4 border border-gray-700">4. OSSTMM</th>
+                    <th class="p-4 border border-gray-700">5. PTES</th>
+                    <th class="p-4 border border-gray-700">6. ISSAF</th>
                 </tr>
             </thead>
-            <tbody class="text-sm text-gray-300">
+            <tbody class="text-[11px] text-gray-300">
                 <tr>
-                    <td class="p-3 border border-gray-700 font-bold">PTES</td>
-                    <td class="p-3 border border-gray-700">Penetration Testing Execution Standard</td>
-                    <td class="p-3 border border-gray-700">Enfoque técnico muy detallado. Cubre desde el acuerdo inicial hasta el reporte técnico. Es el estándar "de facto" para la ejecución técnica.</td>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">A. Descripción</td>
+                    <td class="p-3 border border-gray-700">Base de conocimientos basada en tácticas y técnicas de adversarios reales.</td>
+                    <td class="p-3 border border-gray-700">Guía principal para pruebas en aplicaciones web y vulnerabilidades comunes.</td>
+                    <td class="p-3 border border-gray-700">Guía técnica federal (EE.UU.) para realizar evaluaciones de seguridad.</td>
+                    <td class="p-3 border border-gray-700">Metodología científica basada en métricas para evaluar la seguridad operativa.</td>
+                    <td class="p-3 border border-gray-700">Estándar comercial con lenguaje común para ejecución de pruebas.</td>
+                    <td class="p-3 border border-gray-700">Framework detallado y estructurado para evaluación de sistemas (legado).</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 font-bold">OSSTMM</td>
-                    <td class="p-3 border border-gray-700">Open Source Security Testing Methodology Manual</td>
-                    <td class="p-3 border border-gray-700">Enfoque científico y métrico. Se centra en medir la seguridad operativa (OpSec) y cuantificar el nivel de seguridad. Menos enfocado en "cómo hackear" y más en "cómo medir".</td>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">B. Fases</td>
+                    <td class="p-3 border border-gray-700">14 Tácticas (Reconocimiento, Persistencia, etc.).</td>
+                    <td class="p-3 border border-gray-700">Recopilación, Configuración, Identidad, Autenticación, etc.</td>
+                    <td class="p-3 border border-gray-700">Planificación, Descubrimiento, Ataque, Reporte.</td>
+                    <td class="p-3 border border-gray-700">Inducción, Interacción, Inquisición, Intervención.</td>
+                    <td class="p-3 border border-gray-700">Pre-acuerdo, Intel, Modelado, Vulnerabilidad, Explotación, Post, Reporte.</td>
+                    <td class="p-3 border border-gray-700">Planificación, Evaluación, Tratamiento, Acreditación.</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 font-bold">ISSAF</td>
-                    <td class="p-3 border border-gray-700">Information Systems Security Assessment Framework</td>
-                    <td class="p-3 border border-gray-700">Muy granular, vincula herramientas específicas a cada paso de la prueba. Actualmente está algo desactualizado pero sigue siendo una buena referencia de checklist.</td>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">C. Objetivo Principal</td>
+                    <td class="p-3 border border-gray-700">Clasificar ciberataques para mejorar la detección.</td>
+                    <td class="p-3 border border-gray-700">Marco exhaustivo para seguridad de servicios web.</td>
+                    <td class="p-3 border border-gray-700">Orientar a organizaciones en auditorías técnicas.</td>
+                    <td class="p-3 border border-gray-700">Medición científica cuantificable (RAVs) de seguridad ops.</td>
+                    <td class="p-3 border border-gray-700">Garantizar calidad y consistencia en el servicio de pentesting.</td>
+                    <td class="p-3 border border-gray-700">Evaluar controles con un nivel de detalle técnico granular.</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 font-bold">NIST SP 800-115</td>
-                    <td class="p-3 border border-gray-700">Technical Guide to Information Security Testing and Assessment</td>
-                    <td class="p-3 border border-gray-700">Estándar del gobierno de EE.UU. Muy formal, orientado a cumplimiento y gestión de riesgos en agencias federales y corporaciones grandes.</td>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">D. Escenarios</td>
+                    <td class="p-3 border border-gray-700">Threat Hunting, Red Teaming, mejora de SOC.</td>
+                    <td class="p-3 border border-gray-700">Auditorías de App Web, desarrollo seguro (SDLC).</td>
+                    <td class="p-3 border border-gray-700">Cumplimiento (FISMA), evaluaciones federales.</td>
+                    <td class="p-3 border border-gray-700">Auditorías que requieren métricas exactas.</td>
+                    <td class="p-3 border border-gray-700">Pentesting comercial (Caja Negra/Blanca).</td>
+                    <td class="p-3 border border-gray-700">Evaluaciones técnicas profundas (Uso disminuido).</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">E. Orientación</td>
+                    <td class="p-3 border border-gray-700">Defensa / Ataque (Emulación).</td>
+                    <td class="p-3 border border-gray-700">Evaluación (AppSec).</td>
+                    <td class="p-3 border border-gray-700">Evaluación (Cumplimiento).</td>
+                    <td class="p-3 border border-gray-700">Evaluación / Defensa (Métricas).</td>
+                    <td class="p-3 border border-gray-700">Ataque (Pentesting puro).</td>
+                    <td class="p-3 border border-gray-700">Evaluación (Auditoría técnica).</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">F. Autores</td>
+                    <td class="p-3 border border-gray-700">MITRE Corporation.</td>
+                    <td class="p-3 border border-gray-700">OWASP Foundation.</td>
+                    <td class="p-3 border border-gray-700">NIST (EE.UU.).</td>
+                    <td class="p-3 border border-gray-700">ISECOM - Pete Herzog.</td>
+                    <td class="p-3 border border-gray-700">Grupo de expertos independientes.</td>
+                    <td class="p-3 border border-gray-700">OISSG.</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">G. URL Oficial</td>
+                    <td class="p-3 border border-gray-700"><a href="https://attack.mitre.org" class="text-blue-400 hover:underline">attack.mitre.org</a></td>
+                    <td class="p-3 border border-gray-700"><a href="https://owasp.org" class="text-blue-400 hover:underline">owasp.org</a></td>
+                    <td class="p-3 border border-gray-700"><a href="https://csrc.nist.gov" class="text-blue-400 hover:underline">csrc.nist.gov</a></td>
+                    <td class="p-3 border border-gray-700"><a href="https://isecom.org" class="text-blue-400 hover:underline">isecom.org</a></td>
+                    <td class="p-3 border border-gray-700"><a href="https://pentest-standard.org" class="text-blue-400 hover:underline">pentest-standard.org</a></td>
+                    <td class="p-3 border border-gray-700"><span class="text-gray-500 italic">Sitio inactivo</span></td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">H. Certificaciones</td>
+                    <td class="p-3 border border-gray-700">MAD (MITRE ATT&CK Defender).</td>
+                    <td class="p-3 border border-gray-700">No directa (OSWE, GWAPT).</td>
+                    <td class="p-3 border border-gray-700">No directa (CISA, CISSP).</td>
+                    <td class="p-3 border border-gray-700">OPST, OPSA.</td>
+                    <td class="p-3 border border-gray-700">Referencia p/ OSCP, eCPPT.</td>
+                    <td class="p-3 border border-gray-700">Legado (IACRB).</td>
+                </tr>
+                <tr>
+                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">I. Versiones</td>
+                    <td class="p-3 border border-gray-700 text-green-400">v16 (Activa).</td>
+                    <td class="p-3 border border-gray-700 text-green-400">v4.2 Stable.</td>
+                    <td class="p-3 border border-gray-700 text-yellow-500">Rev 1 (Base).</td>
+                    <td class="p-3 border border-gray-700 text-green-400">v3.0 (Vigente).</td>
+                    <td class="p-3 border border-gray-700 text-green-400">v1.0 (Constante).</td>
+                    <td class="p-3 border border-gray-700 text-red-500">Descontinuado.</td>
                 </tr>
             </tbody>
         </table>
       </div>
 
-      <h2>Desglose del PTES (Penetration Testing Execution Standard)</h2>
-      <p>PTES es comúnmente aceptado como el flujo de trabajo estándar para pentesters. Sus fases son:</p>
-      
-      <ol class="list-decimal pl-6 space-y-4 mb-8 text-gray-300">
-        <li>
-            <strong class="text-white">Pre-engagement Interactions (Interacciones Previas):</strong>
-            <p class="text-sm text-gray-400">Definición del alcance (Scope), Reglas de Compromiso (RoE), ventanas de tiempo, ip's permitidas y gestión de emergencias.</p>
-        </li>
-        <li>
-            <strong class="text-white">Intelligence Gathering (Recolección de Información):</strong>
-            <p class="text-sm text-gray-400">OSINT (Open Source Intelligence). Obtener dominios, correos, IPs, tecnologías usadas sin tocar el objetivo directamente.</p>
-        </li>
-        <li>
-            <strong class="text-white">Threat Modeling (Modelado de Amenazas):</strong>
-            <p class="text-sm text-gray-400">Identificar activos críticos y pensar como el atacante: ¿Cuál es el camino más probable de ataque?</p>
-        </li>
-        <li>
-            <strong class="text-white">Vulnerability Analysis (Análisis de Vulnerabilidades):</strong>
-            <p class="text-sm text-gray-400">Escaneo activo y pasivo para encontrar fallos conocidos (ej. versiones antiguas de software, malas configuraciones).</p>
-        </li>
-        <li>
-            <strong class="text-white">Exploitation (Explotación):</strong>
-            <p class="text-sm text-gray-400">El "hackeo" real. Intentar explotar las vulnerabilidades encontradas para ganar acceso al sistema.</p>
-        </li>
-        <li>
-            <strong class="text-white">Post Exploitation (Post-Explotación):</strong>
-            <p class="text-sm text-gray-400">Determinar el valor del sistema comprometido. Movimiento lateral, escalada de privilegios y persistencia.</p>
-        </li>
-        <li>
-            <strong class="text-white">Reporting (Reporte):</strong>
-            <p class="text-sm text-gray-400">La parte más importante para el cliente. Se divide en Reporte Ejecutivo (para gerencia) y Reporte Técnico (para TI).</p>
-        </li>
-      </ol>
+      <h3 class="text-xl font-bold text-violet-400 mb-6">Metodología Recomendada (PTES)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-violet-900/10 p-4 border border-violet-500/20 rounded">
+            <h4 class="font-bold text-violet-400">Pre-engagement</h4>
+            <p class="text-xs text-gray-400">Definición de alcance, RoE y aspectos legales (NDA).</p>
+        </div>
+        <div class="bg-blue-900/10 p-4 border border-blue-500/20 rounded">
+            <h4 class="font-bold text-blue-400">Intelligence Gathering</h4>
+            <p class="text-xs text-gray-400">OSINT y reconocimiento pasivo/activo del objetivo.</p>
+        </div>
+        <div class="bg-yellow-900/10 p-4 border border-yellow-500/20 rounded">
+            <h4 class="font-bold text-yellow-400">Vulnerability Analysis</h4>
+            <p class="text-xs text-gray-400">Identificación de fallos y vectores potenciales.</p>
+        </div>
+        <div class="bg-red-900/10 p-4 border border-red-500/20 rounded">
+            <h4 class="font-bold text-red-400">Exploitation & Reporting</h4>
+            <p class="text-xs text-gray-400">Ganancia de acceso y documentación detallada de hallazgos.</p>
+        </div>
+      </div>
 
       <h2>Conclusión</h2>
-      <p>Seguir una metodología garantiza que ninguna piedra quede sin remover. Un pentest no es solo correr herramientas automáticas; es un proceso sistemático de validación de seguridad.</p>
+      <p>Adoptar un marco como <strong>PTES</strong> u <strong>OSSTMM</strong> no es opcional para un auditor profesional. Estas herramientas permiten pasar de una simple búsqueda de vulnerabilidades a un análisis de riesgos estructurado que aporta valor real al negocio.</p>
+
+      <h2 class="mt-12 text-purple-400 font-mono">Referencias Bibliográficas</h2>
+      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
+        <li>PTES Team. (2024). <strong>The Penetration Testing Execution Standard</strong>. <a href="http://www.pentest-standard.org" class="text-blue-400 hover:underline">pentest-standard.org</a></li>
+        <li>MITRE Corporation. (2024). <strong>ATT&CK Framework: Tactics and Techniques</strong>. <a href="https://attack.mitre.org" class="text-blue-400 hover:underline">attack.mitre.org</a></li>
+        <li>Herzog, P. (2021). <strong>OSSTMM 3: The Open Source Security Testing Methodology Manual</strong>. ISECOM.</li>
+      </ul>
     `
   },
   {
     id: 6,
-    title: "ACTIVIDAD 06 - Implementación de IPSec VPN",
-    description: "Guía técnica sobre la configuración e implementación de redes privadas virtuales seguras utilizando el protocolo IPSec.",
-    date: "2024-03-05",
-    tags: ["VPN", "IPSec", "Criptografía", "Redes"],
+    title: "ACTIVIDAD 06 - Implementación de VPN IPSec y Seguridad en Capa 2 (Packet Tracer)",
+    description: "Configuración profesional de un túnel Site-to-Site VPN usando IPSec y aplicación de medidas de endurecimiento (Hardening) en infraestructura Cisco.",
+    date: "2026-02-23",
+    tags: ["IPSec", "VPN", "Cisco Packet Tracer", "ACL", "Layer 2 Security"],
     content: `
-      <h2>Introducción a IPSec</h2>
-      <p><strong>IPSec (Internet Protocol Security)</strong> es un conjunto de protocolos que asegura las comunicaciones IP autenticando y cifrando cada paquete IP de una sesión. Es el estándar de facto para construir VPNs (Virtual Private Networks) robustas sitio-a-sitio (Site-to-Site).</p>
+      <h2>Arquitectura de Red Segura</h2>
+      <p>Este laboratorio simula la interconexión de dos sucursales empresariales a través de una red pública (Internet) utilizando un túnel <strong>IPSec VPN</strong> y medidas de endurecimiento en infraestructura Cisco.</p>
 
-      <h2>Arquitectura de IPSec</h2>
-      <p>IPSec no es un protocolo único, sino un marco que utiliza varios protocolos para diferentes funciones:</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-        <div class="bg-gray-900 p-4 border border-blue-900 rounded">
-            <h4 class="text-blue-400 font-bold mb-2">AH (Authentication Header)</h4>
-            <p class="text-sm text-gray-400">Provee integridad de datos y autenticación de origen. Protege contra ataques de repetición (Replay Attacks). <strong>NO cifra los datos</strong> del payload, por lo que la información viaja en texto claro pero firmada.</p>
+      <div class="bg-blue-900/10 border border-blue-500/20 rounded-lg p-6 my-10">
+        <h3 class="text-blue-400 font-mono text-lg mb-4">HABILITACIÓN DE LICENCIAS (CISCO 1941)</h3>
+        <p class="text-sm text-gray-300 mb-4">Para habilitar las funciones de criptografía avanzada en Packet Tracer, se debe activar la licencia de seguridad:</p>
+        <div class="bg-black p-3 rounded font-mono text-xs text-cyan-400 mb-4 border border-cyan-900/30">
+            Switch# license boot module c1900 technology-package securityk9
         </div>
-        <div class="bg-gray-900 p-4 border border-green-900 rounded">
-            <h4 class="text-green-400 font-bold mb-2">ESP (Encapsulating Security Payload)</h4>
-            <p class="text-sm text-gray-400">Provee confidencialidad (cifrado), integridad y autenticación. Es el protocolo más común en VPNs porque oculta los datos reales.</p>
+        <p class="text-xs text-gray-500 italic">Nota: Es necesario reiniciar el router tras aceptar el EULA.</p>
+      </div>
+
+      <h3 class="text-xl font-bold text-violet-400 mb-6">Fases de Configuración IPSec</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-white/5 p-4 rounded border-t-2 border-cyan-500">
+          <h4 class="font-bold text-white mb-2">Fase 1: ISAKMP Policy</h4>
+          <p class="text-xs text-gray-400">Negociación de los parámetros de seguridad para el canal de administración (Pree-shared key, AES-256, SHA, Group 2).</p>
+        </div>
+        <div class="bg-white/5 p-4 rounded border-t-2 border-blue-500">
+          <h4 class="font-bold text-white mb-2">Fase 2: IPSec Transform-Set</h4>
+          <p class="text-xs text-gray-400">Especificación de los algoritmos para el cifrado de datos reales (Transform-Set: esp-aes esp-sha-hmac).</p>
         </div>
       </div>
 
-      <h2>Modos de Cifrado</h2>
-      <ul class="list-disc pl-6 space-y-3 mb-8">
-        <li><strong>Modo Transporte:</strong> Solo cifra el payload (carga útil) del paquete IP. El encabezado IP original se mantiene. Se usa generalmente para comunicaciones End-to-End (ej. Admin a Servidor).</li>
-        <li><strong>Modo Túnel:</strong> Cifra todo el paquete IP original y le añade un nuevo encabezado IP. Se usa para VPNs Site-to-Site (ej. Router a Router), donde las redes internas son privadas.</li>
-      </ul>
-
-      <h2>Fases de IKE (Internet Key Exchange)</h2>
-      <p>Para establecer un túnel IPSec, los dispositivos deben negociar claves y políticas. Esto ocurre en dos fases:</p>
+      <h2>Hardening de Switches (Capa 2)</h2>
+      <p>Como medida de seguridad interna, se implementó <strong>Port Security</strong> en los puertos de acceso de los switches de cada sucursal.</p>
       
-      <div class="overflow-x-auto mb-8">
+      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 my-6 overflow-x-auto">
+        <pre>
+# Configuración de Seguridad de Puerto
+Switch(config)# interface range fastEthernet 0/1 - 24
+Switch(config-if-range)# switchport mode access
+Switch(config-if-range)# switchport port-security
+Switch(config-if-range)# switchport port-security maximum 1
+Switch(config-if-range)# switchport port-security violation shutdown
+Switch(config-if-range)# switchport port-security mac-address sticky
+        </pre>
+      </div>
+
+      <h2>Listas de Control de Acceso (ACL)</h2>
+      <p>Se definieron ACLs detalladas para filtrar qué equipos pueden iniciar el tráfico del túnel VPN y cuáles no.</p>
+
+      <div class="overflow-x-auto my-8">
         <table class="w-full text-left border-collapse border border-gray-700">
-            <thead class="bg-[#1a1f2e] text-white">
+            <thead class="bg-[#1a1f2e] text-cyan-300">
                 <tr>
-                    <th class="p-3 border border-gray-700">Fase</th>
-                    <th class="p-3 border border-gray-700">Objetivo</th>
+                    <th class="p-3 border border-gray-700">Regla ACL</th>
+                    <th class="p-3 border border-gray-700">Propósito Técnico</th>
+                    <th class="p-3 border border-gray-700">Impacto</th>
                 </tr>
             </thead>
-            <tbody class="text-sm text-gray-300">
-                <tr>
-                    <td class="p-3 border border-gray-700 font-bold">Fase 1 (Main Mode / Aggressive Mode)</td>
-                    <td class="p-3 border border-gray-700">Autenticar los peers (routers) y negociar parámetros básicos para establecer un canal seguro inicial (ISAKMP SA).</td>
-                </tr>
-                <tr>
-                    <td class="p-3 border border-gray-700 font-bold">Fase 2 (Quick Mode)</td>
-                    <td class="p-3 border border-gray-700">Negociar los parámetros específicos de IPSec (SA) que se usarán para cifrar el tráfico de datos real (algoritmos de cifrado, hash, tiempos de vida).</td>
-                </tr>
+            <tbody class="text-sm text-gray-300 font-mono">
+                <tr><td class="p-3 border border-gray-700">access-list 101 permit ip 192.168.1.0 0.0.0.255 10.0.0.0 0.255.255.255</td><td class="p-3 border border-gray-700 font-sans text-xs">Define tráfico interesante para el túnel.</td><td class="p-3 border border-gray-700 font-sans text-xs">Cifra toda la LAN local hacia la LAN remota.</td></tr>
+                <tr><td class="p-3 border border-gray-700">access-list 101 deny ip any any</td><td class="p-3 border border-gray-700 font-sans text-xs">Implícito por defecto.</td><td class="p-3 border border-gray-700 font-sans text-xs text-red-400 uppercase">BLOQUEO TOTAL DEL RESTO.</td></tr>
             </tbody>
         </table>
       </div>
 
       <h2>Conclusión</h2>
-      <p>IPSec es complejo de configurar debido a la gran cantidad de parámetros que deben coincidir exactamente en ambos extremos (algoritmos, claves pre-compartidas, selectores de tráfico). Sin embargo, una vez establecido, ofrece uno de los niveles más altos de seguridad para la transmisión de datos sobre redes públicas inseguras como Internet.</p>
+      <p>La combinación de <strong>VPN IPSec</strong> para proteger los datos en tránsito y <strong>Port Security</strong> para blindar el acceso local garantiza una postura de seguridad integral. Este laboratorio demuestra la importancia de asegurar no solo el canal de comunicación, sino también la infraestructura física subyacente.</p>
+
+      <h2 class="mt-12 text-cyan-400 font-mono">Referencias Bibliográficas</h2>
+      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
+        <li>Cisco Systems. (2024). <strong>Configuring Site-to-Site IPSec VPNs with ISAKMP</strong>. Cisco Press.</li>
+        <li>Graziani, R. (2017). <strong>Scaling Networks v6 Companion Guide</strong>. Cisco Press.</li>
+        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Criptografía y Túneles Seguros</strong>.</li>
+      </ul>
     `
   }
 ];
