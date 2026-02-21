@@ -22,7 +22,7 @@ const ActivityDetail = () => {
         const fileMap = {
             1: "Act01_Equipo1.pdf",
             2: "176522-ACT02.pdf",
-            3: "ACT 03.jfif",
+            3: "176522-ACT03.pdf", // New generated PDF
             4: "1765222-act04.pdf",
             5: "176522_Act 5.pdf",
             6: "176522-ACT6.pdf",
@@ -36,10 +36,10 @@ const ActivityDetail = () => {
     const isDoc = fileUrl?.toLowerCase().endsWith('.docx') || fileUrl?.toLowerCase().endsWith('.doc');
     const isImage = fileUrl?.toLowerCase().endsWith('.jfif') || fileUrl?.toLowerCase().endsWith('.jpg') || fileUrl?.toLowerCase().endsWith('.png');
 
-    let downloadText = "DOWNLOAD_REPORT";
-    if (isPdf) downloadText = "DOWNLOAD_REPORT.PDF";
-    else if (isDoc) downloadText = "DOWNLOAD_DOCUMENT.DOCX";
-    else if (isImage) downloadText = "DOWNLOAD_EVIDENCE.IMG";
+    let downloadText = "DOWNLOAD";
+    if (isPdf) downloadText = "DOWNLOAD.PDF";
+    else if (isDoc) downloadText = "DOWNLOAD.DOCX";
+    else if (isImage) downloadText = "DOWNLOAD.IMG";
     else downloadText = "DOWNLOAD_FILE";
 
     // Custom styles for the dynamic content
@@ -139,26 +139,40 @@ const ActivityDetail = () => {
                         <span className="text-red-500 truncate max-w-[200px]">CASE_{String(activity.id).padStart(3, '0')}</span>
                     </nav>
 
-                    {fileUrl ? (
-                        <a
-                            href={fileUrl}
-                            download
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group relative px-6 py-2 bg-transparent overflow-hidden rounded border border-red-500/50 text-red-500 font-mono text-sm tracking-widest hover:text-white hover:border-red-500 transition-all"
-                        >
-                            <div className="absolute inset-0 w-full h-full bg-red-600/0 group-hover:bg-red-600/10 transition-colors"></div>
-                            <div className="relative flex items-center gap-3">
+                    <div className="flex items-center gap-3">
+                        {fileUrl ? (
+                            <>
+                                {isPdf && (
+                                    <a
+                                        href={fileUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group relative px-4 py-2 bg-red-600/10 overflow-hidden rounded border border-red-500 text-red-400 font-mono text-xs tracking-widest hover:bg-red-600 hover:text-white transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]"
+                                    >
+                                        <div className="relative flex items-center gap-2">
+                                            <FaTerminal className="text-xs" />
+                                            <span>VISUALIZE_PDF</span>
+                                        </div>
+                                    </a>
+                                )}
+                                <a
+                                    href={fileUrl}
+                                    download
+                                    className="group relative px-4 py-2 bg-transparent overflow-hidden rounded border border-gray-700 text-gray-500 font-mono text-xs tracking-widest hover:text-white hover:border-gray-500 transition-all"
+                                >
+                                    <div className="relative flex items-center gap-2">
+                                        <FaFilePdf className="text-xs" />
+                                        <span>{downloadText}</span>
+                                    </div>
+                                </a>
+                            </>
+                        ) : (
+                            <div className="px-6 py-2 border border-gray-700 text-gray-600 font-mono text-sm tracking-widest rounded cursor-not-allowed opacity-50 flex items-center gap-3">
                                 <FaFilePdf className="text-lg" />
-                                <span>{downloadText}</span>
+                                <span>FILE_NOT_FOUND</span>
                             </div>
-                        </a>
-                    ) : (
-                        <div className="px-6 py-2 border border-gray-700 text-gray-600 font-mono text-sm tracking-widest rounded cursor-not-allowed opacity-50 flex items-center gap-3">
-                            <FaFilePdf className="text-lg" />
-                            <span>FILE_NOT_FOUND</span>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
 
                 {/* Main Forensic Report Container */}
