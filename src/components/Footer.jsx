@@ -1,16 +1,50 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaShieldAlt, FaLock, FaTerminal, FaServer } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const quickLinks = [
         { name: 'Inicio', path: '/' },
-        { name: 'Proyectos', path: '/#proyectos' },
+        { name: 'Presentación', path: '/#presentacion' },
         { name: 'Perfil', path: '/#perfil' },
+        { name: 'Tecnologías', path: '/#tecnologias' },
         { name: 'Contacto', path: '/#contacto' },
     ];
+
+    const handleNavigation = (e, item) => {
+        e.preventDefault();
+
+        // Case 1: Standard Route (Actividades is not here but just in case)
+        if (!item.path.startsWith('/#') && item.path !== '/') {
+            navigate(item.path);
+            return;
+        }
+
+        // Case 2: Home Page (Scroll to Top)
+        if (item.path === '/') {
+            if (location.pathname === '/') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                navigate('/');
+            }
+            return;
+        }
+
+        // Case 3: Section Anchor (/#section)
+        const targetId = item.path.substring(2);
+        if (location.pathname === '/') {
+            const element = document.getElementById(targetId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            navigate('/', { state: { targetId } });
+        }
+    };
 
     return (
         <footer className="bg-[#020509] border-t border-violet-500/20 py-8 sm:py-12 px-4 sm:px-6 relative overflow-hidden">
@@ -54,14 +88,14 @@ const Footer = () => {
                         </h4>
                         <div className="flex flex-wrap gap-2 sm:gap-0 sm:flex-col sm:space-y-1.5 justify-center sm:justify-start font-mono text-xs sm:text-sm">
                             {quickLinks.map((link, index) => (
-                                <Link
+                                <button
                                     key={index}
-                                    to={link.path}
-                                    className="text-gray-500 hover:text-violet-400 transition-colors px-2 sm:px-0"
+                                    onClick={(e) => handleNavigation(e, link)}
+                                    className="text-gray-500 hover:text-violet-400 transition-colors px-2 sm:px-0 text-left"
                                 >
                                     <span className="text-violet-500/50 hidden sm:inline mr-1">▸</span>
                                     {link.name}
-                                </Link>
+                                </button>
                             ))}
                         </div>
                     </motion.div>
@@ -108,12 +142,12 @@ const Footer = () => {
                             >
                                 <FaLinkedin />
                             </a>
-                            <a
-                                href="#contacto"
+                            <button
+                                onClick={(e) => handleNavigation(e, { path: '/#contacto' })}
                                 className="text-gray-500 hover:text-violet-400 text-xl sm:text-2xl transition-colors hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.5)]"
                             >
                                 <FaEnvelope />
-                            </a>
+                            </button>
                         </div>
                     </motion.div>
                 </div>

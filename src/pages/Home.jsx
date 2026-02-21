@@ -19,9 +19,6 @@ const Home = () => {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             }
-        } else {
-            // Optional: scroll to top if usually landing on home
-            window.scrollTo(0, 0);
         }
     }, [location]);
 

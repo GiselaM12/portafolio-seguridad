@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -8,6 +9,13 @@ import HackingGame from './components/HackingGame'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
+  useEffect(() => {
+    // Disable automatic scroll restoration by the browser
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   return (
     <HashRouter>
       <ScrollToTop />
