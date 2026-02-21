@@ -977,72 +977,108 @@ export const activities = [
         <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mb-4">DESPLIEGUE INFRAESTRUCTURA: VPN IPSEC (LOG-06)</h2>
-      <p>Este laboratorio simula la interconexión de dos sucursales empresariales a través de una red pública (Internet) utilizando un túnel <strong>IPSec VPN</strong> y medidas de endurecimiento en infraestructura Cisco.</p>
+      <h2 class="text-violet-400 font-mono text-lg mb-4">DESPLIEGUE DE INFRAESTRUCTURA: TÚNEL VPN IPSEC (LOG-06)</h2>
+      <p class="mb-6">El presente reporte técnico detalla la interconexión segura de dos sedes corporativas utilizando el marco de seguridad <strong>IPSec</strong> para garantizar la confidencialidad, integridad y autenticidad de los datos en tránsito sobre redes públicas.</p>
 
-      <div class="bg-blue-900/10 border border-blue-500/20 rounded-lg p-6 my-10">
-        <h3 class="text-blue-400 font-mono text-lg mb-4">HABILITACIÓN DE LICENCIAS (CISCO 1941)</h3>
-        <p class="text-sm text-gray-300 mb-4">Para habilitar las funciones de criptografía avanzada en Packet Tracer, se debe activar la licencia de seguridad:</p>
-        <div class="bg-black p-3 rounded font-mono text-xs text-cyan-400 mb-4 border border-cyan-900/30">
-            Switch# license boot module c1900 technology-package securityk9
+      <div class="bg-blue-900/10 border border-blue-500/20 rounded-lg p-6 my-8">
+        <h3 class="text-blue-400 font-mono text-md mb-3 flex items-center gap-2">
+          <span class="bg-blue-500/20 px-2 py-0.5 rounded text-[10px]">AUTH_REQUIRED</span>
+          PRE-REQUISITO: LICENCIAMIENTO DE SEGURIDAD
+        </h3>
+        <p class="text-sm text-gray-300 mb-4 font-mono">Para habilitar el conjunto de comandos criptográficos en routers Cisco ISR, se debe activar el paquete 'securityk9'.</p>
+        <div class="bg-black p-4 rounded font-mono text-xs text-cyan-400 mb-2 border border-cyan-900/30">
+            Router# <span class="text-white">license boot module c1900 technology-package securityk9</span>
         </div>
-        <p class="text-xs text-gray-500 italic">Nota: Es necesario reiniciar el router tras aceptar el EULA.</p>
+        <p class="text-[10px] text-gray-500 italic">SYSTEM RESPONSE: % Security license installed and activated after next reload.</p>
       </div>
 
-      <h3 class="text-xl font-bold text-violet-400 mb-6">Fases de Configuración IPSec</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <div class="bg-white/5 p-4 rounded border-t-2 border-cyan-500">
-          <h4 class="font-bold text-white mb-2">Fase 1: ISAKMP Policy</h4>
-          <p class="text-xs text-gray-400">Negociación de los parámetros de seguridad para el canal de administración (Pree-shared key, AES-256, SHA, Group 2).</p>
+      <h2 class="text-violet-400 font-mono text-lg mt-10 mb-4">ARQUITECTURA DE TRES FASES (CONFIGURACIÓN TÉCNICA)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <!-- Fase 1 -->
+        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-cyan-500">
+          <h4 class="font-bold text-cyan-400 text-xs mb-2">Fase 1: ISAKMP (IKEv1)</h4>
+          <p class="text-[10px] text-gray-400">Negociación de SA (Security Association) para el control. Usa AES-256 y hashing SHA-1 para el canal de gestión.</p>
+          <div class="mt-2 text-[9px] bg-black/40 p-2 font-mono text-cyan-500/70">
+            crypto isakmp policy 10<br/>
+            encryption aes 256<br/>
+            hash sha
+          </div>
         </div>
-        <div class="bg-white/5 p-4 rounded border-t-2 border-blue-500">
-          <h4 class="font-bold text-white mb-2">Fase 2: IPSec Transform-Set</h4>
-          <p class="text-xs text-gray-400">Especificación de los algoritmos para el cifrado de datos reales (Transform-Set: esp-aes esp-sha-hmac).</p>
+        <!-- Fase 2 -->
+        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-blue-500">
+          <h4 class="font-bold text-blue-400 text-xs mb-2">Fase 2: Transform-Set</h4>
+          <p class="text-[10px] text-gray-400">Define los protocolos para el túnel de datos (Capa 3). Se utiliza encapsulación ESP para cifrado total.</p>
+          <div class="mt-2 text-[9px] bg-black/40 p-2 font-mono text-blue-500/70">
+            crypto ipsec transform-set T1 esp-aes esp-sha-hmac
+          </div>
+        </div>
+        <!-- Fase 3 -->
+        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-violet-500">
+          <h4 class="font-bold text-violet-400 text-xs mb-2">Fase 3: Crypto Maps</h4>
+          <p class="text-[10px] text-gray-400">Vinculación de la ACL de tráfico 'interesante' con el peer remoto y el set de transformación.</p>
+          <div class="mt-2 text-[9px] bg-black/40 p-2 font-mono text-violet-500/70">
+            crypto map VPN_MAP 10 ipsec-isakmp
+          </div>
         </div>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">HARDENING DE INFRAESTRUCTURA (SWITCHING L2)</h2>
-      <p>Como medida de seguridad interna, se implementó <strong>Port Security</strong> en los puertos de acceso de los switches de cada sucursal.</p>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">HARDENING CAPA 2: SEGURIDAD DE PUERTO (PORT-SECURITY)</h2>
+      <p class="mb-6">Para prevenir ataques de envenenamiento de tabla CAM y suplantación de MAC, se implementó <strong>Port Security</strong> en todos los puertos de acceso de la infraestructura local.</p>
       
-      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 my-6 overflow-x-auto">
-        <pre>
-# Configuración de Seguridad de Puerto
-Switch(config)# interface range fastEthernet 0/1 - 24
-Switch(config-if-range)# switchport mode access
-Switch(config-if-range)# switchport port-security
-Switch(config-if-range)# switchport port-security maximum 1
-Switch(config-if-range)# switchport port-security violation shutdown
-Switch(config-if-range)# switchport port-security mac-address sticky
+      <div class="bg-black border border-gray-700/50 rounded-lg p-5 font-mono text-xs text-green-500 mb-8 shadow-2xl">
+        <div class="flex items-center gap-2 mb-4 border-b border-gray-800 pb-2">
+          <span class="w-3 h-3 rounded-full bg-red-500"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+          <span class="ml-2 text-gray-500">terminal — Switch#conf t</span>
+        </div>
+        <pre class="leading-relaxed">
+<span class="text-gray-500">! Configuración de puertos de usuario final</span>
+Switch(config)# interface range fa0/1 - 10
+Switch(config-if-range)# <span class="text-white">switchport mode access</span>
+Switch(config-if-range)# <span class="text-white">switchport port-security</span>
+Switch(config-if-range)# <span class="text-white">switchport port-security maximum 1</span>
+Switch(config-if-range)# <span class="text-white">switchport port-security violation shutdown</span>
+Switch(config-if-range)# <span class="text-white">switchport port-security mac-address sticky</span>
         </pre>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">LISTAS DE CONTROL DE ACCESO (ACL)</h2>
-      <p>Se definieron ACLs detalladas para filtrar qué equipos pueden iniciar el tráfico del túnel VPN y cuáles no.</p>
-
-      <div class="overflow-x-auto my-8">
-        <table class="w-full text-left border-collapse border border-gray-700">
-            <thead class="bg-[#1a1f2e] text-cyan-300">
+      <div class="overflow-x-auto my-10">
+        <table class="w-full text-left border-collapse border border-gray-800 rounded-lg overflow-hidden">
+            <thead class="bg-[#1a1f2e] text-cyan-400 text-xs uppercase">
                 <tr>
-                    <th class="p-3 border border-gray-700">Regla ACL</th>
-                    <th class="p-3 border border-gray-700">Propósito Técnico</th>
-                    <th class="p-3 border border-gray-700">Impacto</th>
+                    <th class="p-4 border border-gray-800">Parámetro</th>
+                    <th class="p-4 border border-gray-800">Valor Configurado</th>
+                    <th class="p-4 border border-gray-800">Mecanismo de Defensa</th>
                 </tr>
             </thead>
-            <tbody class="text-sm text-gray-300 font-mono">
-                <tr><td class="p-3 border border-gray-700">access-list 101 permit ip 192.168.1.0 0.0.0.255 10.0.0.0 0.255.255.255</td><td class="p-3 border border-gray-700 font-sans text-xs">Define tráfico interesante para el túnel.</td><td class="p-3 border border-gray-700 font-sans text-xs">Cifra toda la LAN local hacia la LAN remota.</td></tr>
-                <tr><td class="p-3 border border-gray-700">access-list 101 deny ip any any</td><td class="p-3 border border-gray-700 font-sans text-xs">Implícito por defecto.</td><td class="p-3 border border-gray-700 font-sans text-xs text-red-400 uppercase">BLOQUEO TOTAL DEL RESTO.</td></tr>
+            <tbody class="text-sm text-gray-300">
+                <tr><td class="p-4 border border-gray-800 font-mono text-violet-300">Maximum 1</td><td class="p-4 border border-gray-800">1 MAC Admin</td><td class="p-4 border border-gray-800">Previene el desbordamiento de tabla MAC (MAC Flooding).</td></tr>
+                <tr><td class="p-4 border border-gray-800 font-mono text-violet-300">Violation Shutdown</td><td class="p-4 border border-gray-800">Action: err-disable</td><td class="p-4 border border-gray-800">Bloqueo físico inmediato ante intentos de intrusión.</td></tr>
+                <tr><td class="p-4 border border-gray-800 font-mono text-violet-300">MAC Sticky</td><td class="p-4 border border-gray-800">Sticky learning</td><td class="p-4 border border-gray-800">Persistencia de confianza sin carga administrativa manual.</td></tr>
             </tbody>
         </table>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN DEL DESPLIEGUE</h2>
-      <p>La combinación de <strong>VPN IPSec</strong> para proteger los datos en tránsito y <strong>Port Security</strong> para blindar el acceso local garantiza una postura de seguridad integral. Este laboratorio demuestra la importancia de asegurar no solo el canal de comunicación, sino también la infraestructura física subyacente.</p>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">POLÍTICA DE TRÁFICO INTERESANTE (VPN ACL)</h2>
+      <p class="mb-4">Se utilizó una lista de control de acceso extendida para segmentar exactamente qué flujos de datos deben ser redirigidos y cifrados por el motor criptográfico.</p>
 
-      <h2 class="mt-12 text-cyan-400 font-mono">Referencias Bibliográficas</h2>
+      <div class="bg-gray-900/20 border border-gray-800 rounded p-4 font-mono text-xs mb-10">
+        <p class="text-cyan-400 italic mb-2"># access-list 101 permit ip [Origen] [Máscara] [Destino] [Máscara]</p>
+        <p class="text-white">access-list 101 permit ip 192.168.1.0 0.0.0.255 10.0.0.0 0.255.255.255</p>
+        <div class="mt-3 text-red-500/80 uppercase tracking-tighter text-[10px]">
+          [ WARNING: Al aplicar esta ACL al crypto map, todo tráfico no coincidente será enviado en texto plano si no se configura un Default Drop. ]
+        </div>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN DEL DESPLIEGUE</h2>
+      <p>La implementación exitosa de este laboratorio demuestra que la seguridad no es un componente estático. La integración de <strong>VPN IPSec</strong> para proteger el perímetro y <strong>Port Security</strong> para proteger el núcleo (Capa 2), crea una arquitectura de defensa en profundidad resiliente ante amenazas internas y externas.</p>
+
+      <h2 class="mt-12 text-blue-400 font-mono">Referencias Bibliográficas</h2>
       <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
-        <li>Cisco Systems. (2024). <strong>Configuring Site-to-Site IPSec VPNs with ISAKMP</strong>. Cisco Press.</li>
-        <li>Graziani, R. (2017). <strong>Scaling Networks v6 Companion Guide</strong>. Cisco Press.</li>
-        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Criptografía y Túneles Seguros</strong>.</li>
+        <li>Cisco Systems. (2024). <strong>Cisco IOS Security Configuration Guide</strong>. Cisco Press.</li>
+        <li>Graziani, R. (2017). <strong>CCNA Routing and Switching Study Guide</strong>. Cisco Press.</li>
+        <li>López Contreras, S. (2025). <strong>Apuntes: Seguridad en Infraestructura de Red</strong>.</li>
       </ul>
     `
   }
