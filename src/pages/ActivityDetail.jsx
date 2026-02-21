@@ -25,7 +25,7 @@ const ActivityDetail = () => {
             3: "ACT 03.jfif",
             4: "1765222-act04.pdf",
             5: "176522_Act 5.pdf",
-            6: "176658-act06.docx", // Corrected to match the actual file
+            6: "176522-ACT6.pdf",
         };
         const fileName = fileMap[id];
         return fileName ? `/${fileName}` : null;
