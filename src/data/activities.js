@@ -980,57 +980,69 @@ export const activities = [
       <h2 class="text-violet-400 font-mono text-lg mb-4">DESPLIEGUE DE INFRAESTRUCTURA: TÚNEL VPN IPSEC (LOG-06)</h2>
       <p class="mb-6">El presente reporte técnico detalla la interconexión segura de dos sedes corporativas utilizando el marco de seguridad <strong>IPSec</strong> para garantizar la confidencialidad, integridad y autenticidad de los datos en tránsito sobre redes públicas.</p>
 
+      <!-- Galería de Topología -->
+      <div class="my-10">
+        <h3 class="text-violet-400 font-mono text-md mb-4 flex items-center gap-2">
+          <span class="bg-violet-500/20 px-2 py-0.5 rounded text-[10px]">TOPOLOGY_MAP</span>
+          DIAGRAMA DE RED Y TÚNEL ESTABLECIDO
+        </h3>
+        <div class="bg-black/40 border border-violet-500/30 rounded-lg p-2 shadow-2xl overflow-hidden">
+          <img src="evidence/act06/image31.png" alt="Topología Final VPN IPSec" class="w-full rounded border border-gray-800 hover:scale-[1.02] transition-transform duration-500" />
+          <p class="text-[10px] text-gray-500 mt-2 text-center italic">Fig 1.1: Diagrama de red Site-to-Site con túnel IPSec activo entre R1 y R2.</p>
+        </div>
+      </div>
+
       <div class="bg-blue-900/10 border border-blue-500/20 rounded-lg p-6 my-8">
         <h3 class="text-blue-400 font-mono text-md mb-3 flex items-center gap-2">
           <span class="bg-blue-500/20 px-2 py-0.5 rounded text-[10px]">AUTH_REQUIRED</span>
           PRE-REQUISITO: LICENCIAMIENTO DE SEGURIDAD
         </h3>
-        <p class="text-sm text-gray-300 mb-4 font-mono">Para habilitar el conjunto de comandos criptográficos en routers Cisco ISR, se debe activar el paquete 'securityk9'.</p>
-        <div class="bg-black p-4 rounded font-mono text-xs text-cyan-400 mb-2 border border-cyan-900/30">
-            Router# <span class="text-white">license boot module c1900 technology-package securityk9</span>
-        </div>
-        <p class="text-[10px] text-gray-500 italic">SYSTEM RESPONSE: % Security license installed and activated after next reload.</p>
-      </div>
-
-      <h2 class="text-violet-400 font-mono text-lg mt-10 mb-4">ARQUITECTURA DE TRES FASES (CONFIGURACIÓN TÉCNICA)</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <!-- Fase 1 -->
-        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-cyan-500">
-          <h4 class="font-bold text-cyan-400 text-xs mb-2">Fase 1: ISAKMP (IKEv1)</h4>
-          <p class="text-[10px] text-gray-400">Negociación de SA (Security Association) para el control. Usa AES-256 y hashing SHA-1 para el canal de gestión.</p>
-          <div class="mt-2 text-[9px] bg-black/40 p-2 font-mono text-cyan-500/70">
-            crypto isakmp policy 10<br/>
-            encryption aes 256<br/>
-            hash sha
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div>
+            <p class="text-sm text-gray-300 mb-4 font-mono">Para habilitar el conjunto de comandos criptográficos en routers Cisco ISR, se debe activar el paquete 'securityk9'.</p>
+            <div class="bg-black p-4 rounded font-mono text-xs text-cyan-400 mb-2 border border-cyan-900/30">
+                Router# <span class="text-white">license boot module c1900 technology-package securityk9</span>
+            </div>
           </div>
-        </div>
-        <!-- Fase 2 -->
-        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-blue-500">
-          <h4 class="font-bold text-blue-400 text-xs mb-2">Fase 2: Transform-Set</h4>
-          <p class="text-[10px] text-gray-400">Define los protocolos para el túnel de datos (Capa 3). Se utiliza encapsulación ESP para cifrado total.</p>
-          <div class="mt-2 text-[9px] bg-black/40 p-2 font-mono text-blue-500/70">
-            crypto ipsec transform-set T1 esp-aes esp-sha-hmac
-          </div>
-        </div>
-        <!-- Fase 3 -->
-        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-violet-500">
-          <h4 class="font-bold text-violet-400 text-xs mb-2">Fase 3: Crypto Maps</h4>
-          <p class="text-[10px] text-gray-400">Vinculación de la ACL de tráfico 'interesante' con el peer remoto y el set de transformación.</p>
-          <div class="mt-2 text-[9px] bg-black/40 p-2 font-mono text-violet-500/70">
-            crypto map VPN_MAP 10 ipsec-isakmp
+          <div class="border border-gray-800 rounded overflow-hidden shadow-lg bg-black/20 p-1">
+            <img src="evidence/act06/image13.png" alt="Activación de Licencia" class="w-full opacity-80 hover:opacity-100 transition-opacity" />
           </div>
         </div>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">HARDENING CAPA 2: SEGURIDAD DE PUERTO (PORT-SECURITY)</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-10 mb-4">CONFIGURACIÓN TÉCNICA Y EVIDENCIA CLI</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="space-y-4">
+          <div class="bg-white/5 p-4 rounded border border-gray-800">
+            <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Evidencia R1 Config</h4>
+            <img src="evidence/act06/image6.png" alt="Configuración Router 1" class="w-full rounded border border-gray-900 shadow-md" />
+          </div>
+          <div class="bg-white/5 p-4 rounded border border-gray-800">
+            <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Evidencia ISP Config</h4>
+            <img src="evidence/act06/image10.png" alt="Configuración ISP" class="w-full rounded border border-gray-900 shadow-md" />
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-white/5 p-4 rounded border border-gray-800 h-full flex flex-col justify-center">
+            <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Evidencia R2 Config</h4>
+            <img src="evidence/act06/image8.png" alt="Configuración Router 2" class="w-full rounded border border-gray-900 shadow-md mb-2" />
+            <p class="text-[9px] text-gray-500 italic">Captura del proceso de asignación de direccionamiento IP y levantamiento de interfaces en la sede remota.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mt-10 mb-4">HARDENING CAPA 2: SEGURIDAD DE PUERTO</h2>
       <p class="mb-6">Para prevenir ataques de envenenamiento de tabla CAM y suplantación de MAC, se implementó <strong>Port Security</strong> en todos los puertos de acceso de la infraestructura local.</p>
       
-      <div class="bg-black border border-gray-700/50 rounded-lg p-5 font-mono text-xs text-green-500 mb-8 shadow-2xl">
+      <div class="bg-black border border-gray-700/50 rounded-lg p-5 font-mono text-xs text-green-500 mb-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-2 opacity-10">
+          <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <div class="flex items-center gap-2 mb-4 border-b border-gray-800 pb-2">
           <span class="w-3 h-3 rounded-full bg-red-500"></span>
           <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
           <span class="w-3 h-3 rounded-full bg-green-500"></span>
-          <span class="ml-2 text-gray-500">terminal — Switch#conf t</span>
+          <span class="ml-2 text-gray-500 uppercase text-[9px] tracking-tighter">SecureShell V2 — Switch#conf t</span>
         </div>
         <pre class="leading-relaxed">
 <span class="text-gray-500">! Configuración de puertos de usuario final</span>
@@ -1074,8 +1086,8 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
       <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN DEL DESPLIEGUE</h2>
       <p>La implementación exitosa de este laboratorio demuestra que la seguridad no es un componente estático. La integración de <strong>VPN IPSec</strong> para proteger el perímetro y <strong>Port Security</strong> para proteger el núcleo (Capa 2), crea una arquitectura de defensa en profundidad resiliente ante amenazas internas y externas.</p>
 
-      <h2 class="mt-12 text-blue-400 font-mono">Referencias Bibliográficas</h2>
-      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
+      <h2 class="mt-12 text-blue-400 font-mono font-bold tracking-widest border-b border-blue-900/50 pb-2">REFERENCIAS BIBLIOGRÁFICAS</h2>
+      <ul class="list-decimal pl-6 mt-4 space-y-2 text-sm text-gray-400 font-mono">
         <li>Cisco Systems. (2024). <strong>Cisco IOS Security Configuration Guide</strong>. Cisco Press.</li>
         <li>Graziani, R. (2017). <strong>CCNA Routing and Switching Study Guide</strong>. Cisco Press.</li>
         <li>López Contreras, S. (2025). <strong>Apuntes: Seguridad en Infraestructura de Red</strong>.</li>
