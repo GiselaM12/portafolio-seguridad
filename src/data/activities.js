@@ -813,8 +813,8 @@ export const activities = [
         <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mb-4">CARTOGRAFÍA DEL PENTESTING: METODOLOGÍAS (LOG-05)</h2>
-      <p>A continuación se presenta el mapeo completo de las metodologías evaluadas, detallando desde su fundamentación científica hasta las certificaciones asociadas.</p>
+      <h2 class="text-violet-400 font-mono text-lg mb-4">MAPEO ESTRATÉGICO: METODOLOGÍAS DE PENTESTING (LOG-05)</h2>
+      <p class="mb-6">El presente análisis técnico compara los marcos de trabajo más influyentes en la industria de la ciberseguridad ofensiva, permitiendo seleccionar la metodología adecuada según el tipo de auditoría (Web, Red, Cumplimiento o Emulación de Adversarios).</p>
 
       <div class="overflow-x-auto my-10 border border-gray-800 rounded-lg">
         <table class="w-full text-left border-collapse">
@@ -913,25 +913,42 @@ export const activities = [
                 </tr>
             </tbody>
         </table>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">MATRIZ DE SELECCIÓN SEGÚN PERFIL ORGANIZACIONAL</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+        <div class="bg-blue-900/10 border border-blue-500/20 p-4 rounded-lg">
+          <h4 class="text-blue-400 font-black mb-2 flex items-center gap-2"><span class="text-xs">01</span> CORPORATIVO / FEDERAL</h4>
+          <p class="text-[11px] text-gray-400"><strong>MARCO:</strong> NIST SP 800-115</p>
+          <p class="text-[11px] text-gray-400">Ideal para cumplimiento normativo y auditorías gubernamentales donde la rigurosidad documental es la prioridad máxima.</p>
+        </div>
+        <div class="bg-purple-900/10 border border-purple-500/20 p-4 rounded-lg">
+          <h4 class="text-purple-400 font-black mb-2 flex items-center gap-2"><span class="text-xs">02</span> SERVICIOS WEB / SAAS</h4>
+          <p class="text-[11px] text-gray-400"><strong>MARCO:</strong> OWASP WSTG</p>
+          <p class="text-[11px] text-gray-400">El estándar de facto para aplicaciones modernas; enfocado en lógica de negocio, APIs y vulnerabilidades de capa 7.</p>
+        </div>
+        <div class="bg-violet-900/10 border border-violet-500/20 p-4 rounded-lg">
+          <h4 class="text-violet-400 font-black mb-2 flex items-center gap-2"><span class="text-xs">03</span> COMERCIAL / OFFENSIVE</h4>
+          <p class="text-[11px] text-gray-400"><strong>MARCO:</strong> PTES</p>
+          <p class="text-[11px] text-gray-400">Enfocado en resultados técnicos profundos, post-explotación y generación de valor real para los equipos de TI.</p>
+        </div>
       </div>
 
-      <h3 class="text-xl font-bold text-violet-400 mb-6">Metodología Recomendada (PTES)</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-violet-900/10 p-4 border border-violet-500/20 rounded">
-            <h4 class="font-bold text-violet-400">Pre-engagement</h4>
-            <p class="text-xs text-gray-400">Definición de alcance, RoE y aspectos legales (NDA).</p>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CICLO DE VIDA TÁCTICO (CASO PTES)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div class="bg-violet-900/10 p-5 border-t-2 border-violet-500 rounded-b">
+            <h4 class="font-bold text-violet-400 text-xs mb-2">01. PRE-ENGAGEMENT</h4>
+            <p class="text-[10px] text-gray-400 italic">Definición de RoE (Rules of Engagement), alcance técnico y salvaguardas legales.</p>
         </div>
-        <div class="bg-blue-900/10 p-4 border border-blue-500/20 rounded">
-            <h4 class="font-bold text-blue-400">Intelligence Gathering</h4>
-            <p class="text-xs text-gray-400">OSINT y reconocimiento pasivo/activo del objetivo.</p>
+        <div class="bg-blue-900/10 p-5 border-t-2 border-blue-500 rounded-b">
+            <h4 class="font-bold text-blue-400 text-xs mb-2">02. INTEL GATHERING</h4>
+            <p class="text-[10px] text-gray-400 italic">OSINT masivo para identificar la huella digital del objetivo sin interacción directa.</p>
         </div>
-        <div class="bg-yellow-900/10 p-4 border border-yellow-500/20 rounded">
-            <h4 class="font-bold text-yellow-400">Vulnerability Analysis</h4>
-            <p class="text-xs text-gray-400">Identificación de fallos y vectores potenciales.</p>
+        <div class="bg-yellow-900/10 p-5 border-t-2 border-yellow-500 rounded-b">
+            <h4 class="font-bold text-yellow-400 text-xs mb-2">03. VULN ANALYSIS</h4>
+            <p class="text-[10px] text-gray-400 italic">Identificación proactiva de vectores de entrada (0-days, CVEs y misconfigs).</p>
         </div>
-        <div class="bg-red-900/10 p-4 border border-red-500/20 rounded">
-            <h4 class="font-bold text-red-400">Exploitation & Reporting</h4>
-            <p class="text-xs text-gray-400">Ganancia de acceso y documentación detallada de hallazgos.</p>
+        <div class="bg-red-900/10 p-5 border-t-2 border-red-500 rounded-b">
+            <h4 class="font-bold text-red-400 text-xs mb-2">04. POST-EXPLOITATION</h4>
+            <p class="text-[10px] text-gray-400 italic">Determinación del valor real del compromiso y persistencia en la red.</p>
         </div>
       </div>
 
