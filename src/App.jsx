@@ -5,10 +5,12 @@ import Activities from './pages/Activities'
 import ActivityDetail from './pages/ActivityDetail'
 import Footer from './components/Footer'
 import HackingGame from './components/HackingGame'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <div className="min-h-screen bg-cyber-dark text-gray-100 font-sans">
         <Header />
         <main>
