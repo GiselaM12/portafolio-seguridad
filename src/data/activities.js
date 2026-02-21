@@ -6,12 +6,18 @@ export const activities = [
     date: "2026-02-18",
     tags: ["Equifax", "CVE-2017-5638", "Impacto Económico", "Análisis Forense", "ISO 27001"],
     content: `
-      <h2>Introducción</h2>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
+        <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mb-4">REPORTE DE INCIDENTE: CASO EQUIFAX (LOG-01)</h2>
       <p>El presente reporte documenta el ciberataque sufrido por <strong>Equifax en 2017</strong>, considerado uno de los incidentes de ex-filtración masiva más graves en el sector financiero. El ataque fue posible mediante la explotación de la vulnerabilidad <strong>CVE-2017-5638 en Apache Struts</strong>, la cual permitió la ejecución remota de código (RCE) debido a la omisión de un parche de seguridad disponible meses antes del incidente.</p>
       <p>La brecha expuso deficiencias críticas en la gestión de activos y la visibilidad operativa, destacando el vencimiento de certificados SSL que impidieron la detección del tráfico malicioso durante 76 días. Con un impacto que afectó a <strong>147.5 millones de víctimas</strong> y resultó en un acuerdo judicial de <strong>$1.4 mil millones de USD</strong>.</p>
       <p>Este estudio tiene el propósito de evaluar las consecuencias bajo el modelo <strong>CIA (Confidencialidad, Integridad y Disponibilidad)</strong> para comprender la relación entre la ciberseguridad y la sostenibilidad organizacional.</p>
 
-      <h2>Línea de Tiempo</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">CRONOLOGÍA DE EVENTOS (TIMELINE)</h2>
       <h3 class="text-violet-400 font-mono text-lg mt-4 mb-2">CRONOLOGÍA DETALLADA DE LA INVESTIGACIÓN (EXPEDIENTE EQX-2017)</h3>
       <div class="overflow-x-auto my-6">
         <table class="w-full text-left border-collapse border border-gray-700">
@@ -53,7 +59,7 @@ export const activities = [
         </table>
       </div>
 
-      <h2>Análisis técnico, impacto económico y estratégico</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">ANÁLISIS TÉCNICO Y EVALUACIÓN DE IMPACTO</h2>
       <p>Tras la reconstrucción de los hechos, el equipo pericial concluye que el éxito de la intrusión se debió a una pérdida de control del ciclo de vida de los activos. No se trata únicamente de un servidor olvidado; se trata de una ruptura en la Cadena de Mando de TI.</p>
       <ul class="list-disc pl-6 space-y-3 mb-8">
         <li><strong>Omisión de Mantenimiento Crítico:</strong> La vulnerabilidad CVE-2017-5638 fue pública y tuvo una solución técnica inmediata (parche) desde marzo. La incapacidad de Equifax para identificar qué servidores corrían dicho software demuestra una falta de inventario de activos, violando los principios básicos de marcos internacionales como ISO 27001.</li>
@@ -61,7 +67,7 @@ export const activities = [
         <li><strong>Higiene de Datos Deficiente:</strong> Una vez que el perímetro fue vulnerado, los atacantes no enfrentaron resistencia interna. El hallazgo de credenciales de bases de datos en texto plano eliminó la necesidad de realizar ataques de fuerza bruta complejos. Esto permitió que una intrusión web se transformara en un acceso total a la "joyería" de la empresa: los datos crediticios.</li>
       </ul>
 
-      <h2>Tablas técnicas y de costos</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">MATRIZ DE DATOS Y MÉTRICAS DE COSTO</h2>
       
       <h3 class="text-violet-400 font-mono text-lg mb-2">Tabla Técnica del Ataque:</h3>
       <div class="overflow-x-auto mb-8">
@@ -157,7 +163,7 @@ export const activities = [
         </table>
       </div>
 
-      <h2>Relación con marcos normativos</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">MAPEO DE CUMPLIMIENTO NORMARTIVO (COMPLIANCE)</h2>
       <p class="mb-4">Análisis de los controles de seguridad fallidos basándonos en los estándares ISO 27001, NIST CSF y GDPR.</p>
       <div class="overflow-x-auto mb-10">
         <table class="w-full text-left border-collapse border border-gray-700">
@@ -204,7 +210,7 @@ export const activities = [
         </table>
       </div>
 
-      <h2>Conclusiones</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIONES FINALES DEL PERITAJE</h2>
       <p>El ciberataque a Equifax no fue el resultado de una técnica de hackeo sofisticada e inevitable, sino la consecuencia de una serie de fallas operativas y negligencias en la gestión de seguridad. A continuación, se presentan los aprendizajes clave y las acciones preventivas necesarias para cualquier organización:</p>
       <ul class="list-disc pl-6 space-y-2 mb-6">
         <li><strong>La visibilidad es la base de la protección:</strong> No se puede proteger lo que no se sabe que existe. El desconocimiento de que el "Portal de Disputas" utilizaba Apache Struts dejó una brecha crítica fuera del alcance de las políticas de mantenimiento.</li>
@@ -213,7 +219,7 @@ export const activities = [
         <li><strong>La higiene de datos interna es crítica:</strong> Una vez superado el perímetro, la falta de seguridad interna (como credenciales en texto plano) facilitó un acceso total a la base de datos central sin necesidad de ataques complejos.</li>
       </ul>
 
-      <h2>Recomendaciones estratégicas</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">RECOMENDACIONES ESTRATÉGICAS (MITIGACIÓN)</h2>
       <ul class="list-disc pl-6 space-y-2 mb-8">
         <li><strong>Implementar un Inventario de Activos Dinámico:</strong> Mantener un registro automatizado y actualizado de todo el software, versiones y hardware en la red para eliminar "puntos ciegos" operativos.</li>
         <li><strong>Establecer una Política de Gestión de Parches Críticos:</strong> Definir tiempos de respuesta obligatorios (ej. 24-48 horas) para vulnerabilidades con severidad alta o crítica (CVSS 10.0).</li>
@@ -226,7 +232,7 @@ export const activities = [
 
       <p class="text-sm italic mb-8">El caso Equifax es un recordatorio de que marcos como ISO 27001 y NIST CSF no son solo requisitos de cumplimiento, sino herramientas de supervivencia. Para una organización moderna, la ciberseguridad es una responsabilidad ética y financiera: la confianza del cliente, una vez perdida por fallos evitables como la falta de un parche o un certificado vencido, es el activo más difícil y costoso de recuperar.</p>
 
-      <h2>Glosario</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">GLOSARIO TÉCNICO DE TÉRMINOS</h2>
       <div class="bg-gray-900 border border-gray-700 rounded p-4 mb-8">
         <h4 class="text-red-400 font-bold mb-2">FICHA TÉCNICA: CVE-2017-5638</h4>
         <ul class="space-y-2 text-sm">
@@ -239,7 +245,7 @@ export const activities = [
         </ul>
       </div>
 
-      <h2>Bibliografía</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">FUENTES Y REFERENCIAS CONSULTADAS</h2>
       <ul class="list-disc pl-6 space-y-2 text-sm text-gray-400">
         <li><strong>U.S. Government Accountability Office (GAO):</strong> Reporte GAO-18-559, "Data Protection: Actions Taken by Equifax and Federal Agencies in Response to the 2017 Breach".</li>
         <li><strong>House of Representatives (Committee on Oversight and Government Reform):</strong> Reporte final de 96 páginas titulado "The Equifax Data Breach".</li>
@@ -255,358 +261,211 @@ export const activities = [
     tags: ["X.800", "RFC 4949", "Amenazas", "Controles", "Análisis Forense"],
     content: `
       <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
-        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine (176522)</p>
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
         <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
         <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
       </div>
 
       <h2>Introducción</h2>
-      <p>El marco <strong>ITU-T X.800</strong> establece qué servicios de seguridad se deben garantizar (Autenticación, Control de Acceso, Confidencialidad de datos, Integridad de datos, Disponibilidad y No repudio), mientras que el <strong>RFC 4949</strong> proporciona el vocabulario estándar para describir cómo y por qué fallaron. La unión de ambos permite pasar de una descripción anecdótica a un informe técnico profesional.</p>
+      <p>El marco <strong>ITU-T X.800</strong> establece “que” servicios de seguridad se deben garantizar (Autenticación, Control de Acceso, Confidencialidad de datos, Integridad de datos, Disponibilidad y No repudio), mientras que el <strong>RFC 4949</strong> proporciona el vocabulario estándar para describir “cómo” y “por qué” fallaron (tipos de ataques y vulnerabilidades). La reunión de ambos permite pasar de una descripción anecdótica a un informe técnico profesional.</p>
 
-      <div class="space-y-12">
+      <div class="space-y-12 mt-10">
         <!-- Escenario 01 -->
-        <div class="border-l-4 border-red-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-red-400 mb-4 uppercase font-mono tracking-wider">Escenario 01: LockBit Ransomware</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">En múltiples incidentes atribuidos al grupo LockBit, organizaciones públicas y privadas han sufrido el cifrado masivo de servidores tras un acceso inicial no autorizado.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad (por la exfiltración), Integridad (datos cifrados/modificados), Disponibilidad (servidores inaccesibles).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Availability Attack.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Maliciosa deliberada).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Intrusión inicial no autorizada seguida de Lateral Movement.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Parada total de operaciones, daño reputacional por fuga de información sensible.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Respaldos inmutables (offline), segmentación de red y herramientas DLP (Data Loss Prevention).</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[10px] font-mono border border-red-500/30">CRITICAL</span>
+            <h3 class="text-lg font-bold text-red-500 font-mono italic">Escenario 01: LockBit Ransomware</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Organizaciones públicas y privadas han sufrido el cifrado masivo de servidores tras un acceso inicial no autorizado. Los atacantes exfiltraron información sensible y amenazaron con su publicación, evidenciando un compromiso simultáneo de la confidencialidad, la integridad y la disponibilidad.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Confidencialidad, Integridad, Disponibilidad</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-red-400">Availability Attack</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">TIPO DE AMENAZA</td><td class="p-3 text-gray-300">Externa (Maliciosa deliberada)</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">VECTOR DE ATAQUE</td><td class="p-3 text-gray-300">Intrusión inicial y Movimiento Lateral</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Respaldos inmutables y segmentación de red</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 02 -->
-        <div class="border-l-4 border-blue-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-blue-400 mb-4 uppercase font-mono tracking-wider">Escenario 02: Misconfiguración Cloud</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Bases de datos completas quedaron accesibles públicamente debido a errores de configuración en servicios en la nube.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad (datos públicos), Control de acceso (permisos abiertos a "Everyone").</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Exposure.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interna (Involuntaria / Error humano).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Error de configuración en permisos de almacenamiento (ej. S3 bucket abierto).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Violación de normativas de privacidad (GDPR/LFPDPPP), sanciones legales.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Implementación de CSPM (Cloud Security Posture Management) y auditoría continua de permisos.</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded text-[10px] font-mono border border-orange-500/30">EXPOSURE</span>
+            <h3 class="text-lg font-bold text-orange-500 font-mono italic">Escenario 02: Misconfiguración Cloud</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Bases de datos quedaron accesibles públicamente por errores de configuración en servicios en la nube. Falla en el control de acceso que derivó en pérdida de confidencialidad.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Confidencialidad, Control de Acceso</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-orange-400">Exposure</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">TIPO DE AMENAZA</td><td class="p-3 text-gray-300">Interna (Involuntaria / Error humano)</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">CSPM y auditoría continua de permisos</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 03 -->
-        <div class="border-l-4 border-yellow-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-yellow-500 mb-4 uppercase font-mono tracking-wider">Escenario 03: Supply Chain Attack</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Un proveedor legítimo de software fue comprometido y distribuyó una actualización que incluía código malicioso.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Integridad (software alterado), Autenticación (se confió en la firma del proveedor comprometido).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Supply Chain Attack, Trojan Horse, Malicious Logic.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (estructural/sistémica).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Compromiso de la infraestructura de desarrollo del proveedor (CI/CD).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Compromiso masivo de clientes confiados; acceso persistente (backdoor).</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Verificación de firmas, sandboxing de actualizaciones antes de despliegue en producción.</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-[10px] font-mono border border-yellow-500/30">SUPPLY CHAIN</span>
+            <h3 class="text-lg font-bold text-yellow-500 font-mono italic">Escenario 03: Supply Chain Attack</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Un proveedor de software fue comprometido y distribuyó código malicioso en una actualización, violando la integridad y confidencialidad de cientos de organizaciones.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Integridad, Autenticación</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-yellow-400">Supply Chain Attack, Malicious Logic</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">VECTOR DE ATAQUE</td><td class="p-3 text-gray-300">Compromiso de infraestructura CI/CD</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Verificación de firmas y sandboxing</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 04 -->
-        <div class="border-l-4 border-purple-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-purple-400 mb-4 uppercase font-mono tracking-wider">Escenario 04: Spear Phishing</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Mediante campañas de phishing, atacantes obtieron credenciales válidas y accedieron a sistemas corporativos durante meses.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación (vulnerada por robo), Control de acceso (acceso ilegítimo autorizado por el sistema).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Credential Compromise, Advanced Persistent Threat (APT).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Ingeniería Social).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Phishing dirigido (Spear Phishing).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Espionaje corporativo prolongado, exfiltración silenciosa.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">MFA (Autenticación Multifactor) obligatorio y monitoreo de comportamiento (UEBA).</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-[10px] font-mono border border-blue-500/30">PHISHING</span>
+            <h3 class="text-lg font-bold text-blue-500 font-mono italic">Escenario 04: Credential Compromise</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Mediante phishing dirigido, atacantes obtuvieron credenciales válidas. Aunque la autenticación funcionó técnicamente, el servicio fue comprometido conceptualmente.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Autenticación, Control de Acceso</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-blue-400">Credential Compromise, APT</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">MFA obligatorio y monitoreo UEBA</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 05 -->
-        <div class="border-l-4 border-orange-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-orange-400 mb-4 uppercase font-mono tracking-wider">Escenario 05: Backup Sabotage</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">En ataques de ransomware avanzados, los atacantes eliminaron o cifraron los respaldos antes de afectar los sistemas productivos.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Disponibilidad (imposibilidad de recuperar), Integridad (destrucción de activos).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Data Destruction, Sabotage, Availability Attack.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Maliciosa destructiva).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Escalación de privilegios para alcanzar repositorios de respaldo.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Pérdida total de datos, posible quiebra operativa de la organización.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Regla 3-2-1 de respaldos, almacenamiento en cinta o air-gapped (desconectado).</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[10px] font-mono border border-red-500/30">DATA DESTR</span>
+            <h3 class="text-lg font-bold text-red-500 font-mono italic">Escenario 05: Ransomware Avanzado</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Atacantes eliminaron o cifraron los respaldos antes de afectar los sistemas productivos, impidiendo la recuperación y destruyendo activos.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Disponibilidad, Integridad</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-red-400">Data Destruction, Availability Attack</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Regla 3-2-1 y respaldos air-gapped</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 06 -->
-        <div class="border-l-4 border-emerald-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-emerald-400 mb-4 uppercase font-mono tracking-wider">Escenario 06: Insider Threat</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Un empleado con acceso legítimo extrae bases de datos completas y las vendió a terceros, sin explotar vulnerabilidades técnicas.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Control de Acceso (exceso de privilegios otorgados).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Insider Threat, Theft (robo), Unauthorized Disclosure.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interna (Maliciosa).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Abuso de confianza y privilegios legítimos.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Fuga de propiedad intelectual, pérdida de ventaja competitiva.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Principio de Mínimo Privilegio (PoLP) and monitoreo de actividad de usuarios internos.</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded text-[10px] font-mono border border-purple-500/30">INSIDER</span>
+            <h3 class="text-lg font-bold text-purple-400 font-mono italic">Escenario 06: Insider Threat</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Un empleado con acceso legítimo extrajo bases de datos por exceso de privilegios, vendiéndolas a terceros sin explotar vulnerabilidades técnicas.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Confidencialidad, Control de Acceso</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-purple-400">Insider Threat, Theft, Disclosure</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Principio de Mínimo Privilegio (PoLP)</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 07 -->
-        <div class="border-l-4 border-gray-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl shadow-gray-900/40">
-          <h3 class="text-xl font-bold text-gray-400 mb-4 uppercase font-mono tracking-wider">Escenario 07: Log Tampering</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Tras un ataque, los registros del sistema quedaron cifrados o alterados, impidiendo reconstruir la secuencia de eventos.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">No Repudio (no se puede probar quién lo hizo), Integridad (de la evidencia).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Deception, Audit Trail modification, Accountability failure.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa o Interna (Anti-forense).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Manipulación directa de archivos de sistema (log tampering).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Imposibilidad legal de imputar responsabilidad o entender el alcance del ataque.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Envío de logs en tiempo real a SIEM con escritura WORM (Write Once Read Many).</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded text-[10px] font-mono border border-indigo-500/30">ANTI-FORENSIC</span>
+            <h3 class="text-lg font-bold text-indigo-400 font-mono italic">Escenario 07: Log Tampering</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Los registros del sistema fueron alterados tras un ataque, impidiendo reconstruir eventos y vulnerando el no repudio e integridad de la evidencia.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">No Repudio, Integridad</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-indigo-400">Audit Trail modification</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Logs en tiempo real a servidor WORM</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 08 -->
-        <div class="border-l-4 border-cyan-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-cyan-400 mb-4 uppercase font-mono tracking-wider">Escenario 08: Operational Failure</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Una actualización mal ejecutada provocó la caída simultánea de múltiples servicios críticos a nivel global.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Disponibilidad (interrupción del servicio).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Operational Failure, Human Error, System Crash.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interna (No maliciosa / Accidental).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">N/A (Fallo en procesos de QA/Control de calidad).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Interrupción masiva de negocio, pérdidas financieras por tiempo de inactividad.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Pruebas exhaustivas en entorno staging and despliegue escalonado (Canary deployment).</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-gray-500/20 text-gray-400 px-2 py-0.5 rounded text-[10px] font-mono border border-gray-500/30">FAILURE</span>
+            <h3 class="text-lg font-bold text-gray-300 font-mono italic">Escenario 08: Operational Failure</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Error humano en una actualización provocó la caída de servicios globales. Afectación a la disponibilidad sin necesidad de un atacante externo.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Disponibilidad</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-gray-400">Operational Failure, Human Error</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Entorno staging y despliegue Canary</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 09 -->
-        <div class="border-l-4 border-indigo-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-indigo-400 mb-4 uppercase font-mono tracking-wider">Escenario 09: Brand Spoofing</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">Atacantes replicaron sitios y correos oficiales para engañar a ciudadanos y obtener información sensible.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Autenticación de origen de datos (suplantada), Confidencialidad (datos entregados al atacante).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Spoofing, Phishing, Social Engineering.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Fraude).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50">Correos masivos y dominios typosquatting (similares al real).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Robo de identidad de usuarios, pérdida de confianza en la institución.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Implementación de DMARC/SPF/DKIM and monitoreo de marca (Brand Protection).</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded text-[10px] font-mono border border-cyan-500/30">SPOOFING</span>
+            <h3 class="text-lg font-bold text-cyan-400 font-mono italic">Escenario 09: Brand Spoofing</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Réplica de sitios oficiales para obtener datos sensibles. Afecta autenticación de origen y confidencialidad mediante ingeniería social.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Autenticación, Confidencialidad</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-cyan-400">Spoofing, Phishing</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">DMARC/SPF/DKIM y Brand Protection</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Escenario 10 -->
-        <div class="border-l-4 border-pink-500 pl-6 py-6 bg-white/5 rounded-r-lg shadow-xl">
-          <h3 class="text-xl font-bold text-pink-400 mb-4 uppercase font-mono tracking-wider">Escenario 10: Destructive Attack</h3>
-          <p class="mb-6 text-gray-400 italic border-b border-gray-800 pb-4">En algunos incidentes, tras exfiltrar información, los atacantes ejecutaron acciones destructivas para borrar sistemas completos y eliminar rastros.</p>
-          
-          <div class="space-y-4">
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué servicios X.800 fueron comprometidos?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Confidencialidad, Integridad, Disponibilidad (Compromiso total).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es su definición según el glosario RFC 4949?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Destructive Attack, Wiper Malware, Sabotage.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿En qué categoría de amenaza clasifica?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Externa (Ciberwarfare o Hacktivismo destructivo).</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál fue el vector de ataque detectado?</p>
-              <p class="text-red-300 pl-4 border-l-2 border-red-900/50 font-mono text-xs">Ejecución de malware tipo Wiper tras obtener control total.</p>
-            </div>
-            <div class="border-b border-gray-800/30 pb-3">
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Qué impacto técnico y operativo generó?</p>
-              <p class="text-gray-300 pl-4 border-l-2 border-violet-900/50">Destrucción irreversible de infraestructura lógica y datos.</p>
-            </div>
-            <div>
-              <p class="text-violet-300 font-semibold text-sm mb-1">¿Cuál es la medida de control recomendada?</p>
-              <p class="text-green-400 font-mono text-sm pl-4 border-l-2 border-green-900/50 bg-green-900/5 p-2 rounded">Segmentación estricta de red and planes de Recuperación ante Desastres (DRP) probados.</p>
-            </div>
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[10px] font-mono border border-red-500/30">WIPER</span>
+            <h3 class="text-lg font-bold text-red-500 font-mono italic">Escenario 10: Destructive Attack</h3>
           </div>
+          <p class="text-sm text-gray-400 mb-4 font-mono leading-relaxed">
+            Tras exfiltrar información, se ejecutaron malwares tipo Wiper para destruir sistemas y borrar rastros, con compromiso total de C, I, A.
+          </p>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">SERVICIOS X.800 COMPROMETIDOS</td><td class="p-3 text-gray-300">Total (Confid., Integ., Dispon.)</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">DEFINICIÓN RFC 4949</td><td class="p-3 text-red-400">Destructive Attack, Wiper Malware</td></tr>
+              <tr><td class="p-3 bg-green-900/10 text-green-400 border-r border-gray-800">MEDIDA DE CONTROL</td><td class="p-3 text-green-300">Segmentación estricta y DRP probado</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <h2 class="mt-12">Conclusión</h2>
-      <p>Al analizar estos diez escenarios, me queda claro que el estándar X.800 y el RFC 4949 se complementan: uno nos dice qué debemos proteger (como la autenticación y el acceso) y el otro nos ayuda a ponerle el nombre correcto a las amenazas cuando esas protecciones fallan.</p>
-      <p>Lo que más me llamó la atención es que, en la mayoría de estos casos, el problema no fue que los hackers usaran una tecnología imposible de detener, sino que aprovecharon errores humanos y descuidos básicos, como contraseñas robadas (phishing) o configuraciones equivocadas en la nube.</p>
-      <p>Pensando en el entorno de Latinoamérica, creo que la lección más importante es que no siempre se necesita el software más caro para estar seguros. Muchas veces, basta con aplicar bien los fundamentos, como activar la autenticación de dos pasos (MFA) y revisar bien los permisos antes de salir a producción. Si cuidamos esos detalles básicos, podemos evitar la mayoría de los incidentes graves que vimos en la actividad.</p>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN DEL ANÁLISIS X.800 / RFC 4949</h2>
+      <p>El estándar <strong>X.800</strong> y el <strong>RFC 4949</strong> se complementan: uno nos dice qué proteger y el otro cómo nombrar las fallas. En la mayoría de los casos, los atacantes aprovechan descuidos básicos como el phishing o malas configuraciones. Aplicar fundamentos como MFA y revisión de permisos puede evitar la mayoría de los incidentes graves.</p>
 
-      <h2 class="mt-12">Referencias Bibliográficas</h2>
-      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400">
-        <li>Shirey, R. (2007). <strong>RFC 4949: Internet Security Glossary, Version 2</strong>. Internet Engineering Task Force (IETF). <a href="https://www.rfc-editor.org/rfc/rfc4949" class="text-blue-400 hover:underline">rfc-editor.org/rfc/rfc4949</a></li>
-        <li>López Contreras, S. (2025). <strong>Apuntes de clase: Fundamentos del Hacking Ético - Parcial I</strong>. [Material de clase].</li>
-        <li>International Telecommunication Union (ITU). (1991). <strong>Recommendation X.800: Security architecture for Open Systems Interconnection for CCITT applications</strong>. ITU-T. <a href="https://www.itu.int/rec/T-REC-X.800" class="text-blue-400 hover:underline">itu.int/rec/T-REC-X.800</a></li>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">REFERENCIAS BIBLIOGRÁFICAS</h2>
+      <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-400 font-mono">
+          <li>Shirey, R. (2007). <strong>RFC 4949: Internet Security Glossary</strong>. IETF.</li>
+          <li>López Contreras, S. (2025). <strong>Apuntes: Fundamentos del Hacking Ético</strong>.</li>
+          <li>ITU. (1991). <strong>Recommendation X.800: Security architecture</strong>. ITU-T.</li>
       </ul>
     `
+
   },
   {
     id: 3,
@@ -615,7 +474,13 @@ export const activities = [
     date: "2026-02-20",
     tags: ["Linux", "Firewall", "Iptables", "Políticas de Red", "Security Hardening"],
     content: `
-      <h2>Introducción a Netfilter e Iptables</h2>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
+        <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mb-4">IDENTIFICACIÓN: NETFILTER & IPTABLES (LOG-03)</h2>
       <p><strong>Iptables</strong> es la herramienta de espacio de usuario utilizada para configurar las tablas de filtrado de paquetes del kernel de Linux (Netfilter). Es la primera línea de defensa en servidores Linux, permitiendo definir reglas granulares para aceptar, rechazar o modificar el tráfico de red.</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
@@ -629,7 +494,7 @@ export const activities = [
         </div>
       </div>
 
-      <h2>Conceptos Fundamentales</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">CONCEPTOS FUNDAMENTALES (ESTRUCTURA DE DATOS)</h2>
       <p>Iptables organiza las reglas en <strong>Tablas</strong> y <strong>Cadenas (Chains)</strong>. El flujo del paquete sigue un orden lógico: primero pasa por una <strong>tabla</strong>, después por una <strong>cadena</strong> y finalmente se ejecuta una <strong>acción</strong> (regla).</p>
       
       <div class="overflow-x-auto my-6">
@@ -651,7 +516,7 @@ export const activities = [
         </table>
       </div>
 
-      <h2>Anatomía de un comando iptables</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">ANATOMÍA TÉCNICA DE UN COMANDO</h2>
       <div class="bg-black border border-violet-900/50 rounded p-6 font-mono text-sm mb-8">
         <p class="text-violet-400 mb-2"># Estructura básica analizada:</p>
         <p class="text-white">iptables <span class="text-red-400">-A INPUT</span> -p tcp -m multiport <span class="text-yellow-400">--dports 80,443</span> -j <span class="text-green-400">ACCEPT</span></p>
@@ -664,7 +529,7 @@ export const activities = [
         </div>
       </div>
 
-      <h2>Traducción de Políticas</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">TRADUCCIÓN DE POLÍTICAS (WORKLOAD ANALYSIS)</h2>
       <div class="overflow-x-auto my-6">
         <table class="w-full text-left border-collapse border border-gray-700">
             <thead class="bg-[#1a1f2e] text-green-400">
@@ -708,7 +573,7 @@ export const activities = [
         </li>
       </ul>
 
-      <h2>Conclusión</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN TÉCNICA (HARDENING)</h2>
       <p>Iptables es una herramienta poderosa y flexible. Una configuración correcta es vital para la seguridad del servidor; un error (como bloquear el puerto 22 sin tener acceso físico) puede dejar al administrador fuera del sistema. La práctica de <strong>"Default DROP"</strong> es la más segura, obligando a abrir explícitamente solo lo que es necesario.</p>
 
       <h2 class="mt-12 text-violet-400 font-mono">Referencias Bibliográficas</h2>
@@ -726,14 +591,20 @@ export const activities = [
     date: "2026-02-21",
     tags: ["Defensa en Profundidad", "IDS/IPS", "Honeypots"],
     content: `
-      <h2>Introducción a la Cadena FORWARD</h2>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
+        <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mb-4">ANÁLISIS PERIMETRAL: CADENA FORWARD (LOG-04)</h2>
       <p>A diferencia de la cadena INPUT (tráfico dirigido al host local), la cadena <strong>FORWARD</strong> procesa el tráfico que simplemente pasa a través del firewall desde una interfaz hacia otra. Es la base de un firewall perimetral que protege una red interna o una DMZ.</p>
 
       <div class="bg-violet-900/10 border border-violet-500/20 rounded p-6 mb-10">
         <p class="text-gray-300 italic">"La cadena FORWARD permite que el firewall actúe como un guardia entre diferentes zonas de confianza, filtrando el tráfico que fluye entre ellas."</p>
       </div>
 
-      <h2>Traducción de Políticas de Perímetro</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">TRADUCCIÓN DE POLÍTICAS DE PERÍMETRO</h2>
       <div class="overflow-x-auto my-6">
         <table class="w-full text-left border-collapse border border-gray-700">
             <thead class="bg-[#1a1f2e] text-blue-300">
@@ -767,17 +638,6 @@ export const activities = [
         </table>
       </div>
 
-      <h2>Mecanismos de Defensa Complementarios</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-        <div class="bg-white/5 p-6 rounded-lg border border-gray-800">
-          <h3 class="text-lg font-bold text-violet-400 mb-3">Sistemas de Detección (IDS)</h3>
-          <p class="text-sm text-gray-400">Monitorizan el tráfico en busca de anomalías. En la cadena FORWARD, un IDS puede detectar intentos de movimiento lateral entre segmentos de red.</p>
-        </div>
-        <div class="bg-white/5 p-6 rounded-lg border border-gray-800">
-          <h3 class="text-lg font-bold text-green-400 mb-3">Sistemas de Prevención (IPS)</h3>
-          <p class="text-sm text-gray-400">Actúan bloqueando paquetes en tiempo real. Un IPS configurado con iptables puede usar el target REJECT para informar al atacante o DROP para ser silencioso.</p>
-        </div>
-      </div>
 
       <h2>Caso Práctico: Segmentación DMZ</h2>
       <p>En una arquitectura típica, el tráfico de Internet <strong>nunca</strong> debe llegar directamente a la red interna. Debe pasar por una DMZ donde se encuentran los servicios públicos. Si un servidor en la DMZ es comprometido, la cadena FORWARD debe impedir que el atacante salte a la red interna (Movimiento Lateral).</p>
@@ -860,7 +720,7 @@ iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j AC
         </table>
       </div>
 
-      <h2>Conclusión</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN DEL ANÁLISIS PERIMETRAL</h2>
       <p>La correcta configuración de la cadena FORWARD es fundamental para la seguridad de red a gran escala. Permite implementar el principio de <strong>Defensa en Profundidad</strong>, asegurando que incluso si el perímetro falla, las barreras internas siguen protegiendo los activos más valiosos del negocio.</p>
 
       <h2 class="mt-12 text-blue-400 font-mono">Referencias Bibliográficas</h2>
@@ -878,7 +738,13 @@ iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j AC
     date: "2026-02-22",
     tags: ["Pentesting", "Metodologías", "Ethical Hacking", "MITRE ATT&CK"],
     content: `
-      <h2>Análisis Comparativo Maestro</h2>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
+        <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mb-4">CARTOGRAFÍA DEL PENTESTING: METODOLOGÍAS (LOG-05)</h2>
       <p>A continuación se presenta el mapeo completo de las metodologías evaluadas, detallando desde su fundamentación científica hasta las certificaciones asociadas.</p>
 
       <div class="overflow-x-auto my-10 border border-gray-800 rounded-lg">
@@ -1000,7 +866,7 @@ iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j AC
         </div>
       </div>
 
-      <h2>Conclusión</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN ESTRATÉGICA</h2>
       <p>Adoptar un marco como <strong>PTES</strong> u <strong>OSSTMM</strong> no es opcional para un auditor profesional. Estas herramientas permiten pasar de una simple búsqueda de vulnerabilidades a un análisis de riesgos estructurado que aporta valor real al negocio.</p>
 
       <h2 class="mt-12 text-purple-400 font-mono">Referencias Bibliográficas</h2>
@@ -1018,7 +884,13 @@ iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j AC
     date: "2026-02-23",
     tags: ["IPSec", "VPN", "Cisco Packet Tracer", "ACL", "Layer 2 Security"],
     content: `
-      <h2>Arquitectura de Red Segura</h2>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-violet-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
+        <p><span class="text-violet-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-violet-400">CURSO:</span> CNO V SEGURIDAD INFORMATICA</p>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-lg mb-4">DESPLIEGUE INFRAESTRUCTURA: VPN IPSEC (LOG-06)</h2>
       <p>Este laboratorio simula la interconexión de dos sucursales empresariales a través de una red pública (Internet) utilizando un túnel <strong>IPSec VPN</strong> y medidas de endurecimiento en infraestructura Cisco.</p>
 
       <div class="bg-blue-900/10 border border-blue-500/20 rounded-lg p-6 my-10">
@@ -1042,7 +914,7 @@ iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j AC
         </div>
       </div>
 
-      <h2>Hardening de Switches (Capa 2)</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">HARDENING DE INFRAESTRUCTURA (SWITCHING L2)</h2>
       <p>Como medida de seguridad interna, se implementó <strong>Port Security</strong> en los puertos de acceso de los switches de cada sucursal.</p>
       
       <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 my-6 overflow-x-auto">
@@ -1057,7 +929,7 @@ Switch(config-if-range)# switchport port-security mac-address sticky
         </pre>
       </div>
 
-      <h2>Listas de Control de Acceso (ACL)</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">LISTAS DE CONTROL DE ACCESO (ACL)</h2>
       <p>Se definieron ACLs detalladas para filtrar qué equipos pueden iniciar el tráfico del túnel VPN y cuáles no.</p>
 
       <div class="overflow-x-auto my-8">
@@ -1076,7 +948,7 @@ Switch(config-if-range)# switchport port-security mac-address sticky
         </table>
       </div>
 
-      <h2>Conclusión</h2>
+      <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">CONCLUSIÓN DEL DESPLIEGUE</h2>
       <p>La combinación de <strong>VPN IPSec</strong> para proteger los datos en tránsito y <strong>Port Security</strong> para blindar el acceso local garantiza una postura de seguridad integral. Este laboratorio demuestra la importancia de asegurar no solo el canal de comunicación, sino también la infraestructura física subyacente.</p>
 
       <h2 class="mt-12 text-cyan-400 font-mono">Referencias Bibliográficas</h2>
