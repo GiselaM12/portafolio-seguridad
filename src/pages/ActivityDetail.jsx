@@ -131,7 +131,7 @@ const ActivityDetail = () => {
                         <Link to="/" className="hover:text-red-400 transition-colors">ROOT</Link>
                         <span className="text-gray-700">/</span>
                         <button
-                            onClick={() => navigate('/', { state: { targetId: 'actividades' } })}
+                            onClick={() => navigate('/', { state: { targetId: 'proyectos' } })}
                             className="hover:text-red-400 transition-colors uppercase"
                         >
                             Activities
