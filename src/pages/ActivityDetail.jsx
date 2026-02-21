@@ -1,10 +1,11 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { activities } from '../data/activities';
 import { FaFilePdf, FaArrowLeft, FaTerminal, FaShieldAlt, FaCalendarAlt, FaUserSecret } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const ActivityDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const activity = activities.find(a => a.id === parseInt(id));
 
     if (!activity) {
@@ -129,7 +130,12 @@ const ActivityDetail = () => {
                     <nav className="flex items-center gap-2 text-xs md:text-sm text-gray-500 font-mono tracking-wider">
                         <Link to="/" className="hover:text-red-400 transition-colors">ROOT</Link>
                         <span className="text-gray-700">/</span>
-                        <Link to="/actividades" className="hover:text-red-400 transition-colors">ACTIVITIES</Link>
+                        <button
+                            onClick={() => navigate('/', { state: { targetId: 'actividades' } })}
+                            className="hover:text-red-400 transition-colors uppercase"
+                        >
+                            Activities
+                        </button>
                         <span className="text-gray-700">/</span>
                         <span className="text-red-500 truncate max-w-[200px]">CASE_{String(activity.id).padStart(3, '0')}</span>
                     </nav>

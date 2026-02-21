@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
-import Activities from './pages/Activities'
 import ActivityDetail from './pages/ActivityDetail'
 import Footer from './components/Footer'
 import HackingGame from './components/HackingGame'
@@ -24,7 +23,6 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/actividades" element={<Activities />} />
             <Route path="/actividades/:id" element={<ActivityDetail />} />
           </Routes>
         </main>
