@@ -18,15 +18,14 @@ const ActivityDetail = () => {
     }
 
     // Map of activity IDs to uploaded filenames in public/
-    // Checks for specific uploaded files. If not found in map, defaults to #
     const getFileUrl = (id) => {
         const fileMap = {
             1: "Act01_Equipo1.pdf",
             2: "176522-ACT02.pdf",
-            3: "ACT 03.jfif", // Image
+            3: "ACT 03.jfif",
             4: "1765222-act04.pdf",
             5: "176522_Act 5.pdf",
-            6: "176658-act06.pdf", // Expected PDF
+            6: "176658-act06.docx", // Corrected to match the actual file
         };
         const fileName = fileMap[id];
         return fileName ? `/${fileName}` : null;
@@ -143,7 +142,7 @@ const ActivityDetail = () => {
                     {fileUrl ? (
                         <a
                             href={fileUrl}
-                            download={`Act${activity.id}-176522${fileUrl.substring(fileUrl.lastIndexOf('.'))}`}
+                            download
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group relative px-6 py-2 bg-transparent overflow-hidden rounded border border-red-500/50 text-red-500 font-mono text-sm tracking-widest hover:text-white hover:border-red-500 transition-all"
