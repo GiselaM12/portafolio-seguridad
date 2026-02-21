@@ -816,103 +816,104 @@ export const activities = [
       <h2 class="text-violet-400 font-mono text-lg mb-4">MAPEO ESTRATÉGICO: METODOLOGÍAS DE PENTESTING (LOG-05)</h2>
       <p class="mb-6">El presente análisis técnico compara los marcos de trabajo más influyentes en la industria de la ciberseguridad ofensiva, permitiendo seleccionar la metodología adecuada según el tipo de auditoría (Web, Red, Cumplimiento o Emulación de Adversarios).</p>
 
-      <div class="overflow-x-auto my-10 border border-gray-800 rounded-lg">
+      <div class="overflow-x-auto my-10 border border-gray-800 rounded-lg shadow-inner bg-black/20">
         <table class="w-full text-left border-collapse">
-            <thead class="bg-[#1a1f2e] text-purple-300 text-xs uppercase tracking-wider">
+            <thead class="bg-[#1a1f2e] text-purple-300 text-sm uppercase tracking-wider">
                 <tr>
-                    <th class="p-4 border border-gray-700 font-black">Criterio / Marco</th>
-                    <th class="p-4 border border-gray-700">1. MITRE ATT&CK</th>
-                    <th class="p-4 border border-gray-700">2. OWASP WSTG</th>
-                    <th class="p-4 border border-gray-700">3. NIST SP 800-115</th>
-                    <th class="p-4 border border-gray-700">4. OSSTMM</th>
-                    <th class="p-4 border border-gray-700">5. PTES</th>
-                    <th class="p-4 border border-gray-700">6. ISSAF</th>
+                    <th class="p-5 border border-gray-700 font-black min-w-[150px]">Criterio / Marco</th>
+                    <th class="p-5 border border-gray-700">1. MITRE ATT&CK</th>
+                    <th class="p-5 border border-gray-700">2. OWASP WSTG</th>
+                    <th class="p-5 border border-gray-700">3. NIST SP 800-115</th>
+                    <th class="p-5 border border-gray-700">4. OSSTMM</th>
+                    <th class="p-5 border border-gray-700">5. PTES</th>
+                    <th class="p-5 border border-gray-700">6. ISSAF</th>
                 </tr>
             </thead>
-            <tbody class="text-[11px] text-gray-300">
+            <tbody class="text-sm text-gray-300 leading-relaxed">
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">A. Descripción</td>
-                    <td class="p-3 border border-gray-700">Base de conocimientos basada en tácticas y técnicas de adversarios reales.</td>
-                    <td class="p-3 border border-gray-700">Guía principal para pruebas en aplicaciones web y vulnerabilidades comunes.</td>
-                    <td class="p-3 border border-gray-700">Guía técnica federal (EE.UU.) para realizar evaluaciones de seguridad.</td>
-                    <td class="p-3 border border-gray-700">Metodología científica basada en métricas para evaluar la seguridad operativa.</td>
-                    <td class="p-3 border border-gray-700">Estándar comercial con lenguaje común para ejecución de pruebas.</td>
-                    <td class="p-3 border border-gray-700">Framework detallado y estructurado para evaluación de sistemas (legado).</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">A. Descripción</td>
+                    <td class="p-4 border border-gray-700">Base de conocimientos basada en tácticas y técnicas de adversarios reales.</td>
+                    <td class="p-4 border border-gray-700">Guía principal para pruebas en aplicaciones web y vulnerabilidades comunes.</td>
+                    <td class="p-4 border border-gray-700">Guía técnica federal (EE.UU.) para realizar evaluaciones de seguridad.</td>
+                    <td class="p-4 border border-gray-700">Metodología científica basada en métricas para evaluar la seguridad operativa.</td>
+                    <td class="p-4 border border-gray-700">Estándar comercial con lenguaje común para ejecución de pruebas.</td>
+                    <td class="p-4 border border-gray-700">Framework detallado y estructurado para evaluación de sistemas (legado).</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">B. Fases</td>
-                    <td class="p-3 border border-gray-700">14 Tácticas (Reconocimiento, Persistencia, etc.).</td>
-                    <td class="p-3 border border-gray-700">Recopilación, Configuración, Identidad, Autenticación, etc.</td>
-                    <td class="p-3 border border-gray-700">Planificación, Descubrimiento, Ataque, Reporte.</td>
-                    <td class="p-3 border border-gray-700">Inducción, Interacción, Inquisición, Intervención.</td>
-                    <td class="p-3 border border-gray-700">Pre-acuerdo, Intel, Modelado, Vulnerabilidad, Explotación, Post, Reporte.</td>
-                    <td class="p-3 border border-gray-700">Planificación, Evaluación, Tratamiento, Acreditación.</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">B. Fases</td>
+                    <td class="p-4 border border-gray-700">14 Tácticas (Reconocimiento, Persistencia, etc.).</td>
+                    <td class="p-4 border border-gray-700">Recopilación, Configuración, Identidad, Autenticación, etc.</td>
+                    <td class="p-4 border border-gray-700">Planificación, Descubrimiento, Ataque, Reporte.</td>
+                    <td class="p-4 border border-gray-700">Inducción, Interacción, Inquisición, Intervención.</td>
+                    <td class="p-4 border border-gray-700">Pre-acuerdo, Intel, Modelado, Vulnerabilidad, Explotación, Post, Reporte.</td>
+                    <td class="p-4 border border-gray-700">Planificación, Evaluación, Tratamiento, Acreditación.</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">C. Objetivo Principal</td>
-                    <td class="p-3 border border-gray-700">Clasificar ciberataques para mejorar la detección.</td>
-                    <td class="p-3 border border-gray-700">Marco exhaustivo para seguridad de servicios web.</td>
-                    <td class="p-3 border border-gray-700">Orientar a organizaciones en auditorías técnicas.</td>
-                    <td class="p-3 border border-gray-700">Medición científica cuantificable (RAVs) de seguridad ops.</td>
-                    <td class="p-3 border border-gray-700">Garantizar calidad y consistencia en el servicio de pentesting.</td>
-                    <td class="p-3 border border-gray-700">Evaluar controles con un nivel de detalle técnico granular.</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">C. Objetivo Principal</td>
+                    <td class="p-4 border border-gray-700">Clasificar ciberataques para mejorar la detección.</td>
+                    <td class="p-4 border border-gray-700">Marco exhaustivo para seguridad de servicios web.</td>
+                    <td class="p-4 border border-gray-700">Orientar a organizaciones en auditorías técnicas.</td>
+                    <td class="p-4 border border-gray-700">Medición científica cuantificable (RAVs) de seguridad ops.</td>
+                    <td class="p-4 border border-gray-700">Garantizar calidad y consistencia en el servicio de pentesting.</td>
+                    <td class="p-4 border border-gray-700">Evaluar controles con un nivel de detalle técnico granular.</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">D. Escenarios</td>
-                    <td class="p-3 border border-gray-700">Threat Hunting, Red Teaming, mejora de SOC.</td>
-                    <td class="p-3 border border-gray-700">Auditorías de App Web, desarrollo seguro (SDLC).</td>
-                    <td class="p-3 border border-gray-700">Cumplimiento (FISMA), evaluaciones federales.</td>
-                    <td class="p-3 border border-gray-700">Auditorías que requieren métricas exactas.</td>
-                    <td class="p-3 border border-gray-700">Pentesting comercial (Caja Negra/Blanca).</td>
-                    <td class="p-3 border border-gray-700">Evaluaciones técnicas profundas (Uso disminuido).</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">D. Escenarios</td>
+                    <td class="p-4 border border-gray-700">Threat Hunting, Red Teaming, mejora de SOC.</td>
+                    <td class="p-4 border border-gray-700">Auditorías de App Web, desarrollo seguro (SDLC).</td>
+                    <td class="p-4 border border-gray-700">Cumplimiento (FISMA), evaluaciones federales.</td>
+                    <td class="p-4 border border-gray-700">Auditorías que requieren métricas exactas.</td>
+                    <td class="p-4 border border-gray-700">Pentesting comercial (Caja Negra/Blanca).</td>
+                    <td class="p-4 border border-gray-700">Evaluaciones técnicas profundas (Uso disminuido).</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">E. Orientación</td>
-                    <td class="p-3 border border-gray-700">Defensa / Ataque (Emulación).</td>
-                    <td class="p-3 border border-gray-700">Evaluación (AppSec).</td>
-                    <td class="p-3 border border-gray-700">Evaluación (Cumplimiento).</td>
-                    <td class="p-3 border border-gray-700">Evaluación / Defensa (Métricas).</td>
-                    <td class="p-3 border border-gray-700">Ataque (Pentesting puro).</td>
-                    <td class="p-3 border border-gray-700">Evaluación (Auditoría técnica).</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">E. Orientación</td>
+                    <td class="p-4 border border-gray-700">Defensa / Ataque (Emulación).</td>
+                    <td class="p-4 border border-gray-700">Evaluación (AppSec).</td>
+                    <td class="p-4 border border-gray-700">Evaluación (Cumplimiento).</td>
+                    <td class="p-4 border border-gray-700">Evaluación / Defensa (Métricas).</td>
+                    <td class="p-4 border border-gray-700">Ataque (Pentesting puro).</td>
+                    <td class="p-4 border border-gray-700">Evaluación (Auditoría técnica).</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">F. Autores</td>
-                    <td class="p-3 border border-gray-700">MITRE Corporation.</td>
-                    <td class="p-3 border border-gray-700">OWASP Foundation.</td>
-                    <td class="p-3 border border-gray-700">NIST (EE.UU.).</td>
-                    <td class="p-3 border border-gray-700">ISECOM - Pete Herzog.</td>
-                    <td class="p-3 border border-gray-700">Grupo de expertos independientes.</td>
-                    <td class="p-3 border border-gray-700">OISSG.</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">F. Autores</td>
+                    <td class="p-4 border border-gray-700">MITRE Corporation.</td>
+                    <td class="p-4 border border-gray-700">OWASP Foundation.</td>
+                    <td class="p-4 border border-gray-700">NIST (EE.UU.).</td>
+                    <td class="p-4 border border-gray-700">ISECOM - Pete Herzog.</td>
+                    <td class="p-4 border border-gray-700">Grupo de expertos independientes.</td>
+                    <td class="p-4 border border-gray-700">OISSG.</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">G. URL Oficial</td>
-                    <td class="p-3 border border-gray-700"><a href="https://attack.mitre.org" class="text-blue-400 hover:underline">attack.mitre.org</a></td>
-                    <td class="p-3 border border-gray-700"><a href="https://owasp.org" class="text-blue-400 hover:underline">owasp.org</a></td>
-                    <td class="p-3 border border-gray-700"><a href="https://csrc.nist.gov" class="text-blue-400 hover:underline">csrc.nist.gov</a></td>
-                    <td class="p-3 border border-gray-700"><a href="https://isecom.org" class="text-blue-400 hover:underline">isecom.org</a></td>
-                    <td class="p-3 border border-gray-700"><a href="https://pentest-standard.org" class="text-blue-400 hover:underline">pentest-standard.org</a></td>
-                    <td class="p-3 border border-gray-700"><span class="text-gray-500 italic">Sitio inactivo</span></td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">G. URL Oficial</td>
+                    <td class="p-4 border border-gray-700"><a href="https://attack.mitre.org" class="text-blue-400 hover:underline">attack.mitre.org</a></td>
+                    <td class="p-4 border border-gray-700"><a href="https://owasp.org" class="text-blue-400 hover:underline">owasp.org</a></td>
+                    <td class="p-4 border border-gray-700"><a href="https://csrc.nist.gov" class="text-blue-400 hover:underline">csrc.nist.gov</a></td>
+                    <td class="p-4 border border-gray-700"><a href="https://isecom.org" class="text-blue-400 hover:underline">isecom.org</a></td>
+                    <td class="p-4 border border-gray-700"><a href="https://pentest-standard.org" class="text-blue-400 hover:underline">pentest-standard.org</a></td>
+                    <td class="p-4 border border-gray-700"><span class="text-gray-500 italic">Sitio inactivo</span></td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">H. Certificaciones</td>
-                    <td class="p-3 border border-gray-700">MAD (MITRE ATT&CK Defender).</td>
-                    <td class="p-3 border border-gray-700">No directa (OSWE, GWAPT).</td>
-                    <td class="p-3 border border-gray-700">No directa (CISA, CISSP).</td>
-                    <td class="p-3 border border-gray-700">OPST, OPSA.</td>
-                    <td class="p-3 border border-gray-700">Referencia p/ OSCP, eCPPT.</td>
-                    <td class="p-3 border border-gray-700">Legado (IACRB).</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">H. Certificaciones</td>
+                    <td class="p-4 border border-gray-700">MAD (MITRE ATT&CK Defender).</td>
+                    <td class="p-4 border border-gray-700">No directa (OSWE, GWAPT).</td>
+                    <td class="p-4 border border-gray-700">No directa (CISA, CISSP).</td>
+                    <td class="p-4 border border-gray-700">OPST, OPSA.</td>
+                    <td class="p-4 border border-gray-700">Referencia p/ OSCP, eCPPT.</td>
+                    <td class="p-4 border border-gray-700">Legado (IACRB).</td>
                 </tr>
                 <tr>
-                    <td class="p-3 border border-gray-700 bg-white/5 font-bold text-white">I. Versiones</td>
-                    <td class="p-3 border border-gray-700 text-green-400">v16 (Activa).</td>
-                    <td class="p-3 border border-gray-700 text-green-400">v4.2 Stable.</td>
-                    <td class="p-3 border border-gray-700 text-yellow-500">Rev 1 (Base).</td>
-                    <td class="p-3 border border-gray-700 text-green-400">v3.0 (Vigente).</td>
-                    <td class="p-3 border border-gray-700 text-green-400">v1.0 (Constante).</td>
-                    <td class="p-3 border border-gray-700 text-red-500">Descontinuado.</td>
+                    <td class="p-4 border border-gray-700 bg-white/5 font-bold text-white">I. Versiones</td>
+                    <td class="p-4 border border-gray-700 text-green-400 font-bold">v16 (Activa).</td>
+                    <td class="p-4 border border-gray-700 text-green-400 font-bold">v4.2 Stable.</td>
+                    <td class="p-4 border border-gray-700 text-yellow-500 font-bold">Rev 1 (Base).</td>
+                    <td class="p-4 border border-gray-700 text-green-400 font-bold">v3.0 (Vigente).</td>
+                    <td class="p-4 border border-gray-700 text-green-400 font-bold">v1.0 (Constante).</td>
+                    <td class="p-4 border border-gray-700 text-red-500 font-bold">Descontinuado.</td>
                 </tr>
             </tbody>
         </table>
+      </div>
       <h2 class="text-violet-400 font-mono text-lg mt-12 mb-4">MATRIZ DE SELECCIÓN SEGÚN PERFIL ORGANIZACIONAL</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
         <div class="bg-blue-900/10 border border-blue-500/20 p-4 rounded-lg">
