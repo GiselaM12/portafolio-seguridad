@@ -529,23 +529,69 @@ export const activities = [
         </div>
       </div>
 
-      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">TRADUCCIÓN DE POLÍTICAS (WORKLOAD ANALYSIS)</h2>
-      <div class="overflow-x-auto my-6">
-        <table class="w-full text-left border-collapse border border-gray-700">
-            <thead class="bg-[#1a1f2e] text-green-400">
-                <tr>
-                    <th class="p-3 border border-gray-700 w-1/3">Descripción del Filtro</th>
-                    <th class="p-3 border border-gray-700">Comando Iptables</th>
-                </tr>
-            </thead>
-            <tbody class="text-sm text-gray-300 font-mono">
-                <tr><td class="p-3 border border-gray-700 font-sans">Permitir tráfico HTTP entrante</td><td class="p-3 border border-gray-700">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-sans">Permitir todo el tráfico saliente</td><td class="p-3 border border-gray-700">iptables -P OUTPUT ACCEPT</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-sans">Permitir SSH solo desde la IP 192.168.1.50</td><td class="p-3 border border-gray-700">iptables -A INPUT -p tcp -s 192.168.1.50 --dport 22 -j ACCEPT</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-sans">Permitir tráfico TCP a puertos 80 y 443 solo si es conexión establecida o relacionada</td><td class="p-3 border border-gray-700">iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state ESTABLISHED,RELATED -j ACCEPT</td></tr>
-                <tr><td class="p-3 border border-gray-700 font-sans text-white">Permitir tráfico TCP entrante por eth0 a puertos 22, 80 y 443 (Nuevas y Establecidas)</td><td class="p-3 border border-gray-700 text-xs">iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT</td></tr>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">ANÁLISIS DE POLÍTICAS DE RED (TRADUCCIÓN TÉCNICA)</h2>
+      <p class="mb-6">A continuación se detallan los ejercicios prácticos de traducción de requerimientos de negocio a reglas de bajo nivel en <strong>Netfilter/Iptables</strong>.</p>
+      
+      <div class="space-y-10 mt-6">
+        <!-- Ejercicio 01 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-[10px] font-mono border border-blue-500/30">REMOTE_ACCESS</span>
+            <h3 class="text-md font-bold text-blue-400 font-mono italic">Ejercicio 01: Acceso Seguro vía SSH</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Permitir conexión SSH solo desde una IP administrativa específica (192.168.1.50).</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-violet-300">iptables -A INPUT -p tcp -s 192.168.1.50 --dport 22 -j ACCEPT</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">ANÁLISIS DE FLUJO</td><td class="p-3 text-gray-300">Inbound / Filter / INPUT / TCP / Port 22</td></tr>
             </tbody>
-        </table>
+          </table>
+        </div>
+
+        <!-- Ejercicio 02 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-[10px] font-mono border border-green-500/30">WEB_SERVER</span>
+            <h3 class="text-md font-bold text-green-400 font-mono italic">Ejercicio 02: Hardening de Servicios Web</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Abrir puertos HTTP (80) y HTTPS (443) para todo el tráfico público.</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-violet-300">iptables -A INPUT -p tcp -m multiport --dports 80,443 -j ACCEPT</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">OPTIMIZACIÓN</td><td class="p-3 text-gray-300">Uso del módulo 'multiport' para reducir latencia en el procesamiento de reglas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ejercicio 03 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-[10px] font-mono border border-yellow-500/30">STATEFUL_INSPECT</span>
+            <h3 class="text-md font-bold text-yellow-400 font-mono italic">Ejercicio 03: Control de Estados (ESTABLISHED)</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Permitir tráfico de respuesta para conexiones ya iniciadas desde el servidor.</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-violet-300">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">BENEFICIO</td><td class="p-3 text-gray-300">Evita que el firewall rompa sesiones legítimas salientes (DNS, Updates).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ejercicio 04 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[10px] font-mono border border-red-500/30">DENY_BY_DEFAULT</span>
+            <h3 class="text-md font-bold text-red-400 font-mono italic">Ejercicio 04: Política de Denegación Total (Drop)</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Implementar una postura de seguridad "Nada que no esté permitido está prohibido".</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-red-400">iptables -P INPUT DROP</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">RIESGO OPERATIVO</td><td class="p-3 text-gray-300">Bloqueo de administración remota si no hay una regla ACCEPT previa para SSH.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <h2>Variables y Opciones Comunes</h2>
