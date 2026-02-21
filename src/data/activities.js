@@ -685,49 +685,72 @@ export const activities = [
       </div>
 
 
-      <h2>Caso Práctico: Segmentación DMZ</h2>
-      <p>En una arquitectura típica, el tráfico de Internet <strong>nunca</strong> debe llegar directamente a la red interna. Debe pasar por una DMZ donde se encuentran los servicios públicos. Si un servidor en la DMZ es comprometido, la cadena FORWARD debe impedir que el atacante salte a la red interna (Movimiento Lateral).</p>
+      <h2 class="text-violet-400 font-mono text-lg mt-8 mb-4">CASO DE ESTUDIO: SEGMENTACIÓN DE DMZ Y CONTROL PERIMETRAL</h2>
+      <p class="mb-6">El siguiente reporte documenta la implementación de una arquitectura de red protegida mediante la cadena <strong>FORWARD</strong>, asegurando el aislamiento entre la red pública, la zona desmilitarizada (DMZ) y la red interna.</p>
+      
+      <div class="space-y-10 mt-6">
+        <!-- Escenario 01 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[10px] font-mono border border-red-500/30">SECURITY_POLICY</span>
+            <h3 class="text-md font-bold text-red-400 font-mono italic">Política 01: Denegación por Defecto</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Bloquear todo el tráfico de paso que no esté explícitamente autorizado.</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-red-400">iptables -P FORWARD DROP</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">JUSTIFICACIÓN</td><td class="p-3 text-gray-300">Implementación de la postura de seguridad 'Deny All' para reducir la superficie de ataque perimetral.</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 overflow-x-auto my-8">
-        <pre>
-# Política por defecto: Cerramos todo el tráfico de paso
-iptables -P FORWARD DROP
+        <!-- Escenario 02 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-[10px] font-mono border border-blue-500/30">DNS_RESOLUTION</span>
+            <h3 class="text-md font-bold text-blue-400 font-mono italic">Escenario 02: Resolución DNS desde la LAN</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Permitir que los equipos de la red local (192.1.2.0/24) realicen consultas DNS.</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-violet-300">iptables -A FORWARD -s 192.1.2.0/24 -p udp --dport 53 -m state --state NEW -j ACCEPT</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">TIPO DE TRÁFICO</td><td class="p-3 text-gray-300">Outbound / Egress / UDP Port 53</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-# Permitimos que la red interna salga a Internet (eth2 -> eth0)
-iptables -A FORWARD -i eth2 -o eth0 -j ACCEPT
+        <!-- Escenario 03 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded text-[10px] font-mono border border-yellow-500/30">MAIL_SECURITY</span>
+            <h3 class="text-md font-bold text-yellow-400 font-mono italic">Escenario 03: Flujo de Correo Seguro (SMTP)</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Permitir tráfico SMTP entrante y saliente para el servidor de correo (192.1.2.10).</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDOS</td><td class="p-3 text-violet-300 space-y-1">
+                <div>iptables -A FORWARD -d 192.1.2.10 -p tcp --dport 25 -j ACCEPT</div>
+                <div>iptables -A FORWARD -s 192.1.2.10 -p tcp --dport 25 -j ACCEPT</div>
+              </td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">ANÁLISIS</td><td class="p-3 text-gray-300">Control bidireccional específico para evitar que el servidor de correo sea usado como Open Relay malicioso.</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-# Permitimos respuestas de Internet a la red interna
-iptables -A FORWARD -i eth0 -o eth2 -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# Permitimos acceso Web desde Internet a la DMZ (eth0 -> eth1)
-iptables -A FORWARD -i eth0 -o eth1 -p tcp --dport 80 -j ACCEPT
-        </pre>
-      </div>
-
-      <h3 class="text-xl font-bold text-violet-400 mb-6">Políticas de la Cadena FORWARD (Taller Práctico)</h3>
-      <div class="bg-black border border-gray-700 rounded p-4 font-mono text-xs text-green-500 mb-8 overflow-x-auto">
-        <pre>
-# 1. Denegar todo el tráfico de reenvío por defecto (Política de Seguridad)
-iptables -P FORWARD DROP
-
-# 2. Permitir tráfico de sesiones ya establecidas y relacionadas
-iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-# 3. Permitir consultas DNS (puerto 53) desde la red local
-iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 53 -m state --state NEW -j ACCEPT
-
-# 4. Permitir tráfico SMTP (puerto 25) entrante al servidor de correo (192.1.2.10)
-iptables -A FORWARD -d 192.1.2.10 -p tcp --dport 25 -m state --state NEW -j ACCEPT
-
-# 5. Permitir tráfico SMTP saliente desde el servidor de correo
-iptables -A FORWARD -s 192.1.2.10 -p tcp --dport 25 -m state --state NEW -j ACCEPT
-
-# 6. Permitir tráfico HTTP (puerto 80) al servidor web en la DMZ (192.1.2.11)
-iptables -A FORWARD -d 192.1.2.11 -p tcp --dport 80 -m state --state NEW -j ACCEPT
-
-# 7. Permitir navegación web HTTP (puerto 80) desde la LAN
-iptables -A FORWARD -s 192.1.2.0/24 -p tcp --dport 80 -m state --state NEW -j ACCEPT
-        </pre>
+        <!-- Escenario 04 -->
+        <div class="overflow-x-auto">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-[10px] font-mono border border-green-500/30">APP_SEC</span>
+            <h3 class="text-md font-bold text-green-400 font-mono italic">Escenario 04: Publicación de Servidor Web DMZ</h3>
+          </div>
+          <table class="min-w-full border border-gray-800 text-sm">
+            <tbody class="divide-y divide-gray-800 font-mono text-xs">
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 w-1/3 border-r border-gray-800">REQUERIMIENTO</td><td class="p-3 text-gray-300">Permitir acceso público al servidor web corporativo (192.1.2.11) en el puerto 80.</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">COMANDO TÉCNICO</td><td class="p-3 text-violet-300">iptables -A FORWARD -d 192.1.2.11 -p tcp --dport 80 -m state --state NEW -j ACCEPT</td></tr>
+              <tr><td class="p-3 bg-gray-900/50 text-gray-400 border-r border-gray-800">SEGMENTACIÓN</td><td class="p-3 text-gray-300">Aisla el tráfico web hacia un host específico sin comprometer el resto de la subred.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <h3 class="text-xl font-bold text-violet-400 mb-6">Mecanismos de Defensa Complementarios</h3>
