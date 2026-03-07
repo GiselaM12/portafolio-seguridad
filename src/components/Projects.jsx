@@ -28,21 +28,28 @@ const Projects = () => {
     };
 
     // Transform activities to project card format
-    const parcial1Activities = activities.map(act => ({
-        icon: getIconForActivity(act.id),
-        title: act.title, // Keep full title
-        description: act.description,
-        status: "Available",
-        link: `/actividades/${act.id}`,
-        isActivity: true
-    }));
-
-    const projectsData = {
-        parcial1: parcial1Activities,
-        parcial2: [lockedCard, lockedCard, lockedCard],
+    const projectsByParcial = {
+        parcial1: activities.filter(act => typeof act.id === 'number' && act.id <= 6).map(act => ({
+            icon: getIconForActivity(act.id),
+            title: act.title,
+            description: act.description,
+            status: "Available",
+            link: `/actividades/${act.id}`,
+            isActivity: true
+        })),
+        parcial2: activities.filter(act => act.id === "PR02").map(act => ({
+            icon: <FaShieldAlt />,
+            title: act.title,
+            description: act.description,
+            status: "In Progress",
+            link: `/actividades/${act.id}`,
+            isActivity: false
+        })).concat([lockedCard, lockedCard]),
         parcial3: [lockedCard, lockedCard, lockedCard],
         final: [lockedCard, lockedCard, lockedCard]
     };
+
+    const projectsData = projectsByParcial;
 
     const tabs = [
         { id: 'parcial1', label: 'PF01', fullLabel: 'Parcial 1' },

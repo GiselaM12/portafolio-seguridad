@@ -1,12 +1,16 @@
+import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { activities } from '../data/activities';
 import { FaFilePdf, FaArrowLeft, FaTerminal, FaShieldAlt, FaCalendarAlt, FaUserSecret } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import PhishingQuiz from '../components/PhishingQuiz';
 
 const ActivityDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const activity = activities.find(a => a.id === parseInt(id));
+
+    // Support both numeric and string IDs
+    const activity = activities.find(a => String(a.id) === String(id));
 
     if (!activity) {
         return (
@@ -230,6 +234,16 @@ const ActivityDetail = () => {
                         <div className="report-content prose prose-invert max-w-none">
                             <div dangerouslySetInnerHTML={{ __html: activity.content }} />
                         </div>
+
+                        {/* Interactive Quiz Segment for PR02 */}
+                        {String(activity.id) === 'PR02' && (
+                            <div className="mt-12 pt-12 border-t-2 border-dashed border-gray-800">
+                                <h3 className="text-amber-500 font-mono text-xl mb-8 flex items-center gap-3">
+                                    <FaTerminal className="animate-pulse" /> ENTREGABLE INTERACTIVO: SIMULADOR DE EVALUACIÓN
+                                </h3>
+                                <PhishingQuiz />
+                            </div>
+                        )}
 
                         {/* Footer Section */}
                         <footer className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-600 gap-4">

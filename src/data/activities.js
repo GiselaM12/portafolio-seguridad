@@ -1093,5 +1093,159 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <li>López Contreras, S. (2025). <strong>Apuntes: Seguridad en Infraestructura de Red</strong>.</li>
       </ul>
     `
+  },
+  {
+    id: "PR02",
+    title: "PROYECTO PR02 - El eslabón más débil: diseño ético de una campaña de ingeniería social",
+    description: "Diseño, implementación y evaluación ética de una simulación educativa de phishing sustentada en el análisis comparativo de plataformas profesionales.",
+    date: "2026-03-06",
+    tags: ["Phishing", "Ingeniería Social", "Ética Digital", "KPIs", "Simulación"],
+    content: `
+      <div class="bg-amber-500/10 border border-amber-500/20 rounded p-4 mb-8 font-mono text-xs">
+        <p><span class="text-amber-400">PROYECTO:</span> PR02 - El eslabón más débil</p>
+        <p><span class="text-amber-400">ESTUDIANTE:</span> Moreno Solís Gisela Geraldine</p>
+        <p><span class="text-amber-400">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p><span class="text-amber-400">ESTADO:</span> REPORTE TÉCNICO DEFINITIVO</p>
+      </div>
+
+      <h2 class="text-amber-400 font-mono text-xl mb-4">1. INTRODUCCIÓN AL RIESGO HUMANO EN CIBERSEGURIDAD</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+        <div>
+          <h3 class="text-amber-300 font-bold mb-2 uppercase text-sm">El Eslabón Más Débil de la Defensa</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Las organizaciones realizan inversiones significativas en controles técnicos avanzados como firewalls y sistemas de detección. Sin embargo, esta infraestructura resulta insuficiente si no se aborda el <strong>"factor humano"</strong>, el cual es el eslabón más débil de la cadena de defensa.</p>
+        </div>
+        <div>
+          <h3 class="text-amber-300 font-bold mb-2 uppercase text-sm">El Auge de la Ingeniería Social</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Resulta considerablemente más sencillo manipular la psicología y las emociones de un usuario que intentar vulnerar un algoritmo de cifrado. Los ciberdelincuentes han transformado el engaño en una ciencia exacta, explotando la urgencia y la curiosidad.</p>
+        </div>
+      </div>
+
+      <h2 class="text-amber-400 font-mono text-xl mt-8 mb-4">2. OBJETIVOS DE LA CAMPAÑA</h2>
+      <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 mb-8">
+        <h3 class="text-amber-300 font-bold mb-3 uppercase text-sm tracking-widest">Objetivo General</h3>
+        <p class="text-sm text-gray-400 italic">"Diseñar, implementar y evaluar de manera ética una simulación educativa de phishing sustentada en un análisis comparativo profundo de las principales plataformas profesionales del mercado, con el propósito de medir el nivel de reconocimiento de amenazas e interpretar los resultados mediante un sistema de puntuación global."</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        <div class="p-4 bg-white/5 border border-white/10 rounded">
+          <h4 class="text-xs text-amber-400 font-bold mb-2 uppercase tracking-widest">Auditoría de Mercado</h4>
+          <p class="text-[11px] text-gray-500 leading-relaxed">Analizar y comparar exhaustivamente 8 plataformas líderes (Hoxhunt, Proofpoint, KnowBe4, etc.), identificando capacidades, KPIs y enfoques éticos.</p>
+        </div>
+        <div class="p-4 bg-white/5 border border-white/10 rounded">
+          <h4 class="text-xs text-amber-400 font-bold mb-2 uppercase tracking-widest">Diseño del Phishing Quiz</h4>
+          <p class="text-[11px] text-gray-500 leading-relaxed">Implementar un simulador interactivo con 10 escenarios realistas, incorporando retroalimentación formativa inmediata en el punto de falla.</p>
+        </div>
+        <div class="p-4 bg-white/5 border border-white/10 rounded">
+          <h4 class="text-xs text-amber-400 font-bold mb-2 uppercase tracking-widest">Analítica de Datos</h4>
+          <p class="text-[11px] text-gray-500 leading-relaxed">Interpretar un sistema de score global para analizar tendencias de vulnerabilidad e identificar los vectores de ataque más efectivos.</p>
+        </div>
+        <div class="p-4 bg-white/5 border border-white/10 rounded">
+          <h4 class="text-xs text-amber-400 font-bold mb-2 uppercase tracking-widest">Integridad y Privacidad</h4>
+          <p class="text-[11px] text-gray-500 leading-relaxed">Asegurar el cumplimiento ético irrestricto mediante consentimientos informados y omisión absoluta en la captura de credenciales reales.</p>
+        </div>
+      </div>
+
+      <h2 class="text-amber-400 font-mono text-xl mt-12 mb-4">3. FUNDAMENTACIÓN TÉCNICA Y MARCO ÉTICO</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-black/30 p-5 border-l-2 border-amber-500 shadow-xl">
+          <h4 class="text-amber-400 font-bold text-xs mb-3 uppercase tracking-tighter">KPIs Y MÉTRICAS CRÍTICAS</h4>
+          <ul class="text-[11px] space-y-3 text-gray-400">
+            <li><strong class="text-white">Click Rate:</strong> Porcentaje de usuarios que interactuaron directamente con el elemento malicioso.</li>
+            <li><strong class="text-white">Macro-Conversion:</strong> Escalada de riesgo donde el usuario completa una acción comprometedora (ej. descarga).</li>
+            <li><strong class="text-white">Reporting Rate:</strong> Proporción de usuarios que emplearon herramientas de alerta para notificar la amenaza.</li>
+            <li><strong class="text-white">Resilience Score:</strong> Algoritmo que triangula la tasa de clics frente a la tasa de reporte.</li>
+          </ul>
+        </div>
+        <div class="bg-black/30 p-5 border-l-2 border-green-500 shadow-xl">
+          <h4 class="text-green-400 font-bold text-xs mb-3 uppercase tracking-tighter">PRINCIPIOS DE ÉTICA DIGITAL</h4>
+          <ul class="text-[11px] space-y-3 text-gray-400">
+            <li><strong class="text-white">Teachable Moment:</strong> Retroalimentación en el instante inmediatamente posterior al error del usuario.</li>
+            <li><strong class="text-white">Diseño No Punitivo:</strong> Erradicar el 'shaming'. El objetivo es fortalecer la detección mediante refuerzo positivo.</li>
+            <li><strong class="text-white">Privacidad Absoluta:</strong> Bajo ninguna circunstancia se capturan contraseñas reales ni datos personales sensibles.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-amber-400 font-mono text-xl mt-12 mb-4">4. EVALUACIÓN TÉCNICA DE SOLUCIONES</h2>
+      
+      <h3 class="text-amber-300 font-mono text-md mb-4 flex items-center gap-2">
+        <span class="bg-amber-500/20 px-2 py-0.5 rounded text-[10px]">IA_FOCUSED</span>
+        PLATAFORMAS DE CAMBIO CONDUCTUAL IMPULSADAS POR IA
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        <div class="p-4 bg-[#0a0f1a] border border-gray-800 rounded-lg">
+          <h4 class="text-white font-bold text-sm mb-2">HOXHUNT</h4>
+          <p class="text-[11px] text-gray-400 leading-relaxed mb-3 italic">"Transformación del comportamiento humano mediante IA Adaptativa."</p>
+          <div class="text-[10px] text-gray-500 border-t border-gray-800 pt-2 uppercase font-bold">Resiliencia corporativa · Refuerzo positivo · GDPR</div>
+        </div>
+        <div class="p-4 bg-[#0a0f1a] border border-gray-800 rounded-lg">
+          <h4 class="text-white font-bold text-sm mb-2">PHISHED</h4>
+          <p class="text-[11px] text-gray-400 leading-relaxed mb-3 italic">"Piloto automático impulsado por aprendizaje conductual multicanal."</p>
+          <div class="text-[10px] text-gray-500 border-t border-gray-800 pt-2 uppercase font-bold">Behavioral Index · Multicanal · Piloto Automático</div>
+        </div>
+      </div>
+
+      <h3 class="text-amber-300 font-mono text-md mb-4 flex items-center gap-2">
+        <span class="bg-blue-500/20 px-2 py-0.5 rounded text-[10px]">SOC_DRIVEN</span>
+        INTELIGENCIA DE AMENAZAS Y RESPUESTA (SOC)
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+        <div class="p-4 bg-[#0a0f1a] border border-gray-800 rounded-lg">
+          <h4 class="text-white font-bold text-sm mb-2 uppercase">Proofpoint</h4>
+          <p class="text-[10px] text-gray-500 mb-2">Identificación de VAPs (Very Attacked People) para entrenamiento dirigido.</p>
+        </div>
+        <div class="p-4 bg-[#0a0f1a] border border-gray-800 rounded-lg">
+          <h4 class="text-white font-bold text-sm mb-2 uppercase">Cofense</h4>
+          <p class="text-[10px] text-gray-500 mb-2">Transforma al empleado en un sensor activo mediante Triage en tiempo real.</p>
+        </div>
+        <div class="p-4 bg-[#0a0f1a] border border-gray-800 rounded-lg">
+          <h4 class="text-white font-bold text-sm mb-2 uppercase">Mimecast</h4>
+          <p class="text-[10px] text-gray-500 mb-2">Seguridad integrada que convierte ataques neutralizados en simulaciones.</p>
+        </div>
+      </div>
+
+      <h2 class="text-amber-400 font-mono text-xl mt-12 mb-4">5. MATRIZ COMPARATIVA DE CAPACIDADES</h2>
+      <div class="overflow-x-auto mb-12 border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
+        <table class="w-full text-left border-collapse bg-black/40">
+            <thead class="bg-[#1a1f2e] text-amber-300 text-[10px] uppercase tracking-widest">
+                <tr>
+                    <th class="p-4 border border-gray-800">Plataforma</th>
+                    <th class="p-4 border border-gray-800">Diferenciador</th>
+                    <th class="p-4 border border-gray-800">Métricas KPIs</th>
+                    <th class="p-4 border border-gray-800">Limitación</th>
+                    <th class="p-4 border border-gray-800">Ética/Compliance</th>
+                </tr>
+            </thead>
+            <tbody class="text-[10px] text-gray-400 font-mono">
+                <tr><td class="p-4 border border-gray-800 text-white font-bold">Hoxhunt</td><td class="p-4 border border-gray-800">Gamificación / IA</td><td class="p-4 border border-gray-800">Reporting Rate</td><td class="p-4 border border-gray-800">Fallas en Add-in</td><td class="p-4 border border-gray-800 text-green-400">GDPR / No punitivo</td></tr>
+                <tr><td class="p-4 border border-gray-800 text-white font-bold">Proofpoint</td><td class="p-4 border border-gray-800">Foco en VAPs</td><td class="p-4 border border-gray-800">Vulnerability Score</td><td class="p-4 border border-gray-800">Costo elevado</td><td class="p-4 border border-gray-800 text-blue-400">Protección Dirigida</td></tr>
+                <tr><td class="p-4 border border-gray-800 text-white font-bold">KnowBe4</td><td class="p-4 border border-gray-800">Biblioteca HRM</td><td class="p-4 border border-gray-800">Phish-prone %</td><td class="p-4 border border-gray-800">Curva aprendizaje</td><td class="p-4 border border-gray-800 text-violet-400">Teachable Moments</td></tr>
+                <tr><td class="p-4 border border-gray-800 text-white font-bold">Cofense</td><td class="p-4 border border-gray-800">Sensor Activo</td><td class="p-4 border border-gray-800">MTTR</td><td class="p-4 border border-gray-800">Carga en SOC</td><td class="p-4 border border-gray-800 text-cyan-400">Responsabilidad</td></tr>
+                <tr><td class="p-4 border border-gray-800 text-white font-bold">Phished</td><td class="p-4 border border-gray-800">IA Piloto Auto</td><td class="p-4 border border-gray-800">Behavioral Index</td><td class="p-4 border border-gray-800">Menor control manual</td><td class="p-4 border border-gray-800 text-green-400">Privacy by Design</td></tr>
+                <tr><td class="p-4 border border-gray-800 text-white font-bold">NINJIO</td><td class="p-4 border border-gray-800">Edutainment</td><td class="p-4 border border-gray-800">Engagement Score</td><td class="p-4 border border-gray-800">Ancho de banda</td><td class="p-4 border border-gray-800 text-purple-400">Anti-estigma</td></tr>
+            </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-amber-400 font-mono text-xl mt-12 mb-4">6. CONCLUSIONES Y SIGUIENTES PASOS</h2>
+      <div class="bg-gray-900/40 p-6 rounded-lg border border-amber-900/20 mb-10">
+        <p class="text-sm text-gray-300 leading-relaxed mb-4">La gestión del riesgo humano ha trascendido el entrenamiento estático para convertirse en una <strong>arquitectura de defensa conductual fundamentada en datos</strong>. Un hallazgo crítico es que la métrica suprema no es la Tasa de Clics, sino el <strong>Reporting Rate</strong>; transformar al usuario en un sensor activo disminuye exponencialmente los tiempos de exposición.</p>
+        <p class="text-[11px] text-amber-500/80 uppercase font-black tracking-widest italic">Siguiendo la metodología NIST SP 800-50 para el desarrollo de concienciación en ciberseguridad.</p>
+      </div>
+
+      <h2 class="mt-12 text-amber-400 font-mono font-bold tracking-widest border-b border-amber-900/50 pb-2 uppercase text-xs">7. Referencias Bibliográficas</h2>
+      <ul class="list-decimal pl-6 mt-4 space-y-2 text-[10px] text-gray-500 font-mono">
+        <li>Cofense. (2026). Phishing Detection and Response (PDR) Solutions: Technical Overview.</li>
+        <li>Hoxhunt. (2024). The Science of Behavior Change in Cybersecurity: Human Risk Management.</li>
+        <li>Infosec Institute. (2026). Security Awareness Training and Phishing Simulations: Infosec IQ.</li>
+        <li>KnowBe4. (2026). 2026 Phishing by Industry Benchmarking Report.</li>
+        <li>Mimecast. (2026). The State of Email Security 2026: Awareness Training Integration.</li>
+        <li>NIST. (2022). Introduction to Cybersecurity for Human Resources (NIST SP 800-50).</li>
+        <li>NINJIO. (2026). Cybersecurity Awareness Training: Emotional Engagement.</li>
+        <li>Proofpoint. (2024). State of the Phish 2024: Protecting Very Attacked People (VAPs).</li>
+      </ul>
+    `
   }
 ];
+
+
