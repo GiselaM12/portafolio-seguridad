@@ -1516,6 +1516,56 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <p>Proofpoint. (2024). <em>State of the Phish 2024: Identifying and Protecting Very Attacked People (VAPs)</em>. https://www.proofpoint.com/</p>
       </div>
     `
+  },
+  {
+    id: "8",
+    title: "ACTIVIDAD 08 - Road to Hall of Fame (SQL Injection)",
+    description: "Análisis técnico, explotación manual y mitigación de 18 laboratorios estructurados sobre vulnerabilidades de Inyección SQL (In-band, Blind, OAST y Evasión) basados en PortSwigger Web Security Academy.",
+    date: "2026-03-06",
+    tags: ["SQL Injection", "PortSwigger", "Web Security", "Exploitation", "Mitigation"],
+    content: `
+      <div class="bg-green-500/10 border border-green-500/20 rounded p-6 mb-8 font-mono relative overflow-hidden shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+        <div class="absolute top-0 right-0 p-2 bg-green-500/20 text-xs text-green-400 font-bold uppercase tracking-widest">Offensive Security Labs</div>
+        <p class="text-xs mb-1"><span class="text-green-400 font-bold">REPORTE TÉCNICO:</span> ACT08 - ROAD TO HALL OF FAME</p>
+        <p class="text-xs mb-1"><span class="text-green-400 font-bold">AUTOR:</span> Moreno Solís Gisela Geraldine (ID: 176522)</p>
+        <p class="text-xs mb-1"><span class="text-green-400 font-bold">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p class="text-xs"><span class="text-green-400 font-bold">ESTADO:</span> <span class="text-blue-400">LABORATORIOS COMPLETADOS Y AUDITADOS</span></p>
+      </div>
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">01_</span> FUNDAMENTACIÓN TEÓRICA Y CONTEXTO VULNERABLE
+      </h2>
+      <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4">
+        <p>La inyección SQL (SQLi) sigue siendo una de las vulnerabilidades más críticas y persistentes en el ecosistema web, permitiendo a los atacantes interferir con las consultas realizadas por una aplicación web hacia su base de datos. Una explotación exitosa puede comprometer la tríada confidencialidad, integridad y disponibilidad (CIA), escalar privilegios e incluso otorgar ejecución de código remoto en el servidor host subyacente.</p>
+        <p>Este informe documenta el progreso estructurado a través de <strong class="text-white">18 laboratorios de PortSwigger Web Security Academy</strong>, abarcando metodologías desde la simple alteración matemática (In-band) hasta la extracción asíncrona de datos vía canales laterales (DNS/Time-based).</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+          <div class="bg-black/40 p-4 border-t-2 border-green-500 rounded-b shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+            <h4 class="text-green-400 font-bold text-xs mb-2 uppercase tracking-wide">In-Band / UNION (Visibilidad Directa)</h4>
+            <p class="text-xs text-gray-500">Explotación clásica donde el atacante puede recuperar los datos exfiltrados directamente a lo largo en la misma respuesta HTTP que la consulta original.</p>
+          </div>
+          <div class="bg-black/40 p-4 border-t-2 border-yellow-500 rounded-b shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+            <h4 class="text-yellow-400 font-bold text-xs mb-2 uppercase tracking-wide">Inferencial (Blind SQLi)</h4>
+            <p class="text-xs text-gray-500">Las respuestas de la API no devuelven datos en crudo, por lo que el atacante extrae la información a través de cambios observables (errores o latencia de red) formulando preguntas booleanas.</p>
+          </div>
+          <div class="bg-black/40 p-4 border-t-2 border-red-500 rounded-b shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+            <h4 class="text-red-400 font-bold text-xs mb-2 uppercase tracking-wide">Out-Of-Band (OAST)</h4>
+            <p class="text-xs text-gray-500">Inyecciones exóticas usadas cuando existe un firewall / WAF que bloquea las lecturas directas, derivando la data a través de interacciones de red externa (usualmente colusiones DNS).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[#0a0f1a] p-8 border border-green-900/40 rounded-xl mb-12 shadow-[0_0_20px_rgba(34,197,94,0.02)]">
+        <h3 class="text-green-400 font-bold mb-4 uppercase text-sm tracking-widest">METODOLOGÍA DEFENSIVA Y MITIGACIÓN ESTRUCTURAL</h3>
+        <p class="text-xs text-gray-400 space-y-4 mb-4">
+            A pesar de la sofisticación de los modelos inferenciales documentados aquí, la defensa de raíz principal de las 18 variantes depende de un control arquitectónico único:
+        </p>
+        <ul class="text-xs text-gray-400 space-y-4 pl-4 border-l border-green-500/50">
+            <li><strong>Declaraciones Preparadas (Consultas Parametrizadas):</strong> Transforman las sentencias de SQL dinámico a componentes interpretados precompilados. Esto asegura que la base de datos trate cualquier entrada de usuario estrictamente como datos literales y no como código ejecutable lógico, rompiendo gramaticalmente la inyección.</li>
+            <li><strong>Principio de Menor Privilegio (PoLP):</strong> Limitar radicalmente los permisos de red de la cuenta DB en uso para anular inyecciones de enumeración de estructura.</li>
+        </ul >
+      </div>
+    `
   }
 ];
 

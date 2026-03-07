@@ -4,6 +4,7 @@ import { activities } from '../data/activities';
 import { FaFilePdf, FaArrowLeft, FaTerminal, FaShieldAlt, FaCalendarAlt, FaUserSecret } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import PhishingQuiz from '../components/PhishingQuiz';
+import SQLInjectionLabs from '../components/SQLInjectionLabs';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -248,6 +249,16 @@ const ActivityDetail = () => {
                                     <FaTerminal className="animate-pulse" /> ENTREGABLE INTERACTIVO: SIMULADOR DE EVALUACIÓN
                                 </h3>
                                 <PhishingQuiz />
+                            </div>
+                        )}
+
+                        {/* Interactive Labs Segment for Act 08 */}
+                        {String(activity.id) === '8' && (
+                            <div className="mt-12 pt-12 border-t-2 border-dashed border-gray-800">
+                                <h3 className="text-green-500 font-mono text-xl mb-8 flex items-center gap-3">
+                                    <FaTerminal className="animate-pulse" /> PORTAL INTERACTIVO: 18 SQLi MASTERCLASSES
+                                </h3>
+                                <SQLInjectionLabs />
                             </div>
                         )}
 
