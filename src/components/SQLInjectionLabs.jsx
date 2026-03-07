@@ -1124,7 +1124,11 @@ const SQLInjectionLabs = () => {
                                                 {step.text && (
                                                     <p className="text-sm md:text-base leading-relaxed mb-1 text-gray-200 text-justify">
                                                         <span className="text-yellow-500/80 mr-2 font-bold opacity-70">▹</span> 
-                                                        {step.text.replace(/\s+/g, ' ')}
+                                                        <span dangerouslySetInnerHTML={{ __html: step.text.replace(/\s+/g, ' ')
+                                                            .replace(/\b(Burp Suite|Repeater|Proxy|Intruder|Payload|SQL|SQLi|Collaborator|TrackingId|session|GET|POST|Cookie|Administrator|administrator)\b/gi, '<span class="text-blue-400 font-bold">$1</span>')
+                                                            .replace(/(?<!=)(['"])(.*?)\1/g, '<span class="text-yellow-300/90 italic">"$2"</span>')
+                                                            .replace(/\b(Paso \d+|Identificación:|Explotación:|Preparación:|Objetivo:|Resultado:)\b/gi, '<span class="text-purple-400 font-bold underline">$1</span>')
+                                                        }} />
                                                     </p>
                                                 )}
                                                 {step.code && (
