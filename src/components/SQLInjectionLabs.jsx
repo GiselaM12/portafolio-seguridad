@@ -838,7 +838,7 @@ const SQLInjectionLabs = () => {
                     {labsData.map((lab) => (
                         <button
                             key={lab.id}
-                            onClick={() => setActiveLabId(lab.id)}
+                            onClick={() => handleLabChange(lab.id)}
                             className={`w-full text-left p-3 rounded-lg transition-all duration-300 border relative overflow-hidden group ${activeLabId === lab.id
                                 ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_15px_rgba(34,197,94,0.15)] ring-1 ring-green-500/30'
                                 : 'border-transparent text-gray-400 hover:bg-gray-800/60 hover:text-gray-200'
@@ -938,33 +938,69 @@ const SQLInjectionLabs = () => {
                             </div>
                         )}
 
-                        {/* Visual Terminal / Output Mockup */}
-                        <div className="flex-none bg-black rounded-lg border border-gray-800 overflow-hidden flex flex-col font-mono text-xs shadow-2xl relative mb-6">
+                        {/* Interactive Simulation Sandbox */}
+                        <div className="flex-none bg-[#050505] rounded-xl border-2 border-green-900/30 overflow-hidden flex flex-col font-mono text-xs shadow-[0_0_20px_rgba(34,197,94,0.05)] relative mb-8">
                             {/* Terminal Header */}
-                            <div className="bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                <span className="ml-4 text-gray-500">burp-suite-proxy.exe / repeater</span>
+                            <div className="bg-gray-900/80 border-b border-green-900/30 px-4 py-3 flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                    <div className="flex gap-1.5 mr-3">
+                                        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                    </div>
+                                    <span className="text-green-500/90 font-bold tracking-[0.2em] text-[10px] md:text-[11px] uppercase flex items-center gap-2">
+                                        <FaTerminal /> Interactive Exploit Simulator
+                                    </span>
+                                </div>
+                                <span className="text-gray-500 text-[9px] md:text-[10px]">TARGET ENV: PortSwigger</span>
                             </div>
 
                             {/* Terminal Body */}
-                            <div className="p-4 text-gray-300 flex-none space-y-4">
-                                <div className="border-l-2 border-green-500 pl-4 py-2 bg-green-900/10">
-                                    <div className="text-green-500 font-bold mb-2 flex items-center gap-2">
-                                        <FaBug /> POISONED PAYLOAD DETECTED
-                                    </div>
-                                    <div className="bg-black border border-green-900 p-3 rounded text-green-400 break-all shadow-[0_0_15px_rgba(34,197,94,0.15)] overflow-x-auto whitespace-pre-wrap">
-                                        <motion.span
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ duration: 0.5 }}
-                                        >
-                                            <span className="text-red-400 font-bold">INJECT &raquo; </span>
-                                            {activeLab.payload}
-                                        </motion.span>
-                                    </div>
+                            <div className="p-5 md:p-6 text-gray-300 flex-none space-y-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5">
+                                <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+                                    <span className="text-blue-400 font-bold whitespace-nowrap text-sm mt-1 sm:mt-0">User Input:</span>
+                                    <input 
+                                        type="text" 
+                                        value={inputValue}
+                                        onChange={(e) => setInputValue(e.target.value)}
+                                        placeholder={`Intenta inyectar: ${activeLab.payload}`}
+                                        className="w-full bg-[#0a0a0a] border border-gray-700 text-green-400 px-4 py-2.5 rounded-lg focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all font-mono text-sm shadow-inner placeholder-gray-600"
+                                        onKeyDown={(e) => e.key === 'Enter' && setSimulated(true)}
+                                    />
+                                    <button 
+                                        onClick={() => setSimulated(true)}
+                                        className="w-full sm:w-auto bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/50 hover:border-green-400 px-6 py-2.5 rounded-lg font-bold transition-all whitespace-nowrap shadow-[0_0_10px_rgba(34,197,94,0.1)] hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] text-sm uppercase tracking-wide flex justify-center items-center"
+                                    >
+                                        Ejecutar
+                                    </button>
                                 </div>
+
+                                <AnimatePresence>
+                                    {simulated && (
+                                        <motion.div 
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            className="border-l-4 border-red-500 pl-4 py-3 bg-red-900/10 mt-6 rounded-r bg-gradient-to-r from-red-900/20 to-transparent"
+                                        >
+                                            <div className="text-red-500 font-bold mb-3 flex items-center gap-2 text-sm">
+                                                <FaBug className="animate-pulse" /> VULNERABILIDAD EXPLOTADA EXITOSAMENTE
+                                            </div>
+                                            <div className="bg-[#050505] border border-red-900/50 p-4 rounded-lg text-green-400/90 break-all shadow-[0_4px_20px_rgba(220,38,38,0.15)] overflow-x-auto whitespace-pre-wrap font-mono text-sm leading-relaxed">
+                                                <span className="text-red-500 font-bold">PAYLOAD SENT &raquo; </span>
+                                                <span className="text-white">{inputValue || activeLab.payload}</span>
+                                            </div>
+                                            <motion.div 
+                                                initial={{ y: 5, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{ delay: 0.8 }}
+                                                className="mt-4 text-gray-400 text-sm border-t border-red-500/20 pt-3 leading-loose"
+                                            >
+                                                <span className="text-green-500 font-bold">[RESPONSE INJECTED]</span> &raquo; Se ha roto el contorno de seguridad. Lee detenidamente el desglose técnico inferior o revisa la galería visual donde la solicitud fue exitosa para auditar los resultados provocados.
+                                            </motion.div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
 
