@@ -24,14 +24,14 @@ const ActivityDetail = () => {
     // Map of activity IDs to uploaded filenames in public/
     const getFileUrl = (id) => {
         const fileMap = {
-            1: "parcial 1/Act01_Equipo1.pdf",
-            2: "parcial 1/176522-ACT02.pdf",
-            3: "parcial 1/176522-ACT03.pdf",
-            4: "parcial 1/1765222-act04.pdf",
-            5: "parcial 1/176522_Act 5.pdf",
-            6: "parcial 1/176522-ACT6.pdf",
-            "PR02": "parcial 2/Gisela Geraldine Moreno Solis - 176522.pdf",
-            8: "parcial 2/act08-Equipo1.pdf",
+            1: "parcial1/Act01_Equipo1.pdf",
+            2: "parcial1/176522-ACT02.pdf",
+            3: "parcial1/176522-ACT03.pdf",
+            4: "parcial1/1765222-act04.pdf",
+            5: "parcial1/176522_Act 5.pdf",
+            6: "parcial1/176522-ACT6.pdf",
+            "PR02": "parcial2/PR02_Gisela_Moreno_176522.pdf",
+            8: "parcial2/act08-Equipo1.pdf",
         };
         const fileName = fileMap[id];
         return fileName ? `/${fileName}` : null;
