@@ -10,9 +10,9 @@ const labsData = [
         level: "Apprentice",
         payload: "' OR 1=1--",
         description: "Bypass del filtro WHERE con operador tautológico para revelar productos ocultos del catálogo.",
-        objective: "Explotar un parámetro GET vulnerable en el filtro de categorías para recuperar todos los artículos de la base de datos, incluyendo aquellos marcados como 'no publicados'.",
-        analysis: "La aplicación construye la consulta SQL directamente concatenando el parámetro de URL category sin sanitización. Al inyectar ' OR 1=1--, la condición original se rompe y la cláusula OR 1=1 siempre evalúa como verdadero, haciendo que la base de datos devuelva todas las filas.",
-        impact: "Un atacante puede ver todos los registros de la base de datos incluyendo contenido oculto. En entornos productivos, esto podría exponer precios internos, productos en desarrollo, datos de clientes o información confidencial del negocio.",
+        objective: "Explotar el parámetro GET `category` vulnerable para recuperar todos los artículos de la base de datos, incluyendo aquellos marcados como 'no publicados' (released=0).",
+        analysis: "La aplicación construye la consulta SQL concatenando directamente el parámetro de URL sin sanitización. La consulta original es: SELECT * FROM products WHERE category='[input]' AND released=1. Al inyectar ' OR 1=1--, la condición OR 1=1 siempre es verdadera, y los -- comentan el AND released=1.",
+        impact: "El atacante puede ver todos los registros incluyendo contenido privado. En producción expone precios internos, productos en desarrollo, datos de clientes o información confidencial del negocio.",
         steps: [
             {
                 title: "Reconocimiento del Endpoint",
@@ -37,6 +37,8 @@ const labsData = [
         ],
         images: [
             "parcial2/act08_images/P3_img22.png",
+            "parcial2/act08_images/P5_img27.png",
+            "parcial2/act08_images/P6_img31.png",
         ]
     },
     {
@@ -46,9 +48,9 @@ const labsData = [
         level: "Apprentice",
         payload: "administrator'--",
         description: "Evasión del sistema de autenticación inyectando en el campo de usuario para omitir la validación de contraseña.",
-        objective: "Iniciar sesión como el usuario administrator sin conocer su contraseña, explotando el campo username del formulario de inicio de sesión.",
-        analysis: "La consulta de autenticación es: SELECT * FROM users WHERE username='[input]' AND password='[input]'. Al inyectar administrator'--, el apóstrofe cierra el string del username, los guiones -- comentan la parte de la contraseña, haciendo que la base de datos válide solo el nombre de usuario.",
-        impact: "Acceso administrativo total al sistema sin credenciales. Un atacante podría comprometer la totalidad de la aplicación, sus datos y sus usuarios al obtener el panel de administración.",
+        objective: "Acceder a la cuenta de administrator sin poseer la credencial de acceso, explotando el mecanismo de autenticación del formulario de login.",
+        analysis: "El mecanismo de autenticación es vulnerable a la manipulación de la consulta lógica de login. Al comentar la parte que verifica el password, el servidor valida el inicio de sesión basándose únicamente en la existencia del username en la base de datos.",
+        impact: "Acceso administrativo total al sistema sin credenciales. El atacante comprometería la totalidad de la aplicación, sus datos y todos sus usuarios.",
         steps: [
             {
                 title: "Identificación del Vector",
@@ -67,9 +69,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P3_img22.png",
-            "parcial2/act08_images/P5_img27.png",
-            "parcial2/act08_images/P5_img28.png",
+            "parcial2/act08_images/P9_img42.png",
+            "parcial2/act08_images/P9_img43.png",
+            "parcial2/act08_images/P10_img46.png",
         ]
     },
     {
@@ -105,10 +107,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P5_img27.png",
-            "parcial2/act08_images/P5_img28.png",
-            "parcial2/act08_images/P6_img31.png",
-            "parcial2/act08_images/P6_img32.png",
+            "parcial2/act08_images/P12_img53.png",
+            "parcial2/act08_images/P13_img57.png",
+            "parcial2/act08_images/P15_img64.png",
         ]
     },
     {
@@ -144,10 +145,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P5_img27.png",
-            "parcial2/act08_images/P5_img28.png",
-            "parcial2/act08_images/P6_img31.png",
-            "parcial2/act08_images/P6_img32.png",
+            "parcial2/act08_images/P15_img65.png",
+            "parcial2/act08_images/P16_img68.png",
+            "parcial2/act08_images/P16_img69.png",
         ]
     },
     {
@@ -183,10 +183,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P6_img31.png",
-            "parcial2/act08_images/P6_img32.png",
-            "parcial2/act08_images/P7_img35.png",
-            "parcial2/act08_images/P7_img36.png",
+            "parcial2/act08_images/P20_img81.png",
+            "parcial2/act08_images/P20_img82.png",
+            "parcial2/act08_images/P22_img87.png",
         ]
     },
     {
@@ -196,9 +195,9 @@ const labsData = [
         level: "Practitioner",
         payload: "' UNION SELECT table_name, NULL FROM all_tables--",
         description: "Enumeración del esquema en Oracle usando el diccionario interno all_tables y all_tab_columns en lugar del estándar information_schema.",
-        objective: "Listar las tablas de una base de datos Oracle, localizar la tabla de usuarios, enumerar sus columnas y extraer las credenciales del administrador para iniciar sesión.",
-        analysis: "Oracle no implementa information_schema. En su lugar usa vistas del sistema DBA: all_tables para ver todas las tablas accesibles, all_tab_columns para columnas por tabla. Además, Oracle maneja nombres de objetos en MAYÚSCULAS por convención.",
-        impact: "Misma criticidad que en sistemas no-Oracle: exposición completa del esquema de datos. El conocimiento de las vistas propietarias de Oracle (all_tables, dba_users) amplía el vector de ataque para acceder a información privilegiada del servidor.",
+        objective: "Extraer el nombre de la tabla de usuarios, identificar los nombres de columnas, extraer la contraseña del usuario administrator en Oracle y acceder a su cuenta.",
+        analysis: "Oracle no usa information_schema. Utiliza las vistas del sistema all_tables y all_tab_columns. Las condiciones críticas son: toda consulta SELECT necesita clausula FROM (se usa FROM DUAL para pruebas), y Oracle maneja nombres de objetos en MAYÚSCULAS.",
+        impact: "Exposición completa de las credenciales de todos los usuarios del sistema incluyendo la cuenta administrativa, con acceso total a la plataforma.",
         steps: [
             {
                 title: "Enumeración de tablas en Oracle",
@@ -222,10 +221,10 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P7_img35.png",
-            "parcial2/act08_images/P7_img36.png",
-            "parcial2/act08_images/P7_img37.png",
-            "parcial2/act08_images/P9_img42.png",
+            "parcial2/act08_images/P23_img90.png",
+            "parcial2/act08_images/P23_img91.png",
+            "parcial2/act08_images/P24_img94.png",
+            "parcial2/act08_images/P24_img95.png",
         ]
     },
     {
@@ -261,10 +260,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P10_img46.png",
-            "parcial2/act08_images/P10_img47.png",
-            "parcial2/act08_images/P9_img42.png",
-            "parcial2/act08_images/P9_img43.png",
+            "parcial2/act08_images/P26_img100.png",
+            "parcial2/act08_images/P26_img101.png",
+            "parcial2/act08_images/P26_img102.png",
         ]
     },
     {
@@ -300,10 +298,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P10_img47.png",
-            "parcial2/act08_images/P11_img49.png",
-            "parcial2/act08_images/P11_img50.png",
-            "parcial2/act08_images/P11_img51.png",
+            "parcial2/act08_images/P27_img105.png",
+            "parcial2/act08_images/P27_img106.png",
+            "parcial2/act08_images/P28_img109.png",
         ]
     },
     {
@@ -339,10 +336,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P11_img49.png",
-            "parcial2/act08_images/P11_img50.png",
-            "parcial2/act08_images/P12_img53.png",
-            "parcial2/act08_images/P12_img54.png",
+            "parcial2/act08_images/P29_img112.png",
+            "parcial2/act08_images/P29_img113.png",
+            "parcial2/act08_images/P30_img116.png",
         ]
     },
     {
@@ -378,10 +374,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P12_img53.png",
-            "parcial2/act08_images/P12_img54.png",
-            "parcial2/act08_images/P13_img57.png",
-            "parcial2/act08_images/P13_img58.png",
+            "parcial2/act08_images/P30_img117.png",
+            "parcial2/act08_images/P31_img120.png",
+            "parcial2/act08_images/P32_img123.png",
         ]
     },
     {
@@ -391,9 +386,9 @@ const labsData = [
         level: "Practitioner",
         payload: "' AND '1'='1",
         description: "Exfiltración de datos carácter a carácter mediante inyección ciega booleana observando cambios en el mensaje 'Welcome Back'.",
-        objective: "Determinar la contraseña del administrador carácter a carácter explotando una inyección SQL ciega basada en respuestas condicionales booleanas en la cookie TrackingId.",
-        analysis: "La aplicación no muestra resultados SQL pero sí muestra el mensaje 'Welcome Back' cuando la condición es verdadera. Esto permite construir preguntas booleanas: ¿el primer carácter de la contraseña es 'a'? Si es sí → aparece el mensaje. Se automatiza con Burp Intruder o scripts Python para extraer cada carácter.",
-        impact: "Aunque más lento que ataques UNION, la inyección ciega booleana es completamente funcional para extraer cualquier dato de la base de datos. La automatización con Burp Intruder puede obtener contraseñas de 20 caracteres en minutos.",
+        objective: "Obtener el usuario y contraseña del administrador de la tabla users mediante inyección SQL ciega con respuestas condicionales en la cookie TrackingId.",
+        analysis: "Este tipo de ataque no muestra errores ni información directamente. El atacante deduce información a través del cambio en la respuesta: la aparición o ausencia del mensaje 'Welcome Back' al enviar condiciones booleanas inyectadas en la cookie.",
+        impact: "Aunque más lento que UNION-based, la inyección ciega booleana permite extraer cualquier dato de la base de datos. Con automatización via Burp Intruder o scripts, una contraseña de 20 caracteres se obtiene en minutos.",
         steps: [
             {
                 title: "Confirmación de la inyección ciega",
@@ -417,10 +412,10 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P13_img57.png",
-            "parcial2/act08_images/P13_img58.png",
-            "parcial2/act08_images/P14_img61.png",
-            "parcial2/act08_images/P14_img62.png",
+            "parcial2/act08_images/P32_img124.png",
+            "parcial2/act08_images/P32_img125.png",
+            "parcial2/act08_images/P33_img128.png",
+            "parcial2/act08_images/P33_img129.png",
         ]
     },
     {
@@ -456,10 +451,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P14_img61.png",
-            "parcial2/act08_images/P14_img62.png",
-            "parcial2/act08_images/P15_img65.png",
-            "parcial2/act08_images/P15_img66.png",
+            "parcial2/act08_images/P34_img132.png",
+            "parcial2/act08_images/P34_img133.png",
+            "parcial2/act08_images/P35_img136.png",
         ]
     },
     {
@@ -495,10 +489,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P15_img65.png",
-            "parcial2/act08_images/P15_img66.png",
-            "parcial2/act08_images/P16_img69.png",
-            "parcial2/act08_images/P16_img70.png",
+            "parcial2/act08_images/P36_img139.png",
+            "parcial2/act08_images/P36_img140.png",
+            "parcial2/act08_images/P37_img143.png",
         ]
     },
     {
@@ -508,9 +501,9 @@ const labsData = [
         level: "Practitioner",
         payload: "'; IF (1=1) WAITFOR DELAY '0:0:10'--",
         description: "Confirmación de inyección ciega mediante delays temporales cuando no existe ninguna diferencia observable en la respuesta HTTP.",
-        objective: "Verificar la existencia de una vulnerabilidad SQLi ciega en la cookie TrackingId provocando un retraso deliberado en la respuesta del servidor usando funciones de tiempo.",
-        analysis: "Cuando la aplicación procesa la cookie de forma asíncrona y nunca retorna diferencias en su respuesta, se recurre a time-based blind SQLi. Las funciones pg_sleep() (PostgreSQL), WAITFOR DELAY (MSSQL) o SLEEP() (MySQL) detienen la ejecución de la query un tiempo determinado. Si la respuesta tarda ese tiempo, el canal de inyección está confirmado.",
-        impact: "Confirma existencia de inyección incluso en aplicaciones completamente 'silenciosas'. Sirve como prueba forense de vulnerabilidad aunque no extraiga datos directamente. La técnica es fácilmente detectable por sistemas IDS que monitorean latencias anómalas.",
+        objective: "Explotar la vulnerabilidad de inyección SQL ciega en la cookie TrackingId para provocar un retraso de 10 segundos en la respuesta, confirmando el canal de inyección.",
+        analysis: "El servidor está configurado para no mostrar diferencias visuales. La técnica Time-Based usa funciones de pausa: pg_sleep(10) en PostgreSQL, WAITFOR DELAY en MSSQL, SLEEP(10) en MySQL. Si la página tarda 10 segundos, el código fue ejecutado por la BD.",
+        impact: "Confirma existencia de inyección incluso en aplicaciones completamente silenciosas. Sirve como prueba forense de vulnerabilidad y establece base para extracción carácter a carácter usando el tiempo como oráculo.",
         steps: [
             {
                 title: "Prueba con condición siempre verdadera",
@@ -534,10 +527,9 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P16_img69.png",
-            "parcial2/act08_images/P16_img70.png",
-            "parcial2/act08_images/P17_img73.png",
-            "parcial2/act08_images/P17_img74.png",
+            "parcial2/act08_images/P48_img183.png",
+            "parcial2/act08_images/P48_img184.png",
+            "parcial2/act08_images/P48_img185.png",
         ]
     },
     {
@@ -573,10 +565,10 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P17_img73.png",
-            "parcial2/act08_images/P17_img74.png",
-            "parcial2/act08_images/P18_img77.png",
-            "parcial2/act08_images/P18_img78.png",
+            "parcial2/act08_images/P49_img188.png",
+            "parcial2/act08_images/P50_img191.png",
+            "parcial2/act08_images/P50_img192.png",
+            "parcial2/act08_images/P50_img193.png",
         ]
     },
     {
@@ -612,10 +604,10 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P18_img77.png",
-            "parcial2/act08_images/P18_img78.png",
-            "parcial2/act08_images/P19_img81.png",
-            "parcial2/act08_images/P19_img82.png",
+            "parcial2/act08_images/P52_img198.png",
+            "parcial2/act08_images/P52_img199.png",
+            "parcial2/act08_images/P53_img202.png",
+            "parcial2/act08_images/P53_img203.png",
         ]
     },
     {
@@ -651,9 +643,10 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P19_img81.png",
-            "parcial2/act08_images/P19_img82.png",
-            "parcial2/act08_images/P20_img85.png",
+            "parcial2/act08_images/P54_img206.png",
+            "parcial2/act08_images/P54_img207.png",
+            "parcial2/act08_images/P55_img210.png",
+            "parcial2/act08_images/P55_img211.png",
         ]
     },
     {
@@ -663,9 +656,9 @@ const labsData = [
         level: "Practitioner",
         payload: "&#x31;&#x20;&#x55;&#x4e;&#x49;&#x4f;&#x4e;&#x20;&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;&#x20;&#x70;&#x61;&#x73;&#x73;&#x77;&#x6f;&#x72;&#x64;&#x20;&#x46;&#x52;&#x4f;&#x4d;&#x20;&#x75;&#x73;&#x65;&#x72;&#x73;",
         description: "Evasión de WAF codificando el payload UNION SELECT en entidades hexadecimales XML para que el firewall no reconozca el SQL mientras la base de datos sí lo ejecuta.",
-        objective: "Bypassear el WAF (Web Application Firewall) que bloquea keywords SQL en el body de peticiones POST codificando el payload completo en entidades XML hexadecimales.",
-        analysis: "La aplicación usa un WAF que bloquea peticiones con keywords SQL (UNION, SELECT, etc.) en el cuerpo XML del POST. Sin embargo, el WAF no decodifica entidades XML antes de aplicar el filtro. Al codificar el payload completo como entidades hex (&#xNN;), el WAF no lo reconoce como SQL, pero el parser XML del servidor sí lo decodifica antes de pasarlo a la base de datos.",
-        impact: "Demuestra que los filtros de seguridad son ineficaces si no realizan decodificación recursiva de los datos antes de aplicar reglas. Un WAF bypasseado en producción es peor que no tener WAF, ya que da falsa sensación de seguridad.",
+        objective: "Vulnerar la consulta SQL que procesa el stock de productos evasando el WAF con codificación XML hexadecimal para extraer las credenciales del usuario administrator.",
+        analysis: "La vulnerabilidad se localiza en la etiqueta <storeId> del XML enviado en POST. El WAF bloquea UNION y SELECT como texto plano, pero el XML Parser del servidor decodifica las entidades hexadecimales (&#xNN;) ANTES de pasarlas a la BD, permitiendo bypassear el filtro.",
+        impact: "Demuestra que los filtros de seguridad son ineficaces sin decodificación recursiva. Un WAF bypasseado da falsa sensación de seguridad, siendo peor que no tener WAF.",
         steps: [
             {
                 title: "Identificación del endpoint vulnerable y el WAF",
@@ -689,9 +682,10 @@ const labsData = [
             }
         ],
         images: [
-            "parcial2/act08_images/P19_img78.png",
-            "parcial2/act08_images/P20_img81.png",
-            "parcial2/act08_images/P20_img82.png",
+            "parcial2/act08_images/P56_img214.png",
+            "parcial2/act08_images/P56_img215.png",
+            "parcial2/act08_images/P58_img221.png",
+            "parcial2/act08_images/P58_img222.png",
         ]
     }
 ];
@@ -822,16 +816,27 @@ const SQLInjectionLabs = () => {
                         </div>
 
                         {/* Evidence Gallery (if available) */}
-                        {activeLab.images && (
-                            <div className="mb-6 p-4 border border-violet-500/20 bg-violet-900/10 rounded-lg">
-                                <h4 className="text-violet-400 text-sm md:text-base font-bold font-mono tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-violet-500/30 pb-2">
-                                    EJECUCIÓN DEL LABORATORIO & EVIDENCIA VISUAL
-                                </h4>
-                                <div className="flex flex-col gap-6 w-5/6 max-w-3xl mx-auto">
+                        {activeLab.images && activeLab.images.length > 0 && (
+                            <div className="mb-6 rounded-xl overflow-hidden border border-violet-500/20 bg-gradient-to-b from-violet-950/20 to-transparent">
+                                <div className="flex items-center gap-3 px-5 py-3 border-b border-violet-500/20 bg-violet-900/10">
+                                    <div className="w-2 h-2 rounded-full bg-violet-400 animate-pulse"></div>
+                                    <h4 className="text-violet-300 text-xs md:text-sm font-bold font-mono tracking-[0.2em] uppercase">
+                                        Evidencia Visual · {activeLab.images.length} capturas
+                                    </h4>
+                                </div>
+                                <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {activeLab.images.map((imgSrc, idx) => (
-                                        <div key={idx} className="relative group overflow-hidden rounded border border-gray-700 hover:border-violet-500 transition-colors">
-                                            <div className="absolute top-0 left-0 bg-violet-500/80 text-white text-[9px] font-bold px-2 py-0.5 rounded-br z-10">Paso {idx + 1}</div>
-                                            <img src={`${import.meta.env.BASE_URL}${imgSrc}`} alt={`Evidencia Lab ${activeLab.id} Paso ${idx + 1}`} className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" />
+                                        <div key={idx} className="relative group rounded-lg overflow-hidden border border-gray-800 hover:border-violet-500/60 transition-all duration-300 shadow-lg">
+                                            <div className="absolute top-2 left-2 z-10 bg-black/70 text-violet-300 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-violet-500/40">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-violet-400 inline-block"></span>
+                                                Captura {idx + 1}
+                                            </div>
+                                            <img
+                                                src={`${import.meta.env.BASE_URL}${imgSrc}`}
+                                                alt={`Lab ${activeLab.id} - Captura ${idx + 1}`}
+                                                className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-[1.02]"
+                                                onError={(e) => { e.target.style.display='none'; }}
+                                            />
                                         </div>
                                     ))}
                                 </div>
