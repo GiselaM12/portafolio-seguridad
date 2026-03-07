@@ -939,68 +939,162 @@ const SQLInjectionLabs = () => {
                         )}
 
                         {/* Interactive Simulation Sandbox */}
-                        <div className="flex-none bg-[#050505] rounded-xl border-2 border-green-900/30 overflow-hidden flex flex-col font-mono text-xs shadow-[0_0_20px_rgba(34,197,94,0.05)] relative mb-8">
-                            {/* Terminal Header */}
-                            <div className="bg-gray-900/80 border-b border-green-900/30 px-4 py-3 flex items-center justify-between">
+                        <div className="flex-none bg-[#0a0a0a] rounded-xl border border-gray-800 overflow-hidden flex flex-col font-sans shadow-2xl relative mb-8">
+                            {/* Browser/System Header */}
+                            <div className="bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                    <div className="flex gap-1.5 mr-3">
-                                        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                                        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                                        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                    <div className="flex gap-1.5 mr-2">
+                                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
                                     </div>
-                                    <span className="text-green-500/90 font-bold tracking-[0.2em] text-[10px] md:text-[11px] uppercase flex items-center gap-2">
-                                        <FaTerminal /> Interactive Exploit Simulator
-                                    </span>
+                                    <div className="bg-gray-800 text-gray-400 text-[10px] md:text-xs px-3 py-1 rounded-md ml-2 font-mono flex items-center gap-2">
+                                        <FaServer />
+                                        {activeLab.id === 2 ? "https://portswigger.net/login" : 
+                                         activeLab.id === 18 ? "https://portswigger.net/api/stock" : 
+                                         "https://portswigger.net/filter?category="}
+                                    </div>
                                 </div>
-                                <span className="text-gray-500 text-[9px] md:text-[10px]">TARGET ENV: PortSwigger</span>
+                                <span className="text-gray-500 text-[9px] md:text-[10px] uppercase font-bold tracking-widest flex items-center gap-1">
+                                    <FaBug /> TARGET SIMULATOR
+                                </span>
                             </div>
 
-                            {/* Terminal Body */}
-                            <div className="p-5 md:p-6 text-gray-300 flex-none space-y-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5">
-                                <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-                                    <span className="text-blue-400 font-bold whitespace-nowrap text-sm mt-1 sm:mt-0">User Input:</span>
-                                    <input 
-                                        type="text" 
-                                        value={inputValue}
-                                        onChange={(e) => setInputValue(e.target.value)}
-                                        placeholder={`Intenta inyectar: ${activeLab.payload}`}
-                                        className="w-full bg-[#0a0a0a] border border-gray-700 text-green-400 px-4 py-2.5 rounded-lg focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all font-mono text-sm shadow-inner placeholder-gray-600"
-                                        onKeyDown={(e) => e.key === 'Enter' && setSimulated(true)}
-                                    />
+                            {/* Simulation Body */}
+                            <div className="p-5 md:p-8 flex-none space-y-4">
+                                
+                                {/* URL Parameter Context */}
+                                {(![2, 11, 12, 13, 14, 15, 16, 17, 18].includes(activeLab.id)) && (
+                                    <div className="flex flex-col gap-3">
+                                        <p className="text-sm text-gray-400 font-medium mb-1">Simulación: Inyección en Parámetro GET (URL)</p>
+                                        <div className="flex items-center bg-black border border-gray-700 rounded-lg overflow-hidden focus-within:border-blue-500 transition-colors">
+                                            <span className="text-gray-500 font-mono text-xs md:text-sm pl-4 pr-1 bg-gray-900/50 py-3 border-r border-gray-800">?category=</span>
+                                            <input 
+                                                type="text" 
+                                                value={inputValue !== '' ? inputValue : activeLab.payload}
+                                                onChange={(e) => setInputValue(e.target.value)}
+                                                className="w-full bg-transparent text-blue-400 px-3 py-3 focus:outline-none font-mono text-sm"
+                                                onKeyDown={(e) => e.key === 'Enter' && setSimulated(true)}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Login Context */}
+                                {activeLab.id === 2 && (
+                                    <div className="flex flex-col gap-3 max-w-sm mx-auto bg-gray-900/40 p-6 rounded-xl border border-gray-800">
+                                        <h3 className="text-white text-lg font-bold text-center mb-2">Account Login</h3>
+                                        <div className="space-y-4">
+                                            <div>
+                                                <label className="text-xs text-gray-400 mb-1 block">Username</label>
+                                                <input 
+                                                    type="text" 
+                                                    value={inputValue !== '' ? inputValue : activeLab.payload}
+                                                    onChange={(e) => setInputValue(e.target.value)}
+                                                    className="w-full bg-black border border-gray-700 text-green-400 px-4 py-2.5 rounded focus:outline-none focus:border-green-500 font-mono text-sm"
+                                                    onKeyDown={(e) => e.key === 'Enter' && setSimulated(true)}
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="text-xs text-gray-400 mb-1 block">Password</label>
+                                                <input 
+                                                    type="password" 
+                                                    value="********"
+                                                    readOnly
+                                                    className="w-full bg-black/50 border border-gray-800 text-gray-500 px-4 py-2.5 rounded focus:outline-none font-mono text-sm cursor-not-allowed"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Cookie Context */}
+                                {[11, 12, 13, 14, 15, 16, 17].includes(activeLab.id) && (
+                                    <div className="flex flex-col gap-3">
+                                        <p className="text-sm text-gray-400 font-medium mb-1">Simulación: Inyección en Cabecera HTTP (Cookie)</p>
+                                        <div className="bg-black border border-gray-700 rounded-lg p-4 font-mono text-xs md:text-sm text-gray-300">
+                                            <div><span className="text-purple-400">GET</span> / HTTP/1.1</div>
+                                            <div><span className="text-blue-400">Host:</span> target.com</div>
+                                            <div className="flex items-center mt-2 pt-2 border-t border-gray-800">
+                                                <span className="text-yellow-400 mr-2 whitespace-nowrap">Cookie: TrackingId=</span>
+                                                <input 
+                                                    type="text" 
+                                                    value={inputValue !== '' ? inputValue : activeLab.payload}
+                                                    onChange={(e) => setInputValue(e.target.value)}
+                                                    className="w-full bg-gray-900 border border-gray-700 text-green-400 px-2 py-1 rounded focus:outline-none focus:border-green-500 font-mono"
+                                                    onKeyDown={(e) => e.key === 'Enter' && setSimulated(true)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* XML Context */}
+                                {activeLab.id === 18 && (
+                                    <div className="flex flex-col gap-3">
+                                        <p className="text-sm text-gray-400 font-medium mb-1">Simulación: Inyección en XML Body (POST)</p>
+                                        <div className="bg-black border border-gray-700 rounded-lg p-4 font-mono text-xs md:text-sm text-gray-300">
+                                            <div className="text-pink-400 mb-2">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div>
+                                            <div>&lt;stockCheck&gt;</div>
+                                            <div className="pl-4 flex items-center my-1">
+                                                <span>&lt;storeId&gt;</span>
+                                                <input 
+                                                    type="text" 
+                                                    value={inputValue !== '' ? inputValue : activeLab.payload}
+                                                    onChange={(e) => setInputValue(e.target.value)}
+                                                    className="flex-1 mx-2 bg-gray-900 border border-gray-700 text-green-400 px-2 py-1 rounded focus:outline-none focus:border-green-500 font-mono min-w-[200px]"
+                                                    onKeyDown={(e) => e.key === 'Enter' && setSimulated(true)}
+                                                />
+                                                <span>&lt;/storeId&gt;</span>
+                                            </div>
+                                            <div>&lt;/stockCheck&gt;</div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="flex justify-end mt-4">
                                     <button 
                                         onClick={() => setSimulated(true)}
-                                        className="w-full sm:w-auto bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/50 hover:border-green-400 px-6 py-2.5 rounded-lg font-bold transition-all whitespace-nowrap shadow-[0_0_10px_rgba(34,197,94,0.1)] hover:shadow-[0_0_15px_rgba(34,197,94,0.2)] text-sm uppercase tracking-wide flex justify-center items-center"
+                                        className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-2.5 rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] text-sm uppercase tracking-wide flex items-center gap-2"
                                     >
-                                        Ejecutar
+                                        <FaTerminal /> Enviar Petición
                                     </button>
                                 </div>
 
                                 <AnimatePresence>
                                     {simulated && (
                                         <motion.div 
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
+                                            initial={{ height: 0, opacity: 0, y: -10 }}
+                                            animate={{ height: "auto", opacity: 1, y: 0 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            className="border-l-4 border-red-500 pl-4 py-3 bg-red-900/10 mt-6 rounded-r bg-gradient-to-r from-red-900/20 to-transparent"
+                                            className="border-l-4 border-red-500 pl-4 py-4 bg-[#0a0505] mt-6 rounded-r relative overflow-hidden"
                                         >
-                                            <div className="text-red-500 font-bold mb-3 flex items-center gap-2 text-sm">
-                                                <FaBug className="animate-pulse" /> VULNERABILIDAD EXPLOTADA EXITOSAMENTE
+                                            <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-3xl rounded-full"></div>
+                                            <div className="text-red-500 font-bold mb-3 flex items-center gap-2 text-sm uppercase tracking-wider">
+                                                <FaBug className="animate-pulse" /> Respuesta del Servidor Interceptada
                                             </div>
-                                            <div className="bg-[#050505] border border-red-900/50 p-4 rounded-lg text-green-400/90 break-all shadow-[0_4px_20px_rgba(220,38,38,0.15)] overflow-x-auto whitespace-pre-wrap font-mono text-sm leading-relaxed">
-                                                <span className="text-red-500 font-bold">PAYLOAD SENT &raquo; </span>
-                                                <span className="text-white">{inputValue || activeLab.payload}</span>
+                                            
+                                            {/* Mocking actual response based on context */}
+                                            <div className="bg-black/80 border border-red-900/30 p-4 rounded text-green-400/90 break-all shadow-inner overflow-x-auto whitespace-pre-wrap font-mono text-xs md:text-sm leading-relaxed mt-2 text-gray-300">
+                                                {[11, 14].includes(activeLab.id) ? (
+                                                     <div className="animate-pulse text-yellow-500">HTTP/1.1 200 OK<br/>[... Esperando respuesta... Latencia de servidor detectada (10,000ms)]</div>
+                                                ) : activeLab.id === 2 ? (
+                                                     <div><span className="text-green-500">HTTP/1.1 302 Found</span><br/>Location: /my-account?id=administrator<br/><br/>Set-Cookie: session=xyz123...</div>
+                                                ) : activeLab.id === 13 ? (
+                                                     <div className="text-red-400">HTTP/1.1 500 Internal Server Error<br/><br/>Unterminated string literal at character 52. Error converting 'S3cr3tP4ss' to string.</div>
+                                                ) : [12, 15, 16, 17].includes(activeLab.id) ? (
+                                                     <div className="text-blue-400">DNS Lookup Received at Burp Collaborator Server.<br/>Payload successfully triggered Out-Of-Band interaction.</div>
+                                                ) : (
+                                                     <div><span className="text-green-500">HTTP/1.1 200 OK</span><br/>Content-Type: text/html<br/><br/>&lt;!-- Backend Database Dump / SQL Syntax Altered --&gt;<br/>[+] {activeLab.payload} executed.</div>
+                                                )}
                                             </div>
-                                            <motion.div 
-                                                initial={{ y: 5, opacity: 0 }}
-                                                animate={{ y: 0, opacity: 1 }}
-                                                transition={{ delay: 0.8 }}
-                                                className="mt-4 text-gray-400 text-sm border-t border-red-500/20 pt-3 leading-loose"
-                                            >
-                                                <span className="text-green-500 font-bold">[RESPONSE INJECTED]</span> &raquo; Se ha roto el contorno de seguridad. Lee detenidamente el desglose técnico inferior o revisa la galería visual donde la solicitud fue exitosa para auditar los resultados provocados.
-                                            </motion.div>
+                                            <p className="mt-4 text-gray-400 text-xs md:text-sm italic border-t border-gray-800 pt-3">
+                                                * El payload ha penetrado las validaciones. Revisa el análisis inferior para ver el desglose en profundidad.
+                                            </p>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
+
                             </div>
                         </div>
 
