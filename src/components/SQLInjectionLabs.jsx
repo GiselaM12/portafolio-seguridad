@@ -110,7 +110,7 @@ const SQLInjectionLabs = () => {
     const activeLab = labsData.find(lab => lab.id === activeLabId);
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 bg-[#0a0f1a] rounded-xl border border-gray-800 shadow-2xl overflow-hidden min-h-[700px] max-h-[900px] font-sans">
+        <div className="flex flex-col lg:flex-row gap-6 bg-[#0a0f1a] rounded-xl border border-gray-800 shadow-2xl overflow-hidden min-h-[85vh] font-sans">
 
             {/* Sidebar Navigation */}
             <div className="lg:w-1/3 bg-[#05080f] border-r border-gray-800 flex flex-col h-[400px] lg:h-auto">
