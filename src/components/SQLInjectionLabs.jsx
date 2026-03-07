@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaServer, FaTerminal, FaCode, FaCheckCircle, FaExclamationTriangle, FaBug, FaDatabase, FaShieldAlt } from 'react-icons/fa';
+import { FaServer, FaTerminal, FaCode, FaCheckCircle, FaExclamationTriangle, FaBug, FaDatabase, FaShieldAlt, FaEyeSlash, FaClock, FaWifi, FaBolt, FaChevronRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const labsData = [
@@ -105,15 +105,28 @@ const labsData = [
     { id: 18, title: "SQL injection with filter bypass via XML encoding", type: "Filter Bypass", level: "Practitioner", payload: "&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;+", description: "Evasión y ofuscación pura contra WAF empresariales abusando de decodificadores internos de XML o JSON.", objective: "Inyectar dentro de un bloque XML del aplicativo vulnerable para evadir los filtros de caracteres o Expresiones Regulares del Firewall Activo cuando sube el nivel de control sobre la palabra UNION y SELECT explícitas bloqueándolas estáticamente de la petición original y dando baneos 403 Forbidden.", analysis: "Ya que la input original es en XML para SOAP. El Firewall no decodifica sintaxis Hex. El atacante transcodifica el payload de inyección (`UNION SELECT` etc) a un Hex Entity codificado `&#x...;`. El Web Application Firewall de perímetro lee esto como valores aleatorios ciegos y lo deja pasar sin bloquear la petición. El parser en el Servidor lo recibe, lo decodifica a su formato predeterminado legítimo que será SELECT y se inserta limpiamente por diseño sobre la consulta vulnerable final del script, realizando el robo de datos con WAF bypasseado existosamente.", impact: "Comprobación del Bypass severo; Las defensas implementadas puramente como regex simples sin modelado dinámico son ilusorias. Es un caso emblemático para priorizar un parche de Consulta Parametrizada siempre (Prepared Statements)." }
 ];
 
+const getIconForType = (type) => {
+    switch (type) {
+        case "In-band": return <FaCode className="text-blue-400" />;
+        case "UNION-based": return <FaDatabase className="text-purple-400" />;
+        case "Blind": return <FaEyeSlash className="text-red-400" />;
+        case "Blind (Time)": return <FaClock className="text-yellow-400" />;
+        case "Error-based": return <FaExclamationTriangle className="text-orange-400" />;
+        case "OAST": return <FaWifi className="text-green-400" />;
+        case "Filter Bypass": return <FaShieldAlt className="text-cyan-400" />;
+        default: return <FaServer />;
+    }
+};
+
 const SQLInjectionLabs = () => {
     const [activeLabId, setActiveLabId] = useState(1);
     const activeLab = labsData.find(lab => lab.id === activeLabId);
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 bg-[#0a0f1a] rounded-xl border border-gray-800 shadow-2xl overflow-hidden min-h-[85vh] font-sans">
+        <div className="flex flex-col lg:flex-row gap-0 bg-[#0a0f1a] rounded-xl border border-gray-800 shadow-2xl font-sans items-start relative pb-6 lg:pb-0">
 
-            {/* Sidebar Navigation */}
-            <div className="lg:w-1/3 bg-[#05080f] border-r border-gray-800 flex flex-col h-[400px] lg:h-auto">
+            {/* Sidebar Navigation (Sticky) */}
+            <div className="lg:w-1/3 w-full bg-[#05080f] border-b lg:border-b-0 lg:border-r border-gray-800 flex flex-col h-[400px] lg:h-[calc(100vh-8rem)] lg:sticky lg:top-24 rounded-tl-xl lg:rounded-l-xl lg:rounded-tr-none z-10 shadow-2xl">
                 <div className="p-4 border-b border-gray-800 bg-black/40">
                     <h3 className="text-green-500 font-mono font-bold tracking-widest text-sm flex items-center gap-2">
                         <FaServer /> PORTAL DE LABORATORIOS
@@ -126,13 +139,19 @@ const SQLInjectionLabs = () => {
                         <button
                             key={lab.id}
                             onClick={() => setActiveLabId(lab.id)}
-                            className={`w-full text-left p-3 rounded-lg transition-all duration-200 border ${activeLabId === lab.id
-                                ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_10px_rgba(34,197,94,0.1)]'
-                                : 'border-transparent text-gray-400 hover:bg-gray-800/50 hover:text-gray-200'
+                            className={`w-full text-left p-3 rounded-lg transition-all duration-300 border relative overflow-hidden group ${activeLabId === lab.id
+                                    ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_15px_rgba(34,197,94,0.15)] ring-1 ring-green-500/30'
+                                    : 'border-transparent text-gray-400 hover:bg-gray-800/60 hover:text-gray-200'
                                 }`}
                         >
+                            {/* Animated indicator for active state */}
+                            {activeLabId === lab.id && (
+                                <motion.div layoutId="activeLabIndicator" className="absolute left-0 top-0 w-1 h-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
+                            )}
+
                             <div className="flex items-center justify-between mb-1">
-                                <span className="font-mono text-xs font-bold w-6 h-6 rounded bg-black/50 border border-gray-700 flex items-center justify-center">
+                                <span className={`font-mono text-xs font-bold w-6 h-6 rounded flex items-center justify-center border transition-colors ${activeLabId === lab.id ? 'bg-green-900/50 border-green-500/50 text-green-400' : 'bg-black/50 border-gray-700'
+                                    }`}>
                                     {String(lab.id).padStart(2, '0')}
                                 </span>
                                 <span className={`text-[9px] px-2 py-0.5 rounded uppercase font-bold tracking-wider ${lab.level === 'Apprentice' ? 'bg-blue-500/20 text-blue-400' : 'bg-orange-500/20 text-orange-400'
@@ -140,14 +159,21 @@ const SQLInjectionLabs = () => {
                                     {lab.level}
                                 </span>
                             </div>
-                            <p className="text-xs truncate font-medium">{lab.type}</p>
+
+                            <div className="flex items-center gap-2 mt-2">
+                                <div className="p-1.5 bg-black/40 rounded border border-gray-800 group-hover:border-gray-600 transition-colors">
+                                    {getIconForType(lab.type)}
+                                </div>
+                                <p className="text-xs truncate font-medium flex-1 group-hover:text-white transition-colors">{lab.type}</p>
+                                {activeLabId !== lab.id && <FaChevronRight className="text-gray-600 group-hover:text-green-500 transition-colors opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0" />}
+                            </div>
                         </button>
                     ))}
                 </div>
             </div>
 
             {/* Main Content Area */}
-            <div className="lg:w-2/3 p-6 lg:p-8 relative flex flex-col overflow-y-auto custom-scrollbar">
+            <div className="lg:w-2/3 p-6 lg:p-10 relative flex flex-col min-h-full">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeLab.id}
