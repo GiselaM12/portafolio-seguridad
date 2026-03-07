@@ -820,6 +820,15 @@ const getIconForType = (type) => {
 
 const SQLInjectionLabs = () => {
     const [activeLabId, setActiveLabId] = useState(1);
+    const [simulated, setSimulated] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+
+    const handleLabChange = (id) => {
+        setActiveLabId(id);
+        setSimulated(false);
+        setInputValue('');
+    };
+
     const activeLab = labsData.find(lab => lab.id === activeLabId);
 
     return (
