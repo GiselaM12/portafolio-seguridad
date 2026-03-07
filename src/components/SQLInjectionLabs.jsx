@@ -11,7 +11,33 @@ const labsData = [
         payload: "' OR 1=1--",
         description: "Bypassing a WHERE clause to extract hidden products del backend usando un operador tautológico.",
         objective: "El objetivo de esta práctica es manipular una consulta SQL no sanitizada dentro de un filtro de categorías de una tienda web (`/filter?category=X`), provocando que la aplicación liste absolutamente todos los productos registrados, independientemente de la variable lógica de estado 'released'.",
-        analysis: "Se inyecta una comilla simple (') para romper la sintaxis original en la variable GET de la URL. Posteriormente, se anexa una sentencia booleana siempre verdadera (`OR 1=1`) y se anulan los filtros residuales comentando el resto de la consulta interna (`--`).",
+        steps: [
+            {
+                title: "Interceptar la petición original",
+                text: "Utilizamos Burp Suite para capturar la petición GET al momento de hacer clic en la categoría 'Gifts'. Notamos que la aplicación pasa el parámetro en la URL de la forma:",
+                code: "GET /filter?category=Gifts HTTP/1.1"
+            },
+            {
+                title: "Analizar la sintaxis SQL subyacente",
+                text: "Inferimos que el backend está tomando el parámetro 'Gifts' y armando internamente una consulta a base de datos de estructura similar a:",
+                code: "SELECT * FROM products WHERE category = 'Gifts' AND released = 1"
+            },
+            {
+                title: "Diseñar la inyección",
+                text: "Para obligar a la consulta a listar toda la tabla e ignorar la regla de seguridad 'released = 1', inyectamos una comilla simple para cerrar la variable literal, agregamos el operador lógico OR con una condición siempre verdadera (1=1), e insertamos el doble guion (--) para comentar y neutralizar el resto de la instrucción.",
+                code: "PAYLOAD: ' OR 1=1--"
+            },
+            {
+                title: "Enviar el Payload envenenado",
+                text: "Enviamos la petición modificada hacia el backend. El motor de Base de Datos recibirá ahora una orden completamente distinta por culpa de nuestra inyección:",
+                code: "SELECT * FROM products WHERE category = '' OR 1=1--' AND released = 1"
+            },
+            {
+                title: "Explotación Exitosa",
+                text: "Debido a que '1=1' es siempre verdadero, se anula el filtro selectivo de la categoría. Al mismo tiempo, el comentario '--' elimina de ejecución todo el bloque posterior. El servidor procesa la consulta con 200 OK y refleja todo el catálogo oculto en la respuesta.",
+                code: "HTTP/1.1 200 OK\n[...Catálogo Oculto Extraído...]"
+            }
+        ],
         impact: "Alta confidencialidad vulnerada. Un atacante iterativo podría modificar esta cláusula simple para iniciar técnicas de enumeración de columnas en el futuro, pero de per se, expone catálogo o inventario restringido.",
         images: [
             "parcial2/act08_images/lab1_step1.png",
@@ -217,13 +243,46 @@ const SQLInjectionLabs = () => {
                         </div>
 
                         {/* Explicación Técnica (Análisis Step-By-Step) */}
-                        <div className="mt-auto bg-gray-900/40 border-l-4 border-yellow-500 p-5 rounded-r">
-                            <h4 className="text-yellow-500 text-xs font-bold tracking-widest uppercase mb-2 flex items-center gap-2">
+                        <div className="mt-6 bg-gray-900/40 border-l-4 border-yellow-500 p-5 rounded-r relative overflow-hidden">
+                            {/* Decorative background for steps */}
+                            <FaCode className="absolute top-4 right-4 text-4xl text-yellow-500/5 opacity-50" />
+
+                            <h4 className="text-yellow-500 text-xs font-bold tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-yellow-500/20 pb-3">
                                 <FaCode /> Desarrollo Técnico de la Explotación
                             </h4>
-                            <p className="text-sm text-gray-300 leading-relaxed">
-                                {activeLab.analysis}
-                            </p>
+
+                            {activeLab.steps ? (
+                                <div className="space-y-0 mt-4 relative">
+                                    {/* Timeline line */}
+                                    <div className="absolute left-3.5 top-2 bottom-6 w-px bg-yellow-500/20 -z-0"></div>
+
+                                    {activeLab.steps.map((step, index) => (
+                                        <div key={index} className="flex gap-4 relative z-10 pb-6 group">
+                                            <div className="flex flex-col items-center">
+                                                <div className="flex items-center justify-center w-7 h-7 bg-[#0a0f1a] rounded-full text-yellow-500 text-xs font-bold border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)] group-hover:scale-110 group-hover:bg-yellow-500/10 transition-all">
+                                                    {index + 1}
+                                                </div>
+                                            </div>
+                                            <div className="pt-1 flex-1">
+                                                <h5 className="text-yellow-400 text-xs font-bold mb-2 tracking-wide">{step.title}</h5>
+                                                <p className="text-gray-300 text-xs leading-relaxed mb-3">
+                                                    {step.text}
+                                                </p>
+                                                {step.code && (
+                                                    <div className="bg-black border border-gray-800 p-3 rounded-md text-green-400 font-mono text-[10px] sm:text-xs break-all shadow-inner block w-full relative group-hover:border-gray-600 transition-colors">
+                                                        <div className="absolute top-0 left-0 w-1 h-full bg-green-500 rounded-l-md opacity-50"></div>
+                                                        $ {step.code}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-sm text-gray-300 leading-relaxed">
+                                    {activeLab.analysis}
+                                </p>
+                            )}
                         </div>
 
                     </motion.div>
