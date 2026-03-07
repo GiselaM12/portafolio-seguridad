@@ -34,7 +34,7 @@ const ActivityDetail = () => {
             8: "parcial2/act08-Equipo1.pdf",
         };
         const fileName = fileMap[id];
-        return fileName ? `/${fileName}` : null;
+        return fileName ? `${import.meta.env.BASE_URL}${fileName}` : null;
     };
 
     const fileUrl = getFileUrl(activity.id);
@@ -234,7 +234,9 @@ const ActivityDetail = () => {
 
                         {/* Content Body */}
                         <div className="report-content prose prose-invert max-w-none">
-                            <div dangerouslySetInnerHTML={{ __html: activity.content }} />
+                            <div dangerouslySetInnerHTML={{
+                                __html: activity.content.replace(/src="\/parcial/g, `src="${import.meta.env.BASE_URL}parcial`)
+                            }} />
                         </div>
 
                         {/* Interactive Quiz Segment for PR02 */}
