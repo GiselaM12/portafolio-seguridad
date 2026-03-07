@@ -12,7 +12,13 @@ const labsData = [
         description: "Bypassing a WHERE clause to extract hidden products del backend usando un operador tautológico.",
         objective: "El objetivo de esta práctica es manipular una consulta SQL no sanitizada dentro de un filtro de categorías de una tienda web (`/filter?category=X`), provocando que la aplicación liste absolutamente todos los productos registrados, independientemente de la variable lógica de estado 'released'.",
         analysis: "Se inyecta una comilla simple (') para romper la sintaxis original en la variable GET de la URL. Posteriormente, se anexa una sentencia booleana siempre verdadera (`OR 1=1`) y se anulan los filtros residuales comentando el resto de la consulta interna (`--`).",
-        impact: "Alta confidencialidad vulnerada. Un atacante iterativo podría modificar esta cláusula simple para iniciar técnicas de enumeración de columnas en el futuro, pero de per se, expone catálogo o inventario restringido."
+        impact: "Alta confidencialidad vulnerada. Un atacante iterativo podría modificar esta cláusula simple para iniciar técnicas de enumeración de columnas en el futuro, pero de per se, expone catálogo o inventario restringido.",
+        images: [
+            "parcial2/act08_images/lab1_step1.png",
+            "parcial2/act08_images/lab1_step2.png",
+            "parcial2/act08_images/lab1_step3.png",
+            "parcial2/act08_images/lab1_step4.png"
+        ]
     },
     {
         id: 2,
@@ -95,8 +101,8 @@ const SQLInjectionLabs = () => {
                             key={lab.id}
                             onClick={() => setActiveLabId(lab.id)}
                             className={`w-full text-left p-3 rounded-lg transition-all duration-200 border ${activeLabId === lab.id
-                                    ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_10px_rgba(34,197,94,0.1)]'
-                                    : 'border-transparent text-gray-400 hover:bg-gray-800/50 hover:text-gray-200'
+                                ? 'bg-green-900/20 border-green-500/50 text-white shadow-[0_0_10px_rgba(34,197,94,0.1)]'
+                                : 'border-transparent text-gray-400 hover:bg-gray-800/50 hover:text-gray-200'
                                 }`}
                         >
                             <div className="flex items-center justify-between mb-1">
@@ -162,6 +168,23 @@ const SQLInjectionLabs = () => {
                                 </p>
                             </div>
                         </div>
+
+                        {/* Evidence Gallery (if available) */}
+                        {activeLab.images && (
+                            <div className="mb-6 p-4 border border-violet-500/20 bg-violet-900/10 rounded-lg">
+                                <h4 className="text-violet-400 text-xs font-bold font-mono tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-violet-500/30 pb-2">
+                                    EJECUCIÓN DEL LABORATORIO & EVIDENCIA VISUAL
+                                </h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {activeLab.images.map((imgSrc, idx) => (
+                                        <div key={idx} className="relative group overflow-hidden rounded border border-gray-700 hover:border-violet-500 transition-colors">
+                                            <div className="absolute top-0 left-0 bg-violet-500/80 text-white text-[9px] font-bold px-2 py-0.5 rounded-br z-10">Paso {idx + 1}</div>
+                                            <img src={`${import.meta.env.BASE_URL}${imgSrc}`} alt={`Evidencia Lab ${activeLab.id} Paso ${idx + 1}`} className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Visual Terminal / Output Mockup */}
                         <div className="flex-none bg-black rounded-lg border border-gray-800 overflow-hidden flex flex-col font-mono text-xs shadow-2xl relative mb-6">
