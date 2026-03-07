@@ -4,7 +4,6 @@ import { activities } from '../data/activities';
 import { FaFilePdf, FaArrowLeft, FaTerminal, FaShieldAlt, FaCalendarAlt, FaUserSecret } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import PhishingQuiz from '../components/PhishingQuiz';
-import SQLInjectionLabs from '../components/SQLInjectionLabs';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -254,11 +253,25 @@ const ActivityDetail = () => {
 
                         {/* Interactive Labs Segment for Act 08 */}
                         {String(activity.id) === '8' && (
-                            <div className="mt-12 pt-12 border-t-2 border-dashed border-gray-800">
-                                <h3 className="text-green-500 font-mono text-xl mb-8 flex items-center gap-3">
-                                    <FaTerminal className="animate-pulse" /> PORTAL INTERACTIVO: 18 SQLi MASTERCLASSES
+                            <div className="mt-12 pt-12 border-t-2 border-dashed border-green-900/50 flex flex-col items-center justify-center bg-green-900/5 p-8 rounded-lg relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-[80px] rounded-full"></div>
+
+                                <h3 className="text-green-400 font-mono text-xl sm:text-2xl mb-4 flex items-center gap-3 font-bold text-center">
+                                    <FaTerminal className="animate-pulse" /> ACCESO AL PORTAL INTERACTIVO
                                 </h3>
-                                <SQLInjectionLabs />
+
+                                <p className="text-green-500/70 mb-8 max-w-lg text-center text-sm">
+                                    Explora el desglose técnico, análisis paso a paso y la evidencia gráfica en nuestro simulador en pantalla completa de 18 escenarios de SQL Injection.
+                                </p>
+
+                                <Link
+                                    to="/laboratorios-sql"
+                                    className="group relative inline-flex items-center gap-3 px-8 py-4 bg-green-500/10 hover:bg-green-500/20 border border-green-500/50 hover:border-green-400 text-green-400 hover:text-green-300 transition-all font-mono font-bold tracking-widest uppercase overflow-hidden"
+                                >
+                                    <span className="absolute left-0 bottom-0 w-full h-[2px] bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                                    <span className="relative">Iniciando Entorno de Laboratorios</span>
+                                    <FaTerminal className="relative group-hover:translate-x-1 transition-transform" />
+                                </Link>
                             </div>
                         )}
 

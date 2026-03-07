@@ -6,6 +6,7 @@ import ActivityDetail from './pages/ActivityDetail'
 import Footer from './components/Footer'
 import HackingGame from './components/HackingGame'
 import ScrollToTop from './components/ScrollToTop'
+import LabsPage from './pages/LabsPage'
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/actividades/:id" element={<ActivityDetail />} />
+            <Route path="/laboratorios-sql" element={<LabsPage />} />
           </Routes>
         </main>
         <HackingGame />
