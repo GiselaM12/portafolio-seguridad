@@ -30,11 +30,13 @@ const ActivityDetail = () => {
             4: "parcial1/1765222-act04.pdf",
             5: "parcial1/176522_Act 5.pdf",
             6: "parcial1/176522-ACT6.pdf",
-            "PR02": "parcial2/PR02_Gisela_Moreno_176522.pdf",
+            "PR02": "PR02.pdf",
             8: "parcial2/act08-Equipo1.pdf",
         };
         const fileName = fileMap[id];
-        return fileName ? `${import.meta.env.BASE_URL}${fileName}` : null;
+        // Ensure no double slashes and no leading slash if BASE_URL already has it
+        const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+        return fileName ? `${baseUrl}${fileName}` : null;
     };
 
     const fileUrl = getFileUrl(activity.id);
