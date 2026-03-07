@@ -16,13 +16,14 @@ const Projects = () => {
 
     // Helper to select icon based on activity ID or keyword
     const getIconForActivity = (id) => {
-        switch (id) {
-            case 1: return <FaBug />; // Ciberataque
-            case 2: return <FaShieldAlt />; // X.800
-            case 3: return <FaTerminal />; // IPTables
-            case 4: return <FaServer />; // Defensa en Red
-            case 5: return <FaUserSecret />; // Pentesting
-            case 6: return <FaNetworkWired />; // VPN
+        switch (String(id)) {
+            case "1": return <FaBug />; // Ciberataque
+            case "2": return <FaShieldAlt />; // X.800
+            case "3": return <FaTerminal />; // IPTables
+            case "4": return <FaServer />; // Defensa en Red
+            case "5": return <FaUserSecret />; // Pentesting
+            case "6": return <FaNetworkWired />; // VPN
+            case "8": return <FaDatabase />; // SQL Injection
             default: return <FaFolderPlus />;
         }
     };
@@ -37,14 +38,14 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: true
         })),
-        parcial2: activities.filter(act => act.id === "PR02").map(act => ({
-            icon: <FaShieldAlt />,
+        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8").map(act => ({
+            icon: getIconForActivity(act.id),
             title: act.title,
             description: act.description,
-            status: "In Progress",
+            status: "Available",
             link: `/actividades/${act.id}`,
-            isActivity: false
-        })).concat([lockedCard, lockedCard]),
+            isActivity: act.id !== "PR02"
+        })).concat([lockedCard]),
         parcial3: [lockedCard, lockedCard, lockedCard],
         final: [lockedCard, lockedCard, lockedCard]
     };
