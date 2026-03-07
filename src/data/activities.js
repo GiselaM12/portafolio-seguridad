@@ -1565,6 +1565,15 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
             <li><strong>Principio de Menor Privilegio (PoLP):</strong> Limitar radicalmente los permisos de red de la cuenta DB en uso para anular inyecciones de enumeración de estructura.</li>
         </ul >
       </div>
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">03_</span> CONCLUSIÓN DEL REPORTE TÉCNICO
+      </h2>
+      <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4 bg-black/40 p-6 rounded border border-gray-800">
+        <p>A lo largo del desarrollo de esta práctica documentada, que abarcó 18 retos estructuralmente progresivos en PortSwigger Web Security Academy, ha resurgido un patrón claro: <strong>la complejidad de la explotación no excluye su severidad</strong>. Mientras que algunos laboratorios requerían la concatenación de payloads matemáticos triviales (In-band), otros forzaban vías laterales como el análisis de latencia (Blind Time-based) o interacciones OAST (Out-Of-Band) para eludir contramedidas robustas reales.</p>
+        <p>En el panorama de ciberamenazas (como está reflejado perpetuamente en el OWASP Top 10), SQL Injection sigue encabezando los incidentes no por su innovación técnica, sino por un <strong>fallo humano recurrente en la validación y sanitización del flujo de entrada y salida directa a la capa de bases de datos.</strong></p>
+        <p>El diseño y resolución de esta base experimental (El "Road to Hall of Fame") garantiza no sólo mi capacidad para comprometer el modelo de capas de un servicio moderno usando vectores complejos y evasiones de WAF, sino el factor más importante para un analista de seguridad integral: <strong class="text-green-400">la certeza de poder asesorar e implementar su contramedida total y definitiva.</strong></p>
+      </div>
     `
   }
 ];

