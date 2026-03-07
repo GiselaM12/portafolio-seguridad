@@ -480,11 +480,11 @@ Please change the parent <Route path="${z}"> to <Route path="${z==="/"?"*":`${z}
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
         <div class="bg-[#0a0f1a] border border-red-900/30 rounded-lg overflow-hidden shadow-2xl transition-transform hover:scale-[1.02]">
           <div class="bg-red-900/20 px-4 py-2 border-b border-red-900/30 text-xs font-mono text-red-100">EVIDENCE_IMG_01</div>
-          <img src="/ACT 03.jfif" alt="Iptables Worksheet 1" class="w-full h-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <img src="/parcial 1/ACT 03.jfif" alt="Iptables Worksheet 1" class="w-full h-auto opacity-80 hover:opacity-100 transition-opacity" />
         </div>
         <div class="bg-[#0a0f1a] border border-red-900/30 rounded-lg overflow-hidden shadow-2xl transition-transform hover:scale-[1.02]">
           <div class="bg-red-900/20 px-4 py-2 border-b border-red-900/30 text-xs font-mono text-red-100">EVIDENCE_IMG_02</div>
-          <img src="/ACT 03.2.jfif" alt="Iptables Worksheet 2" class="w-full h-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <img src="/parcial 1/ACT 03.2.jfif" alt="Iptables Worksheet 2" class="w-full h-auto opacity-80 hover:opacity-100 transition-opacity" />
         </div>
       </div>
 
@@ -957,7 +957,7 @@ Please change the parent <Route path="${z}"> to <Route path="${z==="/"?"*":`${z}
           DIAGRAMA DE RED Y TÚNEL ESTABLECIDO
         </h3>
         <div class="bg-black/40 border border-violet-500/30 rounded-lg p-2 shadow-2xl overflow-hidden">
-          <img src="evidence/act06/image31.png" alt="Topología Final VPN IPSec" class="w-full rounded border border-gray-800 hover:scale-[1.02] transition-transform duration-500" />
+          <img src="/parcial 1/evidence/act06/image31.png" alt="Topología Final VPN IPSec" class="w-full rounded border border-gray-800 hover:scale-[1.02] transition-transform duration-500" />
           <p class="text-xs text-gray-500 mt-2 text-center italic">Fig 1.1: Diagrama de red Site-to-Site con túnel IPSec activo entre R1 y R2.</p>
         </div>
       </div>
@@ -975,7 +975,7 @@ Please change the parent <Route path="${z}"> to <Route path="${z==="/"?"*":`${z}
             </div>
           </div>
           <div class="border border-gray-800 rounded overflow-hidden shadow-lg bg-black/20 p-1">
-            <img src="evidence/act06/image13.png" alt="Activación de Licencia" class="w-full opacity-80 hover:opacity-100 transition-opacity" />
+            <img src="/parcial 1/evidence/act06/image13.png" alt="Activación de Licencia" class="w-full opacity-80 hover:opacity-100 transition-opacity" />
           </div>
         </div>
       </div>
@@ -985,17 +985,17 @@ Please change the parent <Route path="${z}"> to <Route path="${z==="/"?"*":`${z}
         <div class="space-y-4">
           <div class="bg-white/5 p-4 rounded border border-gray-800">
             <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Evidencia R1 Config</h4>
-            <img src="evidence/act06/image6.png" alt="Configuración Router 1" class="w-full rounded border border-gray-900 shadow-md" />
+            <img src="/parcial 1/evidence/act06/image6.png" alt="Configuración Router 1" class="w-full rounded border border-gray-900 shadow-md" />
           </div>
           <div class="bg-white/5 p-4 rounded border border-gray-800">
             <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Evidencia ISP Config</h4>
-            <img src="evidence/act06/image10.png" alt="Configuración ISP" class="w-full rounded border border-gray-900 shadow-md" />
+            <img src="/parcial 1/evidence/act06/image10.png" alt="Configuración ISP" class="w-full rounded border border-gray-900 shadow-md" />
           </div>
         </div>
         <div class="space-y-4">
           <div class="bg-white/5 p-4 rounded border border-gray-800 h-full flex flex-col justify-center">
             <h4 class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Evidencia R2 Config</h4>
-            <img src="evidence/act06/image8.png" alt="Configuración Router 2" class="w-full rounded border border-gray-900 shadow-md mb-2" />
+            <img src="/parcial 1/evidence/act06/image8.png" alt="Configuración Router 2" class="w-full rounded border border-gray-900 shadow-md mb-2" />
             <p class="text-[9px] text-gray-500 italic">Captura del proceso de asignación de direccionamiento IP y levantamiento de interfaces en la sede remota.</p>
           </div>
         </div>
