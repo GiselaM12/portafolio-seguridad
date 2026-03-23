@@ -664,43 +664,86 @@ const PhishingQuiz = () => {
                 {/* ═══ RANKING ═══ */}
                 {gameState === 'ranking' && (
                     <motion.div key="ranking" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                        className="bg-gradient-to-b from-[#0c0c1d] to-[#111127] border border-violet-500/15 rounded-3xl p-10 md:p-16 shadow-xl">
+                        className="bg-gradient-to-b from-[#0c0c1d] to-[#111127] border border-violet-500/15 rounded-3xl p-6 md:p-16 shadow-2xl relative overflow-hidden">
+                        
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-violet-500/50 to-transparent"></div>
 
-                        <h2 className="text-4xl md:text-5xl font-black text-white mb-10 flex items-center justify-center gap-4 font-sans">
-                            <FaChartLine className="text-violet-400" />
-                            <span>Top Agentes</span>
-                        </h2>
-
-                        <div className="overflow-hidden border border-white/5 rounded-xl mb-8">
-                            <table className="w-full text-left">
-                                <thead className="bg-violet-600/8 font-sans text-violet-400/80 text-sm">
-                                    <tr>
-                                        <th className="px-6 py-4 font-semibold">#</th>
-                                        <th className="px-6 py-4 font-semibold">Agente</th>
-                                        <th className="px-6 py-4 text-center font-semibold">Score</th>
-                                        <th className="px-6 py-4 text-right font-semibold">Fecha</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-white/5">
-                                    {leaderboard.length > 0 ? leaderboard.map((entry, i) => (
-                                        <motion.tr key={entry.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                                            className={`${entry.name === username ? 'bg-violet-600/15' : ''} text-gray-300 font-sans`}>
-                                            <td className="px-6 py-5 font-bold text-violet-400 text-xl">{i + 1}</td>
-                                            <td className="px-6 py-5 font-bold uppercase tracking-wide text-xl text-white">{entry.name}</td>
-                                            <td className="px-6 py-5 text-center font-bold text-xl">{entry.score}/10</td>
-                                            <td className="px-6 py-5 text-right text-gray-500 text-sm">{entry.date}</td>
-                                        </motion.tr>
-                                    )) : (
-                                        <tr><td colSpan="4" className="px-6 py-14 text-center text-gray-600 italic font-sans">Sin registros aún — ¡Sé el primero!</td></tr>
-                                    )}
-                                </tbody>
-                            </table>
+                        <div className="text-center mb-16 relative">
+                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="inline-block p-4 rounded-3xl bg-violet-500/10 border border-violet-500/20 mb-6 shadow-[0_0_30px_rgba(139,92,246,0.1)]">
+                                <FaStar className="text-5xl text-violet-400" />
+                            </motion.div>
+                            <h2 className="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter font-sans">
+                                Top <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">Agentes</span>
+                            </h2>
+                            <p className="text-gray-500 text-xs mt-4 uppercase tracking-[0.4em] font-mono">Resiliencia Cognitiva Registrada</p>
                         </div>
 
-                        <button onClick={() => setGameState('intro')}
-                            className="w-full bg-white/5 border border-white/10 text-gray-400 hover:bg-violet-600 hover:text-white hover:border-violet-500 py-4 rounded-xl transition-all text-sm font-semibold font-sans">
-                            ← Volver al inicio
-                        </button>
+                        <div className="max-w-4xl mx-auto space-y-4 mb-16">
+                            {leaderboard.length > 0 ? leaderboard.map((entry, i) => (
+                                <motion.div key={entry.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
+                                    className={`relative group flex items-center gap-4 md:gap-8 p-4 md:p-6 rounded-2xl border transition-all duration-300 ${
+                                        entry.name === username ? 'bg-violet-600/15 border-violet-500/50 shadow-[0_0_30px_rgba(139,92,246,0.2)] scale-[1.02] z-10' : 
+                                        'bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:ring-1 hover:ring-white/10'
+                                    }`}>
+                                    
+                                    {/* Rank badge */}
+                                    <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center font-black text-2xl md:text-3xl shrink-0 ${
+                                        i === 0 ? 'bg-gradient-to-br from-yellow-300 to-yellow-600 text-black shadow-[0_0_20px_rgba(234,179,8,0.4)]' :
+                                        i === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-black shadow-[0_0_20px_rgba(156,163,175,0.4)]' :
+                                        i === 2 ? 'bg-gradient-to-br from-orange-400 to-orange-700 text-black shadow-[0_0_20px_rgba(194,65,12,0.4)]' :
+                                        'bg-white/5 text-gray-500 border border-white/10'
+                                    }`}>
+                                        {i + 1}
+                                    </div>
+
+                                    {/* Name & Date */}
+                                    <div className="flex-grow min-w-0">
+                                        <div className="flex items-center gap-3">
+                                            <h3 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter truncate font-mono">
+                                                {entry.name}
+                                            </h3>
+                                            {i === 0 && <span className="bg-yellow-500/20 text-yellow-400 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-widest border border-yellow-500/30 font-mono">Champion</span>}
+                                        </div>
+                                        <p className="text-[10px] text-gray-500 font-mono uppercase tracking-widest mt-1 opacity-60">
+                                            Operativo: {entry.date}
+                                        </p>
+                                    </div>
+
+                                    {/* Score visualizer */}
+                                    <div className="flex flex-col items-end gap-2 shrink-0">
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-[10px] text-gray-500 font-mono uppercase font-black">Accuracy</span>
+                                            <span className={`text-xl md:text-3xl font-black font-mono ${
+                                                entry.score > 7 ? 'text-emerald-400' : entry.score > 4 ? 'text-amber-400' : 'text-red-400'
+                                            }`}>
+                                                {entry.score * 10}%
+                                            </span>
+                                        </div>
+                                        <div className="w-24 md:w-32 h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                                            <motion.div initial={{ width: 0 }} animate={{ width: `${entry.score * 10}%` }} transition={{ duration: 1, delay: i * 0.2 }}
+                                                className={`h-full rounded-full ${
+                                                    entry.score > 7 ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 
+                                                    entry.score > 4 ? 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 
+                                                    'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]'
+                                                }`} />
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )) : (
+                                <div className="py-20 text-center bg-white/[0.02] border border-dashed border-white/10 rounded-3xl">
+                                    <FaExclamationTriangle className="text-5xl text-gray-700 mx-auto mb-4 opacity-20" />
+                                    <p className="text-gray-600 italic font-mono uppercase tracking-widest text-sm">Sin registros operativos aún</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="max-w-xs mx-auto">
+                            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                                onClick={() => setGameState('intro')}
+                                className="w-full bg-violet-600/10 border border-violet-500/30 text-violet-400 hover:bg-violet-600 hover:text-white py-4 rounded-xl transition-all text-xs font-black uppercase tracking-[0.2em] font-sans">
+                                ← Volver al puente de mando
+                            </motion.button>
+                        </div>
                     </motion.div>
                 )}
 
