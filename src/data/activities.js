@@ -1726,121 +1726,131 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
                     <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">10</span>
                     <h5 class="text-white font-black text-sm uppercase tracking-tighter">LinkedIn Connection Request</h5>
                   </div>
-                  <p class="text-gray-400 text-sm font-light leading-relaxed mb-6 flex-grow">
-                    Spear Phishing dirigido a perfiles profesionales. El archivo <code class="text-violet-300 bg-white/5 px-1 rounded">Resume.pdf.exe</code> contiene un troyano de acceso remoto (RAT).
-                  </p>
-                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">ZERO_DAY_RAT</span>
-                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_010</span>
-                  </div>
-                </div>
-            </div>
-          </div>
-
-          <!-- Leaderboard Advanced Dashboard -->
-          <div class="bg-gradient-to-br from-[#030712] to-black border border-violet-500/20 rounded-[4rem] p-12 md:p-20 shadow-2xl relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
-            
-            <div class="relative z-10 flex flex-col lg:flex-row gap-20 items-center">
-              <div class="lg:w-1/2">
-                <div class="inline-flex items-center gap-4 px-6 py-2 bg-violet-600/10 border border-violet-500/30 rounded-full mb-10">
-                  <span class="flex h-3 w-3 relative">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-violet-500"></span>
-                  </span>
-                  <span class="text-xs text-violet-400 font-mono font-black uppercase tracking-[0.4em]">Live_Audit_Active</span>
-                </div>
-                <h3 class="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Security <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-400">Hall of Fame</span></h3>
-                <p class="text-gray-500 text-lg font-light mb-12 max-w-md">Cuantificación del desempeño humano ante la matriz de simulación. <strong class="text-white">Top 1% Global.</strong></p>
-                <button class="w-full bg-violet-600 hover:bg-violet-500 text-white font-black py-8 px-12 rounded-[2rem] text-sm uppercase tracking-[0.5em] transition-all hover:scale-[1.02] shadow-[0_30px_80px_rgba(139,92,246,0.4)] active:scale-95 flex items-center justify-center gap-4 group">
-                  <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-1.17-12.29a2.996 2.996 0 000 5.438m1.532 1.91c.173.199.341.413.504.644m-1.532-1.91a2.996 2.996 0 010-5.438m1.532-1.91c.173-.199.341-.413.504-.644M12 11V9m0 2v2m0-5a7 7 0 110 14h-1a7 7 0 007-7V9a7 7 0 00-7-7h-1a7 7 0 017 7z"></path></svg>
-                  VALIDAR IDENTIDAD & ACCEDER
-                </button>
-              </div>
-
-              <div class="lg:w-1/2 w-full space-y-4">
-                <div class="bg-violet-600 text-black p-8 rounded-[2.5rem] flex items-center justify-between shadow-[0_20px_60px_rgba(139,92,246,0.4)] group">
-                  <div class="flex items-center gap-6">
-                    <span class="text-4xl font-black italic opacity-20">01</span>
-                    <div class="h-12 w-[2px] bg-black/20"></div>
-                    <div>
-                      <span class="text-xl font-black uppercase tracking-tighter block leading-none">Moreno Solís Gisela</span>
-                      <span class="text-[10px] font-mono font-black uppercase tracking-widest opacity-60">Status: GOD_LIKE_SENTRY</span>
-                    </div>
-                  </div>
-                  <div class="text-right">
-                    <span class="text-2xl font-black block leading-none">10/10</span>
-                    <span class="text-[10px] font-mono font-black uppercase tracking-widest opacity-60">PUNTUACIÓN</span>
-                  </div>
-                </div>
-
-                <div class="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] flex items-center justify-between group hover:bg-white/10 transition-all opacity-70 hover:opacity-100">
-                  <div class="flex items-center gap-6">
-                    <span class="text-4xl font-black italic opacity-10">02</span>
-                    <div class="h-12 w-[1px] bg-white/10"></div>
-                    <div>
-                      <span class="text-lg font-black text-gray-300 uppercase tracking-tighter block leading-none">Red_Team_Analyst_09</span>
-                      <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-600">Status: SENIOR_OPERATOR</span>
-                    </div>
-                  </div>
-                  <div class="text-right">
-                    <span class="text-xl font-black text-white block leading-none">10/10</span>
-                  </div>
-                </div>
-
-                <div class="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] flex items-center justify-between group hover:bg-white/10 transition-all opacity-40">
-                  <div class="flex items-center gap-6">
-                    <span class="text-4xl font-black italic opacity-10">03</span>
-                    <div class="h-12 w-[1px] bg-white/10"></div>
-                    <div>
-                      <span class="text-lg font-black text-gray-500 uppercase tracking-tighter block leading-none">Guest_Security_Probe</span>
-                      <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-800">Status: EXTERNAL_AUDIT</span>
-                    </div>
-                  </div>
-                  <div class="text-right text-gray-600">
-                    <span class="text-xl font-black block leading-none">09/10</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                 </div>
         </div>
       </div>
 
-      <h2 class="text-white font-mono text-3xl mb-12 flex items-center gap-6 group">
-        <span class="text-violet-600 font-black">04_</span> 
-        <span class="uppercase tracking-[0.2em] font-black text-sm">Rúbrica de Excelencia Técnica</span>
-        <div class="h-[2px] flex-grow bg-white/5 group-hover:bg-violet-600/50 transition-all"></div>
+      <h2 class="text-violet-500 font-mono text-4xl mb-12 flex items-center gap-6 group relative">
+        <span class="absolute -left-8 top-1/2 -translate-y-1/2 w-1 h-12 bg-violet-600 rounded-full group-hover:h-16 transition-all duration-500"></span>
+        <span class="text-gray-800 font-black tracking-tighter opacity-20 group-hover:opacity-40 transition-opacity">03_</span> 
+        <span class="tracking-tighter font-black uppercase">Tabla Técnica Comparativa (Matriz de Capacidades)</span>
+        <div class="h-[1px] flex-grow bg-gradient-to-r from-violet-600/50 via-indigo-500/20 to-transparent ml-4"></div>
       </h2>
 
-      <div class="overflow-hidden rounded-[3rem] border border-white/10 bg-black/40 shadow-2xl mb-24 backdrop-blur-md">
-        <table class="w-full text-left border-collapse">
-            <thead class="bg-violet-600 text-black">
+      <div class="overflow-x-auto mb-24 rounded-2xl border border-violet-500/20 bg-black/40 shadow-2xl backdrop-blur-md">
+        <table class="w-full text-left border-collapse min-w-[900px]">
+            <thead class="bg-violet-600/15">
                 <tr>
-                    <th class="p-10 text-xs font-black uppercase tracking-[0.3em]">Criterio de Evaluación</th>
-                    <th class="p-10 text-center text-xs font-black uppercase tracking-[0.3em]">Impacto</th>
-                    <th class="p-10 text-xs font-black uppercase tracking-[0.3em]">Nivel de Excelencia</th>
+                    <th class="p-5 text-violet-300 text-xs font-black uppercase tracking-[0.2em] border-b border-violet-500/20">Plataforma</th>
+                    <th class="p-5 text-violet-300 text-xs font-black uppercase tracking-[0.2em] border-b border-violet-500/20">Analítica / KPIs</th>
+                    <th class="p-5 text-violet-300 text-xs font-black uppercase tracking-[0.2em] border-b border-violet-500/20">Integración Técnica</th>
+                    <th class="p-5 text-violet-300 text-xs font-black uppercase tracking-[0.2em] border-b border-violet-500/20">Enfoque Ético</th>
+                    <th class="p-5 text-violet-300 text-xs font-black uppercase tracking-[0.2em] border-b border-violet-500/20">Limitaciones</th>
+                    <th class="p-5 text-violet-300 text-xs font-black uppercase tracking-[0.2em] border-b border-violet-500/20">Compliance</th>
                 </tr>
             </thead>
-            <tbody class="text-gray-400">
-                <tr class="border-b border-white/10 hover:bg-violet-600/5 transition-colors">
-                    <td class="p-10 font-black text-white uppercase text-sm tracking-tighter">Sofisticación del Vector</td>
-                    <td class="p-10 text-center font-mono font-black text-violet-500 text-2xl">20%</td>
-                    <td class="p-10 text-sm font-light italic">Replicación exacta de ataques de Día Cero con indicadores técnicos granulares y verosímiles.</td>
+            <tbody class="text-gray-300 text-sm font-mono">
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-amber-400">Hoxhunt</td>
+                    <td class="p-5">Success/Fail Rate</td>
+                    <td class="p-5">Native Outlook Add-in</td>
+                    <td class="p-5">Refuerzo Positivo</td>
+                    <td class="p-5 text-gray-500">Dependencia de Telemetría</td>
+                    <td class="p-5 font-bold text-violet-400">GDPR</td>
                 </tr>
-                <tr class="border-b border-white/10 hover:bg-violet-600/5 transition-colors">
-                    <td class="p-10 font-black text-white uppercase text-sm tracking-tighter">UX de Diagnóstico</td>
-                    <td class="p-10 text-center font-mono font-black text-violet-500 text-2xl">15%</td>
-                    <td class="p-10 text-sm font-light italic">Entorno de interacción fluido con HUD de feedback inmediato para el aprendizaje preventivo.</td>
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-blue-400">Proofpoint</td>
+                    <td class="p-5">Vulnerability Score</td>
+                    <td class="p-5">Cloud Email Security</td>
+                    <td class="p-5">Protección Centrada</td>
+                    <td class="p-5 text-gray-500">Costo Licenciamiento</td>
+                    <td class="p-5 font-bold text-violet-400">FISMA/SOC2</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-green-400">KnowBe4</td>
+                    <td class="p-5">Industry Benchmarking</td>
+                    <td class="p-5">AD/Azure API Push</td>
+                    <td class="p-5">Teachable Moments</td>
+                    <td class="p-5 text-gray-500">Sobrecarga Contenido</td>
+                    <td class="p-5 font-bold text-violet-400">HIPAA/PCI</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-red-400">Cofense</td>
+                    <td class="p-5">Accuracy Score</td>
+                    <td class="p-5">SOAR/SIEM Connect</td>
+                    <td class="p-5">Colaboración SOC</td>
+                    <td class="p-5 text-gray-500">Manejo de Triage</td>
+                    <td class="p-5 font-bold text-violet-400">FedRAMP</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-cyan-400">Phished</td>
+                    <td class="p-5">Behavioral Index</td>
+                    <td class="p-5">Full Cloud API</td>
+                    <td class="p-5">No-Bias AI</td>
+                    <td class="p-5 text-gray-500">Poco Control Manual</td>
+                    <td class="p-5 font-bold text-violet-400">ISO 27001</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-purple-400">NINJIO</td>
+                    <td class="p-5">Engagement Metrics</td>
+                    <td class="p-5">LMS/SCORM 1.2</td>
+                    <td class="p-5">Empatía Cognitiva</td>
+                    <td class="p-5 text-gray-500">Multimedia HD</td>
+                    <td class="p-5 font-bold text-violet-400">SOC2 Type II</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-5 font-bold text-gray-300">Mimecast</td>
+                    <td class="p-5">SAFE Score</td>
+                    <td class="p-5">Gateway Nativo</td>
+                    <td class="p-5">Risk Signals</td>
+                    <td class="p-5 text-gray-500">Vendor Lock-in</td>
+                    <td class="p-5 font-bold text-violet-400">SOC2/GDPR</td>
                 </tr>
                 <tr class="hover:bg-violet-600/5 transition-colors">
-                    <td class="p-10 font-black text-white uppercase text-sm tracking-tighter">Compliance Ético</td>
-                    <td class="p-10 text-center font-mono font-black text-violet-500 text-2xl">15%</td>
-                    <td class="p-10 text-sm font-light italic">Manejo impecable de la privacidad por diseño y transparencia absoluta con el eslabón humano.</td>
+                    <td class="p-5 font-bold text-orange-400">Infosec IQ</td>
+                    <td class="p-5">IQ Score + NICE</td>
+                    <td class="p-5">SCORM/NIST Align</td>
+                    <td class="p-5">Role-Based Training</td>
+                    <td class="p-5 text-gray-500">UI Compleja</td>
+                    <td class="p-5 font-bold text-violet-400">FISMA/NIST</td>
                 </tr>
             </tbody>
         </table>
       </div>
+
+      <h2 class="text-violet-500 font-mono text-4xl mb-12 flex items-center gap-6 group relative">
+        <span class="absolute -left-8 top-1/2 -translate-y-1/2 w-1 h-12 bg-violet-600 rounded-full group-hover:h-16 transition-all duration-500"></span>
+        <span class="text-gray-800 font-black tracking-tighter opacity-20 group-hover:opacity-40 transition-opacity">04_</span> 
+        <span class="tracking-tighter font-black uppercase">Análisis Crítico y Conclusiones Comparativas</span>
+        <div class="h-[1px] flex-grow bg-gradient-to-r from-violet-600/50 via-indigo-500/20 to-transparent ml-4"></div>
+      </h2>
+
+      <div class="bg-[#0a0f1a] border border-violet-500/15 rounded-2xl p-10 mb-10 shadow-xl">
+        <h4 class="text-amber-400 font-black uppercase tracking-widest text-sm mb-6">Hallazgos y Recomendaciones de Contexto</h4>
+        <div class="space-y-5">
+          <div class="flex items-start gap-4 p-5 bg-white/3 border border-white/5 rounded-xl hover:border-violet-500/20 transition-all">
+            <span class="text-violet-500 font-black text-lg mt-0.5">▸</span>
+            <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-amber-400">Para PyMEs con Recursos Limitados:</strong> Se recomienda <strong class="text-white">Phished</strong> debido a su automatización de "piloto automático", que elimina la necesidad de un equipo de ciberseguridad dedicado al diseño de campañas.</p>
+          </div>
+          <div class="flex items-start gap-4 p-5 bg-white/3 border border-white/5 rounded-xl hover:border-violet-500/20 transition-all">
+            <span class="text-violet-500 font-black text-lg mt-0.5">▸</span>
+            <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-amber-400">Para Sectores Altamente Regulados (Finanzas/Salud):</strong> <strong class="text-white">KnowBe4</strong> e <strong class="text-white">Infosec IQ</strong> ofrecen los mejores marcos de cumplimiento (HIPAA, PCI-DSS) y benchmarks industriales para justificar auditorías.</p>
+          </div>
+          <div class="flex items-start gap-4 p-5 bg-white/3 border border-white/5 rounded-xl hover:border-violet-500/20 transition-all">
+            <span class="text-violet-500 font-black text-lg mt-0.5">▸</span>
+            <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-amber-400">Para Organizaciones con SOC Propio:</strong> <strong class="text-white">Cofense</strong> es el líder indiscutible, ya que integra el reporte técnico del usuario directamente al flujo de respuesta ante incidentes.</p>
+          </div>
+          <div class="flex items-start gap-4 p-5 bg-white/3 border border-white/5 rounded-xl hover:border-violet-500/20 transition-all">
+            <span class="text-violet-500 font-black text-lg mt-0.5">▸</span>
+            <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-amber-400">Para Transformación Cultural a Gran Escala:</strong> <strong class="text-white">Hoxhunt</strong> con su motor de IA agéntica y gamificación adaptativa logra las tasas de engagement más altas del mercado.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-violet-900/20 to-indigo-900/20 border border-violet-500/20 rounded-2xl p-8 mb-24 text-center">
+        <p class="text-violet-300 text-lg italic font-light leading-relaxed">"La métrica suprema de resiliencia no es la prevención del clic, sino el <strong class="text-white font-bold">reporte activo de la amenaza</strong>."</p>
+      </div>
+
       <div class="bg-gradient-to-br from-red-600/20 via-black to-black border-2 border-red-900/50 rounded-[4rem] p-16 md:p-24 shadow-[0_50px_100px_rgba(239,68,68,0.1)] relative overflow-hidden group mb-24">
         <div class="absolute -top-24 -right-24 w-64 h-64 bg-red-600/10 blur-[100px] rounded-full group-hover:bg-red-600/20 transition-all duration-1000"></div>
         <div class="relative z-10">
@@ -1853,15 +1863,23 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         </div>
       </div>
 
-      <h2 class="text-white font-mono text-3xl mb-12 flex items-center gap-6 group">
-        <span class="text-violet-600 font-black">05_</span> 
-        <span class="uppercase tracking-[0.2em] font-black text-sm">Referencias Bibliográficas (APA 7)</span>
-        <div class="h-[2px] flex-grow bg-white/5 group-hover:bg-violet-600/50 transition-all"></div>
+      <h2 class="text-violet-500 font-mono text-4xl mb-12 flex items-center gap-6 group relative">
+        <span class="absolute -left-8 top-1/2 -translate-y-1/2 w-1 h-12 bg-violet-600 rounded-full group-hover:h-16 transition-all duration-500"></span>
+        <span class="text-gray-800 font-black tracking-tighter opacity-20 group-hover:opacity-40 transition-opacity">05_</span> 
+        <span class="tracking-tighter font-black uppercase">Referencias Bibliográficas (APA 7)</span>
+        <div class="h-[1px] flex-grow bg-gradient-to-r from-violet-600/50 via-indigo-500/20 to-transparent ml-4"></div>
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[10px] text-gray-500 font-mono italic mb-12">
-        <p class="p-4 bg-white/5 rounded-xl border border-white/5">Cofense. (2026). <em>Technical Overview and Collective Intelligence</em>. https://cofense.com/</p>
-        <p class="p-4 bg-white/5 rounded-xl border border-white/5">National Institute of Standards and Technology. (2022). <em>NIST SP 800-50</em>. U.S. Department of Commerce.</p>
-        <p class="p-4 bg-white/5 rounded-xl border border-white/5 col-span-1 md:col-span-2 text-center italic">KnowBe4. (2026). <em>Phishing Industry Benchmarking Report</em>. https://www.knowbe4.com/</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] text-gray-500 font-mono italic mb-16">
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Hoxhunt. (2025). <em>Agentic Reasoning Engine: Technical Overview</em>. https://www.hoxhunt.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Proofpoint. (2026). <em>Human Factor Report and Security Awareness</em>. https://www.proofpoint.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">KnowBe4. (2026). <em>Phishing Industry Benchmarking Report</em>. https://www.knowbe4.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Cofense. (2026). <em>Cofense Intelligence Network & Triage Technical Overview</em>. https://cofense.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Phished. (2026). <em>Behavioral Risk Score: Continuous Risk Quantification</em>. https://phished.io/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">NINJIO. (2026). <em>Edutainment Security Awareness Training</em>. https://ninjio.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Mimecast. (2026). <em>Human Risk Management & Engage Platform</em>. https://www.mimecast.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Infosec IQ. (2026). <em>NICE Framework NIST Aligned Training</em>. https://www.infosecinstitute.com/</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">National Institute of Standards and Technology. (2022). <em>NIST SP 800-50: Building IT Security Awareness Programs</em>. U.S. Department of Commerce.</p>
+        <p class="p-5 bg-white/5 rounded-xl border border-white/5 hover:border-violet-500/20 transition-all">Google. (2026). <em>Phishing Quiz: Can You Spot a Scam?</em>. https://phishingquiz.withgoogle.com/</p>
       </div>
     `
   },
