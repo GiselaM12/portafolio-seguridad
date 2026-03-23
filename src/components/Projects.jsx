@@ -24,6 +24,7 @@ const Projects = () => {
             case "5": return <FaUserSecret />; // Pentesting
             case "6": return <FaNetworkWired />; // VPN
             case "8": return <FaDatabase />; // SQL Injection
+            case "PR02": return <FaUserSecret />; // Phishing / Engineering Social
             default: return <FaFolderPlus />;
         }
     };

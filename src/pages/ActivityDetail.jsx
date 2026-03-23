@@ -52,7 +52,7 @@ const ActivityDetail = () => {
 
     // Custom styles for the dynamic content
     const customStyles = `
-        .report-content h2 {
+        .standard-report h2 {
             color: #a78bfa; /* violet-400 */
             font-family: 'Courier New', monospace;
             font-size: 1.5rem;
@@ -64,59 +64,94 @@ const ActivityDetail = () => {
             display: flex;
             align-items: center;
         }
-        .report-content h2::before {
+        .standard-report h2::before {
             content: '>>';
             margin-right: 10px;
             color: #8b5cf6;
         }
-        .report-content p {
+        .standard-report p {
             margin-bottom: 1rem;
             line-height: 1.7;
             color: #d1d5db; /* gray-300 */
         }
-        .report-content strong {
+        .standard-report strong {
             color: #ffffff;
             font-weight: 600;
         }
-        .report-content ul {
+        .standard-report ul {
             list-style-type: none;
             padding-left: 0;
         }
-        .report-content li {
+        .standard-report li {
             position: relative;
             padding-left: 1.5rem;
             margin-bottom: 0.5rem;
         }
-        .report-content li::before {
+        .standard-report li::before {
             content: '>';
             position: absolute;
             left: 0;
             color: #ef4444; /* red-500 */
             font-family: monospace;
         }
-        .report-content table {
+        .standard-report table {
             width: 100%;
             border-collapse: collapse;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
             background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
         }
-        .report-content th {
-            background-color: rgba(139, 92, 246, 0.1);
+        .standard-report th {
+            background-color: rgba(139, 92, 246, 0.15);
             color: #c4b5fd;
             border: 1px solid #4c1d95;
-            padding: 10px;
+            padding: 16px 18px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
-        .report-content td {
+        .standard-report td {
             border: 1px solid #334155;
-            padding: 10px;
+            padding: 16px 18px;
             color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.6;
         }
-        .report-content tr:hover td {
-            background-color: rgba(139, 92, 246, 0.05);
+        .standard-report tr:hover td {
+            background-color: rgba(139, 92, 246, 0.07);
+        }
+        
+        /* HUD Specific overrides to prevent clashing */
+        .hud-content h2, .hud-content p, .hud-content table {
+            margin: revert;
+            padding: revert;
+            border: revert;
+            background: revert;
+            color: revert;
+            font-family: revert;
+        }
+        .hud-content details summary {
+            font-size: 1.05rem !important;
+            padding: 20px 24px !important;
+        }
+        .hud-content details > div {
+            padding: 28px 32px !important;
+            font-size: 1rem !important;
+            line-height: 1.75 !important;
+        }
+        .hud-content details > div p {
+            font-size: 1rem !important;
+            line-height: 1.75 !important;
+        }
+        .hud-content details > div .grid > div {
+            padding: 20px !important;
+        }
+        .hud-content details > div .grid > div p {
+            font-size: 0.9rem !important;
         }
     `;
 
@@ -130,7 +165,7 @@ const ActivityDetail = () => {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
             </div>
 
-            <div className="max-w-6xl mx-auto px-6 relative z-10">
+            <div className={`${activity.id === 'PR02' ? 'max-w-7xl' : 'max-w-6xl'} mx-auto px-6 relative z-10`}>
 
                 {/* Top Navigation Bar */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
@@ -183,59 +218,87 @@ const ActivityDetail = () => {
                     </div>
                 </div>
 
-                {/* Main Forensic Report Container */}
+                {/* Main Forensic Report Container / HUD */}
                 <motion.article
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="relative bg-[#0a0a0a] border border-gray-800 shadow-2xl overflow-hidden"
+                    className={`relative overflow-hidden transition-all duration-700 ${
+                        activity.id === 'PR02' 
+                        ? "bg-black/20 backdrop-blur-3xl border-2 border-violet-500/20 rounded-[4rem] shadow-[0_0_100px_rgba(139,92,246,0.15)] ring-1 ring-violet-500/10" 
+                        : "bg-[#0a0a0a] border border-gray-800 shadow-2xl"
+                    }`}
                 >
                     {/* Decorative Top Bar */}
-                    <div className="h-2 bg-gradient-to-r from-red-900 via-red-600 to-red-900 w-full"></div>
+                    <div className={`h-2 w-full ${
+                        activity.id === 'PR02' 
+                        ? "bg-gradient-to-r from-violet-900 via-violet-600 to-indigo-900" 
+                        : "bg-gradient-to-r from-red-900 via-red-600 to-red-900"
+                    }`}></div>
 
                     {/* Watermark */}
-                    <div className="absolute top-10 right-10 opacity-10 pointer-events-none rotate-12 border-4 border-red-500 rounded p-4">
-                        <span className="text-6xl font-black text-red-500 uppercase tracking-widest">CONFIDENTIAL</span>
+                    <div className={`absolute top-10 right-10 opacity-5 pointer-events-none rotate-12 border-4 rounded p-4 ${
+                        activity.id === 'PR02' ? "border-violet-500 text-violet-500" : "border-red-500 text-red-500"
+                    }`}>
+                        <span className="text-6xl font-black uppercase tracking-widest">
+                            {activity.id === 'PR02' ? "TOP_SECRET" : "CONFIDENTIAL"}
+                        </span>
                     </div>
 
                     <div className="p-8 md:p-16 relative">
                         {/* Header Section */}
-                        <header className="border-b-2 border-gray-800 pb-8 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                        <header className={`border-b-2 pb-8 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 ${
+                             activity.id === 'PR02' ? "border-violet-500/20" : "border-gray-800"
+                        }`}>
                             <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <span className="bg-red-500/10 text-red-500 border border-red-500/20 px-2 py-1 text-xs font-mono rounded">
+                                    <span className={`px-2 py-1 text-xs font-mono rounded border ${
+                                        activity.id === 'PR02' 
+                                        ? "bg-violet-500/10 text-violet-500 border-violet-500/20" 
+                                        : "bg-red-500/10 text-red-500 border-red-500/20"
+                                    }`}>
                                         INCIDENT REPORT #{String(activity.id).padStart(4, '0')}
                                     </span>
-                                    <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 text-xs font-mono rounded flex items-center gap-1">
+                                    <span className={`px-2 py-1 text-xs font-mono rounded border flex items-center gap-1 ${
+                                        activity.id === 'PR02'
+                                        ? "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
+                                        : "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                                    }`}>
                                         <FaShieldAlt className="text-[10px]" /> FORENSIC ANALYSIS
                                     </span>
                                 </div>
-                                <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 tracking-tight uppercase font-mono">
+                                <h1 className={`text-3xl md:text-5xl font-black mb-2 tracking-tight uppercase font-mono ${
+                                    activity.id === 'PR02' ? "text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-300" : "text-white"
+                                }`}>
                                     {activity.title}
                                 </h1>
-                                <p className="text-gray-500 font-mono text-sm max-w-2xl">
+                                <p className="text-gray-500 font-mono text-sm max-w-2xl italic">
                                     {activity.description}
                                 </p>
                             </div>
 
                             <div className="text-right font-mono text-xs text-gray-500 space-y-1 min-w-[150px]">
-                                <div className="flex justify-between md:justify-end gap-4 border-b border-gray-800 pb-1">
+                                <div className={`flex justify-between md:justify-end gap-4 border-b pb-1 ${
+                                    activity.id === 'PR02' ? "border-violet-500/10" : "border-gray-800"
+                                }`}>
                                     <span>DATE:</span>
-                                    <span className="text-gray-300">{activity.date}</span>
+                                    <span className={activity.id === 'PR02' ? "text-violet-300" : "text-gray-300"}>{activity.date}</span>
                                 </div>
-                                <div className="flex justify-between md:justify-end gap-4 border-b border-gray-800 pb-1">
+                                <div className={`flex justify-between md:justify-end gap-4 border-b pb-1 ${
+                                    activity.id === 'PR02' ? "border-violet-500/10" : "border-gray-800"
+                                }`}>
                                     <span>OFFICER:</span>
-                                    <span className="text-gray-300">G. Moreno</span>
+                                    <span className={activity.id === 'PR02' ? "text-violet-300" : "text-gray-300"}>G. Moreno</span>
                                 </div>
                                 <div className="flex justify-between md:justify-end gap-4">
                                     <span>CLEARANCE:</span>
-                                    <span className="text-red-500 font-bold animate-pulse">LEVEL 5</span>
+                                    <span className={`${activity.id === 'PR02' ? "text-violet-500" : "text-red-500"} font-bold animate-pulse`}>LEVEL 5</span>
                                 </div>
                             </div>
                         </header>
 
                         {/* Content Body */}
-                        <div className="report-content prose prose-invert max-w-none">
+                        <div className={`report-content prose prose-invert max-w-none ${activity.id === 'PR02' ? "hud-content" : "standard-report"}`}>
                             <div dangerouslySetInnerHTML={{
                                 __html: activity.content.replace(/src="\/parcial/g, `src="${import.meta.env.BASE_URL}parcial`)
                             }} />
@@ -243,13 +306,14 @@ const ActivityDetail = () => {
 
                         {/* Interactive Quiz Segment for PR02 */}
                         {String(activity.id) === 'PR02' && (
-                            <div className="mt-12 pt-12 border-t-2 border-dashed border-gray-800">
-                                <h3 className="text-amber-500 font-mono text-xl mb-8 flex items-center gap-3">
-                                    <FaTerminal className="animate-pulse" /> ENTREGABLE INTERACTIVO: SIMULADOR DE EVALUACIÓN
+                            <div className="mt-20 pt-20 border-t-2 border-dashed border-violet-500/20">
+                                <h3 className="text-violet-500 font-black text-3xl mb-12 flex items-center gap-4 uppercase italic tracking-tighter">
+                                    <FaTerminal className="animate-pulse" /> Auditoría_Interactiva: Simulador_Resiliencia
                                 </h3>
                                 <PhishingQuiz />
                             </div>
                         )}
+
 
                         {/* Interactive Labs Segment for Act 08 */}
                         {String(activity.id) === '8' && (

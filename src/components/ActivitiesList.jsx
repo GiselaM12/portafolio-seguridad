@@ -39,9 +39,9 @@ const ActivitiesList = () => {
                         </span>
                     </h2>
 
-                    <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-blue-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-blue-500/10">
-                        <h3 className="text-blue-400 font-mono text-xs md:text-sm tracking-widest flex items-center justify-center gap-2 uppercase">
-                            <FaShieldAlt /> Parcial 1: Fundamentos de Ciberseguridad
+                    <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-violet-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-violet-500/10">
+                        <h3 className="text-violet-400 font-mono text-xs md:text-sm tracking-widest flex items-center justify-center gap-2 uppercase">
+                            <FaShieldAlt /> Bitácora de Actividades de Seguridad
                         </h3>
                     </div>
                 </motion.div>

@@ -1,92 +1,412 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaShieldAlt, FaExclamationTriangle, FaCheckCircle, FaTimesCircle, FaEnvelope, FaSms, FaUsb, FaUsers, FaLock, FaUserShield, FaChartLine } from 'react-icons/fa';
+import { FaShieldAlt, FaExclamationTriangle, FaCheckCircle, FaTimesCircle, FaChartLine, FaClock, FaArrowRight, FaPaperclip, FaUserShield, FaStar, FaReply, FaEllipsisV, FaTrash, FaArchive } from 'react-icons/fa';
 import { quizData } from '../data/quizData';
 
+/* ═══════════════════════════════════
+   RICH TEXT — renders bodyParts
+   ═══════════════════════════════════ */
+const RichText = ({ parts, darkMode = false }) => (
+    <span>
+        {parts.map((part, i) => {
+            switch (part.type) {
+                case 'bold':
+                    return <strong key={i} className={darkMode ? "font-semibold text-white" : "font-semibold text-gray-900"}>{part.text}</strong>;
+                case 'danger':
+                    return <span key={i} className="font-semibold text-red-500">{part.text}</span>;
+                case 'link':
+                    return <span key={i} className={`underline cursor-pointer ${darkMode ? "text-blue-400" : "text-blue-600 hover:text-blue-800"}`}>{part.text}</span>;
+                default:
+                    return <span key={i}>{part.text}</span>;
+            }
+        })}
+    </span>
+);
+
+/* ═══════════════════════════════════
+   EMAIL MOCKUP — Ultra-realistic Gmail
+   ═══════════════════════════════════ */
+const EmailMockup = ({ question }) => {
+    const emailMatch = question.senderEmail?.match(/^(.+)@(.+)$/);
+    const emailUser = emailMatch ? emailMatch[1] : '';
+    const emailDomain = emailMatch ? emailMatch[2] : '';
+    const safeDomains = ['github.com', 'microsoft.com', 'slack.com', 'amazon.com', 'salesforce.com', 'tu-empresa.com'];
+    const isSuspicious = !safeDomains.some(d => emailDomain.endsWith(d));
+
+    return (
+        <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.12)] overflow-hidden font-sans border border-gray-200/80 max-w-2xl mx-auto"
+        >
+            {/* macOS Title Bar */}
+            <div className="bg-[#f0f0f0] px-4 py-2.5 flex items-center gap-3 border-b border-gray-200/60">
+                <div className="flex items-center gap-[7px]">
+                    <div className="w-[13px] h-[13px] rounded-full bg-[#ff5f57] shadow-sm"></div>
+                    <div className="w-[13px] h-[13px] rounded-full bg-[#febc2e] shadow-sm"></div>
+                    <div className="w-[13px] h-[13px] rounded-full bg-[#28c840] shadow-sm"></div>
+                </div>
+                <span className="ml-2 text-[13px] text-gray-500 font-medium tracking-tight">Gmail</span>
+            </div>
+
+            {/* Toolbar */}
+            <div className="bg-white px-6 py-2 border-b border-gray-100 flex items-center gap-4 text-gray-400 text-sm">
+                <FaArchive className="hover:text-gray-600 cursor-pointer" title="Archivar" />
+                <FaTrash className="hover:text-gray-600 cursor-pointer" title="Eliminar" />
+                <span className="text-gray-200">|</span>
+                <FaReply className="hover:text-gray-600 cursor-pointer" title="Responder" />
+                <FaEllipsisV className="hover:text-gray-600 cursor-pointer ml-auto" />
+            </div>
+
+            {/* Email Content */}
+            <div className="px-7 py-6 md:px-10 md:py-8">
+                {/* Subject */}
+                <h2 className="text-[22px] font-normal text-gray-900 mb-5 leading-snug">
+                    {question.subject}
+                </h2>
+
+                {/* Sender Info */}
+                <div className="flex items-start gap-4 mb-6 pb-5 border-b border-gray-100">
+                    <div 
+                        className="w-11 h-11 rounded-full flex items-center justify-center text-white font-semibold text-lg uppercase flex-shrink-0"
+                        style={{ backgroundColor: question.senderColor || '#5f6368' }}
+                    >
+                        {question.senderInitial || 'S'}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                            <span className="font-semibold text-[15px] text-gray-900">{question.senderName}</span>
+                            <span className="text-xs text-gray-400">
+                                {new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                        </div>
+                        <div className="text-[13px] mt-0.5">
+                            <span className="text-gray-400">&lt;{emailUser}@</span>
+                            <span className={isSuspicious ? "text-red-500 font-semibold" : "text-gray-400"}>{emailDomain}</span>
+                            <span className="text-gray-400">&gt;</span>
+                        </div>
+                    </div>
+                    <FaStar className="text-gray-300 hover:text-yellow-400 cursor-pointer text-lg flex-shrink-0 mt-1" />
+                </div>
+
+                {/* Body */}
+                <div className="text-[15px] text-gray-600 leading-[1.75] space-y-4">
+                    <p>
+                        <RichText parts={question.bodyParts} />
+                    </p>
+
+                    {/* CTA Button/Link */}
+                    {question.linkText && (
+                        <p className="py-1">
+                            <span className="text-blue-600 underline cursor-pointer hover:text-blue-800 text-[15px]">
+                                {question.linkText}
+                            </span>
+                        </p>
+                    )}
+
+                    {/* Attachment */}
+                    {question.attachment && (
+                        <div className="mt-5 inline-flex items-center gap-3 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 cursor-pointer transition-colors">
+                            <FaPaperclip className="text-gray-400" />
+                            <span className="text-sm font-medium text-blue-600">{question.attachment}</span>
+                            <span className="text-[11px] text-gray-400">· Descargar</span>
+                        </div>
+                    )}
+                </div>
+
+                {/* Footer */}
+                {question.footerText && (
+                    <div className="border-t border-gray-100 mt-8 pt-4 text-[11px] text-gray-400 tracking-wide">
+                        {question.footerText}
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
+};
+
+/* ═══════════════════════════════════
+   SMS MOCKUP — iPhone Messages
+   ═══════════════════════════════════ */
+const SMSMockup = ({ question }) => (
+    <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mx-auto max-w-[360px]"
+    >
+        {/* Phone frame */}
+        <div className="bg-[#0a0a0a] rounded-[2.8rem] p-[10px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative">
+            {/* Dynamic Island */}
+            <div className="absolute top-[18px] left-1/2 -translate-x-1/2 w-[95px] h-[28px] bg-black rounded-full z-30"></div>
+            
+            <div className="bg-[#000000] rounded-[2.3rem] overflow-hidden min-h-[520px] flex flex-col relative">
+                {/* Status Bar */}
+                <div className="px-8 pt-[14px] pb-1 flex justify-between items-center text-white text-[12px] font-semibold relative z-20">
+                    <span>{new Date().getHours()}:{String(new Date().getMinutes()).padStart(2, '0')}</span>
+                    <div className="flex items-center gap-1.5">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="white"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="white"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+                    </div>
+                </div>
+
+                {/* Header */}
+                <div className="text-center pt-3 pb-4 border-b border-white/10">
+                    <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-gray-700 rounded-full mx-auto mb-3 flex items-center justify-center shadow-lg">
+                        <FaUserShield className="text-white text-2xl" />
+                    </div>
+                    <div className="text-white font-semibold text-[17px]">{question.senderName}</div>
+                    <div className="text-gray-400 text-[13px] mt-0.5">{question.senderPhone || 'SMS'}</div>
+                </div>
+
+                {/* Messages */}
+                <div className="flex-1 px-4 py-5 space-y-2">
+                    <div className="text-center text-gray-500 text-[11px] font-medium mb-4">
+                        Hoy {new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                    
+                    {/* Bubble */}
+                    <div className="bg-[#303030] text-white px-4 py-3 rounded-2xl rounded-tl-md max-w-[88%] text-[15px] leading-relaxed shadow-sm">
+                        <RichText parts={question.bodyParts} darkMode={true} />
+                    </div>
+                </div>
+
+                {/* Input */}
+                <div className="px-3 pb-6 pt-2">
+                    <div className="bg-[#1c1c1e] border border-[#3a3a3c] rounded-full px-5 py-2.5 flex items-center">
+                        <span className="text-gray-500 text-[14px]">Mensaje de texto</span>
+                        <div className="ml-auto w-7 h-7 bg-gray-600 rounded-full flex items-center justify-center">
+                            <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </motion.div>
+);
+
+/* ═══════════════════════════════════
+   TEAMS MOCKUP — Microsoft Teams Chat
+   ═══════════════════════════════════ */
+const TeamsMockup = ({ question }) => (
+    <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-xl mx-auto"
+    >
+        <div className="bg-white rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.12)] overflow-hidden font-sans border border-gray-200/80">
+            {/* Teams Header */}
+            <div className="bg-[#464775] px-5 py-2.5 flex items-center gap-3">
+                <div className="flex items-center gap-[6px]">
+                    <div className="w-[11px] h-[11px] rounded-full bg-white/20"></div>
+                    <div className="w-[11px] h-[11px] rounded-full bg-white/20"></div>
+                    <div className="w-[11px] h-[11px] rounded-full bg-white/20"></div>
+                </div>
+                <span className="text-white/90 font-semibold text-[13px] ml-1">Microsoft Teams — Chat</span>
+            </div>
+
+            {/* Chat Header */}
+            <div className="px-5 py-3 border-b border-gray-100 flex items-center gap-3 bg-[#fafafa]">
+                <div className="relative">
+                    <div className="w-9 h-9 rounded-full bg-[#464775] flex items-center justify-center text-white font-semibold text-sm uppercase">
+                        {question.senderName?.charAt(0) || 'U'}
+                    </div>
+                    <span className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-white ${
+                        question.senderStatus === 'Ocupado' ? 'bg-red-500' : 'bg-green-500'
+                    }`}></span>
+                </div>
+                <div>
+                    <div className="font-semibold text-[14px] text-gray-900">{question.senderName}</div>
+                    <div className="text-[11px] text-gray-500">{question.senderStatus || "En línea"}</div>
+                </div>
+            </div>
+
+            {/* Chat Body */}
+            <div className="bg-[#f5f5f5] px-5 py-6 min-h-[200px]">
+                <div className="text-center text-gray-400 text-[11px] font-medium mb-5">
+                    Hoy {new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}
+                </div>
+                
+                <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-[#464775] flex items-center justify-center text-white text-xs font-semibold uppercase flex-shrink-0 mt-0.5">
+                        {question.senderName?.charAt(0) || 'U'}
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-[13px] text-gray-900">{question.senderName?.split(' ')[0]}</span>
+                            <span className="text-[11px] text-gray-400">{new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                        <div className="bg-white px-4 py-3 rounded-lg rounded-tl-sm shadow-sm text-[14px] text-gray-700 leading-relaxed border border-gray-100 max-w-md">
+                            <RichText parts={question.bodyParts} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Input */}
+            <div className="px-4 py-3 border-t border-gray-200 bg-white">
+                <div className="bg-gray-50 border border-gray-200 rounded-md px-4 py-2.5 text-gray-400 text-[13px]">
+                    Escribe un nuevo mensaje
+                </div>
+            </div>
+        </div>
+    </motion.div>
+);
+
+/* ═══════════════════════════════════
+   FEEDBACK CARD
+   ═══════════════════════════════════ */
+const FeedbackCard = ({ question, isCorrect, isTimeOut, onNext }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", damping: 20 }}
+        className="mt-6"
+    >
+        <div className={`p-6 rounded-xl border-l-4 ${
+            isTimeOut ? 'bg-amber-50 border-amber-400' :
+            isCorrect ? 'bg-emerald-50 border-emerald-500' :
+            'bg-red-50 border-red-500'
+        }`}>
+            <div className="flex items-center gap-2.5 mb-3">
+                {isTimeOut ? <FaClock className="text-xl text-amber-500" /> :
+                 isCorrect ? <FaCheckCircle className="text-xl text-emerald-500" /> :
+                 <FaTimesCircle className="text-xl text-red-500" />}
+                <h4 className={`text-base font-bold ${
+                    isTimeOut ? 'text-amber-700' : isCorrect ? 'text-emerald-700' : 'text-red-700'
+                }`}>
+                    {isTimeOut ? '⏱ Se acabó el tiempo' :
+                     isCorrect ? '✅ ¡Correcto!' :
+                     question.isPhishing ? '🚨 Era Phishing' : '⚠️ Era legítimo'}
+                </h4>
+            </div>
+
+            <p className="text-gray-600 text-sm mb-3 leading-relaxed font-sans">
+                {question.feedback.technical}
+            </p>
+
+            {question.feedback.points && (
+                <ul className="space-y-2">
+                    {question.feedback.points.map((point, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-sm font-sans">
+                            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5 ${
+                                isTimeOut ? 'bg-amber-200 text-amber-700' :
+                                isCorrect ? 'bg-emerald-200 text-emerald-700' :
+                                'bg-red-200 text-red-700'
+                            }`}>{i + 1}</span>
+                            <span className="text-gray-600">{point}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+
+        <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={onNext}
+            className="w-full mt-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-colors font-sans shadow-sm"
+        >
+            Siguiente pregunta <FaArrowRight className="text-xs" />
+        </motion.button>
+    </motion.div>
+);
+
+/* ═══════════════════════════════════
+   GLITCH TEXT
+   ═══════════════════════════════════ */
+const GlitchText = ({ text, className = "" }) => (
+    <span className={`relative inline-block group ${className}`}>
+        <span className="relative z-10">{text}</span>
+        <span className="absolute top-0 left-0 -z-10 text-red-500/60 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-75">{text}</span>
+        <span className="absolute top-0 left-0 -z-20 text-cyan-400/60 opacity-0 group-hover:opacity-100 group-hover:-translate-x-0.5 transition-all duration-75">{text}</span>
+    </span>
+);
+
+/* ═══════════════════════════════════════════
+   MAIN COMPONENT
+   ═══════════════════════════════════════════ */
 const PhishingQuiz = () => {
-    const [gameState, setGameState] = useState('intro'); // intro, questions, results, ranking
+    const [gameState, setGameState] = useState('intro');
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [showFeedback, setShowFeedback] = useState(false);
-    const [lastSelected, setLastSelected] = useState(null);
+    const [lastCorrect, setLastCorrect] = useState(null);
     const [username, setUsername] = useState('');
     const [leaderboard, setLeaderboard] = useState([]);
     const [sessionQuestions, setSessionQuestions] = useState([]);
+    const [timeLeft, setTimeLeft] = useState(30);
+    const [isTimeOut, setIsTimeOut] = useState(false);
 
-    // Load leaderboard on mount
     useEffect(() => {
-        const savedRanking = localStorage.getItem('phishing_leaderboard');
-        if (savedRanking) {
-            setLeaderboard(JSON.parse(savedRanking));
-        }
+        const saved = localStorage.getItem('phishing_leaderboard');
+        if (saved) setLeaderboard(JSON.parse(saved));
     }, []);
 
-    const shuffleArray = (array) => {
-        const newArr = [...array];
-        for (let i = newArr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    useEffect(() => {
+        if (gameState !== 'questions' || showFeedback || timeLeft <= 0) return;
+        const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
+        return () => clearInterval(timer);
+    }, [gameState, showFeedback, timeLeft]);
+
+    useEffect(() => {
+        if (timeLeft === 0 && gameState === 'questions' && !showFeedback) {
+            setIsTimeOut(true);
+            processAnswer(false);
         }
-        return newArr;
+    }, [timeLeft]);
+
+    const shuffle = (arr) => {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     };
 
     const handleStart = () => {
-        if (!username.trim()) {
-            alert("Por favor, ingresa un alias o nombre para continuar.");
-            return;
-        }
-
-        // Seleccionar 10 preguntas aleatorias de la base de datos
-        const shuffledPool = shuffleArray(quizData);
-        const selected = shuffledPool.slice(0, 10).map(q => ({
-            ...q,
-            options: q.options ? shuffleArray(q.options) : q.options
-        }));
-
-        setSessionQuestions(selected);
+        if (!username.trim()) return alert("Ingresa tu nombre de agente.");
+        setSessionQuestions(shuffle(quizData).slice(0, 10));
         setGameState('questions');
+        setScore(0);
+        setTimeLeft(30);
+        setIsTimeOut(false);
+        setAnswers([]);
+        setShowFeedback(false);
     };
 
-    const handleAnswer = (option) => {
-        const correct = option.isCorrect;
-        if (correct) setScore(prev => prev + 1);
-
-        setAnswers([...answers, {
-            question: currentQuestion,
-            correct,
-            selected: option.text || (option.isCorrect ? "ES PHISHING" : "ES LEGÍTIMO"),
-            title: sessionQuestions[currentQuestion].title,
-            vector: sessionQuestions[currentQuestion].vector,
-            feedback: sessionQuestions[currentQuestion].feedback
-        }]);
-        setLastSelected(option.isCorrect);
+    const processAnswer = (isCorrect) => {
+        if (showFeedback) return;
+        const newScore = isCorrect ? score + 1 : score;
+        if (isCorrect) setScore(newScore);
+        setLastCorrect(isCorrect);
         setShowFeedback(true);
+        setAnswers(prev => [...prev, { correct: isCorrect }]);
+        if (currentQuestion === sessionQuestions.length - 1) saveResult(newScore);
+    };
+
+    const handleUserAnswer = (userSaysPhishing) => {
+        processAnswer(userSaysPhishing === sessionQuestions[currentQuestion].isPhishing);
     };
 
     const nextQuestion = () => {
-        setShowFeedback(false);
         if (currentQuestion < sessionQuestions.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
+            setCurrentQuestion(prev => prev + 1);
+            setTimeLeft(30);
+            setShowFeedback(false);
+            setIsTimeOut(false);
         } else {
-            saveResult();
             setGameState('results');
         }
     };
 
-    const saveResult = () => {
-        const newEntry = {
-            name: username,
-            score: score + (lastSelected ? 1 : 0),
-            date: new Date().toLocaleDateString(),
-            id: Date.now()
-        };
-        const updatedRanking = [...leaderboard, newEntry]
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 10); // Keep top 10
-
-        setLeaderboard(updatedRanking);
-        localStorage.setItem('phishing_leaderboard', JSON.stringify(updatedRanking));
+    const saveResult = (finalScore) => {
+        const saved = JSON.parse(localStorage.getItem('phishing_leaderboard') || '[]');
+        const entry = { name: username, score: finalScore, date: new Date().toLocaleDateString(), id: Date.now() };
+        const updated = [...saved, entry].sort((a, b) => b.score - a.score).slice(0, 10);
+        setLeaderboard(updated);
+        localStorage.setItem('phishing_leaderboard', JSON.stringify(updated));
     };
 
     const resetQuiz = () => {
@@ -96,366 +416,248 @@ const PhishingQuiz = () => {
         setAnswers([]);
         setShowFeedback(false);
         setUsername('');
+        setTimeLeft(30);
+        setIsTimeOut(false);
     };
 
-    const getIconForVector = (vector) => {
-        const v = vector.toLowerCase();
-        if (v.includes('email')) return <FaEnvelope className="text-blue-400" />;
-        if (v.includes('sms')) return <FaSms className="text-green-400" />;
-        if (v.includes('físico') || v.includes('fisico')) return <FaUsb className="text-red-400" />;
-        if (v.includes('teams') || v.includes('redes')) return <FaUsers className="text-purple-400" />;
-        return <FaShieldAlt />;
+    const renderMockup = (q) => {
+        if (q.mockupType === 'sms') return <SMSMockup question={q} />;
+        if (q.mockupType === 'teams') return <TeamsMockup question={q} />;
+        return <EmailMockup question={q} />;
     };
 
     return (
-        <div className="w-full max-w-4xl mx-auto my-12 font-mono">
+        <div className="w-full max-w-6xl mx-auto my-12 relative">
             <AnimatePresence mode="wait">
+
+                {/* ═══ INTRO ═══ */}
                 {gameState === 'intro' && (
-                    <motion.div
-                        key="intro"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.1 }}
-                        className="bg-black/40 border border-amber-500/30 rounded-xl p-8 md:p-12 text-center shadow-[0_0_30px_rgba(245,158,11,0.1)]"
+                    <motion.div key="intro" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                        className="bg-gradient-to-b from-[#0c0c1d] to-[#111127] border border-violet-500/15 rounded-3xl p-10 md:p-16 text-center shadow-[0_0_80px_rgba(139,92,246,0.08)] relative overflow-hidden"
                     >
-                        <div className="mb-6 flex justify-center">
-                            <div className="w-20 h-20 bg-amber-500/10 rounded-full flex items-center justify-center border border-amber-500/50 animate-pulse">
-                                <FaShieldAlt className="text-4xl text-amber-500" />
-                            </div>
-                        </div>
-                        <h2 className="text-3xl font-black text-amber-400 mb-4 tracking-tighter uppercase">Simulador de Resiliencia Humana</h2>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.08),transparent_60%)]"></div>
+                        
+                        <div className="relative z-10">
+                            <motion.div animate={{ rotateY: 360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                                className="w-20 h-20 bg-violet-500/10 rounded-2xl mx-auto mb-8 flex items-center justify-center border border-violet-500/20">
+                                <FaShieldAlt className="text-4xl text-violet-400" />
+                            </motion.div>
 
-                        <div className="max-w-md mx-auto mb-8">
-                            <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold">Ingresa tu Alias de Agente:</label>
-                            <input
-                                type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="E.g. AGENT_ZERO"
-                                className="w-full bg-black/60 border border-amber-500/30 rounded px-4 py-3 text-amber-400 focus:outline-none focus:border-amber-500 transition-colors text-center font-bold tracking-widest"
-                                maxLength={15}
-                            />
-                        </div>
+                            <h2 className="text-4xl md:text-6xl font-black text-white mb-2 uppercase tracking-tighter leading-none font-mono">
+                                <GlitchText text="PHISHING" /><br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">SIMULATOR</span>
+                            </h2>
+                            <p className="text-gray-500 text-sm mb-10 max-w-md mx-auto font-sans leading-relaxed">
+                                Analiza correos, SMS y mensajes de chat reales.<br/>¿Puedes distinguir un ataque de una comunicación legítima?
+                            </p>
 
-                        <p className="text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed text-sm">
-                            Eval&uacute;a tu capacidad de detecci&oacute;n ante ataques de ingenier&iacute;a social.
-                            Participa en 10 escenarios reales y mide tu **Score de Resiliencia**.
-                        </p>
+                            <div className="max-w-xs mx-auto mb-10">
+                                <label className="block text-[10px] text-violet-400/70 font-semibold uppercase tracking-[0.3em] mb-2 font-mono">Nombre de Agente</label>
+                                <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Tu nombre"
+                                    className="w-full bg-white/5 border border-violet-500/20 rounded-xl px-5 py-4 text-violet-300 focus:outline-none focus:border-violet-400 text-center font-semibold text-lg uppercase tracking-wider font-mono placeholder:text-gray-600 transition-colors"
+                                    maxLength={15} />
+                            </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 text-left">
-                            <div className="p-4 bg-white/5 border border-white/10 rounded">
-                                <h4 className="text-xs text-amber-400 font-bold mb-1 uppercase tracking-widest">IA Generativa</h4>
-                                <p className="text-[10px] text-gray-500">Escenarios adaptados a amenazas de 2026.</p>
+                            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleStart}
+                                    className="bg-violet-600 hover:bg-violet-500 text-white font-semibold py-4 px-12 rounded-xl text-sm shadow-[0_8px_30px_rgba(139,92,246,0.3)] font-sans transition-colors">
+                                    🛡️ Iniciar Simulación
+                                </motion.button>
+                                <button onClick={() => setGameState('ranking')}
+                                    className="border border-white/10 text-gray-400 hover:text-white hover:border-white/20 py-4 px-10 rounded-xl text-sm font-semibold transition-all font-sans">
+                                    📊 Ver Ranking
+                                </button>
                             </div>
-                            <div className="p-4 bg-white/5 border border-white/10 rounded">
-                                <h4 className="text-xs text-amber-400 font-bold mb-1 uppercase tracking-widest">Ranking Global</h4>
-                                <p className="text-[10px] text-gray-500">Compara tu nivel de alerta con otros analistas.</p>
-                            </div>
-                            <div className="p-4 bg-white/5 border border-white/10 rounded">
-                                <h4 className="text-xs text-amber-400 font-bold mb-1 uppercase tracking-widest">No Punitivo</h4>
-                                <p className="text-[10px] text-gray-500">Dise&ntilde;o &eacute;tico enfocado en el aprendizaje.</p>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button
-                                onClick={handleStart}
-                                className="bg-amber-600 hover:bg-amber-500 text-black font-black py-4 px-12 rounded transition-all shadow-[0_0_20px_rgba(245,158,11,0.4)] uppercase tracking-widest text-sm"
-                            >
-                                INICIAR EVALUACIÓN
-                            </button>
-                            <button
-                                onClick={() => setGameState('ranking')}
-                                className="bg-transparent border border-gray-700 text-gray-400 hover:text-white hover:border-white py-4 px-8 rounded transition-all uppercase tracking-widest text-sm"
-                            >
-                                VER RANKING
-                            </button>
                         </div>
                     </motion.div>
                 )}
 
+                {/* ═══ QUESTIONS ═══ */}
+                {gameState === 'questions' && sessionQuestions.length > 0 && (
+                    <motion.div key="q" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        
+                        {/* Top Bar */}
+                        <div className="flex items-center justify-between mb-5 px-1">
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm font-semibold text-white font-sans">
+                                    Pregunta {currentQuestion + 1} <span className="text-gray-500">de 10</span>
+                                </span>
+                                <span className="text-xs text-gray-600 font-mono">• {sessionQuestions[currentQuestion].vector}</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className="text-xs text-gray-500 font-mono">✓ {score}</span>
+                                <div className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold font-mono ${
+                                    timeLeft <= 10 ? 'bg-red-500/15 text-red-400' : 'bg-white/5 text-gray-300'
+                                } ${timeLeft <= 5 ? 'animate-pulse' : ''}`}>
+                                    <FaClock className="text-xs" /> {timeLeft}s
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Progress */}
+                        <div className="h-1 bg-white/5 rounded-full mb-6 overflow-hidden">
+                            <motion.div className="h-full bg-gradient-to-r from-violet-600 to-indigo-500 rounded-full" 
+                                animate={{ width: `${((currentQuestion + 1) / 10) * 100}%` }} transition={{ duration: 0.5 }} />
+                        </div>
+
+                        {/* Question Context */}
+                        <div className="bg-[#111] rounded-xl px-6 py-4 mb-6 border border-white/5">
+                            <p className="text-gray-300 text-sm font-sans">
+                                <span className="text-violet-400 font-semibold mr-2">Escenario:</span>
+                                {sessionQuestions[currentQuestion].title}
+                            </p>
+                        </div>
+
+                        {/* Layout: Mockup + Buttons */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                            {/* Mockup - 8 cols */}
+                            <div className="lg:col-span-8">
+                                <div key={currentQuestion}>
+                                    {renderMockup(sessionQuestions[currentQuestion])}
+                                </div>
+
+                                <AnimatePresence>
+                                    {showFeedback && (
+                                        <FeedbackCard 
+                                            question={sessionQuestions[currentQuestion]}
+                                            isCorrect={lastCorrect}
+                                            isTimeOut={isTimeOut}
+                                            onNext={nextQuestion}
+                                        />
+                                    )}
+                                </AnimatePresence>
+                            </div>
+
+                            {/* Answer buttons - 4 cols */}
+                            <div className="lg:col-span-4">
+                                <AnimatePresence>
+                                    {!showFeedback && (
+                                        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
+                                            className="space-y-4 sticky top-4">
+                                            <p className="text-xs text-gray-500 text-center font-sans mb-2">¿Qué opinas de este mensaje?</p>
+
+                                            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                                                onClick={() => handleUserAnswer(false)}
+                                                className="w-full p-6 bg-emerald-500/5 border border-emerald-500/15 rounded-xl group transition-all text-center hover:bg-emerald-500/10 hover:border-emerald-500/30">
+                                                <FaCheckCircle className="text-4xl text-emerald-500 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                                                <span className="text-base font-bold text-emerald-400 block font-sans">Es legítimo</span>
+                                                <span className="text-[11px] text-gray-500 mt-1 block font-sans">No es un intento de fraude</span>
+                                            </motion.button>
+
+                                            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                                                onClick={() => handleUserAnswer(true)}
+                                                className="w-full p-6 bg-red-500/5 border border-red-500/15 rounded-xl group transition-all text-center hover:bg-red-500/10 hover:border-red-500/30">
+                                                <FaExclamationTriangle className="text-4xl text-red-500 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                                                <span className="text-base font-bold text-red-400 block font-sans">Es phishing</span>
+                                                <span className="text-[11px] text-gray-500 mt-1 block font-sans">Reportar como fraude</span>
+                                            </motion.button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* ═══ RESULTS ═══ */}
+                {gameState === 'results' && (
+                    <motion.div key="results" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+                        className="bg-gradient-to-b from-[#0c0c1d] to-[#111127] border border-violet-500/15 rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
+                        
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.06),transparent_60%)]"></div>
+                        
+                        <div className="relative z-10">
+                            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5 }}
+                                className={`w-36 h-36 rounded-full border-4 mx-auto flex flex-col items-center justify-center mb-8 ${
+                                    score > 7 ? 'border-emerald-500 shadow-[0_0_50px_rgba(34,197,94,0.2)]' : 
+                                    score > 4 ? 'border-amber-500 shadow-[0_0_50px_rgba(234,179,8,0.2)]' : 
+                                    'border-red-500 shadow-[0_0_50px_rgba(239,68,68,0.2)]'
+                                }`}>
+                                <span className="text-4xl font-black text-white font-mono">{score}</span>
+                                <span className="text-sm text-gray-400 font-mono">/10</span>
+                            </motion.div>
+
+                            <h2 className="text-3xl font-black text-white mb-2 font-sans">
+                                {score > 7 ? "🏆 Operador Elite" : score > 4 ? "📊 Analista Junior" : "⚠️ Agente Vulnerable"}
+                            </h2>
+                            <p className="text-gray-400 mb-10 text-sm font-sans max-w-md mx-auto">
+                                {score > 7 ? "Excelente capacidad de detección. Tu organización está segura contigo." :
+                                 score > 4 ? "Buen trabajo, pero aún hay vectores que podrían engañarte." :
+                                 "Necesitas más entrenamiento. Eres vulnerable a ataques de ingeniería social."}
+                            </p>
+
+                            <div className="grid grid-cols-3 gap-3 mb-10 max-w-md mx-auto">
+                                <div className="p-4 bg-emerald-500/10 border border-emerald-500/15 rounded-xl">
+                                    <div className="text-2xl font-black text-emerald-400 font-mono">{score}</div>
+                                    <div className="text-[9px] text-emerald-400/60 uppercase tracking-wider mt-1 font-mono">Correctas</div>
+                                </div>
+                                <div className="p-4 bg-red-500/10 border border-red-500/15 rounded-xl">
+                                    <div className="text-2xl font-black text-red-400 font-mono">{10 - score}</div>
+                                    <div className="text-[9px] text-red-400/60 uppercase tracking-wider mt-1 font-mono">Errores</div>
+                                </div>
+                                <div className="p-4 bg-violet-500/10 border border-violet-500/15 rounded-xl">
+                                    <div className="text-2xl font-black text-violet-400 font-mono">{score * 10}%</div>
+                                    <div className="text-[9px] text-violet-400/60 uppercase tracking-wider mt-1 font-mono">Resiliencia</div>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                                <motion.button whileHover={{ scale: 1.02 }} onClick={resetQuiz}
+                                    className="bg-violet-600 hover:bg-violet-500 text-white font-semibold py-4 px-12 rounded-xl text-sm shadow-lg font-sans transition-colors">
+                                    🔄 Reintentar
+                                </motion.button>
+                                <button onClick={() => setGameState('ranking')}
+                                    className="border border-white/10 text-gray-400 hover:text-white hover:border-white/20 py-4 px-10 rounded-xl text-sm font-semibold transition-all font-sans">
+                                    📊 Ver Ranking
+                                </button>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* ═══ RANKING ═══ */}
                 {gameState === 'ranking' && (
-                    <motion.div
-                        key="ranking"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="bg-black/80 border border-gray-800 rounded-xl p-8 shadow-2xl"
-                    >
-                        <h2 className="text-2xl font-black text-amber-500 mb-8 flex items-center gap-3">
-                            <FaChartLine /> RANKING DE RESILIENCIA (TOP 10)
+                    <motion.div key="ranking" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                        className="bg-gradient-to-b from-[#0c0c1d] to-[#111127] border border-violet-500/15 rounded-3xl p-10 md:p-16 shadow-xl">
+
+                        <h2 className="text-4xl md:text-5xl font-black text-white mb-10 flex items-center justify-center gap-4 font-sans">
+                            <FaChartLine className="text-violet-400" />
+                            <span>Top Agentes</span>
                         </h2>
 
-                        <div className="overflow-hidden border border-gray-800 rounded-lg mb-8">
+                        <div className="overflow-hidden border border-white/5 rounded-xl mb-8">
                             <table className="w-full text-left">
-                                <thead className="bg-white/5 uppercase text-[10px] text-gray-500 tracking-widest">
+                                <thead className="bg-violet-600/8 font-sans text-violet-400/80 text-sm">
                                     <tr>
-                                        <th className="p-4">POS</th>
-                                        <th className="p-4">AGENTE (ALIAS)</th>
-                                        <th className="p-4 text-center">SCORE</th>
-                                        <th className="p-4 text-right">FECHA</th>
+                                        <th className="px-6 py-4 font-semibold">#</th>
+                                        <th className="px-6 py-4 font-semibold">Agente</th>
+                                        <th className="px-6 py-4 text-center font-semibold">Score</th>
+                                        <th className="px-6 py-4 text-right font-semibold">Fecha</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-800 text-sm">
-                                    {leaderboard.length > 0 ? leaderboard.map((entry, index) => (
-                                        <tr key={entry.id} className={entry.name === username ? "bg-amber-500/10 text-amber-400" : "text-gray-400"}>
-                                            <td className="p-4 font-bold text-amber-600">{index + 1}</td>
-                                            <td className="p-4 font-bold uppercase tracking-wider">{entry.name}</td>
-                                            <td className="p-4 text-center font-black">{entry.score}/10</td>
-                                            <td className="p-4 text-right text-[10px] text-gray-600">{entry.date}</td>
-                                        </tr>
+                                <tbody className="divide-y divide-white/5">
+                                    {leaderboard.length > 0 ? leaderboard.map((entry, i) => (
+                                        <motion.tr key={entry.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
+                                            className={`${entry.name === username ? 'bg-violet-600/15' : ''} text-gray-300 font-sans`}>
+                                            <td className="px-6 py-5 font-bold text-violet-400 text-xl">{i + 1}</td>
+                                            <td className="px-6 py-5 font-bold uppercase tracking-wide text-xl text-white">{entry.name}</td>
+                                            <td className="px-6 py-5 text-center font-bold text-xl">{entry.score}/10</td>
+                                            <td className="px-6 py-5 text-right text-gray-500 text-sm">{entry.date}</td>
+                                        </motion.tr>
                                     )) : (
-                                        <tr>
-                                            <td colSpan="4" className="p-12 text-center text-gray-600 italic">No hay registros en la base de datos local.</td>
-                                        </tr>
+                                        <tr><td colSpan="4" className="px-6 py-14 text-center text-gray-600 italic font-sans">Sin registros aún — ¡Sé el primero!</td></tr>
                                     )}
                                 </tbody>
                             </table>
                         </div>
 
-                        <button
-                            onClick={() => setGameState('intro')}
-                            className="w-full bg-transparent border border-gray-700 text-gray-500 hover:text-white hover:border-gray-500 py-4 rounded transition-all uppercase tracking-widest text-sm"
-                        >
-                            VOLVER
+                        <button onClick={() => setGameState('intro')}
+                            className="w-full bg-white/5 border border-white/10 text-gray-400 hover:bg-violet-600 hover:text-white hover:border-violet-500 py-4 rounded-xl transition-all text-sm font-semibold font-sans">
+                            ← Volver al inicio
                         </button>
                     </motion.div>
                 )}
 
-                {gameState === 'questions' && (
-                    <motion.div
-                        key="question"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        className="bg-[#0a0a0a] border border-gray-800 rounded-xl overflow-hidden shadow-2xl"
-                    >
-                        <div className="h-1 bg-gray-900 w-full">
-                            <motion.div
-                                className="h-full bg-amber-500"
-                                initial={{ width: 0 }}
-                                animate={{ width: `${((currentQuestion + 1) / (sessionQuestions.length || 10)) * 100}%` }}
-                            />
-                        </div>
-
-                        <div className="p-4 bg-[#111] border-b border-gray-800 flex justify-between items-center">
-                            <span className="text-[10px] text-gray-500 tracking-widest uppercase font-bold">ESCENARIO {currentQuestion + 1} / {sessionQuestions.length}</span>
-                            <span className="text-amber-500 text-[10px] font-bold uppercase tracking-widest">{sessionQuestions[currentQuestion].trigger}</span>
-                        </div>
-
-                        <div className="p-6 md:p-10">
-                            <div className="bg-[#1a1a1a] border border-gray-700 rounded-lg overflow-hidden mb-8 shadow-inner">
-                                <div className="bg-gray-800/50 p-3 flex items-center gap-3 border-b border-gray-700">
-                                    <div className="p-2 bg-black/40 rounded">
-                                        {getIconForVector(sessionQuestions[currentQuestion].vector)}
-                                    </div>
-                                    <div className="flex-1">
-                                        <div className="text-[10px] text-gray-500 uppercase font-bold">Remitente:</div>
-                                        <div className="text-xs text-gray-300 font-bold">{sessionQuestions[currentQuestion].sender}</div>
-                                    </div>
-                                </div>
-                                <div className="p-6">
-                                    {sessionQuestions[currentQuestion].subject && (
-                                        <div className="mb-4">
-                                            <div className="text-[10px] text-gray-500 uppercase font-bold mb-1">Asunto:</div>
-                                            <div className="text-sm text-amber-100 font-bold uppercase tracking-tight">{sessionQuestions[currentQuestion].subject}</div>
-                                        </div>
-                                    )}
-                                    <div className="text-sm text-gray-400 leading-relaxed mb-8">
-                                        {sessionQuestions[currentQuestion].content}
-                                    </div>
-
-                                    {sessionQuestions[currentQuestion].buttonText && (
-                                        <div className="flex justify-center mb-6">
-                                            <div className="bg-blue-600/80 px-6 py-2 rounded text-xs text-white font-bold cursor-default">
-                                                {sessionQuestions[currentQuestion].buttonText}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {sessionQuestions[currentQuestion].attachment && (
-                                        <div className="flex items-center gap-2 p-3 bg-black/20 border border-gray-700 rounded w-fit mx-auto">
-                                            <FaLock className="text-gray-600 text-xs" />
-                                            <span className="text-[10px] text-gray-400 font-bold">{sessionQuestions[currentQuestion].attachment}</span>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Options */}
-                            {!showFeedback ? (
-                                <div className="grid grid-cols-1 gap-3">
-                                    {sessionQuestions[currentQuestion].options ? (
-                                        sessionQuestions[currentQuestion].options.map((option) => (
-                                            <button
-                                                key={option.id}
-                                                onClick={() => handleAnswer(option)}
-                                                className="group relative p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-amber-500/10 hover:border-amber-500/50 transition-all text-left flex items-center justify-between"
-                                            >
-                                                <span className="text-sm font-medium text-gray-300 group-hover:text-amber-400 transition-colors">
-                                                    {option.text}
-                                                </span>
-                                                <div className="w-5 h-5 rounded-full border border-gray-700 flex items-center justify-center group-hover:border-amber-500">
-                                                    <div className="w-2 h-2 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                                </div>
-                                            </button>
-                                        ))
-                                    ) : (
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <button
-                                                onClick={() => handleAnswer({ isCorrect: sessionQuestions[currentQuestion].isPhishing, text: "ES PHISHING" })}
-                                                className="group relative p-4 bg-red-900/10 border border-red-500/30 rounded-lg hover:bg-red-900/20 hover:border-red-500 transition-all text-center"
-                                            >
-                                                <FaExclamationTriangle className="mx-auto mb-2 text-red-500" />
-                                                <span className="text-sm font-bold text-red-400 uppercase tracking-widest">ES PHISHING</span>
-                                            </button>
-                                            <button
-                                                onClick={() => handleAnswer({ isCorrect: !sessionQuestions[currentQuestion].isPhishing, text: "ES LEGÍTIMO" })}
-                                                className="group relative p-4 bg-green-900/10 border border-green-500/30 rounded-lg hover:bg-green-900/20 hover:border-green-500 transition-all text-center"
-                                            >
-                                                <FaCheckCircle className="mx-auto mb-2 text-green-500" />
-                                                <span className="text-sm font-bold text-green-400 uppercase tracking-widest">ES LEGÍTIMO</span>
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            ) : (
-                                <div className="space-y-6">
-                                    <div className={`p-4 rounded-lg flex items-start gap-4 ${answers[answers.length - 1].correct ? 'bg-green-500/10 border border-green-500/30' : 'bg-red-500/10 border border-red-500/30'}`}>
-                                        <div className="mt-1">
-                                            {answers[answers.length - 1].correct ? <FaCheckCircle className="text-xl text-green-500" /> : <FaTimesCircle className="text-xl text-red-500" />}
-                                        </div>
-                                        <div>
-                                            <h4 className={`text-sm font-bold uppercase mb-1 ${answers[answers.length - 1].correct ? 'text-green-400' : 'text-red-400'}`}>
-                                                {answers[answers.length - 1].correct ? '¡Análisis Correcto!' : 'Error de Detección'}
-                                            </h4>
-                                            <p className="text-xs text-gray-400 leading-relaxed">
-                                                {sessionQuestions[currentQuestion].isPhishing
-                                                    ? 'Identificaste correctamente un ataque o tomaste la acción preventiva adecuada.'
-                                                    : 'Diferenciaste correctamente una comunicación legítima.'}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="p-4 bg-blue-900/5 border border-blue-500/20 rounded-lg">
-                                            <h4 className="text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em] mb-2">POR QU&Eacute; ES {sessionQuestions[currentQuestion].isPhishing ? 'PELIGROSO' : 'SEGURO'}</h4>
-                                            <p className="text-[11px] text-gray-400 leading-relaxed italic">{sessionQuestions[currentQuestion].feedback.technical}</p>
-                                        </div>
-                                        <div className="p-4 bg-purple-900/5 border border-purple-500/20 rounded-lg">
-                                            <h4 className="text-[10px] text-purple-400 font-bold uppercase tracking-[0.2em] mb-2">LECCIÓN ÉTICA</h4>
-                                            <p className="text-[11px] text-gray-400 leading-relaxed text-gray-400">{sessionQuestions[currentQuestion].feedback.ethical}</p>
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        onClick={nextQuestion}
-                                        className="w-full bg-white text-black font-black py-4 rounded hover:bg-amber-400 transition-colors uppercase tracking-widest text-sm shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
-                                    >
-                                        {currentQuestion < sessionQuestions.length - 1 ? 'SIGUIENTE ESCENARIO' : 'VER RESULTADOS FINALES'}
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </motion.div>
-                )}
-
-                {gameState === 'results' && (
-                    <motion.div
-                        key="results"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="bg-black/90 border-2 border-amber-500/30 rounded-xl p-8 md:p-12"
-                    >
-                        <div className="text-center mb-10">
-                            <h2 className="text-4xl font-black text-amber-500 mb-2 uppercase tracking-tighter">Reporte de Desempe&ntilde;o: {username}</h2>
-                            <div className="text-gray-600 font-mono text-[10px] uppercase tracking-widest">Analista de Riesgo Humano // Nivel de Acceso L5</div>
-                        </div>
-
-                        <div className="flex flex-col md:flex-row items-center justify-around gap-12 mb-12 py-8 bg-white/5 border-y border-white/10">
-                            <div className="relative">
-                                <div className="w-40 h-40 rounded-full border-4 border-gray-800 flex items-center justify-center">
-                                    <div className="text-center">
-                                        <div className="text-6xl font-black text-white">{score}</div>
-                                        <div className="text-xs text-gray-500 font-bold tracking-widest">/ 10</div>
-                                    </div>
-                                </div>
-                                {score >= 8 && (
-                                    <div className="absolute -top-2 -right-2 bg-green-500 text-black px-3 py-1 text-[10px] font-black rounded rotate-12 shadow-lg">PASSED</div>
-                                )}
-                            </div>
-
-                            <div className="flex-1 max-w-sm">
-                                <h4 className="text-xs text-amber-400 font-bold uppercase tracking-widest mb-3">Estatus de Resiliencia</h4>
-                                <div className={`text-2xl font-black mb-4 ${score > 8 ? 'text-green-500' : score > 5 ? 'text-yellow-500' : 'text-red-500'}`}>
-                                    {score > 8 ? 'OPERATIVO EXPERTO' : score > 5 ? 'EN ENTRENAMIENTO' : 'VULNERABLE - RE-CERTIFICACIÓN'}
-                                </div>
-                                <p className="text-xs text-gray-400 leading-relaxed font-sans mt-2">
-                                    {score > 8
-                                        ? "Tu capacidad de an&aacute;lisis es excepcional. Mantienes una desconfianza saludable y técnica ante est&iacute;mulos de urgencia y autoridad."
-                                        : score > 5
-                                            ? "Detectas el phishing est&aacute;ndar, pero los vectores de alta presi&oacute;n y spear phishing dirigido a&uacute;n logran evadir tus defensas."
-                                            : "Nivel cr&iacute;tico de riesgo. Tus sesgos emocionales dominan tu toma de decisiones t&eacute;cnica. Se requiere an&aacute;lisis de errores inmediato."}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Mistakes/Feedback Section */}
-                        <div className="mb-12">
-                            <h3 className="text-sm font-black text-gray-400 mb-6 uppercase tracking-widest flex items-center gap-2">
-                                <FaExclamationTriangle className="text-amber-500" /> Bit&aacute;cora de Fallos y Retroalimentaci&oacute;n
-                            </h3>
-                            <div className="space-y-4">
-                                {answers.filter(a => !a.correct).length > 0 ? (
-                                    answers.filter(a => !a.correct).map((f, idx) => (
-                                        <div key={idx} className="bg-red-500/5 border border-red-500/20 p-4 rounded-lg group hover:border-red-500/40 transition-colors">
-                                            <div className="flex justify-between items-start mb-2">
-                                                <h4 className="text-xs font-bold text-red-400 uppercase tracking-wider">{f.title}</h4>
-                                                <span className="text-[9px] bg-red-500/20 px-2 py-0.5 rounded text-red-500 font-mono tracking-tighter uppercase">{f.vector}</span>
-                                            </div>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                                                <div>
-                                                    <span className="text-[9px] text-gray-600 block uppercase font-black mb-1">Debilidad T&eacute;cnica</span>
-                                                    <p className="text-[10px] text-gray-400 italic leading-relaxed">{f.feedback.technical}</p>
-                                                </div>
-                                                <div>
-                                                    <span className="text-[9px] text-gray-600 block uppercase font-black mb-1">Retroalimentaci&oacute;n Conductual</span>
-                                                    <p className="text-[10px] text-gray-400 leading-relaxed">{f.feedback.ethical}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div className="p-10 border border-green-500/20 rounded-xl bg-green-500/5 text-center">
-                                        <FaCheckCircle className="text-4xl text-green-500 mx-auto mb-4" />
-                                        <h4 className="text-green-500 font-black uppercase text-sm tracking-widest">Resiliencia Perfecta</h4>
-                                        <p className="text-xs text-gray-500 mt-2">No se detectaron brechas conductuales en esta sesi&oacute;n.</p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <button
-                                onClick={resetQuiz}
-                                className="border border-amber-600/50 text-amber-500 py-4 rounded hover:bg-amber-600 hover:text-black transition-all uppercase tracking-widest text-xs font-bold"
-                            >
-                                NUEVO ANALISTA
-                            </button>
-                            <button
-                                onClick={() => setGameState('ranking')}
-                                className="bg-white/5 border border-white/10 text-white py-4 rounded hover:bg-white/10 transition-all uppercase tracking-widest text-xs font-bold"
-                            >
-                                VER CLASIFICACIÓN
-                            </button>
-                            <button
-                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                className="bg-amber-600 text-black py-4 rounded hover:bg-amber-500 transition-all uppercase tracking-widest text-xs font-black shadow-lg"
-                            >
-                                VOLVER AL REPORTE
-                            </button>
-                        </div>
-                    </motion.div>
-                )}
             </AnimatePresence>
         </div>
     );

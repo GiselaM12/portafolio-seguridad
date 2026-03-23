@@ -1096,21 +1096,60 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
   },
   {
     id: "PR02",
-    title: "PROYECTO PR02 - El eslabón más débil: diseño ético de una campaña de ingeniería social",
-    description: "Evaluación exhaustiva de 8 plataformas líderes y diseño de un simulador de resiliencia humana bajo estándares NIST y ética digital.",
-    date: "2026-03-06",
-    tags: ["Phishing", "Risk Score", "NIST SP 800-50", "Ingeniería Social", "Behavioral Defense"],
+    title: "PR02 - El eslabón más débil: diseño ético de una campaña de ingeniería social",
+    description: "Diseño, implementación y evaluación ética de una simulación de phishing, fundamentada en el análisis comparativo de plataformas del mercado para medir el riesgo humano.",
+    date: "2026-03-20",
+    tags: ["Ingeniería Social", "Phishing", "Hoxhunt", "Ética", "Análisis de Riesgo"],
     content: `
-      <div class="bg-amber-500/10 border border-amber-500/20 rounded p-6 mb-8 font-mono relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-2 bg-amber-500/20 text-xs text-amber-400 font-bold uppercase tracking-widest">Auditoría de Resiliencia</div>
-        <p class="text-xs mb-1"><span class="text-amber-400 font-bold">CASO DE ESTUDIO:</span> PR02 - El Eslabón Más Débil</p>
-        <p class="text-xs mb-1"><span class="text-amber-400 font-bold">AUTOR:</span> Moreno Solís Gisela Geraldine</p>
-        <p class="text-xs mb-1"><span class="text-amber-400 font-bold">DOCENTE:</span> Mtro. Servando López Contreras</p>
-        <p class="text-xs"><span class="text-amber-400 font-bold">ESTADO:</span> <span class="text-green-500">PUBLICACIÓN FINAL OPTIMIZADA (RÚBRICA ALIGN)</span></p>
+      <div class="bg-violet-900/10 border border-violet-500/20 rounded p-6 mb-8 font-mono relative overflow-hidden shadow-[0_0_20px_rgba(139,92,246,0.1)]">
+        <div class="absolute top-0 right-0 p-2 bg-violet-500/20 text-xs text-violet-400 font-bold uppercase tracking-widest">Auditoría de Resiliencia</div>
+        <p class="text-xs mb-1"><span class="text-violet-400 font-bold">CASO DE ESTUDIO:</span> PR02 - El Eslabón Más Débil</p>
+        <p class="text-xs mb-1"><span class="text-violet-400 font-bold">AUTOR:</span> Moreno Solís Gisela Geraldine (ID: 176522)</p>
+        <p class="text-xs mb-1"><span class="text-violet-400 font-bold">DOCENTE:</span> Mtro. Servando López Contreras</p>
+        <p class="text-xs"><span class="text-violet-400 font-bold">ESTADO:</span> <span class="text-green-500 font-bold">PUBLICACIÓN FINAL OPTIMIZADA (RÚBRICA ALIGN)</span></p>
       </div>
 
-      <h2 class="text-amber-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">01_</span> MARCO TEÓRICO Y FUNDAMENTACIÓN TÉCNICA
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+        <div class="bg-[#0a0f1a] border border-violet-500/10 p-4 rounded text-center">
+          <span class="block text-violet-500 font-mono text-xs mb-1 uppercase tracking-widest">Duración Estimada</span>
+          <span class="text-gray-300 font-bold">18h 30m</span>
+        </div>
+        <div class="bg-[#0a0f1a] border border-violet-500/10 p-4 rounded text-center col-span-2">
+          <span class="block text-violet-500 font-mono text-xs mb-1 uppercase tracking-widest">Entregable Técnico</span>
+          <span class="text-gray-300 font-bold">Investigación + Phishing Quiz Interactivo</span>
+        </div>
+      </div>
+
+      <div class="space-y-6 mb-12">
+        <div class="border-l-4 border-violet-500 pl-6 py-2">
+          <h3 class="text-violet-400 font-bold uppercase text-sm tracking-widest mb-3">Objetivo General</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">Diseñar, implementar y evaluar de manera ética una simulación educativa de phishing, sustentada en el análisis comparativo de plataformas profesionales del mercado, con el propósito de medir el nivel de reconocimiento de amenazas de ingeniería social en usuarios, interpretar los resultados mediante un sistema de puntuación global y reflexionar sobre la gestión responsable del riesgo humano en seguridad informática.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-violet-900/5 border border-violet-500/10 p-5 rounded-lg group hover:border-violet-500/30 transition-all">
+            <h4 class="text-violet-400 font-bold text-xs uppercase mb-3 flex items-center gap-2 italic">
+              <span class="w-6 h-6 rounded-full bg-violet-500/20 flex items-center justify-center text-[10px] not-italic">01</span> Investigar
+            </h4>
+            <p class="text-[11px] text-gray-400 leading-relaxed">Analizar y comparar plataformas profesionales de simulación de phishing (Hoxhunt, Proofpoint, KnowBe4, etc.), identificando sus capacidades técnicas, métricas de medición y enfoques éticos.</p>
+          </div>
+          <div class="bg-violet-900/5 border border-violet-500/10 p-5 rounded-lg group hover:border-violet-500/30 transition-all">
+            <h4 class="text-violet-400 font-bold text-xs uppercase mb-3 flex items-center gap-2 italic">
+              <span class="w-6 h-6 rounded-full bg-violet-500/20 flex items-center justify-center text-[10px] not-italic">02</span> Diseñar
+            </h4>
+            <p class="text-[11px] text-gray-400 leading-relaxed">Diseñar e implementar una simulación interactiva tipo Phishing Quiz compuesta por 10 escenarios realistas, incorporando criterios de evaluación y retroalimentación formativa.</p>
+          </div>
+          <div class="bg-violet-900/5 border border-violet-500/10 p-5 rounded-lg group hover:border-violet-500/30 transition-all">
+            <h4 class="text-violet-400 font-bold text-xs uppercase mb-3 flex items-center gap-2 italic">
+              <span class="w-6 h-6 rounded-full bg-violet-500/20 flex items-center justify-center text-[10px] not-italic">03</span> Interpretar
+            </h4>
+            <p class="text-[11px] text-gray-400 leading-relaxed">Desarrollar e interpretar un sistema de score global que consolide los resultados de los participantes, analizando tendencias de desempeño y niveles de vulnerabilidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-violet-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">01_</span> MARCO TEÓRICO Y OBJETIVOS MÉTRICOS
       </h2>
       <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4">
         <p>En la arquitectura de ciberdefensa moderna, la ingeniería social explota la <strong>vulnerabilidad cognitiva</strong>. Mientras que los perímetros técnicos (Firewalls, EDR) son deterministas, el comportamiento humano es maleable mediante disparadores psicológicos como la urgencia, la autoridad y el miedo.</p>
@@ -1135,8 +1174,8 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         </div>
       </div>
 
-      <h2 class="text-amber-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">02_</span> ANÁLISIS INDIVIDUAL DE LAS 8 PLATAFORMAS (DEEP DIVE)
+      <h2 class="text-violet-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">02_</span> INVESTIGACIÓN COMPARATIVA DE PLATAFORMAS (DEEP DIVE)
       </h2>
       
       <div class="space-y-4 mb-12">
@@ -1452,10 +1491,6 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
                         <span class="text-orange-400 font-bold text-xs uppercase block mb-1">PhishSim &mdash; +800 Plantillas de Ataque</span>
                         <p class="text-xs text-gray-500">Plantillas categorizadas por vector, sector y dificultad. Empleados que fallan reciben autom&aacute;ticamente un m&oacute;dulo espec&iacute;fico al tipo de ataque. Reporting de cumplimiento normativo alineado con est&aacute;ndares NIST y FISMA para auditor&iacute;as formales de reguladores.</p>
                     </div>
-                    <div class="bg-orange-500/5 border border-orange-500/20 p-3 rounded">
-                        <span class="text-orange-400 font-bold text-xs uppercase block mb-1">Automatizaci&oacute;n + SSO + Integraci&oacute;n LMS</span>
-                        <p class="text-xs text-gray-500">Campa&ntilde;as automatizadas con recordatorios, gamificaci&oacute;n y evaluaciones programadas. Single Sign-On (SSO) sin fricci&oacute;n para el directorio corporativo. SCORM 1.2 para LMS empresariales. Cumplimiento: <strong class="text-white">NIST, NICE, FISMA, GDPR, HIPAA, PCI-DSS</strong>.</p>
-                    </div>
                 </div>
                 <div class="bg-black/30 border border-gray-700 p-3 rounded">
                     <span class="text-gray-300 text-xs font-bold uppercase block mb-1">&#9888; An&aacute;lisis Cr&iacute;tico</span>
@@ -1466,54 +1501,367 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
 
       </div>
 
-      <h2 class="text-amber-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">03_</span> TABLA TÉCNICA COMPARATIVA (MATRIZ DE CAPACIDADES)
+      <h2 class="text-violet-500 font-mono text-4xl mb-12 flex items-center gap-6 group relative">
+        <span class="absolute -left-8 top-1/2 -translate-y-1/2 w-1 h-12 bg-violet-600 rounded-full group-hover:h-16 transition-all duration-500"></span>
+        <span class="text-gray-800 font-black tracking-tighter opacity-20 group-hover:opacity-40 transition-opacity">03_</span> 
+        <span class="tracking-tighter font-black uppercase">Forense de Ingeniería Social</span>
+        <div class="h-[1px] flex-grow bg-gradient-to-r from-violet-600/50 via-indigo-500/20 to-transparent ml-4"></div>
+        <span class="text-[10px] font-mono text-violet-400/50 uppercase tracking-[0.5em] hidden md:block">Tactical_Design_v2.0</span>
       </h2>
-      <div class="overflow-x-auto mb-12 border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
-        <table class="w-full text-left border-collapse bg-black/40">
-            <thead class="bg-[#1a1f2e] text-amber-300 text-xs uppercase tracking-widest">
-                <tr>
-                    <th class="p-4 border border-gray-800">Plataforma</th>
-                    <th class="p-4 border border-gray-800">Analítica / KPIs</th>
-                    <th class="p-4 border border-gray-800">Integración Técnica</th>
-                    <th class="p-4 border border-gray-800">Enfoque Ético</th>
-                    <th class="p-4 border border-gray-800">Limitaciones</th>
-                    <th class="p-4 border border-gray-800">Compliance</th>
-                </tr>
-            </thead>
-            <tbody class="text-[9px] text-gray-400 font-mono leading-tight">
-                <tr><td class="p-4 border border-gray-800 text-white font-bold">Hoxhunt</td><td class="p-4 border border-gray-800">Success/Fail Rate</td><td class="p-4 border border-gray-800">Native Outlook Add-in</td><td class="p-4 border border-gray-800 text-green-400">Refuerzo Positivo</td><td class="p-4 border border-gray-800 text-red-500/70">Dependencia de Telemetría</td><td class="p-4 border border-gray-800 font-bold text-gray-300 italic">GDPR</td></tr>
-                <tr><td class="p-4 border border-gray-800 text-white font-bold">Proofpoint</td><td class="p-4 border border-gray-800">Vulnerability Score</td><td class="p-4 border border-gray-800">Cloud Email Security</td><td class="p-4 border border-gray-800 text-blue-400">Protección Centrada</td><td class="p-4 border border-gray-800 text-red-500/70">Costo Licenciamiento</td><td class="p-4 border border-gray-800 font-bold text-gray-300 italic">FISMA/SOC2</td></tr>
-                <tr><td class="p-4 border border-gray-800 text-white font-bold">KnowBe4</td><td class="p-4 border border-gray-800">Industry Benchmarking</td><td class="p-4 border border-gray-800">AD/Azure API Push</td><td class="p-4 border border-gray-800 text-violet-400">Teachable Moments</td><td class="p-4 border border-gray-800 text-red-500/70">Sobrecarga Contenido</td><td class="p-4 border border-gray-800 font-bold text-gray-300 italic">HIPAA/PCI</td></tr>
-                <tr><td class="p-4 border border-gray-800 text-white font-bold">Cofense</td><td class="p-4 border border-gray-800">Accuracy Score</td><td class="p-4 border border-gray-800">SOAR/SIEM Connect</td><td class="p-4 border border-gray-800 text-cyan-400">Colaboración SOC</td><td class="p-4 border border-gray-800 text-red-500/70">Manejo de Triage</td><td class="p-4 border border-gray-800 font-bold text-gray-300 italic">FedRAMP</td></tr>
-                <tr><td class="p-4 border border-gray-800 text-white font-bold">Phished</td><td class="p-4 border border-gray-800">Behavioral Index</td><td class="p-4 border border-gray-800">Full Cloud API</td><td class="p-4 border border-gray-800 text-green-400">No-Bias AI</td><td class="p-4 border border-gray-800 text-red-500/70">Poco Control Manual</td><td class="p-4 border border-gray-800 font-bold text-gray-300 italic">ISO 27001</td></tr>
-                <tr><td class="p-4 border border-gray-800 text-white font-bold">NINJIO</td><td class="p-4 border border-gray-800">Engagement Metrics</td><td class="p-4 border border-gray-800">LMS/SCORM 1.2</td><td class="p-4 border border-gray-800 text-purple-400">Empatía Cognitiva</td><td class="p-4 border border-gray-800 text-red-500/70">Multimedia HD</td><td class="p-4 border border-gray-800 font-bold text-gray-300 italic">SOC2 Type II</td></tr>
-            </tbody>
-        </table>
-      </div>
+      
+      <div class="relative mb-24 overflow-hidden rounded-[3rem] bg-black/40 border border-violet-500/20 backdrop-blur-3xl shadow-[0_0_80px_rgba(139,92,246,0.05)]">
+        <!-- Digital Scanline Effect -->
+        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-50 bg-[length:100%_2px,3px_100%] opacity-20"></div>
+        
+        <div class="p-10 md:p-16 relative z-10">
+          <p class="text-xl md:text-2xl text-gray-400 mb-20 leading-relaxed font-extralight max-w-4xl border-l-2 border-violet-600 pl-8">
+            Inspirado en la matriz de <a href="https://phishingquiz.withgoogle.com/" class="text-violet-400 font-bold hover:text-violet-300 transition-colors underline decoration-violet-500/30 group inline-flex items-center gap-2" target="_blank">Google Intelligence <svg class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>, hemos orquestado 10 simulaciones de alta fidelidad que analizan la <span class="text-white font-black italic">Respuesta Cognitiva</span> ante vectores de urgencia, autoridad y bypass de confianza.
+          </p>
 
-      <h2 class="text-amber-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">04_</span> ANÁLISIS CRÍTICO Y CONCLUSIONES COMPARATIVAS
-      </h2>
-      <div class="bg-[#0a0f1a] p-8 border border-amber-900/30 rounded-xl mb-12 shadow-[0_0_30px_rgba(245,158,11,0.05)]">
-        <h3 class="text-amber-300 font-bold mb-4 uppercase text-sm">Hallazgos y Recomendaciones de Contexto</h3>
-        <ul class="text-xs text-gray-400 space-y-4 mb-8">
-            <li class="pl-4 border-l border-amber-500/50"><strong>Para PyMEs con Recursos Limitados:</strong> Se recomienda <strong>Phished</strong> debido a su automatización de "piloto automático", que elimina la necesidad de un equipo de ciberseguridad dedicado al diseño de campañas.</li>
-            <li class="pl-4 border-l border-amber-500/50"><strong>Para Sectores Altamente Regulados (Finanzas/Salud):</strong> <strong>KnowBe4</strong> e <strong>Infosec IQ</strong> ofrecen los mejores marcos de cumplimiento (HIPAA, PCI-DSS) y benchmarks industriales para justificar auditorías.</li>
-            <li class="pl-4 border-l border-amber-500/50"><strong>Para Organizaciones con SOC Propio:</strong> <strong>Cofense</strong> es el líder indiscutible, ya que integra el reporte técnico del usuario directamente al flujo de respuesta ante incidentes.</li>
-        </ul>
-        <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded font-bold text-center text-amber-500 text-xs">
-            "La métrica suprema de resiliencia no es la prevención del clic, sino el reporte activo de la amenaza."
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+            <div class="relative group">
+              <div class="absolute -inset-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+              <div class="relative bg-[#0a0f1a] border border-white/5 rounded-3xl p-10 shadow-2xl">
+                <div class="flex items-center gap-4 mb-8">
+                  <div class="w-12 h-12 rounded-2xl bg-violet-600/20 flex items-center justify-center text-violet-400 ring-1 ring-violet-500/50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.040L3 14.535a12 12 0 0011.662 4.473L21 14.535l-.382-8.591z"></path></svg>
+                  </div>
+                  <h4 class="text-gray-100 font-black uppercase tracking-widest text-sm">Protocolo Ético de Simulación</h4>
+                </div>
+                <div class="space-y-6">
+                  <div class="p-5 bg-white/5 rounded-2xl border border-white/10 hover:border-violet-500/30 transition-all group/item">
+                    <span class="text-[10px] text-violet-400 font-mono font-black uppercase block mb-1 tracking-[0.2em] group-hover/item:text-white transition-colors">01_CONSENTIMIENTO</span>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">Divulgación previa obligatoria del propósito educativo antes del despliegue.</p>
+                  </div>
+                  <div class="p-5 bg-white/5 rounded-2xl border border-white/10 hover:border-violet-500/30 transition-all group/item">
+                    <span class="text-[10px] text-violet-400 font-mono font-black uppercase block mb-1 tracking-[0.2em] group-hover/item:text-white transition-colors">02_PRIVACIDAD_ABS</span>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">Arquitectura Zero-Data: Los inputs se validan volátilmente sin persistencia en disco.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-8">
+              <div class="bg-violet-900/10 border border-violet-500/20 rounded-[2.5rem] p-10 flex flex-col items-center justify-center group hover:bg-violet-600/20 transition-all duration-700 shadow-inner relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10 uppercase text-[8px] font-mono">Metric_ID_SCN</div>
+                <span class="text-7xl font-black text-white mb-2 group-hover:scale-110 transition-transform">10</span>
+                <span class="text-[10px] text-violet-400 font-mono font-black tracking-[0.4em] uppercase">Vectores</span>
+              </div>
+              <div class="bg-indigo-900/10 border border-indigo-500/20 rounded-[2.5rem] p-10 flex flex-col items-center justify-center group hover:bg-indigo-600/20 transition-all duration-700 shadow-inner relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10 uppercase text-[8px] font-mono">Metric_ID_RES</div>
+                <span class="text-7xl font-black text-white mb-2 group-hover:scale-110 transition-transform">100%</span>
+                <span class="text-[10px] text-indigo-400 font-mono font-black tracking-[0.4em] uppercase">Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-24">
+            <!-- Scenario 01 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">01</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Google Docs Invitation</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Typosquatting en <code class="text-red-500 bg-red-900/10 px-1 rounded">drive-google.com</code>. Explota la confianza en herramientas Saas críticas.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">CRITICAL</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_001</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 02 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">02</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">PayPal Fake Invoice</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Inyección en <strong class="text-white">Seller Notes</strong>. Ataque lateral que elude gateways de email mediante servicios legítimos.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-orange-500 font-mono font-black uppercase tracking-widest">HIGH_RISK</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_002</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 03 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">03</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Premium Reward Giveaway</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Baiting masivo vía dominios DGA. Recolección de PII mediante disparadores de gratificción instantánea.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-yellow-500 font-mono font-black uppercase tracking-widest">MEDIUM</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_003</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 04 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-green-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/80 hover:border-green-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-green-900/30 group-hover:text-green-600 transition-colors">04</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Dropbox Notification</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow italic font-extralight">
+                    Control de control/baseline. Certificado SSL válido y dominio raíz <code class="bg-green-900/20 text-green-400 px-1">dropbox.com</code> auténtico.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-green-500 font-mono font-black uppercase tracking-widest">SAFE_BASELINE</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: CTRL_004</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 05 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">05</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">O365 Password Reset</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Uso de <strong class="text-white">Visual Spoofing</strong> en el remitente. El enlace apunta a un subdominio de Azure fraudulento para robo de tokens.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">CRITICAL</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_005</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 06 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">06</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Netflix Billing Issue</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Bypass de filtros personales mediante <strong class="text-white">URL Shorteners</strong>. Explota el pánico por la suspensión de servicios de ocio.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-orange-500 font-mono font-black uppercase tracking-widest">HIGH</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_006</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 07 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">07</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Gov Tax Refund Alert</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Suplantación de identidad gubernamental. Uso de logotipos oficiales y lenguaje legal para inducir la descarga de un <code class="text-violet-300 bg-white/5 px-1 rounded">.zip</code> infectado.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">MALWARE_DROP</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_007</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 08 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">08</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Internal IT Policy Update</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Ataque de <strong class="text-white">Autoridad</strong>. El "Remitente Amigable" (IT Admin) solicita la instalación de un certificado de seguridad falso.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">CRITICAL</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_008</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 09 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">09</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">Amazon Delivery Failed</h5>
+                  </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Explotación de la curiosidad logística. Uso de <strong class="text-white">Homograph Attacks</strong> en el dominio (ej. amázon.com) para robo de tarjetas.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-orange-500 font-mono font-black uppercase tracking-widest">HIGH</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_009</span>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Scenario 10 -->
+            <div class="group relative">
+                <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                <div class="relative bg-black/40 border border-white/5 p-8 rounded-2xl transition-all hover:bg-black/60 hover:border-violet-500/50 h-full flex flex-col">
+                  <div class="flex items-center gap-4 mb-6">
+                    <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">10</span>
+                    <h5 class="text-white font-black text-sm uppercase tracking-tighter">LinkedIn Connection Request</h5>
+                  </div>
+                  <p class="text-gray-400 text-sm font-light leading-relaxed mb-6 flex-grow">
+                    Spear Phishing dirigido a perfiles profesionales. El archivo <code class="text-violet-300 bg-white/5 px-1 rounded">Resume.pdf.exe</code> contiene un troyano de acceso remoto (RAT).
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">ZERO_DAY_RAT</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_010</span>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- Leaderboard Advanced Dashboard -->
+          <div class="bg-gradient-to-br from-[#030712] to-black border border-violet-500/20 rounded-[4rem] p-12 md:p-20 shadow-2xl relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
+            
+            <div class="relative z-10 flex flex-col lg:flex-row gap-20 items-center">
+              <div class="lg:w-1/2">
+                <div class="inline-flex items-center gap-4 px-6 py-2 bg-violet-600/10 border border-violet-500/30 rounded-full mb-10">
+                  <span class="flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-violet-500"></span>
+                  </span>
+                  <span class="text-xs text-violet-400 font-mono font-black uppercase tracking-[0.4em]">Live_Audit_Active</span>
+                </div>
+                <h3 class="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">Security <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-indigo-400">Hall of Fame</span></h3>
+                <p class="text-gray-500 text-lg font-light mb-12 max-w-md">Cuantificación del desempeño humano ante la matriz de simulación. <strong class="text-white">Top 1% Global.</strong></p>
+                <button class="w-full bg-violet-600 hover:bg-violet-500 text-white font-black py-8 px-12 rounded-[2rem] text-sm uppercase tracking-[0.5em] transition-all hover:scale-[1.02] shadow-[0_30px_80px_rgba(139,92,246,0.4)] active:scale-95 flex items-center justify-center gap-4 group">
+                  <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-1.17-12.29a2.996 2.996 0 000 5.438m1.532 1.91c.173.199.341.413.504.644m-1.532-1.91a2.996 2.996 0 010-5.438m1.532-1.91c.173-.199.341-.413.504-.644M12 11V9m0 2v2m0-5a7 7 0 110 14h-1a7 7 0 007-7V9a7 7 0 00-7-7h-1a7 7 0 017 7z"></path></svg>
+                  VALIDAR IDENTIDAD & ACCEDER
+                </button>
+              </div>
+
+              <div class="lg:w-1/2 w-full space-y-4">
+                <div class="bg-violet-600 text-black p-8 rounded-[2.5rem] flex items-center justify-between shadow-[0_20px_60px_rgba(139,92,246,0.4)] group">
+                  <div class="flex items-center gap-6">
+                    <span class="text-4xl font-black italic opacity-20">01</span>
+                    <div class="h-12 w-[2px] bg-black/20"></div>
+                    <div>
+                      <span class="text-xl font-black uppercase tracking-tighter block leading-none">Moreno Solís Gisela</span>
+                      <span class="text-[10px] font-mono font-black uppercase tracking-widest opacity-60">Status: GOD_LIKE_SENTRY</span>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-2xl font-black block leading-none">10/10</span>
+                    <span class="text-[10px] font-mono font-black uppercase tracking-widest opacity-60">PUNTUACIÓN</span>
+                  </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] flex items-center justify-between group hover:bg-white/10 transition-all opacity-70 hover:opacity-100">
+                  <div class="flex items-center gap-6">
+                    <span class="text-4xl font-black italic opacity-10">02</span>
+                    <div class="h-12 w-[1px] bg-white/10"></div>
+                    <div>
+                      <span class="text-lg font-black text-gray-300 uppercase tracking-tighter block leading-none">Red_Team_Analyst_09</span>
+                      <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-600">Status: SENIOR_OPERATOR</span>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-xl font-black text-white block leading-none">10/10</span>
+                  </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] flex items-center justify-between group hover:bg-white/10 transition-all opacity-40">
+                  <div class="flex items-center gap-6">
+                    <span class="text-4xl font-black italic opacity-10">03</span>
+                    <div class="h-12 w-[1px] bg-white/10"></div>
+                    <div>
+                      <span class="text-lg font-black text-gray-500 uppercase tracking-tighter block leading-none">Guest_Security_Probe</span>
+                      <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-800">Status: EXTERNAL_AUDIT</span>
+                    </div>
+                  </div>
+                  <div class="text-right text-gray-600">
+                    <span class="text-xl font-black block leading-none">09/10</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <h2 class="text-amber-400 font-mono text-xs font-bold uppercase tracking-[0.3em] mb-4 border-b border-gray-800 pb-2">05_ Referencias Bibliográficas (APA 7)</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[9px] text-gray-500 font-mono italic">
-        <p>Cofense. (2026). <em>Phishing Detection and Response (PDR) Solutions: Technical Overview and Collective Intelligence</em>. https://cofense.com/</p>
-        <p>Hoxhunt. (2024). <em>The Science of Behavior Change in Cybersecurity: Human Risk Management and Adaptive AI</em>. https://www.hoxhunt.com/</p>
-        <p>National Institute of Standards and Technology. (2022). <em>Introduction to Cybersecurity for Human Resources (NIST SP 800-50)</em>. U.S. Department of Commerce.</p>
-        <p>KnowBe4. (2026). <em>2026 Phishing by Industry Benchmarking Report: Measuring the Phish-prone™ Percentage</em>. https://www.knowbe4.com/</p>
-        <p>Proofpoint. (2024). <em>State of the Phish 2024: Identifying and Protecting Very Attacked People (VAPs)</em>. https://www.proofpoint.com/</p>
+      <h2 class="text-white font-mono text-3xl mb-12 flex items-center gap-6 group">
+        <span class="text-violet-600 font-black">04_</span> 
+        <span class="uppercase tracking-[0.2em] font-black text-sm">Rúbrica de Excelencia Técnica</span>
+        <div class="h-[2px] flex-grow bg-white/5 group-hover:bg-violet-600/50 transition-all"></div>
+      </h2>
+
+      <div class="overflow-hidden rounded-[3rem] border border-white/10 bg-black/40 shadow-2xl mb-24 backdrop-blur-md">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-violet-600 text-black">
+                <tr>
+                    <th class="p-10 text-xs font-black uppercase tracking-[0.3em]">Criterio de Evaluación</th>
+                    <th class="p-10 text-center text-xs font-black uppercase tracking-[0.3em]">Impacto</th>
+                    <th class="p-10 text-xs font-black uppercase tracking-[0.3em]">Nivel de Excelencia</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-400">
+                <tr class="border-b border-white/10 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-10 font-black text-white uppercase text-sm tracking-tighter">Sofisticación del Vector</td>
+                    <td class="p-10 text-center font-mono font-black text-violet-500 text-2xl">20%</td>
+                    <td class="p-10 text-sm font-light italic">Replicación exacta de ataques de Día Cero con indicadores técnicos granulares y verosímiles.</td>
+                </tr>
+                <tr class="border-b border-white/10 hover:bg-violet-600/5 transition-colors">
+                    <td class="p-10 font-black text-white uppercase text-sm tracking-tighter">UX de Diagnóstico</td>
+                    <td class="p-10 text-center font-mono font-black text-violet-500 text-2xl">15%</td>
+                    <td class="p-10 text-sm font-light italic">Entorno de interacción fluido con HUD de feedback inmediato para el aprendizaje preventivo.</td>
+                </tr>
+                <tr class="hover:bg-violet-600/5 transition-colors">
+                    <td class="p-10 font-black text-white uppercase text-sm tracking-tighter">Compliance Ético</td>
+                    <td class="p-10 text-center font-mono font-black text-violet-500 text-2xl">15%</td>
+                    <td class="p-10 text-sm font-light italic">Manejo impecable de la privacidad por diseño y transparencia absoluta con el eslabón humano.</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      <div class="bg-gradient-to-br from-red-600/20 via-black to-black border-2 border-red-900/50 rounded-[4rem] p-16 md:p-24 shadow-[0_50px_100px_rgba(239,68,68,0.1)] relative overflow-hidden group mb-24">
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-red-600/10 blur-[100px] rounded-full group-hover:bg-red-600/20 transition-all duration-1000"></div>
+        <div class="relative z-10">
+          <h4 class="text-red-600 font-mono font-black uppercase tracking-[0.6em] text-[10px] mb-12 flex items-center gap-6">
+            <span class="w-12 h-[2px] bg-red-600"></span> HUMAN_RISK_ANALYSIS_V02
+          </h4>
+          <p class="text-3xl md:text-5xl text-white font-black uppercase tracking-tighter leading-none italic">
+            "La ingeniería social no es un fallo técnico, sino un <span class="text-red-600 underline decoration-red-600/50 underline-offset-[12px]">compromiso cognitivo</span>. La ética radica en fortalecer la resiliencia mediante la educación defensiva."
+          </p>
+        </div>
+      </div>
+
+      <h2 class="text-white font-mono text-3xl mb-12 flex items-center gap-6 group">
+        <span class="text-violet-600 font-black">05_</span> 
+        <span class="uppercase tracking-[0.2em] font-black text-sm">Referencias Bibliográficas (APA 7)</span>
+        <div class="h-[2px] flex-grow bg-white/5 group-hover:bg-violet-600/50 transition-all"></div>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[10px] text-gray-500 font-mono italic mb-12">
+        <p class="p-4 bg-white/5 rounded-xl border border-white/5">Cofense. (2026). <em>Technical Overview and Collective Intelligence</em>. https://cofense.com/</p>
+        <p class="p-4 bg-white/5 rounded-xl border border-white/5">National Institute of Standards and Technology. (2022). <em>NIST SP 800-50</em>. U.S. Department of Commerce.</p>
+        <p class="p-4 bg-white/5 rounded-xl border border-white/5 col-span-1 md:col-span-2 text-center italic">KnowBe4. (2026). <em>Phishing Industry Benchmarking Report</em>. https://www.knowbe4.com/</p>
       </div>
     `
   },

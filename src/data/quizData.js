@@ -1,374 +1,542 @@
 export const quizData = [
     {
         id: 1,
-        vector: "Email / Quishing",
-        trigger: "Curiosidad Técnica",
-        title: "Actualización de Protocolo de Acceso Físico",
-        sender: "Seguridad Patrimonial <patrimonial-security@corporativo-central.com>",
-        subject: "IMPORTANTE: Nuevo QR de Acceso a Oficinas - Mayo 2026",
-        content: "Estimado colaborador, debido a la actualización de los lectores biométricos en la recepción, su tarjeta física dejará de funcionar mañana. Es obligatorio escanear el siguiente código QR para sincronizar su identidad digital con la nueva app de acceso 'SmartGate'.",
-        attachment: "Instrucciones_Sincronizacion.pdf",
-        options: [
-            { id: 0, text: "Escanear QR y seguir instrucciones", isCorrect: false },
-            { id: 1, text: "Reportar como posible Phishing", isCorrect: true },
-            { id: 2, text: "Ignorar el correo y esperar a mañana", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Correo de tu banco pidiendo verificación urgente",
+        senderName: "Seguridad Banamex",
+        senderEmail: "seguridad@banamex-alertas.net",
+        senderInitial: "S",
+        senderColor: "#dc2626",
+        subject: "URGENTE: Tu cuenta ha sido bloqueada",
+        bodyParts: [
+            { text: "Estimado cliente,", type: "normal" },
+            { text: "Se detectó ", type: "normal" },
+            { text: "actividad sospechosa", type: "bold" },
+            { text: ". Verifica tus datos en las próximas ", type: "normal" },
+            { text: "2 horas", type: "danger" },
+            { text: " para evitar bloqueo permanente.", type: "normal" }
         ],
+        linkText: "Verificar cuenta ahora",
+        footerText: "Seguridad — Banamex",
         isPhishing: true,
         feedback: {
-            technical: "El vector es **Quishing**. Los atacantes usan QRs porque evaden filtros de texto. El dominio '@corporativo-central.com' no es el oficial y la urgencia es una señal de alerta.",
-            ethical: "Aprovecha la **Dependencia Operativa**. El miedo a no poder entrar a trabajar induce a una acción impulsiva."
+            title: "Se acabó el tiempo",
+            points: [
+                "Dominio falso: banamex-alertas.net (el oficial es banamex.com)",
+                "Urgencia artificial: 2 horas para actuar",
+                "Enlace genérico sin URL verificable"
+            ],
+            technical: "Phishing clásico: dominio 'banamex-alertas.net' es falso (el real es banamex.com), urgencia artificial y enlace genérico."
         }
     },
     {
         id: 2,
-        vector: "Teams / AI-Whaling",
-        trigger: "Autoridad (Deepfake)",
-        title: "Mensaje del VP de Operaciones",
-        sender: "VP Operaciones (Direct Assistant)",
-        subject: "Directiva Confidencial: Reestructuración",
-        content: "Hola. Necesito que revises este memorándum de voz generado por mi asistente IA sobre cambios en tu departamento. Es información sensible. No lo compartas. Haz clic para autenticarte y escuchar.",
-        options: [
-            { id: 0, text: "Acceder al portal de voz y autenticarse", isCorrect: false },
-            { id: 1, text: "Verificar con el VP por otro canal oficial", isCorrect: true },
-            { id: 2, text: "Enviar el link a un compañero para confirmar", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Correo de PayPal sobre actividad inusual",
+        senderName: "PayPal Security",
+        senderEmail: "security@paypal-account-verify.com",
+        senderInitial: "P",
+        senderColor: "#0070ba",
+        subject: "Actividad inusual detectada en su cuenta",
+        bodyParts: [
+            { text: "Estimado usuario,", type: "normal" },
+            { text: "Hemos detectado un ", type: "normal" },
+            { text: "intento de acceso no autorizado", type: "bold" },
+            { text: " desde una ubicación desconocida. Su cuenta ha sido ", type: "normal" },
+            { text: "temporalmente limitada", type: "danger" },
+            { text: ". Para restaurar el acceso completo, verifique su identidad.", type: "normal" }
         ],
+        linkText: "Restaurar acceso a mi cuenta",
+        footerText: "PayPal — Seguridad de Cuentas",
         isPhishing: true,
         feedback: {
-            technical: "Uso de **AitM (Adversary-in-the-Middle)**. El portal pide login para 'escuchar', capturando tu token de sesión real incluso con MFA.",
-            ethical: "Explota la **Exclusividad**. Hacer sentir al usuario parte de un círculo de confianza reduce su escepticismo."
+            points: [
+                "Dominio falso: paypal-account-verify.com (el real es paypal.com)",
+                "Lenguaje alarmista: 'cuenta limitada'",
+                "PayPal nunca pide verificar identidad por email"
+            ],
+            technical: "El dominio 'paypal-account-verify.com' no pertenece a PayPal. Es un sitio de captura de credenciales."
         }
     },
     {
         id: 3,
-        vector: "GitHub / System",
-        trigger: "Mantenimiento Real",
-        title: "Alert: Dependabot Vulnerability Fixed",
-        sender: "GitHub <noreply@github.com>",
-        subject: "[P-2026] Fix merged in your personal repository",
-        content: "Dependabot ha detectado y corregido automáticamente una vulnerabilidad en 'package.json'. La PR ha sido aprobada según tus políticas de seguridad automática. Puedes revisar el log de cambios en tu tablero de GitHub oficial.",
-        options: [
-            { id: 0, text: "Hacer clic en el link del correo", isCorrect: false },
-            { id: 1, text: "Ir a github.com manualmente y revisar", isCorrect: true },
-            { id: 2, text: "Marcar como Phishing y borrar", isCorrect: false }
+        vector: "SMS",
+        mockupType: "sms",
+        title: "SMS de tu banco alertando una compra",
+        senderName: "BBVA Alertas",
+        senderPhone: "+52 55 1234 5678",
+        bodyParts: [
+            { text: "BBVA: Intento de compra en ", type: "normal" },
+            { text: "APPLE STORE", type: "bold" },
+            { text: " por ", type: "normal" },
+            { text: "$15,999 MXN", type: "danger" },
+            { text: ". Si NO reconoce esta transacción presione aquí para cancelar inmediatamente: ", type: "normal" },
+            { text: "https://bbva-auth.net/cancelar", type: "link" }
         ],
-        isPhishing: false,
+        isPhishing: true,
         feedback: {
-            technical: "Este es un mensaje **LEGÍTIMO** de GitHub. Sin embargo, la mejor práctica (seguridad proactiva) es **nunca** usar links de correos, sino navegar manualmente al sitio oficial.",
-            ethical: "Este escenario mide la **Paranoia Funcional**. Ser cauteloso incluso ante comunicaciones reales es el nivel más alto de resiliencia."
+            points: [
+                "Dominio falso: bbva-auth.net (BBVA usa bbva.mx)",
+                "Los bancos nunca envían links para cancelar cargos por SMS",
+                "Urgencia artificial para evitar el razonamiento"
+            ],
+            technical: "El dominio 'bbva-auth.net' es fraudulento. Los bancos nunca usan links directos en SMS."
         }
     },
     {
         id: 4,
-        vector: "SMS / Smishing",
-        trigger: "Pánico Bancario",
-        title: "Alerta de Seguridad BBVA",
-        sender: "BBVA_SMS",
-        content: "BBVA: Intento de compra en APPLE STORE por $15,999 MXN. Si NO reconoce presione aquí para cancelar: https://bbva-auth.net/cancelar-token",
-        options: [
-            { id: 0, text: "Hacer clic para cancelar el cargo", isCorrect: false },
-            { id: 1, text: "Entrar a la App oficial de BBVA", isCorrect: true },
-            { id: 2, text: "Llamar al número que envió el SMS", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Notificación de GitHub sobre tu repositorio",
+        senderName: "GitHub",
+        senderEmail: "noreply@github.com",
+        senderInitial: "G",
+        senderColor: "#333",
+        subject: "[Dependabot] Vulnerability fixed in your repository",
+        bodyParts: [
+            { text: "Dependabot ha detectado y corregido automáticamente una vulnerabilidad en ", type: "normal" },
+            { text: "package.json", type: "bold" },
+            { text: ". La PR ha sido aprobada según tus políticas de seguridad automática. Puedes revisar el log de cambios en tu tablero de GitHub.", type: "normal" }
         ],
-        isPhishing: true,
+        linkText: "Ver cambios en GitHub",
+        footerText: "GitHub — Security Alerts",
+        isPhishing: false,
         feedback: {
-            technical: "El dominio 'bbva-auth.net' es fraudulento. Los bancos nunca usan dominios '.net' ni piden cancelar cargos vía links directos en SMS.",
-            ethical: "Usa el **Pánico Financiero**. La urgencia emocional de detener una pérdida de dinero nubla el juicio técnico."
+            points: [
+                "El dominio github.com es legítimo",
+                "No solicita datos personales ni credenciales",
+                "Mejor práctica: navegar manualmente a github.com"
+            ],
+            technical: "Mensaje LEGÍTIMO de GitHub. Sin embargo, la mejor práctica es navegar manualmente al sitio."
         }
     },
     {
         id: 5,
-        vector: "Email / Soporte",
-        trigger: "Notificación Real IT",
-        title: "Ticket #8829: Cambio de Perfil solicitado",
-        sender: "Service Desk <it.support@tu-empresa-real.com>",
-        subject: "Confirmación de actualización de privilegios",
-        content: "Hola, según la solicitud enviada por tu gerente, se han actualizado tus permisos en el ERP. Recibirás un correo de sistema automático con las nuevas políticas. Si no solicitaste esto, contacta a la línea de ayuda interna ext. 5555.",
-        options: [
-            { id: 0, text: "Ignorar, es un proceso normal", isCorrect: true },
-            { id: 1, text: "Hacer clic en 'Confirmar'", isCorrect: false },
-            { id: 2, text: "Reportar como Phishing", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Correo del SAT sobre un adeudo fiscal",
+        senderName: "SAT - Buzón Tributario",
+        senderEmail: "contacto@sat.gob.mx.seguridad-fiscal.com",
+        senderInitial: "S",
+        senderColor: "#1e40af",
+        subject: "ADEUDO FISCAL DETECTADO - Acción Inmediata",
+        bodyParts: [
+            { text: "Se han encontrado ", type: "normal" },
+            { text: "discrepancias graves", type: "bold" },
+            { text: " en sus declaraciones del ejercicio fiscal 2025. Se ha generado una ", type: "normal" },
+            { text: "orden de embargo precautorio", type: "danger" },
+            { text: " que se ejecutará en ", type: "normal" },
+            { text: "48 horas", type: "danger" },
+            { text: " si no presenta su aclaración.", type: "normal" }
         ],
-        isPhishing: false,
+        linkText: "Presentar aclaración fiscal",
+        footerText: "SAT — Servicio de Administración Tributaria",
+        isPhishing: true,
         feedback: {
-            technical: "Es una comunicación **LEGÍTIMA** de un sistema de tickets. No incluye links sospechosos, usa dominios internos correctos y ofrece un canal de verificación fuera de banda (extensión 5555).",
-            ethical: "Evalúa la **Atención al Detalle**. Diferenciar un proceso corporativo normal de un ataque requiere conocer cómo opera tu propia organización."
+            points: [
+                "Dominio real es 'seguridad-fiscal.com', no 'sat.gob.mx'",
+                "Urgencia artificial: amenaza de embargo en 48 horas",
+                "El SAT nunca solicita aclaraciones por email"
+            ],
+            technical: "El dominio real es 'seguridad-fiscal.com', no 'sat.gob.mx'. Los atacantes usan nombres largos para ocultar el dominio."
         }
     },
     {
         id: 6,
-        vector: "LinkedIn / Social",
-        trigger: "Headhunting Senior",
-        title: "Propuesta de CISO Regional",
-        sender: "Tech Recruiters Global",
-        subject: "Tu perfil ha sido seleccionado para una vacante de $180k USD",
-        content: "Hola, estamos buscando un líder de seguridad. El paquete incluye bonos y acciones. Adjunto el PDF con los detalles técnicos de la posición para nuestra entrevista de mañana.",
-        attachment: "Detalles_Posicion.iso",
-        options: [
-            { id: 0, text: "Descargar y abrir el archivo para prepararme", isCorrect: false },
-            { id: 1, text: "Preguntar por qué el archivo es .ISO", isCorrect: true },
-            { id: 2, text: "Bloquear al reclutador inmediatamente", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Alerta de Microsoft sobre nuevo inicio de sesión", 
+        senderName: "Microsoft",
+        senderEmail: "no-reply@microsoft.com",
+        senderInitial: "M",
+        senderColor: "#0078d4",
+        subject: "Alerta de seguridad: Nuevo inicio de sesión",
+        bodyParts: [
+            { text: "Se ha detectado un ", type: "normal" },
+            { text: "inicio de sesión", type: "bold" },
+            { text: " en tu cuenta desde un nuevo dispositivo (", type: "normal" },
+            { text: "Windows 11, Chrome, Monterrey NL", type: "bold" },
+            { text: "). Si has sido tú, puedes ignorar este mensaje. Si no, revisa tu actividad de seguridad.", type: "normal" }
         ],
-        isPhishing: true,
+        linkText: "Revisar actividad reciente",
+        footerText: "Microsoft — Tu cuenta",
+        isPhishing: false,
         feedback: {
-            technical: "Un PDF no debería venir dentro de un **.ISO**. Estos archivos montan un disco virtual que puede contener ejecutables que eluden el escaneo de antivirus básico.",
-            ethical: "Usa el **Ego y la Curiosidad**. Las ofertas salariales altas son el método #1 para que profesionales de IT bajen la guardia."
+            points: [
+                "El dominio microsoft.com es legítimo",
+                "No exige acción urgente ni amenaza con consecuencias",
+                "Mejor práctica: ingresar manualmente a account.microsoft.com"
+            ],
+            technical: "Alerta LEGÍTIMA de Microsoft. La postura 'Zero Trust' sugiere siempre entrar a los paneles de seguridad manualmente."
         }
     },
     {
         id: 7,
-        vector: "Browser / Hijack",
-        trigger: "Actualización Browser",
-        title: "Critical Update: Google Chrome 2026",
-        sender: "Chrome System Alert",
-        content: "Su versión de Chrome está desactualizada y es vulnerable a ataques de día cero. Haga clic abajo para instalar el parche de seguridad oficial v144.0.2.",
-        buttonText: "UPDATE CHROME NOW",
-        options: [
-            { id: 0, text: "Hacer clic para descargar el parche", isCorrect: false },
-            { id: 1, text: "Cerrar y actualizar el navegador desde la configuración real", isCorrect: true },
-            { id: 2, text: "Continuar navegando, no es importante", isCorrect: false }
+        vector: "SMS",
+        mockupType: "sms",
+        title: "SMS de Meta sobre tu cuenta de WhatsApp",
+        senderName: "Meta Verify",
+        senderPhone: "+1 (555) 012-3456",
+        bodyParts: [
+            { text: "Alguien ha solicitado un ", type: "normal" },
+            { text: "código de verificación", type: "bold" },
+            { text: " para tu número en un nuevo dispositivo. Si no fuiste tú, cancela el acceso aquí: ", type: "normal" },
+            { text: "https://verify-meta.security-auth.net", type: "link" }
         ],
         isPhishing: true,
         feedback: {
-            technical: "Ataque de **Malvertising**. Los navegadores se actualizan solos o a través de su propio menú interno, nunca mediante botones en páginas web de terceros.",
-            ethical: "Usa la **Falsa Seguridad**. El atacante se disfraza de la solución al problema que él mismo inventó."
+            points: [
+                "Dominio falso: security-auth.net no es de Meta",
+                "Meta nunca envía links para 'cancelar' códigos",
+                "Si no diste el código, el atacante no puede entrar"
+            ],
+            technical: "Meta nunca envía links para 'cancelar' códigos. El portal es un Phishing de OTP."
         }
     },
     {
         id: 8,
-        vector: "Email / Admin",
-        trigger: "Aviso de Seguridad Real",
-        title: "Microsoft 365: Nuevo inicio de sesión",
-        sender: "Microsoft <no-reply@microsoft.com>",
-        content: "Se ha detectado un inicio de sesión en tu cuenta desde un nuevo dispositivo (Windows 11, Chrome). Si has sido tú, puedes ignorar este mensaje. Si no, revisa tu actividad de seguridad.",
-        options: [
-            { id: 0, text: "Hacer clic en 'Revisar Actividad'", isCorrect: false },
-            { id: 1, text: "Ingresar manualmente a mysignins.microsoft.com", isCorrect: true },
-            { id: 2, text: "Marcar como Phishing", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Alerta de Chrome sobre una actualización crítica",
+        senderName: "Google Chrome",
+        senderEmail: "update@chrome-security-patch.com",
+        senderInitial: "C",
+        senderColor: "#ea4335",
+        subject: "CRITICAL: Tu navegador es vulnerable",
+        bodyParts: [
+            { text: "Su versión de Chrome está ", type: "normal" },
+            { text: "desactualizada", type: "danger" },
+            { text: " y es vulnerable a ataques de ", type: "normal" },
+            { text: "día cero (CVE-2026-4871)", type: "bold" },
+            { text: ". Haga clic abajo para instalar el parche de seguridad oficial v144.0.2.", type: "normal" }
         ],
-        isPhishing: false,
+        linkText: "ACTUALIZAR CHROME AHORA",
+        footerText: "Google Chrome — Security Team",
+        isPhishing: true,
         feedback: {
-            technical: "Es una alerta **LEGÍTIMO**. Aunque el link del correo podría ser real, la postura de 'Zero Trust' dicta que siempre debes entrar a los paneles de seguridad manualmente.",
-            ethical: "Mide la **Disciplina Operativa**. El experto no toma atajos, incluso cuando la alerta parece genuina de un servicio oficial."
+            points: [
+                "Dominio falso: chrome-security-patch.com no es de Google",
+                "Chrome se actualiza solo desde su menú interno",
+                "Nunca descargues actualizaciones desde páginas web"
+            ],
+            technical: "Ataque de Malvertising. Los navegadores se actualizan desde su propio menú, nunca por botones web."
         }
     },
     {
         id: 9,
-        vector: "Teams / Chat",
-        trigger: "Familiaridad Fake",
-        title: "Mensaje de Mar&iacute;a (RH)",
-        sender: "RH Admin (Teams)",
-        content: "Hola! Me ayudas con tu firma para el nuevo anexo de trabajo remoto? S&uacute;belo por aqu&iacute; plis: https://rh-portal-empresa.sharepoint-files.net/anexo_2026",
-        options: [
-            { id: 0, text: "Hacer clic y subir la firma", isCorrect: false },
-            { id: 1, text: "Llamar a Mar&iacute;a por voz para confirmar", isCorrect: true },
-            { id: 2, text: "Ignorar el mensaje", isCorrect: false }
+        vector: "Teams",
+        mockupType: "teams",
+        title: "Mensaje de RH pidiendo tu firma digital",
+        senderName: "María (Recursos Humanos)",
+        senderStatus: "En línea",
+        bodyParts: [
+            { text: "¡Hola! ¿Me ayudas con tu firma para el nuevo ", type: "normal" },
+            { text: "anexo de trabajo remoto", type: "bold" },
+            { text: "? Súbelo por aquí plis: ", type: "normal" },
+            { text: "https://rh-portal.sharepoint-files.net/anexo", type: "link" }
         ],
         isPhishing: true,
         feedback: {
-            technical: "El dominio 'sharepoint-files.net' no es oficial de Microsoft SharePoint (que usa .com). Es un sitio para capturar credenciales o inyectar scripts.",
-            ethical: "Explota la **Familiaridad**. Al usar un nombre común y un lenguaje informal ('plis'), el atacante intenta saltarse los protocolos de seguridad corporativos."
+            points: [
+                "Dominio falso: sharepoint-files.net (el real es sharepoint.com)",
+                "Lenguaje informal ('plis') para bajar la guardia",
+                "Siempre verificar por otro canal (llamada, presencial)"
+            ],
+            technical: "El dominio 'sharepoint-files.net' no es oficial de Microsoft SharePoint. Es un sitio para capturar credenciales."
         }
     },
     {
         id: 10,
-        vector: "Physical / Hardware",
-        trigger: "Regalo de Empresa Real",
-        title: "Cup&oacute;n de Starbucks Corporativo",
-        sender: "Cultura Organizacional <cultura@tu-empresa.com>",
-        content: "¡Gracias por tus 3 años en la empresa! Aquí tienes un cup&oacute;n digital de $200 para tu café favorito. Escanea el código en la sucursal o regístralo en la App de Starbucks oficial.",
-        options: [
-            { id: 0, text: "Confirmar recepción y usar el cup&oacute;n", isCorrect: true },
-            { id: 1, text: "Reportar como Phishing", isCorrect: false },
-            { id: 2, text: "Hacer clic en un link oculto en el correo", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "LinkedIn te notifica sobre visitas a tu perfil",
+        senderName: "LinkedIn Insights",
+        senderEmail: "insights-alert@linkedin-premium.biz",
+        senderInitial: "L",
+        senderColor: "#0a66c2",
+        subject: "Tu perfil fue visto 50 veces hoy",
+        bodyParts: [
+            { text: "Tu perfil está siendo ", type: "normal" },
+            { text: "extremadamente popular", type: "bold" },
+            { text: ". Un reclutador de una empresa ", type: "normal" },
+            { text: "Fortune 500", type: "bold" },
+            { text: " ha revisado tus datos repetidamente. Descubre quién es y qué vacante tiene para ti.", type: "normal" }
         ],
-        isPhishing: false,
+        linkText: "Ver quién visitó tu perfil",
+        footerText: "LinkedIn — Premium Insights",
+        isPhishing: true,
         feedback: {
-            technical: "Es una recompensa **LEGÍTIMA**. No pide datos sensibles, el remitente es correcto y te dirige a una app externa oficial ya establecida sin intermediarios sospechosos.",
-            ethical: "Cierra el ciclo de **Discernimiento**. El objetivo final de la concienciación no es bloquear todo, sino tener el criterio para distinguir lo bueno de lo malo."
+            points: [
+                "Dominio falso: linkedin-premium.biz (el real es linkedin.com)",
+                "LinkedIn nunca usa dominios .biz",
+                "Explota la vanidad profesional para que bajes la guardia"
+            ],
+            technical: "Ataque de Vanidad/Typosquatting. El dominio '.biz' es señal clara de fraude."
         }
     },
     {
         id: 11,
-        vector: "Email / Spoofing",
-        trigger: "Pánico Fiscal",
-        title: "SAT: Notificaci&oacute;n de Embargo Precautorio",
-        sender: "SAT - Buz&oacute;n Tributario <contacto@sat.gob.mx.seguridad.com>",
-        subject: "ADEUDO FISCAL DETECTADO - Acci&oacute;n Inmediata",
-        content: "Se han encontrado discrepancias en sus declaraciones del ejercicio fiscal 2025. Se ha generado una orden de embargo que se ejecutar&aacute; en 48 horas si no presenta la aclaraci&oacute;n correspondiente.",
-        options: [
-            { id: 0, text: "Entrar al link para ver la aclaraci&oacute;n", isCorrect: false },
-            { id: 1, text: "Ingresar al Buz&oacute;n Tributario oficial vía sat.gob.mx", isCorrect: true },
-            { id: 2, text: "Llamar a un contador de confianza", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Oferta de trabajo con salario altísimo",
+        senderName: "Tech Recruiters Global",
+        senderEmail: "careers@techrecruit-global.net",
+        senderInitial: "T",
+        senderColor: "#7c3aed",
+        subject: "Propuesta de CISO Regional — $180,000 USD",
+        bodyParts: [
+            { text: "Hola, hemos revisado tu perfil y creemos que eres el candidato ideal para nuestra vacante. El paquete incluye ", type: "normal" },
+            { text: "bonos y acciones", type: "bold" },
+            { text: ". Adjunto los detalles técnicos de la posición.", type: "normal" }
         ],
+        attachment: "Propuesta_Confidencial.iso",
+        footerText: "Tech Recruiters — Global Talent",
         isPhishing: true,
         feedback: {
-            technical: "El dominio real es 'seguridad.com', no 'sat.gob.mx'. Los atacantes usan nombres largos para ocultar el dominio final en dispositivos m&oacute;viles.",
-            ethical: "Usa el **Miedo a la Autoridad**. La amenaza de embargo es un estresor muy potente que anula el pensamiento cr&iacute;tico."
+            points: [
+                "Archivo adjunto .ISO es altamente sospechoso",
+                "Un PDF no debería venir dentro de un .ISO",
+                "Los .ISO montan discos virtuales que ejecutan malware"
+            ],
+            technical: "Un PDF no debería venir en un .ISO. Estos archivos montan discos virtuales que eluden antivirus."
         }
     },
     {
         id: 12,
-        vector: "Slack / Workspace",
-        trigger: "Seguridad de Cuenta Real",
-        title: "Slack: Nueva integraci&oacute;n instalada",
-        sender: "Slack Systems <feedback@slack.com>",
-        content: "Un administrador ha instalado la app 'Google Drive for Slack' en tu espacio de trabajo. Si no reconoces esta acci&oacute;n, por favor contacta a tu admin de Slack.",
-        options: [
-            { id: 0, text: "Hacer clic en 'De-autorizar App'", isCorrect: false },
-            { id: 1, text: "Preguntar al admin de TI por un canal interno", isCorrect: true },
-            { id: 2, text: "Ignorar si usas Google Drive", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Tu empresa te envía un cupón de Starbucks",
+        senderName: "Cultura Organizacional",
+        senderEmail: "beneficios@tu-empresa.com",
+        senderInitial: "C",
+        senderColor: "#059669",
+        subject: "¡Felicidades por tus 3 años con nosotros!",
+        bodyParts: [
+            { text: "¡Gracias por tu compromiso y dedicación! Aquí tienes un ", type: "normal" },
+            { text: "cupón digital de $200", type: "bold" },
+            { text: " para tu café favorito en Starbucks. Puedes canjearlo directamente en la ", type: "normal" },
+            { text: "App oficial de Starbucks", type: "bold" },
+            { text: " o escanearlo en la sucursal.", type: "normal" }
         ],
+        linkText: "Descargar cupón",
+        footerText: "Cultura Organizacional — Tu Empresa",
         isPhishing: false,
         feedback: {
-            technical: "Notificaci&oacute;n **LEG&Iacute;TIMA**. No solicita credenciales ni pins, solo informa de un cambio administrativo. Consultar con el admin es la mejor pr&aacute;ctica de seguridad corporativa.",
-            ethical: "Mide la **Comunicaci&oacute;n Interna**. Muchos ataques dependen de que el empleado no hable con sus compar&ntilde;eros ante dudas menores."
+            points: [
+                "El dominio tu-empresa.com es interno y legítimo",
+                "No solicita datos personales ni credenciales",
+                "Dirige a una app oficial ya establecida"
+            ],
+            technical: "Recompensa LEGÍTIMA. No pide datos sensibles y dirige a una aplicación oficial."
         }
     },
     {
         id: 13,
-        vector: "Teams / Vishing",
-        trigger: "Soporte Técnico (Audio)",
-        title: "Llamada perdida: Service Desk",
-        sender: "IT Helpdesk Automations",
-        content: "Has recibido un mensaje de voz de soporte. Transcripci&oacute;n: 'Hola, habla Luis de IT. Estamos reparando un error en tu laptop desde el backend. Necesito que nos des el c&oacute;digo de 6 d&iacute;gitos que te acaba de llegar por SMS'.",
-        options: [
-            { id: 0, text: "Dar el c&oacute;digo para que terminen la reparaci&oacute;n", isCorrect: false },
-            { id: 1, text: "Colgar o ignorar y reportar el intento de fraude", isCorrect: true },
-            { id: 2, text: "Pedir que se identifiquen con su ID de empleado", isCorrect: false }
+        vector: "Teams",
+        mockupType: "teams",
+        title: "Tu VP te envía una directiva urgente por Teams",
+        senderName: "Carlos Rodríguez (VP Operaciones)",
+        senderStatus: "Ocupado",
+        bodyParts: [
+            { text: "Hola, necesito que revises este ", type: "normal" },
+            { text: "memorándum confidencial", type: "bold" },
+            { text: " sobre cambios en tu departamento. Es información ", type: "normal" },
+            { text: "altamente sensible", type: "danger" },
+            { text: ". No lo compartas. Autentícate aquí para escuchar: ", type: "normal" },
+            { text: "https://teams-voice.auth-portal.com/memo", type: "link" }
         ],
         isPhishing: true,
         feedback: {
-            technical: "Ataque de **Vishing / MFA Push**. El c&oacute;digo es para que el atacante cambie tu contraseña o autorice un nuevo dispositivo. IT nunca pide códigos por teléfono.",
-            ethical: "Se basa en la **Cooperaci&oacute;n**. El usuario quiere ayudar a 'Luis' a terminar su trabajo r&aacute;pido."
+            points: [
+                "Dominio falso: auth-portal.com no es de Microsoft",
+                "El tono de exclusividad busca reducir tu escepticismo",
+                "Verificar siempre por una llamada directa al VP"
+            ],
+            technical: "Ataque de AitM. El portal captura tu token de sesión real incluso con MFA."
         }
     },
     {
         id: 14,
-        vector: "Email / Cloud",
-        trigger: "Mantenimiento AWS Real",
-        title: "Amazon Web Services: Scheduled Maintenance",
-        sender: "AWS Health <no-reply-aws@amazon.com>",
-        content: "AWS ha programado una ventana de mantenimiento para su instancia EC2 (region us-east-1) para el 15 de Mayo. No se requiere ninguna acci&oacute;n por su parte, pero el servicio podr&iacute;a experimentar latencia.",
-        options: [
-            { id: 0, text: "Confirmar mantenimiento haciendo clic", isCorrect: false },
-            { id: 1, text: "Revisar el panel 'Service Health Dash' de AWS", isCorrect: true },
-            { id: 2, text: "Marcar como Phishing por precauci&oacute;n", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Notificación de Slack sobre una nueva app",
+        senderName: "Slack",
+        senderEmail: "feedback@slack.com",
+        senderInitial: "S",
+        senderColor: "#611f69",
+        subject: "Nueva integración instalada en tu Workspace",
+        bodyParts: [
+            { text: "Un administrador ha instalado la app '", type: "normal" },
+            { text: "Google Drive for Slack", type: "bold" },
+            { text: "' en tu espacio de trabajo. Si no reconoces esta acción, por favor contacta a tu admin de Slack.", type: "normal" }
         ],
+        footerText: "Slack — Workspace Notifications",
         isPhishing: false,
         feedback: {
-            technical: "Aviso **LEG&Iacute;TIMO** de salud de nube. Note que expl&iacute;citamente dice 'No se requiere ninguna acci&oacute;n'. Los ataques siempre te piden hacer algo.",
-            ethical: "Ense&ntilde;a a **Diferenciar Avisos Pasivos**. Aprender a filtrar ruido informativo sin caer en el bloqueo sistem&aacute;tico de correos reales."
+            points: [
+                "El dominio slack.com es legítimo",
+                "Solo informa, no solicita credenciales",
+                "Buena práctica: consultar con el admin por chat"
+            ],
+            technical: "Notificación LEGÍTIMA. No solicita credenciales, solo informa de un cambio administrativo."
         }
     },
     {
         id: 15,
-        vector: "SMS / OTP",
-        trigger: "Pánico de Cuenta",
-        title: "Meta: C&oacute;digo de recuperaci&oacute;n de WhatsApp",
-        sender: "Meta Systems (+1)",
-        content: "Alguien ha solicitado un c&oacute;digo de verificaci&oacute;n para tu n&uacute;mero en un nuevo dispositivo. Si no fuiste t&uacute;, cancela el acceso ingresando el c&oacute;digo aqu&iacute;: https://verify-meta.security-auth.net",
-        options: [
-            { id: 0, text: "Ingresar el c&oacute;digo para cancelar", isCorrect: false },
-            { id: 1, text: "No hacer nada y activar el PIN de 2 pasos en la App de WhatsApp", isCorrect: true },
-            { id: 2, text: "Responder al SMS diciendo que no fui yo", isCorrect: false }
+        vector: "SMS",
+        mockupType: "sms",
+        title: "SMS del Service Desk pidiendo un código",
+        senderName: "IT Helpdesk",
+        senderPhone: "Ext. 5500",
+        bodyParts: [
+            { text: "Hola, habla Luis de IT. Estamos reparando un error en tu laptop desde el backend. Necesito que nos des el ", type: "normal" },
+            { text: "código de 6 dígitos", type: "danger" },
+            { text: " que te acaba de llegar por SMS para validar la licencia de Windows.", type: "normal" }
         ],
         isPhishing: true,
         feedback: {
-            technical: "El portal es un **Phishing de OTP**. Meta nunca env&iacute;a links para 'cancelar' c&oacute;digos; si no lo pediste, el atacante simplemente no puede entrar si t&uacute; no le das el n&uacute;mero.",
-            ethical: "Usa el **Instinto de Protecci&oacute;n**. El usuario cree que al 'cancelar' est&aacute; protegiendo su cuenta, cuando en realidad est&aacute; entregando la llave."
+            points: [
+                "IT nunca pide códigos de verificación por teléfono o SMS",
+                "El código es para que el atacante cambie tu contraseña",
+                "Siempre reporta intentos de obtener códigos MFA"
+            ],
+            technical: "Ataque de Vishing/MFA Push. El código permite al atacante resetear contraseñas."
         }
     },
     {
         id: 16,
-        vector: "Slack / Social",
-        trigger: "Evento Corporativo Real",
-        title: "Comisi&oacute;n de Cultura: Registro de Pizza",
-        sender: "Slack Bot / Delegado Cultura",
-        content: "¡Ma&ntilde;ana hay Pizza en la oficina! Por favor, vota tu sabor favorito en el canal #general antes de las 4pm para hacer el pedido correcto.",
-        options: [
-            { id: 0, text: "Votar en el canal oficial de Slack", isCorrect: true },
-            { id: 1, text: "Ignorar, seguro es Phishing", isCorrect: false },
-            { id: 2, text: "Hacer clic en un link externo sospechoso", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "AWS te notifica sobre mantenimiento programado",
+        senderName: "AWS Health",
+        senderEmail: "no-reply-aws@amazon.com",
+        senderInitial: "A",
+        senderColor: "#ff9900",
+        subject: "Scheduled Maintenance — EC2 us-east-1",
+        bodyParts: [
+            { text: "AWS ha programado una ventana de mantenimiento para su instancia EC2 (region us-east-1) para el 15 de Mayo. ", type: "normal" },
+            { text: "No se requiere ninguna acción por su parte", type: "bold" },
+            { text: ", pero el servicio podría experimentar latencia breve durante el proceso.", type: "normal" }
         ],
+        footerText: "Amazon Web Services — Service Health",
         isPhishing: false,
         feedback: {
-            technical: "Scenario **LEG&Iacute;TIMO** de cultura organizacional. Usa canales internos establecidos sin links a sitios de autenticaci&oacute;n.",
-            ethical: "Promueve la **Participaci&oacute;n Segura**. La ciberseguridad no debe matar la cultura de la empresa, sino convivir con ella de forma inteligente."
+            points: [
+                "El dominio amazon.com es legítimo",
+                "Dice explícitamente 'No se requiere acción'",
+                "Los ataques siempre te piden hacer algo"
+            ],
+            technical: "Aviso LEGÍTIMO. Note que dice 'No se requiere acción'. Los ataques siempre exigen interacción."
         }
     },
     {
         id: 17,
-        vector: "Email / Finance",
-        trigger: "Factura Inflada",
-        title: "Microsoft Azure: Tu factura de este mes es de $142,500 MXN",
-        sender: "Azure Billing <billing@microsoft-cloud-serv.com>",
-        subject: "Factura generada y cobrada autom&aacute;ticamente",
-        content: "Se ha procesado exitosamente el cargo a tu tarjeta corporativa. Si hay un error en el consumo o crees que tus credenciales fueron usadas por terceros, revisa el desglose inmediato aqu&iacute;.",
-        options: [
-            { id: 0, text: "Bajar el PDF de desglose para ver el error", isCorrect: false },
-            { id: 1, text: "Entrar al Portal de Azure (portal.azure.com) y revisar Billing", isCorrect: true },
-            { id: 2, text: "Llamar al banco para cancelar la tarjeta", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Factura gigante de Azure que no reconoces",
+        senderName: "Azure Billing",
+        senderEmail: "billing@microsoft-azure-cloud.net",
+        senderInitial: "A",
+        senderColor: "#0078d4",
+        subject: "Factura procesada: $142,500 MXN",
+        bodyParts: [
+            { text: "Se ha procesado exitosamente el cargo de ", type: "normal" },
+            { text: "$142,500 MXN", type: "danger" },
+            { text: " a tu tarjeta corporativa. Si hay un error en el consumo, revisa el desglose inmediato.", type: "normal" }
         ],
+        linkText: "Ver desglose de factura",
+        footerText: "Microsoft Azure — Billing Center",
         isPhishing: true,
         feedback: {
-            technical: "Uso de **Phishing de Mal de Pago**. El dominio real es 'microsoft-cloud-serv.com' (falso). Microsoft oficial usa dominios internos. El link del desglose captura tus credenciales de Admin.",
-            ethical: "Utiliza el **Shock Financiero**. Un cargo tan alto provoca que el administrador de TI act&uacute;e sin pensar antes de tener que dar explicaciones a finanzas."
+            points: [
+                "Dominio falso: microsoft-azure-cloud.net (Azure usa azure.com)",
+                "Shock financiero: $142k para que actúes sin pensar",
+                "Verificar siempre en portal.azure.com directamente"
+            ],
+            technical: "El dominio 'microsoft-azure-cloud.net' es falso. El link captura credenciales de administrador."
         }
     },
     {
         id: 18,
-        vector: "Salesforce / Admin",
-        trigger: "Actualización de Datos Real",
-        title: "Salesforce: Inactividad detectada",
-        sender: "Salesforce Personalization <no-reply@salesforce.com>",
-        content: "Llevas 30 d&iacute;as sin usar tu m&oacute;dulo de Trailhead. Tus puntos est&aacute;n por expirar. Entra a completar tu siguiente reto para mantener tu ranking de 'Ranger'.",
-        options: [
-            { id: 0, text: "Entrar a Trailhead desde el marcador de tu navegador", isCorrect: true },
-            { id: 1, text: "Ignorar el correo", isCorrect: true },
-            { id: 2, text: "Reportar como malware", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Tu empresa te invita a una encuesta de clima laboral",
+        senderName: "Cultura & Talento",
+        senderEmail: "encuestas@tu-empresa.com",
+        senderInitial: "C",
+        senderColor: "#7c3aed",
+        subject: "Encuesta de Clima Laboral 2026",
+        bodyParts: [
+            { text: "Queremos saber tu opinión ", type: "normal" },
+            { text: "anónima", type: "bold" },
+            { text: " sobre el liderazgo de la empresa. La encuesta se realiza en ", type: "normal" },
+            { text: "Microsoft Forms interno", type: "bold" },
+            { text: " y no requiere login adicional si estás en tu equipo de trabajo.", type: "normal" }
         ],
+        linkText: "Responder encuesta",
+        footerText: "Cultura & Talento — Tu Empresa",
         isPhishing: false,
         feedback: {
-            technical: "Mensaje **LEG&Iacute;TIMO** de gamificaci&oacute;n. Ambas opciones (1 y 2) son v&aacute;lidas; lo importante es no usar el link del correo si no se est&aacute; seguro, aunque sea real.",
-            ethical: "Ense&ntilde;a **Higiene Digital**. Mantenimiento de cuentas y descarte de ruido sin comprometer la seguridad."
+            points: [
+                "Dominio interno de la empresa (legítimo)",
+                "No requiere login adicional (SSO válido)",
+                "Usa herramientas del ecosistema M365"
+            ],
+            technical: "Proceso LEGÍTIMO. Las empresas usan Forms de M365 para procesos internos."
         }
     },
     {
         id: 19,
-        vector: "LinkedIn / Admin",
-        trigger: "Seguidad de Perfil Fake",
-        title: "LinkedIn: Alguien ha visualizado tu perfil 50 veces hoy",
-        sender: "LinkedIn Insights <insights-alert@linkedin-premium.biz>",
-        content: "Tu perfil est&aacute; siendo muy popular. Un reclutador de una empresa 'Fortune 500' ha visto tus datos repetidamente. Mira qui&eacute;n es y qu&eacute; vacante tiene para ti.",
-        options: [
-            { id: 0, text: "Hacer clic para ver al reclutador", isCorrect: false },
-            { id: 1, text: "Ignorar; LinkedIn no usa dominios .biz", isCorrect: true },
-            { id: 2, text: "Actualizar a Premium usando el bot&oacute;n del correo", isCorrect: false }
+        vector: "Email",
+        mockupType: "email",
+        title: "Ticket de IT confirmando cambio de permisos",
+        senderName: "Service Desk",
+        senderEmail: "it.support@tu-empresa.com",
+        senderInitial: "I",
+        senderColor: "#475569",
+        subject: "Ticket #8829: Actualización de privilegios completada",
+        bodyParts: [
+            { text: "Hola, según la solicitud enviada por tu gerente, se han actualizado tus permisos en el ", type: "normal" },
+            { text: "ERP corporativo", type: "bold" },
+            { text: ". Recibirás un correo de sistema automático con las nuevas políticas. Si no solicitaste esto, contacta la ", type: "normal" },
+            { text: "extensión 5555", type: "bold" },
+            { text: ".", type: "normal" }
         ],
-        isPhishing: true,
+        footerText: "Service Desk — IT Department",
+        isPhishing: false,
         feedback: {
-            technical: "Ataque de **Vanidad / Typosquatting**. El dominio '.biz' es una señal clara de fraude. LinkedIn oficial usa .com.",
-            ethical: "Explota la **Vanidad Profesional**. Queremos saber quién nos mira, lo que nos hace ignorar señales técnicas obvias."
+            points: [
+                "Dominio interno legítimo (tu-empresa.com)",
+                "Ofrece canal de verificación fuera de banda (ext. 5555)",
+                "No incluye links sospechosos ni botones externos"
+            ],
+            technical: "Comunicación LEGÍTIMA. No incluye links sospechosos y ofrece un canal de verificación fuera de banda."
         }
     },
     {
         id: 20,
-        vector: "Teams / HR",
-        trigger: "Encuesta de Clima Real",
-        title: "Encuesta de Clima Laboral 2026",
-        sender: "Cultura & Talento (vía Microsoft Forms)",
-        content: "Queremos saber tu opini&oacute;n annima sobre el liderazgo de la empresa. La encuesta se realiza en Microsoft Forms interno y no requiere login adicional si est&aacute;s en tu equipo de trabajo.",
-        options: [
-            { id: 0, text: "Responder la encuesta en el Forms interno", isCorrect: true },
-            { id: 1, text: "Reportar como espionaje de TI", isCorrect: false },
-            { id: 2, text: "Ignorar por desconfianza", isCorrect: false }
+        vector: "Teams",
+        mockupType: "teams",
+        title: "Mensaje en Slack sobre el viernes de pizza",
+        senderName: "Delegado de Cultura",
+        senderStatus: "Activo",
+        bodyParts: [
+            { text: "¡Mañana hay ", type: "normal" },
+            { text: "Pizza en la oficina", type: "bold" },
+            { text: "! 🍕 Vota tu sabor favorito en el canal ", type: "normal" },
+            { text: "#general", type: "bold" },
+            { text: " antes de las 4pm para hacer el pedido correcto.", type: "normal" }
         ],
         isPhishing: false,
         feedback: {
-            technical: "Proceso **LEG&Iacute;TIMO**. Las empresas usan herramientas del ecosistema M365 (como Forms) para procesos internos. Note que NO pide login, lo cual es indicio de una herramienta SSO v&aacute;lida.",
-            ethical: "Fomenta la **Confianza Organizacional**. Diferenciar el seguimiento administrativo leg&iacute;timo de la vigilancia orwelliana o ataques externos."
+            points: [
+                "Publicado en un canal interno establecido",
+                "No incluye links a sitios de autenticación",
+                "Evento de cultura organizacional legítimo"
+            ],
+            technical: "Escenario LEGÍTIMO de cultura organizacional. Usa canales internos sin links de autenticación."
         }
     }
 ];
-
-

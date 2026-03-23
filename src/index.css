@@ -150,22 +150,34 @@
     animation: blink 1s step-end infinite;
   }
 
-  /* Gradient borders */
-  .gradient-border {
-    position: relative;
+  /* Cyber Animations */
+  @keyframes scan {
+    from { top: -10%; opacity: 0; }
+    50% { opacity: 0.5; }
+    to { top: 110%; opacity: 0; }
+  }
+  .animate-scan-fast {
+    animation: scan 3s linear infinite;
   }
 
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(168, 85, 247, 0.2), rgba(99, 102, 241, 0.5));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
+  .animate-glitch {
+    animation: glitch 0.5s ease-in-out infinite;
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
   }
 }
 

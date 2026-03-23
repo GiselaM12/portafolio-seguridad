@@ -43,86 +43,90 @@ const Activities = () => {
                         </span>
                     </h1>
 
-                    <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-blue-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-blue-500/10 transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <h2 className="text-blue-400 font-mono text-sm md:text-base tracking-widest flex items-center justify-center gap-2">
+                </motion.div>
+
+                {/* Parcial 1 Section */}
+                <div className="mb-20">
+                    <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-blue-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-blue-500/10 mb-10">
+                        <h2 className="text-blue-400 font-mono text-sm md:text-base tracking-widest flex items-center justify-center gap-2 uppercase">
                             <FaShieldAlt /> PARCIAL 1: FUNDAMENTOS DEL HACKING ÉTICO
                         </h2>
                     </div>
-                </motion.div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {activities.filter(act => typeof act.id === 'number' && act.id <= 6).map((activity, index) => (
+                            <ActivityCard key={activity.id} activity={activity} index={index} />
+                        ))}
+                    </div>
+                </div>
 
-                {/* Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {activities.map((activity, index) => (
-                        <motion.div
-                            key={activity.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                        >
-                            <Link to={`/actividades/${activity.id}`}>
-                                <div className="group h-full bg-[#0a0f1a]/60 backdrop-blur-sm border border-violet-500/10 rounded-xl overflow-hidden hover:border-violet-500/50 hover:shadow-[0_0_40px_rgba(139,92,246,0.15)] transition-all duration-300 flex flex-col relative">
-
-                                    {/* Decoration Line */}
-                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-
-                                    {/* Card Header */}
-                                    <div className="flex justify-between items-center p-5 border-b border-violet-500/10 bg-violet-500/5">
-                                        <div className="flex items-center gap-2">
-                                            <span className="flex items-center justify-center w-8 h-8 rounded bg-violet-500/10 text-violet-400 font-mono text-sm font-bold border border-violet-500/20 group-hover:bg-violet-500 group-hover:text-white transition-colors duration-300">
-                                                {String(activity.id).padStart(2, '0')}
-                                            </span>
-                                            <span className="text-xs font-mono text-violet-300/70">ID_REF</span>
-                                        </div>
-                                        <div className="flex items-center gap-1.5 text-xs font-mono text-gray-500 bg-[#030712] px-2 py-1 rounded border border-gray-800">
-                                            <FaCalendarAlt className="text-xs" />
-                                            {activity.date}
-                                        </div>
-                                    </div>
-
-                                    {/* Card Content */}
-                                    <div className="p-6 flex-grow flex flex-col">
-                                        <h3 className="text-xl font-bold text-gray-100 mb-3 group-hover:text-violet-400 transition-colors leading-tight">
-                                            {activity.title}
-                                        </h3>
-
-                                        <p className="text-gray-400 text-sm mb-6 flex-grow line-clamp-3 leading-relaxed border-l-2 border-gray-800 pl-3 group-hover:border-violet-500/50 transition-colors">
-                                            {activity.description}
-                                        </p>
-
-                                        {/* Tags */}
-                                        <div className="flex flex-wrap gap-2 mb-6">
-                                            {activity.tags?.slice(0, 3).map((tag) => (
-                                                <span key={tag} className="text-[10px] uppercase tracking-wider font-mono text-violet-300 bg-violet-500/10 px-2 py-1 rounded border border-violet-500/20">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                            {activity.tags?.length > 3 && (
-                                                <span className="text-[10px] font-mono text-gray-500 px-1 py-1">+{activity.tags.length - 3}</span>
-                                            )}
-                                        </div>
-
-                                        {/* Footer Action */}
-                                        <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-800 group-hover:border-violet-500/30 transition-colors">
-                                            <span className="text-xs font-mono text-gray-500 flex items-center gap-2">
-                                                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                                DISPONIBLE
-                                            </span>
-                                            <span className="text-sm font-bold text-violet-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                                ACCEDER <FaChevronRight className="text-xs" />
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* Hover corner effect */}
-                                    <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                </div>
-                            </Link>
-                        </motion.div>
-                    ))}
+                {/* Parcial 2 Section */}
+                <div>
+                    <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-violet-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-violet-500/10 mb-10">
+                        <h2 className="text-violet-400 font-mono text-sm md:text-base tracking-widest flex items-center justify-center gap-2 uppercase">
+                            <FaCode /> PARCIAL 2: TÉCNICAS DE EXPLOTACIÓN Y SEGURIDAD
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {activities.filter(act => act.id === "PR02" || String(act.id) === "8").map((activity, index) => (
+                            <ActivityCard key={activity.id} activity={activity} index={index} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
+
+// Extracted Card Component for reuse and cleaner code
+const ActivityCard = ({ activity, index }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.1, duration: 0.5 }}
+    >
+        <Link to={`/actividades/${activity.id}`}>
+            <div className="group h-full bg-[#0a0f1a]/60 backdrop-blur-sm border border-violet-500/10 rounded-xl overflow-hidden hover:border-violet-500/50 hover:shadow-[0_0_40px_rgba(139,92,246,0.15)] transition-all duration-300 flex flex-col relative">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                <div className="flex justify-between items-center p-5 border-b border-violet-500/10 bg-violet-500/5">
+                    <div className="flex items-center gap-2">
+                        <span className="flex items-center justify-center w-8 h-8 rounded bg-violet-500/10 text-violet-400 font-mono text-sm font-bold border border-violet-500/20 group-hover:bg-violet-500 group-hover:text-white transition-colors duration-300">
+                            {String(activity.id).padStart(2, '0')}
+                        </span>
+                        <span className="text-xs font-mono text-violet-300/70">ID_REF</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs font-mono text-gray-500 bg-[#030712] px-2 py-1 rounded border border-gray-800">
+                        <FaCalendarAlt className="text-xs" />
+                        {activity.date}
+                    </div>
+                </div>
+                <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-xl font-bold text-gray-100 mb-3 group-hover:text-violet-400 transition-colors leading-tight">
+                        {activity.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-6 flex-grow line-clamp-3 leading-relaxed border-l-2 border-gray-800 pl-3 group-hover:border-violet-500/50 transition-colors">
+                        {activity.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                        {activity.tags?.slice(0, 3).map((tag) => (
+                            <span key={tag} className="text-[10px] uppercase tracking-wider font-mono text-violet-300 bg-violet-500/10 px-2 py-1 rounded border border-violet-500/20">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-800 group-hover:border-violet-500/30 transition-colors">
+                        <span className="text-xs font-mono text-gray-500 flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                            DISPONIBLE
+                        </span>
+                        <span className="text-sm font-bold text-violet-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            ACCEDER <FaChevronRight className="text-xs" />
+                        </span>
+                    </div>
+                </div>
+                <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+        </Link>
+    </motion.div>
+);
 
 export default Activities;
