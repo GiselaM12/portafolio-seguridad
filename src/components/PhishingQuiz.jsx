@@ -335,7 +335,8 @@ const PhishingQuiz = () => {
     const [username, setUsername] = useState('');
     const [leaderboard, setLeaderboard] = useState([]);
     const [sessionQuestions, setSessionQuestions] = useState([]);
-    const [timeLeft, setTimeLeft] = useState(30);
+    const [timeLeft, setTimeLeft] = useState(30); // Per question
+    const [activityTimeLeft, setActivityTimeLeft] = useState(300); // 5 mins for activity
     const [isTimeOut, setIsTimeOut] = useState(false);
 
     useEffect(() => {
@@ -343,6 +344,23 @@ const PhishingQuiz = () => {
         if (saved) setLeaderboard(JSON.parse(saved));
     }, []);
 
+    // Global Activity Timer
+    useEffect(() => {
+        if (gameState !== 'questions') return;
+        const mainTimer = setInterval(() => {
+            setActivityTimeLeft(t => {
+                if (t <= 1) {
+                    clearInterval(mainTimer);
+                    setGameState('results');
+                    return 0;
+                }
+                return t - 1;
+            });
+        }, 1000);
+        return () => clearInterval(mainTimer);
+    }, [gameState]);
+
+    // Per Question Timer
     useEffect(() => {
         if (gameState !== 'questions' || showFeedback || timeLeft <= 0) return;
         const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
@@ -371,6 +389,7 @@ const PhishingQuiz = () => {
         setGameState('questions');
         setScore(0);
         setTimeLeft(30);
+        setActivityTimeLeft(300);
         setIsTimeOut(false);
         setAnswers([]);
         setShowFeedback(false);
@@ -417,6 +436,7 @@ const PhishingQuiz = () => {
         setShowFeedback(false);
         setUsername('');
         setTimeLeft(30);
+        setActivityTimeLeft(300);
         setIsTimeOut(false);
     };
 
@@ -426,8 +446,14 @@ const PhishingQuiz = () => {
         return <EmailMockup question={q} />;
     };
 
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
     return (
-        <div className="w-full max-w-6xl mx-auto my-12 relative">
+        <div className="w-full max-w-6xl mx-auto my-12 relative px-4">
             <AnimatePresence mode="wait">
 
                 {/* ═══ INTRO ═══ */}
@@ -443,11 +469,11 @@ const PhishingQuiz = () => {
                                 <FaShieldAlt className="text-4xl text-violet-400" />
                             </motion.div>
 
-                            <h2 className="text-4xl md:text-6xl font-black text-white mb-2 uppercase tracking-tighter leading-none font-mono">
+                            <h2 className="text-4xl md:text-6xl font-black text-white mb-2 uppercase tracking-tighter leading-none font-mono text-center">
                                 <GlitchText text="PHISHING" /><br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">SIMULATOR</span>
                             </h2>
-                            <p className="text-gray-500 text-sm mb-10 max-w-md mx-auto font-sans leading-relaxed">
+                            <p className="text-gray-500 text-sm mb-10 max-w-md mx-auto font-sans leading-relaxed text-center">
                                 Analiza correos, SMS y mensajes de chat reales.<br/>¿Puedes distinguir un ataque de una comunicación legítima?
                             </p>
 
@@ -476,85 +502,105 @@ const PhishingQuiz = () => {
                 {gameState === 'questions' && sessionQuestions.length > 0 && (
                     <motion.div key="q" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         
-                        {/* Top Bar */}
-                        <div className="flex items-center justify-between mb-5 px-1">
-                            <div className="flex items-center gap-2">
-                                <span className="text-sm font-semibold text-white font-sans">
-                                    Pregunta {currentQuestion + 1} <span className="text-gray-500">de 10</span>
-                                </span>
-                                <span className="text-xs text-gray-600 font-mono">• {sessionQuestions[currentQuestion].vector}</span>
+                        {/* Top Bar - Multi-Timer */}
+                        <div className="flex flex-col md:flex-row items-center justify-between mb-8 px-4 py-4 bg-black/40 border border-white/5 rounded-2xl gap-4">
+                            <div className="flex items-center gap-4">
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest mb-1">Progreso Actividad</span>
+                                    <span className="text-sm font-bold text-white font-sans">
+                                        Pregunta {currentQuestion + 1} <span className="text-gray-500">/ 10</span>
+                                    </span>
+                                </div>
+                                <div className="w-[1px] h-8 bg-white/10 mx-2"></div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-violet-400 font-mono uppercase tracking-widest mb-1">Tiempo Total</span>
+                                    <div className={`flex items-center gap-2 text-lg font-black font-mono ${activityTimeLeft < 60 ? 'text-red-500 animate-pulse' : 'text-violet-400'}`}>
+                                        <FaClock size={14} /> {formatTime(activityTimeLeft)}
+                                    </div>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <span className="text-xs text-gray-500 font-mono">✓ {score}</span>
-                                <div className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold font-mono ${
-                                    timeLeft <= 10 ? 'bg-red-500/15 text-red-400' : 'bg-white/5 text-gray-300'
-                                } ${timeLeft <= 5 ? 'animate-pulse' : ''}`}>
-                                    <FaClock className="text-xs" /> {timeLeft}s
+
+                            <div className="flex items-center gap-6">
+                                <div className="text-right">
+                                    <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest block mb-1">Score</span>
+                                    <span className="text-lg font-black text-emerald-400 font-mono">{score}</span>
+                                </div>
+                                <div className={`flex flex-col items-end p-2 px-4 rounded-xl border ${
+                                    timeLeft <= 10 ? 'bg-red-500/10 border-red-500/30 text-red-500' : 'bg-white/5 border-white/10 text-gray-300'
+                                }`}>
+                                    <span className="text-[9px] uppercase font-bold tracking-tighter mb-1">Límite Pregunta</span>
+                                    <span className="text-xl font-black font-mono leading-none">{timeLeft}s</span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Progress */}
-                        <div className="h-1 bg-white/5 rounded-full mb-6 overflow-hidden">
-                            <motion.div className="h-full bg-gradient-to-r from-violet-600 to-indigo-500 rounded-full" 
-                                animate={{ width: `${((currentQuestion + 1) / 10) * 100}%` }} transition={{ duration: 0.5 }} />
-                        </div>
-
                         {/* Question Context */}
-                        <div className="bg-[#111] rounded-xl px-6 py-4 mb-6 border border-white/5">
-                            <p className="text-gray-300 text-sm font-sans">
-                                <span className="text-violet-400 font-semibold mr-2">Escenario:</span>
+                        <div className="bg-violet-600/5 rounded-xl px-6 py-4 mb-8 border border-violet-500/20 flex flex-col md:flex-row items-center gap-4">
+                             <div className="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 flex-shrink-0">
+                                 <FaExclamationTriangle />
+                             </div>
+                             <p className="text-gray-300 text-sm font-sans leading-relaxed">
+                                <span className="text-violet-400 font-bold uppercase tracking-tighter mr-2">Analizando:</span>
                                 {sessionQuestions[currentQuestion].title}
-                            </p>
+                             </p>
                         </div>
 
-                        {/* Layout: Mockup + Buttons */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                            {/* Mockup - 8 cols */}
-                            <div className="lg:col-span-8">
-                                <div key={currentQuestion}>
-                                    {renderMockup(sessionQuestions[currentQuestion])}
+                        {/* Layout: Main Area */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                            {/* Mockup - Center/Left area */}
+                            <div className={`transition-all duration-500 ${showFeedback ? 'lg:col-span-12' : 'lg:col-span-8'}`}>
+                                <div key={currentQuestion} className="w-full flex justify-center">
+                                    <div className="w-full max-w-2xl">
+                                        {renderMockup(sessionQuestions[currentQuestion])}
+                                    </div>
                                 </div>
 
                                 <AnimatePresence>
                                     {showFeedback && (
-                                        <FeedbackCard 
-                                            question={sessionQuestions[currentQuestion]}
-                                            isCorrect={lastCorrect}
-                                            isTimeOut={isTimeOut}
-                                            onNext={nextQuestion}
-                                        />
+                                        <div className="mt-8 max-w-3xl mx-auto">
+                                            <FeedbackCard 
+                                                question={sessionQuestions[currentQuestion]}
+                                                isCorrect={lastCorrect}
+                                                isTimeOut={isTimeOut}
+                                                onNext={nextQuestion}
+                                            />
+                                        </div>
                                     )}
                                 </AnimatePresence>
                             </div>
 
-                            {/* Answer buttons - 4 cols */}
-                            <div className="lg:col-span-4">
-                                <AnimatePresence>
-                                    {!showFeedback && (
-                                        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
-                                            className="space-y-4 sticky top-4">
-                                            <p className="text-xs text-gray-500 text-center font-sans mb-2">¿Qué opinas de este mensaje?</p>
+                            {/* Answer buttons - Right Side (hidden on feedback) */}
+                            {!showFeedback && (
+                                <div className="lg:col-span-4 sticky top-10">
+                                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
+                                        className="space-y-4 p-6 bg-black/30 border border-white/5 rounded-2xl backdrop-blur-sm">
+                                        <h3 className="text-xs text-violet-400 font-black uppercase tracking-[0.2em] mb-4 text-center">Toma una Decisión</h3>
 
-                                            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                                                onClick={() => handleUserAnswer(false)}
-                                                className="w-full p-6 bg-emerald-500/5 border border-emerald-500/15 rounded-xl group transition-all text-center hover:bg-emerald-500/10 hover:border-emerald-500/30">
-                                                <FaCheckCircle className="text-4xl text-emerald-500 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                                                <span className="text-base font-bold text-emerald-400 block font-sans">Es legítimo</span>
-                                                <span className="text-[11px] text-gray-500 mt-1 block font-sans">No es un intento de fraude</span>
-                                            </motion.button>
+                                        <motion.button whileHover={{ scale: 1.03, backgroundColor: 'rgba(16, 185, 129, 0.1)' }} whileTap={{ scale: 0.97 }}
+                                            onClick={() => handleUserAnswer(false)}
+                                            className="w-full p-6 border-2 border-emerald-500/20 rounded-2xl group transition-all text-center flex flex-col items-center gap-2">
+                                            <FaCheckCircle className="text-4xl text-emerald-500 group-hover:scale-110 transition-transform" />
+                                            <span className="text-lg font-black text-white block font-sans uppercase tracking-tighter">Es legítimo</span>
+                                            <span className="text-[10px] text-gray-500 font-sans tracking-wide">CONFÍO EN EL REMITENTE</span>
+                                        </motion.button>
 
-                                            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                                                onClick={() => handleUserAnswer(true)}
-                                                className="w-full p-6 bg-red-500/5 border border-red-500/15 rounded-xl group transition-all text-center hover:bg-red-500/10 hover:border-red-500/30">
-                                                <FaExclamationTriangle className="text-4xl text-red-500 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                                                <span className="text-base font-bold text-red-400 block font-sans">Es phishing</span>
-                                                <span className="text-[11px] text-gray-500 mt-1 block font-sans">Reportar como fraude</span>
-                                            </motion.button>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
+                                        <motion.button whileHover={{ scale: 1.03, backgroundColor: 'rgba(239, 68, 68, 0.1)' }} whileTap={{ scale: 0.97 }}
+                                            onClick={() => handleUserAnswer(true)}
+                                            className="w-full p-6 border-2 border-red-500/20 rounded-2xl group transition-all text-center flex flex-col items-center gap-2">
+                                            <FaExclamationTriangle className="text-4xl text-red-500 group-hover:scale-110 transition-transform" />
+                                            <span className="text-lg font-black text-white block font-sans uppercase tracking-tighter">Es phishing</span>
+                                            <span className="text-[10px] text-gray-500 font-sans tracking-wide">ELIMINAR Y REPORTAR</span>
+                                        </motion.button>
+                                        
+                                        <div className="pt-4 mt-4 border-t border-white/5">
+                                            <div className="flex justify-between text-[9px] font-mono text-gray-600 uppercase tracking-widest">
+                                                <span>Protocol_ID: 02</span>
+                                                <span>Enc_Mode: RSA-AES</span>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}

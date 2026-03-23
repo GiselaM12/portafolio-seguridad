@@ -1679,8 +1679,15 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
                     <span class="text-3xl font-black text-violet-900/30 group-hover:text-violet-600 transition-colors">10</span>
                     <h5 class="text-white font-black text-sm uppercase tracking-tighter">LinkedIn Connection Request</h5>
                   </div>
-                 </div>
-        </div>
+                  <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 flex-grow">
+                    Vector de <strong class="text-white">Social Engineering</strong> profesional. Perfiles falsos "clonan" la identidad de reclutadores para enviar archivos maliciosos.
+                  </p>
+                  <div class="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                    <span class="text-[9px] text-red-500 font-mono font-black uppercase tracking-widest">CRITICAL</span>
+                    <span class="text-[9px] text-gray-600 font-mono">ID: VECT_010</span>
+                  </div>
+                </div>
+            </div>
       </div>
 
       <h2 class="text-violet-500 font-mono text-4xl mb-12 flex items-center gap-6 group relative">
@@ -1800,21 +1807,7 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         </div>
       </div>
 
-      <div class="bg-gradient-to-r from-violet-900/20 to-indigo-900/20 border border-violet-500/20 rounded-2xl p-8 mb-24 text-center">
-        <p class="text-violet-300 text-lg italic font-light leading-relaxed">"La métrica suprema de resiliencia no es la prevención del clic, sino el <strong class="text-white font-bold">reporte activo de la amenaza</strong>."</p>
-      </div>
 
-      <div class="bg-gradient-to-br from-red-600/20 via-black to-black border-2 border-red-900/50 rounded-[4rem] p-16 md:p-24 shadow-[0_50px_100px_rgba(239,68,68,0.1)] relative overflow-hidden group mb-24">
-        <div class="absolute -top-24 -right-24 w-64 h-64 bg-red-600/10 blur-[100px] rounded-full group-hover:bg-red-600/20 transition-all duration-1000"></div>
-        <div class="relative z-10">
-          <h4 class="text-red-600 font-mono font-black uppercase tracking-[0.6em] text-[10px] mb-12 flex items-center gap-6">
-            <span class="w-12 h-[2px] bg-red-600"></span> HUMAN_RISK_ANALYSIS_V02
-          </h4>
-          <p class="text-3xl md:text-5xl text-white font-black uppercase tracking-tighter leading-none italic">
-            "La ingeniería social no es un fallo técnico, sino un <span class="text-red-600 underline decoration-red-600/50 underline-offset-[12px]">compromiso cognitivo</span>. La ética radica en fortalecer la resiliencia mediante la educación defensiva."
-          </p>
-        </div>
-      </div>
 
       <h2 class="text-violet-500 font-mono text-4xl mb-12 flex items-center gap-6 group relative">
         <span class="absolute -left-8 top-1/2 -translate-y-1/2 w-1 h-12 bg-violet-600 rounded-full group-hover:h-16 transition-all duration-500"></span>
