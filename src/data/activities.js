@@ -1494,7 +1494,7 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
                 </div>
                 <div class="bg-black/30 border border-gray-700 p-3 rounded">
                     <span class="text-gray-300 text-xs font-bold uppercase block mb-1">&#9888; An&aacute;lisis Cr&iacute;tico</span>
-                    <p class="text-xs text-gray-500 italic">La interfaz de administraci&oacute;n es consistentemente citada como menos intuitiva que la de KnowBe4 o Phished en revisiones comparativas de G2 y Gartner. El setup inicial y la configuraci&oacute;n del programa de cumplimiento pueden requerir soporte especializado del proveedor. Sin una funci&oacute;n de L&amp;D dedicada, la amplitud de la plataforma es dif&iacute;cil de aprovechar al m&aacute;ximo.</p>
+                    <p class="text-xs text-gray-500 italic">La interfaz de administraci&oacute;n es consistentemente citada como menos intuitiva que la de KnowBe4 o Phished en revisiones comparativas de G2 y Gartner.</p>
                 </div>
             </div>
         </details>
@@ -1506,56 +1506,9 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <span class="text-gray-800 font-black tracking-tighter opacity-20 group-hover:opacity-40 transition-opacity">03_</span> 
         <span class="tracking-tighter font-black uppercase">Forense de Ingeniería Social</span>
         <div class="h-[1px] flex-grow bg-gradient-to-r from-violet-600/50 via-indigo-500/20 to-transparent ml-4"></div>
-        <span class="text-[10px] font-mono text-violet-400/50 uppercase tracking-[0.5em] hidden md:block">Tactical_Design_v2.0</span>
       </h2>
-      
-      <div class="relative mb-24 overflow-hidden rounded-[3rem] bg-black/40 border border-violet-500/20 backdrop-blur-3xl shadow-[0_0_80px_rgba(139,92,246,0.05)]">
-        <!-- Digital Scanline Effect -->
-        <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-50 bg-[length:100%_2px,3px_100%] opacity-20"></div>
-        
-        <div class="p-10 md:p-16 relative z-10">
-          <p class="text-xl md:text-2xl text-gray-400 mb-20 leading-relaxed font-extralight max-w-4xl border-l-2 border-violet-600 pl-8">
-            Inspirado en la matriz de <a href="https://phishingquiz.withgoogle.com/" class="text-violet-400 font-bold hover:text-violet-300 transition-colors underline decoration-violet-500/30 group inline-flex items-center gap-2" target="_blank">Google Intelligence <svg class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>, hemos orquestado 10 simulaciones de alta fidelidad que analizan la <span class="text-white font-black italic">Respuesta Cognitiva</span> ante vectores de urgencia, autoridad y bypass de confianza.
-          </p>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-            <div class="relative group">
-              <div class="absolute -inset-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-              <div class="relative bg-[#0a0f1a] border border-white/5 rounded-3xl p-10 shadow-2xl">
-                <div class="flex items-center gap-4 mb-8">
-                  <div class="w-12 h-12 rounded-2xl bg-violet-600/20 flex items-center justify-center text-violet-400 ring-1 ring-violet-500/50">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.040L3 14.535a12 12 0 0011.662 4.473L21 14.535l-.382-8.591z"></path></svg>
-                  </div>
-                  <h4 class="text-gray-100 font-black uppercase tracking-widest text-sm">Protocolo Ético de Simulación</h4>
-                </div>
-                <div class="space-y-6">
-                  <div class="p-5 bg-white/5 rounded-2xl border border-white/10 hover:border-violet-500/30 transition-all group/item">
-                    <span class="text-[10px] text-violet-400 font-mono font-black uppercase block mb-1 tracking-[0.2em] group-hover/item:text-white transition-colors">01_CONSENTIMIENTO</span>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed">Divulgación previa obligatoria del propósito educativo antes del despliegue.</p>
-                  </div>
-                  <div class="p-5 bg-white/5 rounded-2xl border border-white/10 hover:border-violet-500/30 transition-all group/item">
-                    <span class="text-[10px] text-violet-400 font-mono font-black uppercase block mb-1 tracking-[0.2em] group-hover/item:text-white transition-colors">02_PRIVACIDAD_ABS</span>
-                    <p class="text-sm text-gray-400 font-light leading-relaxed">Arquitectura Zero-Data: Los inputs se validan volátilmente sin persistencia en disco.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-8">
-              <div class="bg-violet-900/10 border border-violet-500/20 rounded-[2.5rem] p-10 flex flex-col items-center justify-center group hover:bg-violet-600/20 transition-all duration-700 shadow-inner relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10 uppercase text-[8px] font-mono">Metric_ID_SCN</div>
-                <span class="text-7xl font-black text-white mb-2 group-hover:scale-110 transition-transform">10</span>
-                <span class="text-[10px] text-violet-400 font-mono font-black tracking-[0.4em] uppercase">Vectores</span>
-              </div>
-              <div class="bg-indigo-900/10 border border-indigo-500/20 rounded-[2.5rem] p-10 flex flex-col items-center justify-center group hover:bg-indigo-600/20 transition-all duration-700 shadow-inner relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10 uppercase text-[8px] font-mono">Metric_ID_RES</div>
-                <span class="text-7xl font-black text-white mb-2 group-hover:scale-110 transition-transform">100%</span>
-                <span class="text-[10px] text-indigo-400 font-mono font-black tracking-[0.4em] uppercase">Ready</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
             <!-- Scenario 01 -->
             <div class="group relative">
                 <div class="absolute -inset-0.5 bg-gradient-to-br from-violet-600 to-transparent rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition duration-500"></div>
