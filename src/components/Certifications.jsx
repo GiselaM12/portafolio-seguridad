@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     FaShieldAlt, 
@@ -8,11 +8,28 @@ import {
     FaFilePdf, 
     FaExternalLinkAlt, 
     FaCertificate, 
-    FaUserShield
+    FaUserShield,
+    FaTimes,
+    FaExpand,
+    FaLock,
+    FaEye
 } from 'react-icons/fa';
 
 const Certifications = () => {
     const [activeTab, setActiveTab] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Disable body scroll when modal is open
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isModalOpen]);
 
     const certificationsData = [
         {
@@ -21,7 +38,7 @@ const Certifications = () => {
             code: "CS-INTRO",
             date: "2025",
             themeColor: "from-emerald-500 to-teal-600",
-            glowColor: "rgba(16, 185, 129, 0.25)",
+            glowColor: "rgba(16, 185, 129, 0.3)",
             badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
             icon: <FaShieldAlt />,
             badgeText: "SEC-INTRO",
@@ -38,7 +55,7 @@ const Certifications = () => {
             code: "NET-CONFIG",
             date: "2025",
             themeColor: "from-purple-500 to-indigo-600",
-            glowColor: "rgba(139, 92, 246, 0.25)",
+            glowColor: "rgba(139, 92, 246, 0.3)",
             badgeColor: "text-purple-400 border-purple-500/30 bg-purple-500/10",
             icon: <FaTerminal />,
             badgeText: "NET-DEV",
@@ -55,7 +72,7 @@ const Certifications = () => {
             code: "NET-DEFENSE",
             date: "2025",
             themeColor: "from-cyan-500 to-blue-600",
-            glowColor: "rgba(6, 182, 212, 0.25)",
+            glowColor: "rgba(6, 182, 212, 0.3)",
             badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
             icon: <FaNetworkWired />,
             badgeText: "NET-DEF",
@@ -72,7 +89,7 @@ const Certifications = () => {
             code: "END-SEC",
             date: "2025",
             themeColor: "from-rose-500 to-red-600",
-            glowColor: "rgba(244, 63, 94, 0.25)",
+            glowColor: "rgba(244, 63, 94, 0.3)",
             badgeColor: "text-rose-400 border-rose-500/30 bg-rose-500/10",
             icon: <FaLaptopCode />,
             badgeText: "END-SEC",
@@ -89,7 +106,7 @@ const Certifications = () => {
             code: "THREAT-MGMT",
             date: "2025",
             themeColor: "from-amber-500 to-orange-600",
-            glowColor: "rgba(245, 158, 11, 0.25)",
+            glowColor: "rgba(245, 158, 11, 0.3)",
             badgeColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
             icon: <FaUserShield />,
             badgeText: "THR-MGMT",
@@ -106,7 +123,7 @@ const Certifications = () => {
             code: "JR-ANALYST-PATH",
             date: "2025",
             themeColor: "from-violet-500 to-fuchsia-600",
-            glowColor: "rgba(168, 85, 247, 0.25)",
+            glowColor: "rgba(168, 85, 247, 0.3)",
             badgeColor: "text-violet-400 border-violet-500/30 bg-violet-500/10",
             icon: <FaCertificate />,
             badgeText: "JR-ANALYST",
@@ -271,50 +288,100 @@ const Certifications = () => {
                                         </div>
                                     </div>
 
-                                    {/* Structured Written Reflection (PD05 Mandatory Details) */}
-                                    <div className="py-6 space-y-5">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    {/* Main Content Layout - Split Review and Holographic Document Card */}
+                                    <div className="py-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+                                        
+                                        {/* Reflections (Learnings, etc.) */}
+                                        <div className="md:col-span-7 space-y-4">
                                             {/* Key Learnings */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
-                                                <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
+                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
+                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
                                                     <span>🛡️</span> APRENDIZAJES CLAVE
                                                 </h4>
-                                                <p className="text-gray-400 text-xs leading-relaxed text-justify text-justify-last-left">
+                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
                                                     {currentCert.learnings}
                                                 </p>
                                             </div>
 
                                             {/* Challenges */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
-                                                <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
+                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
+                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
                                                     <span>🎯</span> RETOS SUPERADOS
                                                 </h4>
-                                                <p className="text-gray-400 text-xs leading-relaxed text-justify text-justify-last-left">
+                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
                                                     {currentCert.challenges}
                                                 </p>
                                             </div>
-                                        </div>
 
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                             {/* Practical Application */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
-                                                <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
+                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
+                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
                                                     <span>💻</span> APLICACIÓN PRÁCTICA
                                                 </h4>
-                                                <p className="text-gray-400 text-xs leading-relaxed text-justify text-justify-last-left">
+                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
                                                     {currentCert.application}
                                                 </p>
                                             </div>
 
                                             {/* Personal Comment */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
-                                                <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
+                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
+                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
                                                     <span>💬</span> COMENTARIO PERSONAL
                                                 </h4>
-                                                <p className="text-gray-400 text-xs leading-relaxed text-justify text-justify-last-left">
+                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
                                                     {currentCert.comment}
                                                 </p>
                                             </div>
+                                        </div>
+
+                                        {/* Premium Holographic Certificate Preview Card */}
+                                        <div className="md:col-span-5 flex">
+                                            <motion.div
+                                                onClick={() => setIsModalOpen(true)}
+                                                whileHover={{ y: -5, borderColor: 'rgba(139, 92, 246, 0.5)' }}
+                                                className="w-full relative bg-[#070b14]/90 border border-violet-500/25 rounded-lg p-5 flex flex-col items-center justify-between text-center overflow-hidden min-h-[300px] group cursor-pointer hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-all duration-300 backdrop-blur-sm select-none"
+                                            >
+                                                {/* Tech Background Grid Lines */}
+                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.05)_1px,transparent_1px)] bg-[size:20px_20px] opacity-40 pointer-events-none" />
+                                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/5 to-violet-500/10 opacity-30 pointer-events-none" />
+
+                                                {/* Corner Marks inside preview */}
+                                                <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-violet-500/40" />
+                                                <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-violet-500/40" />
+                                                <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-violet-500/40" />
+                                                <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-violet-500/40" />
+
+                                                {/* Status indicator on top of preview */}
+                                                <div className="w-full flex items-center justify-between text-[8px] font-mono text-violet-500/50">
+                                                    <span>[PREVIEW_SECURE]</span>
+                                                    <span className="flex items-center gap-1">
+                                                        <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse" />
+                                                        LOADED
+                                                    </span>
+                                                </div>
+
+                                                {/* Big lock / Certificate design in center */}
+                                                <div className="my-auto flex flex-col items-center gap-3 relative z-10">
+                                                    <div className="w-16 h-16 rounded-full bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 shadow-[0_0_20px_rgba(139,92,246,0.1)] group-hover:scale-110 transition-transform duration-300">
+                                                        <FaLock className="text-xl text-violet-400/90 group-hover:hidden" />
+                                                        <FaEye className="text-2xl text-violet-300 hidden group-hover:block animate-pulse" />
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="font-mono text-xs text-white font-semibold uppercase tracking-wider px-1">
+                                                            {currentCert.title}
+                                                        </h5>
+                                                        <p className="text-[9px] font-mono text-gray-500 mt-1">
+                                                            HAGA CLIC PARA AMPLIAR CERTIFICADO
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Holographic interactive button */}
+                                                <div className="w-full py-2 border border-violet-500/20 bg-violet-500/5 rounded font-mono text-[10px] text-violet-400 font-bold group-hover:bg-violet-500/20 group-hover:text-white group-hover:border-violet-500/50 transition-colors duration-300 flex items-center justify-center gap-1.5">
+                                                    <FaExpand className="text-[9px]" />
+                                                    <span>AMPLIAR EN PANTALLA COMPLETA</span>
+                                                </div>
+                                            </motion.div>
                                         </div>
                                     </div>
 
@@ -327,28 +394,38 @@ const Certifications = () => {
                                         </div>
 
                                         <div className="flex items-center gap-3">
-                                            <motion.a
-                                                whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                href={currentCert.pdfPath}
-                                                target="_blank"
-                                                rel="noreferrer"
+                                            <motion.button
+                                                whileHover={{ scale: 1.03 }}
+                                                whileTap={{ scale: 0.97 }}
+                                                onClick={() => setIsModalOpen(true)}
                                                 className="px-4 py-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded font-mono text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] border border-violet-500/40 transition-all duration-300"
                                             >
-                                                <FaFilePdf className="text-sm" />
-                                                <span>Ver Evidencia PDF</span>
-                                            </motion.a>
+                                                <FaExpand className="text-xs" />
+                                                <span>Ver en Grande</span>
+                                            </motion.button>
 
                                             <motion.a
-                                                whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                href={currentCert.verifyUrl}
+                                                whileHover={{ scale: 1.03 }}
+                                                whileTap={{ scale: 0.97 }}
+                                                href={currentCert.pdfPath}
                                                 target="_blank"
                                                 rel="noreferrer"
                                                 className="px-4 py-2 bg-transparent hover:bg-violet-500/10 text-violet-400 border border-violet-500/20 hover:border-violet-500/50 rounded font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
                                             >
-                                                <FaExternalLinkAlt className="text-xs" />
-                                                <span>Verificar Credencial</span>
+                                                <FaFilePdf className="text-sm" />
+                                                <span>Descargar PDF</span>
+                                            </motion.a>
+
+                                            <motion.a
+                                                whileHover={{ scale: 1.03 }}
+                                                whileTap={{ scale: 0.97 }}
+                                                href={currentCert.verifyUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="px-4 py-2 bg-transparent hover:bg-violet-500/10 text-gray-500 hover:text-violet-400 border border-transparent rounded font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
+                                            >
+                                                <FaExternalLinkAlt className="text-[10px]" />
+                                                <span>Credencial</span>
                                             </motion.a>
                                         </div>
                                     </div>
@@ -359,6 +436,99 @@ const Certifications = () => {
 
                 </div>
             </div>
+
+            {/* Premium Full-Screen PDF Decryptor Lightbox Modal */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#030712]/95 backdrop-blur-md"
+                    >
+                        {/* Backdrop close area */}
+                        <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
+
+                        {/* Modal Dialog Container */}
+                        <motion.div
+                            initial={{ scale: 0.95, y: 15, opacity: 0 }}
+                            animate={{ scale: 1, y: 0, opacity: 1 }}
+                            exit={{ scale: 0.95, y: 15, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="bg-[#080d19] border border-violet-500/35 rounded-lg w-full max-w-5xl h-[85vh] sm:h-[90vh] overflow-hidden flex flex-col shadow-2xl shadow-violet-950/40 relative z-10"
+                        >
+                            {/* Cyber decoration lines */}
+                            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-violet-500/60" />
+                            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-violet-500/60" />
+                            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-violet-500/60" />
+                            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-violet-500/60" />
+
+                            {/* Modal Header */}
+                            <div className="bg-[#0b1224] px-4 sm:px-6 py-3 border-b border-violet-500/20 flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-violet-400 animate-ping" />
+                                    <div>
+                                        <h4 className="font-mono text-xs sm:text-sm font-bold text-white leading-none">
+                                            [DECRYPTED_DOCUMENT: {currentCert.code}]
+                                        </h4>
+                                        <p className="text-[9px] font-mono text-violet-400 mt-1 uppercase">
+                                            {currentCert.title}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300"
+                                >
+                                    <FaTimes className="text-sm" />
+                                </button>
+                            </div>
+
+                            {/* Modal Document Body - Large Iframe PDF Viewer */}
+                            <div className="flex-1 bg-[#03060d] p-2 sm:p-4 flex items-center justify-center relative">
+                                <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+                                
+                                {/* Iframe embedding the PDF */}
+                                <iframe 
+                                    src={`${currentCert.pdfPath}#toolbar=1&navpanes=0&scrollbar=1`}
+                                    title={currentCert.title}
+                                    className="w-full h-full rounded border border-violet-500/15 bg-[#03060d] shadow-inner relative z-10"
+                                />
+                            </div>
+
+                            {/* Modal Footer Controls */}
+                            <div className="bg-[#0b1224] px-4 sm:px-6 py-3 border-t border-violet-500/20 flex items-center justify-between flex-wrap gap-3">
+                                <div className="flex items-center gap-2 font-mono text-[9px] sm:text-xs text-gray-500">
+                                    <span>[SECURE_ACCESS_GRANTED]</span>
+                                    <span>|</span>
+                                    <span>VITE_ENV_PRODUCTION</span>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    <motion.a
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        href={currentCert.pdfPath}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="px-4 py-1.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded font-mono text-[10px] sm:text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] border border-violet-500/40 transition-all duration-300"
+                                    >
+                                        <FaFilePdf className="text-sm" />
+                                        <span>Descargar Evidencia Oficial</span>
+                                    </motion.a>
+
+                                    <button
+                                        onClick={() => setIsModalOpen(false)}
+                                        className="px-4 py-1.5 bg-transparent hover:bg-violet-500/10 text-gray-400 hover:text-white border border-violet-500/20 hover:border-violet-500/40 rounded font-mono text-[10px] sm:text-xs transition-all duration-300"
+                                    >
+                                        Cerrar Visor
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
