@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Banner Bento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Outfit:wght@300;500;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        body {
+            margin: 0; background-color: #000; display: flex; justify-content: center;
+            align-items: center; min-height: 100vh; font-family: 'Space Grotesk', sans-serif;
+            flex-direction: column; gap: 20px; padding: 40px 20px;
+        }
+
+        .controls {
+            display: flex; gap: 30px; background: #111; padding: 20px 40px;
+            border-radius: 20px; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            color: white; z-index: 100; border: 1px solid #333;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #00f0ff 0%, #a855f7 100%);
+            color: #000; border: none; padding: 15px 35px; font-size: 1.2rem;
+            font-weight: 800; border-radius: 50px; cursor: pointer; transition: 0.2s;
+            font-family: 'Outfit', sans-serif; box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+        }
+        .download-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 240, 255, 0.4); }
+
+        /* LİENZO DEL BANNER 1080x1350 */
+        #banner {
+            width: 1080px; height: 1350px; background-color: #030305;
+            position: relative; overflow: hidden; box-sizing: border-box; padding: 50px;
+            color: #fff; display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-rows: 1.25fr 1fr;
+            gap: 30px;
+        }
+
+        /* Ambient Glows */
+        .ambient-1 { position: absolute; top: -20%; left: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(0,240,255,0.15) 0%, transparent 60%); z-index: 0; pointer-events: none; }
+        .ambient-2 { position: absolute; bottom: -20%; right: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 60%); z-index: 0; pointer-events: none; }
+        
+        /* Subtle dots */
+        #banner::before {
+            content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 25px 25px; z-index: 0; pointer-events: none;
+        }
+
+        /* BENTO CARDS */
+        .bento-card {
+            border-radius: 40px; padding: 45px; position: relative; z-index: 1;
+            display: flex; flex-direction: column; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            background: linear-gradient(135deg, #111116 0%, #060608 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .card-hero { border-top: 1px solid rgba(0, 240, 255, 0.3); border-left: 1px solid rgba(0, 240, 255, 0.3); justify-content: center; }
+        .hero-badge { 
+            display: inline-block; padding: 8px 16px; background: rgba(168,85,247,0.1); 
+            border: 1px solid rgba(168,85,247,0.3); border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #a855f7; 
+            letter-spacing: 2px; margin-bottom: 30px; width: max-content;
+        }
+        .hero-title { 
+            font-family: 'Outfit', sans-serif; font-size: 48px; line-height: 1; margin: 0 0 20px 0; font-weight: 900;
+            letter-spacing: 0px;
+        }
+        .hero-title span { color: #00f0ff; }
+        .hero-desc { font-size: 23px; line-height: 1.6; color: #a1a1aa; margin: 0; font-weight: 400; }
+        .author-tag {
+            display: flex; align-items: center; gap: 15px; margin-top: 45px;
+        }
+        .author-avatar { width: 60px; height: 60px; background: #00f0ff; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .author-avatar svg { width: 35px; height: 35px; fill: #000; }
+        .author-info p { margin: 0; }
+        .author-name { font-size: 24px; font-weight: 700; color: #fff; }
+        .author-role { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #00f0ff; }
+
+        .card-auth { border-top: 1px solid rgba(168, 85, 247, 0.3); border-right: 1px solid rgba(168, 85, 247, 0.3); align-items: center; justify-content: space-between; text-align: center; }
+        .auth-title { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #a1a1aa; letter-spacing: 2px; margin: 0;}
+        .qr-wrapper {
+            background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
+            position: relative; margin: auto 0;
+        }
+        .qr-wrapper::before, .qr-wrapper::after { content: ''; position: absolute; width: 40px; height: 40px; border: 4px solid #a855f7; }
+        .qr-wrapper::before { top: -15px; left: -15px; border-right: none; border-bottom: none; border-radius: 10px 0 0 0;}
+        .qr-wrapper::after { bottom: -15px; right: -15px; border-left: none; border-top: none; border-radius: 0 0 10px 0;}
+        .qr-wrapper img { width: 200px; height: 200px; display: block; border-radius: 10px;}
+        
+        .scan-text { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin: 0; }
+        .scan-sub { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: #a855f7; margin-top: 5px; }
+
+        .card-facts { border-bottom: 1px solid rgba(0, 240, 255, 0.3); border-left: 1px solid rgba(0, 240, 255, 0.3); justify-content: center; }
+        .facts-header { display: flex; align-items: center; gap: 15px; margin-bottom: 35px; }
+        .facts-header h3 { font-family: 'Outfit', sans-serif; font-size: 32px; margin: 0; font-weight: 800; }
+        .pulse-dot { width: 15px; height: 15px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 15px #ef4444;}
+        
+        .fact-item {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 25px; padding: 25px; display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;
+        }
+        .fact-icon {
+            width: 65px; height: 65px; border-radius: 15px; background: rgba(0, 240, 255, 0.1);
+            display: flex; justify-content: center; align-items: center; flex-shrink: 0;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        .fact-icon svg { width: 32px; height: 32px; fill: #00f0ff; }
+        .fact-text { font-size: 19px; color: #d4d4d8; line-height: 1.5; margin: 0; font-weight: 400;}
+        .fact-text strong { color: #fff; font-weight: 700; }
+
+        .card-status { border-bottom: 1px solid rgba(168, 85, 247, 0.3); border-right: 1px solid rgba(168, 85, 247, 0.3); justify-content: space-between; }
+        .status-header { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #a1a1aa; margin: 0 0 10px 0;}
+        .status-big { font-family: 'Outfit', sans-serif; font-size: 70px; font-weight: 900; color: #22c55e; margin: 0; line-height: 1; text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);}
+        
+        .url-box {
+            background: rgba(0, 240, 255, 0.05); padding: 25px; border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace; font-size: 15px; color: #00f0ff;
+            word-break: break-all; border: 1px dashed rgba(0, 240, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        .terminal-logs {
+            font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #52525b; line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <div>
+            <h2 style="margin:0; font-size: 1.5rem; color: #00f0ff;">Banner PD04 [Bento Grid]</h2>
+            <p style="color:#aaa; margin:5px 0 0 0; font-size: 1rem;">Diseño Totalmente Original y Profesional</p>
+        </div>
+        <button class="download-btn" onclick="descargarJPG()">⬇️ Generar Imagen Final</button>
+    </div>
+
+    <!-- EL BANNER -->
+    <div id="banner">
+        <div class="ambient-1"></div>
+        <div class="ambient-2"></div>
+        
+        <!-- Hero Card -->
+        <div class="bento-card card-hero">
+            <div class="hero-badge">INFORME_OPERATIVO</div>
+            <h1 class="hero-title">PORTAFOLIO<br><span>CIBERSEGURIDAD</span></h1>
+            <p class="hero-desc">La protección de la información es el pilar de la confianza digital. En este espacio documento mis investigaciones, laboratorios y ejercicios prácticos sobre análisis de vulnerabilidades, hardening y defensa de infraestructuras críticas.</p>
+            <div class="author-tag">
+                <div class="author-avatar">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
+                <div class="author-info">
+                    <p class="author-name">GISELA MORENO</p>
+                    <p class="author-role">ANALISTA & ESTUDIANTE</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Card -->
+        <div class="bento-card card-auth">
+            <p class="auth-title">CÓDIGO DE ACCESO</p>
+            <div class="qr-wrapper">
+                <img crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://giselam12.github.io/portafolio-seguridad/&color=050505&bgcolor=ffffff" alt="QR Portafolio">
+            </div>
+            <div>
+                <p class="scan-text">ESCANEAR CÓDIGO</p>
+                <p class="scan-sub">CONEXIÓN CIFRADA E2E</p>
+            </div>
+        </div>
+
+        <!-- Facts Card -->
+        <div class="bento-card card-facts">
+            <div class="facts-header">
+                <div class="pulse-dot"></div>
+                <h3>INTELIGENCIA DE AMENAZAS</h3>
+            </div>
+            
+            <div class="fact-item">
+                <div class="fact-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                    </svg>
+                </div>
+                <p class="fact-text">El <strong>90% de los ataques exitosos</strong> inician con ingeniería social, aprovechando el factor humano más que las propias fallas técnicas del sistema.</p>
+            </div>
+            
+            <div class="fact-item" style="margin-bottom: 0;">
+                <div class="fact-icon" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.2);">
+                    <svg viewBox="0 0 24 24" style="fill: #a855f7;">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                    </svg>
+                </div>
+                <p class="fact-text">El <strong>Ransomware</strong> ha evolucionado rápidamente, paralizando infraestructuras críticas y forzando la evolución de la seguridad defensiva.</p>
+            </div>
+        </div>
+
+        <!-- Status Card -->
+        <div class="bento-card card-status">
+            <div>
+                <p class="status-header">ESTADO DEL SISTEMA</p>
+                <p class="status-big">ONLINE</p>
+            </div>
+            
+            <div>
+                <div class="url-box">
+                    <span style="color:#64748b; margin-right: 10px;">TARGET:</span>https://giselam12.github.io/portafolio-seguridad/
+                </div>
+                <div class="terminal-logs">
+                    > PING giselam12.github.io<br>
+                    > 64 bytes from 185.199.108.153: icmp_seq=1 ttl=54 time=14.2 ms<br>
+                    > CONEXIÓN ESTABLECIDA EXITOSAMENTE_
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function descargarJPG() {
+            const banner = document.getElementById('banner');
+            const btn = document.querySelector('.download-btn');
+            const originalText = btn.innerText;
+            btn.innerText = "Procesando Alta Resolución... ⏳";
+            btn.style.opacity = "0.7";
+            
+            html2canvas(banner, {
+                scale: 1, // Tamaño exacto 1080x1350
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: "#030305"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'GiselaMoreno_Banner_Bento.jpg';
+                link.href = canvas.toDataURL('image/jpeg', 0.95);
+                link.click();
+                
+                btn.innerText = "✅ ¡Guardado Exitoso!";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                }, 3000);
+            }).catch(err => {
+                alert("Hubo un error. Intenta la herramienta Recortes (Windows + Shift + S).");
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import About from '../components/About'
 import Profile from '../components/Profile'
 import Projects from '../components/Projects'
+import Certifications from '../components/Certifications'
 import TechStack from '../components/TechStack'
 import Contact from '../components/Contact'
 
@@ -28,6 +29,7 @@ const Home = () => {
             <About />
             <Profile />
             <Projects />
+            <Certifications />
             <TechStack />
             <Contact />
         </>
