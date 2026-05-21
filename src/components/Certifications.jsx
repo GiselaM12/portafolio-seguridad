@@ -4,14 +4,12 @@ import {
     FaShieldAlt, 
     FaNetworkWired, 
     FaLaptopCode, 
-    FaBug, 
     FaTerminal, 
     FaFilePdf, 
     FaExternalLinkAlt, 
     FaCertificate, 
     FaUserShield,
-    FaLock,
-    FaExclamationTriangle
+    FaWifi
 } from 'react-icons/fa';
 
 const Certifications = () => {
@@ -28,29 +26,12 @@ const Certifications = () => {
             badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
             icon: <FaShieldAlt />,
             badgeText: "SEC-INTRO",
-            pdfPath: "./certificaciones/Introduccion_Ciberseguridad.pdf",
+            pdfPath: "./certificaciones/Introduction_to_Cybersecurity_certificate_176522-upslp-edu-mx_4a49d98c-8b6a-4eb1-8870-a1d0b64651ac.pdf",
             verifyUrl: "https://www.credly.com/organizations/cisco/badges",
             learnings: "Este curso fundamental marcó mi inicio formal en la seguridad informática. Profundicé en los conceptos clave que rigen la protección de la información, analizando en detalle la tríada de seguridad CID: Confidencialidad, Integridad y Disponibilidad. Estudié la anatomía de los ataques informáticos contemporáneos, comprendiendo el funcionamiento de diversos tipos de malware (virus, gusanos, troyanos y el devastador impacto del ransomware) y desglosando las técnicas de ingeniería social como el phishing.",
             challenges: "El reto más grande en esta etapa fue comprender que el factor humano suele ser el eslabón más débil en la cadena de seguridad, lo que me obligó a adoptar una mentalidad analítica y defensiva para identificar vulnerabilidades no técnicas.",
             application: "En el ámbito práctico, este curso me capacitó para diseñar directrices de seguridad sólidas para redes domésticas y personales, formulando políticas de contraseñas robustas y concientizando a mi entorno directo sobre las mejores prácticas de higiene digital.",
             comment: "En lo personal, este curso fue sumamente revelador. Consolidó mi deseo de especializarme en ciberseguridad, sentando las bases teóricas indispensables para abordar las certificaciones más complejas del trayecto formativo."
-        },
-        {
-            title: "Conceptos Básicos de Redes",
-            issuer: "Cisco Networking Academy / Skills for All",
-            code: "NET-BASICS",
-            date: "2025",
-            themeColor: "from-cyan-500 to-blue-600",
-            glowColor: "rgba(6, 182, 212, 0.25)",
-            badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
-            icon: <FaNetworkWired />,
-            badgeText: "NET-BASE",
-            pdfPath: "./certificaciones/Conceptos_Redes.pdf",
-            verifyUrl: "https://www.credly.com/organizations/cisco/badges",
-            learnings: "Para defender un sistema, primero es fundamental entender cómo se comunica. Este curso me proporcionó los conocimientos esenciales sobre el funcionamiento de las redes de datos, abarcando desde el hardware de red hasta los protocolos de transporte y enlace de datos. Aprendí a diferenciar los modelos OSI y TCP/IP, asimilando cómo viaja la información encapsulada en bits, tramas, paquetes y segmentos. Profundicé en el direccionamiento IPv4/IPv6 y dominé el subnetting.",
-            challenges: "El desafío principal consistió en comprender la lógica matemática detrás del direccionamiento IP y la asignación eficiente de subredes, un tema abstracto pero crucial para prevenir el desperdicio de direcciones IP en arquitecturas empresariales.",
-            application: "Implementé simulaciones avanzadas en Cisco Packet Tracer, conectando físicamente computadoras a switches y routers, y verificando la conectividad mediante comandos de diagnóstico de red como ping y traceroute.",
-            comment: "Esta certificación fue un paso fundamental en mi formación profesional. Me brindó la seguridad de comprender la infraestructura física y lógica de la comunicación moderna, transformando mi perspectiva sobre la seguridad de redes."
         },
         {
             title: "Dispositivos de Red y Configuración Inicial",
@@ -62,7 +43,7 @@ const Certifications = () => {
             badgeColor: "text-purple-400 border-purple-500/30 bg-purple-500/10",
             icon: <FaTerminal />,
             badgeText: "NET-DEV",
-            pdfPath: "./certificaciones/Dispositivos_Red_Configuracion.pdf",
+            pdfPath: "./certificaciones/Networking_Devices_and_Initial_Configuration_certificate_176522-upslp-edu-mx_c1439a2d-7981-4c09-9cdc-09f54051918c.pdf",
             verifyUrl: "https://www.credly.com/organizations/cisco/badges",
             learnings: "Este módulo práctico me permitió dar el salto del conocimiento teórico de redes a la interacción real y configuración de equipos de comunicación Cisco. Estudié routers, switches, puntos de acceso inalámbricos (WAPs) y dispositivos de seguridad perimetral. Aprendí a acceder al sistema operativo Cisco IOS mediante conexiones de consola y red cifrada (SSH), y dominé la interfaz de línea de comandos (CLI) para realizar configuraciones iniciales de seguridad.",
             challenges: "El reto más significativo fue familiarizarme con la sintaxis de comandos de Cisco y comprender cómo la configuración de interfaces de red y el enrutamiento estático afectan directamente el flujo de tráfico de datos de forma bidireccional.",
@@ -96,7 +77,7 @@ const Certifications = () => {
             badgeColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
             icon: <FaUserShield />,
             badgeText: "THR-MGMT",
-            pdfPath: "./certificaciones/Administracion_Amenazas.pdf",
+            pdfPath: "./certificaciones/Cyber_Threat_Management_certificate_176522-upslp-edu-mx_59f5dfbb-ad23-4021-b7de-d01e62ff049d.pdf",
             verifyUrl: "https://www.credly.com/organizations/cisco/badges",
             learnings: "Este curso me preparó para enfrentar el panorama táctico de la ciberdefensa moderna, dotándome de habilidades para la detección, análisis y mitigación de amenazas cibernéticas en entornos organizacionales. Aprendí a utilizar marcos de trabajo profesionales como el NIST y la taxonomía de ataques cibernéticos para comprender las fases de una intrusión (Cyber Kill Chain). Estudié el funcionamiento de los SOC, sistemas SIEM e inteligencia de amenazas.",
             challenges: "El reto más complejo fue aprender a correlacionar alertas y logs de seguridad procedentes de múltiples fuentes (como firewalls, routers e IDS) para identificar patrones de ataque sutiles que de otro modo pasarían desapercibidos en la red.",
@@ -104,16 +85,16 @@ const Certifications = () => {
             comment: "Esta certificación me brindó una visión estratégica espectacular. Me enseñó que la seguridad no es estática, sino una disciplina activa de monitoreo e investigación, inspirándome a desarrollar la mentalidad analítica necesaria en un SOC."
         },
         {
-            title: "Carrera Profesional de Analista Junior en Ciberseguridad",
+            title: "Carrera de Analista Junior en Ciberseguridad",
             issuer: "Cisco Networking Academy / Skills for All",
-            code: "JR-ANALYST-PATH",
+            code: "JR-ANALYST",
             date: "2025",
             themeColor: "from-violet-500 to-fuchsia-600",
             glowColor: "rgba(168, 85, 247, 0.25)",
             badgeColor: "text-violet-400 border-violet-500/30 bg-violet-500/10",
             icon: <FaCertificate />,
             badgeText: "JR-ANALYST",
-            pdfPath: "./certificaciones/Analista_Junior_Ciberseguridad.pdf",
+            pdfPath: "./certificaciones/Junior_Cybersecurity_Analyst_Career_Path_certificate_176522-upslp-edu-mx_ba4afaa8-88f1-4ce5-a4f8-26274dc951c0.pdf",
             verifyUrl: "https://www.credly.com/organizations/cisco/badges",
             learnings: "Esta trayectoria profesional de Cisco es la culminación integradora de los conocimientos del trayecto formativo. El programa me capacitó en las responsabilidades clave de un Analista de Ciberseguridad Junior dentro de un SOC. Aprendí a monitorear redes corporativas, clasificar la gravedad de las alertas de seguridad, realizar análisis iniciales de malware, aplicar metodologías forenses digitales básicas y a cumplir con los estándares ISO 27001.",
             challenges: "El reto primordial fue consolidar todas las disciplinas previas (redes, sistemas operativos, criptografía y análisis de amenazas) y aplicarlas bajo la presión simulada de un escenario de brecha de seguridad real, tomando decisiones rápidas de contención.",
@@ -121,21 +102,21 @@ const Certifications = () => {
             comment: "Este recorrido formativo fue sumamente motivador, ya que me permitió proyectar mis competencias directo al mercado laboral. Me dio una comprensión clara de la ética profesional del analista y la importancia de la respuesta a incidentes."
         },
         {
-            title: "Hacker Ético",
+            title: "Defensa de Redes",
             issuer: "Cisco Networking Academy / Skills for All",
-            code: "ETH-HACKING",
+            code: "NET-DEFENSE",
             date: "2025",
-            themeColor: "from-red-600 to-pink-700",
-            glowColor: "rgba(220, 38, 38, 0.25)",
-            badgeColor: "text-red-400 border-red-500/30 bg-red-500/10",
-            icon: <FaBug />,
-            badgeText: "ETH-HACK",
-            pdfPath: "./certificaciones/Hacker_Etico.pdf",
+            themeColor: "from-cyan-500 to-blue-600",
+            glowColor: "rgba(6, 182, 212, 0.25)",
+            badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
+            icon: <FaWifi />,
+            badgeText: "NET-DEF",
+            pdfPath: "./certificaciones/Network_Defense_certificate_176522-upslp-edu-mx_eeab82b6-029a-47f8-b814-b0393d7a5636.pdf",
             verifyUrl: "https://www.credly.com/organizations/cisco/badges",
-            learnings: "Esta apasionante certificación de Cisco me enseñó a adoptar la mentalidad y utilizar las mismas herramientas que los atacantes cibernéticos, pero con un propósito ético y constructivo: identificar vulnerabilidades antes de que sean explotadas por delincuentes. Estudié las fases del pentesting: reconocimiento, escaneo de red, enumeración, ganancia de acceso (explotación), mantenimiento y borrado de huellas.",
-            challenges: "El desafío más enriquecedor fue comprender los vectores de ataque avanzados, como la inyección de código SQL y el Cross-Site Scripting (XSS), así como la necesidad crítica de documentar cada hallazgo de forma minuciosa en un reporte formal.",
-            application: "Ejecuté laboratorios de hacking ético en entornos controlados, realizando escaneos de red con Nmap para descubrir puertos abiertos y servicios activos, y utilizando Metasploit para validar fallos de seguridad de forma controlada.",
-            comment: "Considero que esta ha sido la experiencia de aprendizaje más intensa de mi formación. Me enseñó que para proteger un sistema de manera verdaderamente efectiva, debes ser capaz de pensar como el atacante, reforzando mi pasión por el hacking ético."
+            learnings: "Este curso me brindó las herramientas y metodologías necesarias para defender activamente una infraestructura de red frente a ataques cibernéticos sofisticados. Estudié en profundidad el diseño de arquitecturas de red seguras, aprendiendo a implementar ACLs (Listas de Control de Acceso), firewalls de próxima generación (NGFW), sistemas de detección y prevención de intrusos basados en red (NIDS/NIPS) y técnicas de segmentación mediante VLANs.",
+            challenges: "El mayor desafío fue aprender a diseñar topologías de red que incorporen capas de seguridad redundantes sin comprometer el rendimiento ni la disponibilidad de los servicios críticos de la organización, equilibrando la seguridad con la operatividad.",
+            application: "Configuré reglas de firewall en entornos simulados de Packet Tracer y GNS3, implementé listas de acceso extendidas para filtrar tráfico malicioso por protocolo, puerto y dirección IP, y diseñé zonas desmilitarizadas (DMZ) para aislar los servicios públicos de la red interna.",
+            comment: "Esta certificación solidificó mi comprensión de la seguridad perimetral y de red. Me enseñó que proteger una red no solo implica reaccionar ante los ataques, sino anticiparse a ellos mediante una arquitectura bien planificada, reforzando mi visión proactiva de la ciberseguridad."
         }
     ];
 
@@ -143,13 +124,13 @@ const Certifications = () => {
 
     return (
         <section id="certificaciones" className="min-h-screen py-16 sm:py-20 px-4 sm:px-6 relative bg-[#030712] overflow-hidden">
-            {/* Cyberpunk grid background & glowing dust */}
+            {/* Background effects */}
             <div className="absolute inset-0 scanlines pointer-events-none opacity-40" />
             <div className="absolute top-20 right-10 w-72 sm:w-[600px] h-72 sm:h-[600px] bg-violet-600/5 rounded-full blur-[130px] sm:blur-[200px]" />
             <div className="absolute bottom-20 left-10 w-72 sm:w-[600px] h-72 sm:h-[600px] bg-purple-600/5 rounded-full blur-[130px] sm:blur-[200px]" />
 
             <div className="container mx-auto relative z-10 max-w-6xl">
-                {/* Header Section */}
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -161,7 +142,6 @@ const Certifications = () => {
                         <FaTerminal className="text-violet-400 text-xs sm:text-sm" />
                         <span className="font-mono text-violet-400 text-[10px] sm:text-xs tracking-wider">ACADEMIC_CREDENTIALS</span>
                     </div>
-
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 font-mono">
                         <span className="text-gradient">Certificaciones Oficiales</span>
                     </h2>
@@ -171,17 +151,17 @@ const Certifications = () => {
                     </p>
                 </motion.div>
 
-                {/* Dashboard Layout Grid */}
+                {/* Dashboard Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    {/* Left Column - Navigation Tabs */}
+
+                    {/* Left: Tab Selector */}
                     <div className="lg:col-span-4 flex flex-col gap-2 order-2 lg:order-1">
                         <div className="bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg p-3 backdrop-blur-sm">
                             <div className="text-[10px] font-mono text-violet-500/60 mb-2 px-2 flex items-center justify-between">
                                 <span>[SYS_SELECT: CERTIFICATIONS]</span>
-                                <span className="animate-pulse">● SECURE_LINK</span>
+                                <span className="animate-pulse">● SECURE</span>
                             </div>
-                            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible gap-1.5 scrollbar-thin scrollbar-thumb-violet-500/20 pb-2 lg:pb-0">
+                            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible gap-1.5 pb-2 lg:pb-0">
                                 {certificationsData.map((cert, index) => {
                                     const isActive = activeTab === index;
                                     return (
@@ -200,9 +180,9 @@ const Certifications = () => {
                                                 </span>
                                                 <span className="truncate">{cert.title}</span>
                                             </div>
-                                            <span className={`text-[10px] hidden md:inline px-1.5 py-0.5 rounded border font-bold ${
-                                                isActive 
-                                                    ? 'bg-violet-500/20 border-violet-500/40 text-violet-300' 
+                                            <span className={`text-[10px] hidden md:inline px-1.5 py-0.5 rounded border font-bold shrink-0 ${
+                                                isActive
+                                                    ? 'bg-violet-500/20 border-violet-500/40 text-violet-300'
                                                     : 'bg-gray-500/5 border-gray-500/10 text-gray-500'
                                             }`}>
                                                 {cert.code}
@@ -214,7 +194,7 @@ const Certifications = () => {
                         </div>
                     </div>
 
-                    {/* Right Column - Detailed View */}
+                    {/* Right: Detail Panel */}
                     <div className="lg:col-span-8 order-1 lg:order-2">
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -225,7 +205,7 @@ const Certifications = () => {
                                 transition={{ duration: 0.4 }}
                                 className="bg-[#0a0f1a]/85 border border-violet-500/20 rounded-lg overflow-hidden backdrop-blur-md relative shadow-2xl shadow-violet-950/20"
                             >
-                                {/* Corner Cyber Accents */}
+                                {/* Cyber corner accents */}
                                 <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-violet-500/60" />
                                 <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-violet-500/60" />
                                 <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-violet-500/60" />
@@ -234,14 +214,16 @@ const Certifications = () => {
                                 {/* Console Header */}
                                 <div className="bg-[#0d1321]/80 px-4 sm:px-6 py-3 border-b border-violet-500/20 flex items-center justify-between text-[10px] sm:text-xs font-mono">
                                     <div className="flex items-center gap-1.5 sm:gap-2">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/60 animate-pulse" />
-                                        <span className="text-gray-400">CREDENTIAL_DECRYPTED.cfg</span>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                                        <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                                        <span className="text-gray-500 ml-2">credential_decrypted.cfg</span>
                                     </div>
-                                    <span className="text-violet-400/80">SECURITY_LEVEL: VERIFIED_AGENTS</span>
+                                    <span className="text-violet-400/80 hidden sm:inline">SECURITY_LEVEL: VERIFIED</span>
                                 </div>
 
                                 <div className="p-5 sm:p-8">
-                                    {/* Certificate Header Detail */}
+                                    {/* Certificate Header */}
                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-violet-500/10">
                                         <div className="flex-1">
                                             <span className="text-[10px] font-mono text-violet-400 bg-violet-500/10 px-2.5 py-1 rounded-full border border-violet-500/20 inline-block mb-3">
@@ -257,27 +239,17 @@ const Certifications = () => {
                                             </p>
                                         </div>
 
-                                        {/* Premium Glowing Interactive SVG Badge */}
+                                        {/* Animated Badge */}
                                         <div className="shrink-0 flex items-center justify-center">
                                             <motion.div
                                                 whileHover={{ scale: 1.05 }}
                                                 className="relative group cursor-pointer"
                                                 style={{ filter: `drop-shadow(0 0 15px ${currentCert.glowColor})` }}
                                             >
-                                                {/* Glowing Background Ring */}
-                                                <div className="absolute inset-0 rounded-full bg-gradient-to-r opacity-25 blur-md group-hover:opacity-40 transition-opacity duration-300" />
-                                                
-                                                {/* Tech Circular Shield Design */}
                                                 <div className={`w-28 h-28 sm:w-32 sm:h-32 rounded-full border-2 flex flex-col items-center justify-center relative p-2 ${currentCert.badgeColor}`}>
-                                                    
-                                                    {/* Outer spinning ring detail */}
                                                     <div className="absolute inset-1 rounded-full border border-dashed border-white/10 animate-[spin_40s_linear_infinite]" />
-                                                    
-                                                    {/* Outer corner marks */}
                                                     <div className="absolute inset-0 rounded-full border border-white/5" />
-
-                                                    {/* Icon & text */}
-                                                    <span className="text-3xl sm:text-4xl mb-1.5 filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.1)]">
+                                                    <span className="text-3xl sm:text-4xl mb-1.5">
                                                         {currentCert.icon}
                                                     </span>
                                                     <span className="text-[10px] font-mono font-bold tracking-widest text-center uppercase text-white/90">
@@ -291,10 +263,9 @@ const Certifications = () => {
                                         </div>
                                     </div>
 
-                                    {/* Structured Written Reflection (PD05 Mandatory Details) */}
+                                    {/* Structured Reflections */}
                                     <div className="py-6 space-y-5">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                            {/* Key Learnings */}
                                             <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
                                                 <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
                                                     <span>🛡️</span> APRENDIZAJES CLAVE
@@ -303,8 +274,6 @@ const Certifications = () => {
                                                     {currentCert.learnings}
                                                 </p>
                                             </div>
-
-                                            {/* Challenges */}
                                             <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
                                                 <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
                                                     <span>🎯</span> RETOS SUPERADOS
@@ -314,9 +283,7 @@ const Certifications = () => {
                                                 </p>
                                             </div>
                                         </div>
-
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                            {/* Practical Application */}
                                             <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
                                                 <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
                                                     <span>💻</span> APLICACIÓN PRÁCTICA
@@ -325,8 +292,6 @@ const Certifications = () => {
                                                     {currentCert.application}
                                                 </p>
                                             </div>
-
-                                            {/* Personal Comment */}
                                             <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-4 font-mono">
                                                 <h4 className="text-violet-400 text-xs sm:text-sm font-bold mb-2 flex items-center gap-2">
                                                     <span>💬</span> COMENTARIO PERSONAL
@@ -338,14 +303,13 @@ const Certifications = () => {
                                         </div>
                                     </div>
 
-                                    {/* Action Buttons Section */}
+                                    {/* Action Buttons */}
                                     <div className="pt-4 border-t border-violet-500/10 flex flex-wrap items-center justify-between gap-4">
                                         <div className="flex items-center gap-2 text-[10px] font-mono text-gray-500">
-                                            <span>[STATUS: ONLINE_VERIFIED]</span>
+                                            <span>[STATUS: VERIFIED]</span>
                                             <span>|</span>
-                                            <span>ID: {currentCert.code}-{currentTabNumber(activeTab)}</span>
+                                            <span>ID: {currentCert.code}-{String(activeTab + 1).padStart(3, '0')}</span>
                                         </div>
-
                                         <div className="flex items-center gap-3">
                                             <motion.a
                                                 whileHover={{ scale: 1.05 }}
@@ -358,7 +322,6 @@ const Certifications = () => {
                                                 <FaFilePdf className="text-sm" />
                                                 <span>Ver Evidencia PDF</span>
                                             </motion.a>
-
                                             <motion.a
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
@@ -381,11 +344,6 @@ const Certifications = () => {
             </div>
         </section>
     );
-};
-
-// Helper function to return index format
-const currentTabNumber = (tabIndex) => {
-    return String(tabIndex + 1).padStart(3, '0');
 };
 
 export default Certifications;
