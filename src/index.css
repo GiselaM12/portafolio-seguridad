@@ -181,6 +181,68 @@
   }
 }
 
+/* ── Certifications Typography ─────────────────────────── */
+
+/* Animated gradient for the main title word "Certificaciones" */
+.cert-title-gradient {
+  background: linear-gradient(
+    135deg,
+    #a78bfa 0%,
+    #c084fc 25%,
+    #818cf8 50%,
+    #a78bfa 75%,
+    #c4b5fd 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cert-gradient-shift 4s ease-in-out infinite;
+}
+
+/* Secondary gradient for "Oficiales" */
+.cert-title-gradient-alt {
+  background: linear-gradient(
+    135deg,
+    #818cf8 0%,
+    #a78bfa 40%,
+    #e879f9 70%,
+    #c084fc 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cert-gradient-shift 4s ease-in-out infinite reverse;
+}
+
+@keyframes cert-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Detail title with subtle text-shadow for depth */
+.cert-detail-title {
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.12);
+}
+
+/* Dossier card hover: subtle text brightness lift */
+.cert-dossier-card:hover .cert-dossier-text {
+  color: rgba(226, 232, 240, 0.95);
+}
+
+/* Mockup title inside the certificate card */
+.cert-mockup-title {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Name text in the certificate mockup — subtle glow */
+.cert-name-text {
+  text-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

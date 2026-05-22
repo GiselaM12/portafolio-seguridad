@@ -12,12 +12,15 @@ import {
     FaTimes,
     FaExpand,
     FaLock,
-    FaEye
+    FaEye,
+    FaAward,
+    FaQrcode
 } from 'react-icons/fa';
 
 const Certifications = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeDossier, setActiveDossier] = useState(0);
 
     // Disable body scroll when modal is open
     useEffect(() => {
@@ -38,7 +41,7 @@ const Certifications = () => {
             code: "CS-INTRO",
             date: "2025",
             themeColor: "from-emerald-500 to-teal-600",
-            glowColor: "rgba(16, 185, 129, 0.3)",
+            glowColor: "rgba(16, 185, 129, 0.2)",
             badgeColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
             icon: <FaShieldAlt />,
             badgeText: "SEC-INTRO",
@@ -55,7 +58,7 @@ const Certifications = () => {
             code: "NET-CONFIG",
             date: "2025",
             themeColor: "from-purple-500 to-indigo-600",
-            glowColor: "rgba(139, 92, 246, 0.3)",
+            glowColor: "rgba(139, 92, 246, 0.2)",
             badgeColor: "text-purple-400 border-purple-500/30 bg-purple-500/10",
             icon: <FaTerminal />,
             badgeText: "NET-DEV",
@@ -72,7 +75,7 @@ const Certifications = () => {
             code: "NET-DEFENSE",
             date: "2025",
             themeColor: "from-cyan-500 to-blue-600",
-            glowColor: "rgba(6, 182, 212, 0.3)",
+            glowColor: "rgba(6, 182, 212, 0.2)",
             badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
             icon: <FaNetworkWired />,
             badgeText: "NET-DEF",
@@ -89,7 +92,7 @@ const Certifications = () => {
             code: "END-SEC",
             date: "2025",
             themeColor: "from-rose-500 to-red-600",
-            glowColor: "rgba(244, 63, 94, 0.3)",
+            glowColor: "rgba(244, 63, 94, 0.2)",
             badgeColor: "text-rose-400 border-rose-500/30 bg-rose-500/10",
             icon: <FaLaptopCode />,
             badgeText: "END-SEC",
@@ -106,7 +109,7 @@ const Certifications = () => {
             code: "THREAT-MGMT",
             date: "2025",
             themeColor: "from-amber-500 to-orange-600",
-            glowColor: "rgba(245, 158, 11, 0.3)",
+            glowColor: "rgba(245, 158, 11, 0.2)",
             badgeColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
             icon: <FaUserShield />,
             badgeText: "THR-MGMT",
@@ -123,7 +126,7 @@ const Certifications = () => {
             code: "JR-ANALYST-PATH",
             date: "2025",
             themeColor: "from-violet-500 to-fuchsia-600",
-            glowColor: "rgba(168, 85, 247, 0.3)",
+            glowColor: "rgba(168, 85, 247, 0.2)",
             badgeColor: "text-violet-400 border-violet-500/30 bg-violet-500/10",
             icon: <FaCertificate />,
             badgeText: "JR-ANALYST",
@@ -138,293 +141,420 @@ const Certifications = () => {
 
     const currentCert = certificationsData[activeTab];
 
-    return (
-        <section id="certificaciones" className="min-h-screen py-16 sm:py-20 px-4 sm:px-6 relative bg-[#030712] overflow-hidden">
-            {/* Cyberpunk grid background & glowing dust */}
-            <div className="absolute inset-0 scanlines pointer-events-none opacity-40" />
-            <div className="absolute top-20 right-10 w-72 sm:w-[600px] h-72 sm:h-[600px] bg-violet-600/5 rounded-full blur-[130px] sm:blur-[200px]" />
-            <div className="absolute bottom-20 left-10 w-72 sm:w-[600px] h-72 sm:h-[600px] bg-purple-600/5 rounded-full blur-[130px] sm:blur-[200px]" />
+    const dossierSections = [
+        { emoji: '🛡️', label: '01 // Aprendizajes Clave', key: 'learnings' },
+        { emoji: '🎯', label: '02 // Retos Superados', key: 'challenges' },
+        { emoji: '💻', label: '03 // Aplicación Práctica', key: 'application' },
+        { emoji: '💬', label: '04 // Comentario Personal', key: 'comment' },
+    ];
 
-            <div className="container mx-auto relative z-10 max-w-6xl">
-                {/* Header Section */}
+    return (
+        <section id="certificaciones" className="py-16 sm:py-24 px-4 sm:px-6 relative bg-[#030712] overflow-hidden">
+            {/* Background design accents */}
+            <div className="absolute inset-0 scanlines pointer-events-none opacity-30" />
+            <div className="absolute top-20 right-10 w-80 sm:w-[600px] h-80 sm:h-[600px] bg-violet-600/5 rounded-full blur-[130px] sm:blur-[200px]" />
+            <div className="absolute bottom-20 left-10 w-80 sm:w-[600px] h-80 sm:h-[600px] bg-purple-600/5 rounded-full blur-[130px] sm:blur-[200px]" />
+
+            <div className="container mx-auto relative z-10 max-w-7xl">
+
+                {/* ── Header Section ─────────────────────────────────────── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mb-10 sm:mb-16"
+                    className="text-center mb-12 sm:mb-16"
                 >
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-violet-500/10 border border-violet-500/30 rounded-full mb-4 sm:mb-6">
-                        <FaTerminal className="text-violet-400 text-xs sm:text-sm" />
-                        <span className="font-mono text-violet-400 text-[10px] sm:text-xs tracking-wider">ACADEMIC_CREDENTIALS</span>
+                    <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/20 rounded-full mb-5 shadow-[0_0_20px_rgba(139,92,246,0.08)]">
+                        <FaTerminal className="text-violet-400 text-[10px]" />
+                        <span className="font-mono text-violet-400 text-[10px] tracking-[0.25em] uppercase font-semibold">Academic_Credentials</span>
                     </div>
 
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 font-mono">
-                        <span className="text-gradient">Certificaciones Oficiales</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-5 tracking-tight text-white leading-[1.1]">
+                        <span className="cert-title-gradient">Certificaciones</span>
+                        <br className="hidden sm:block" />
+                        <span className="cert-title-gradient-alt"> Oficiales</span>
                     </h2>
-                    <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-violet-600 to-purple-600 mx-auto rounded-full mb-4" />
-                    <p className="text-gray-500 text-xs sm:text-sm max-w-2xl mx-auto font-mono px-2">
-                        // Evidencia formal y reflexión académica de competencias adquiridas (Cisco NetAcad / Skills for All)
+                    <div className="flex items-center justify-center gap-2 mb-5">
+                        <div className="w-8 h-px bg-gradient-to-r from-transparent to-violet-600/60" />
+                        <div className="w-2 h-2 rounded-full bg-violet-500/40 animate-pulse" />
+                        <div className="w-16 h-0.5 bg-gradient-to-r from-violet-600 to-purple-600 rounded-full" />
+                        <div className="w-2 h-2 rounded-full bg-purple-500/40 animate-pulse" />
+                        <div className="w-8 h-px bg-gradient-to-l from-transparent to-purple-600/60" />
+                    </div>
+                    <p className="text-gray-500 text-xs sm:text-sm max-w-2xl mx-auto font-mono leading-relaxed tracking-wide">
+                        <span className="text-violet-500/70">//</span> Evidencia curricular y reflexiones analíticas validadas por <span className="text-violet-400/80 font-semibold">Cisco Networking Academy</span>
                     </p>
                 </motion.div>
 
-                {/* Dashboard Layout Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    {/* Left Column - Navigation Tabs */}
-                    <div className="lg:col-span-4 flex flex-col gap-2 order-2 lg:order-1">
-                        <div className="bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg p-3 backdrop-blur-sm">
-                            <div className="text-[10px] font-mono text-violet-500/60 mb-2 px-2 flex items-center justify-between">
-                                <span>[SYS_SELECT: CERTIFICATIONS]</span>
-                                <span className="animate-pulse">● SECURE_LINK</span>
+                {/* ── Main Dashboard Layout ───────────────────────────────── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+
+                    {/* ── Left Column — Navigation Menu ───────────────────── */}
+                    <div className="lg:col-span-4 order-2 lg:order-1 lg:sticky lg:top-24">
+                        <div className="bg-[#080c14]/90 border border-violet-500/10 rounded-xl p-5 backdrop-blur-md">
+
+                            {/* Panel title bar */}
+                            <div className="text-[8px] font-mono text-violet-500/50 mb-5 tracking-[0.2em] flex items-center justify-between border-b border-violet-500/10 pb-3 font-semibold">
+                                <span className="text-violet-400/60">[CREDENTIALS_LIST]</span>
+                                <span className="flex items-center gap-1.5 text-emerald-400/70">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_4px_rgba(52,211,153,0.5)]" />
+                                    VERIFIED
+                                </span>
                             </div>
-                            <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-visible gap-1.5 scrollbar-thin scrollbar-thumb-violet-500/20 pb-2 lg:pb-0">
+
+                            {/* Desktop Menu — Timeline Style */}
+                            <nav className="hidden lg:flex flex-col gap-1.5 relative pl-7">
+                                {/* Timeline vertical line */}
+                                <div className="absolute left-[9px] top-2 bottom-2 w-px bg-gradient-to-b from-violet-500/40 via-violet-500/15 to-transparent pointer-events-none" />
+
                                 {certificationsData.map((cert, index) => {
                                     const isActive = activeTab === index;
                                     return (
                                         <button
                                             key={index}
                                             onClick={() => setActiveTab(index)}
-                                            className={`w-full text-left font-mono text-xs sm:text-sm p-3 rounded-lg border transition-all duration-300 flex items-center justify-between gap-3 shrink-0 lg:shrink whitespace-nowrap lg:whitespace-normal ${
+                                            className={`relative w-full text-left transition-all duration-300 flex items-start gap-3 px-4 py-3.5 rounded-lg border cursor-pointer group ${
                                                 isActive
-                                                    ? 'bg-gradient-to-r from-violet-600/20 to-purple-600/10 border-violet-500 text-white shadow-[0_0_15px_rgba(139,92,246,0.15)]'
-                                                    : 'bg-transparent border-violet-500/10 text-gray-400 hover:text-violet-400 hover:bg-violet-500/5 hover:border-violet-500/30'
+                                                    ? 'border-violet-500/25 text-white bg-violet-500/10'
+                                                    : 'border-transparent text-slate-500 hover:text-slate-200 hover:bg-white/[0.03]'
                                             }`}
                                         >
-                                            <div className="flex items-center gap-2.5 truncate lg:truncate-none">
-                                                <span className={`text-xs ${isActive ? 'text-violet-400' : 'text-gray-600'}`}>
-                                                    0{index + 1}.
-                                                </span>
-                                                <span className="truncate">{cert.title}</span>
+                                            {/* Active accent bar */}
+                                            <div className={`absolute left-0 top-3 bottom-3 w-0.5 rounded-r-full transition-all duration-300 ${
+                                                isActive ? 'bg-violet-500' : 'bg-transparent group-hover:bg-violet-500/30'
+                                            }`} />
+
+                                            {/* Timeline dot */}
+                                            <div className="absolute left-[-24px] top-1/2 -translate-y-1/2 flex items-center justify-center">
+                                                {isActive ? (
+                                                    <div className="relative flex items-center justify-center">
+                                                        <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-violet-400 opacity-50" />
+                                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-violet-400" />
+                                                    </div>
+                                                ) : (
+                                                    <div className="h-1.5 w-1.5 rounded-full bg-violet-500/20 group-hover:bg-violet-500/50 transition-colors" />
+                                                )}
                                             </div>
-                                            <span className={`text-[10px] hidden md:inline px-1.5 py-0.5 rounded border font-bold ${
-                                                isActive 
-                                                    ? 'bg-violet-500/20 border-violet-500/40 text-violet-300' 
-                                                    : 'bg-gray-500/5 border-gray-500/10 text-gray-500'
-                                            }`}>
-                                                {cert.code}
-                                            </span>
+
+                                            {/* Content */}
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center justify-between gap-2 mb-1.5">
+                                                    <span className={`text-[9px] font-mono font-bold tracking-[0.2em] ${isActive ? 'text-violet-400' : 'text-violet-500/40 group-hover:text-violet-500/60'}`}>
+                                                        CASE 0{index + 1}
+                                                    </span>
+                                                    <span className={`text-[7px] font-mono uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border transition-colors duration-300 ${isActive ? 'text-violet-300 bg-violet-500/10 border-violet-500/25' : 'text-slate-600 bg-white/[0.02] border-white/5 group-hover:text-slate-500'}`}>
+                                                        {cert.badgeText}
+                                                    </span>
+                                                </div>
+                                                <p className={`text-[13px] font-semibold leading-snug tracking-[-0.01em] transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'}`}>
+                                                    {cert.title}
+                                                </p>
+                                            </div>
+                                        </button>
+                                    );
+                                })}
+                            </nav>
+
+                            {/* Mobile/Tablet Menu — Horizontal Slider */}
+                            <div className="flex lg:hidden overflow-x-auto gap-2 pb-1 scrollbar-none -mx-1 px-1">
+                                {certificationsData.map((cert, index) => {
+                                    const isActive = activeTab === index;
+                                    return (
+                                        <button
+                                            key={index}
+                                            onClick={() => setActiveTab(index)}
+                                            className={`py-2 px-3.5 rounded-lg text-xs font-mono whitespace-nowrap transition-all duration-300 border flex items-center gap-2 cursor-pointer shrink-0 ${
+                                                isActive
+                                                    ? 'bg-violet-500/10 border-violet-500/40 text-white font-semibold'
+                                                    : 'bg-black/20 border-violet-500/10 text-slate-400 hover:text-white hover:border-violet-500/25'
+                                            }`}
+                                        >
+                                            <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-violet-400 animate-pulse' : 'bg-violet-500/30'}`} />
+                                            <span>0{index + 1}. {cert.badgeText}</span>
                                         </button>
                                     );
                                 })}
                             </div>
+
+                            {/* Footer */}
+                            <div className="hidden lg:flex items-center gap-2 text-[8px] font-mono text-gray-600 mt-5 border-t border-violet-500/10 pt-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-violet-500/40 animate-pulse" />
+                                <span>SECURE ACCESS SHELL V1.0</span>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Right Column - Detailed View */}
+                    {/* ── Right Column — Dossier Detail Pane ──────────────── */}
                     <div className="lg:col-span-8 order-1 lg:order-2">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeTab}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.4 }}
-                                className="bg-[#0a0f1a]/85 border border-violet-500/20 rounded-lg overflow-hidden backdrop-blur-md relative shadow-2xl shadow-violet-950/20"
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -8 }}
+                                transition={{ duration: 0.28 }}
+                                className="bg-[#080c14]/90 border border-violet-500/15 rounded-xl overflow-hidden backdrop-blur-md w-full shadow-2xl shadow-violet-950/10"
                             >
-                                {/* Corner Cyber Accents */}
-                                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-violet-500/60" />
-                                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-violet-500/60" />
-                                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-violet-500/60" />
-                                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-violet-500/60" />
-
-                                {/* Console Header */}
-                                <div className="bg-[#0d1321]/80 px-4 sm:px-6 py-3 border-b border-violet-500/20 flex items-center justify-between text-[10px] sm:text-xs font-mono">
-                                    <div className="flex items-center gap-1.5 sm:gap-2">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/60 animate-pulse" />
-                                        <span className="text-gray-400">CREDENTIAL_DECRYPTED.cfg</span>
+                                {/* ── Card Top Bar ──────────────────────────── */}
+                                <div className="bg-[#0c101c] px-5 sm:px-7 py-3.5 border-b border-violet-500/10 flex items-center justify-between text-[9px] sm:text-[10px] font-mono">
+                                    <div className="flex items-center gap-2.5">
+                                        <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse shadow-[0_0_6px_rgba(139,92,246,0.5)]" />
+                                        <span className="text-gray-400 tracking-[0.15em] font-medium">DOSSIER_SYS://<span className="text-violet-400/70">{currentCert.code}</span></span>
                                     </div>
-                                    <span className="text-violet-400/80">SECURITY_LEVEL: VERIFIED_AGENTS</span>
+                                    <div className="flex items-center gap-3 text-gray-600 tracking-[0.12em]">
+                                        <span className="font-medium">CISCO_NETACAD</span>
+                                        <span className="text-emerald-400/80 flex items-center gap-1.5 font-semibold">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-[0_0_4px_rgba(52,211,153,0.5)]" />
+                                            VERIFIED
+                                        </span>
+                                    </div>
                                 </div>
 
-                                <div className="p-5 sm:p-8">
-                                    {/* Certificate Header Detail */}
-                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-violet-500/10">
+                                {/* ── Card Body ─────────────────────────────── */}
+                                <div className="p-5 sm:p-7">
+
+                                    {/* Section 1 — Certificate Header */}
+                                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-violet-500/10 mb-6">
                                         <div className="flex-1">
-                                            <span className="text-[10px] font-mono text-violet-400 bg-violet-500/10 px-2.5 py-1 rounded-full border border-violet-500/20 inline-block mb-3">
-                                                ★ CERTIFICATE OFFICIAL
-                                            </span>
-                                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 font-mono tracking-tight leading-tight">
-                                                {currentCert.title}
+                                            <div className="flex flex-wrap items-center gap-2 mb-3">
+                                                <span className="text-[7px] font-mono text-violet-400 bg-violet-500/10 px-2.5 py-1 rounded-full border border-violet-500/20 font-bold tracking-[0.2em] uppercase">
+                                                    VERIFICATION_LEVEL_01
+                                                </span>
+                                                <span className="text-[7px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 font-bold tracking-[0.2em] uppercase flex items-center gap-1.5">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                                    STATUS: VERIFIED
+                                                </span>
+                                                <span className="text-[7px] font-mono text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20 font-bold tracking-[0.2em] uppercase">
+                                                    DATE: {currentCert.date}
+                                                </span>
+                                            </div>
+                                            <h3 className="text-xl sm:text-2xl md:text-[1.7rem] font-extrabold text-white mb-2.5 tracking-[-0.02em] leading-tight flex items-start gap-3">
+                                                <span className="text-violet-400 text-lg sm:text-xl shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]">{currentCert.icon}</span>
+                                                <span className="cert-detail-title">{currentCert.title}</span>
                                             </h3>
-                                            <p className="text-gray-400 text-xs sm:text-sm font-mono flex items-center gap-2">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-                                                <span>Emisor:</span>
-                                                <span className="text-violet-300 font-semibold">{currentCert.issuer}</span>
+                                            <p className="text-slate-500 text-[11px] font-mono tracking-wide">
+                                                <span className="text-slate-600">Organismo Certificador:</span> <span className="text-violet-400 font-semibold">{currentCert.issuer}</span>
                                             </p>
                                         </div>
-
-                                        {/* Premium Glowing Interactive SVG Badge */}
-                                        <div className="shrink-0 flex items-center justify-center">
-                                            <motion.div
-                                                whileHover={{ scale: 1.05 }}
-                                                className="relative group cursor-pointer"
-                                                style={{ filter: `drop-shadow(0 0 15px ${currentCert.glowColor})` }}
-                                            >
-                                                {/* Glowing Background Ring */}
-                                                <div className="absolute inset-0 rounded-full bg-gradient-to-r opacity-25 blur-md group-hover:opacity-40 transition-opacity duration-300" />
-                                                
-                                                {/* Tech Circular Shield Design */}
-                                                <div className={`w-28 h-28 sm:w-32 sm:h-32 rounded-full border-2 flex flex-col items-center justify-center relative p-2 ${currentCert.badgeColor}`}>
-                                                    
-                                                    {/* Outer spinning ring detail */}
-                                                    <div className="absolute inset-1 rounded-full border border-dashed border-white/10 animate-[spin_40s_linear_infinite]" />
-                                                    
-                                                    {/* Outer corner marks */}
-                                                    <div className="absolute inset-0 rounded-full border border-white/5" />
-
-                                                    {/* Icon & text */}
-                                                    <span className="text-3xl sm:text-4xl mb-1.5 filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.1)]">
-                                                        {currentCert.icon}
-                                                    </span>
-                                                    <span className="text-[10px] font-mono font-bold tracking-widest text-center uppercase text-white/90">
-                                                        {currentCert.badgeText}
-                                                    </span>
-                                                    <span className="text-[8px] font-mono text-white/40 mt-0.5">
-                                                        CISCO SEC
-                                                    </span>
-                                                </div>
-                                            </motion.div>
-                                        </div>
                                     </div>
 
-                                    {/* Main Content Layout - Split Review and Holographic Document Card */}
-                                    <div className="py-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-                                        
-                                        {/* Reflections (Learnings, etc.) */}
-                                        <div className="md:col-span-7 space-y-4">
-                                            {/* Key Learnings */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
-                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
-                                                    <span>🛡️</span> APRENDIZAJES CLAVE
-                                                </h4>
-                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
-                                                    {currentCert.learnings}
-                                                </p>
-                                            </div>
+                                    {/* Section 2 — Dossier Tabs + Content */}
+                                    <div className="mb-6">
 
-                                            {/* Challenges */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
-                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
-                                                    <span>🎯</span> RETOS SUPERADOS
-                                                </h4>
-                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
-                                                    {currentCert.challenges}
-                                                </p>
-                                            </div>
-
-                                            {/* Practical Application */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
-                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
-                                                    <span>💻</span> APLICACIÓN PRÁCTICA
-                                                </h4>
-                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
-                                                    {currentCert.application}
-                                                </p>
-                                            </div>
-
-                                            {/* Personal Comment */}
-                                            <div className="bg-violet-950/10 border border-violet-500/5 rounded-lg p-3.5 font-mono">
-                                                <h4 className="text-violet-400 text-xs font-bold mb-1.5 flex items-center gap-2">
-                                                    <span>💬</span> COMENTARIO PERSONAL
-                                                </h4>
-                                                <p className="text-gray-400 text-[11px] leading-relaxed text-justify">
-                                                    {currentCert.comment}
-                                                </p>
-                                            </div>
+                                        {/* Dossier Tab Bar */}
+                                        <div className="flex items-center gap-1 mb-0 border-b border-violet-500/10 overflow-x-auto scrollbar-none">
+                                            {dossierSections.map(({ emoji, label }, index) => {
+                                                const isActive = activeDossier === index;
+                                                return (
+                                                    <button
+                                                        key={index}
+                                                        onClick={() => setActiveDossier(index)}
+                                                        className={`relative px-4 py-3 text-[9px] sm:text-[10px] font-mono font-semibold tracking-[0.1em] uppercase whitespace-nowrap transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 ${
+                                                            isActive
+                                                                ? 'text-violet-300'
+                                                                : 'text-slate-600 hover:text-slate-400'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm">{emoji}</span>
+                                                        <span className="hidden sm:inline">{label}</span>
+                                                        <span className="sm:hidden">0{index + 1}</span>
+                                                        {/* Active underline */}
+                                                        {isActive && (
+                                                            <motion.div
+                                                                layoutId="dossierTab"
+                                                                className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-violet-500 to-purple-500 rounded-full"
+                                                                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                                            />
+                                                        )}
+                                                    </button>
+                                                );
+                                            })}
                                         </div>
 
-                                        {/* Premium Holographic Certificate Preview Card */}
-                                        <div className="md:col-span-5 flex">
-                                            <motion.div
-                                                onClick={() => setIsModalOpen(true)}
-                                                whileHover={{ y: -5, borderColor: 'rgba(139, 92, 246, 0.5)' }}
-                                                className="w-full relative bg-[#070b14]/90 border border-violet-500/25 rounded-lg p-5 flex flex-col items-center justify-between text-center overflow-hidden min-h-[300px] group cursor-pointer hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-all duration-300 backdrop-blur-sm select-none"
-                                            >
-                                                {/* Tech Background Grid Lines */}
-                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.05)_1px,transparent_1px)] bg-[size:20px_20px] opacity-40 pointer-events-none" />
-                                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/5 to-violet-500/10 opacity-30 pointer-events-none" />
+                                        {/* Dossier Content + Certificate Mockup Side by Side */}
+                                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start pt-5">
 
-                                                {/* Corner Marks inside preview */}
-                                                <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-violet-500/40" />
-                                                <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-violet-500/40" />
-                                                <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-violet-500/40" />
-                                                <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-violet-500/40" />
+                                            {/* Active Dossier Content — Full Width */}
+                                            <div className="lg:col-span-8">
+                                                <AnimatePresence mode="wait">
+                                                    <motion.div
+                                                        key={`${activeTab}-${activeDossier}`}
+                                                        initial={{ opacity: 0, y: 8 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        exit={{ opacity: 0, y: -5 }}
+                                                        transition={{ duration: 0.2 }}
+                                                        className="bg-[#05070c]/50 border border-white/[0.04] rounded-xl p-6 relative overflow-hidden"
+                                                    >
+                                                        {/* Decorative left accent */}
+                                                        <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-violet-500/50 via-purple-500/30 to-transparent rounded-l-xl" />
 
-                                                {/* Status indicator on top of preview */}
-                                                <div className="w-full flex items-center justify-between text-[8px] font-mono text-violet-500/50">
-                                                    <span>[PREVIEW_SECURE]</span>
-                                                    <span className="flex items-center gap-1">
-                                                        <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse" />
-                                                        LOADED
-                                                    </span>
-                                                </div>
+                                                        {/* Section label */}
+                                                        <div className="flex items-center gap-2.5 mb-4">
+                                                            <span className="text-lg">{dossierSections[activeDossier].emoji}</span>
+                                                            <h4 className="text-violet-400/90 font-mono text-[9px] font-bold tracking-[0.2em] uppercase">
+                                                                {dossierSections[activeDossier].label}
+                                                            </h4>
+                                                            <div className="flex-1 h-px bg-gradient-to-r from-violet-500/15 to-transparent" />
+                                                        </div>
 
-                                                {/* Big lock / Certificate design in center */}
-                                                <div className="my-auto flex flex-col items-center gap-3 relative z-10">
-                                                    <div className="w-16 h-16 rounded-full bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 shadow-[0_0_20px_rgba(139,92,246,0.1)] group-hover:scale-110 transition-transform duration-300">
-                                                        <FaLock className="text-xl text-violet-400/90 group-hover:hidden" />
-                                                        <FaEye className="text-2xl text-violet-300 hidden group-hover:block animate-pulse" />
+                                                        {/* Text content — nice readable typography */}
+                                                        <p className="text-slate-300/90 text-[14px] sm:text-[15px] leading-[1.85] tracking-[0.005em] pl-1">
+                                                            {currentCert[dossierSections[activeDossier].key]}
+                                                        </p>
+
+                                                        {/* Section counter */}
+                                                        <div className="flex items-center justify-between mt-5 pt-3 border-t border-white/[0.04]">
+                                                            <span className="text-[8px] font-mono text-slate-600 tracking-[0.15em]">
+                                                                SECTION {String(activeDossier + 1).padStart(2, '0')} / {String(dossierSections.length).padStart(2, '0')}
+                                                            </span>
+                                                            <div className="flex items-center gap-1.5">
+                                                                {dossierSections.map((_, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className={`h-1 rounded-full transition-all duration-300 ${
+                                                                            i === activeDossier
+                                                                                ? 'w-5 bg-violet-500/60'
+                                                                                : 'w-1 bg-slate-700/50'
+                                                                        }`}
+                                                                    />
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    </motion.div>
+                                                </AnimatePresence>
+                                            </div>
+
+                                            {/* Certificate Mockup Card */}
+                                            <div className="lg:col-span-4 flex">
+                                                <motion.div
+                                                    onClick={() => setIsModalOpen(true)}
+                                                    whileHover={{ y: -3, borderColor: 'rgba(139, 92, 246, 0.4)' }}
+                                                    className="w-full relative bg-gradient-to-br from-[#0c111d] to-[#04060c] border border-violet-500/20 rounded-xl p-5 flex flex-col justify-between overflow-hidden group cursor-pointer hover:shadow-[0_0_30px_rgba(139,92,246,0.12)] transition-all duration-300 backdrop-blur-sm select-none min-h-[280px]"
+                                                >
+                                                    {/* Grid overlay */}
+                                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:14px_14px] opacity-50 pointer-events-none" />
+
+                                                    {/* Scan laser */}
+                                                    <div className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-violet-500/25 to-transparent top-0 animate-scan-fast pointer-events-none" />
+
+                                                    {/* Corner accents */}
+                                                    <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-[1.5px] border-l-[1.5px] border-violet-500/40" />
+                                                    <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-[1.5px] border-r-[1.5px] border-violet-500/40" />
+                                                    <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-[1.5px] border-l-[1.5px] border-violet-500/40" />
+                                                    <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-[1.5px] border-r-[1.5px] border-violet-500/40" />
+
+                                                    {/* Mockup Header */}
+                                                    <div className="relative z-10 w-full flex items-center justify-between text-[8px] font-mono text-violet-500/40 pb-2 border-b border-violet-500/10">
+                                                        <span>[CREDENTIAL_SECURE_ID]</span>
+                                                        <span className="flex items-center gap-1 text-emerald-400/80">
+                                                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                                                            VERIFIED
+                                                        </span>
                                                     </div>
-                                                    <div>
-                                                        <h5 className="font-mono text-xs text-white font-semibold uppercase tracking-wider px-1">
+
+                                                    {/* Certificate Face */}
+                                                    <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center py-4 px-2">
+                                                        {/* Digital Seal */}
+                                                        <div className="relative mb-4">
+                                                            <div className="absolute inset-[-6px] rounded-full border border-dashed border-violet-500/35 animate-[spin_40s_linear_infinite]" />
+                                                            <div className="w-12 h-12 rounded-full bg-violet-950/50 border border-violet-500/30 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+                                                                <FaAward className="text-xl text-violet-400" />
+                                                            </div>
+                                                        </div>
+
+                                                        <span className="text-[6px] font-mono text-violet-400/50 uppercase tracking-[0.35em] block mb-1.5">
+                                                            CISCO NETWORKING ACADEMY
+                                                        </span>
+                                                        <span className="text-[8px] font-mono text-slate-300/80 font-bold uppercase tracking-[0.2em] block mb-3">
+                                                            CERTIFICATE OF COMPLETION
+                                                        </span>
+
+                                                        <h5 className="text-[10px] font-extrabold text-white uppercase tracking-[0.08em] px-3 leading-snug border-y border-violet-500/15 py-2.5 w-full max-w-[180px] line-clamp-2 my-1 cert-mockup-title">
                                                             {currentCert.title}
                                                         </h5>
-                                                        <p className="text-[9px] font-mono text-gray-500 mt-1">
-                                                            HAGA CLIC PARA AMPLIAR CERTIFICADO
+
+                                                        <p className="text-[7px] font-mono text-slate-500/80 uppercase tracking-[0.25em] mt-3 mb-1">
+                                                            Otorgado con distinción a:
+                                                        </p>
+                                                        <p className="text-[12px] font-bold text-white tracking-[0.1em] cert-name-text">
+                                                            Gisela M.
                                                         </p>
                                                     </div>
-                                                </div>
 
-                                                {/* Holographic interactive button */}
-                                                <div className="w-full py-2 border border-violet-500/20 bg-violet-500/5 rounded font-mono text-[10px] text-violet-400 font-bold group-hover:bg-violet-500/20 group-hover:text-white group-hover:border-violet-500/50 transition-colors duration-300 flex items-center justify-center gap-1.5">
-                                                    <FaExpand className="text-[9px]" />
-                                                    <span>AMPLIAR EN PANTALLA COMPLETA</span>
-                                                </div>
-                                            </motion.div>
+                                                    {/* Mockup Footer */}
+                                                    <div className="relative z-10 pt-2.5 border-t border-violet-500/10 flex items-end justify-between">
+                                                        <div className="flex flex-col gap-0.5 font-mono text-[6px] text-slate-600 tracking-[0.15em]">
+                                                            <span>DATE: <span className="text-slate-500">2025</span></span>
+                                                            <span>CODE: <span className="text-violet-400/50">{currentCert.code}</span></span>
+                                                        </div>
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="flex flex-col items-end gap-0.5 font-mono text-[5px] text-slate-700 tracking-[0.2em]">
+                                                                <span className="h-px w-8 bg-slate-700/60 rounded" />
+                                                                <span>SIGNATURE</span>
+                                                            </div>
+                                                            <div className="w-6 h-6 border border-violet-500/20 rounded bg-black/40 flex items-center justify-center text-violet-500/50 p-0.5">
+                                                                <FaQrcode className="text-xs" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Hover Overlay */}
+                                                    <div className="absolute inset-0 bg-[#020407]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-3 backdrop-blur-sm z-20 rounded-xl">
+                                                        <div className="w-12 h-12 rounded-full bg-violet-500/15 border border-violet-500/40 flex items-center justify-center">
+                                                            <FaEye className="text-xl text-violet-300" />
+                                                        </div>
+                                                        <p className="text-[11px] font-mono text-violet-300 text-center px-4 leading-relaxed tracking-wide">
+                                                            Click para ver<br />
+                                                            <span className="text-violet-500/80 text-[10px] tracking-[0.1em]">certificado completo</span>
+                                                        </p>
+                                                    </div>
+                                                </motion.div>
+                                            </div>
+
                                         </div>
                                     </div>
 
-                                    {/* Action Buttons Section */}
-                                    <div className="pt-4 border-t border-violet-500/10 flex flex-wrap items-center justify-between gap-4">
-                                        <div className="flex items-center gap-2 text-[10px] font-mono text-gray-500">
-                                            <span>[STATUS: ONLINE_VERIFIED]</span>
-                                            <span>|</span>
-                                            <span>ID: {currentCert.code}-{currentTabNumber(activeTab)}</span>
+                                    {/* Section 3 — Action Buttons Footer */}
+                                    <div className="pt-5 border-t border-violet-500/10 flex flex-wrap items-center justify-between gap-4">
+                                        <div className="flex items-center gap-2.5 text-[8px] font-mono text-gray-600 tracking-[0.12em]">
+                                            <span className="text-gray-500">[ENCRYPTION_HASH: <span className="text-emerald-500/70">OK</span>]</span>
+                                            <span className="text-violet-500/30">│</span>
+                                            <span className="text-violet-400/50 font-semibold">00{activeTab + 1}-VRY</span>
                                         </div>
 
-                                        <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-3 flex-wrap">
                                             <motion.button
-                                                whileHover={{ scale: 1.03 }}
+                                                whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.97 }}
                                                 onClick={() => setIsModalOpen(true)}
-                                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded font-mono text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] border border-violet-500/40 transition-all duration-300"
+                                                className="px-4 py-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg font-mono text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_18px_rgba(139,92,246,0.35)] border border-violet-500/30 transition-all duration-300 cursor-pointer"
                                             >
                                                 <FaExpand className="text-xs" />
                                                 <span>Ver en Grande</span>
                                             </motion.button>
 
                                             <motion.a
-                                                whileHover={{ scale: 1.03 }}
+                                                whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.97 }}
                                                 href={currentCert.pdfPath}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="px-4 py-2 bg-transparent hover:bg-violet-500/10 text-violet-400 border border-violet-500/20 hover:border-violet-500/50 rounded font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
+                                                className="px-4 py-2 bg-transparent hover:bg-violet-500/5 text-violet-400 border border-violet-500/20 hover:border-violet-500/40 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
                                             >
                                                 <FaFilePdf className="text-sm" />
                                                 <span>Descargar PDF</span>
                                             </motion.a>
 
                                             <motion.a
-                                                whileHover={{ scale: 1.03 }}
+                                                whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.97 }}
                                                 href={currentCert.verifyUrl}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="px-4 py-2 bg-transparent hover:bg-violet-500/10 text-gray-500 hover:text-violet-400 border border-transparent rounded font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
+                                                className="px-4 py-2 bg-transparent text-gray-500 hover:text-violet-400 rounded-lg font-mono text-xs flex items-center gap-2 transition-all duration-300"
                                             >
-                                                <FaExternalLinkAlt className="text-[10px]" />
+                                                <FaExternalLinkAlt className="text-[9px]" />
                                                 <span>Credencial</span>
                                             </motion.a>
                                         </div>
@@ -437,81 +567,79 @@ const Certifications = () => {
                 </div>
             </div>
 
-            {/* Premium Full-Screen PDF Decryptor Lightbox Modal */}
+            {/* ── Full-Screen PDF Lightbox Modal ─────────────────────────── */}
             <AnimatePresence>
                 {isModalOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#030712]/95 backdrop-blur-md"
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#020408]/95 backdrop-blur-md"
                     >
-                        {/* Backdrop close area */}
+                        {/* Backdrop close */}
                         <div className="absolute inset-0" onClick={() => setIsModalOpen(false)} />
 
-                        {/* Modal Dialog Container */}
+                        {/* Modal Container */}
                         <motion.div
-                            initial={{ scale: 0.95, y: 15, opacity: 0 }}
+                            initial={{ scale: 0.96, y: 10, opacity: 0 }}
                             animate={{ scale: 1, y: 0, opacity: 1 }}
-                            exit={{ scale: 0.95, y: 15, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="bg-[#080d19] border border-violet-500/35 rounded-lg w-full max-w-5xl h-[85vh] sm:h-[90vh] overflow-hidden flex flex-col shadow-2xl shadow-violet-950/40 relative z-10"
+                            exit={{ scale: 0.96, y: 10, opacity: 0 }}
+                            transition={{ duration: 0.22, ease: "easeOut" }}
+                            className="bg-[#060a12] border border-violet-500/30 rounded-xl w-full max-w-5xl h-[85vh] sm:h-[90vh] overflow-hidden flex flex-col shadow-2xl shadow-violet-950/30 relative z-10"
                         >
-                            {/* Cyber decoration lines */}
-                            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-violet-500/60" />
-                            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-violet-500/60" />
-                            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-violet-500/60" />
-                            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-violet-500/60" />
+                            {/* Corner accents */}
+                            <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-violet-500/50" />
+                            <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-violet-500/50" />
+                            <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-violet-500/50" />
+                            <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-violet-500/50" />
 
                             {/* Modal Header */}
-                            <div className="bg-[#0b1224] px-4 sm:px-6 py-3 border-b border-violet-500/20 flex items-center justify-between">
+                            <div className="bg-[#0a0e1a] px-4 sm:px-6 py-3.5 border-b border-violet-500/15 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-violet-400 animate-ping" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-ping" />
                                     <div>
                                         <h4 className="font-mono text-xs sm:text-sm font-bold text-white leading-none">
                                             [DECRYPTED_DOCUMENT: {currentCert.code}]
                                         </h4>
-                                        <p className="text-[9px] font-mono text-violet-400 mt-1 uppercase">
+                                        <p className="text-[8px] sm:text-[9px] font-mono text-violet-400 mt-1 uppercase tracking-wider">
                                             {currentCert.title}
                                         </p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={() => setIsModalOpen(false)}
-                                    className="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300"
+                                    className="w-8 h-8 rounded-full bg-red-500/5 border border-red-500/20 flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all duration-300 cursor-pointer"
                                 >
                                     <FaTimes className="text-sm" />
                                 </button>
                             </div>
 
-                            {/* Modal Document Body - Large Iframe PDF Viewer */}
-                            <div className="flex-1 bg-[#03060d] p-2 sm:p-4 flex items-center justify-center relative">
-                                <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-                                
-                                {/* Iframe embedding the PDF */}
-                                <iframe 
+                            {/* PDF Viewer */}
+                            <div className="flex-1 bg-[#020408] p-1 sm:p-3 flex items-center justify-center relative">
+                                <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.01)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+                                <iframe
                                     src={`${currentCert.pdfPath}#toolbar=1&navpanes=0&scrollbar=1`}
                                     title={currentCert.title}
-                                    className="w-full h-full rounded border border-violet-500/15 bg-[#03060d] shadow-inner relative z-10"
+                                    className="w-full h-full rounded-lg border border-violet-500/10 bg-[#020408] relative z-10"
                                 />
                             </div>
 
-                            {/* Modal Footer Controls */}
-                            <div className="bg-[#0b1224] px-4 sm:px-6 py-3 border-t border-violet-500/20 flex items-center justify-between flex-wrap gap-3">
+                            {/* Modal Footer */}
+                            <div className="bg-[#0a0e1a] px-4 sm:px-6 py-3 border-t border-violet-500/15 flex items-center justify-between flex-wrap gap-3">
                                 <div className="flex items-center gap-2 font-mono text-[9px] sm:text-xs text-gray-500">
                                     <span>[SECURE_ACCESS_GRANTED]</span>
                                     <span>|</span>
-                                    <span>VITE_ENV_PRODUCTION</span>
+                                    <span>VITE_DEPL_ONLINE</span>
                                 </div>
 
                                 <div className="flex items-center gap-3">
                                     <motion.a
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
                                         href={currentCert.pdfPath}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="px-4 py-1.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded font-mono text-[10px] sm:text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] border border-violet-500/40 transition-all duration-300"
+                                        className="px-4 py-1.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg font-mono text-[10px] sm:text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.25)] border border-violet-500/35 transition-all duration-300"
                                     >
                                         <FaFilePdf className="text-sm" />
                                         <span>Descargar Evidencia Oficial</span>
@@ -519,7 +647,7 @@ const Certifications = () => {
 
                                     <button
                                         onClick={() => setIsModalOpen(false)}
-                                        className="px-4 py-1.5 bg-transparent hover:bg-violet-500/10 text-gray-400 hover:text-white border border-violet-500/20 hover:border-violet-500/40 rounded font-mono text-[10px] sm:text-xs transition-all duration-300"
+                                        className="px-4 py-1.5 bg-transparent hover:bg-violet-500/5 text-gray-400 hover:text-white border border-violet-500/15 rounded-lg font-mono text-[10px] sm:text-xs transition-all duration-300 cursor-pointer"
                                     >
                                         Cerrar Visor
                                     </button>
@@ -531,11 +659,6 @@ const Certifications = () => {
             </AnimatePresence>
         </section>
     );
-};
-
-// Helper function to return index format
-const currentTabNumber = (tabIndex) => {
-    return String(tabIndex + 1).padStart(3, '0');
 };
 
 export default Certifications;
