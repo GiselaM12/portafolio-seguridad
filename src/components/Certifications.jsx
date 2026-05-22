@@ -51,7 +51,7 @@ const getCertColorClasses = (code) => {
                 glow: 'shadow-[0_0_20px_rgba(139,92,246,0.06)]',
                 dotHover: 'group-hover:bg-purple-400 group-hover:border-purple-400 group-hover:shadow-[0_0_8px_rgba(139,92,246,0.6)]'
             };
-        case 'NET-DEFENSE':
+        case 'NET-BASICS':
             return {
                 text: 'text-cyan-400',
                 textMuted: 'text-cyan-400/70',
@@ -66,6 +66,22 @@ const getCertColorClasses = (code) => {
                 iconBorder: 'border-cyan-500/20',
                 glow: 'shadow-[0_0_20px_rgba(6,182,212,0.06)]',
                 dotHover: 'group-hover:bg-cyan-400 group-hover:border-cyan-400 group-hover:shadow-[0_0_8px_rgba(6,182,212,0.6)]'
+            };
+        case 'ETHICAL-HACK':
+            return {
+                text: 'text-red-400',
+                textMuted: 'text-red-400/70',
+                bg: 'bg-red-500',
+                border: 'border-red-500/20',
+                borderActive: 'border-red-500/30',
+                bgMuted: 'bg-red-500/5',
+                bgGradient: 'bg-gradient-to-r from-red-500/8 to-red-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-red-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-red-500/35',
+                iconBg: 'bg-red-500/10',
+                iconBorder: 'border-red-500/20',
+                glow: 'shadow-[0_0_20px_rgba(239,68,68,0.06)]',
+                dotHover: 'group-hover:bg-red-400 group-hover:border-red-400 group-hover:shadow-[0_0_8px_rgba(239,68,68,0.6)]'
             };
         case 'END-SEC':
             return {
@@ -170,6 +186,24 @@ const Certifications = () => {
             comment: "En lo personal, este curso fue sumamente revelador. Consolidó mi deseo de especializarme en ciberseguridad, sentando las bases teóricas indispensables para abordar las certificaciones más complejas del trayecto formativo."
         },
         {
+            title: "Conceptos Básicos de Redes",
+            issuer: "Cisco Networking Academy / Skills for All",
+            code: "NET-BASICS",
+            date: "2025",
+            themeColor: "from-cyan-500 to-blue-600",
+            glowColor: "rgba(6, 182, 212, 0.2)",
+            badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
+            icon: <FaNetworkWired />,
+            badgeText: "NET-BASICS",
+            pdfPath: "",
+            verifyUrl: "https://www.credly.com/organizations/cisco/badges",
+            learnings: "Este curso aborda la base de la comunicación de redes de computadoras, los modelos de referencia OSI y TCP/IP, y el direccionamiento IPv4/IPv6. Aprendí a calcular subredes, clasificar cables y medios físicos de transmisión, y a comprender el flujo de encapsulación de datos desde la capa de aplicación hasta la física.",
+            challenges: "El principal reto fue dominar el direccionamiento IP y la subdivisión de redes (subnetting), comprendiendo cómo las máquinas e interfaces de red dividen lógicamente una red física y optimizan el direccionamiento de host.",
+            application: "Apliqué estos conceptos diseñando esquemas de direccionamiento eficientes para topologías de red pequeñas y medianas, reduciendo colisiones y optimizando los dominios de difusión.",
+            comment: "Comprender la base lógica de cómo viajan los datos en Internet me dio una perspectiva técnica sólida. Este curso es la zapata fundamental de todo profesional en seguridad digital.",
+            isPlaceholder: true
+        },
+        {
             title: "Dispositivos de Red y Configuración Inicial",
             issuer: "Cisco Networking Academy / Skills for All",
             code: "NET-CONFIG",
@@ -185,23 +219,6 @@ const Certifications = () => {
             challenges: "El reto más significativo fue familiarizarme con la sintaxis de comandos de Cisco y comprender cómo la configuración de interfaces de red y el enrutamiento estático afectan directamente el flujo de tráfico de datos de forma bidireccional.",
             application: "Apliqué estos conceptos configurando switches y routers en entornos virtuales de Packet Tracer, asignando nombres de host, contraseñas cifradas para el modo EXEC privilegiado, banners de advertencia y protegiendo accesos VTY.",
             comment: "Esta experiencia fue sumamente enriquecedora, ya que me otorgó habilidades técnicas tangibles. Configurar mis primeros dispositivos de red me dio la satisfacción de saber que puedo administrar y asegurar la puerta de entrada a la infraestructura digital."
-        },
-        {
-            title: "Defensa de Red (Network Defense)",
-            issuer: "Cisco Networking Academy / Skills for All",
-            code: "NET-DEFENSE",
-            date: "2025",
-            themeColor: "from-cyan-500 to-blue-600",
-            glowColor: "rgba(6, 182, 212, 0.2)",
-            badgeColor: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
-            icon: <FaNetworkWired />,
-            badgeText: "NET-DEF",
-            pdfPath: "./certificaciones/network_defense.pdf",
-            verifyUrl: "https://www.credly.com/organizations/cisco/badges",
-            learnings: "Esta certificación se enfoca en las metodologías y herramientas necesarias para proteger la infraestructura de comunicación de una organización contra accesos no autorizados, ataques y filtraciones de datos. Aprendí los principios de la defensa perimetral, analizando cortafuegos tradicionales y de próxima generación (NGFW), así como sistemas IDS/IPS y el diseño de VPNs seguras mediante IPsec.",
-            challenges: "El desafío principal consistió en asimilar la complejidad de la configuración de políticas de acceso a la red y comprender cómo se realiza el monitoreo continuo para identificar anomalías en tiempo real y mitigar riesgos proactivamente.",
-            application: "Simulé topologías de red seguras en Cisco Packet Tracer, configurando reglas avanzadas de filtrado de tráfico (Listas de Control de Acceso - ACLs) en routers y switches, y analizando flujos de tráfico sospechoso.",
-            comment: "Esta formación fue un pilar clave en mi desarrollo académico. Me dio las herramientas para entender que una defensa de red efectiva es multifacética y requiere no solo barreras perimetrales, sino una estrategia integral de monitoreo."
         },
         {
             title: "Seguridad en Terminales",
@@ -253,6 +270,24 @@ const Certifications = () => {
             challenges: "El reto primordial fue consolidar todas las disciplinas previas (redes, sistemas operativos, criptografía y análisis de amenazas) y aplicarlas bajo la presión simulada de un escenario de brecha de seguridad real, tomando decisiones rápidas de contención.",
             application: "Realicé prácticas de investigación forense digital, análisis de bitácoras de cortafuegos y sistemas de detección de intrusos (IDS), y elaboré informes técnicos de incidentes estructurados bajo estándares regulatorios y normativos de la industria.",
             comment: "Este recorrido formativo fue sumamente motivador, ya que me permitió proyectar mis competencias directo al mercado laboral. Me dio una comprensión clara de la ética profesional del analista y la importancia de la respuesta a incidentes."
+        },
+        {
+            title: "Hacker Ético",
+            issuer: "Cisco Networking Academy / Skills for All",
+            code: "ETHICAL-HACK",
+            date: "2025",
+            themeColor: "from-red-500 to-rose-600",
+            glowColor: "rgba(239, 68, 68, 0.2)",
+            badgeColor: "text-red-400 border-red-500/30 bg-red-500/10",
+            icon: <FaTerminal />,
+            badgeText: "ETH-HACK",
+            pdfPath: "",
+            verifyUrl: "https://www.credly.com/organizations/cisco/badges",
+            learnings: "Este módulo avanzado me introdujo a las metodologías de pruebas de penetración y evaluación de seguridad defensiva y ofensiva. Estudié las fases del hacking ético: reconocimiento pasivo y activo, escaneo de vulnerabilidades, ganancia de acceso, mantenimiento de acceso y borrado de huellas.",
+            challenges: "El reto más importante fue desarrollar la habilidad de pensar como un atacante para anticipar vectores de intrusión y, a la vez, mantener la rigurosidad ética y el apego a la legalidad y autorización formal.",
+            application: "Simulé auditorías de seguridad en entornos controlados, identificando puertos abiertos expuestos, debilidades en servicios web y analizando cómo mitigar ataques comunes de inyección de código y desbordamiento de búfer.",
+            comment: "El hacking ético es una disciplina apasionante que cierra el ciclo de la ciberdefensa. Saber atacar para defender mejor es la clave para la resiliencia tecnológica moderna.",
+            isPlaceholder: true
         }
     ];
 
@@ -575,37 +610,48 @@ const Certifications = () => {
                                             <div className="lg:col-span-4 flex">
                                                 <motion.div
                                                     onClick={() => setIsModalOpen(true)}
-                                                    whileHover={{ y: -3, borderColor: 'rgba(139, 92, 246, 0.4)' }}
-                                                    className="w-full relative bg-gradient-to-br from-[#0c111d] to-[#04060c] border border-violet-500/20 rounded-xl p-5 flex flex-col justify-between overflow-hidden group cursor-pointer hover:shadow-[0_0_30px_rgba(139,92,246,0.12)] transition-all duration-300 backdrop-blur-sm select-none min-h-[280px]"
+                                                    whileHover={{ y: -3, borderColor: currentCert.isPlaceholder ? 'rgba(245, 158, 11, 0.4)' : 'rgba(139, 92, 246, 0.4)' }}
+                                                    className={`w-full relative bg-gradient-to-br from-[#0c111d] to-[#04060c] border ${currentCert.isPlaceholder ? 'border-amber-500/20 hover:shadow-[0_0_30px_rgba(245,158,11,0.12)]' : 'border-violet-500/20 hover:shadow-[0_0_30px_rgba(139,92,246,0.12)]'} rounded-xl p-5 flex flex-col justify-between overflow-hidden group cursor-pointer transition-all duration-300 backdrop-blur-sm select-none min-h-[280px]`}
                                                 >
                                                     {/* Grid overlay */}
-                                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:14px_14px] opacity-50 pointer-events-none" />
+                                                    <div className={`absolute inset-0 bg-[linear-gradient(${currentCert.isPlaceholder ? 'rgba(245,158,11,0.03)' : 'rgba(139,92,246,0.03)'}_1px,transparent_1px),linear-gradient(90deg,${currentCert.isPlaceholder ? 'rgba(245,158,11,0.03)' : 'rgba(139,92,246,0.03)'}_1px,transparent_1px)] bg-[size:14px_14px] opacity-50 pointer-events-none`} />
 
                                                     {/* Scan laser */}
-                                                    <div className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-violet-500/25 to-transparent top-0 animate-scan-fast pointer-events-none" />
+                                                    <div className={`absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-${currentCert.isPlaceholder ? 'amber-500/25' : 'violet-500/25'} to-transparent top-0 animate-scan-fast pointer-events-none`} />
 
                                                     {/* Corner accents */}
-                                                    <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-[1.5px] border-l-[1.5px] border-violet-500/40" />
-                                                    <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-[1.5px] border-r-[1.5px] border-violet-500/40" />
-                                                    <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-[1.5px] border-l-[1.5px] border-violet-500/40" />
-                                                    <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-[1.5px] border-r-[1.5px] border-violet-500/40" />
+                                                    <div className={`absolute top-2.5 left-2.5 w-3 h-3 border-t-[1.5px] border-l-[1.5px] ${currentCert.isPlaceholder ? 'border-amber-500/40' : 'border-violet-500/40'}`} />
+                                                    <div className={`absolute top-2.5 right-2.5 w-3 h-3 border-t-[1.5px] border-r-[1.5px] ${currentCert.isPlaceholder ? 'border-amber-500/40' : 'border-violet-500/40'}`} />
+                                                    <div className={`absolute bottom-2.5 left-2.5 w-3 h-3 border-b-[1.5px] border-l-[1.5px] ${currentCert.isPlaceholder ? 'border-amber-500/40' : 'border-violet-500/40'}`} />
+                                                    <div className={`absolute bottom-2.5 right-2.5 w-3 h-3 border-b-[1.5px] border-r-[1.5px] ${currentCert.isPlaceholder ? 'border-amber-500/40' : 'border-violet-500/40'}`} />
 
                                                     {/* Mockup Header */}
                                                     <div className="relative z-10 w-full flex items-center justify-between text-[8px] font-mono text-violet-500/40 pb-2 border-b border-violet-500/10">
-                                                        <span>[CREDENTIAL_SECURE_ID]</span>
-                                                        <span className="flex items-center gap-1 text-emerald-400/80">
-                                                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-                                                            VERIFIED
-                                                        </span>
+                                                        <span>{currentCert.isPlaceholder ? '[CREDENTIAL_HOLD_ID]' : '[CREDENTIAL_SECURE_ID]'}</span>
+                                                        {currentCert.isPlaceholder ? (
+                                                            <span className="flex items-center gap-1 text-amber-400/80">
+                                                                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse shadow-[0_0_4px_rgba(245,158,11,0.5)]" />
+                                                                PENDING_SIGN
+                                                            </span>
+                                                        ) : (
+                                                            <span className="flex items-center gap-1 text-emerald-400/80">
+                                                                <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_4px_rgba(52,211,153,0.5)]" />
+                                                                VERIFIED
+                                                            </span>
+                                                        )}
                                                     </div>
 
                                                     {/* Certificate Face */}
                                                     <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center py-4 px-2">
                                                         {/* Digital Seal */}
                                                         <div className="relative mb-4">
-                                                            <div className="absolute inset-[-6px] rounded-full border border-dashed border-violet-500/35 animate-[spin_40s_linear_infinite]" />
-                                                            <div className="w-12 h-12 rounded-full bg-violet-950/50 border border-violet-500/30 flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.15)]">
-                                                                <FaAward className="text-xl text-violet-400" />
+                                                            <div className={`absolute inset-[-6px] rounded-full border border-dashed ${currentCert.isPlaceholder ? 'border-amber-500/35' : 'border-violet-500/35'} animate-[spin_40s_linear_infinite]`} />
+                                                            <div className={`w-12 h-12 rounded-full bg-violet-950/50 border ${currentCert.isPlaceholder ? 'border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)]' : 'border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.15)]'} flex items-center justify-center`}>
+                                                                {currentCert.isPlaceholder ? (
+                                                                    <FaLock className="text-lg text-amber-400 animate-pulse" />
+                                                                ) : (
+                                                                    <FaAward className="text-xl text-violet-400" />
+                                                                )}
                                                             </div>
                                                         </div>
 
@@ -647,12 +693,21 @@ const Certifications = () => {
 
                                                     {/* Hover Overlay */}
                                                     <div className="absolute inset-0 bg-[#020407]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-3 backdrop-blur-sm z-20 rounded-xl">
-                                                        <div className="w-12 h-12 rounded-full bg-violet-500/15 border border-violet-500/40 flex items-center justify-center">
-                                                            <FaEye className="text-xl text-violet-300" />
+                                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${currentCert.isPlaceholder ? 'bg-amber-500/10 border-amber-500/30 text-amber-300' : 'bg-violet-500/15 border-violet-500/40 text-violet-300'} border`}>
+                                                            {currentCert.isPlaceholder ? <FaLock className="text-lg animate-pulse" /> : <FaEye className="text-xl" />}
                                                         </div>
-                                                        <p className="text-[11px] font-mono text-violet-300 text-center px-4 leading-relaxed tracking-wide">
-                                                            Click para ver<br />
-                                                            <span className="text-violet-500/80 text-[10px] tracking-[0.1em]">certificado completo</span>
+                                                        <p className={`text-[11px] font-mono text-center px-4 leading-relaxed tracking-wide ${currentCert.isPlaceholder ? 'text-amber-300' : 'text-violet-300'}`}>
+                                                            {currentCert.isPlaceholder ? (
+                                                                <>
+                                                                    Ver Estado de<br />
+                                                                    <span className="text-amber-500/80 text-[10px] tracking-[0.1em]">la credencial</span>
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    Click para ver<br />
+                                                                    <span className="text-violet-500/80 text-[10px] tracking-[0.1em]">certificado completo</span>
+                                                                </>
+                                                            )}
                                                         </p>
                                                     </div>
                                                 </motion.div>
@@ -680,17 +735,24 @@ const Certifications = () => {
                                                 <span>Ver en Grande</span>
                                             </motion.button>
 
-                                            <motion.a
-                                                whileHover={{ scale: 1.02 }}
-                                                whileTap={{ scale: 0.97 }}
-                                                href={currentCert.pdfPath}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="px-4 py-2 bg-transparent hover:bg-violet-500/5 text-violet-400 border border-violet-500/20 hover:border-violet-500/40 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
-                                            >
-                                                <FaFilePdf className="text-sm" />
-                                                <span>Descargar PDF</span>
-                                            </motion.a>
+                                            {currentCert.isPlaceholder ? (
+                                                <div className="px-4 py-2 bg-white/[0.02] text-slate-500 border border-white/5 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 cursor-not-allowed select-none">
+                                                    <FaLock className="text-xs" />
+                                                    <span>PDF Pendiente</span>
+                                                </div>
+                                            ) : (
+                                                <motion.a
+                                                    whileHover={{ scale: 1.02 }}
+                                                    whileTap={{ scale: 0.97 }}
+                                                    href={currentCert.pdfPath}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="px-4 py-2 bg-transparent hover:bg-violet-500/5 text-violet-400 border border-violet-500/20 hover:border-violet-500/40 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 transition-all duration-300"
+                                                >
+                                                    <FaFilePdf className="text-sm" />
+                                                    <span>Descargar PDF</span>
+                                                </motion.a>
+                                            )}
 
                                             <motion.a
                                                 whileHover={{ scale: 1.02 }}
@@ -763,11 +825,41 @@ const Certifications = () => {
                             {/* PDF Viewer */}
                             <div className="flex-1 bg-[#020408] p-1 sm:p-3 flex items-center justify-center relative">
                                 <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.01)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-                                <iframe
-                                    src={`${currentCert.pdfPath}#toolbar=1&navpanes=0&scrollbar=1`}
-                                    title={currentCert.title}
-                                    className="w-full h-full rounded-lg border border-violet-500/10 bg-[#020408] relative z-10"
-                                />
+                                {currentCert.isPlaceholder ? (
+                                    <div className="w-full h-full rounded-lg border border-amber-500/20 bg-[#04060c] relative z-10 flex flex-col items-center justify-center p-6 text-center overflow-hidden">
+                                        {/* Scanner Grid Line */}
+                                        <div className="absolute inset-0 bg-[linear-gradient(rgba(245,158,11,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(245,158,11,0.02)_1px,transparent_1px)] bg-[size:20px_20px] opacity-60 pointer-events-none" />
+                                        <div className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent top-0 animate-scan-slow pointer-events-none" />
+                                        
+                                        <div className="relative mb-6">
+                                            <div className="absolute inset-[-12px] rounded-full border border-dashed border-amber-500/20 animate-[spin_60s_linear_infinite]" />
+                                            <div className="absolute inset-[-6px] rounded-full border border-dashed border-amber-500/40 animate-[spin_30s_linear_infinite_reverse]" />
+                                            <div className="w-20 h-20 rounded-full bg-amber-950/20 border border-amber-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.1)]">
+                                                <FaLock className="text-3xl text-amber-400 animate-pulse" />
+                                            </div>
+                                        </div>
+                                        
+                                        <span className="text-[10px] font-mono text-amber-500/70 uppercase tracking-[0.3em] mb-2 font-bold">
+                                            STATUS: CREDENTIAL_PENDING_SIGN
+                                        </span>
+                                        <h3 className="text-lg sm:text-xl font-bold text-white max-w-md mb-3 tracking-wide">
+                                            {currentCert.title}
+                                        </h3>
+                                        <p className="text-xs sm:text-sm text-slate-450 max-w-lg leading-relaxed font-mono">
+                                            Esta credencial oficial de <span className="text-amber-400/80">Cisco Networking Academy</span> se encuentra en proceso de validación final por la institución educativa. La firma digital y el archivo PDF se integrarán de manera automática al concluir el periodo de evaluación académica correspondiente.
+                                        </p>
+                                        
+                                        <div className="mt-8 flex items-center gap-2 px-3 py-1.5 bg-amber-500/5 border border-amber-500/10 rounded font-mono text-[9px] text-amber-400/60 uppercase tracking-widest">
+                                            <span>SECURE_SHA256_HASH_RESERVED</span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <iframe
+                                        src={`${currentCert.pdfPath}#toolbar=1&navpanes=0&scrollbar=1`}
+                                        title={currentCert.title}
+                                        className="w-full h-full rounded-lg border border-violet-500/10 bg-[#020408] relative z-10"
+                                    />
+                                )}
                             </div>
 
                             {/* Modal Footer */}
@@ -779,17 +871,24 @@ const Certifications = () => {
                                 </div>
 
                                 <div className="flex items-center gap-3">
-                                    <motion.a
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        href={currentCert.pdfPath}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="px-4 py-1.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg font-mono text-[10px] sm:text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.25)] border border-violet-500/35 transition-all duration-300"
-                                    >
-                                        <FaFilePdf className="text-sm" />
-                                        <span>Descargar Evidencia Oficial</span>
-                                    </motion.a>
+                                    {currentCert.isPlaceholder ? (
+                                        <div className="px-4 py-1.5 bg-white/[0.02] text-slate-500 border border-white/5 rounded-lg font-mono text-[10px] sm:text-xs font-semibold flex items-center gap-2 cursor-not-allowed select-none">
+                                            <FaLock className="text-sm" />
+                                            <span>PDF Pendiente</span>
+                                        </div>
+                                    ) : (
+                                        <motion.a
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            href={currentCert.pdfPath}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="px-4 py-1.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg font-mono text-[10px] sm:text-xs font-semibold flex items-center gap-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.25)] border border-violet-500/35 transition-all duration-300"
+                                        >
+                                            <FaFilePdf className="text-sm" />
+                                            <span>Descargar Evidencia Oficial</span>
+                                        </motion.a>
+                                    )}
 
                                     <button
                                         onClick={() => setIsModalOpen(false)}
