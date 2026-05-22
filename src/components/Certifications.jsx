@@ -333,7 +333,15 @@ const Certifications = () => {
                                                 <span className="text-violet-400 text-lg sm:text-xl shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]">{currentCert.icon}</span>
                                                 <span className="cert-detail-title">{currentCert.title}</span>
                                             </h3>
-                                                                             {/* Dossier Tab Bar */}
+                                            <p className="text-slate-500 text-[11px] font-mono tracking-wide">
+                                                <span className="text-slate-600">Organismo Certificador:</span> <span className="text-violet-400 font-semibold">{currentCert.issuer}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Section 2 — Dossier Tabs + Content */}
+                                    <div className="mb-6">
+                                        {/* Dossier Tab Bar */}
                                         <div className="flex items-center gap-1 mb-4 border-b border-violet-500/10 overflow-x-auto scrollbar-none pb-px">
                                             {dossierSections.map(({ emoji, tabLabel }, index) => {
                                                 const isActive = activeDossier === index;
