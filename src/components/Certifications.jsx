@@ -377,7 +377,11 @@ const Certifications = () => {
                                             {isActive && (
                                                 <motion.div
                                                     layoutId="activeTimelineCard"
-                                                    className={`absolute inset-0 border rounded-xl -z-10 ${colors.bgGradient} ${colors.borderActive} ${colors.glow}`}
+                                                    className={`absolute inset-0 border rounded-xl -z-10 ${
+                                                        cert.isPlaceholder
+                                                            ? 'bg-gradient-to-r from-amber-500/8 to-amber-500/[0.01] border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.06)]'
+                                                            : `${colors.bgGradient} ${colors.borderActive} ${colors.glow}`
+                                                    }`}
                                                     transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                                                 />
                                             )}
@@ -389,15 +393,15 @@ const Certifications = () => {
 
                                             {/* Accent line left */}
                                             <div className={`absolute left-0 w-[3px] rounded-r-full transition-all duration-300 ${
-                                                isActive ? `${colors.bg} shadow-[0_0_8px_currentColor]` : 'bg-transparent group-hover:bg-white/10'
+                                                isActive ? (cert.isPlaceholder ? 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]' : `${colors.bg} shadow-[0_0_8px_currentColor]`) : 'bg-transparent group-hover:bg-white/10'
                                             }`} style={{ top: '12px', bottom: '12px' }} />
 
                                             {/* Timeline dot */}
                                             <div className="absolute left-[-20px] -translate-x-1/2 top-[28px] -translate-y-1/2 flex items-center justify-center">
                                                 {isActive ? (
                                                     <div className="relative flex items-center justify-center">
-                                                        <span className={`animate-ping absolute inline-flex h-3.5 w-3.5 rounded-full opacity-45 ${colors.bg}`} />
-                                                        <span className={`relative inline-flex rounded-full h-2 w-2 ${colors.bg} shadow-[0_0_8px_currentColor]`} />
+                                                        <span className={`animate-ping absolute inline-flex h-3.5 w-3.5 rounded-full opacity-45 ${cert.isPlaceholder ? 'bg-amber-500' : colors.bg}`} />
+                                                        <span className={`relative inline-flex rounded-full h-2 w-2 ${cert.isPlaceholder ? 'bg-amber-500' : colors.bg} shadow-[0_0_8px_currentColor]`} />
                                                     </div>
                                                 ) : (
                                                     <div className={`h-1.5 w-1.5 rounded-full bg-slate-900 border border-slate-700/80 transition-all duration-300 ${colors.dotHover}`} />
@@ -407,20 +411,33 @@ const Certifications = () => {
                                             {/* Icon Container */}
                                             <div className={`w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-300 shrink-0 mt-0.5 ${
                                                 isActive
-                                                    ? `${colors.iconBg} ${colors.iconBorder} ${colors.text} ${colors.glow}`
+                                                    ? (cert.isPlaceholder ? 'bg-amber-500/10 border-amber-500/30 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)]' : `${colors.iconBg} ${colors.iconBorder} ${colors.text} ${colors.glow}`)
                                                     : 'bg-white/[0.01] border-white/5 text-slate-500 group-hover:text-slate-350 group-hover:border-white/15'
                                             }`}>
-                                                <span className="text-base">{cert.icon}</span>
+                                                <span className="text-base">
+                                                    {cert.isPlaceholder ? <FaLock className={isActive ? "text-amber-400 animate-pulse" : "text-slate-500"} /> : cert.icon}
+                                                </span>
                                             </div>
 
                                             {/* Content */}
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center justify-between gap-2 mb-1.5">
-                                                    <span className={`text-[10px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 ${isActive ? colors.text : 'text-slate-650 group-hover:text-slate-450'}`}>
+                                                    <span className={`text-[10px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 ${isActive ? (cert.isPlaceholder ? 'text-amber-400' : colors.text) : 'text-slate-650 group-hover:text-slate-450'}`}>
                                                         CASE 0{index + 1}
                                                     </span>
-                                                    <span className={`text-[8px] font-mono uppercase tracking-[0.15em] px-2 py-0.5 rounded-md border transition-all duration-300 ${isActive ? cert.badgeColor : 'text-slate-650 bg-white/[0.01] border-white/5 group-hover:text-slate-400 group-hover:border-white/10'}`}>
-                                                        {cert.badgeText}
+                                                    <span className={`text-[8px] font-mono uppercase tracking-[0.15em] px-2 py-0.5 rounded-md border transition-all duration-300 ${
+                                                        cert.isPlaceholder
+                                                            ? 'text-amber-400 border-amber-500/30 bg-amber-500/10'
+                                                            : (isActive ? cert.badgeColor : 'text-slate-650 bg-white/[0.01] border-white/5 group-hover:text-slate-400 group-hover:border-white/10')
+                                                    }`}>
+                                                        {cert.isPlaceholder ? (
+                                                            <span className="flex items-center gap-1">
+                                                                <FaLock className="text-[7px]" />
+                                                                PENDING
+                                                            </span>
+                                                        ) : (
+                                                            cert.badgeText
+                                                        )}
                                                     </span>
                                                 </div>
                                                 <p className={`text-[13px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-450 group-hover:text-slate-200'}`}>
@@ -443,16 +460,16 @@ const Certifications = () => {
                                             onClick={() => setActiveTab(index)}
                                             className={`py-2.5 px-4 rounded-xl text-xs font-mono whitespace-nowrap transition-all duration-300 border flex items-center gap-2.5 cursor-pointer shrink-0 backdrop-blur-md relative select-none group ${
                                                 isActive
-                                                    ? `${colors.bgGradient} ${colors.borderActive} text-white font-semibold ${colors.glow}`
+                                                    ? (cert.isPlaceholder ? 'bg-amber-500/5 border-amber-500/30 text-white shadow-[0_0_15px_rgba(245,158,11,0.12)]' : `${colors.bgGradient} ${colors.borderActive} text-white font-semibold ${colors.glow}`)
                                                     : 'bg-[#080c14]/40 border-white/5 text-slate-450 hover:text-slate-200 hover:bg-white/[0.02]'
                                             }`}
                                         >
-                                            <span className={`text-[10px] transition-colors duration-300 ${isActive ? colors.text : 'text-slate-500 group-hover:text-slate-350'}`}>
-                                                {cert.icon}
+                                            <span className={`text-[10px] transition-colors duration-300 ${isActive ? (cert.isPlaceholder ? 'text-amber-400' : colors.text) : 'text-slate-500 group-hover:text-slate-350'}`}>
+                                                {cert.isPlaceholder ? <FaLock className={isActive ? "text-amber-400 animate-pulse" : "text-slate-500"} /> : cert.icon}
                                             </span>
-                                            <span>0{index + 1}. {cert.badgeText}</span>
+                                            <span>0{index + 1}. {cert.isPlaceholder ? 'PENDING' : cert.badgeText}</span>
                                             {isActive && (
-                                                <div className={`absolute bottom-0 left-2 right-2 h-[2px] rounded-t-full ${colors.bg}`} />
+                                                <div className={`absolute bottom-0 left-2 right-2 h-[2px] rounded-t-full ${cert.isPlaceholder ? 'bg-amber-500' : colors.bg}`} />
                                             )}
                                         </button>
                                     );
