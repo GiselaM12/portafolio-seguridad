@@ -17,6 +17,123 @@ import {
     FaQrcode
 } from 'react-icons/fa';
 
+const getCertColorClasses = (code) => {
+    switch (code) {
+        case 'CS-INTRO':
+            return {
+                text: 'text-emerald-400',
+                textMuted: 'text-emerald-400/70',
+                bg: 'bg-emerald-400',
+                border: 'border-emerald-500/20',
+                borderActive: 'border-emerald-500/30',
+                bgMuted: 'bg-emerald-500/5',
+                bgGradient: 'bg-gradient-to-r from-emerald-500/8 to-emerald-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-emerald-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-emerald-500/35',
+                iconBg: 'bg-emerald-500/10',
+                iconBorder: 'border-emerald-500/20',
+                glow: 'shadow-[0_0_20px_rgba(16,185,129,0.06)]',
+                dotHover: 'group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:shadow-[0_0_8px_rgba(16,185,129,0.6)]'
+            };
+        case 'NET-CONFIG':
+            return {
+                text: 'text-purple-400',
+                textMuted: 'text-purple-400/70',
+                bg: 'bg-purple-400',
+                border: 'border-purple-500/20',
+                borderActive: 'border-purple-500/30',
+                bgMuted: 'bg-purple-500/5',
+                bgGradient: 'bg-gradient-to-r from-purple-500/8 to-purple-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-purple-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-purple-500/35',
+                iconBg: 'bg-purple-500/10',
+                iconBorder: 'border-purple-500/20',
+                glow: 'shadow-[0_0_20px_rgba(139,92,246,0.06)]',
+                dotHover: 'group-hover:bg-purple-400 group-hover:border-purple-400 group-hover:shadow-[0_0_8px_rgba(139,92,246,0.6)]'
+            };
+        case 'NET-DEFENSE':
+            return {
+                text: 'text-cyan-400',
+                textMuted: 'text-cyan-400/70',
+                bg: 'bg-cyan-400',
+                border: 'border-cyan-500/20',
+                borderActive: 'border-cyan-500/30',
+                bgMuted: 'bg-cyan-500/5',
+                bgGradient: 'bg-gradient-to-r from-cyan-500/8 to-cyan-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-cyan-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-cyan-500/35',
+                iconBg: 'bg-cyan-500/10',
+                iconBorder: 'border-cyan-500/20',
+                glow: 'shadow-[0_0_20px_rgba(6,182,212,0.06)]',
+                dotHover: 'group-hover:bg-cyan-400 group-hover:border-cyan-400 group-hover:shadow-[0_0_8px_rgba(6,182,212,0.6)]'
+            };
+        case 'END-SEC':
+            return {
+                text: 'text-rose-400',
+                textMuted: 'text-rose-400/70',
+                bg: 'bg-rose-400',
+                border: 'border-rose-500/20',
+                borderActive: 'border-rose-500/30',
+                bgMuted: 'bg-rose-500/5',
+                bgGradient: 'bg-gradient-to-r from-rose-500/8 to-rose-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-rose-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-rose-500/35',
+                iconBg: 'bg-rose-500/10',
+                iconBorder: 'border-rose-500/20',
+                glow: 'shadow-[0_0_20px_rgba(244,63,94,0.06)]',
+                dotHover: 'group-hover:bg-rose-400 group-hover:border-rose-400 group-hover:shadow-[0_0_8px_rgba(244,63,94,0.6)]'
+            };
+        case 'THREAT-MGMT':
+            return {
+                text: 'text-amber-400',
+                textMuted: 'text-amber-400/70',
+                bg: 'bg-amber-400',
+                border: 'border-amber-500/20',
+                borderActive: 'border-amber-500/30',
+                bgMuted: 'bg-amber-500/5',
+                bgGradient: 'bg-gradient-to-r from-amber-500/8 to-amber-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-amber-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-amber-500/35',
+                iconBg: 'bg-amber-500/10',
+                iconBorder: 'border-amber-500/20',
+                glow: 'shadow-[0_0_20px_rgba(245,158,11,0.06)]',
+                dotHover: 'group-hover:bg-amber-400 group-hover:border-amber-400 group-hover:shadow-[0_0_8px_rgba(245,158,11,0.6)]'
+            };
+        case 'JR-ANALYST-PATH':
+            return {
+                text: 'text-violet-400',
+                textMuted: 'text-violet-400/70',
+                bg: 'bg-violet-400',
+                border: 'border-violet-500/20',
+                borderActive: 'border-violet-500/30',
+                bgMuted: 'bg-violet-500/5',
+                bgGradient: 'bg-gradient-to-r from-violet-500/8 to-violet-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-violet-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-violet-500/35',
+                iconBg: 'bg-violet-500/10',
+                iconBorder: 'border-violet-500/20',
+                glow: 'shadow-[0_0_20px_rgba(168,85,247,0.06)]',
+                dotHover: 'group-hover:bg-violet-400 group-hover:border-violet-400 group-hover:shadow-[0_0_8px_rgba(168,85,247,0.6)]'
+            };
+        default:
+            return {
+                text: 'text-violet-400',
+                textMuted: 'text-violet-400/70',
+                bg: 'bg-violet-400',
+                border: 'border-violet-500/20',
+                borderActive: 'border-violet-500/30',
+                bgMuted: 'bg-violet-500/5',
+                bgGradient: 'bg-gradient-to-r from-violet-500/8 to-violet-500/[0.01]',
+                hoverBgGradient: 'group-hover:bg-gradient-to-r group-hover:from-violet-500/5 group-hover:to-transparent',
+                hoverBorder: 'group-hover:border-violet-500/35',
+                iconBg: 'bg-violet-500/10',
+                iconBorder: 'border-violet-500/20',
+                glow: 'shadow-[0_0_20px_rgba(168,85,247,0.06)]',
+                dotHover: 'group-hover:bg-violet-400 group-hover:border-violet-400 group-hover:shadow-[0_0_8px_rgba(168,85,247,0.6)]'
+            };
+    }
+}
+
 const Certifications = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -204,50 +321,74 @@ const Certifications = () => {
                             </div>
 
                             {/* Desktop Menu — Timeline Style */}
-                            <nav className="hidden lg:flex flex-col gap-1.5 relative pl-7">
+                            <nav className="hidden lg:flex flex-col gap-2 relative pl-9">
                                 {/* Timeline vertical line */}
-                                <div className="absolute left-[9px] top-2 bottom-2 w-px bg-gradient-to-b from-violet-500/40 via-violet-500/15 to-transparent pointer-events-none" />
+                                <div className="absolute left-[16px] top-3 bottom-3 w-px bg-gradient-to-b from-violet-500/30 via-violet-500/10 to-transparent pointer-events-none" />
 
                                 {certificationsData.map((cert, index) => {
                                     const isActive = activeTab === index;
+                                    const colors = getCertColorClasses(cert.code);
                                     return (
                                         <button
                                             key={index}
                                             onClick={() => setActiveTab(index)}
-                                            className={`relative w-full text-left transition-all duration-300 flex items-start gap-3 px-4 py-3.5 rounded-lg border cursor-pointer group ${
+                                            className={`relative w-full text-left transition-all duration-300 flex items-start gap-3.5 px-4 py-3.5 rounded-xl border border-transparent cursor-pointer group select-none ${
                                                 isActive
-                                                    ? 'border-violet-500/25 text-white bg-violet-500/10'
-                                                    : 'border-transparent text-slate-500 hover:text-slate-200 hover:bg-white/[0.03]'
+                                                    ? 'text-white font-semibold'
+                                                    : 'text-slate-500 hover:text-slate-200'
                                             }`}
                                         >
-                                            {/* Active accent bar */}
-                                            <div className={`absolute left-0 top-3 bottom-3 w-0.5 rounded-r-full transition-all duration-300 ${
-                                                isActive ? 'bg-violet-500' : 'bg-transparent group-hover:bg-violet-500/30'
-                                            }`} />
+                                            {/* Active glass card background using Framer Motion */}
+                                            {isActive && (
+                                                <motion.div
+                                                    layoutId="activeTimelineCard"
+                                                    className={`absolute inset-0 border rounded-xl -z-10 ${colors.bgGradient} ${colors.borderActive} ${colors.glow}`}
+                                                    transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+                                                />
+                                            )}
+
+                                            {/* Inactive hover background */}
+                                            {!isActive && (
+                                                <div className={`absolute inset-0 border border-transparent rounded-xl -z-10 transition-all duration-300 ${colors.hoverBgGradient} group-hover:border-white/5`} />
+                                            )}
+
+                                            {/* Accent line left */}
+                                            <div className={`absolute left-0 w-[3px] rounded-r-full transition-all duration-300 ${
+                                                isActive ? `${colors.bg} shadow-[0_0_8px_currentColor]` : 'bg-transparent group-hover:bg-white/10'
+                                            }`} style={{ top: '12px', bottom: '12px' }} />
 
                                             {/* Timeline dot */}
-                                            <div className="absolute left-[-24px] top-1/2 -translate-y-1/2 flex items-center justify-center">
+                                            <div className="absolute left-[-20px] -translate-x-1/2 top-[28px] -translate-y-1/2 flex items-center justify-center">
                                                 {isActive ? (
                                                     <div className="relative flex items-center justify-center">
-                                                        <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-violet-400 opacity-50" />
-                                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-violet-400" />
+                                                        <span className={`animate-ping absolute inline-flex h-3.5 w-3.5 rounded-full opacity-45 ${colors.bg}`} />
+                                                        <span className={`relative inline-flex rounded-full h-2 w-2 ${colors.bg} shadow-[0_0_8px_currentColor]`} />
                                                     </div>
                                                 ) : (
-                                                    <div className="h-1.5 w-1.5 rounded-full bg-violet-500/20 group-hover:bg-violet-500/50 transition-colors" />
+                                                    <div className={`h-1.5 w-1.5 rounded-full bg-slate-900 border border-slate-700/80 transition-all duration-300 ${colors.dotHover}`} />
                                                 )}
+                                            </div>
+
+                                            {/* Icon Container */}
+                                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-300 shrink-0 mt-0.5 ${
+                                                isActive
+                                                    ? `${colors.iconBg} ${colors.iconBorder} ${colors.text} ${colors.glow}`
+                                                    : 'bg-white/[0.01] border-white/5 text-slate-500 group-hover:text-slate-350 group-hover:border-white/15'
+                                            }`}>
+                                                <span className="text-base">{cert.icon}</span>
                                             </div>
 
                                             {/* Content */}
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center justify-between gap-2 mb-1.5">
-                                                    <span className={`text-[9px] font-mono font-bold tracking-[0.2em] ${isActive ? 'text-violet-400' : 'text-violet-500/40 group-hover:text-violet-500/60'}`}>
+                                                    <span className={`text-[10px] font-mono font-bold tracking-[0.2em] transition-colors duration-300 ${isActive ? colors.text : 'text-slate-650 group-hover:text-slate-450'}`}>
                                                         CASE 0{index + 1}
                                                     </span>
-                                                    <span className={`text-[7px] font-mono uppercase tracking-[0.15em] px-2 py-0.5 rounded-sm border transition-colors duration-300 ${isActive ? 'text-violet-300 bg-violet-500/10 border-violet-500/25' : 'text-slate-600 bg-white/[0.02] border-white/5 group-hover:text-slate-500'}`}>
+                                                    <span className={`text-[8px] font-mono uppercase tracking-[0.15em] px-2 py-0.5 rounded-md border transition-all duration-300 ${isActive ? cert.badgeColor : 'text-slate-650 bg-white/[0.01] border-white/5 group-hover:text-slate-400 group-hover:border-white/10'}`}>
                                                         {cert.badgeText}
                                                     </span>
                                                 </div>
-                                                <p className={`text-[13px] font-semibold leading-snug tracking-[-0.01em] transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'}`}>
+                                                <p className={`text-[13px] font-bold leading-snug tracking-[-0.01em] transition-colors duration-300 ${isActive ? 'text-white' : 'text-slate-450 group-hover:text-slate-200'}`}>
                                                     {cert.title}
                                                 </p>
                                             </div>
@@ -257,21 +398,27 @@ const Certifications = () => {
                             </nav>
 
                             {/* Mobile/Tablet Menu — Horizontal Slider */}
-                            <div className="flex lg:hidden overflow-x-auto gap-2 pb-1 scrollbar-none -mx-1 px-1">
+                            <div className="flex lg:hidden overflow-x-auto gap-2.5 pb-3 scrollbar-none -mx-1 px-1">
                                 {certificationsData.map((cert, index) => {
                                     const isActive = activeTab === index;
+                                    const colors = getCertColorClasses(cert.code);
                                     return (
                                         <button
                                             key={index}
                                             onClick={() => setActiveTab(index)}
-                                            className={`py-2 px-3.5 rounded-lg text-xs font-mono whitespace-nowrap transition-all duration-300 border flex items-center gap-2 cursor-pointer shrink-0 ${
+                                            className={`py-2.5 px-4 rounded-xl text-xs font-mono whitespace-nowrap transition-all duration-300 border flex items-center gap-2.5 cursor-pointer shrink-0 backdrop-blur-md relative select-none group ${
                                                 isActive
-                                                    ? 'bg-violet-500/10 border-violet-500/40 text-white font-semibold'
-                                                    : 'bg-black/20 border-violet-500/10 text-slate-400 hover:text-white hover:border-violet-500/25'
+                                                    ? `${colors.bgGradient} ${colors.borderActive} text-white font-semibold ${colors.glow}`
+                                                    : 'bg-[#080c14]/40 border-white/5 text-slate-450 hover:text-slate-200 hover:bg-white/[0.02]'
                                             }`}
                                         >
-                                            <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-violet-400 animate-pulse' : 'bg-violet-500/30'}`} />
+                                            <span className={`text-[10px] transition-colors duration-300 ${isActive ? colors.text : 'text-slate-500 group-hover:text-slate-350'}`}>
+                                                {cert.icon}
+                                            </span>
                                             <span>0{index + 1}. {cert.badgeText}</span>
+                                            {isActive && (
+                                                <div className={`absolute bottom-0 left-2 right-2 h-[2px] rounded-t-full ${colors.bg}`} />
+                                            )}
                                         </button>
                                     );
                                 })}
