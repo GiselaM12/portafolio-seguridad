@@ -142,10 +142,10 @@ const Certifications = () => {
     const currentCert = certificationsData[activeTab];
 
     const dossierSections = [
-        { emoji: '🛡️', label: '01 // Aprendizajes Clave', key: 'learnings' },
-        { emoji: '🎯', label: '02 // Retos Superados', key: 'challenges' },
-        { emoji: '💻', label: '03 // Aplicación Práctica', key: 'application' },
-        { emoji: '💬', label: '04 // Comentario Personal', key: 'comment' },
+        { emoji: '🛡️', tabLabel: 'Aprendizajes', fullLabel: 'Aprendizajes Clave', key: 'learnings' },
+        { emoji: '🎯', tabLabel: 'Retos', fullLabel: 'Retos Superados', key: 'challenges' },
+        { emoji: '💻', tabLabel: 'Aplicación', fullLabel: 'Aplicación Práctica', key: 'application' },
+        { emoji: '💬', tabLabel: 'Comentario', fullLabel: 'Comentario Personal', key: 'comment' },
     ];
 
     return (
@@ -333,38 +333,29 @@ const Certifications = () => {
                                                 <span className="text-violet-400 text-lg sm:text-xl shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(139,92,246,0.4)]">{currentCert.icon}</span>
                                                 <span className="cert-detail-title">{currentCert.title}</span>
                                             </h3>
-                                            <p className="text-slate-500 text-[11px] font-mono tracking-wide">
-                                                <span className="text-slate-600">Organismo Certificador:</span> <span className="text-violet-400 font-semibold">{currentCert.issuer}</span>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Section 2 — Dossier Tabs + Content */}
-                                    <div className="mb-6">
-
-                                        {/* Dossier Tab Bar */}
-                                        <div className="flex items-center gap-1 mb-0 border-b border-violet-500/10 overflow-x-auto scrollbar-none">
-                                            {dossierSections.map(({ emoji, label }, index) => {
+                                                                             {/* Dossier Tab Bar */}
+                                        <div className="flex items-center gap-1 mb-4 border-b border-violet-500/10 overflow-x-auto scrollbar-none pb-px">
+                                            {dossierSections.map(({ emoji, tabLabel }, index) => {
                                                 const isActive = activeDossier === index;
                                                 return (
                                                     <button
                                                         key={index}
                                                         onClick={() => setActiveDossier(index)}
-                                                        className={`relative px-4 py-3 text-[9px] sm:text-[10px] font-mono font-semibold tracking-[0.1em] uppercase whitespace-nowrap transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 ${
+                                                        className={`relative px-4 py-2.5 text-[10px] sm:text-xs font-mono font-bold tracking-[0.08em] uppercase whitespace-nowrap transition-all duration-300 flex items-center gap-2 cursor-pointer shrink-0 rounded-t-lg ${
                                                             isActive
-                                                                ? 'text-violet-300'
-                                                                : 'text-slate-600 hover:text-slate-400'
+                                                                ? 'text-violet-300 bg-violet-500/5'
+                                                                : 'text-slate-500 hover:text-slate-300 hover:bg-white/[0.01]'
                                                         }`}
                                                     >
-                                                        <span className="text-sm">{emoji}</span>
-                                                        <span className="hidden sm:inline">{label}</span>
-                                                        <span className="sm:hidden">0{index + 1}</span>
-                                                        {/* Active underline */}
+                                                        <span className="text-sm shrink-0">{emoji}</span>
+                                                        <span>{tabLabel}</span>
+                                                        
+                                                        {/* Active indicator bar */}
                                                         {isActive && (
                                                             <motion.div
                                                                 layoutId="dossierTab"
-                                                                className="absolute bottom-0 left-2 right-2 h-[2px] bg-gradient-to-r from-violet-500 to-purple-500 rounded-full"
-                                                                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                                                className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500"
+                                                                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                                                             />
                                                         )}
                                                     </button>
@@ -373,7 +364,7 @@ const Certifications = () => {
                                         </div>
 
                                         {/* Dossier Content + Certificate Mockup Side by Side */}
-                                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start pt-5">
+                                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start pt-2">
 
                                             {/* Active Dossier Content — Full Width */}
                                             <div className="lg:col-span-8">
@@ -392,8 +383,8 @@ const Certifications = () => {
                                                         {/* Section label */}
                                                         <div className="flex items-center gap-2.5 mb-4">
                                                             <span className="text-lg">{dossierSections[activeDossier].emoji}</span>
-                                                            <h4 className="text-violet-400/90 font-mono text-[9px] font-bold tracking-[0.2em] uppercase">
-                                                                {dossierSections[activeDossier].label}
+                                                            <h4 className="text-violet-400/90 font-mono text-[10px] font-bold tracking-[0.2em] uppercase">
+                                                                {dossierSections[activeDossier].fullLabel}
                                                             </h4>
                                                             <div className="flex-1 h-px bg-gradient-to-r from-violet-500/15 to-transparent" />
                                                         </div>
