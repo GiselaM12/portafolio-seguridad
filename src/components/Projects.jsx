@@ -63,9 +63,9 @@ const Projects = () => {
     return (
         <section id="proyectos" className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden bg-[#030712]">
             {/* Background effects */}
-            <div className="absolute inset-0 scanlines pointer-events-none opacity-50" />
-            <div className="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-violet-600/5 rounded-full blur-[100px] sm:blur-[150px]" />
-            <div className="absolute bottom-0 left-0 w-48 sm:w-96 h-48 sm:h-96 bg-purple-600/5 rounded-full blur-[100px] sm:blur-[150px]" />
+            <div className="absolute inset-0 scanlines pointer-events-none opacity-30" />
+            <div className="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-cyan-500/5 rounded-full blur-[100px] sm:blur-[150px]" />
+            <div className="absolute bottom-0 left-0 w-48 sm:w-96 h-48 sm:h-96 bg-violet-600/5 rounded-full blur-[100px] sm:blur-[150px]" />
 
             <div className="container mx-auto relative z-10">
                 <motion.div
@@ -76,31 +76,31 @@ const Projects = () => {
                     className="text-center mb-8 sm:mb-12"
                 >
                     {/* Terminal badge */}
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-violet-500/10 border border-violet-500/30 rounded-full mb-4 sm:mb-6">
-                        <FaDatabase className="text-violet-400 text-xs sm:text-sm" />
-                        <span className="font-mono text-violet-400 text-[10px] sm:text-sm tracking-wider">PROJECT_ARCHIVE</span>
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-cyan-500/5 border border-cyan-500/30 rounded mb-4 sm:mb-6 shadow-[0_0_15px_rgba(20,184,166,0.1)]">
+                        <FaDatabase className="text-cyan-400 text-xs sm:text-sm animate-pulse" />
+                        <span className="font-mono text-cyan-400 text-[10px] sm:text-xs tracking-widest uppercase">PROJECT_ARCHIVE</span>
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-                        <span className="text-gradient">Proyectos y Evidencias</span>
+                        <span className="text-gradient-cyber drop-shadow-[0_0_35px_rgba(99,102,241,0.15)]">Proyectos y Evidencias</span>
                     </h2>
-                    <p className="text-gray-500 text-sm sm:text-lg max-w-2xl mx-auto mb-6 sm:mb-10 font-mono px-2">
+                    <p className="text-gray-500 text-xs sm:text-sm max-w-2xl mx-auto mb-8 sm:mb-10 font-mono uppercase tracking-widest px-2">
                         // Repositorio de prácticas y proyectos CNO V
                     </p>
 
-                    {/* Tabs Navigation - Terminal Style */}
-                    <div className="bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg inline-flex p-1 backdrop-blur-sm overflow-x-auto max-w-full">
+                    {/* Tabs Navigation - IDE File Style */}
+                    <div className="flex border-b border-cyan-500/20 max-w-xl mx-auto overflow-x-auto scrollbar-none mb-8 justify-center">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-md font-mono text-xs sm:text-sm transition-all duration-300 whitespace-nowrap ${activeTab === tab.id
-                                    ? 'bg-violet-500/20 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.2)]'
-                                    : 'text-gray-500 hover:text-violet-400'
+                                className={`px-4 sm:px-6 py-2.5 font-mono text-xs transition-all duration-300 border-t border-x rounded-t relative -bottom-[1px] flex items-center gap-2 whitespace-nowrap ${activeTab === tab.id
+                                    ? 'bg-[#070b14]/90 border-cyan-500/30 border-b-transparent text-cyan-400 shadow-[0_-4px_12px_rgba(20,184,166,0.05)]'
+                                    : 'bg-transparent border-transparent text-gray-500 hover:text-cyan-400/80 hover:bg-[#070b14]/30'
                                     }`}
                             >
-                                <span className="sm:hidden">{tab.label}</span>
-                                <span className="hidden sm:inline">{tab.fullLabel}</span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/60" />
+                                <span>{tab.fullLabel}.log</span>
                             </button>
                         ))}
                     </div>
@@ -126,63 +126,64 @@ const Projects = () => {
                                 <Wrapper
                                     key={index}
                                     {...wrapperProps}
-                                    className={`bg-[#0a0f1a]/80 backdrop-blur-sm rounded-lg border relative overflow-hidden group transition-all duration-500 ${project.status === 'Locked'
-                                        ? 'border-red-500/20 hover:border-red-500/40'
-                                        : 'border-violet-500/20 hover:border-violet-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] cursor-pointer'
-                                        } block h-full flex flex-col`} // Added h-full and flex-col for consistent height
+                                    className={`bg-[#070b14]/90 backdrop-blur-xl rounded border relative overflow-hidden group transition-all duration-500 flex flex-col h-full ${project.status === 'Locked'
+                                        ? 'border-red-500/10 hover:border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.02)]'
+                                        : 'border-cyan-500/15 hover:border-cyan-500/40 hover:shadow-[0_0_25px_rgba(20,184,166,0.12)] cursor-pointer corner-borders'
+                                        }`}
                                 >
                                     {/* Terminal Header */}
-                                    <div className="bg-[#0d1321] px-3 sm:px-4 py-1.5 sm:py-2 border-b border-violet-500/10 flex items-center justify-between flex-shrink-0">
-                                        <div className="flex items-center gap-1 sm:gap-1.5">
-                                            <div className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full ${project.status === 'Locked' ? 'bg-red-500/70' : 'bg-green-500/70'}`} />
-                                            <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-yellow-500/70" />
-                                            <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-gray-600" />
+                                    <div className={`px-4 py-2 border-b flex items-center justify-between flex-shrink-0 ${project.status === 'Locked' ? 'bg-[#0f0b0c] border-red-500/10' : 'bg-[#090e1a] border-cyan-500/10'}`}>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className={`w-2 h-2 rounded-full ${project.status === 'Locked' ? 'bg-red-500/80 animate-pulse' : 'bg-green-500/80'}`} />
+                                            <span className="w-2 h-2 rounded-full bg-yellow-500/80" />
+                                            <span className="w-2 h-2 rounded-full bg-gray-700" />
                                         </div>
-                                        <span className={`px-1.5 sm:px-2 py-0.5 rounded text-[8px] sm:text-[10px] font-mono border flex items-center gap-1 ${project.status === 'Locked'
+                                        <span className={`px-2 py-0.5 rounded text-[8px] sm:text-[9px] font-mono border flex items-center gap-1 uppercase tracking-widest ${project.status === 'Locked'
                                             ? 'bg-red-500/10 text-red-400 border-red-500/20'
-                                            : 'bg-violet-500/10 text-violet-400 border-violet-500/20'
+                                            : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
                                             }`}>
-                                            {project.status === 'Locked' ? <FaLock className="text-[6px] sm:text-[8px]" /> : <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-violet-400 rounded-full animate-pulse"></div>}
-                                            <span className="hidden xs:inline">{project.status}</span>
+                                            {project.status === 'Locked' ? <FaLock className="text-[7px]" /> : <span className="w-1 h-1 bg-cyan-400 rounded-full animate-ping" />}
+                                            <span>{project.status}</span>
                                         </span>
                                     </div>
 
-                                    <div className="p-4 sm:p-6 flex-grow flex flex-col">
+                                    <div className="p-5 sm:p-6 flex-grow flex flex-col">
                                         {/* Code identifier */}
-                                        <div className="text-[10px] sm:text-xs font-mono text-violet-500/50 mb-3 sm:mb-4 flex justify-between">
+                                        <div className="text-[9px] font-mono text-cyan-500/50 mb-3 sm:mb-4 flex justify-between tracking-wider">
                                             <span>
                                                 {project.isActivity
                                                     ? `[ACT-${String(index + 1).padStart(3, '0')}]`
                                                     : `[PROJ-${String(index + 1).padStart(3, '0')}]`
                                                 }
                                             </span>
-                                            {isLink && <FaExternalLinkAlt className="opacity-0 group-hover:opacity-100 transition-opacity text-violet-400" />}
+                                            {isLink && <FaExternalLinkAlt className="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400 text-xs" />}
                                         </div>
 
-                                        <div className={`w-10 sm:w-14 h-10 sm:h-14 rounded-lg flex items-center justify-center mb-3 sm:mb-4 text-xl sm:text-2xl transition-all duration-300 group-hover:scale-110 ${project.status === 'Locked'
-                                            ? 'bg-red-500/10 text-red-500/50'
-                                            : 'bg-violet-500/10 text-violet-400'
+                                        <div className={`w-10 sm:w-12 h-10 sm:h-12 rounded flex items-center justify-center mb-3 sm:mb-4 text-xl sm:text-2xl transition-all duration-300 group-hover:scale-105 ${project.status === 'Locked'
+                                            ? 'bg-red-500/5 text-red-500/40 border border-red-500/10'
+                                            : 'bg-cyan-500/5 text-cyan-400 border border-cyan-500/10 group-hover:border-cyan-400/30 shadow-[0_0_10px_rgba(20,184,166,0.1)]'
                                             }`}>
                                             {project.icon}
                                         </div>
 
-                                        <div className="flex items-center justify-between group-hover:translate-x-1 transition-transform mb-2">
-                                            <h3 className={`text-sm sm:text-base font-bold font-mono transition-colors line-clamp-2 ${project.status === 'Locked' ? 'text-gray-500' : 'text-white group-hover:text-violet-400'
-                                                }`}>
+                                        <div className="flex items-center justify-between transition-transform mb-2">
+                                            <h3 className={`text-sm sm:text-base font-bold font-mono transition-all duration-300 line-clamp-2 ${project.status === 'Locked' ? 'text-gray-500' : 'text-white group-hover:text-cyan-400'}`}>
+                                                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-cyan-400 mr-1">[</span>
                                                 {project.title}
+                                                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-cyan-400 ml-1">]</span>
                                             </h3>
                                         </div>
 
-                                        <p className="text-gray-600 mb-4 font-mono text-[10px] sm:text-xs leading-relaxed line-clamp-3 flex-grow">
-                                            {project.status === 'Locked' ? '>>> ENCRYPTED' : project.description}
+                                        <p className="text-gray-500 mb-4 font-mono text-[10px] sm:text-xs leading-relaxed line-clamp-3 flex-grow">
+                                            {project.status === 'Locked' ? '>>> ENCRYPTED_BLOCK // ACCESS_DENIED' : project.description}
                                         </p>
 
                                         {/* Progress bar */}
-                                        <div className="w-full h-0.5 sm:h-1 bg-gray-800 rounded-full overflow-hidden mt-auto">
+                                        <div className="w-full h-0.5 bg-gray-950 rounded-full overflow-hidden mt-auto">
                                             <div className={`h-full transition-all duration-500 ${project.status === 'Locked'
-                                                ? 'bg-red-900/50 w-full'
-                                                : 'bg-violet-500 w-full animate-pulse'
-                                                }`}></div>
+                                                ? 'bg-red-950 w-full'
+                                                : 'bg-cyan-500 w-full animate-pulse shadow-[0_0_4px_#22d3ee]'
+                                                }`} style={{ width: project.status === 'Locked' ? '15%' : '100%' }}></div>
                                         </div>
                                     </div>
                                 </Wrapper>
@@ -199,10 +200,10 @@ const Projects = () => {
                     viewport={{ once: true }}
                     className="text-center mt-8 sm:mt-12"
                 >
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0a0f1a]/80 border border-violet-500/20 rounded-lg backdrop-blur-sm">
-                        <FaTerminal className="text-violet-400 text-xs sm:text-sm" />
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#070b14]/90 border border-cyan-500/20 rounded shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+                        <FaTerminal className="text-cyan-400 text-xs sm:text-sm animate-pulse" />
                         <span className="text-gray-500 font-mono text-[10px] sm:text-xs">
-                            <span className="text-violet-400">$</span> ls /{activeTab} -la
+                            <span className="text-cyan-400">$</span> ls -la /archives/activities/{activeTab}
                         </span>
                     </div>
                 </motion.div>

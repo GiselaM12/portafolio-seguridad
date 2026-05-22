@@ -66,8 +66,8 @@ const Contact = () => {
             <div className="absolute inset-0 scanlines pointer-events-none opacity-50 z-10" />
 
             {/* Glowing orbs - smaller on mobile */}
-            <div className="absolute top-10 left-5 w-32 sm:w-64 h-32 sm:h-64 bg-violet-500/10 rounded-full blur-2xl sm:blur-3xl animate-pulse" />
-            <div className="absolute bottom-10 right-5 w-48 sm:w-96 h-48 sm:h-96 bg-purple-500/5 rounded-full blur-2xl sm:blur-3xl" />
+            <div className="absolute top-10 left-5 w-32 sm:w-64 h-32 sm:h-64 bg-cyan-500/10 rounded-full blur-2xl sm:blur-3xl animate-pulse" />
+            <div className="absolute bottom-10 right-5 w-48 sm:w-96 h-48 sm:h-96 bg-violet-500/5 rounded-full blur-2xl sm:blur-3xl" />
 
             <div className="container mx-auto relative z-20">
                 <motion.div
@@ -78,18 +78,18 @@ const Contact = () => {
                     className="text-center mb-8 sm:mb-12"
                 >
                     {/* Forensic Header */}
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-violet-500/10 border border-violet-500/30 rounded-full mb-4 sm:mb-6">
-                        <FaFingerprint className="text-violet-400 animate-pulse text-sm" />
-                        <span className="font-mono text-violet-400 text-[10px] sm:text-sm tracking-wider">SECURE_CHANNEL</span>
-                        <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-violet-500 rounded-full animate-ping" />
+                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-cyan-500/5 border border-cyan-500/30 rounded-full mb-4 sm:mb-6 shadow-[0_0_15px_rgba(20,184,166,0.05)]">
+                        <FaFingerprint className="text-cyan-400 animate-pulse text-sm" />
+                        <span className="font-mono text-cyan-400 text-[10px] sm:text-xs tracking-wider uppercase">SECURE_COMM_CHANNEL</span>
+                        <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-cyan-500 rounded-full animate-ping" />
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
-                        <span className="text-gray-100">Secure </span>
-                        <span className="text-gradient">Communication</span>
+                        <span className="text-gray-100">Establecer </span>
+                        <span className="text-gradient-cyber drop-shadow-[0_0_35px_rgba(99,102,241,0.15)]">Conexión</span>
                     </h2>
 
-                    <p className="text-violet-500/80 font-mono text-xs sm:text-sm mb-2">
+                    <p className="text-cyan-500/80 font-mono text-xs sm:text-sm mb-2">
                         {typingText}<span className="animate-ping">_</span>
                     </p>
                 </motion.div>
@@ -103,38 +103,38 @@ const Contact = () => {
                         className="relative"
                     >
                         {/* Terminal glow effect - subtle on mobile */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-violet-500/10 sm:from-violet-500/20 via-purple-500/10 sm:via-purple-500/20 to-violet-500/10 sm:to-violet-500/20 rounded-lg blur-lg sm:blur-xl opacity-50" />
+                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/10 sm:from-cyan-500/20 via-violet-500/10 sm:via-violet-500/20 to-cyan-500/10 sm:to-cyan-500/20 rounded-lg blur-lg sm:blur-xl opacity-50" />
 
-                        <div className="relative bg-[#0a0f1a]/95 backdrop-blur-xl border border-violet-500/30 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(139,92,246,0.1)] sm:shadow-[0_0_50px_rgba(139,92,246,0.15)]">
-                            {/* Terminal Header - simplified on mobile */}
-                            <div className="bg-[#0d1321] px-3 sm:px-6 py-2 sm:py-3 border-b border-violet-500/20 flex items-center justify-between">
+                        <div className="relative bg-[#070b14]/95 backdrop-blur-xl border border-cyan-500/20 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(20,184,166,0.1)] sm:shadow-[0_0_50px_rgba(20,184,166,0.15)]">
+                            {/* Terminal Header */}
+                            <div className="bg-[#090e1a] px-3 sm:px-6 py-2 sm:py-3 border-b border-cyan-500/10 flex items-center justify-between">
                                 <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-red-500" />
-                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-yellow-500" />
-                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-green-500" />
+                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-red-500/80" />
+                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-yellow-500/80" />
+                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-green-500/80" />
                                 </div>
-                                <div className="flex items-center gap-2 sm:gap-4 text-[8px] sm:text-xs font-mono text-violet-500/60">
+                                <div className="flex items-center gap-2 sm:gap-4 text-[8px] sm:text-xs font-mono text-cyan-500/60">
                                     <span className="hidden sm:flex items-center gap-1">
-                                        <FaLock className="text-[10px]" /> SSL
+                                        <FaLock className="text-[10px]" /> SSL_ACTIVE
                                     </span>
                                     <span className="flex items-center gap-1">
-                                        <FaServer className="text-[8px] sm:text-[10px]" /> SECURE
+                                        <FaServer className="text-[8px] sm:text-[10px]" /> SECURE_NODE
                                     </span>
                                 </div>
                             </div>
 
-                            {/* Terminal Info Bar - hidden on small mobile */}
-                            <div className="hidden sm:flex bg-violet-500/5 px-4 sm:px-6 py-2 border-b border-violet-500/10 items-center justify-between text-[10px] sm:text-xs font-mono">
-                                <div className="flex items-center gap-2 sm:gap-4 text-violet-500/60">
+                            {/* Terminal Info Bar */}
+                            <div className="hidden sm:flex bg-cyan-500/5 px-4 sm:px-6 py-2 border-b border-cyan-500/10 items-center justify-between text-[10px] sm:text-xs font-mono">
+                                <div className="flex items-center gap-2 sm:gap-4 text-cyan-500/60">
                                     <span className="flex items-center gap-1">
-                                        <FaUserSecret className="text-[10px]" /> Agente: GiselaM
+                                        <FaUserSecret className="text-[10px]" /> OPERADOR: GISELAM
                                     </span>
                                     <span className="hidden md:inline">|</span>
-                                    <span className="hidden md:inline">Acceso: NIVEL-5</span>
+                                    <span className="hidden md:inline">CLEARANCE: LEVEL-5</span>
                                 </div>
-                                <div className="text-violet-400/60 flex items-center">
-                                    <span className="inline-block w-1.5 sm:w-2 h-1.5 sm:h-2 bg-violet-500 rounded-full mr-1.5 sm:mr-2 animate-pulse" />
-                                    ACTIVO
+                                <div className="text-cyan-400/80 flex items-center">
+                                    <span className="inline-block w-1.5 sm:w-2 h-1.5 sm:h-2 bg-cyan-400 rounded-full mr-1.5 sm:mr-2 animate-pulse" />
+                                    TUNNEL_SECURE
                                 </div>
                             </div>
 
@@ -143,12 +143,12 @@ const Contact = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mb-6 sm:mb-8 p-3 sm:p-4 bg-green-500/10 border border-green-500/40 rounded font-mono text-green-400 flex items-start gap-2 sm:gap-3"
+                                        className="mb-6 sm:mb-8 p-3 sm:p-4 bg-green-500/10 border border-green-500/35 rounded font-mono text-green-450 flex items-start gap-2 sm:gap-3"
                                     >
-                                        <FaCheckCircle className="mt-0.5 sm:mt-1 text-base sm:text-lg shrink-0" />
+                                        <FaCheckCircle className="mt-0.5 sm:mt-1 text-base sm:text-lg shrink-0 text-green-400" />
                                         <div>
-                                            <p className="font-bold text-green-300 text-sm sm:text-base">[ TRANSMISIÓN EXITOSA ]</p>
-                                            <p className="text-xs sm:text-sm opacity-80">Mensaje enviado correctamente.</p>
+                                            <p className="font-bold text-green-300 text-sm sm:text-base">[ INITIATE_TRANSMISSION: SUCCESS ]</p>
+                                            <p className="text-xs sm:text-sm opacity-80 mt-0.5">Mensaje encriptado y transmitido correctamente.</p>
                                         </div>
                                     </motion.div>
                                 )}
@@ -157,12 +157,12 @@ const Contact = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mb-6 sm:mb-8 p-3 sm:p-4 bg-red-500/10 border border-red-500/40 rounded font-mono text-red-400 flex items-start gap-2 sm:gap-3"
+                                        className="mb-6 sm:mb-8 p-3 sm:p-4 bg-red-500/10 border border-red-500/35 rounded font-mono text-red-400 flex items-start gap-2 sm:gap-3"
                                     >
-                                        <FaExclamationTriangle className="mt-0.5 sm:mt-1 text-base sm:text-lg shrink-0" />
+                                        <FaExclamationTriangle className="mt-0.5 sm:mt-1 text-base sm:text-lg shrink-0 text-red-400" />
                                         <div>
-                                            <p className="font-bold text-red-300 text-sm sm:text-base">[ ERROR ]</p>
-                                            <p className="text-xs sm:text-sm opacity-80">Reintente la conexión.</p>
+                                            <p className="font-bold text-red-300 text-sm sm:text-base">[ TRANSMISSION_ERROR ]</p>
+                                            <p className="text-xs sm:text-sm opacity-80 mt-0.5">Fallo en la comunicación. Reintente establecer el canal.</p>
                                         </div>
                                     </motion.div>
                                 )}
@@ -171,13 +171,13 @@ const Contact = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                         {/* Nombre */}
                                         <div className="group">
-                                            <label className="block text-violet-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
-                                                <FaUser className="inline mr-1 sm:mr-2" />Nombre
+                                            <label className="block text-cyan-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
+                                                <FaUser className="inline mr-1 sm:mr-2 text-cyan-400/80" />Nombre
                                             </label>
                                             <input
                                                 type="text"
                                                 {...register('name', { required: true, minLength: 3 })}
-                                                className="w-full bg-[#020617] border border-violet-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-violet-100 font-mono text-sm placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
+                                                className="w-full bg-[#040815] border border-cyan-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-cyan-100 font-mono text-sm placeholder-cyan-500/20 focus:outline-none focus:border-cyan-450 focus:shadow-[0_0_15px_rgba(20,184,166,0.2)] transition-all duration-300"
                                                 placeholder="Tu nombre..."
                                             />
                                             {errors.name && <p className="text-red-400 text-[10px] sm:text-xs mt-1 font-mono">! Campo requerido</p>}
@@ -185,8 +185,8 @@ const Contact = () => {
 
                                         {/* Email */}
                                         <div className="group">
-                                            <label className="block text-violet-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
-                                                <FaEnvelope className="inline mr-1 sm:mr-2" />Email
+                                            <label className="block text-cyan-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
+                                                <FaEnvelope className="inline mr-1 sm:mr-2 text-cyan-400/80" />Email
                                             </label>
                                             <input
                                                 type="email"
@@ -194,7 +194,7 @@ const Contact = () => {
                                                     required: true,
                                                     pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                                 })}
-                                                className="w-full bg-[#020617] border border-violet-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-violet-100 font-mono text-sm placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
+                                                className="w-full bg-[#040815] border border-cyan-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-cyan-100 font-mono text-sm placeholder-cyan-500/20 focus:outline-none focus:border-cyan-450 focus:shadow-[0_0_15px_rgba(20,184,166,0.2)] transition-all duration-300"
                                                 placeholder="correo@ejemplo.com"
                                             />
                                             {errors.email && <p className="text-red-400 text-[10px] sm:text-xs mt-1 font-mono">! Email inválido</p>}
@@ -203,13 +203,13 @@ const Contact = () => {
 
                                     {/* Asunto */}
                                     <div className="group">
-                                        <label className="block text-violet-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
-                                            <FaTerminal className="inline mr-1 sm:mr-2" />Asunto
+                                        <label className="block text-cyan-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
+                                            <FaTerminal className="inline mr-1 sm:mr-2 text-cyan-400/80" />Asunto
                                         </label>
                                         <input
                                             type="text"
                                             {...register('subject', { required: true })}
-                                            className="w-full bg-[#020617] border border-violet-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-violet-100 font-mono text-sm placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
+                                            className="w-full bg-[#040815] border border-cyan-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-cyan-100 font-mono text-sm placeholder-cyan-500/20 focus:outline-none focus:border-cyan-450 focus:shadow-[0_0_15px_rgba(20,184,166,0.2)] transition-all duration-300"
                                             placeholder="Asunto del mensaje..."
                                         />
                                         {errors.subject && <p className="text-red-400 text-[10px] sm:text-xs mt-1 font-mono">! Campo requerido</p>}
@@ -217,13 +217,13 @@ const Contact = () => {
 
                                     {/* Mensaje */}
                                     <div className="group">
-                                        <label className="block text-violet-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
-                                            <span className="text-purple-400">&gt;</span> Mensaje
+                                        <label className="block text-cyan-500/70 text-[10px] sm:text-xs font-mono mb-1.5 sm:mb-2 uppercase tracking-wider">
+                                            <span className="text-cyan-400">&gt;</span> Mensaje
                                         </label>
                                         <textarea
                                             {...register('message', { required: true, minLength: 10 })}
                                             rows="4"
-                                            className="w-full bg-[#020617] border border-violet-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-violet-100 font-mono text-sm placeholder-violet-500/30 focus:outline-none focus:border-violet-400 focus:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all resize-none"
+                                            className="w-full bg-[#040815] border border-cyan-500/20 rounded px-3 sm:px-4 py-2.5 sm:py-3 text-cyan-100 font-mono text-sm placeholder-cyan-500/20 focus:outline-none focus:border-cyan-450 focus:shadow-[0_0_15px_rgba(20,184,166,0.2)] transition-all duration-300 resize-none font-mono"
                                             placeholder="Escribe tu mensaje..."
                                         />
                                         {errors.message && <p className="text-red-400 text-[10px] sm:text-xs mt-1 font-mono">! Mínimo 10 caracteres</p>}
@@ -235,36 +235,36 @@ const Contact = () => {
                                         disabled={isSubmitting}
                                         whileHover={{ scale: 1.01 }}
                                         whileTap={{ scale: 0.99 }}
-                                        className={`w-full py-3 sm:py-4 rounded font-mono font-bold text-sm sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 border-2 ${isSubmitting
+                                        className={`w-full py-3 sm:py-4 rounded font-mono font-bold text-sm sm:text-base flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 border ${isSubmitting
                                             ? 'bg-gray-800/50 border-gray-700 text-gray-500 cursor-not-allowed'
-                                            : 'bg-violet-500/10 border-violet-500/50 text-violet-400 hover:bg-violet-500/20 hover:border-violet-400 hover:text-violet-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]'
+                                            : 'bg-cyan-500/10 border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_30px_rgba(20,184,166,0.25)]'
                                             }`}
                                     >
                                         {isSubmitting ? (
                                             <>
                                                 <div className="w-4 sm:w-5 h-4 sm:h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                                                <span className="animate-pulse text-xs sm:text-base">Enviando...</span>
+                                                <span className="animate-pulse text-xs sm:text-sm">TRANSMITIENDO...</span>
                                             </>
                                         ) : (
                                             <>
                                                 <FaPaperPlane />
-                                                <span>ENVIAR MENSAJE</span>
+                                                <span>INITIATE_TRANSMISSION</span>
                                             </>
                                         )}
                                     </motion.button>
                                 </form>
                             </div>
 
-                            {/* Terminal Footer - simplified on mobile */}
-                            <div className="bg-[#0d1321] px-3 sm:px-6 py-2 sm:py-3 border-t border-violet-500/20 flex justify-between items-center text-[8px] sm:text-[10px] text-violet-500/50 font-mono">
+                            {/* Terminal Footer */}
+                            <div className="bg-[#090e1a] px-3 sm:px-6 py-2 sm:py-3 border-t border-cyan-500/10 flex justify-between items-center text-[8px] sm:text-[10px] text-cyan-500/50 font-mono">
                                 <div className="flex items-center gap-2 sm:gap-4">
-                                    <span>HTTPS</span>
+                                    <span>PROTOCOL: HTTPS</span>
                                     <span className="hidden sm:inline">|</span>
-                                    <span className="hidden sm:inline">AES-256</span>
+                                    <span>CIPHER: AES-256</span>
                                 </div>
                                 <div className="flex items-center gap-1 sm:gap-2">
-                                    <span className="text-violet-400">⬤</span>
-                                    <span>443</span>
+                                    <span className="text-cyan-400">⬤</span>
+                                    <span>PORT: 443</span>
                                 </div>
                             </div>
                         </div>

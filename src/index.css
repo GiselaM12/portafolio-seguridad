@@ -271,3 +271,113 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* ── Cyber Redesign Premium Styles ────────────────────────── */
+
+/* Cybernetic Grid */
+.cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+  position: relative;
+}
+
+.cyber-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, #030712 95%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Border Gradient */
+.border-gradient-cyber {
+  border: 1px solid transparent;
+  background-image: linear-gradient(rgba(10, 15, 26, 0.8), rgba(10, 15, 26, 0.8)), 
+                    linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.25) 50%, rgba(20, 184, 166, 0.25) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.border-gradient-cyber:hover {
+  background-image: linear-gradient(rgba(10, 15, 26, 0.9), rgba(10, 15, 26, 0.9)), 
+                    linear-gradient(135deg, rgba(99, 102, 241, 0.5) 0%, rgba(168, 85, 247, 0.5) 50%, rgba(20, 184, 166, 0.5) 100%);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+}
+
+/* Corner Borders (Bracket accents) */
+.corner-borders {
+  position: relative;
+}
+
+.corner-borders::before, .corner-borders::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(99, 102, 241, 0.4);
+  border-style: solid;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.corner-borders::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.corner-borders::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+.corner-borders:hover::before, .corner-borders:hover::after {
+  border-color: rgba(20, 184, 166, 0.8);
+  width: 14px;
+  height: 14px;
+}
+
+/* Cybernetic cut clip paths */
+.cyber-clip {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.cyber-clip-sm {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+/* Scanline animation for profile & holograms */
+@keyframes laser-scan {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
+.animate-laser-scan {
+  animation: laser-scan 4s linear infinite;
+}
+
+/* Glowing typography */
+.glow-text-cyan {
+  text-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+}
+
+.glow-text-violet {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}

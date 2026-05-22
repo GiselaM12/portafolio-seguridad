@@ -7,6 +7,7 @@ const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [currentTime, setCurrentTime] = useState('');
+    const [ping, setPing] = useState(14);
     const location = useLocation();
 
     useEffect(() => {
@@ -23,9 +24,15 @@ const Header = () => {
         updateTime();
         const timeInterval = setInterval(updateTime, 1000);
 
+        // Simulate ping fluctuation
+        const pingInterval = setInterval(() => {
+            setPing(Math.floor(Math.random() * 8) + 11); // 11-18ms
+        }, 4000);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             clearInterval(timeInterval);
+            clearInterval(pingInterval);
         };
     }, []);
 
@@ -35,7 +42,6 @@ const Header = () => {
         { name: 'Presentación', path: '/#presentacion' },
         { name: 'Perfil', path: '/#perfil' },
         { name: 'Certificaciones', path: '/#certificaciones' },
-
         { name: 'Tecnologías', path: '/#tecnologias' },
         { name: 'Contacto', path: '/#contacto' },
     ];
@@ -81,12 +87,12 @@ const Header = () => {
     const NavLink = ({ item, isMobile = false }) => {
         // Base classes
         const baseClasses = isMobile
-            ? "block py-3 px-4 text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 rounded-lg transition-all duration-300 font-mono text-sm cursor-pointer"
-            : "px-4 py-2 text-gray-400 hover:text-violet-400 transition-all duration-300 font-mono text-sm rounded-lg hover:bg-violet-500/10 cursor-pointer";
+            ? "block py-3 px-4 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/5 rounded-lg border-l border-transparent hover:border-cyan-500/30 transition-all duration-300 font-mono text-xs uppercase tracking-wider cursor-pointer"
+            : "px-3 py-1.5 text-gray-400 hover:text-cyan-400 transition-all duration-300 font-mono text-xs uppercase tracking-wider rounded border border-transparent hover:border-cyan-500/20 hover:bg-cyan-500/5 cursor-pointer";
 
         return (
             <div onClick={(e) => handleNavigation(e, item)} className={baseClasses}>
-                {isMobile && <span className="text-violet-500 mr-2">&gt;</span>}
+                {isMobile && <span className="text-cyan-500 mr-2">&gt;</span>}
                 {item.name}
             </div>
         );
@@ -98,8 +104,8 @@ const Header = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? 'bg-[#030712]/95 backdrop-blur-xl border-b border-violet-500/20 shadow-lg shadow-violet-500/5'
-                : 'bg-transparent'
+                ? 'bg-[#060a13]/85 backdrop-blur-xl border-b border-violet-500/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+                : 'bg-[#060a13]/30 backdrop-blur-sm border-b border-transparent'
                 }`}
         >
             <nav className="container mx-auto px-6 py-3">
@@ -111,17 +117,17 @@ const Header = () => {
                             className="flex items-center space-x-3 cursor-pointer"
                         >
                             <div className="relative">
-                                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center text-white text-lg shadow-lg shadow-violet-600/30">
-                                    <FaShieldAlt />
+                                <div className="w-10 h-10 rounded bg-gradient-to-br from-cyan-500 via-violet-600 to-purple-600 flex items-center justify-center text-white text-lg shadow-lg shadow-cyan-500/10 border border-cyan-400/30">
+                                    <FaShieldAlt className="text-cyan-200" />
                                 </div>
-                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-violet-400 rounded-full animate-pulse" />
+                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_8px_#22d3ee]" />
                             </div>
                             <div>
-                                <h1 className="text-lg font-bold text-white tracking-wide font-mono">
+                                <h1 className="text-sm font-bold text-white tracking-widest font-mono uppercase">
                                     Gisela Moreno
                                 </h1>
-                                <p className="text-[10px] text-violet-400 font-mono flex items-center gap-1">
-                                    <FaTerminal /> SecOps Portfolio
+                                <p className="text-[9px] text-cyan-400 font-mono tracking-wider flex items-center gap-1">
+                                    <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping" /> SECOPS // CORE_NODE
                                 </p>
                             </div>
                         </motion.div>
@@ -134,8 +140,8 @@ const Header = () => {
                                 key={item.name}
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.05 }}
+                                transition={{ delay: index * 0.05 }}
+                                whileHover={{ scale: 1.02 }}
                             >
                                 <NavLink item={item} />
                             </motion.div>
@@ -143,21 +149,21 @@ const Header = () => {
                     </div>
 
                     {/* Right side - Status */}
-                    <div className="hidden md:flex items-center gap-4 text-xs font-mono">
-                        <span className="text-gray-600 flex items-center gap-1">
-                            <FaLock className="text-violet-400" />
+                    <div className="hidden md:flex items-center gap-4 text-[10px] font-mono">
+                        <span className="text-gray-500 flex items-center gap-1.5">
+                            <FaLock className="text-cyan-400/60" />
                             {currentTime}
                         </span>
-                        <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-500/10 border border-violet-500/20 rounded-full">
-                            <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
-                            <span className="text-violet-400">ONLINE</span>
+                        <div className="flex items-center gap-2 px-3 py-1 bg-cyan-500/5 border border-cyan-500/20 rounded">
+                            <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_6px_#22d3ee]" />
+                            <span className="text-cyan-400/90 tracking-widest">NOMINAL // {ping}MS</span>
                         </div>
                     </div>
 
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="md:hidden text-violet-400 text-2xl p-2 hover:bg-violet-500/10 rounded-lg transition-colors"
+                        className="md:hidden text-cyan-400 text-xl p-2 hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/20 rounded transition-colors"
                     >
                         {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
                     </button>
@@ -169,7 +175,7 @@ const Header = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden mt-4 bg-[#0a0f1a]/95 backdrop-blur-xl border border-violet-500/20 rounded-lg p-4"
+                        className="md:hidden mt-4 bg-[#0a0f1a]/95 backdrop-blur-xl border border-cyan-500/20 rounded p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
                     >
                         {navItems.map((item) => (
                             <div key={item.name}>
