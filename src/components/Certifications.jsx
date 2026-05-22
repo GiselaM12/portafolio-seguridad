@@ -863,7 +863,7 @@ const Certifications = () => {
                                             {currentCert.title}
                                         </h3>
                                         <p className="text-xs sm:text-sm text-slate-450 max-w-lg leading-relaxed font-mono">
-                                            Esta credencial oficial de <span className="text-amber-400/80">Cisco Networking Academy</span> se encuentra en proceso de validación final por la institución educativa. La firma digital y el archivo PDF se integrarán de manera automática al concluir el periodo de evaluación académica correspondiente.
+                                            Esta credencial oficial de <span className="text-amber-400/80">Cisco Networking Academy</span> se encuentra en proceso de validación y acreditación de forma individual e independiente. La firma digital y el archivo PDF se integrarán de manera automática una vez concluido el curso correspondiente.
                                         </p>
                                         
                                         <div className="mt-8 flex items-center gap-2 px-3 py-1.5 bg-amber-500/5 border border-amber-500/10 rounded font-mono text-[9px] text-amber-400/60 uppercase tracking-widest">
