@@ -521,39 +521,73 @@ const EthicsSimulator = () => {
 
                         {/* TAB 2: Case Details */}
                         {activeTab === 'CASE_DETAILS' && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
-                                <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-xl flex flex-col justify-between">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-3 text-cyan-400">
-                                            <FaInfoCircle />
-                                            <span className="font-mono text-xs uppercase tracking-wider">RESUMEN DEL CASO</span>
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow">
+                                {/* Left: Cyber Threat Illustration Card */}
+                                <div className="lg:col-span-4 flex flex-col gap-3">
+                                    <span className="font-mono text-gray-500 text-[10px] tracking-widest uppercase">VISUAL_THREAT_RECON</span>
+                                    <div className="relative aspect-[4/3] lg:aspect-[3/4] rounded-2xl overflow-hidden border border-gray-800 bg-black/60 group shadow-lg">
+                                        <img
+                                            src={`${import.meta.env.BASE_URL}parcial3/scenario${scenario.id}.png`}
+                                            alt={scenario.title}
+                                            className={`w-full h-full object-cover transition-all duration-700 ${
+                                                isEthical 
+                                                ? 'filter hue-rotate-0 saturate-100 group-hover:scale-105' 
+                                                : 'filter hue-rotate-[140deg] saturate-150 brightness-90 group-hover:scale-105 contrast-125'
+                                            }`}
+                                        />
+                                        <div className={`absolute inset-0 bg-gradient-to-t transition-opacity duration-500 ${
+                                            isEthical 
+                                            ? 'from-cyan-950/80 via-transparent to-transparent opacity-80' 
+                                            : 'from-red-950/80 via-transparent to-transparent opacity-90'
+                                        }`} />
+                                        <div className="absolute bottom-4 left-4 right-4 font-mono text-[10px] flex flex-col gap-1">
+                                            <span className={isEthical ? 'text-cyan-400 font-bold' : 'text-red-400 font-bold animate-pulse'}>
+                                                {isEthical ? 'STATUS: NOMINAL_SAFE' : 'STATUS: ANOMALY_ALERT'}
+                                            </span>
+                                            <span className="text-gray-500 text-[8px] uppercase">
+                                                {isEthical ? 'SYS_INTEGRITY_LEVEL: 100%' : 'SECURITY_BREACH_DETECTED'}
+                                            </span>
                                         </div>
-                                        <h3 className="text-white font-bold text-base mb-2 font-mono">{scenario.title}</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed mb-4">{scenario.description}</p>
-                                    </div>
-                                    <div className="bg-black/40 border border-gray-800 p-4 rounded-lg">
-                                        <span className="text-[10px] text-gray-500 font-mono block mb-1">DILEMA ÉTICO IDENTIFICADO:</span>
-                                        <p className="text-white text-xs leading-relaxed font-mono">{scenario.dilema}</p>
                                     </div>
                                 </div>
 
-                                <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-xl flex flex-col justify-between">
-                                    <div>
-                                        <div className="flex items-center gap-2 mb-3 text-cyan-400">
-                                            <FaUserSecret />
-                                            <span className="font-mono text-xs uppercase tracking-wider">PLAN DE ACCIÓN DEL ESPECIALISTA</span>
-                                        </div>
-                                        <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                            Como analista y responsable de ciberseguridad, se definen los siguientes cursos de acción posibles:
-                                        </p>
-                                        <div className="space-y-3">
-                                            <div className="p-3 bg-green-500/5 rounded border border-green-500/10">
-                                                <span className="text-green-400 font-bold text-xs font-mono block">✔ ACCIÓN ÉTICA Y CUMPLIMIENTO:</span>
-                                                <p className="text-xs text-gray-400 leading-relaxed mt-1">{scenario.ethicalAction.title} - {scenario.ethicalAction.description}</p>
+                                {/* Right: Context Details & Dilema */}
+                                <div className="lg:col-span-8 flex flex-col gap-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                                        <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-xl flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-3 text-cyan-400">
+                                                    <FaInfoCircle />
+                                                    <span className="font-mono text-xs uppercase tracking-wider">RESUMEN DEL CASO</span>
+                                                </div>
+                                                <h3 className="text-white font-bold text-base mb-2 font-mono">{scenario.title}</h3>
+                                                <p className="text-gray-400 text-sm leading-relaxed mb-4">{scenario.description}</p>
                                             </div>
-                                            <div className="p-3 bg-red-500/5 rounded border border-red-500/10">
-                                                <span className="text-red-400 font-bold text-xs font-mono block">❌ ACCIÓN NEGLIGENTE Y RIESGO:</span>
-                                                <p className="text-xs text-gray-400 leading-relaxed mt-1">{scenario.unethicalAction.title} - {scenario.unethicalAction.description}</p>
+                                            <div className="bg-black/40 border border-gray-800 p-4 rounded-lg">
+                                                <span className="text-[10px] text-gray-500 font-mono block mb-1">DILEMA ÉTICO IDENTIFICADO:</span>
+                                                <p className="text-white text-xs leading-relaxed font-mono">{scenario.dilema}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-xl flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-3 text-cyan-400">
+                                                    <FaUserSecret />
+                                                    <span className="font-mono text-xs uppercase tracking-wider">PLAN DE ACCIÓN DEL ESPECIALISTA</span>
+                                                </div>
+                                                <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                                                    Como analista y responsable de ciberseguridad, se definen los siguientes cursos de acción posibles:
+                                                </p>
+                                                <div className="space-y-3">
+                                                    <div className="p-3 bg-green-500/5 rounded border border-green-500/10">
+                                                        <span className="text-green-400 font-bold text-xs font-mono block">✔ ACCIÓN ÉTICA Y CUMPLIMIENTO:</span>
+                                                        <p className="text-xs text-gray-400 leading-relaxed mt-1">{scenario.ethicalAction.title} - {scenario.ethicalAction.description}</p>
+                                                    </div>
+                                                    <div className="p-3 bg-red-500/5 rounded border border-red-500/10">
+                                                        <span className="text-red-400 font-bold text-xs font-mono block">❌ ACCIÓN NEGLIGENTE Y RIESGO:</span>
+                                                        <p className="text-xs text-gray-400 leading-relaxed mt-1">{scenario.unethicalAction.title} - {scenario.unethicalAction.description}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
