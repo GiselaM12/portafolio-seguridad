@@ -327,74 +327,76 @@ const DiamondModel = () => {
                     </button>
                 </div>
 
-                <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-stretch">
+                <div className="p-6 md:p-8 flex flex-col gap-8">
                     
-                    {/* =========================================
-                        PANEL 1: TOPOLOGÍA (IZQUIERDA - 4 cols) 
-                    ========================================== */}
-                    <div className="lg:col-span-4 flex flex-col items-center lg:border-r border-indigo-500/10 lg:pr-6">
-                        <h5 className="text-indigo-400 font-mono text-sm font-bold uppercase tracking-widest mb-10 flex items-center gap-2 bg-indigo-900/20 px-4 py-2 rounded-lg border border-indigo-500/30 w-full justify-center">
-                            <FaSearch /> Topología del Evento
-                        </h5>
+                    {/* ROW 1: Diamond Model & Node Details */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                         
-                        {/* Interactive Diamond Graph - Controlled safe boundaries to prevent any overflow */}
-                        <div className="relative w-full max-w-[280px] aspect-square my-6 mx-auto select-none shrink-0">
+                        {/* PANEL 1: TOPOLOGÍA (IZQUIERDA - 7 cols) */}
+                        <div className="lg:col-span-7 flex flex-col items-center bg-[#050810]/50 border border-indigo-500/10 p-6 md:p-10 rounded-2xl relative shadow-inner overflow-visible">
+                            <h5 className="text-indigo-400 font-mono text-sm md:text-base font-bold uppercase tracking-widest mb-12 flex items-center gap-3 bg-indigo-900/20 px-6 py-3 rounded-lg border border-indigo-500/30 w-full justify-center shadow-md">
+                                <FaSearch /> Topología del Evento
+                            </h5>
                             
-                            {/* Axis Label Masks - Blueprint Technical Overlay */}
-                            <div 
-                                className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[7px] sm:text-[8px] text-indigo-400/40 uppercase tracking-widest bg-[#03060f]/90 px-1 select-none pointer-events-none whitespace-nowrap rotate-90 origin-center"
-                                style={{ zIndex: 5 }}
-                            >
-                                Eje Socio-Político
-                            </div>
-                            <div 
-                                className="absolute left-[33%] top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[7px] sm:text-[8px] text-indigo-400/40 uppercase tracking-widest bg-[#03060f]/90 px-1 select-none pointer-events-none whitespace-nowrap"
-                                style={{ zIndex: 5 }}
-                            >
-                                Eje Técnico
-                            </div>
+                            {/* Interactive Diamond Graph - Increased size and safe boundaries */}
+                            <div className="relative w-full max-w-[400px] aspect-square mb-6 mt-4 mx-auto select-none shrink-0">
+                                
+                                {/* Axis Label Masks - Blueprint Technical Overlay */}
+                                <div 
+                                    className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[10px] sm:text-xs text-indigo-400/40 uppercase tracking-widest bg-[#050810] px-2 select-none pointer-events-none whitespace-nowrap rotate-90 origin-center"
+                                    style={{ zIndex: 5 }}
+                                >
+                                    Eje Socio-Político
+                                </div>
+                                <div 
+                                    className="absolute left-[33%] top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[10px] sm:text-xs text-indigo-400/40 uppercase tracking-widest bg-[#050810] px-2 select-none pointer-events-none whitespace-nowrap"
+                                    style={{ zIndex: 5 }}
+                                >
+                                    Eje Técnico
+                                </div>
 
-                            {/* Outer Node Labels (Adversary, Capability, Victim, Infrastructure) */}
-                            <div className="absolute top-[2%] left-1/2 -translate-x-1/2 font-mono text-[9px] sm:text-[10px] font-bold text-rose-400 bg-rose-500/10 border border-rose-500/30 px-2 py-0.5 rounded tracking-widest uppercase shadow-sm z-20">
-                                Adversario
-                            </div>
-                            <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 font-mono text-[9px] sm:text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded tracking-widest uppercase shadow-sm z-20">
-                                Víctima
-                            </div>
-                            <div className="absolute left-[-2%] top-1/2 -translate-y-1/2 font-mono text-[8px] sm:text-[9px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-1.5 py-0.5 rounded tracking-wider uppercase text-center max-w-[85px] leading-tight shadow-sm z-20">
-                                Infraestructura
-                            </div>
-                            <div className="absolute right-[-2%] top-1/2 -translate-y-1/2 font-mono text-[8px] sm:text-[9px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded tracking-wider uppercase text-center max-w-[85px] leading-tight shadow-sm z-20">
-                                Capacidad
-                            </div>
+                                {/* Outer Node Labels */}
+                                <div className="absolute top-[-5%] left-1/2 -translate-x-1/2 font-mono text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/30 px-3 py-1 rounded tracking-widest uppercase shadow-md z-20">
+                                    Adversario
+                                </div>
+                                <div className="absolute bottom-[-5%] left-1/2 -translate-x-1/2 font-mono text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded tracking-widest uppercase shadow-md z-20">
+                                    Víctima
+                                </div>
+                                <div className="absolute left-[-10%] top-1/2 -translate-y-1/2 font-mono text-xs font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-1 rounded tracking-wider uppercase text-center max-w-[120px] leading-tight shadow-md z-20">
+                                    Infraestructura
+                                </div>
+                                <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 font-mono text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded tracking-wider uppercase text-center max-w-[120px] leading-tight shadow-md z-20">
+                                    Capacidad
+                                </div>
 
-                            {/* Lines connecting nodes - perfectly aligned to percentage coordinates */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]" style={{ zIndex: 1 }}>
-                                <line x1="50%" y1="20%" x2="80%" y2="50%" stroke="rgba(244,63,94,0.4)" strokeWidth="2" />
-                                <line x1="80%" y1="50%" x2="50%" y2="80%" stroke="rgba(16,185,129,0.4)" strokeWidth="2" />
-                                <line x1="50%" y1="80%" x2="20%" y2="50%" stroke="rgba(6,182,212,0.4)" strokeWidth="2" />
-                                <line x1="20%" y1="50%" x2="50%" y2="20%" stroke="rgba(245,158,11,0.4)" strokeWidth="2" />
-                                <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(99,102,241,0.15)" strokeWidth="1" strokeDasharray="4" />
-                                <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="rgba(99,102,241,0.15)" strokeWidth="1" strokeDasharray="4" />
-                            </svg>
+                                {/* Lines connecting nodes */}
+                                <svg className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_12px_rgba(99,102,241,0.3)]" style={{ zIndex: 1 }}>
+                                    <line x1="50%" y1="20%" x2="80%" y2="50%" stroke="rgba(244,63,94,0.5)" strokeWidth="3" />
+                                    <line x1="80%" y1="50%" x2="50%" y2="80%" stroke="rgba(16,185,129,0.5)" strokeWidth="3" />
+                                    <line x1="50%" y1="80%" x2="20%" y2="50%" stroke="rgba(6,182,212,0.5)" strokeWidth="3" />
+                                    <line x1="20%" y1="50%" x2="50%" y2="20%" stroke="rgba(245,158,11,0.5)" strokeWidth="3" />
+                                    <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" strokeDasharray="6" />
+                                    <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" strokeDasharray="6" />
+                                </svg>
 
-                            {/* Nodes centered exactly at percentage coordinates */}
-                            <div className="absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
-                                <DiamondNode node={nodes.adversary} active={activeNode?.id === 'adversary'} onClick={() => setActiveNode(nodes.adversary)} />
-                            </div>
-                            <div className="absolute top-[50%] left-[80%] -translate-x-1/2 -translate-y-1/2 z-10">
-                                <DiamondNode node={nodes.capability} active={activeNode?.id === 'capability'} onClick={() => setActiveNode(nodes.capability)} />
-                            </div>
-                            <div className="absolute top-[80%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
-                                <DiamondNode node={nodes.victim} active={activeNode?.id === 'victim'} onClick={() => setActiveNode(nodes.victim)} />
-                            </div>
-                            <div className="absolute top-[50%] left-[20%] -translate-x-1/2 -translate-y-1/2 z-10">
-                                <DiamondNode node={nodes.infrastructure} active={activeNode?.id === 'infrastructure'} onClick={() => setActiveNode(nodes.infrastructure)} />
+                                {/* Nodes centered exactly at percentage coordinates */}
+                                <div className="absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
+                                    <DiamondNode node={nodes.adversary} active={activeNode?.id === 'adversary'} onClick={() => setActiveNode(nodes.adversary)} />
+                                </div>
+                                <div className="absolute top-[50%] left-[80%] -translate-x-1/2 -translate-y-1/2 z-10">
+                                    <DiamondNode node={nodes.capability} active={activeNode?.id === 'capability'} onClick={() => setActiveNode(nodes.capability)} />
+                                </div>
+                                <div className="absolute top-[80%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
+                                    <DiamondNode node={nodes.victim} active={activeNode?.id === 'victim'} onClick={() => setActiveNode(nodes.victim)} />
+                                </div>
+                                <div className="absolute top-[50%] left-[20%] -translate-x-1/2 -translate-y-1/2 z-10">
+                                    <DiamondNode node={nodes.infrastructure} active={activeNode?.id === 'infrastructure'} onClick={() => setActiveNode(nodes.infrastructure)} />
+                                </div>
                             </div>
                         </div>
 
-                        {/* Node Info Panel */}
-                        <div className="mt-12 w-full flex-grow">
+                        {/* PANEL 2: DETALLES DEL NODO (DERECHA - 5 cols) */}
+                        <div className="lg:col-span-5 w-full flex flex-col h-full">
                             <AnimatePresence mode="wait">
                                 {activeNode ? (
                                     <motion.div
@@ -402,28 +404,28 @@ const DiamondModel = () => {
                                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                                        className={`p-5 border border-indigo-500/30 rounded-xl bg-[#060a16] shadow-[0_0_20px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col gap-4`}
+                                        className={`p-6 md:p-8 h-full border border-indigo-500/30 rounded-2xl bg-[#060a16] shadow-[0_0_30px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col gap-6`}
                                     >
-                                        <div className={`absolute top-0 left-0 w-full h-1 ${activeNode.bg.replace('/10', '')}`} />
+                                        <div className={`absolute top-0 left-0 w-full h-1.5 ${activeNode.bg.replace('/10', '')}`} />
                                         
                                         <div>
-                                            <h6 className={`font-mono font-black text-sm md:text-base mb-1.5 ${activeNode.color} flex items-center gap-2 drop-shadow-md uppercase tracking-wider`}>
-                                                <activeNode.icon className="text-lg animate-pulse" /> {activeNode.title}
+                                            <h6 className={`font-mono font-black text-xl md:text-2xl mb-2 ${activeNode.color} flex items-center gap-3 drop-shadow-lg uppercase tracking-wider`}>
+                                                <activeNode.icon className="text-2xl md:text-3xl animate-pulse" /> {activeNode.title}
                                             </h6>
-                                            <p className="text-gray-300 text-[11px] sm:text-xs leading-relaxed">{activeNode.desc}</p>
+                                            <p className="text-gray-300 text-sm md:text-base leading-relaxed">{activeNode.desc}</p>
                                         </div>
 
-                                        <div className="border-t border-indigo-500/10 pt-3 space-y-2">
-                                            <span className="text-[9px] font-mono font-bold text-indigo-400 tracking-widest block uppercase">
-                                                TELEMETRÍA Y ARTEFACTOS:
+                                        <div className="border-t border-indigo-500/10 pt-5 space-y-4 flex-grow">
+                                            <span className="text-xs md:text-sm font-mono font-bold text-indigo-400 tracking-widest block uppercase">
+                                                TELEMETRÍA Y ARTEFACTOS DETALLADOS:
                                             </span>
-                                            <div className="space-y-1.5">
+                                            <div className="space-y-3">
                                                 {activeNode.details.map((detail, idx) => (
-                                                    <div key={idx} className="bg-black/35 border border-gray-800/80 rounded p-2 flex flex-col gap-0.5 hover:border-indigo-500/30 transition-all">
-                                                        <span className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">
+                                                    <div key={idx} className="bg-black/40 border border-gray-800/80 rounded-lg p-3 md:p-4 flex flex-col gap-1 hover:border-indigo-500/30 transition-all shadow-sm">
+                                                        <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
                                                             {detail.label}
                                                         </span>
-                                                        <span className="text-[10px] font-mono text-gray-200 font-medium leading-tight">
+                                                        <span className="text-sm font-mono text-gray-100 font-medium leading-relaxed">
                                                             {detail.value}
                                                         </span>
                                                     </div>
@@ -431,138 +433,141 @@ const DiamondModel = () => {
                                             </div>
                                         </div>
 
-                                        <div className="text-[10px] text-gray-400 font-mono bg-black/50 p-3 rounded-lg border border-gray-800">
-                                            <span className={`font-bold ${activeNode.color} block mb-1 uppercase tracking-wider text-[8px]`}>
+                                        <div className="text-xs md:text-sm text-gray-400 font-mono bg-black/60 p-4 md:p-5 rounded-xl border border-gray-700 shadow-inner mt-2">
+                                            <span className={`font-bold ${activeNode.color} block mb-2 uppercase tracking-widest text-xs`}>
                                                 Firma Técnica / Evidencia:
                                             </span> 
                                             {activeNode.example}
                                         </div>
                                     </motion.div>
                                 ) : (
-                                    <div className="h-full min-h-[150px] flex flex-col items-center justify-center border border-dashed border-indigo-500/20 rounded-xl text-indigo-400/50 font-mono text-xs text-center p-6 bg-[#03050a]/50">
-                                        <FaInfoCircle className="text-2xl mb-3" />
-                                        <p>Seleccione un nodo operativo del diamante para examinar los artefactos técnicos asociados.</p>
+                                    <div className="h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-indigo-500/20 rounded-2xl text-indigo-400/50 font-mono text-sm text-center p-8 bg-[#03050a]/50">
+                                        <FaInfoCircle className="text-4xl mb-4" />
+                                        <p className="max-w-xs">Seleccione un nodo operativo del diagrama para examinar los artefactos técnicos asociados en detalle.</p>
                                     </div>
                                 )}
                             </AnimatePresence>
                         </div>
+
                     </div>
 
-                    {/* =========================================
-                        PANEL 2: SIMULACIÓN (CENTRO - 5 cols) 
-                    ========================================== */}
-                    <div className="lg:col-span-4 flex flex-col gap-6 lg:border-r border-indigo-500/10 lg:pr-6">
-                        <div className="bg-[#050810] border border-indigo-500/30 rounded-xl p-6 h-full flex flex-col relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
+                    {/* ROW 2: Activity Threads & MITRE/Telemetry */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                        
+                        {/* PANEL 3: SIMULACIÓN (IZQUIERDA - 7 cols) */}
+                        <div className="lg:col-span-7 bg-[#050810] border border-indigo-500/30 rounded-2xl p-6 md:p-10 h-full flex flex-col relative overflow-hidden shadow-lg">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-[100px] rounded-full pointer-events-none" />
                             
-                            <h5 className="text-white font-mono text-sm md:text-base font-bold uppercase tracking-widest mb-8 flex items-center justify-between border-b border-indigo-900/50 pb-3">
-                                <span className="flex items-center gap-2">
-                                    <FaNetworkWired className="text-rose-400 text-lg" /> HILOS DE ACTIVIDAD <span className="text-indigo-400/60 hidden sm:inline">(PIVOTING)</span>
+                            <h5 className="text-white font-mono text-base md:text-lg font-bold uppercase tracking-widest mb-10 flex items-center justify-between border-b border-indigo-900/50 pb-4">
+                                <span className="flex items-center gap-3">
+                                    <FaNetworkWired className="text-rose-400 text-xl" /> HILOS DE ACTIVIDAD (PIVOTING)
                                 </span>
-                                <span className="text-[9px] md:text-[10px] font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-900 px-2 py-1 rounded flex items-center gap-1.5 animate-pulse">
-                                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" /> LIVE SIMULATION
+                                <span className="text-xs font-bold text-emerald-400 bg-emerald-950/50 border border-emerald-900 px-3 py-1.5 rounded-md flex items-center gap-2 animate-pulse shadow-sm">
+                                    <span className="w-2 h-2 bg-emerald-400 rounded-full" /> LIVE SIMULATION
                                 </span>
                             </h5>
                             
-                            <div className="flex-grow flex flex-col justify-center gap-12 sm:gap-16 py-8">
+                            <div className="flex-grow flex flex-col justify-center gap-16 md:gap-20 py-10 px-4 md:px-8">
                                 {/* Thread 1 */}
                                 <div className="relative">
-                                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-indigo-900/60 -translate-y-1/2"></div>
+                                    <div className="absolute top-1/2 left-0 w-full h-[2px] bg-indigo-900/60 -translate-y-1/2"></div>
                                     <div className="relative z-10 flex justify-between items-center">
-                                        <div className="bg-[#03050a] border border-rose-500/40 p-3 rounded-lg flex flex-col items-center gap-1.5 shadow-[0_0_15px_rgba(244,63,94,0.15)] z-20">
-                                            <FaUserSecret className="text-rose-500 text-xl md:text-2xl" />
-                                            <span className="text-[9px] md:text-[10px] font-mono font-bold text-rose-300">Atacante</span>
+                                        <div className="bg-[#03050a] border-2 border-rose-500/40 p-4 md:p-5 rounded-xl flex flex-col items-center gap-2 shadow-[0_0_20px_rgba(244,63,94,0.15)] z-20">
+                                            <FaUserSecret className="text-rose-500 text-3xl md:text-4xl" />
+                                            <span className="text-xs md:text-sm font-mono font-bold text-rose-300">Atacante</span>
                                         </div>
-                                        <div className="text-[9px] md:text-[10px] font-mono font-bold text-cyan-400 bg-[#050810] border border-cyan-900/50 px-2 py-0.5 rounded-full z-20">1. Compromiso Inicial</div>
-                                        <div className="bg-[#03050a] border border-emerald-500/40 p-3 rounded-lg flex flex-col items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.15)] z-20">
-                                            <FaServer className="text-emerald-500 text-xl md:text-2xl" />
-                                            <span className="text-[9px] md:text-[10px] font-mono font-bold text-emerald-300">Proxy (V1)</span>
+                                        <div className="text-xs md:text-sm font-mono font-bold text-cyan-400 bg-[#050810] border-2 border-cyan-900/50 px-4 py-1.5 rounded-full z-20 shadow-md">1. Compromiso Inicial</div>
+                                        <div className="bg-[#03050a] border-2 border-emerald-500/40 p-4 md:p-5 rounded-xl flex flex-col items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.15)] z-20">
+                                            <FaServer className="text-emerald-500 text-3xl md:text-4xl" />
+                                            <span className="text-xs md:text-sm font-mono font-bold text-emerald-300">Proxy (V1)</span>
                                         </div>
                                     </div>
                                     <motion.div 
-                                        className="absolute top-1/2 left-8 w-2 h-2 bg-rose-500 rounded-full shadow-[0_0_10px_rgba(244,63,94,1)] z-10"
-                                        animate={{ x: [0, '250%', 0] }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                                        className="absolute top-1/2 left-16 w-3 h-3 bg-rose-500 rounded-full shadow-[0_0_15px_rgba(244,63,94,1)] z-10"
+                                        animate={{ x: [0, '350%', 0] }}
+                                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                     />
                                 </div>
 
                                 {/* Thread 2 */}
-                                <div className="relative ml-8 sm:ml-16">
-                                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-amber-900/60 -translate-y-1/2"></div>
+                                <div className="relative ml-16 md:ml-32">
+                                    <div className="absolute top-1/2 left-0 w-full h-[2px] bg-amber-900/60 -translate-y-1/2"></div>
                                     <div className="relative z-10 flex justify-between items-center">
-                                        <div className="bg-[#03050a] border border-emerald-500/20 p-3 rounded-lg flex flex-col items-center gap-1.5 opacity-40 z-20">
-                                            <FaServer className="text-emerald-500 text-xl md:text-2xl" />
+                                        <div className="bg-[#03050a] border-2 border-emerald-500/20 p-4 md:p-5 rounded-xl flex flex-col items-center gap-2 opacity-40 z-20">
+                                            <FaServer className="text-emerald-500 text-3xl md:text-4xl" />
                                         </div>
-                                        <div className="text-[9px] md:text-[10px] font-mono font-bold text-amber-400 bg-[#050810] border border-amber-900/50 px-2 py-0.5 rounded-full z-20">2. Túnel C2 / Mov. Lateral</div>
-                                        <div className="bg-[#03050a] border border-amber-500/40 p-3 rounded-lg flex flex-col items-center gap-1.5 shadow-[0_0_15px_rgba(245,158,11,0.15)] z-20">
-                                            <FaDatabase className="text-amber-500 text-xl md:text-2xl" />
-                                            <span className="text-[9px] md:text-[10px] font-mono font-bold text-amber-300">Objetivo (V2)</span>
+                                        <div className="text-xs md:text-sm font-mono font-bold text-amber-400 bg-[#050810] border-2 border-amber-900/50 px-4 py-1.5 rounded-full z-20 shadow-md">2. Túnel C2 / Mov. Lateral</div>
+                                        <div className="bg-[#03050a] border-2 border-amber-500/40 p-4 md:p-5 rounded-xl flex flex-col items-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.15)] z-20">
+                                            <FaDatabase className="text-amber-500 text-3xl md:text-4xl" />
+                                            <span className="text-xs md:text-sm font-mono font-bold text-amber-300">Objetivo (V2)</span>
                                         </div>
                                     </div>
                                     <motion.div 
-                                        className="absolute top-1/2 left-8 w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,1)] z-10"
-                                        animate={{ x: [0, '250%', 0] }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                                        className="absolute top-1/2 left-16 w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,1)] z-10"
+                                        animate={{ x: [0, '350%', 0] }}
+                                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                                     />
                                 </div>
                             </div>
                             
-                            <div className="mt-4 bg-indigo-950/20 p-4 rounded-lg border border-indigo-900/30">
-                                <h6 className="text-[10px] md:text-xs text-indigo-300 font-mono font-bold uppercase mb-2 flex items-center gap-2">
-                                    <FaInfoCircle /> Impacto del Movimiento Lateral (Pivoting)
+                            <div className="mt-8 bg-indigo-950/20 p-5 rounded-xl border border-indigo-900/40">
+                                <h6 className="text-xs md:text-sm text-indigo-300 font-mono font-bold uppercase mb-3 flex items-center gap-2">
+                                    <FaInfoCircle className="text-lg" /> Impacto del Movimiento Lateral (Pivoting)
                                 </h6>
-                                <p className="text-[10px] md:text-xs text-gray-400 font-sans leading-relaxed">
+                                <p className="text-xs md:text-sm text-gray-400 font-sans leading-relaxed">
                                     El adversario utiliza el host comprometido inicialmente (Proxy V1) como un "trampolín" dentro de la red corporativa. Esta técnica permite evadir firewalls perimetrales y sistemas IDS/IPS, ya que el ataque a la Base de Datos (V2) parece provenir de una dirección IP interna confiable en lugar del exterior.
                                 </p>
                             </div>
                         </div>
-                    </div>
 
-                    {/* =========================================
-                        PANEL 3: ANÁLISIS FORENSE (DERECHA - 4 cols) 
-                    ========================================== */}
-                    <div className="lg:col-span-4 flex flex-col gap-6">
-                        
-                        {/* MITRE ATT&CK Mapping */}
-                        <div className="bg-[#0a0c16] border border-gray-800 rounded-xl p-5">
-                            <h5 className="text-white font-mono text-xs md:text-sm font-bold uppercase tracking-widest border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                                <FaShieldAlt className="text-indigo-500" /> Tácticas y Técnicas (MITRE)
-                            </h5>
-                            <div className="flex flex-col gap-3">
-                                <div className="bg-black/50 border border-gray-800 rounded px-3 py-2 flex items-center justify-between">
-                                    <span className="text-[10px] text-gray-400 font-mono">T1566.001 - Phishing</span>
-                                    <span className="text-[9px] bg-rose-500/20 text-rose-300 px-2 rounded font-bold">Initial Access</span>
-                                </div>
-                                <div className="bg-black/50 border border-gray-800 rounded px-3 py-2 flex items-center justify-between">
-                                    <span className="text-[10px] text-gray-400 font-mono">T1090 - Connection Proxy</span>
-                                    <span className="text-[9px] bg-amber-500/20 text-amber-300 px-2 rounded font-bold">C2 / Evasion</span>
-                                </div>
-                                <div className="bg-black/50 border border-gray-800 rounded px-3 py-2 flex items-center justify-between">
-                                    <span className="text-[10px] text-gray-400 font-mono">T1105 - Ingress Tool Transfer</span>
-                                    <span className="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 rounded font-bold">Lateral Move</span>
+                        {/* PANEL 4: ANÁLISIS FORENSE (DERECHA - 5 cols) */}
+                        <div className="lg:col-span-5 flex flex-col gap-8">
+                            
+                            {/* MITRE ATT&CK Mapping */}
+                            <div className="bg-[#0a0c16] border border-gray-800 rounded-2xl p-6 shadow-lg">
+                                <h5 className="text-white font-mono text-sm md:text-base font-bold uppercase tracking-widest border-b border-gray-800 pb-4 mb-5 flex items-center gap-3">
+                                    <FaShieldAlt className="text-indigo-500 text-xl" /> Tácticas y Técnicas (MITRE)
+                                </h5>
+                                <div className="flex flex-col gap-4">
+                                    <div className="bg-black/60 border border-gray-800 rounded-lg px-4 py-3 flex items-center justify-between shadow-sm hover:border-indigo-900 transition-colors">
+                                        <span className="text-xs md:text-sm text-gray-300 font-mono">T1566.001 - Phishing</span>
+                                        <span className="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-md font-bold">Initial Access</span>
+                                    </div>
+                                    <div className="bg-black/60 border border-gray-800 rounded-lg px-4 py-3 flex items-center justify-between shadow-sm hover:border-indigo-900 transition-colors">
+                                        <span className="text-xs md:text-sm text-gray-300 font-mono">T1090 - Connection Proxy</span>
+                                        <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-md font-bold">C2 / Evasion</span>
+                                    </div>
+                                    <div className="bg-black/60 border border-gray-800 rounded-lg px-4 py-3 flex items-center justify-between shadow-sm hover:border-indigo-900 transition-colors">
+                                        <span className="text-xs md:text-sm text-gray-300 font-mono">T1105 - Ingress Tool Transfer</span>
+                                        <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-md font-bold">Lateral Move</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        {/* SOC Telemetry Logs */}
-                        <div className="bg-[#05060a] border border-red-900/30 rounded-xl p-5 shadow-[0_0_20px_rgba(153,27,27,0.1)] flex-grow">
-                            <h5 className="text-white font-mono text-xs md:text-sm font-bold uppercase tracking-widest border-b border-red-900/50 pb-3 mb-4 flex items-center justify-between">
-                                <span className="flex items-center gap-2"><FaTerminal className="text-red-500" /> Event Telemetry</span>
-                                <span className="text-xs text-red-500 animate-pulse">● REC</span>
-                            </h5>
-                            <div className="font-mono text-[9px] sm:text-[10px] space-y-2 h-48 overflow-y-auto pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#374151 transparent' }}>
-                                <div className="text-gray-500"><span className="text-gray-600">[08:42:15]</span> <span className="text-cyan-600">INFO:</span> Payload delivered via Email attachment.</div>
-                                <div className="text-amber-500"><span className="text-gray-600">[08:45:02]</span> <span className="text-amber-600">WARN:</span> Execution detected (T1204).</div>
-                                <div className="text-rose-500"><span className="text-gray-600">[08:46:33]</span> <span className="text-rose-600 font-bold">ALERT:</span> DNS request to suspicious C2 domain.</div>
-                                <div className="text-rose-500"><span className="text-gray-600">[08:46:34]</span> <span className="text-rose-600 font-bold">ALERT:</span> Outbound traffic anomaly detected on Port 443.</div>
-                                <div className="text-gray-500"><span className="text-gray-600">[09:12:10]</span> <span className="text-cyan-600">INFO:</span> Internal scan from Proxy V1 started.</div>
-                                <div className="text-rose-500 bg-red-900/20 border-l-2 border-red-500 pl-2 py-1 mt-2">
-                                    <span className="text-gray-600">[09:15:45]</span> <span className="text-red-500 font-bold">CRITICAL:</span> Lateral movement attempt to Database Server (10.0.5.20).
+                            {/* SOC Telemetry Logs */}
+                            <div className="bg-[#05060a] border border-red-900/40 rounded-2xl p-6 shadow-[0_0_30px_rgba(153,27,27,0.15)] flex-grow flex flex-col">
+                                <h5 className="text-white font-mono text-sm md:text-base font-bold uppercase tracking-widest border-b border-red-900/50 pb-4 mb-5 flex items-center justify-between">
+                                    <span className="flex items-center gap-3"><FaTerminal className="text-red-500 text-xl" /> Event Telemetry</span>
+                                    <span className="text-xs md:text-sm text-red-500 font-bold animate-pulse flex items-center gap-2">
+                                        <span className="w-2.5 h-2.5 bg-red-500 rounded-full"></span> REC
+                                    </span>
+                                </h5>
+                                <div className="font-mono text-xs md:text-sm space-y-3 h-64 md:h-72 overflow-y-auto pr-3 flex-grow" style={{ scrollbarWidth: 'thin', scrollbarColor: '#4b5563 transparent' }}>
+                                    <div className="text-gray-400"><span className="text-gray-600">[08:42:15]</span> <span className="text-cyan-500 font-bold">INFO:</span> Payload delivered via Email attachment.</div>
+                                    <div className="text-amber-400"><span className="text-gray-600">[08:45:02]</span> <span className="text-amber-500 font-bold">WARN:</span> Execution detected (T1204).</div>
+                                    <div className="text-rose-400"><span className="text-gray-600">[08:46:33]</span> <span className="text-rose-500 font-bold">ALERT:</span> DNS request to suspicious C2 domain.</div>
+                                    <div className="text-rose-400"><span className="text-gray-600">[08:46:34]</span> <span className="text-rose-500 font-bold">ALERT:</span> Outbound traffic anomaly detected on Port 443.</div>
+                                    <div className="text-gray-400"><span className="text-gray-600">[09:12:10]</span> <span className="text-cyan-500 font-bold">INFO:</span> Internal scan from Proxy V1 started.</div>
+                                    <div className="text-rose-400 bg-red-900/20 border-l-4 border-red-500 pl-3 py-2 mt-3 rounded-r-md">
+                                        <span className="text-gray-500">[09:15:45]</span> <span className="text-red-500 font-black">CRITICAL:</span> Lateral movement attempt to Database Server (10.0.5.20).
+                                    </div>
+                                    <div className="text-gray-400"><span className="text-gray-600">[09:18:22]</span> <span className="text-cyan-500 font-bold">INFO:</span> Automated isolation protocol initiated.</div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -573,15 +578,15 @@ const DiamondNode = ({ node, active, onClick }) => {
     return (
         <button
             onClick={onClick}
-            className={`w-12 h-12 sm:w-14 sm:h-14 rotate-45 flex items-center justify-center transition-all duration-300 shadow-lg border border-dashed rounded-md ${
+            className={`w-16 h-16 sm:w-20 sm:h-20 rotate-45 flex items-center justify-center transition-all duration-300 shadow-xl border-2 border-dashed rounded-lg ${
                 active 
-                ? `${node.bg} ${node.border.replace('/30', '/80')} scale-110 shadow-[0_0_25px_rgba(99,102,241,0.3)] z-50 border-solid` 
-                : 'bg-[#0a0f1c]/90 border-indigo-500/20 hover:border-indigo-400/50 hover:bg-[#0c1222] hover:scale-105'
+                ? `${node.bg} ${node.border.replace('/30', '/80')} scale-110 shadow-[0_0_30px_rgba(99,102,241,0.4)] z-50 border-solid` 
+                : 'bg-[#0a0f1c]/90 border-indigo-500/30 hover:border-indigo-400/60 hover:bg-[#0c1222] hover:scale-105'
             }`}
         >
             <div className="-rotate-45 flex flex-col items-center justify-center">
-                <node.icon className={`text-base sm:text-lg transition-colors ${active ? node.color : 'text-gray-500'}`} />
-                <span className={`text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider mt-0.5 ${active ? node.color : 'text-gray-500'}`}>
+                <node.icon className={`text-2xl sm:text-3xl transition-colors ${active ? node.color : 'text-gray-500'}`} />
+                <span className={`text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest mt-1.5 ${active ? node.color : 'text-gray-500'}`}>
                     {node.id.substring(0,3)}
                 </span>
             </div>
