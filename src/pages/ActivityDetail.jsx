@@ -7,6 +7,7 @@ import PhishingQuiz from '../components/PhishingQuiz';
 import EthicsSimulator from '../components/EthicsSimulator';
 import CvssCalculator from '../components/CvssCalculator';
 import DiamondModel from '../components/DiamondModel';
+import PR03Dashboard from '../components/PR03Dashboard';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -34,6 +35,7 @@ const ActivityDetail = () => {
             5: "parcial1/176522_Act 5.pdf",
             6: "parcial1/176522-ACT6.pdf",
             "PR02": "PR02.pdf",
+            "PR03": "PR03.pdf",
             8: "parcial2/act08-Equipo1.pdf",
             16: "parcial3/act16-Equipo1.pdf",
             17: "parcial3/act17-Equipo1.pdf",
@@ -171,7 +173,7 @@ const ActivityDetail = () => {
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
             </div>
 
-            <div className={`${activity.id === 'PR02' || String(activity.id) === '16' || String(activity.id) === '18' ? 'max-w-screen-2xl w-full' : 'max-w-6xl'} mx-auto px-4 md:px-8 relative z-10`}>
+            <div className={`${activity.id === 'PR02' || activity.id === 'PR03' || String(activity.id) === '16' || String(activity.id) === '18' ? 'max-w-screen-2xl w-full' : 'max-w-6xl'} mx-auto px-4 md:px-8 relative z-10`}>
 
                 {/* Top Navigation Bar */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
@@ -182,10 +184,10 @@ const ActivityDetail = () => {
                             onClick={() => navigate('/', { state: { targetId: 'proyectos' } })}
                             className="hover:text-red-400 transition-colors uppercase"
                         >
-                            {activity.id === 'PR02' || String(activity.id) === '16' || String(activity.id) === '18' ? 'Projects' : 'Activities'}
+                            {activity.id === 'PR02' || activity.id === 'PR03' || String(activity.id) === '16' || String(activity.id) === '18' ? 'Projects' : 'Activities'}
                         </button>
                         <span className="text-gray-700">/</span>
-                        <span className={`${activity.id === 'PR02' ? 'text-violet-400' : String(activity.id) === '16' ? 'text-cyan-400' : String(activity.id) === '18' ? 'text-indigo-400' : 'text-red-500'} truncate max-w-[200px]`}>CASE_{String(activity.id).padStart(3, '0')}</span>
+                        <span className={`${activity.id === 'PR02' ? 'text-violet-400' : activity.id === 'PR03' ? 'text-emerald-400' : String(activity.id) === '16' ? 'text-cyan-400' : String(activity.id) === '18' ? 'text-indigo-400' : 'text-red-500'} truncate max-w-[200px]`}>CASE_{String(activity.id).padStart(3, '0')}</span>
                     </nav>
 
                     <div className="flex items-center gap-3">
@@ -240,6 +242,8 @@ const ActivityDetail = () => {
                     className={`relative overflow-hidden transition-all duration-700 ${
                         activity.id === 'PR02' 
                         ? "bg-black/20 backdrop-blur-3xl border-2 border-violet-500/20 rounded-[4rem] shadow-[0_0_100px_rgba(139,92,246,0.15)] ring-1 ring-violet-500/10" 
+                        : activity.id === 'PR03'
+                        ? "bg-black/20 backdrop-blur-3xl border-2 border-emerald-500/20 rounded-[4rem] shadow-[0_0_100px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/10"
                         : String(activity.id) === '16'
                         ? "bg-black/20 backdrop-blur-3xl border-2 border-cyan-500/20 rounded-[4rem] shadow-[0_0_100px_rgba(6,182,212,0.15)] ring-1 ring-cyan-500/10"
                         : String(activity.id) === '18'
@@ -251,6 +255,8 @@ const ActivityDetail = () => {
                     <div className={`h-2 w-full ${
                         activity.id === 'PR02' 
                         ? "bg-gradient-to-r from-violet-900 via-violet-600 to-indigo-900" 
+                        : activity.id === 'PR03'
+                        ? "bg-gradient-to-r from-emerald-900 via-emerald-600 to-teal-900"
                         : String(activity.id) === '16'
                         ? "bg-gradient-to-r from-cyan-900 via-cyan-600 to-indigo-900"
                         : String(activity.id) === '18'
@@ -260,23 +266,25 @@ const ActivityDetail = () => {
 
                     {/* Watermark */}
                     <div className={`absolute top-10 right-10 opacity-5 pointer-events-none rotate-12 border-4 rounded p-4 ${
-                        activity.id === 'PR02' ? "border-violet-500 text-violet-500" : String(activity.id) === '16' ? "border-cyan-500 text-cyan-500" : String(activity.id) === '18' ? "border-indigo-500 text-indigo-500" : "border-red-500 text-red-500"
+                        activity.id === 'PR02' ? "border-violet-500 text-violet-500" : activity.id === 'PR03' ? "border-emerald-500 text-emerald-500" : String(activity.id) === '16' ? "border-cyan-500 text-cyan-500" : String(activity.id) === '18' ? "border-indigo-500 text-indigo-500" : "border-red-500 text-red-500"
                     }`}>
                         <span className="text-6xl font-black uppercase tracking-widest">
-                            {activity.id === 'PR02' ? "TOP_SECRET" : String(activity.id) === '16' ? "TOP_SECRET" : String(activity.id) === '18' ? "RESTRICTED" : "CONFIDENTIAL"}
+                            {activity.id === 'PR02' ? "TOP_SECRET" : activity.id === 'PR03' ? "ISO_27001_COMPLIANT" : String(activity.id) === '16' ? "TOP_SECRET" : String(activity.id) === '18' ? "RESTRICTED" : "CONFIDENTIAL"}
                         </span>
                     </div>
 
                     <div className="p-8 md:p-16 relative">
                         {/* Header Section */}
                         <header className={`border-b-2 pb-8 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 ${
-                             activity.id === 'PR02' ? "border-violet-500/20" : String(activity.id) === '16' ? "border-cyan-500/20" : String(activity.id) === '18' ? "border-indigo-500/20" : "border-gray-800"
+                             activity.id === 'PR02' ? "border-violet-500/20" : activity.id === 'PR03' ? "border-emerald-500/20" : String(activity.id) === '16' ? "border-cyan-500/20" : String(activity.id) === '18' ? "border-indigo-500/20" : "border-gray-800"
                         }`}>
                             <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-4">
                                     <span className={`px-2 py-1 text-xs font-mono rounded border ${
                                         activity.id === 'PR02' 
                                         ? "bg-violet-500/10 text-violet-500 border-violet-500/20" 
+                                        : activity.id === 'PR03'
+                                        ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
                                         : String(activity.id) === '16'
                                         ? "bg-cyan-500/10 text-cyan-500 border-cyan-500/20"
                                         : String(activity.id) === '18'
@@ -288,6 +296,8 @@ const ActivityDetail = () => {
                                     <span className={`px-2 py-1 text-xs font-mono rounded border flex items-center gap-1 ${
                                         activity.id === 'PR02'
                                         ? "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
+                                        : activity.id === 'PR03'
+                                        ? "bg-teal-500/10 text-teal-400 border-teal-500/20"
                                         : String(activity.id) === '16'
                                         ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
                                         : String(activity.id) === '18'
@@ -300,6 +310,8 @@ const ActivityDetail = () => {
                                 <h1 className={`text-3xl md:text-5xl font-black mb-2 tracking-tight uppercase font-mono ${
                                     activity.id === 'PR02' 
                                     ? "text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-300" 
+                                    : activity.id === 'PR03'
+                                    ? "text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300"
                                     : String(activity.id) === '16'
                                     ? "text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-300"
                                     : String(activity.id) === '18'
@@ -315,26 +327,26 @@ const ActivityDetail = () => {
 
                              <div className="text-right font-mono text-xs text-gray-500 space-y-1 min-w-[150px]">
                                 <div className={`flex justify-between md:justify-end gap-4 border-b pb-1 ${
-                                    activity.id === 'PR02' ? "border-violet-500/10" : String(activity.id) === '16' ? "border-cyan-500/10" : "border-gray-800"
+                                    activity.id === 'PR02' ? "border-violet-500/10" : activity.id === 'PR03' ? "border-emerald-500/10" : String(activity.id) === '16' ? "border-cyan-500/10" : "border-gray-800"
                                 }`}>
                                     <span>DATE:</span>
-                                    <span className={activity.id === 'PR02' ? "text-violet-300" : String(activity.id) === '16' ? "text-cyan-300" : "text-gray-300"}>{activity.date}</span>
+                                    <span className={activity.id === 'PR02' ? "text-violet-300" : activity.id === 'PR03' ? "text-emerald-300" : String(activity.id) === '16' ? "text-cyan-300" : "text-gray-300"}>{activity.date}</span>
                                 </div>
                                 <div className={`flex justify-between md:justify-end gap-4 border-b pb-1 ${
-                                    activity.id === 'PR02' ? "border-violet-500/10" : String(activity.id) === '16' ? "border-cyan-500/10" : "border-gray-800"
+                                    activity.id === 'PR02' ? "border-violet-500/10" : activity.id === 'PR03' ? "border-emerald-500/10" : String(activity.id) === '16' ? "border-cyan-500/10" : "border-gray-800"
                                 }`}>
                                     <span>OFFICER:</span>
-                                    <span className={activity.id === 'PR02' ? "text-violet-300" : String(activity.id) === '16' ? "text-cyan-300" : "text-gray-300"}>G. Moreno</span>
+                                    <span className={activity.id === 'PR02' ? "text-violet-300" : activity.id === 'PR03' ? "text-emerald-300" : String(activity.id) === '16' ? "text-cyan-300" : "text-gray-300"}>{activity.id === 'PR03' ? "Equipo 1" : "G. Moreno"}</span>
                                 </div>
                                 <div className="flex justify-between md:justify-end gap-4">
                                     <span>CLEARANCE:</span>
-                                    <span className={`${activity.id === 'PR02' ? "text-violet-500" : String(activity.id) === '16' ? "text-cyan-500" : "text-red-500"} font-bold animate-pulse`}>LEVEL 5</span>
+                                    <span className={`${activity.id === 'PR02' ? "text-violet-500" : activity.id === 'PR03' ? "text-emerald-500" : String(activity.id) === '16' ? "text-cyan-500" : "text-red-500"} font-bold animate-pulse`}>LEVEL 5</span>
                                 </div>
                             </div>
                         </header>
 
                         {/* Content Body */}
-                        <div className={`report-content prose prose-invert max-w-none ${activity.id === 'PR02' || String(activity.id) === '16' ? "hud-content" : "standard-report"}`}>
+                        <div className={`report-content prose prose-invert max-w-none ${activity.id === 'PR02' || activity.id === 'PR03' || String(activity.id) === '16' ? "hud-content" : "standard-report"}`}>
                             <div dangerouslySetInnerHTML={{
                                 __html: activity.content.replace(/src="\/parcial/g, `src="${import.meta.env.BASE_URL}parcial`)
                             }} />
@@ -393,6 +405,13 @@ const ActivityDetail = () => {
                         {String(activity.id) === '18' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-indigo-900/50">
                                 <DiamondModel />
+                            </div>
+                        )}
+
+                        {/* Interactive SGSI Dashboard for PR03 */}
+                        {activity.id === 'PR03' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-emerald-900/50">
+                                <PR03Dashboard />
                             </div>
                         )}
 

@@ -2016,6 +2016,45 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         </p>
       </div>
     `
+  },
+  {
+    id: "PR03",
+    type: "Proyecto",
+    color: "from-teal-500 to-emerald-700",
+    title: "PR03 - Diseño e Implementación de un SGSI (ISO 27001)",
+    description: "Desarrollo completo de un Sistema de Gestión de Seguridad de la Información para Inspección Certificada SL, incluyendo evaluación de riesgos, SoA y políticas bajo el estándar ISO/IEC 27001.",
+    date: "2026-05-23",
+    tags: ["ISO 27001", "SGSI", "Gestión de Riesgos", "Auditoría"],
+    content: `
+      <div class="border border-emerald-500/30 bg-[#020805] p-4 rounded-lg font-mono text-xs text-emerald-400/80 mb-6 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+        <p>[SYSTEM] ISO/IEC 27001:2022 ISMS DASHBOARD ONLINE.</p>
+        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 3 PROJECT.</p>
+        <p>[METRICS] 40 ASSETS LOGGED. 12 RISKS ASSESSED. 10 POLICIES ACTIVE.</p>
+      </div>
+
+      <div class="mb-10 text-gray-300 space-y-6">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="flex-1 space-y-4">
+                <h3 class="text-xl font-bold text-emerald-400 font-mono border-b border-gray-800 pb-2">Sistema de Gestión de Seguridad de la Información</h3>
+                <p class="leading-relaxed">
+                    El proyecto <strong>PR03</strong> documenta el diseño e implementación de un SGSI estructurado para proteger los activos críticos de <em>Inspección Certificada SL</em>. Este proyecto se alinea estrictamente con los controles de la norma internacional <strong>ISO/IEC 27001:2022</strong>.
+                </p>
+                <p class="leading-relaxed">
+                    A través de un riguroso análisis (Gap Analysis), inventario de activos y matriz de evaluación de riesgos, se establecieron políticas de seguridad, planes de continuidad (BCP) y mecanismos de respuesta a incidentes para salvaguardar la <strong>Confidencialidad, Integridad y Disponibilidad</strong> de la información operativa.
+                </p>
+            </div>
+            <div class="md:w-1/3 flex-shrink-0 flex justify-center">
+                <div class="w-32 h-32 rounded-full border-4 border-emerald-500/40 flex items-center justify-center bg-emerald-900/20 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                    <span class="text-emerald-400 font-black text-3xl font-mono tracking-tighter">ISO</span>
+                </div>
+            </div>
+        </div>
+        
+        <p class="text-sm italic text-gray-500 border-l-2 border-emerald-900 pl-3">
+            Interactúa con el <strong>Dashboard Ejecutivo del SGSI</strong> a continuación para explorar el mapa de riesgos, las políticas implementadas (matriz RACI) y descargar el expediente técnico formal del proyecto.
+        </p>
+      </div>
+    `
   }
 ];
 
