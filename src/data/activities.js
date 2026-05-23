@@ -1915,6 +1915,60 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 3 PROJECT.</p>
         <p>[METRICS] ACTIVE DECODING OF ATTACK VECTOR AND SCOPE.</p>
       </div>
+
+      <div class="mb-10 text-gray-300 space-y-6">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="flex-1 space-y-4">
+                <h3 class="text-xl font-bold text-cyan-400 font-mono border-b border-gray-800 pb-2">El Estándar CVSS v3.1</h3>
+                <p class="leading-relaxed">
+                    El <strong>Common Vulnerability Scoring System (CVSS)</strong> es un marco abierto y estándar de la industria utilizado para evaluar la gravedad de las vulnerabilidades de seguridad informática. Su propósito es proporcionar una forma estandarizada y repetible de puntuar las vulnerabilidades para ayudar a los equipos de ciberseguridad a priorizar la mitigación y parcheo.
+                </p>
+                <p class="leading-relaxed">
+                    A diferencia de evaluaciones subjetivas, CVSS descompone una vulnerabilidad en parámetros medibles (métricas base) que describen sus características fundamentales y permanentes.
+                </p>
+            </div>
+            <div class="md:w-1/3 flex-shrink-0">
+                <div class="rounded-xl overflow-hidden border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.15)] relative group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#02050b] via-transparent to-transparent opacity-80 z-10"></div>
+                    <img src="assets/images/cvss_radar.png" alt="CVSS Radar Hologram" class="w-full h-auto object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" />
+                    <div class="absolute bottom-2 left-3 z-20 font-mono text-[9px] text-cyan-400 uppercase">
+                        [FIG. 1] Mapeo Holográfico de Riesgo
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-black/40 border border-gray-800 p-6 rounded-2xl">
+            <h4 class="font-mono text-white text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                Anatomía de la Evaluación
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h5 class="text-xs font-bold text-gray-400 uppercase mb-2 border-b border-gray-800 pb-1">Métricas de Explotabilidad</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><strong class="text-cyan-300">Vector de Ataque (AV):</strong> ¿El atacante debe estar físicamente en la máquina o puede hackear por Internet?</li>
+                        <li><strong class="text-cyan-300">Complejidad (AC):</strong> ¿Se requiere evadir protecciones complejas o es un exploit directo?</li>
+                        <li><strong class="text-cyan-300">Privilegios (PR):</strong> ¿El hacker necesita ser administrador o puede hacerlo como usuario anónimo?</li>
+                        <li><strong class="text-cyan-300">Interacción (UI):</strong> ¿Una víctima legítima tiene que hacer clic en un enlace o abrir un archivo malicioso?</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-bold text-gray-400 uppercase mb-2 border-b border-gray-800 pb-1">Métricas de Impacto</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><strong class="text-amber-400">Confidencialidad (C):</strong> ¿Se expone información privada, bases de datos o contraseñas?</li>
+                        <li><strong class="text-amber-400">Integridad (I):</strong> ¿El atacante puede alterar los datos, falsificar registros o modificar el sistema?</li>
+                        <li><strong class="text-amber-400">Disponibilidad (A):</strong> ¿El ataque puede tumbar el servidor o causar una denegación de servicio (DoS)?</li>
+                        <li><strong class="text-amber-400">Alcance (S):</strong> ¿La falla puede saltar y comprometer otros componentes fuera de su entorno original?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <p class="text-sm italic text-gray-500 border-l-2 border-gray-700 pl-3">
+            El siguiente <strong>Calculador Táctico CVSS v3.1</strong> permite simular la calificación de riesgos. Hemos preconfigurado el caso de estudio correspondiente a la Actividad 17 como demostración base, pero puedes habilitar el "Simulador Libre" para explorar cómo cambia la puntuación al variar el contexto del ataque.
+        </p>
+      </div>
     `
   }
 ];
