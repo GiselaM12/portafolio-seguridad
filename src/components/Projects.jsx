@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret, FaBalanceScale } from 'react-icons/fa';
+import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret, FaBalanceScale, FaProjectDiagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { activities } from '../data/activities';
 
