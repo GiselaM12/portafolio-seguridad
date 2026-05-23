@@ -895,14 +895,14 @@ const CvssCalculator = () => {
                         </div>
 
                         {/* Parameter Justifications */}
-                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-5 flex flex-col gap-4 flex-grow min-h-[380px]">
-                            <h5 className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2 border-b border-gray-900 pb-2">
-                                <FaFileAlt />
+                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-6 flex flex-col gap-5 flex-grow min-h-[420px]">
+                            <h5 className="text-xs sm:text-sm font-mono font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2 border-b border-gray-900 pb-2">
+                                <FaFileAlt className="text-sm" />
                                 <span>Justificación de Parámetros</span>
                             </h5>
 
                             {/* Metric grid tabs */}
-                            <div className="grid grid-cols-4 gap-1.5 flex-shrink-0">
+                            <div className="grid grid-cols-4 gap-2 flex-shrink-0">
                                 {Object.keys(caseJustifications).map((key) => {
                                     const optCode = selectedMetrics[key];
                                     const defaultJust = caseJustifications[key];
@@ -913,16 +913,16 @@ const CvssCalculator = () => {
                                         <button
                                             key={key}
                                             onClick={() => setActiveJustKey(key)}
-                                            className={`py-1.5 px-1 rounded-lg border text-center font-mono text-[9px] transition-all flex flex-col items-center justify-center gap-0.5 ${
+                                            className={`py-2 px-1 rounded-lg border text-center font-mono text-[10px] sm:text-xs transition-all flex flex-col items-center justify-center gap-1 ${
                                                 isActive
-                                                ? 'bg-cyan-500/15 border-cyan-500/50 text-cyan-300 font-bold shadow-[0_0_10px_rgba(6,182,212,0.1)]'
+                                                ? 'bg-cyan-500/15 border-cyan-500/50 text-cyan-300 font-bold shadow-[0_0_12px_rgba(6,182,212,0.15)]'
                                                 : isCaseMatch
-                                                ? 'bg-black/30 border-gray-950 text-gray-400 hover:border-cyan-500/20'
-                                                : 'bg-amber-500/5 border-amber-500/10 text-amber-400 hover:border-amber-500/20'
+                                                ? 'bg-black/35 border-gray-950 text-gray-400 hover:border-cyan-500/30'
+                                                : 'bg-amber-500/5 border-amber-500/20 text-amber-400 hover:border-amber-500/30'
                                             }`}
                                         >
-                                            <span className="opacity-60 text-[8px]">{key}</span>
-                                            <span className="font-bold text-[10px]">{optCode}</span>
+                                            <span className="opacity-60 text-[9px] sm:text-[10px]">{key}</span>
+                                            <span className="font-bold text-xs sm:text-sm">{optCode}</span>
                                         </button>
                                     );
                                 })}
@@ -938,16 +938,16 @@ const CvssCalculator = () => {
                                 const plainInfo = plainExplanations[activeJustKey];
 
                                 return (
-                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-3 flex flex-col justify-between flex-grow gap-3 relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 blur-[40px] rounded-full pointer-events-none" />
+                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-4 flex flex-col justify-between flex-grow gap-4 relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-[50px] rounded-full pointer-events-none" />
                                         
-                                        <div className="space-y-2 flex-grow flex flex-col justify-start">
+                                        <div className="space-y-3 flex-grow flex flex-col justify-start">
                                             {/* Technical Title */}
-                                            <div className="flex justify-between items-center border-b border-gray-900/60 pb-1.5">
-                                                <strong className="text-gray-300 font-mono text-[10px] uppercase tracking-wide truncate max-w-[160px]">
+                                            <div className="flex justify-between items-center border-b border-gray-900/60 pb-2">
+                                                <strong className="text-gray-200 font-mono text-xs sm:text-sm uppercase tracking-wide truncate max-w-[200px]">
                                                     {details.name}
                                                 </strong>
-                                                <span className={`px-1.5 py-0.2 font-mono text-[8px] rounded font-bold ${
+                                                <span className={`px-2 py-0.5 font-mono text-[10px] sm:text-xs rounded font-bold ${
                                                     isCaseMatch 
                                                     ? 'bg-cyan-500/10 border border-cyan-500/20 text-cyan-400' 
                                                     : 'bg-amber-500/10 border border-amber-500/20 text-amber-400'
@@ -957,30 +957,30 @@ const CvssCalculator = () => {
                                             </div>
                                             
                                             {/* 1. Cyberconcept Translated (Plain explanation) */}
-                                            <div className="bg-cyan-950/10 border border-cyan-500/5 p-2 rounded-lg space-y-1">
-                                                <span className="text-[10px] text-cyan-400 font-bold block">
+                                            <div className="bg-cyan-950/10 border border-cyan-500/5 p-3 rounded-lg space-y-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.1)]">
+                                                <span className="text-xs sm:text-[13px] text-cyan-300 font-bold block">
                                                     💡 {plainInfo.question}
                                                 </span>
-                                                <p className="text-[9px] text-gray-400 leading-normal font-sans">
+                                                <p className="text-xs text-gray-400 leading-relaxed font-sans">
                                                     {plainInfo.meaning}
                                                 </p>
                                             </div>
                                             
                                             {/* 2. Plain meaning of active choice */}
-                                            <div className="space-y-1 mt-1">
-                                                <span className="text-[7.5px] text-gray-500 font-mono uppercase tracking-wider block">Decisión y Efecto Práctico:</span>
-                                                <p className="text-[9.5px] text-gray-300 font-sans leading-relaxed border-l-2 border-cyan-500/30 pl-2.5 py-0.5">
+                                            <div className="space-y-1 mt-1.5">
+                                                <span className="text-[9px] sm:text-[10px] text-gray-500 font-mono uppercase tracking-wider block font-bold">Decisión y Efecto Práctico:</span>
+                                                <p className="text-xs sm:text-[13px] text-gray-200 font-sans leading-relaxed border-l-2 border-cyan-500/40 pl-3 py-0.5">
                                                     {plainInfo.cases[optCode]}
                                                 </p>
                                             </div>
                                         </div>
 
                                         {/* 3. Team Technical Justification Console */}
-                                        <div className="bg-[#03060c] p-2.5 rounded-lg border border-cyan-500/10 mt-1 flex flex-col gap-1 flex-shrink-0">
-                                            <span className="text-[7px] font-mono text-cyan-500/50 uppercase tracking-widest block font-bold">
+                                        <div className="bg-[#03060c] p-3 rounded-lg border border-cyan-500/10 mt-1 flex flex-col gap-1.5 flex-shrink-0">
+                                            <span className="text-[8px] sm:text-[9px] font-mono text-cyan-500/60 uppercase tracking-widest block font-bold">
                                                 [JUSTIFICACIÓN_TÉCNICA_EQUIPO_1]
                                             </span>
-                                            <p className="text-[9.5px] text-cyan-200 font-mono leading-relaxed italic">
+                                            <p className="text-xs sm:text-[13px] text-cyan-200 font-mono leading-relaxed italic">
                                                 "{isCaseMatch 
                                                     ? defaultJust.text 
                                                     : "Simulación libre: El cálculo y severidad de este parámetro se actualiza en tiempo real de acuerdo a la matriz base de CVSS."
