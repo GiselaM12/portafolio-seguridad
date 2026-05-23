@@ -91,6 +91,79 @@ const caseJustifications = {
     A: { selection: "L", text: "La degradación del servicio es leve y temporal, sin congelar el servidor ni tumbar los demonios de red principales." }
 };
 
+const plainExplanations = {
+    AV: {
+        question: "¿Desde dónde se realiza el ataque?",
+        meaning: "Determina si el atacante necesita estar físicamente en la consola, en la red de la escuela/empresa o si puede hackear desde Internet.",
+        cases: {
+            N: "Desde Internet (Remoto): El atacante no necesita acceso físico ni estar en la misma red local para explotar la falla. Puede hacerlo a distancia.",
+            A: "Red Adyacente (Local): El atacante debe estar conectado al mismo segmento de red local o red Wi-Fi de la organización.",
+            L: "Acceso Local: Requiere acceso directo a la consola del servidor (sesión física o vía SSH local iniciada).",
+            P: "Acceso Físico: Requiere tocar directamente los puertos del equipo vulnerable (ej: conectar un USB malicioso)."
+        }
+    },
+    AC: {
+        question: "¿Qué tan difícil es ejecutar el ataque?",
+        meaning: "Mide si el atacante se enfrenta a barreras de seguridad complejas o si el ataque es automático y siempre funciona.",
+        cases: {
+            L: "Baja (Fácil): No se requieren condiciones especiales. El ataque funciona directamente de forma repetible y predecible.",
+            H: "Alta (Difícil): Requiere evadir defensas avanzadas, encriptaciones o condiciones de sincronización temporal muy precisas."
+        }
+    },
+    PR: {
+        question: "¿Qué permisos previos requiere el atacante?",
+        meaning: "Define si el ataque lo puede lanzar un usuario anónimo o si debe tener credenciales con ciertos permisos en el sistema.",
+        cases: {
+            N: "Ninguno (Anónimo): Cualquiera en Internet puede explotar la falla sin necesidad de registrarse o iniciar sesión.",
+            L: "Bajos (Usuario): Requiere tener una cuenta de usuario básico común sin privilegios especiales.",
+            H: "Altos (Administrador): El atacante debe tener credenciales de administrador con acceso total al servidor."
+        }
+    },
+    UI: {
+        question: "¿Requiere ayuda de una víctima (interacción)?",
+        meaning: "Evalúa si se necesita que un usuario real haga alguna acción como dar clic en un enlace malicioso o descargar un archivo.",
+        cases: {
+            N: "Ninguna (Silencioso): El ataque se ejecuta de forma totalmente invisible sin que ningún usuario deba hacer nada.",
+            R: "Requerida (Interacción): El usuario víctima debe realizar una acción (abrir enlace, dar permisos, etc.) para que se detone la falla."
+        }
+    },
+    S: {
+        question: "¿El daño se propaga a otros sistemas?",
+        meaning: "Indica si el atacante puede usar esta falla para saltar y comprometer la seguridad de otros servidores u otros programas.",
+        cases: {
+            U: "Sin Cambios (Encapsulado): El impacto queda estrictamente limitado dentro del mismo software afectado, sin dañar otros sistemas.",
+            C: "Cambiado (Expansivo): El atacante puede romper la frontera de seguridad y comprometer la red interna o sistemas anfitriones."
+        }
+    },
+    C: {
+        question: "¿Qué tanta información privada se expone?",
+        meaning: "Mide el impacto en la confidencialidad: si el atacante puede leer archivos reservados o extraer base de datos privados.",
+        cases: {
+            N: "Ninguno: No hay pérdida de privacidad en absoluto.",
+            L: "Bajo (Parcial): Se exponen datos menores o aislados, pero la base de datos central y los archivos clave siguen seguros.",
+            H: "Alto (Total): El atacante puede leer toda la información confidencial, archivos de configuración o claves maestras."
+        }
+    },
+    I: {
+        question: "¿El atacante puede alterar o borrar datos?",
+        meaning: "Mide el impacto en la integridad: si el atacante puede alterar el código del software, modificar archivos o inyectar datos falsos.",
+        cases: {
+            N: "Ninguno: El atacante no puede modificar, agregar ni borrar ningún tipo de información del sistema.",
+            L: "Bajo (Parcial): Puede realizar modificaciones superficiales, pero no alterar el núcleo de las bases de datos transaccionales.",
+            H: "Alto (Total): El atacante tiene control total para cambiar, borrar o falsificar cualquier archivo o registro del sistema."
+        }
+    },
+    A: {
+        question: "¿El sistema se cae o deja de funcionar?",
+        meaning: "Mide el impacto en la disponibilidad: si el ataque puede apagar el servidor, saturar el servicio o congelar la página web.",
+        cases: {
+            N: "Ninguno: El servidor y la aplicación siguen funcionando de forma óptima sin retrasos ni lentitud.",
+            L: "Bajo (Leve): El sistema puede experimentar cierta lentitud temporal o fallos menores, pero no se suspende la operación.",
+            H: "Alto (Total): El atacante puede provocar un apagado total del servidor o denegación de servicio completa para todos los usuarios."
+        }
+    }
+};
+
 const qaData = [
     {
         id: "A",
@@ -807,7 +880,7 @@ const CvssCalculator = () => {
 
                             <div className="border-t border-gray-900 pt-3.5 space-y-2 text-[10px] text-gray-400">
                                 <div className="flex justify-between">
-                                    <span>Vector de Vector:</span>
+                                    <span>Vector CVSS v3.1:</span>
                                     <span className="text-cyan-400 text-right text-[8px] font-bold max-w-[200px] truncate">{results.vector}</span>
                                 </div>
                                 <div className="flex justify-between">
@@ -822,7 +895,7 @@ const CvssCalculator = () => {
                         </div>
 
                         {/* Parameter Justifications */}
-                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-5 flex flex-col gap-4 flex-grow min-h-[340px]">
+                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-5 flex flex-col gap-4 flex-grow min-h-[380px]">
                             <h5 className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2 border-b border-gray-900 pb-2">
                                 <FaFileAlt />
                                 <span>Justificación de Parámetros</span>
@@ -862,36 +935,52 @@ const CvssCalculator = () => {
                                 const opt = details.options.find(o => o.code === optCode);
                                 const defaultJust = caseJustifications[activeJustKey];
                                 const isCaseMatch = optCode === defaultJust.selection;
+                                const plainInfo = plainExplanations[activeJustKey];
 
                                 return (
-                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-3 flex flex-col justify-between flex-grow gap-2.5 relative overflow-hidden">
+                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-3 flex flex-col justify-between flex-grow gap-3 relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 blur-[40px] rounded-full pointer-events-none" />
                                         
-                                        <div className="space-y-1">
+                                        <div className="space-y-2 flex-grow flex flex-col justify-start">
+                                            {/* Technical Title */}
                                             <div className="flex justify-between items-center border-b border-gray-900/60 pb-1.5">
                                                 <strong className="text-gray-300 font-mono text-[10px] uppercase tracking-wide truncate max-w-[160px]">
                                                     {details.name}
                                                 </strong>
-                                                <span className={`px-1.5 py-0.2 font-mono text-[8px] rounded ${
+                                                <span className={`px-1.5 py-0.2 font-mono text-[8px] rounded font-bold ${
                                                     isCaseMatch 
-                                                    ? 'bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold' 
-                                                    : 'bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold'
+                                                    ? 'bg-cyan-500/10 border border-cyan-500/20 text-cyan-400' 
+                                                    : 'bg-amber-500/10 border border-amber-500/20 text-amber-400'
                                                 }`}>
                                                     {activeJustKey}:{optCode}
                                                 </span>
                                             </div>
                                             
-                                            <p className="text-[10px] text-gray-500 font-mono leading-relaxed">
-                                                {details.description}
-                                            </p>
+                                            {/* 1. Cyberconcept Translated (Plain explanation) */}
+                                            <div className="bg-cyan-950/10 border border-cyan-500/5 p-2 rounded-lg space-y-1">
+                                                <span className="text-[10px] text-cyan-400 font-bold block">
+                                                    💡 {plainInfo.question}
+                                                </span>
+                                                <p className="text-[9px] text-gray-400 leading-normal font-sans">
+                                                    {plainInfo.meaning}
+                                                </p>
+                                            </div>
                                             
-                                            <p className="text-[9px] text-cyan-400/80 font-mono mt-1">
-                                                Seleccionado: <strong className="text-white">"{opt?.name || opt?.code}"</strong>
-                                            </p>
+                                            {/* 2. Plain meaning of active choice */}
+                                            <div className="space-y-1 mt-1">
+                                                <span className="text-[7.5px] text-gray-500 font-mono uppercase tracking-wider block">Decisión y Efecto Práctico:</span>
+                                                <p className="text-[9.5px] text-gray-300 font-sans leading-relaxed border-l-2 border-cyan-500/30 pl-2.5 py-0.5">
+                                                    {plainInfo.cases[optCode]}
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div className="bg-[#03060c] p-2.5 rounded-lg border border-cyan-500/5 flex-grow flex items-center justify-center">
-                                            <p className="text-[10px] text-gray-300 font-mono leading-relaxed italic text-center w-full">
+                                        {/* 3. Team Technical Justification Console */}
+                                        <div className="bg-[#03060c] p-2.5 rounded-lg border border-cyan-500/10 mt-1 flex flex-col gap-1 flex-shrink-0">
+                                            <span className="text-[7px] font-mono text-cyan-500/50 uppercase tracking-widest block font-bold">
+                                                [JUSTIFICACIÓN_TÉCNICA_EQUIPO_1]
+                                            </span>
+                                            <p className="text-[9.5px] text-cyan-200 font-mono leading-relaxed italic">
                                                 "{isCaseMatch 
                                                     ? defaultJust.text 
                                                     : "Simulación libre: El cálculo y severidad de este parámetro se actualiza en tiempo real de acuerdo a la matriz base de CVSS."
