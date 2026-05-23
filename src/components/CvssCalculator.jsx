@@ -763,7 +763,7 @@ const CvssCalculator = () => {
                                 {/* Confidentiality */}
                                 <div className="bg-black/30 border border-gray-900 p-4 rounded-xl space-y-3">
                                     <div className="flex justify-between items-start">
-                                        <span className="font-mono text-[11px] font-bold text-gray-200 block">C (Confidencialidad)</span>
+                                        <span className="font-mono text-xs font-bold text-gray-200 block">C (Confidencialidad)</span>
                                         <span className="px-1.5 py-0.5 text-[9px] font-mono text-cyan-400 border border-cyan-500/20 bg-cyan-500/5 rounded">C:{selectedMetrics.C}</span>
                                     </div>
                                     <div className="flex flex-col gap-2">
@@ -780,8 +780,8 @@ const CvssCalculator = () => {
                                                     : 'bg-black/40 border-gray-900 text-gray-400 hover:border-gray-800'
                                                 }`}
                                             >
-                                                <span className="text-[10px] font-mono font-bold">{opt.name}</span>
-                                                <span className="text-[9px] font-mono text-gray-500">{opt.value.toFixed(2)}</span>
+                                                <span className="text-[11px] font-mono font-bold">{opt.name}</span>
+                                                <span className="text-[10px] font-mono text-gray-500">{opt.value.toFixed(2)}</span>
                                             </button>
                                         ))}
                                     </div>
@@ -790,7 +790,7 @@ const CvssCalculator = () => {
                                 {/* Integrity */}
                                 <div className="bg-black/30 border border-gray-900 p-4 rounded-xl space-y-3">
                                     <div className="flex justify-between items-start">
-                                        <span className="font-mono text-[11px] font-bold text-gray-200 block">I (Integridad)</span>
+                                        <span className="font-mono text-xs font-bold text-gray-200 block">I (Integridad)</span>
                                         <span className="px-1.5 py-0.5 text-[9px] font-mono text-cyan-400 border border-cyan-500/20 bg-cyan-500/5 rounded">I:{selectedMetrics.I}</span>
                                     </div>
                                     <div className="flex flex-col gap-2">
@@ -817,7 +817,7 @@ const CvssCalculator = () => {
                                 {/* Availability */}
                                 <div className="bg-black/30 border border-gray-900 p-4 rounded-xl space-y-3">
                                     <div className="flex justify-between items-start">
-                                        <span className="font-mono text-[11px] font-bold text-gray-200 block">A (Disponibilidad)</span>
+                                        <span className="font-mono text-xs font-bold text-gray-200 block">A (Disponibilidad)</span>
                                         <span className="px-1.5 py-0.5 text-[9px] font-mono text-cyan-400 border border-cyan-500/20 bg-cyan-500/5 rounded">A:{selectedMetrics.A}</span>
                                     </div>
                                     <div className="flex flex-col gap-2">
@@ -847,7 +847,7 @@ const CvssCalculator = () => {
                     </div>
 
                     {/* Right: Results Engine, Justifications & Q&A Panel */}
-                    <div className="lg:col-span-4 flex flex-col gap-6 h-full">
+                    <div className="lg:col-span-4 flex flex-col gap-6">
                         
                         {/* Score Diagnostic Box */}
                         <div className="bg-black/70 border border-cyan-500/10 rounded-2xl p-5 font-mono flex flex-col gap-4">
@@ -895,7 +895,7 @@ const CvssCalculator = () => {
                         </div>
 
                         {/* Parameter Justifications */}
-                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-6 flex flex-col gap-5 flex-grow min-h-[420px]">
+                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-6 flex flex-col gap-4">
                             <h5 className="text-xs sm:text-sm font-mono font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2 border-b border-gray-900 pb-2">
                                 <FaFileAlt className="text-sm" />
                                 <span>Justificación de Parámetros</span>
@@ -938,10 +938,10 @@ const CvssCalculator = () => {
                                 const plainInfo = plainExplanations[activeJustKey];
 
                                 return (
-                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-4 flex flex-col justify-start flex-grow gap-4 relative overflow-hidden">
+                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-4 flex flex-col gap-4 relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-[50px] rounded-full pointer-events-none" />
                                         
-                                        <div className="space-y-3 flex-grow flex flex-col justify-start">
+                                        <div className="space-y-3 flex flex-col">
                                             {/* Technical Title */}
                                             <div className="flex justify-between items-center border-b border-gray-900/60 pb-2">
                                                 <strong className="text-gray-200 font-mono text-xs sm:text-sm uppercase tracking-wide truncate max-w-[200px]">
