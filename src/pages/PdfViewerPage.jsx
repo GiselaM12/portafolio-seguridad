@@ -32,7 +32,8 @@ const PdfViewerPage = () => {
             "PR02": "PR02.pdf",
             8: "parcial2/act08-Equipo1.pdf",
             16: "parcial3/act16-Equipo1.pdf",
-            17: "parcial3/act17-Equipo1.pdf"
+            17: "parcial3/act17-Equipo1.pdf",
+            18: "parcial3/act18-Equipo1.pdf"
         };
         const fileName = fileMap[id];
         const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
