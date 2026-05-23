@@ -82,6 +82,159 @@ const PR03Dashboard = () => {
         ]
     };
 
+    const policiesDetail = [
+        {
+            code: "POL-01",
+            name: "Gestión de Accesos e Identidades",
+            control: "ISO/IEC 27002:2022 — Control A.8.5",
+            color: "emerald",
+            objective: "Garantizar que únicamente el personal autorizado acceda a los sistemas de información de ISL mediante credenciales robustas y mecanismos de autenticación multifactor.",
+            scope: "Aplica a todas las cuentas de usuario en Active Directory, incluidas las cuentas administrativas, de servicio y de acceso VPN remoto.",
+            controls: [
+                "MFA obligatorio con YubiKey 5C para todas las cuentas administrativas de dominio y acceso VPN.",
+                "Contraseñas mínimo de 14 caracteres, con complejidad activada en directiva de AD.",
+                "Revisión trimestral de cuentas activas y eliminación inmediata de usuarios al término de contrato.",
+                "Bloqueo automático de cuenta tras 5 intentos fallidos consecutivos."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Consultado)"
+        },
+        {
+            code: "POL-02",
+            name: "Clasificación y Protección de Datos",
+            control: "ISO/IEC 27002:2022 — Control A.5.12",
+            color: "cyan",
+            objective: "Asegurar que toda la información generada o procesada por ISL sea clasificada, etiquetada y protegida de acuerdo con su nivel de sensibilidad para prevenir accesos no autorizados y fugas de datos.",
+            scope: "Abarca todos los documentos, reportes técnicos, planos de clientes, contratos y datos almacenados en Microsoft 365, servidor local y dispositivos móviles.",
+            controls: [
+                "Tres niveles de clasificación obligatorios: CONFIDENCIAL / INTERNO / PÚBLICO.",
+                "Etiquetas de sensibilidad automáticas en Microsoft Purview para archivos de OneDrive y SharePoint.",
+                "Políticas DLP (Data Loss Prevention) que bloquean el envío externo de planos sin autorización.",
+                "Cifrado AES-256 en reposo para todos los archivos clasificados como CONFIDENCIAL."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Ejecuta) · Supervisores (Consultado)"
+        },
+        {
+            code: "POL-03",
+            name: "Seguridad de la Infraestructura Tecnológica",
+            control: "ISO/IEC 27002:2022 — Controls A.8.8 & A.7.3",
+            color: "amber",
+            objective: "Mantener la infraestructura tecnológica de ISL actualizada, parcheada y físicamente protegida para eliminar vectores de ataque derivados de vulnerabilidades conocidas.",
+            scope: "Servidor Dell PowerEdge T550, switches de red, firewall perimetral, cuarto de servidores físico y cualquier equipo de comunicaciones en la sede central.",
+            controls: [
+                "Ventana de mantenimiento semanal: Domingos 22:00–02:00 hrs para aplicación de parches críticos.",
+                "Formulario IC-SGSI-INF-04 de registro de parches: obligatorio, firmado por TI y aprobado por Dirección.",
+                "Acceso físico al cuarto de servidores restringido mediante lector biométrico ZKTeco SpeedFace.",
+                "Escaneo de vulnerabilidades mensual con Nessus y remediación de CVEs críticos en máximo 72 horas."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Consultado)"
+        },
+        {
+            code: "POL-04",
+            name: "Control e Inventario de Activos de Información",
+            control: "ISO/IEC 27002:2022 — Control A.5.9",
+            color: "violet",
+            objective: "Mantener un inventario actualizado y completo de todos los activos de información de ISL para garantizar su correcta identificación, valoración y asignación de propietario responsable.",
+            scope: "Los 40 activos catalogados incluyendo hardware, software, datos, servicios en nube y activos de comunicaciones tanto en sede central como en operaciones de campo.",
+            controls: [
+                "Inventario formal documentado con clasificación CIA (Confidencialidad, Integridad, Disponibilidad).",
+                "Revisión semestral física y verificación de activos con el formulario IC-SGSI-ACT-01.",
+                "Asignación obligatoria de un Custodio a cada activo crítico con responsabilidad documentada.",
+                "Alta y baja de activos documentada en el registro con firma del Director General."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Consultado) · Inspectores (Consultado)"
+        },
+        {
+            code: "POL-05",
+            name: "Seguridad en Dispositivos Móviles (MDM)",
+            control: "ISO/IEC 27002:2022 — Control A.8.1",
+            color: "rose",
+            objective: "Proteger la información confidencial de clientes contenida en las tablets Samsung Galaxy Tab Active4 Pro, regulando su uso en campo y garantizando mecanismos de control remoto ante pérdida o robo.",
+            scope: "Las 6 tablets Samsung Galaxy Tab Active4 Pro asignadas al equipo de inspectores de campo que operan en plantas industriales de clientes.",
+            controls: [
+                "Enrolamiento obligatorio en Samsung Knox MDM con cifrado de disco completo activo en el 100% de dispositivos.",
+                "Prohibición de acceso a galería personal, redes sociales o correo personal desde tablets de trabajo.",
+                "Borrado remoto inmediato ejecutado por TI en menos de 20 minutos ante reporte de extravío.",
+                "Auditoría semanal de enrolamiento y estado de firmas antivirus vía consola Knox MDM."
+            ],
+            responsible: "Director General (Aprueba) · Gerente Operaciones (Ejecuta) · Supervisor Inspección (Ejecuta) · Inspectores (Ejecuta)"
+        },
+        {
+            code: "POL-06",
+            name: "Seguridad en Relaciones con Proveedores",
+            control: "ISO/IEC 27002:2022 — Control A.5.19",
+            color: "indigo",
+            objective: "Garantizar que los proveedores críticos de ISL (GoDaddy, AWS, Microsoft 365, Telmex) cumplan con estándares mínimos de seguridad antes de acceder a sistemas o datos de la organización.",
+            scope: "Todos los proveedores de servicios tecnológicos con acceso a infraestructura o datos de ISL, incluyendo servicios en la nube, conectividad y registro de dominio.",
+            controls: [
+                "Formulario IC-SGSI-PROV-01 de evaluación de seguridad para cada proveedor crítico, anual.",
+                "MFA obligatorio en la consola de administración de GoDaddy y alertas de renovación con 90 días de anticipación.",
+                "Cláusulas de seguridad de la información en todos los contratos de proveedores y NDAs firmados.",
+                "Revisión anual de SLAs y capacidades de respuesta a incidentes de proveedores cloud (AWS, Microsoft)."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Consultado)"
+        },
+        {
+            code: "POL-07",
+            name: "Gestión de Incidentes de Seguridad",
+            control: "ISO/IEC 27002:2022 — Control A.5.24",
+            color: "orange",
+            objective: "Establecer un proceso formal y documentado para la detección, reporte, clasificación, respuesta y análisis post-mortem de incidentes de seguridad de la información en ISL.",
+            scope: "Todos los incidentes de seguridad que afecten activos de ISL, incluyendo accesos no autorizados, malware, pérdida de datos, fallos de infraestructura y violaciones a políticas internas.",
+            controls: [
+                "Canal de reporte de incidentes 24/7 habilitado al Responsable de TI vía correo ic-seguridad@inspeccionsl.com y WhatsApp.",
+                "Clasificación de incidentes en 3 niveles: Crítico (< 1 hora respuesta) / Alto (< 4 horas) / Medio (< 24 horas).",
+                "Análisis de causa raíz (Root Cause Analysis) documentado en formulario IC-SGSI-INC-02 tras cada incidente mayor.",
+                "Informe mensual de incidentes presentado en reunión de revisión gerencial con métricas de MTTR y MTTD."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Ejecuta) · Supervisores (Consultado)"
+        },
+        {
+            code: "POL-08",
+            name: "Continuidad del Negocio y Respaldos (BCP)",
+            control: "ISO/IEC 27002:2022 — Control A.8.13",
+            color: "teal",
+            objective: "Asegurar la disponibilidad operativa de los sistemas críticos de ISL ante interrupciones mayores, mediante una estrategia de respaldo probada y un Plan de Continuidad del Negocio documentado.",
+            scope: "La base de datos SQL Server, los archivos de Microsoft 365 (OneDrive/SharePoint), el servidor Dell PowerEdge y todos los datos de inspección generados en campo.",
+            controls: [
+                "Regla de Respaldos 3-2-1: 3 copias, 2 medios distintos (AWS S3 y disco WD externo), 1 copia off-site en caja fuerte.",
+                "Backup automático diario a las 02:00 hrs hacia AWS S3 con retención de 90 días.",
+                "Copia offline semanal en discos externos WD custodiados en caja fuerte física firmada con bitácora BCP-01.",
+                "Simulacro de recuperación ante desastre (DRP) semestral con RTO objetivo de 4 horas y RPO de 24 horas."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Ejecuta)"
+        },
+        {
+            code: "POL-09",
+            name: "Gestión de Cambios de TI",
+            control: "ISO/IEC 27002:2022 — Control A.8.32",
+            color: "sky",
+            objective: "Controlar y documentar todos los cambios significativos realizados a la infraestructura, sistemas y aplicaciones de ISL para minimizar el riesgo de interrupciones no planificadas.",
+            scope: "Cualquier modificación en el servidor central, configuración de red, actualización de software, cambios en Active Directory o en servicios en la nube de ISL.",
+            controls: [
+                "Solicitud de Cambio (RFC) documentada en formulario IC-SGSI-CAM-03 y aprobada por Dirección antes de implementación.",
+                "Pruebas obligatorias en entorno de staging antes de implementar cambios en producción.",
+                "Ventana de cambios aprobada: Domingos 22:00–02:00 hrs para evitar afectación operativa.",
+                "Plan de rollback documentado para cada cambio mayor, con responsable de ejecución identificado."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Consultado)"
+        },
+        {
+            code: "POL-10",
+            name: "Concientización y Capacitación en Seguridad",
+            control: "ISO/IEC 27002:2022 — Control A.6.3",
+            color: "pink",
+            objective: "Desarrollar y mantener un programa de capacitación en seguridad de la información para todos los colaboradores de ISL, reduciendo el riesgo humano como vector de ataque principal.",
+            scope: "Los 23 colaboradores de ISL, con especial énfasis en inspectores de campo y personal con acceso a sistemas críticos de información.",
+            controls: [
+                "Capacitación anual obligatoria con módulos de phishing, ingeniería social, uso seguro de dispositivos y políticas internas.",
+                "Simulacro de phishing trimestral con reporte de tasas de clics para medir la madurez del equipo.",
+                "Examen de comprensión post-capacitación con nota mínima aprobatoria de 80/100.",
+                "Firmas de asistencia registradas en formulario IC-SGSI-CAP-01 archivadas por 3 años."
+            ],
+            responsible: "Director General (Aprueba) · Responsable TI (Ejecuta) · Gerente Operaciones (Ejecuta) · Supervisores (Ejecuta) · Inspectores (Ejecuta)"
+        }
+    ];
+
     const auditChecklist = [
         { id: "CHK-01", req: "¿Existe una Política de Seguridad aprobada por Dirección?", policy: "POL-10 / Cláusula 5.2", evidence: "Documento PSI-2026 firmado por Director General.", status: "C", obs: "PSI-2026 (ACT-INT-015) localizada en repositorio central. Aprobada en mayo 2026." },
         { id: "CHK-02", req: "¿Está definido y documentado el alcance del SGSI?", policy: "Cláusula 4.3", evidence: "Sección 3 del Manual del SGSI.", status: "C", obs: "Alcance documentado en Sección 3. Incluye la sede central y las operaciones técnicas externas." },
@@ -235,7 +388,7 @@ const PR03Dashboard = () => {
                     ))}
                 </div>
 
-                <div className="p-6 md:p-8 min-h-[550px]">
+                <div className="p-6 md:p-10 min-h-[550px]">
                     <AnimatePresence mode="wait">
                         
                         {/* Tab 1: General & Alcance */}
@@ -575,43 +728,53 @@ const PR03Dashboard = () => {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="space-y-8"
                             >
-                                <div className="bg-[#0a0c16] border border-gray-800 rounded-2xl p-6">
-                                    <div className="border-b border-gray-800 pb-4 mb-6">
-                                        <h5 className="text-white font-mono font-bold flex items-center gap-2">
-                                            <FaBook className="text-emerald-400" /> MATRIZ RACI — POLÍTICAS DE SEGURIDAD (SECCIÓN 8.3)
+                                {/* RACI Overview */}
+                                <div className="bg-[#0a0c16] border border-gray-800 rounded-2xl p-6 md:p-8">
+                                    <div className="border-b border-gray-800 pb-5 mb-6">
+                                        <h5 className="text-white font-mono text-lg font-bold flex items-center gap-3">
+                                            <FaBook className="text-emerald-400 text-xl" /> MATRIZ RACI — POLÍTICAS DE SEGURIDAD (SECCIÓN 8.3)
                                         </h5>
-                                        <p className="text-gray-400 text-xs font-mono mt-1">
-                                            Asignación formal de responsabilidades para las 10 directivas críticas del SGSI implementadas en ISL.
+                                        <p className="text-gray-400 text-sm font-mono mt-2 leading-relaxed">
+                                            Asignación formal de responsabilidades para las 10 directivas críticas del SGSI implementadas en <strong className="text-white">Inspección Certificada SL (ISL)</strong>. Cada rol tiene una función clara: Accountable aprueba, Responsible ejecuta, Consulted opina e Informed recibe notificación.
                                         </p>
                                     </div>
 
+                                    {/* Role legend */}
+                                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+                                        {raciMatrix.roles.map(role => (
+                                            <div key={role.code} className="bg-black/30 border border-gray-800 rounded-xl p-3 text-center">
+                                                <span className="block text-emerald-400 font-mono font-black text-lg">{role.code}</span>
+                                                <span className="text-gray-400 text-xs mt-1 block">{role.label}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
                                     <div className="overflow-x-auto">
-                                        <table className="w-full text-center text-xs md:text-sm text-gray-300">
-                                            <thead className="bg-[#05060a] text-xs font-mono text-emerald-400">
+                                        <table className="w-full text-center text-sm text-gray-300">
+                                            <thead className="bg-[#05060a] text-sm font-mono text-emerald-400">
                                                 <tr>
-                                                    <th className="px-4 py-3 border-b border-gray-800 text-left rounded-tl-lg">Política del SGSI</th>
-                                                    <th className="px-4 py-3 border-b border-gray-800 text-left">Control Anexo A</th>
+                                                    <th className="px-5 py-4 border-b border-gray-800 text-left rounded-tl-lg">Política del SGSI</th>
+                                                    <th className="px-5 py-4 border-b border-gray-800 text-left">Control ISO 27002</th>
                                                     {raciMatrix.roles.map(role => (
-                                                        <th key={role.code} className="px-2 py-3 border-b border-gray-800" title={role.label}>{role.code}</th>
+                                                        <th key={role.code} className="px-3 py-4 border-b border-gray-800" title={role.label}>{role.code}</th>
                                                     ))}
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-800/60 font-mono">
                                                 {raciMatrix.policies.map((p) => (
                                                     <tr key={p.code} className="hover:bg-emerald-500/5 transition-colors group">
-                                                        <td className="px-4 py-3 text-left font-bold text-white text-xs">{p.name}</td>
-                                                        <td className="px-4 py-3 text-left text-gray-500 text-[10px]">{p.control}</td>
+                                                        <td className="px-5 py-4 text-left font-bold text-white text-sm">{p.name}</td>
+                                                        <td className="px-5 py-4 text-left text-gray-400 text-xs">{p.control}</td>
                                                         {raciMatrix.roles.map(role => {
                                                             const roleVal = p.raci[role.code];
-                                                            let bgStyle = "text-gray-500";
+                                                            let bgStyle = "text-gray-600";
                                                             if (roleVal === "A") bgStyle = "text-rose-400 font-bold bg-rose-500/10 border border-rose-500/20";
                                                             else if (roleVal === "R") bgStyle = "text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20";
                                                             else if (roleVal === "C") bgStyle = "text-cyan-400 font-bold bg-cyan-500/10 border border-cyan-500/20";
                                                             else if (roleVal === "I") bgStyle = "text-amber-400 font-bold bg-amber-500/10 border border-amber-500/20";
-
                                                             return (
-                                                                <td key={role.code} className="px-2 py-3 text-center">
-                                                                    <span className={`inline-block w-6 py-0.5 rounded text-[10px] ${bgStyle}`}>{roleVal}</span>
+                                                                <td key={role.code} className="px-3 py-4 text-center">
+                                                                    <span className={`inline-block w-8 py-1 rounded text-sm ${bgStyle}`}>{roleVal}</span>
                                                                 </td>
                                                             );
                                                         })}
@@ -621,39 +784,96 @@ const PR03Dashboard = () => {
                                         </table>
                                     </div>
                                     
-                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 p-4 bg-black/20 border border-gray-800 rounded-xl font-mono text-[10px] justify-items-center">
-                                        <div className="flex items-center gap-1.5"><span className="w-5 py-0.5 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-center rounded font-bold">A</span> <span>Accountable (Aprueba)</span></div>
-                                        <div className="flex items-center gap-1.5"><span className="w-5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-center rounded font-bold">R</span> <span>Responsible (Ejecuta)</span></div>
-                                        <div className="flex items-center gap-1.5"><span className="w-5 py-0.5 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-center rounded font-bold">C</span> <span>Consulted (Consultado)</span></div>
-                                        <div className="flex items-center gap-1.5"><span className="w-5 py-0.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-center rounded font-bold">I</span> <span>Informed (Informado)</span></div>
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 p-5 bg-black/20 border border-gray-800 rounded-xl">
+                                        {[
+                                            { code: 'A', label: 'Accountable (Aprueba y responde)', bg: 'bg-rose-500/10 border-rose-500/20 text-rose-400' },
+                                            { code: 'R', label: 'Responsible (Ejecuta la tarea)', bg: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' },
+                                            { code: 'C', label: 'Consulted (Aporta criterio)', bg: 'bg-cyan-500/10 border-cyan-500/20 text-cyan-400' },
+                                            { code: 'I', label: 'Informed (Recibe notificación)', bg: 'bg-amber-500/10 border-amber-500/20 text-amber-400' },
+                                        ].map(item => (
+                                            <div key={item.code} className="flex items-center gap-3">
+                                                <span className={`w-8 h-8 flex items-center justify-center border rounded text-sm font-black font-mono ${item.bg}`}>{item.code}</span>
+                                                <span className="text-gray-300 text-sm">{item.label}</span>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 
-                                <div className="bg-[#0a0c16] border border-gray-800 rounded-2xl p-6">
-                                    <h5 className="text-white font-mono font-bold mb-4 flex items-center gap-2 border-b border-gray-800 pb-3">
-                                        <FaLaptop className="text-emerald-400" /> PROCEDIMIENTO PASO A PASO: POLÍTICA SELECCIONADA (SECCIÓN 11)
-                                    </h5>
-                                    <p className="text-gray-400 text-xs md:text-sm mb-6 leading-relaxed">
-                                        La política de **Seguridad en Dispositivos Móviles (POL-05)** se enfoca en regular las tablets Samsung Knox operando en campo. Su procedimiento paso a paso es:
+                                {/* Detailed Policy Cards */}
+                                <div>
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <FaShieldAlt className="text-emerald-400 text-xl" />
+                                        <h5 className="text-white font-mono text-lg font-bold">DESGLOSE DETALLADO DE LAS 10 POLÍTICAS DEL SGSI</h5>
+                                    </div>
+                                    <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                                        Cada política de seguridad de ISL define un objetivo claro, el alcance de aplicación, los controles específicos que implementa y los responsables asignados. Están alineadas directamente con los controles del <strong className="text-white">Anexo A de la norma ISO/IEC 27001:2022</strong>.
                                     </p>
-                                    <div className="space-y-4">
-                                        {[
-                                            { step: "1", title: "Verificación y Carga Físicas", desc: "Antes de cada salida a campo, el Supervisor de Inspección comprueba que la tablet tenga cargada la batería al 100% y que la app de inspección esté sincronizada." },
-                                            { step: "2", title: "Captura Local Segura", desc: "Durante la jornada laboral en la planta, el inspector captura exclusivamente los planos e informes dentro de la App con cifrado local activo. Queda prohibida la toma de fotos a la galería personal." },
-                                            { step: "3", title: "Canal Seguro VPN", desc: "Al finalizar las inspecciones, el inspector activa la VPN Cisco AnyConnect mediante credenciales de un solo uso (OTP) para encriptar los datos a través de Telmex IPSec." },
-                                            { step: "4", title: "Reporte de Extravíos", desc: "Ante robo o extravío en planta, el inspector reporta al Supervisor de inmediato por llamada. El Responsable de TI ejecuta la orden de borrado y destrucción de claves remotas en < 20 minutos." },
-                                            { step: "5", title: "Auditoría de Enrolamiento", desc: "El Responsable de TI valida semanalmente en la consola de Knox MDM que el 100% de los dispositivos en campo cuenten con el agente activo y las firmas de antivirus actualizadas." }
-                                        ].map((p, idx) => (
-                                            <div key={idx} className="flex gap-4 items-start">
-                                                <div className="w-8 h-8 rounded-full border border-emerald-500/40 bg-emerald-950/20 text-emerald-400 font-mono text-sm font-bold flex items-center justify-center flex-shrink-0">
-                                                    {p.step}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {policiesDetail.map((pol, idx) => {
+                                            const colorMap = {
+                                                emerald: { border: 'border-emerald-500/30', header: 'bg-emerald-500/10', badge: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30', accent: 'text-emerald-400', dot: 'bg-emerald-500' },
+                                                cyan:    { border: 'border-cyan-500/30',    header: 'bg-cyan-500/10',    badge: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',       accent: 'text-cyan-400',    dot: 'bg-cyan-500' },
+                                                amber:   { border: 'border-amber-500/30',   header: 'bg-amber-500/10',   badge: 'bg-amber-500/10 text-amber-300 border-amber-500/30',    accent: 'text-amber-400',   dot: 'bg-amber-500' },
+                                                violet:  { border: 'border-violet-500/30',  header: 'bg-violet-500/10',  badge: 'bg-violet-500/10 text-violet-300 border-violet-500/30', accent: 'text-violet-400',  dot: 'bg-violet-500' },
+                                                rose:    { border: 'border-rose-500/30',    header: 'bg-rose-500/10',    badge: 'bg-rose-500/10 text-rose-300 border-rose-500/30',       accent: 'text-rose-400',    dot: 'bg-rose-500' },
+                                                indigo:  { border: 'border-indigo-500/30',  header: 'bg-indigo-500/10',  badge: 'bg-indigo-500/10 text-indigo-300 border-indigo-500/30', accent: 'text-indigo-400',  dot: 'bg-indigo-500' },
+                                                orange:  { border: 'border-orange-500/30',  header: 'bg-orange-500/10',  badge: 'bg-orange-500/10 text-orange-300 border-orange-500/30', accent: 'text-orange-400',  dot: 'bg-orange-500' },
+                                                teal:    { border: 'border-teal-500/30',    header: 'bg-teal-500/10',    badge: 'bg-teal-500/10 text-teal-300 border-teal-500/30',       accent: 'text-teal-400',    dot: 'bg-teal-500' },
+                                                sky:     { border: 'border-sky-500/30',     header: 'bg-sky-500/10',     badge: 'bg-sky-500/10 text-sky-300 border-sky-500/30',          accent: 'text-sky-400',     dot: 'bg-sky-500' },
+                                                pink:    { border: 'border-pink-500/30',    header: 'bg-pink-500/10',    badge: 'bg-pink-500/10 text-pink-300 border-pink-500/30',       accent: 'text-pink-400',    dot: 'bg-pink-500' },
+                                            };
+                                            const c = colorMap[pol.color] || colorMap.emerald;
+                                            return (
+                                                <div key={idx} className={`bg-[#0a0c16] border ${c.border} rounded-2xl overflow-hidden hover:shadow-lg transition-shadow`}>
+                                                    {/* Card Header */}
+                                                    <div className={`${c.header} px-6 py-4 border-b border-gray-800/60 flex justify-between items-start`}>
+                                                        <div>
+                                                            <span className={`inline-block px-3 py-1 text-xs font-mono font-bold rounded border ${c.badge} mb-2`}>{pol.code}</span>
+                                                            <h6 className="text-white font-bold text-base leading-snug">{pol.name}</h6>
+                                                        </div>
+                                                        <span className={`text-[11px] font-mono ${c.accent} text-right max-w-[140px] leading-tight`}>{pol.control}</span>
+                                                    </div>
+                                                    {/* Card Body */}
+                                                    <div className="px-6 py-5 space-y-5">
+                                                        {/* Objetivo */}
+                                                        <div>
+                                                            <span className={`text-xs font-mono font-bold uppercase tracking-widest ${c.accent} flex items-center gap-2 mb-2`}>
+                                                                <FaBullseye className="text-xs" /> Objetivo
+                                                            </span>
+                                                            <p className="text-gray-300 text-sm leading-relaxed">{pol.objective}</p>
+                                                        </div>
+                                                        {/* Alcance */}
+                                                        <div>
+                                                            <span className={`text-xs font-mono font-bold uppercase tracking-widest ${c.accent} flex items-center gap-2 mb-2`}>
+                                                                <FaNetworkWired className="text-xs" /> Alcance
+                                                            </span>
+                                                            <p className="text-gray-400 text-sm leading-relaxed">{pol.scope}</p>
+                                                        </div>
+                                                        {/* Controls */}
+                                                        <div>
+                                                            <span className={`text-xs font-mono font-bold uppercase tracking-widest ${c.accent} flex items-center gap-2 mb-3`}>
+                                                                <FaCheckCircle className="text-xs" /> Controles Implementados
+                                                            </span>
+                                                            <ul className="space-y-2">
+                                                                {pol.controls.map((ctrl, ci) => (
+                                                                    <li key={ci} className="flex items-start gap-3">
+                                                                        <span className={`mt-1.5 w-2 h-2 rounded-full ${c.dot} flex-shrink-0`} />
+                                                                        <span className="text-gray-300 text-sm leading-relaxed">{ctrl}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                        {/* Responsible */}
+                                                        <div className={`border-t border-gray-800/60 pt-4`}>
+                                                            <span className="text-xs font-mono font-bold uppercase tracking-widest text-gray-500 flex items-center gap-2 mb-2">
+                                                                <FaUsers className="text-xs" /> Responsables
+                                                            </span>
+                                                            <p className={`text-xs leading-relaxed ${c.accent}`}>{pol.responsible}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h6 className="text-white font-bold text-sm">{p.title}</h6>
-                                                    <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{p.desc}</p>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </motion.div>
