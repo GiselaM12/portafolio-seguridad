@@ -1970,6 +1970,52 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         </p>
       </div>
     `
+  },
+  {
+    id: 18,
+    title: "ACTIVIDAD 18 - Análisis de Intrusiones con el Modelo Diamante",
+    description: "Evaluación y mapeo de incidentes de ciberseguridad utilizando el Modelo Diamante, integración con el Cyber Kill Chain y diagramación de Hilos de Actividad para identificar técnicas de Pivoting.",
+    date: "2026-05-23",
+    tags: ["Modelo Diamante", "APT", "Cyber Kill Chain", "Pivoting", "Threat Intelligence"],
+    content: `
+      <div class="border border-indigo-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-indigo-400/80 mb-6 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
+        <p>[SYSTEM] DIAMOND MODEL INTRUSION ANALYSIS ENGINE ONLINE.</p>
+        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 3 PROJECT.</p>
+        <p>[METRICS] TRACING ADVERSARY, INFRASTRUCTURE, CAPABILITY & VICTIM NODES.</p>
+      </div>
+
+      <div class="mb-10 text-gray-300 space-y-6">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="flex-1 space-y-4">
+                <h3 class="text-xl font-bold text-indigo-400 font-mono border-b border-gray-800 pb-2">El Modelo Diamante</h3>
+                <p class="leading-relaxed">
+                    El <strong>Modelo Diamante de Análisis de Intrusiones</strong> es un marco conceptual utilizado por analistas de inteligencia de amenazas (Threat Intelligence) para describir y organizar incidentes cibernéticos. 
+                </p>
+                <p class="leading-relaxed">
+                    Su núcleo se basa en cuatro vértices inseparables que definen cualquier evento de seguridad: Un <strong>Adversario</strong> despliega una <strong>Capacidad</strong> sobre una <strong>Infraestructura</strong> contra una <strong>Víctima</strong>. Analizando las aristas y metacaracterísticas (como la fase del Kill Chain o el Resultado), podemos descubrir campañas complejas (Hilos de Actividad) y predecir los siguientes movimientos de una APT.
+                </p>
+            </div>
+            <div class="md:w-1/3 flex-shrink-0">
+                <div class="rounded-xl overflow-hidden border border-indigo-500/30 shadow-[0_0_20px_rgba(99,102,241,0.15)] relative group bg-indigo-950/20 p-8 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#02050b] via-transparent to-transparent opacity-80 z-10"></div>
+                    <div class="w-32 h-32 rotate-45 border-2 border-indigo-500/50 shadow-[0_0_30px_rgba(99,102,241,0.3)] relative group-hover:scale-105 transition-transform duration-700 bg-indigo-500/5">
+                        <span class="absolute -top-6 -left-6 -rotate-45 text-[10px] text-indigo-400 font-mono font-bold">ADV</span>
+                        <span class="absolute -bottom-6 -right-6 -rotate-45 text-[10px] text-indigo-400 font-mono font-bold">VIC</span>
+                        <span class="absolute top-1/2 -left-8 -rotate-45 text-[10px] text-indigo-400 font-mono font-bold">CAP</span>
+                        <span class="absolute top-1/2 -right-8 -rotate-45 text-[10px] text-indigo-400 font-mono font-bold">INF</span>
+                    </div>
+                    <div class="absolute bottom-2 left-3 z-20 font-mono text-[9px] text-indigo-400 uppercase">
+                        [FIG. 1] Abstracción Topológica
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="text-sm italic text-gray-500 border-l-2 border-indigo-900 pl-3">
+            Explora el siguiente <strong>Simulador Táctico Forense</strong> para interactuar con los hallazgos del Equipo 1 sobre el ataque de phishing, el control de la red mediante Pivoting (proxy) y el análisis integral utilizando este modelo de inteligencia.
+        </p>
+      </div>
+    `
   }
 ];
 
