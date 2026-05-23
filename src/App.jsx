@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import HackingGame from './components/HackingGame'
 import ScrollToTop from './components/ScrollToTop'
 import LabsPage from './pages/LabsPage'
+import PdfViewerPage from './pages/PdfViewerPage'
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/actividades/:id" element={<ActivityDetail />} />
             <Route path="/laboratorios-sql" element={<LabsPage />} />
+            <Route path="/visor-pdf/:id" element={<PdfViewerPage />} />
           </Routes>
         </main>
         <HackingGame />

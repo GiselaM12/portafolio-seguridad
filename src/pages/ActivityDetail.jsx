@@ -5,6 +5,7 @@ import { FaFilePdf, FaArrowLeft, FaTerminal, FaShieldAlt, FaCalendarAlt, FaUserS
 import { motion } from 'framer-motion';
 import PhishingQuiz from '../components/PhishingQuiz';
 import EthicsSimulator from '../components/EthicsSimulator';
+import CvssCalculator from '../components/CvssCalculator';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -33,7 +34,8 @@ const ActivityDetail = () => {
             6: "parcial1/176522-ACT6.pdf",
             "PR02": "PR02.pdf",
             8: "parcial2/act08-Equipo1.pdf",
-            16: "parcial3/act16-Equipo1.pdf"
+            16: "parcial3/act16-Equipo1.pdf",
+            17: "parcial3/act17-Equipo1.pdf"
         };
         const fileName = fileMap[id];
         // Ensure no double slashes and no leading slash if BASE_URL already has it
@@ -365,6 +367,13 @@ const ActivityDetail = () => {
                         {String(activity.id) === '16' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-cyan-900/50">
                                 <EthicsSimulator />
+                            </div>
+                        )}
+
+                        {/* Interactive CVSS Segment for Act 17 */}
+                        {String(activity.id) === '17' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-cyan-900/50">
+                                <CvssCalculator />
                             </div>
                         )}
 

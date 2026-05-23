@@ -1902,6 +1902,20 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
       </div>
     `
+  },
+  {
+    id: 17,
+    title: "ACTIVIDAD 17 - Evaluación de Vulnerabilidades con CVSS v3.1",
+    description: "Calculadora interactiva y análisis de riesgos aplicando el estándar CVSS v3.1 para la evaluación de vulnerabilidades críticas y clasificación de severidad.",
+    date: "2026-05-18",
+    tags: ["CVSS v3.1", "Vulnerabilidades", "Gestión de Riesgo", "CWE", "Análisis Técnico"],
+    content: `
+      <div class="border border-cyan-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-cyan-400/80 mb-6">
+        <p>[SYSTEM] CVSS V3.1 RISK CALCULATOR ENGINE ONLINE.</p>
+        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 3 PROJECT.</p>
+        <p>[METRICS] ACTIVE DECODING OF ATTACK VECTOR AND SCOPE.</p>
+      </div>
+    `
   }
 ];
 
