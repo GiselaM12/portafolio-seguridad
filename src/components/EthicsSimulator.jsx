@@ -4,7 +4,7 @@ import {
     FaShieldAlt, FaInfoCircle, FaCheckCircle, FaTimesCircle, 
     FaFilePdf, FaTerminal, FaBalanceScale, FaGavel, FaLock, 
     FaUserSecret, FaRegFileAlt, FaSkullCrossbones,
-    FaArrowRight, FaCodeBranch, FaExclamationTriangle, FaDownload, FaUsers
+    FaArrowRight, FaCodeBranch, FaExclamationTriangle, FaEye, FaUsers
 } from 'react-icons/fa';
 import { jsPDF } from 'jspdf';
 
@@ -483,11 +483,12 @@ const EthicsSimulator = () => {
                         </div>
                         <a
                             href={originalPdfUrl}
-                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex items-center justify-center gap-2.5 w-full py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-400 font-mono text-xs font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.05)] active:scale-[0.98]"
                         >
-                            <FaDownload />
-                            <span>DESCARGAR PDF ORIGINAL</span>
+                            <FaEye />
+                            <span>VISUALIZAR PDF ORIGINAL</span>
                         </a>
                     </div>
                 </div>

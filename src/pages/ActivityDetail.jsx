@@ -206,16 +206,18 @@ const ActivityDetail = () => {
                                         </div>
                                     </a>
                                 )}
-                                <a
-                                    href={fileUrl}
-                                    download
-                                    className="group relative px-4 py-2 bg-transparent overflow-hidden rounded border border-gray-700 text-gray-500 font-mono text-xs tracking-widest hover:text-white hover:border-gray-500 transition-all"
-                                >
-                                    <div className="relative flex items-center gap-2">
-                                        <FaFilePdf className="text-xs" />
-                                        <span>{downloadText}</span>
-                                    </div>
-                                </a>
+                                {!isPdf && (
+                                    <a
+                                        href={fileUrl}
+                                        download
+                                        className="group relative px-4 py-2 bg-transparent overflow-hidden rounded border border-gray-700 text-gray-500 font-mono text-xs tracking-widest hover:text-white hover:border-gray-500 transition-all"
+                                    >
+                                        <div className="relative flex items-center gap-2">
+                                            <FaFilePdf className="text-xs" />
+                                            <span>{downloadText}</span>
+                                        </div>
+                                    </a>
+                                )}
                             </>
                         ) : (
                             <div className="px-6 py-2 border border-gray-700 text-gray-600 font-mono text-sm tracking-widest rounded cursor-not-allowed opacity-50 flex items-center gap-3">
