@@ -186,13 +186,27 @@ const DiamondModel = () => {
                             <h3 className="text-sm font-mono font-bold text-indigo-400 uppercase tracking-widest flex items-center gap-3 mb-4">
                                 <FaShieldAlt className="text-lg" /> MIEMBROS DEL EQUIPO 1
                             </h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs md:text-sm font-mono text-gray-300">
-                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Aguilar Espinoza Juan Diego (173877)</div>
-                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Jasso Dávila Pedro Damián (176658)</div>
-                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Moreno Solís Gisela Geraldine (176522)</div>
-                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Palomo Cerdá José Armando (17593)</div>
-                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Zarate Domínguez David (175842)</div>
-                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Zorrilla Rivera Eduardo (175877)</div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                {[
+                                    { name: "Moreno Solís Gisela Geraldine", id: "176522", role: "Auditor Líder" },
+                                    { name: "Aguilar Espinoza Juan Diego", id: "173877", role: "Analista de Riesgo" },
+                                    { name: "Jasso Dávila Pedro Damián", id: "176658", role: "Ing. Forense" },
+                                    { name: "Palomo Cerdá José Armando", id: "17593", role: "Especialista OSINT" },
+                                    { name: "Zarate Domínguez David", id: "175842", role: "Pentester Principal" },
+                                    { name: "Zorrilla Rivera Eduardo", id: "175877", role: "Asesor de Cumplimiento" }
+                                ].map((member, idx) => (
+                                    <div key={idx} className="bg-black/40 border border-indigo-900/40 rounded-xl p-3 flex flex-col justify-between hover:border-indigo-500/50 transition-all duration-300 shadow-sm">
+                                        <div className="font-mono text-xs text-white font-bold tracking-tight truncate">
+                                            {member.name}
+                                        </div>
+                                        <div className="flex justify-between items-center mt-2 text-[10px] font-mono">
+                                            <span className="text-gray-500">{member.id}</span>
+                                            <span className="text-indigo-300 font-bold px-1.5 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20">
+                                                {member.role}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -256,7 +270,7 @@ const DiamondModel = () => {
                             <FaSearch /> Topología del Evento
                         </h5>
                         
-                        <div className="relative w-72 h-72 md:w-96 md:h-96 my-8">
+                        <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 my-8 shrink-0">
                             {/* Lines connecting nodes */}
                             <svg className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_10px_rgba(99,102,241,0.3)]" style={{ zIndex: 0 }}>
                                 <line x1="50%" y1="10%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.4)" strokeWidth="3" />
@@ -336,7 +350,7 @@ const DiamondModel = () => {
                                 <span className="text-[10px] md:text-xs font-bold text-gray-400 bg-gray-900 border border-gray-700 px-3 py-1.5 rounded-full drop-shadow-lg">SIMULACIÓN VISUAL</span>
                             </h5>
                             
-                            <div className="flex flex-col gap-10 mt-10">
+                            <div className="flex flex-col gap-8 mt-8">
                                 {/* Thread 1 */}
                                 <div className="relative">
                                     <div className="absolute top-1/2 left-0 w-full h-[2px] bg-indigo-900/40 -translate-y-1/2"></div>
@@ -353,14 +367,14 @@ const DiamondModel = () => {
                                     </div>
                                     {/* Animation dot */}
                                     <motion.div 
-                                        className="absolute top-1/2 left-20 w-3 h-3 bg-rose-500 rounded-full shadow-[0_0_15px_rgba(244,63,94,1)] z-10"
-                                        animate={{ x: [0, 250, 0] }}
+                                        className="absolute top-1/2 left-10 w-2.5 h-2.5 bg-rose-500 rounded-full shadow-[0_0_15px_rgba(244,63,94,1)] z-10"
+                                        animate={{ x: [0, 150, 0] }}
                                         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                                     />
                                 </div>
 
                                 {/* Thread 2 */}
-                                <div className="relative ml-20 sm:ml-40 mt-4">
+                                <div className="relative ml-10 sm:ml-20 mt-4">
                                     <div className="absolute top-1/2 left-0 w-full h-[2px] bg-amber-900/40 -translate-y-1/2"></div>
                                     <div className="relative z-10 flex justify-between items-center px-2 md:px-6">
                                         <div className="bg-[#03050a] border-2 border-emerald-500/20 p-3 md:p-4 rounded-xl flex flex-col items-center gap-2 opacity-60 z-20">
@@ -374,14 +388,14 @@ const DiamondModel = () => {
                                     </div>
                                     {/* Animation dot */}
                                     <motion.div 
-                                        className="absolute top-1/2 left-20 w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,1)] z-10"
-                                        animate={{ x: [0, 200, 0] }}
+                                        className="absolute top-1/2 left-10 w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,1)] z-10"
+                                        animate={{ x: [0, 150, 0] }}
                                         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                                     />
                                 </div>
                             </div>
                             
-                            <div className="mt-12 bg-black/50 p-5 rounded-xl border border-emerald-900/30 flex gap-4 items-start">
+                            <div className="mt-8 bg-black/50 p-4 md:p-5 rounded-xl border border-emerald-900/30 flex gap-3 md:gap-4 items-start">
                                 <FaInfoCircle className="text-emerald-500 text-2xl flex-shrink-0 mt-1" />
                                 <p className="text-xs md:text-sm text-gray-300 font-mono leading-relaxed">
                                     <strong className="text-emerald-400 text-sm md:text-base tracking-wide uppercase block mb-1">Impacto del Pivoting</strong>
@@ -401,15 +415,15 @@ const DiamondNode = ({ node, active, onClick }) => {
     return (
         <button
             onClick={onClick}
-            className={`w-20 h-20 md:w-28 md:h-28 rotate-45 flex items-center justify-center transition-all duration-300 shadow-xl border-2 ${
+            className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rotate-45 flex items-center justify-center transition-all duration-300 shadow-xl border-2 ${
                 active 
                 ? `${node.bg} ${node.border} scale-110 shadow-[0_0_40px_rgba(99,102,241,0.4)] z-50` 
                 : 'bg-[#0a0f1c] border-gray-700/50 hover:border-gray-500/80 hover:bg-[#0c1222]'
             }`}
         >
-            <div className="-rotate-45 flex flex-col items-center gap-2">
-                <node.icon className={`text-2xl md:text-3xl transition-colors ${active ? node.color : 'text-gray-500'}`} />
-                <span className={`text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest ${active ? node.color : 'text-gray-500'}`}>
+            <div className="-rotate-45 flex flex-col items-center gap-1.5 md:gap-2">
+                <node.icon className={`text-xl md:text-2xl transition-colors ${active ? node.color : 'text-gray-500'}`} />
+                <span className={`text-[9px] md:text-[10px] lg:text-xs font-mono font-bold uppercase tracking-widest ${active ? node.color : 'text-gray-500'}`}>
                     {node.id.substring(0,3)}
                 </span>
             </div>
