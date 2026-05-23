@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret } from 'react-icons/fa';
+import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret, FaBalanceScale } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { activities } from '../data/activities';
 
@@ -24,6 +24,7 @@ const Projects = () => {
             case "5": return <FaUserSecret />; // Pentesting
             case "6": return <FaNetworkWired />; // VPN
             case "8": return <FaDatabase />; // SQL Injection
+            case "16": return <FaBalanceScale />; // Dilemas Éticos
             case "PR02": return <FaUserSecret />; // Phishing / Engineering Social
             default: return <FaFolderPlus />;
         }
@@ -47,7 +48,14 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: act.id !== "PR02"
         })).concat([lockedCard]),
-        parcial3: [lockedCard, lockedCard, lockedCard],
+        parcial3: activities.filter(act => String(act.id) === "16").map(act => ({
+            icon: getIconForActivity(act.id),
+            title: act.title,
+            description: act.description,
+            status: "Available",
+            link: `/actividades/${act.id}`,
+            isActivity: false
+        })).concat([lockedCard, lockedCard]),
         final: [lockedCard, lockedCard, lockedCard]
     };
 

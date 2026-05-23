@@ -60,7 +60,7 @@ const Activities = () => {
                 </div>
 
                 {/* Parcial 2 Section */}
-                <div>
+                <div className="mb-20">
                     <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-violet-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-violet-500/10 mb-10">
                         <h2 className="text-violet-400 font-mono text-sm md:text-base tracking-widest flex items-center justify-center gap-2 uppercase">
                             <FaCode /> PARCIAL 2: TÉCNICAS DE EXPLOTACIÓN Y SEGURIDAD
