@@ -938,7 +938,7 @@ const CvssCalculator = () => {
                                 const plainInfo = plainExplanations[activeJustKey];
 
                                 return (
-                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-4 flex flex-col justify-between flex-grow gap-4 relative overflow-hidden">
+                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-4 flex flex-col justify-start flex-grow gap-4 relative overflow-hidden">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-[50px] rounded-full pointer-events-none" />
                                         
                                         <div className="space-y-3 flex-grow flex flex-col justify-start">
