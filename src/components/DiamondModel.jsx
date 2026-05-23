@@ -163,48 +163,48 @@ const DiamondModel = () => {
                 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
                     <div className="lg:col-span-8 space-y-4">
-                        <div className="flex gap-3">
-                            <span className="px-3 py-1 text-[10px] font-mono font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 rounded">
+                        <div className="flex gap-4">
+                            <span className="px-4 py-1.5 text-xs font-mono font-bold text-indigo-300 bg-indigo-500/10 border border-indigo-500/30 rounded">
                                 INST: UPSLP
                             </span>
-                            <span className="px-3 py-1 text-[10px] font-mono font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded">
+                            <span className="px-4 py-1.5 text-xs font-mono font-bold text-rose-300 bg-rose-500/10 border border-rose-500/30 rounded">
                                 MATERIA: CNO V
                             </span>
-                            <span className="px-3 py-1 text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded">
+                            <span className="px-4 py-1.5 text-xs font-mono font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded">
                                 ACT18: MODELO DIAMANTE
                             </span>
                         </div>
                         
-                        <h2 className="text-2xl md:text-3xl font-mono font-black text-white tracking-tight uppercase">
+                        <h2 className="text-3xl md:text-5xl font-mono font-black text-white tracking-tight uppercase shadow-indigo-500/20 drop-shadow-lg">
                             Análisis de Intrusiones Avanzado
                         </h2>
-                        <p className="text-gray-400 text-sm leading-relaxed max-w-3xl">
+                        <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-4xl">
                             Esta herramienta simula un entorno de Threat Intelligence basado en el Modelo Diamante. Permite mapear eventos anómalos (infección de malware, conexiones C2) y descubrir hilos de actividad complejos como el "Pivoting" dentro de la red corporativa.
                         </p>
 
-                        <div className="border-t border-gray-900 pt-4 mt-6">
-                            <h3 className="text-xs font-mono font-bold text-indigo-400 uppercase tracking-widest flex items-center gap-2 mb-3">
-                                <FaShieldAlt /> MIEMBROS DE EQUIPO 1
+                        <div className="border-t border-gray-800 pt-6 mt-8">
+                            <h3 className="text-sm font-mono font-bold text-indigo-400 uppercase tracking-widest flex items-center gap-3 mb-4">
+                                <FaShieldAlt className="text-lg" /> MIEMBROS DEL EQUIPO 1
                             </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-[10px] font-mono text-gray-400">
-                                <div>Aguilar Espinoza Juan Diego (173877)</div>
-                                <div>Jasso Dávila Pedro Damián (176658)</div>
-                                <div>Moreno Solís Gisela Geraldine (176522)</div>
-                                <div>Palomo Cerdá José Armando (17593)</div>
-                                <div>Zarate Domínguez David (175842)</div>
-                                <div>Zorrilla Rivera Eduardo (175877)</div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs md:text-sm font-mono text-gray-300">
+                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Aguilar Espinoza Juan Diego (173877)</div>
+                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Jasso Dávila Pedro Damián (176658)</div>
+                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Moreno Solís Gisela Geraldine (176522)</div>
+                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Palomo Cerdá José Armando (17593)</div>
+                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Zarate Domínguez David (175842)</div>
+                                <div className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>Zorrilla Rivera Eduardo (175877)</div>
                             </div>
                         </div>
                     </div>
 
                     <div className="lg:col-span-4 bg-[#0a0f1c]/80 border border-indigo-500/20 p-5 rounded-2xl flex flex-col justify-between">
                         <div>
-                            <div className="flex items-center gap-2 text-indigo-400 mb-2">
-                                <FaFilePdf className="text-xl" />
-                                <span className="font-mono text-xs font-bold uppercase tracking-wider">EXPEDIENTE ORIGINAL</span>
+                            <div className="flex items-center gap-3 text-indigo-400 mb-3">
+                                <FaFilePdf className="text-2xl" />
+                                <span className="font-mono text-sm font-bold uppercase tracking-wider">EXPEDIENTE ORIGINAL</span>
                             </div>
-                            <h4 className="text-white font-mono text-sm font-bold">act18-Equipo1.pdf</h4>
-                            <p className="text-gray-500 text-[11px] font-mono mt-1.5 leading-relaxed">
+                            <h4 className="text-white font-mono text-base md:text-lg font-bold">act18-Equipo1.pdf</h4>
+                            <p className="text-gray-400 text-xs md:text-sm font-mono mt-2 leading-relaxed">
                                 Documento con el análisis de intrusiones, mapeo del evento y relación con la Kill Chain.
                             </p>
                         </div>
@@ -212,7 +212,7 @@ const DiamondModel = () => {
                             href={`${baseUrl}#/visor-pdf/18`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-4 flex items-center justify-center gap-2.5 w-full py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 text-indigo-400 font-mono text-xs font-bold rounded-xl transition-all"
+                            className="mt-6 flex items-center justify-center gap-3 w-full py-4 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 hover:text-white font-mono text-sm font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(99,102,241,0.2)]"
                         >
                             <FaSearch className="text-sm" />
                             <span>VISUALIZAR EXPEDIENTE</span>
@@ -227,42 +227,44 @@ const DiamondModel = () => {
                 {/* HUD Header */}
                 <div className="bg-[#060a16]/90 border-b border-indigo-500/10 px-6 py-5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                            <FaProjectDiagram />
+                        <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
+                            <FaProjectDiagram className="text-xl" />
                         </span>
                         <div>
-                            <h4 className="text-white font-mono text-xs font-bold tracking-widest uppercase">
+                            <h4 className="text-white font-mono text-sm md:text-base font-bold tracking-widest uppercase drop-shadow-md">
                                 DIAMOND_MODEL_VISUALIZER
                             </h4>
-                            <p className="text-[10px] text-indigo-400/80 font-mono tracking-wider flex items-center gap-1.5 mt-0.5">
-                                <span className="w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping" />
+                            <p className="text-xs text-indigo-400 font-mono tracking-wider flex items-center gap-2 mt-1">
+                                <span className="w-2 h-2 bg-rose-500 rounded-full animate-ping shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
                                 APT THREAT TRACKING ACTIVE
                             </p>
                         </div>
                     </div>
                     <button
                         onClick={handleExportPDF}
-                        className="flex items-center gap-2 px-4 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 text-indigo-400 font-mono text-xs rounded-lg transition-all"
+                        className="flex items-center gap-3 px-6 py-3 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/40 hover:border-indigo-400 text-indigo-300 hover:text-white font-mono text-sm rounded-xl transition-all shadow-[0_0_15px_rgba(99,102,241,0.15)]"
                     >
                         <FaFilePdf /> EXPORTAR ACTA (PDF)
                     </button>
                 </div>
 
-                <div className="p-6 md:p-10 flex flex-col xl:flex-row gap-10">
+                <div className="p-6 md:p-10 flex flex-col xl:flex-row gap-12">
                     
                     {/* Left: Interactive Diamond */}
-                    <div className="xl:w-1/2 flex flex-col items-center justify-center">
-                        <h5 className="text-indigo-400 font-mono text-xs font-bold uppercase tracking-widest mb-12">Topología del Evento</h5>
+                    <div className="xl:w-5/12 flex flex-col items-center justify-start border-b xl:border-b-0 xl:border-r border-indigo-500/10 pb-12 xl:pb-0 xl:pr-12">
+                        <h5 className="text-indigo-300 font-mono text-base font-bold uppercase tracking-widest mb-16 flex items-center gap-3">
+                            <FaSearch /> Topología del Evento
+                        </h5>
                         
-                        <div className="relative w-64 h-64 md:w-80 md:h-80">
+                        <div className="relative w-72 h-72 md:w-96 md:h-96 my-8">
                             {/* Lines connecting nodes */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
-                                <line x1="50%" y1="10%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" />
-                                <line x1="90%" y1="50%" x2="50%" y2="90%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" />
-                                <line x1="50%" y1="90%" x2="10%" y2="50%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" />
-                                <line x1="10%" y1="50%" x2="50%" y2="10%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" />
-                                <line x1="10%" y1="50%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.1)" strokeWidth="1" strokeDasharray="4" />
-                                <line x1="50%" y1="10%" x2="50%" y2="90%" stroke="rgba(99,102,241,0.1)" strokeWidth="1" strokeDasharray="4" />
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_10px_rgba(99,102,241,0.3)]" style={{ zIndex: 0 }}>
+                                <line x1="50%" y1="10%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.4)" strokeWidth="3" />
+                                <line x1="90%" y1="50%" x2="50%" y2="90%" stroke="rgba(99,102,241,0.4)" strokeWidth="3" />
+                                <line x1="50%" y1="90%" x2="10%" y2="50%" stroke="rgba(99,102,241,0.4)" strokeWidth="3" />
+                                <line x1="10%" y1="50%" x2="50%" y2="10%" stroke="rgba(99,102,241,0.4)" strokeWidth="3" />
+                                <line x1="10%" y1="50%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" strokeDasharray="6" />
+                                <line x1="50%" y1="10%" x2="50%" y2="90%" stroke="rgba(99,102,241,0.2)" strokeWidth="2" strokeDasharray="6" />
                             </svg>
 
                             {/* Nodes */}
@@ -281,27 +283,29 @@ const DiamondModel = () => {
                         </div>
 
                         {/* Node Info Panel */}
-                        <div className="mt-16 w-full max-w-md h-32">
+                        <div className="mt-16 w-full min-h-[180px]">
                             <AnimatePresence mode="wait">
                                 {activeNode ? (
                                     <motion.div
                                         key={activeNode.id}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className={`p-4 border rounded-xl ${activeNode.bg} ${activeNode.border}`}
+                                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                                        className={`p-6 border-2 rounded-2xl ${activeNode.bg} ${activeNode.border} shadow-[0_0_20px_rgba(0,0,0,0.5)] relative overflow-hidden`}
                                     >
-                                        <h6 className={`font-mono font-bold text-sm mb-2 ${activeNode.color} flex items-center gap-2`}>
-                                            <activeNode.icon /> {activeNode.title}
+                                        <div className={`absolute top-0 right-0 w-32 h-32 ${activeNode.bg.replace('/10', '/20')} blur-3xl -z-10`} />
+                                        <h6 className={`font-mono font-black text-lg md:text-xl mb-3 ${activeNode.color} flex items-center gap-3 drop-shadow-md`}>
+                                            <activeNode.icon className="text-2xl" /> {activeNode.title}
                                         </h6>
-                                        <p className="text-gray-300 text-xs mb-2 leading-relaxed">{activeNode.desc}</p>
-                                        <div className="text-[10px] text-gray-500 font-mono bg-black/40 p-2 rounded border border-gray-800">
-                                            <span className="text-gray-400">Ejemplo:</span> {activeNode.example}
+                                        <p className="text-gray-200 text-sm md:text-base mb-4 leading-relaxed font-sans">{activeNode.desc}</p>
+                                        <div className="text-xs md:text-sm text-gray-300 font-mono bg-[#03050a]/80 p-4 rounded-xl border border-gray-700/50">
+                                            <span className={`font-bold ${activeNode.color}`}>EJEMPLO:</span> {activeNode.example}
                                         </div>
                                     </motion.div>
                                 ) : (
-                                    <div className="h-full flex items-center justify-center border border-dashed border-gray-800 rounded-xl text-gray-600 font-mono text-xs text-center p-4">
-                                        Selecciona un nodo del diamante para visualizar su contexto teórico y práctico.
+                                    <div className="h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-2xl text-gray-500 font-mono text-sm text-center p-8 bg-[#0a0f1c]/50">
+                                        <FaInfoCircle className="text-3xl mb-4 text-gray-600" />
+                                        <p>Selecciona un nodo del diamante para visualizar su contexto teórico y práctico de forma ampliada.</p>
                                     </div>
                                 )}
                             </AnimatePresence>
@@ -309,76 +313,81 @@ const DiamondModel = () => {
                     </div>
 
                     {/* Right: Analysis & Activity Threads */}
-                    <div className="xl:w-1/2 flex flex-col gap-6">
+                    <div className="xl:w-7/12 flex flex-col gap-8">
                         
                         {/* Event Details */}
-                        <div className="bg-[#060a16] border border-gray-800 rounded-2xl p-5">
-                            <h5 className="text-white font-mono text-sm font-bold uppercase tracking-widest border-b border-gray-900 pb-3 mb-4 flex items-center gap-2">
-                                <FaTerminal className="text-indigo-400" /> Escenario de Infección
+                        <div className="bg-[#060a16] border-2 border-indigo-900/50 rounded-2xl p-6 shadow-lg">
+                            <h5 className="text-white font-mono text-base md:text-lg font-bold uppercase tracking-widest border-b border-indigo-900/50 pb-4 mb-5 flex items-center gap-3">
+                                <FaTerminal className="text-indigo-400 text-xl" /> Escenario de Infección
                             </h5>
-                            <ul className="space-y-2 text-xs text-gray-400 font-mono">
-                                <li className="flex gap-2"><span className="text-indigo-500">&gt;</span> La víctima detecta malware.</li>
-                                <li className="flex gap-2"><span className="text-indigo-500">&gt;</span> El malware contiene dominios de Comando y Control (C2).</li>
-                                <li className="flex gap-2"><span className="text-indigo-500">&gt;</span> Los dominios resuelven a direcciones IP externas.</li>
-                                <li className="flex gap-2"><span className="text-indigo-500">&gt;</span> Logs muestran múltiples hosts conectándose a esas IP.</li>
-                                <li className="flex gap-2"><span className="text-indigo-500">&gt;</span> WHOIS/IP revela posible origen del atacante.</li>
+                            <ul className="space-y-4 text-sm md:text-base text-gray-300 font-mono leading-relaxed">
+                                <li className="flex gap-3 items-start"><span className="text-indigo-400 mt-1">&gt;</span> <span>La víctima detecta malware.</span></li>
+                                <li className="flex gap-3 items-start"><span className="text-indigo-400 mt-1">&gt;</span> <span>El malware contiene dominios de <strong className="text-white font-black bg-indigo-900/40 px-1 rounded">Comando y Control (C2)</strong>.</span></li>
+                                <li className="flex gap-3 items-start"><span className="text-indigo-400 mt-1">&gt;</span> <span>Los dominios resuelven a direcciones IP externas.</span></li>
+                                <li className="flex gap-3 items-start"><span className="text-indigo-400 mt-1">&gt;</span> <span>Logs muestran múltiples hosts conectándose a esas IP.</span></li>
+                                <li className="flex gap-3 items-start"><span className="text-indigo-400 mt-1">&gt;</span> <span>WHOIS/IP revela posible origen del atacante.</span></li>
                             </ul>
                         </div>
 
                         {/* Pivoting Animation */}
-                        <div className="bg-[#050810] border border-indigo-500/20 rounded-2xl p-5 overflow-hidden relative group">
-                            <h5 className="text-white font-mono text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-between">
-                                <span className="flex items-center gap-2"><FaNetworkWired className="text-rose-400" /> Hilos de Actividad (Pivoting)</span>
-                                <span className="text-[9px] text-gray-500 bg-gray-900 px-2 py-1 rounded">SIMULACIÓN VISUAL</span>
+                        <div className="bg-[#050810] border-2 border-indigo-500/30 rounded-2xl p-6 md:p-8 overflow-hidden relative group shadow-[0_0_25px_rgba(99,102,241,0.1)]">
+                            <h5 className="text-white font-mono text-base md:text-lg font-bold uppercase tracking-widest mb-6 flex items-center justify-between">
+                                <span className="flex items-center gap-3"><FaNetworkWired className="text-rose-400 text-xl" /> Hilos de Actividad <span className="text-indigo-300">(Pivoting)</span></span>
+                                <span className="text-[10px] md:text-xs font-bold text-gray-400 bg-gray-900 border border-gray-700 px-3 py-1.5 rounded-full drop-shadow-lg">SIMULACIÓN VISUAL</span>
                             </h5>
                             
-                            <div className="flex flex-col gap-6 mt-6">
+                            <div className="flex flex-col gap-10 mt-10">
                                 {/* Thread 1 */}
                                 <div className="relative">
-                                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 -translate-y-1/2"></div>
-                                    <div className="relative z-10 flex justify-between items-center px-4">
-                                        <div className="bg-black border border-rose-500/30 p-2 rounded-lg flex flex-col items-center gap-1 shadow-[0_0_15px_rgba(244,63,94,0.15)]">
-                                            <FaUserSecret className="text-rose-500 text-xl" />
-                                            <span className="text-[8px] font-mono text-gray-400">Atacante Ext.</span>
+                                    <div className="absolute top-1/2 left-0 w-full h-[2px] bg-indigo-900/40 -translate-y-1/2"></div>
+                                    <div className="relative z-10 flex justify-between items-center px-2 md:px-6">
+                                        <div className="bg-[#03050a] border-2 border-rose-500/50 p-3 md:p-4 rounded-xl flex flex-col items-center gap-2 shadow-[0_0_20px_rgba(244,63,94,0.3)] z-20">
+                                            <FaUserSecret className="text-rose-500 text-3xl" />
+                                            <span className="text-[10px] md:text-xs font-mono font-bold text-rose-300 whitespace-nowrap">Atacante Ext.</span>
                                         </div>
-                                        <div className="text-[9px] font-mono text-cyan-500 bg-[#050810] px-2">1. Phishing</div>
-                                        <div className="bg-black border border-emerald-500/50 p-2 rounded-lg flex flex-col items-center gap-1 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
-                                            <FaServer className="text-emerald-500 text-xl" />
-                                            <span className="text-[8px] font-mono text-gray-400">Víctima 1 (Proxy)</span>
+                                        <div className="text-[10px] md:text-xs font-mono font-bold text-cyan-400 bg-[#050810] border border-cyan-900/50 px-3 py-1 rounded-full z-20 shadow-md">1. Phishing</div>
+                                        <div className="bg-[#03050a] border-2 border-emerald-500/50 p-3 md:p-4 rounded-xl flex flex-col items-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.2)] z-20">
+                                            <FaServer className="text-emerald-500 text-3xl" />
+                                            <span className="text-[10px] md:text-xs font-mono font-bold text-emerald-300 whitespace-nowrap">Víctima 1 (Proxy)</span>
                                         </div>
                                     </div>
                                     {/* Animation dot */}
                                     <motion.div 
-                                        className="absolute top-1/2 left-10 w-2 h-2 bg-rose-500 rounded-full shadow-[0_0_10px_rgba(244,63,94,0.8)]"
-                                        animate={{ x: [0, 200] }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                        className="absolute top-1/2 left-20 w-3 h-3 bg-rose-500 rounded-full shadow-[0_0_15px_rgba(244,63,94,1)] z-10"
+                                        animate={{ x: [0, 250, 0] }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                                     />
                                 </div>
 
                                 {/* Thread 2 */}
-                                <div className="relative ml-16 sm:ml-32 mt-4">
-                                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 -translate-y-1/2"></div>
-                                    <div className="relative z-10 flex justify-between items-center px-4">
-                                        <div className="bg-black border border-emerald-500/50 p-2 rounded-lg flex flex-col items-center gap-1 opacity-50">
-                                            <FaServer className="text-emerald-500 text-xl" />
+                                <div className="relative ml-20 sm:ml-40 mt-4">
+                                    <div className="absolute top-1/2 left-0 w-full h-[2px] bg-amber-900/40 -translate-y-1/2"></div>
+                                    <div className="relative z-10 flex justify-between items-center px-2 md:px-6">
+                                        <div className="bg-[#03050a] border-2 border-emerald-500/20 p-3 md:p-4 rounded-xl flex flex-col items-center gap-2 opacity-60 z-20">
+                                            <FaServer className="text-emerald-500 text-3xl" />
                                         </div>
-                                        <div className="text-[9px] font-mono text-rose-400 bg-[#050810] px-2">2. Pivoting (Túnel)</div>
-                                        <div className="bg-black border border-amber-500/50 p-2 rounded-lg flex flex-col items-center gap-1 shadow-[0_0_15px_rgba(245,158,11,0.15)]">
-                                            <FaServer className="text-amber-500 text-xl" />
-                                            <span className="text-[8px] font-mono text-gray-400">Víctima 2 (Objetivo)</span>
+                                        <div className="text-[10px] md:text-xs font-mono font-bold text-amber-400 bg-[#050810] border border-amber-900/50 px-3 py-1 rounded-full z-20 shadow-md">2. Túnel C2</div>
+                                        <div className="bg-[#03050a] border-2 border-amber-500/50 p-3 md:p-4 rounded-xl flex flex-col items-center gap-2 shadow-[0_0_25px_rgba(245,158,11,0.3)] z-20">
+                                            <FaDatabase className="text-amber-500 text-3xl" />
+                                            <span className="text-[10px] md:text-xs font-mono font-bold text-amber-300 whitespace-nowrap">Víctima 2 (Target)</span>
                                         </div>
                                     </div>
                                     {/* Animation dot */}
                                     <motion.div 
-                                        className="absolute top-1/2 left-10 w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"
-                                        animate={{ x: [0, 150] }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 1 }}
+                                        className="absolute top-1/2 left-20 w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,1)] z-10"
+                                        animate={{ x: [0, 200, 0] }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                                     />
                                 </div>
                             </div>
-                            <p className="text-[10px] text-gray-500 mt-6 font-mono leading-relaxed bg-black/30 p-3 rounded border border-gray-900">
-                                <strong className="text-emerald-400">Relación:</strong> El atacante utiliza el host comprometido (Víctima 1) como un proxy. Esto le permite ocultar su origen real y utilizar la confianza de la red interna para lanzar un ataque contra la segunda víctima, evadiendo controles perimetrales.
-                            </p>
+                            
+                            <div className="mt-12 bg-black/50 p-5 rounded-xl border border-emerald-900/30 flex gap-4 items-start">
+                                <FaInfoCircle className="text-emerald-500 text-2xl flex-shrink-0 mt-1" />
+                                <p className="text-xs md:text-sm text-gray-300 font-mono leading-relaxed">
+                                    <strong className="text-emerald-400 text-sm md:text-base tracking-wide uppercase block mb-1">Impacto del Pivoting</strong>
+                                    El atacante utiliza el host comprometido (Víctima 1) como un proxy. Esto le permite ocultar su origen real y utilizar la confianza de la red interna para lanzar un ataque contra la segunda víctima (Base de Datos), evadiendo completamente los firewalls perimetrales de la organización.
+                                </p>
+                            </div>
                         </div>
 
                     </div>
@@ -392,15 +401,15 @@ const DiamondNode = ({ node, active, onClick }) => {
     return (
         <button
             onClick={onClick}
-            className={`w-16 h-16 md:w-20 md:h-20 rotate-45 flex items-center justify-center transition-all duration-300 shadow-xl border-2 ${
+            className={`w-20 h-20 md:w-28 md:h-28 rotate-45 flex items-center justify-center transition-all duration-300 shadow-xl border-2 ${
                 active 
-                ? `${node.bg} ${node.border} scale-110 shadow-[0_0_30px_rgba(99,102,241,0.3)]` 
-                : 'bg-[#0a0f1c] border-gray-800 hover:border-gray-600'
+                ? `${node.bg} ${node.border} scale-110 shadow-[0_0_40px_rgba(99,102,241,0.4)] z-50` 
+                : 'bg-[#0a0f1c] border-gray-700/50 hover:border-gray-500/80 hover:bg-[#0c1222]'
             }`}
         >
-            <div className="-rotate-45 flex flex-col items-center gap-1">
-                <node.icon className={`text-lg md:text-2xl ${active ? node.color : 'text-gray-600'}`} />
-                <span className={`text-[8px] font-mono font-bold uppercase tracking-wider ${active ? node.color : 'text-gray-600'}`}>
+            <div className="-rotate-45 flex flex-col items-center gap-2">
+                <node.icon className={`text-2xl md:text-3xl transition-colors ${active ? node.color : 'text-gray-500'}`} />
+                <span className={`text-[10px] md:text-xs font-mono font-bold uppercase tracking-widest ${active ? node.color : 'text-gray-500'}`}>
                     {node.id.substring(0,3)}
                 </span>
             </div>
