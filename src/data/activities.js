@@ -1896,81 +1896,11 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     date: "2026-05-15",
     tags: ["Ética", "Dilemas", "NIST", "ISO 27001", "Delitos Informáticos", "OSINT"],
     content: `
-      <div class="bg-cyan-500/10 border border-cyan-500/20 rounded p-6 mb-8 font-mono relative overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-        <div class="absolute top-0 right-0 p-2 bg-cyan-500/20 text-xs text-cyan-400 font-bold uppercase tracking-widest font-mono">Ethical & Compliance Labs</div>
-        <p class="text-xs mb-1"><span class="text-cyan-400 font-bold">REPORTE DE AUDITORÍA ÉTICA:</span> ACT16 - DILEMAS ÉTICOS</p>
-        <p class="text-xs mb-1"><span class="text-cyan-400 font-bold">INTEGRANTES DEL EQUIPO:</span></p>
-        <ul class="text-[10px] text-gray-400 pl-4 list-disc mb-2 font-mono">
-          <li>Aguilar Espinoza Juan Diego — 173877</li>
-          <li>Jasso Dávila Pedro Damián — 176658</li>
-          <li>Moreno Solís Gisela Geraldine — 176522</li>
-          <li>Palomo Cerdá José Armando — 17593</li>
-          <li>Zarate Domínguez David — 175842</li>
-          <li>Zorrilla Rivera Eduardo — 175877</li>
-        </ul>
-        <p class="text-xs mb-1"><span class="text-cyan-400 font-bold">DOCENTE:</span> Mtro. Servando López Contreras</p>
-        <p class="text-xs"><span class="text-cyan-400 font-bold">ESTADO:</span> <span class="text-cyan-300">ANÁLISIS ÉTICO COMPLETADO Y AUDITADO</span></p>
+      <div class="border border-cyan-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-cyan-400/80 mb-6">
+        <p>[SYSTEM] AUDIT MATRIX CONSOLE INITIALIZED SUCCESSFULLY.</p>
+        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 3 PROJECT.</p>
+        <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
       </div>
-
-      <h2 class="text-cyan-400 font-mono text-xl mb-4">INTRODUCCIÓN Y MARCO CONCEPTUAL</h2>
-      <p>El ejercicio profesional de la ciberseguridad se sitúa con frecuencia en la intersección de la capacidad técnica y la responsabilidad moral. Este reporte analiza tres escenarios críticos donde el uso de privilegios tecnológicos genera conflictos éticos y legales significativos. El análisis se realiza empleando tres marcos normativos fundamentales: la <strong>Ética Utilitarista</strong> (balance de consecuencias), el <strong>Enfoque de Derechos</strong> (respeto a la autonomía y dignidad individual) y el <strong>Enfoque del Bien Común</strong> (salvaguarda de la confianza sistémica y cohesión social).</p>
-      <p>Adicionalmente, se evalúa el cumplimiento de los <strong>Mandamientos de la Ética Informática</strong> definidos por el Computer Ethics Institute y la clasificación de los actos bajo las definiciones típicas de los delitos informáticos modernos.</p>
-
-      <h2 class="text-cyan-400 font-mono text-xl mt-8 mb-4">ANÁLISIS ESTRATÉGICO DE ESCENARIOS</h2>
-      
-      <div class="space-y-8">
-        <div class="bg-black/35 p-6 border-l-2 border-cyan-500 rounded-r">
-          <h3 class="text-cyan-300 font-bold font-mono text-md mb-2">Escenario 01: Acceso No Autorizado Interno</h3>
-          <p class="text-sm text-gray-400 mb-4 italic">Un especialista en ciberseguridad detecta en los logs que un compañero accedió a correos privados del Director General sin autorización, justificándolo como medida preventiva para "detectar fugas de información".</p>
-          <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
-            <li><strong>Dilema Ético:</strong> Decidir entre avalar un acceso no autorizado basándose en una intención presuntamente protectora, o aplicar de manera irrestricta las políticas de acceso y confidencialidad corporativas, sancionando la violación a la privacidad del Director General.</li>
-            <li><strong>Plan de Acción Profesional:</strong> Documentación inmutable de la evidencia en los logs. Reporte inmediato al comité de cumplimiento, recursos humanos o la alta dirección. Recomendación de auditoría completa de los privilegios del empleado y endurecimiento de políticas de control de acceso.</li>
-            <li><strong>Justificación desde Marcos Éticos:</strong>
-              <br>- <em>Utilitarismo:</em> Incorrecto. El beneficio preventivo hipotético es superado por el daño real a la confianza organizacional, riesgos de demandas legales y el precedente de abuso de privilegios.
-              <br>- <em>Derechos:</em> Incorrecto. Se vulneró directamente el derecho fundamental a la privacidad de las comunicaciones y al debido proceso de auditoría del Director General.
-              <br>- <em>Bien Común:</em> Incorrecto. La viabilidad del entorno de trabajo y la seguridad de la empresa dependen de reglas claras. Ignorar este acto debilita el estado de derecho interno.
-            </li>
-            <li><strong>Mandamientos de Ética Violados:</strong> No utilizarás una computadora para dañar a otros; No interferirás con el trabajo informático ajeno; No husmearás en archivos privados ajenos; No usarás recursos informáticos sin autorización.</li>
-            <li><strong>Clasificación del Delito:</strong> Acceso ilícito a sistemas informáticos protegidos y violación al secreto de las comunicaciones (privacidad digital).</li>
-          </ul>
-        </div>
-
-        <div class="bg-black/35 p-6 border-l-2 border-cyan-500 rounded-r">
-          <h3 class="text-cyan-300 font-bold font-mono text-md mb-2">Escenario 02: Vulnerabilidad Crítica No Reportada</h3>
-          <p class="text-sm text-gray-400 mb-4 italic">Durante un pentest, se descubre una vulnerabilidad en un sistema financiero que permite retirar dinero sin autorización. El cliente aún no ha firmado el contrato final de servicios.</p>
-          <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
-            <li><strong>Dilema Ético:</strong> Balancear el beneficio egoísta (explotar la falla para ganancia económica personal o profesional, o retener el hallazgo como palanca de negociación) frente al deber profesional de reportar y mitigar una falla crítica de manera inmediata para proteger los activos del cliente y sus usuarios.</li>
-            <li><strong>Plan de Acción Profesional:</strong> Reporte técnico detallado e inmediato al cliente con medidas de contención. Mantener estricta confidencialidad del hallazgo (divulgación responsable). Bajo ninguna circunstancia explotar la falla para extraer capital o realizar pruebas destructivas no autorizadas.</li>
-            <li><strong>Justificación desde Marcos Éticos:</strong>
-              <br>- <em>Utilitarismo:</em> Incorrecto. Explotar la falla destruye la credibilidad profesional, causa pérdidas financieras masivas y desestabiliza a la entidad, superando cualquier ganancia personal.
-              <br>- <em>Derechos:</em> Incorrecto. Los usuarios del sistema y la empresa tienen derecho inalienable a la integridad de su patrimonio y a la seguridad de sus datos.
-              <br>- <em>Bien Común:</em> Incorrecto. La estabilidad y confianza en el sistema financiero es un bien público. Comprometerla daña la cohesión económica y la reputación de la industria de ciberseguridad.
-            </li>
-            <li><strong>Mandamientos de Ética Violados (si se explota):</strong> No usarás una computadora para robar; No usarás recursos informáticos para cometer fraude. <em>Mandamiento respetado (si se reporta):</em> Considerarás el impacto social de tus desarrollos o acciones.</li>
-            <li><strong>Clasificación del Delito:</strong> Acceso ilícito a sistemas informáticos y fraude financiero por medios digitales (delito informático).</li>
-          </ul>
-        </div>
-
-        <div class="bg-black/35 p-6 border-l-2 border-cyan-500 rounded-r">
-          <h3 class="text-cyan-300 font-bold font-mono text-md mb-2">Escenario 03: Uso de Herramientas OSINT</h3>
-          <p class="text-sm text-gray-400 mb-4 italic">Se utiliza información obtenida de fuentes abiertas (OSINT) para presionar y manipular psicológicamente a un sospechoso interno de fuga de información con el fin de obtener una confesión.</p>
-          <ul class="list-disc pl-5 text-sm text-gray-300 space-y-2">
-            <li><strong>Dilema Ético:</strong> Decidir si el fin legítimo de proteger los activos de información de la empresa justifica el uso de métodos coercitivos y de manipulación psicológica basados en la recolección masiva de datos personales de fuentes públicas.</li>
-            <li><strong>Plan de Acción Profesional:</strong> Rechazar el uso de información personal para tácticas de coerción o intimidación. Limitar las investigaciones de OSINT estrictamente a la recolección de evidencia técnica y fáctica. Canalizar el caso a las áreas jurídica y de seguridad física para una entrevista bajo el debido proceso legal.</li>
-            <li><strong>Justificación desde Marcos Éticos:</strong>
-              <br>- <em>Utilitarismo:</em> Incorrecto. La obtención rápida de una confesión no compensa el daño psicológico, el abuso de poder y la potencial inadmisibilidad legal de la confesión bajo coacción.
-              <br>- <em>Derechos:</em> Incorrecto. Se vulnera la dignidad de la persona, su derecho a la integridad psíquica, a la privacidad de sus datos y a no autoincriminarse bajo intimidación.
-              <br>- <em>Bien Común:</em> Incorrecto. Fomenta una cultura corporativa de vigilancia extrema y acoso, erosionando el tejido social y la confianza dentro de la organización.
-            </li>
-            <li><strong>Mandamientos de Ética Violados:</strong> No utilizarás tecnología para dañar o acosar a otros; No invadirás la privacidad de los demás.</li>
-            <li><strong>Clasificación del Delito:</strong> Extorsión o coacción asistida por computadora (delito asistido por medios informáticos).</li>
-          </ul>
-        </div>
-      </div>
-
-      <h2 class="text-cyan-400 font-mono text-xl mt-12 mb-4">CONCLUSIONES E IMPACTO ORGANIZACIONAL</h2>
-      <p>El análisis sistemático demuestra que los dilemas en ciberseguridad rara vez tienen justificaciones puramente técnicas. Las justificaciones de "protección preventiva" o "aceleración de investigaciones" son inválidas cuando violan los derechos fundamentales a la privacidad, la dignidad y la legalidad.</p>
-      <p>La adopción de marcos éticos robustos no es solo una obligación moral, sino un imperativo de supervivencia organizacional. Las fallas éticas conllevan severas sanciones civiles y penales, destrucción reputacional y quiebra de la confianza del cliente, lo que demuestra que la ética profesional es el pilar de la ciberseguridad sostenible.</p>
     `
   }
 ];
