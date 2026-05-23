@@ -26,6 +26,7 @@ const Projects = () => {
             case "8": return <FaDatabase />; // SQL Injection
             case "16": return <FaBalanceScale />; // Dilemas Éticos
             case "17": return <FaShieldAlt />; // CVSS v3.1
+            case "18": return <FaProjectDiagram />; // Modelo Diamante
             case "PR02": return <FaUserSecret />; // Phishing / Engineering Social
             default: return <FaFolderPlus />;
         }
@@ -49,14 +50,14 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: act.id !== "PR02"
         })).concat([lockedCard]),
-        parcial3: activities.filter(act => String(act.id) === "16" || String(act.id) === "17").map(act => ({
+        parcial3: activities.filter(act => String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18").map(act => ({
             icon: getIconForActivity(act.id),
             title: act.title,
             description: act.description,
             status: "Available",
             link: `/actividades/${act.id}`,
             isActivity: false
-        })).concat([lockedCard]),
+        })),
         final: [lockedCard, lockedCard, lockedCard]
     };
 
