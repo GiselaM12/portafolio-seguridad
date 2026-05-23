@@ -464,8 +464,8 @@ const CvssCalculator = () => {
                             Universidad Politécnica de San Luis Potosí
                         </h2>
                         
-                        <p className="text-gray-400 text-sm leading-relaxed max-w-3xl">
-                            Esta sección presenta el análisis y desglose de la <strong>Actividad 17: Evaluación de Vulnerabilidades con CVSS v3.1</strong>. A través del calculador dinámico inferior, se clasifica de forma precisa la severidad de las fallas, se justifica el vector asignado por el equipo y se da respuesta detallada al marco de preguntas forenses.
+                        <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-4xl">
+                            En esta actividad aplicamos el estándar internacional CVSS v3.1 para evaluar vulnerabilidades de software. Este sistema nos permite calcular de manera objetiva la gravedad de un fallo de seguridad, analizando desde dónde se puede atacar (Vector), qué tan complejo es, qué privilegios requiere y qué impacto tiene sobre la confidencialidad, integridad y disponibilidad de los datos. Esta herramienta interactiva simula el proceso de evaluación que realizan los analistas de ciberseguridad en la vida real.
                         </p>
 
                         {/* Team Grid */}
@@ -578,10 +578,10 @@ const CvssCalculator = () => {
                 </div>
 
                 {/* Main HUD Body */}
-                <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="p-6 flex flex-col gap-8">
                     
-                    {/* Left: Interactive Metric Controllers */}
-                    <div className="lg:col-span-8 space-y-6">
+                    {/* Interactive Metric Controllers (Simulation - Now at bottom) */}
+                    <div className="space-y-6 order-2">
                         
                         {calcMode === 'case' && (
                             <div className="bg-cyan-500/5 border border-cyan-500/20 rounded-xl p-4 text-xs font-mono text-cyan-300 flex items-start gap-3">
@@ -622,8 +622,8 @@ const CvssCalculator = () => {
                                                 : 'bg-black/40 border-gray-900 text-gray-400 hover:border-gray-800'
                                             }`}
                                         >
-                                            <span className="text-[10px] font-mono uppercase font-bold">{opt.name}</span>
-                                            <span className="text-[9px] font-mono text-gray-500 block mt-1.5">Factor: {opt.value}</span>
+                                            <span className="text-[11px] sm:text-xs font-mono uppercase font-bold">{opt.name}</span>
+                                            <span className="text-[10px] sm:text-[11px] font-mono text-gray-400 block mt-1.5">Factor: {opt.value}</span>
                                         </button>
                                     ))}
                                 </div>
@@ -684,8 +684,8 @@ const CvssCalculator = () => {
                                                     : 'bg-black/40 border-gray-900 text-gray-400 hover:border-gray-800'
                                                 }`}
                                             >
-                                                <span className="text-[10px] font-mono uppercase font-bold">{opt.name}</span>
-                                                <span className="text-[9px] font-mono text-gray-500 block mt-1.5">Factor: {val}</span>
+                                                <span className="text-[11px] sm:text-xs font-mono uppercase font-bold">{opt.name}</span>
+                                                <span className="text-[10px] sm:text-[11px] font-mono text-gray-400 block mt-1.5">Factor: {val}</span>
                                             </button>
                                         );
                                     })}
@@ -750,8 +750,8 @@ const CvssCalculator = () => {
                                                 : 'bg-black/40 border-gray-900 text-gray-400 hover:border-gray-800'
                                             }`}
                                         >
-                                            <span className="text-[10px] font-mono uppercase font-bold">{opt.name}</span>
-                                            <span className="text-[8px] font-mono text-gray-500 block mt-1.5">{opt.desc}</span>
+                                            <span className="text-[11px] sm:text-xs font-mono uppercase font-bold">{opt.name}</span>
+                                            <span className="text-[9px] sm:text-[10px] font-mono text-gray-400 block mt-1.5 leading-tight">{opt.desc}</span>
                                         </button>
                                     ))}
                                 </div>
@@ -846,11 +846,11 @@ const CvssCalculator = () => {
                         </div>
                     </div>
 
-                    {/* Right: Results Engine, Justifications & Q&A Panel */}
-                    <div className="lg:col-span-4 flex flex-col gap-6">
+                    {/* Results Engine & Justifications (Information - Now at top) */}
+                    <div className="flex flex-col lg:flex-row gap-6 order-1">
                         
                         {/* Score Diagnostic Box */}
-                        <div className="bg-black/70 border border-cyan-500/10 rounded-2xl p-5 font-mono flex flex-col gap-4">
+                        <div className="bg-black/70 border border-cyan-500/10 rounded-2xl p-6 font-mono flex flex-col justify-center gap-5 lg:w-1/3">
                             <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Base severity meter</span>
                             
                             <div className="flex items-end justify-between">
@@ -895,7 +895,7 @@ const CvssCalculator = () => {
                         </div>
 
                         {/* Parameter Justifications */}
-                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-6 flex flex-col gap-4">
+                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-6 flex flex-col gap-4 lg:w-2/3">
                             <h5 className="text-xs sm:text-sm font-mono font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2 border-b border-gray-900 pb-2">
                                 <FaFileAlt className="text-sm" />
                                 <span>Justificación de Parámetros</span>
