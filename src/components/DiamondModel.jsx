@@ -5,7 +5,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
 const DiamondModel = () => {
-    const [activeNode, setActiveNode] = useState(null);
+    const [activeNodeKey, setActiveNodeKey] = useState('adversary');
     const [activeThread, setActiveThread] = useState('all');
 
     const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -18,8 +18,14 @@ const DiamondModel = () => {
             color: 'text-rose-500',
             bg: 'bg-rose-500/10',
             border: 'border-rose-500/30',
-            desc: 'El actor o grupo responsable de llevar a cabo el ataque.',
-            example: 'Un grupo de ciberdelincuencia o una APT (Amenaza Persistente Avanzada).'
+            desc: 'El actor o grupo de amenaza persistente avanzada (APT) responsable de la intrusión.',
+            details: [
+                { label: 'Identificador', value: 'APT-37 / Group 12 (Espionaje Dirigido)' },
+                { label: 'Motivación', value: 'Exfiltración de propiedad intelectual y espionaje industrial' },
+                { label: 'Tácticas Clave', value: 'Spear-phishing dirigido, suplantación de servicios Saas y evasión defensiva' },
+                { label: 'Origen Probable', value: 'Actor estatal con recursos avanzados y herramientas propietarias' }
+            ],
+            example: 'Grupo APT-37 que utiliza spear-phishing temático para comprometer sistemas críticos en la red interna.'
         },
         capability: {
             id: 'capability',
@@ -28,8 +34,14 @@ const DiamondModel = () => {
             color: 'text-amber-500',
             bg: 'bg-amber-500/10',
             border: 'border-amber-500/30',
-            desc: 'Herramientas, técnicas, software o conocimientos utilizados por el atacante.',
-            example: 'Un malware tipo troyano (RAT) o un exploit de día cero.'
+            desc: 'Herramientas, payloads y técnicas operativas empleadas durante la intrusión.',
+            details: [
+                { label: 'Vector Inicial', value: 'Correo con PDF malicioso conteniendo exploit para Adobe Reader' },
+                { label: 'Malware Principal', value: 'SombraRAT (Troyano de Acceso Remoto compilado a medida)' },
+                { label: 'Herramienta Pivoting', value: 'Chisel & Socat para redirección de puertos y túneles reverse-TCP' },
+                { label: 'Persistencia', value: 'Modificación de claves de registro Run (HKCU) y tareas programadas' }
+            ],
+            example: 'Payload SombraRAT con capacidades de evasión de sandbox de red y registro de teclas (keylogging).'
         },
         infrastructure: {
             id: 'infrastructure',
@@ -38,8 +50,14 @@ const DiamondModel = () => {
             color: 'text-cyan-500',
             bg: 'bg-cyan-500/10',
             border: 'border-cyan-500/30',
-            desc: 'Los recursos físicos o lógicos que permiten la comunicación entre el adversario y la víctima.',
-            example: 'Direcciones IP, servidores de Comando y Control (C2) o nombres de dominio.'
+            desc: 'Recursos lógicos y servidores de red utilizados para controlar el malware y realizar pivoting.',
+            details: [
+                { label: 'Servidor C2', value: '185.220.101.44 (IP pública enmascarada tras nodos Tor y CDN)' },
+                { label: 'Dominio Phishing', value: 'drive-goog1e.com (Typosquatting registrado para entrega del payload)' },
+                { label: 'Nodo de Pivoting', value: '10.0.5.15 (Host interno comprometido usado como túnel de reenvío)' },
+                { label: 'Protocolos C2', value: 'HTTPS en puerto 443 con tráfico cifrado simulando telemetría legítima' }
+            ],
+            example: 'Uso de un dominio de typosquatting drive-goog1e.com para evadir alertas DNS y establecer el canal de C2.'
         },
         victim: {
             id: 'victim',
@@ -48,10 +66,19 @@ const DiamondModel = () => {
             color: 'text-emerald-500',
             bg: 'bg-emerald-500/10',
             border: 'border-emerald-500/30',
-            desc: 'El objetivo del ataque, que puede ser una persona, un dispositivo o una organización entera.',
-            example: 'El servidor de base de datos de una institución financiera o el equipo de un administrador.'
+            desc: 'Los activos, usuarios y sistemas afectados que fueron el objetivo de la intrusión.',
+            details: [
+                { label: 'Víctima Primaria', value: 'moreno.g@empresa.com (Gisela Geraldine - Auditor Líder, Host: DESKTOP-GGM18)' },
+                { label: 'Víctima Secundaria', value: 'SRV-DB-PROD (Servidor de base de datos de producción - IP: 10.0.5.20)' },
+                { label: 'Datos Comprometidos', value: 'Credenciales del dominio de red y registros confidenciales del servidor de BD' },
+                { label: 'Ubicación Física', value: 'Segmento de red corporativo interno UPSLP' }
+            ],
+            example: 'Compromiso inicial de la estación de trabajo local y subsiguiente acceso no autorizado a la base de datos central.'
         }
     };
+
+    const activeNode = nodes[activeNodeKey];
+    const setActiveNode = (node) => setActiveNodeKey(node.id);
 
     const killChainMap = [
         { event: 'Envío de phishing', phase: 'Distribución (Delivery)' },
@@ -89,15 +116,53 @@ const DiamondModel = () => {
 
         let y = 65;
         Object.values(nodes).forEach(node => {
+            if (y > 240) {
+                doc.addPage();
+                doc.setFillColor(3, 7, 18);
+                doc.rect(0, 0, 210, 297, 'F');
+                y = 20;
+            }
             doc.setFont('helvetica', 'bold');
             doc.setTextColor(129, 140, 248);
             doc.text(`${node.title.toUpperCase()}:`, 15, y);
+            y += 6;
             
             doc.setFont('helvetica', 'normal');
-            doc.setTextColor(180, 180, 180);
-            doc.text(`Desc: ${node.desc}`, 20, y + 6);
-            doc.text(`Ejemplo: ${node.example}`, 20, y + 12);
-            y += 22;
+            doc.setTextColor(200, 200, 200);
+            const descLines = doc.splitTextToSize(`Descripción: ${node.desc}`, 180);
+            doc.text(descLines, 15, y);
+            y += descLines.length * 5 + 2;
+
+            node.details.forEach(detail => {
+                if (y > 275) {
+                    doc.addPage();
+                    doc.setFillColor(3, 7, 18);
+                    doc.rect(0, 0, 210, 297, 'F');
+                    y = 20;
+                }
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(150, 150, 150);
+                doc.text(`  * ${detail.label}:`, 15, y);
+                const labelWidth = doc.getTextWidth(`  * ${detail.label}: `);
+                
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(180, 180, 180);
+                const valLines = doc.splitTextToSize(detail.value, 180 - labelWidth);
+                doc.text(valLines, 15 + labelWidth, y);
+                y += valLines.length * 5;
+            });
+
+            if (y > 275) {
+                doc.addPage();
+                doc.setFillColor(3, 7, 18);
+                doc.rect(0, 0, 210, 297, 'F');
+                y = 20;
+            }
+            doc.setFont('helvetica', 'italic');
+            doc.setTextColor(140, 140, 140);
+            const exLines = doc.splitTextToSize(`Firma Técnica: ${node.example}`, 180);
+            doc.text(exLines, 15, y);
+            y += exLines.length * 5 + 6;
         });
 
         // Kill Chain
@@ -265,35 +330,65 @@ const DiamondModel = () => {
                 <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-stretch">
                     
                     {/* =========================================
-                        PANEL 1: TOPOLOGÍA (IZQUIERDA - 3 cols) 
+                        PANEL 1: TOPOLOGÍA (IZQUIERDA - 4 cols) 
                     ========================================== */}
-                    <div className="lg:col-span-3 flex flex-col items-center xl:border-r border-indigo-500/10 xl:pr-6">
+                    <div className="lg:col-span-4 flex flex-col items-center lg:border-r border-indigo-500/10 lg:pr-6">
                         <h5 className="text-indigo-400 font-mono text-sm font-bold uppercase tracking-widest mb-10 flex items-center gap-2 bg-indigo-900/20 px-4 py-2 rounded-lg border border-indigo-500/30 w-full justify-center">
                             <FaSearch /> Topología del Evento
                         </h5>
                         
-                        {/* Interactive Diamond Graph */}
-                        <div className="relative w-48 h-48 sm:w-64 sm:h-64 my-6 shrink-0">
-                            {/* Lines connecting nodes */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]" style={{ zIndex: 0 }}>
-                                <line x1="50%" y1="10%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.4)" strokeWidth="2" />
-                                <line x1="90%" y1="50%" x2="50%" y2="90%" stroke="rgba(99,102,241,0.4)" strokeWidth="2" />
-                                <line x1="50%" y1="90%" x2="10%" y2="50%" stroke="rgba(99,102,241,0.4)" strokeWidth="2" />
-                                <line x1="10%" y1="50%" x2="50%" y2="10%" stroke="rgba(99,102,241,0.4)" strokeWidth="2" />
-                                <line x1="10%" y1="50%" x2="90%" y2="50%" stroke="rgba(99,102,241,0.15)" strokeWidth="1" strokeDasharray="4" />
-                                <line x1="50%" y1="10%" x2="50%" y2="90%" stroke="rgba(99,102,241,0.15)" strokeWidth="1" strokeDasharray="4" />
+                        {/* Interactive Diamond Graph - Controlled safe boundaries to prevent any overflow */}
+                        <div className="relative w-full max-w-[280px] aspect-square my-6 mx-auto select-none shrink-0">
+                            
+                            {/* Axis Label Masks - Blueprint Technical Overlay */}
+                            <div 
+                                className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[7px] sm:text-[8px] text-indigo-400/40 uppercase tracking-widest bg-[#03060f]/90 px-1 select-none pointer-events-none whitespace-nowrap rotate-90 origin-center"
+                                style={{ zIndex: 5 }}
+                            >
+                                Eje Socio-Político
+                            </div>
+                            <div 
+                                className="absolute left-[33%] top-1/2 -translate-x-1/2 -translate-y-1/2 font-mono text-[7px] sm:text-[8px] text-indigo-400/40 uppercase tracking-widest bg-[#03060f]/90 px-1 select-none pointer-events-none whitespace-nowrap"
+                                style={{ zIndex: 5 }}
+                            >
+                                Eje Técnico
+                            </div>
+
+                            {/* Outer Node Labels (Adversary, Capability, Victim, Infrastructure) */}
+                            <div className="absolute top-[2%] left-1/2 -translate-x-1/2 font-mono text-[9px] sm:text-[10px] font-bold text-rose-400 bg-rose-500/10 border border-rose-500/30 px-2 py-0.5 rounded tracking-widest uppercase shadow-sm z-20">
+                                Adversario
+                            </div>
+                            <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 font-mono text-[9px] sm:text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded tracking-widest uppercase shadow-sm z-20">
+                                Víctima
+                            </div>
+                            <div className="absolute left-[-2%] top-1/2 -translate-y-1/2 font-mono text-[8px] sm:text-[9px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 px-1.5 py-0.5 rounded tracking-wider uppercase text-center max-w-[85px] leading-tight shadow-sm z-20">
+                                Infraestructura
+                            </div>
+                            <div className="absolute right-[-2%] top-1/2 -translate-y-1/2 font-mono text-[8px] sm:text-[9px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded tracking-wider uppercase text-center max-w-[85px] leading-tight shadow-sm z-20">
+                                Capacidad
+                            </div>
+
+                            {/* Lines connecting nodes - perfectly aligned to percentage coordinates */}
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]" style={{ zIndex: 1 }}>
+                                <line x1="50%" y1="20%" x2="80%" y2="50%" stroke="rgba(244,63,94,0.4)" strokeWidth="2" />
+                                <line x1="80%" y1="50%" x2="50%" y2="80%" stroke="rgba(16,185,129,0.4)" strokeWidth="2" />
+                                <line x1="50%" y1="80%" x2="20%" y2="50%" stroke="rgba(6,182,212,0.4)" strokeWidth="2" />
+                                <line x1="20%" y1="50%" x2="50%" y2="20%" stroke="rgba(245,158,11,0.4)" strokeWidth="2" />
+                                <line x1="20%" y1="50%" x2="80%" y2="50%" stroke="rgba(99,102,241,0.15)" strokeWidth="1" strokeDasharray="4" />
+                                <line x1="50%" y1="20%" x2="50%" y2="80%" stroke="rgba(99,102,241,0.15)" strokeWidth="1" strokeDasharray="4" />
                             </svg>
 
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                            {/* Nodes centered exactly at percentage coordinates */}
+                            <div className="absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
                                 <DiamondNode node={nodes.adversary} active={activeNode?.id === 'adversary'} onClick={() => setActiveNode(nodes.adversary)} />
                             </div>
-                            <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 z-10">
+                            <div className="absolute top-[50%] left-[80%] -translate-x-1/2 -translate-y-1/2 z-10">
                                 <DiamondNode node={nodes.capability} active={activeNode?.id === 'capability'} onClick={() => setActiveNode(nodes.capability)} />
                             </div>
-                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+                            <div className="absolute top-[80%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
                                 <DiamondNode node={nodes.victim} active={activeNode?.id === 'victim'} onClick={() => setActiveNode(nodes.victim)} />
                             </div>
-                            <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                            <div className="absolute top-[50%] left-[20%] -translate-x-1/2 -translate-y-1/2 z-10">
                                 <DiamondNode node={nodes.infrastructure} active={activeNode?.id === 'infrastructure'} onClick={() => setActiveNode(nodes.infrastructure)} />
                             </div>
                         </div>
@@ -307,15 +402,40 @@ const DiamondModel = () => {
                                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                                        className={`p-5 border border-indigo-500/30 rounded-xl bg-[#060a16] shadow-[0_0_20px_rgba(0,0,0,0.5)] relative overflow-hidden h-full flex flex-col`}
+                                        className={`p-5 border border-indigo-500/30 rounded-xl bg-[#060a16] shadow-[0_0_20px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col gap-4`}
                                     >
                                         <div className={`absolute top-0 left-0 w-full h-1 ${activeNode.bg.replace('/10', '')}`} />
-                                        <h6 className={`font-mono font-black text-sm md:text-base mb-3 ${activeNode.color} flex items-center gap-2 drop-shadow-md uppercase tracking-wider`}>
-                                            <activeNode.icon className="text-lg" /> {activeNode.title}
-                                        </h6>
-                                        <p className="text-gray-300 text-xs md:text-sm mb-4 leading-relaxed flex-grow">{activeNode.desc}</p>
-                                        <div className="text-[10px] md:text-xs text-gray-400 font-mono bg-black/50 p-3 rounded-lg border border-gray-800">
-                                            <span className={`font-bold ${activeNode.color} block mb-1`}>EJEMPLO TÉCNICO:</span> {activeNode.example}
+                                        
+                                        <div>
+                                            <h6 className={`font-mono font-black text-sm md:text-base mb-1.5 ${activeNode.color} flex items-center gap-2 drop-shadow-md uppercase tracking-wider`}>
+                                                <activeNode.icon className="text-lg animate-pulse" /> {activeNode.title}
+                                            </h6>
+                                            <p className="text-gray-300 text-[11px] sm:text-xs leading-relaxed">{activeNode.desc}</p>
+                                        </div>
+
+                                        <div className="border-t border-indigo-500/10 pt-3 space-y-2">
+                                            <span className="text-[9px] font-mono font-bold text-indigo-400 tracking-widest block uppercase">
+                                                TELEMETRÍA Y ARTEFACTOS:
+                                            </span>
+                                            <div className="space-y-1.5">
+                                                {activeNode.details.map((detail, idx) => (
+                                                    <div key={idx} className="bg-black/35 border border-gray-800/80 rounded p-2 flex flex-col gap-0.5 hover:border-indigo-500/30 transition-all">
+                                                        <span className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">
+                                                            {detail.label}
+                                                        </span>
+                                                        <span className="text-[10px] font-mono text-gray-200 font-medium leading-tight">
+                                                            {detail.value}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="text-[10px] text-gray-400 font-mono bg-black/50 p-3 rounded-lg border border-gray-800">
+                                            <span className={`font-bold ${activeNode.color} block mb-1 uppercase tracking-wider text-[8px]`}>
+                                                Firma Técnica / Evidencia:
+                                            </span> 
+                                            {activeNode.example}
                                         </div>
                                     </motion.div>
                                 ) : (
@@ -331,7 +451,7 @@ const DiamondModel = () => {
                     {/* =========================================
                         PANEL 2: SIMULACIÓN (CENTRO - 5 cols) 
                     ========================================== */}
-                    <div className="lg:col-span-5 flex flex-col gap-6 xl:border-r border-indigo-500/10 xl:pr-6">
+                    <div className="lg:col-span-4 flex flex-col gap-6 lg:border-r border-indigo-500/10 lg:pr-6">
                         <div className="bg-[#050810] border border-indigo-500/30 rounded-xl p-6 h-full flex flex-col relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
                             
@@ -453,15 +573,15 @@ const DiamondNode = ({ node, active, onClick }) => {
     return (
         <button
             onClick={onClick}
-            className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rotate-45 flex items-center justify-center transition-all duration-300 shadow-xl border-2 ${
+            className={`w-12 h-12 sm:w-14 sm:h-14 rotate-45 flex items-center justify-center transition-all duration-300 shadow-lg border border-dashed rounded-md ${
                 active 
-                ? `${node.bg} ${node.border} scale-110 shadow-[0_0_40px_rgba(99,102,241,0.4)] z-50` 
-                : 'bg-[#0a0f1c] border-gray-700/50 hover:border-gray-500/80 hover:bg-[#0c1222]'
+                ? `${node.bg} ${node.border.replace('/30', '/80')} scale-110 shadow-[0_0_25px_rgba(99,102,241,0.3)] z-50 border-solid` 
+                : 'bg-[#0a0f1c]/90 border-indigo-500/20 hover:border-indigo-400/50 hover:bg-[#0c1222] hover:scale-105'
             }`}
         >
-            <div className="-rotate-45 flex flex-col items-center gap-1 md:gap-1.5">
-                <node.icon className={`text-xl md:text-2xl transition-colors ${active ? node.color : 'text-gray-500'}`} />
-                <span className={`text-[9px] md:text-[10px] font-mono font-bold uppercase tracking-widest ${active ? node.color : 'text-gray-500'}`}>
+            <div className="-rotate-45 flex flex-col items-center justify-center">
+                <node.icon className={`text-base sm:text-lg transition-colors ${active ? node.color : 'text-gray-500'}`} />
+                <span className={`text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider mt-0.5 ${active ? node.color : 'text-gray-500'}`}>
                     {node.id.substring(0,3)}
                 </span>
             </div>
