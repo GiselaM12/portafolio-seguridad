@@ -190,10 +190,8 @@ const ActivityDetail = () => {
                         {fileUrl ? (
                             <>
                                 {isPdf && (
-                                    <a
-                                        href={fileUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                    <Link
+                                        to={`/visor-pdf/${activity.id}`}
                                         className={`group relative px-4 py-2 overflow-hidden rounded border transition-all ${
                                             activity.id === 'PR02' 
                                             ? 'bg-violet-600/10 border-violet-500 text-violet-400 hover:bg-violet-600 hover:text-white shadow-[0_0_15px_rgba(139,92,246,0.2)]'
@@ -206,7 +204,7 @@ const ActivityDetail = () => {
                                             <FaTerminal className="text-xs" />
                                             <span>VISUALIZE_PDF</span>
                                         </div>
-                                    </a>
+                                    </Link>
                                 )}
                                 {!isPdf && (
                                     <a
