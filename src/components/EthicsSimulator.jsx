@@ -86,8 +86,8 @@ const scenariosData = [
         id: 3,
         title: "Escenario 03: Uso de Herramientas OSINT",
         description: "Se detecta una fuga de propiedad intelectual crítica en el repositorio corporativo. Para identificar al responsable, el director de seguridad ordena utilizar herramientas OSINT de recolección de metadatos e información personal (redes sociales públicas, repositorios privados, foros, historial de IPs de registros) sobre un empleado sospechoso, utilizando la información recopilada para chantajearlo emocionalmente en un interrogatorio informal para forzar una confesión.",
-        technicalDetails: "Herramientas utilizadas: Maltego, Sherlock, de-anonymization de cuentas de GitHub personales y análisis de geolocalización basados en metadatos EXIF de fotos públicas en redes sociales. Uso ilegal de perfiles de conducta psicológicos fuera del alcance corporativo.",
-        dilema: "Decidir si el fin legítimo de mitigar la fuga de propiedad intelectual y proteger los activos industriales de la empresa justifica la utilización de métodos invasivos, acoso psicológico y extorsión personal basados en datos recopilados de fuentes abiertas.",
+        technicalDetails: "Herramientas utilizadas: Metadatos EXIF de fotos públicas en redes sociales, de-anonimization de cuentas de GitHub personales y perfiles de conducta psicológicos fuera del alcance corporativo.",
+        dilema: "Decidir si el fin legítimo de mitigar la fuga de propiedad intelectual y proteger los activos industriales de la empresa justifica la utilización de métodos invasivos, acoso psicológico y extorsión personal basados en datos de fuentes abiertas.",
         ethicalAction: {
             title: "Investigar bajo el Debido Proceso y Protección de Privacidad",
             description: "Utilizar herramientas de auditoría OSINT exclusivamente para recopilar evidencia técnica y metadatos asociados a la fuga. Presentar las pruebas al departamento legal y recursos humanos para iniciar una entrevista formal de cumplimiento, garantizando los derechos laborales del empleado.",
@@ -417,7 +417,7 @@ const EthicsSimulator = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                     
-                    {/* Left: UPSLP Logo replacement / Academic Info */}
+                    {/* Left: Academic Info */}
                     <div className="lg:col-span-8 space-y-4">
                         <div className="flex flex-col md:flex-row md:items-center gap-3">
                             <span className="px-3 py-1 text-[10px] font-mono font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded">
@@ -493,7 +493,7 @@ const EthicsSimulator = () => {
                 </div>
             </div>
 
-            {/* 2. Unified SecOps Console Dashboard Grid */}
+            {/* 2. Unified SecOps Console Dashboard Grid (Balanced Columns) */}
             <div className="bg-[#050913]/90 border border-cyan-500/20 rounded-3xl overflow-hidden shadow-2xl relative">
                 
                 {/* Console HUD Header */}
@@ -543,11 +543,11 @@ const EthicsSimulator = () => {
                     </button>
                 </div>
 
-                {/* Main Unified Workspace (Split Screen Grid) */}
-                <div className="p-6 md:p-8 bg-[#03060c] grid grid-cols-1 xl:grid-cols-12 gap-8">
+                {/* Main Unified Workspace (Balanced Split Screen Grid 1:1) */}
+                <div className="p-6 md:p-8 bg-[#03060c] grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    {/* LEFT PANEL: Interactive Shell & Realtime CIA Metrics (5 Columns) */}
-                    <div className="xl:col-span-5 flex flex-col gap-6">
+                    {/* LEFT PANEL: Shell, CIA, Ethics Frameworks, and Compliance Laws */}
+                    <div className="flex flex-col gap-6">
                         
                         {/* 1. Unix Terminal Shell */}
                         <div className="bg-black/90 rounded-2xl border border-gray-900 p-5 flex flex-col justify-between h-[300px] shadow-inner font-mono text-xs">
@@ -590,82 +590,203 @@ const EthicsSimulator = () => {
                             </div>
                         </div>
 
-                        {/* 2. Interactive Toggles (Decisor Posture) */}
-                        <div className="bg-[#070c18] border border-cyan-500/10 p-5 rounded-2xl space-y-3 font-mono">
-                            <span className="text-[10px] text-gray-500 uppercase tracking-widest block">AUDITOR_DECISION_POSTURE</span>
-                            <div className="grid grid-cols-2 gap-3">
-                                <button
-                                    onClick={() => {
-                                        setIsEthical(true);
-                                        logPostures(true);
-                                    }}
-                                    className={`py-3.5 rounded-xl font-bold border transition-all flex items-center justify-center gap-2 uppercase text-xs ${
-                                        isEthical
-                                        ? 'bg-green-500/10 text-green-400 border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.15)]'
-                                        : 'bg-black text-gray-500 border-gray-900 hover:text-gray-400 hover:border-gray-800'
-                                    }`}
-                                >
-                                    <FaCheckCircle className="text-sm" />
-                                    <span>Acción Ética</span>
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        setIsEthical(false);
-                                        logPostures(false);
-                                    }}
-                                    className={`py-3.5 rounded-xl font-bold border transition-all flex items-center justify-center gap-2 uppercase text-xs ${
-                                        !isEthical
-                                        ? 'bg-red-500/10 text-red-400 border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.15)]'
-                                        : 'bg-black text-gray-500 border-gray-900 hover:text-gray-400 hover:border-gray-800'
-                                    }`}
-                                >
-                                    <FaSkullCrossbones className="text-sm" />
-                                    <span>Acción Negligente</span>
-                                </button>
+                        {/* 2. Interactive Toggles (Decisor Posture) & CIA Triad Risk Meters */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            {/* Decision Toggles */}
+                            <div className="bg-[#070c18] border border-cyan-500/10 p-5 rounded-2xl flex flex-col justify-between font-mono gap-3">
+                                <span className="text-[10px] text-gray-500 uppercase tracking-widest block">AUDITOR_DECISION_POSTURE</span>
+                                <div className="flex flex-col gap-2.5">
+                                    <button
+                                        onClick={() => {
+                                            setIsEthical(true);
+                                            logPostures(true);
+                                        }}
+                                        className={`py-3.5 rounded-xl font-bold border transition-all flex items-center justify-center gap-2 uppercase text-xs w-full ${
+                                            isEthical
+                                            ? 'bg-green-500/10 text-green-400 border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.15)]'
+                                            : 'bg-black text-gray-500 border-gray-900 hover:text-gray-400 hover:border-gray-800'
+                                        }`}
+                                    >
+                                        <FaCheckCircle className="text-sm" />
+                                        <span>Acción Ética</span>
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setIsEthical(false);
+                                            logPostures(false);
+                                        }}
+                                        className={`py-3.5 rounded-xl font-bold border transition-all flex items-center justify-center gap-2 uppercase text-xs w-full ${
+                                            !isEthical
+                                            ? 'bg-red-500/10 text-red-400 border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.15)]'
+                                            : 'bg-black text-gray-500 border-gray-900 hover:text-gray-400 hover:border-gray-800'
+                                        }`}
+                                    >
+                                        <FaSkullCrossbones className="text-sm" />
+                                        <span>Acción Negligente</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* CIA Meters */}
+                            <div className="bg-[#070c18] border border-cyan-500/10 p-5 rounded-2xl space-y-3 flex flex-col justify-between">
+                                <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest block">CIA TRIAD POSTURE</span>
+                                <div className="space-y-2.5">
+                                    {/* C */}
+                                    <div>
+                                        <div className="flex justify-between text-[10px] font-mono mb-0.5">
+                                            <span className="text-gray-400">CONFIDENCIALIDAD</span>
+                                            <span className={currentAction.cia.c > 50 ? 'text-green-400' : 'text-red-400 font-bold'}>{currentAction.cia.c}%</span>
+                                        </div>
+                                        <div className="h-1.5 bg-black rounded-full overflow-hidden border border-gray-900">
+                                            <div className={`h-full rounded-full transition-all duration-700 ${currentAction.cia.c > 50 ? 'bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_10px_#10b981]' : 'bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_10px_#ef4444]'}`} style={{ width: `${currentAction.cia.c}%` }}></div>
+                                        </div>
+                                    </div>
+                                    {/* I */}
+                                    <div>
+                                        <div className="flex justify-between text-[10px] font-mono mb-0.5">
+                                            <span className="text-gray-400">INTEGRIDAD</span>
+                                            <span className={currentAction.cia.i > 50 ? 'text-green-400' : 'text-red-400 font-bold'}>{currentAction.cia.i}%</span>
+                                        </div>
+                                        <div className="h-1.5 bg-black rounded-full overflow-hidden border border-gray-900">
+                                            <div className={`h-full rounded-full transition-all duration-700 ${currentAction.cia.i > 50 ? 'bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_10px_#10b981]' : 'bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_10px_#ef4444]'}`} style={{ width: `${currentAction.cia.i}%` }}></div>
+                                        </div>
+                                    </div>
+                                    {/* A */}
+                                    <div>
+                                        <div className="flex justify-between text-[10px] font-mono mb-0.5">
+                                            <span className="text-gray-400">DISPONIBILIDAD</span>
+                                            <span className={currentAction.cia.a > 50 ? 'text-green-400' : 'text-red-400 font-bold'}>{currentAction.cia.a}%</span>
+                                        </div>
+                                        <div className="h-1.5 bg-black rounded-full overflow-hidden border border-gray-900">
+                                            <div className={`h-full rounded-full transition-all duration-700 ${currentAction.cia.a > 50 ? 'bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_10px_#10b981]' : 'bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_10px_#ef4444]'}`} style={{ width: `${currentAction.cia.a}%` }}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {/* 3. Ethical Frameworks Justification & Scores */}
+                        <div className="bg-[#070d18] border border-cyan-500/10 p-6 rounded-2xl space-y-4">
+                            <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
+                                <FaBalanceScale />
+                                <span>Justificación desde Marcos Éticos Generales</span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="bg-black/40 p-3.5 border border-gray-950 rounded-xl space-y-1.5 flex flex-col justify-between">
+                                    <h5 className="text-cyan-300 font-mono text-[11px] font-bold uppercase">A) Ética Utilitarista</h5>
+                                    <p className="text-gray-400 text-[10px] leading-relaxed flex-grow">
+                                        {isEthical 
+                                            ? "Incorrecto violar la norma. El perjuicio sistémico potencial supera las intenciones preventivas del empleado, rompiendo la confianza." 
+                                            : "Falsa utilidad. Pretender proteger los activos usando canales ilegítimos debilita la seguridad y provoca daños severos colaterales."
+                                        }
+                                    </p>
+                                </div>
+                                <div className="bg-black/40 p-3.5 border border-gray-950 rounded-xl space-y-1.5 flex flex-col justify-between">
+                                    <h5 className="text-cyan-300 font-mono text-[11px] font-bold uppercase">B) Enfoque de Derechos</h5>
+                                    <p className="text-gray-400 text-[10px] leading-relaxed flex-grow">
+                                        {isEthical 
+                                            ? "Correcto. Respeta inalienablemente los derechos del director/cliente a la privacidad y el debido proceso de auditoría autorizada." 
+                                            : "Violado. Toda persona tiene derecho a la confidencialidad de sus comunicaciones y a no ser coaccionada o manipulada."
+                                        }
+                                    </p>
+                                </div>
+                                <div className="bg-black/40 p-3.5 border border-gray-950 rounded-xl space-y-1.5 flex flex-col justify-between">
+                                    <h5 className="text-cyan-300 font-mono text-[11px] font-bold uppercase">C) Enfoque del Bien Común</h5>
+                                    <p className="text-gray-400 text-[10px] leading-relaxed flex-grow">
+                                        {isEthical 
+                                            ? "Protegido. Fomenta un ambiente corporativo de confianza, reglas claras, gobernanza y transparencia." 
+                                            : "Afectado. Crea un ambiente insostenible de desconfianza mutua y vigilancia arbitraria, destruyendo la cohesión."
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-black/30 rounded-xl p-3 flex flex-wrap gap-4 justify-between items-center text-[11px] font-mono">
+                                <span className="text-gray-500 uppercase tracking-widest text-[9px]">Puntuaciones morales (Postura Actual)</span>
+                                <div className="flex gap-4">
+                                    <span className="text-cyan-400">UTILIT: {currentAction.moralFrameworks.util}/100</span>
+                                    <span className="text-cyan-400">DERECH: {currentAction.moralFrameworks.rights}/100</span>
+                                    <span className="text-cyan-400">B_COMUN: {currentAction.moralFrameworks.commonGood}/100</span>
+                                </div>
                             </div>
                         </div>
 
-                        {/* 3. CIA Triad Risk Meters */}
-                        <div className="bg-[#070c18] border border-cyan-500/10 p-5 rounded-2xl space-y-4">
-                            <span className="text-[10px] text-gray-500 font-mono uppercase tracking-widest block">MÉTRICA AMBIENTAL CIA (TRÍADA DE SEGURIDAD)</span>
-                            <div className="space-y-4">
-                                {/* C */}
-                                <div>
-                                    <div className="flex justify-between text-xs font-mono mb-1">
-                                        <span className="text-gray-400">CONFIDENCIALIDAD</span>
-                                        <span className={currentAction.cia.c > 50 ? 'text-green-400' : 'text-red-400 font-bold'}>{currentAction.cia.c}%</span>
+                        {/* 4. Legal Compliance & 10 Commandments */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            
+                            {/* Legal Panel */}
+                            <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-2xl flex flex-col justify-between gap-4">
+                                <div className="space-y-4">
+                                    <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
+                                        <FaGavel />
+                                        <span>Marco Regulatorio</span>
                                     </div>
-                                    <div className="h-2 bg-black rounded-full overflow-hidden border border-gray-900">
-                                        <div className={`h-full rounded-full transition-all duration-700 ${currentAction.cia.c > 50 ? 'bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_10px_#10b981]' : 'bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_10px_#ef4444]'}`} style={{ width: `${currentAction.cia.c}%` }}></div>
-                                    </div>
-                                </div>
-                                {/* I */}
-                                <div>
-                                    <div className="flex justify-between text-xs font-mono mb-1">
-                                        <span className="text-gray-400">INTEGRIDAD</span>
-                                        <span className={currentAction.cia.i > 50 ? 'text-green-400' : 'text-red-400 font-bold'}>{currentAction.cia.i}%</span>
-                                    </div>
-                                    <div className="h-2 bg-black rounded-full overflow-hidden border border-gray-900">
-                                        <div className={`h-full rounded-full transition-all duration-700 ${currentAction.cia.i > 50 ? 'bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_10px_#10b981]' : 'bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_10px_#ef4444]'}`} style={{ width: `${currentAction.cia.i}%` }}></div>
+                                    <div className="space-y-3 font-mono text-xs">
+                                        <div>
+                                            <span className="text-[10px] text-gray-500 block uppercase">Clasificación Jurídica</span>
+                                            <p className="text-white font-bold mt-0.5 leading-tight">{currentAction.crimeClassification}</p>
+                                        </div>
+                                        <div>
+                                            <span className="text-[10px] text-gray-500 block uppercase">Consecuencias</span>
+                                            <p className="text-gray-400 text-[10px] leading-relaxed mt-0.5">{currentAction.legalImpact}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                {/* A */}
-                                <div>
-                                    <div className="flex justify-between text-xs font-mono mb-1">
-                                        <span className="text-gray-400">DISPONIBILIDAD</span>
-                                        <span className={currentAction.cia.a > 50 ? 'text-green-400' : 'text-red-400 font-bold'}>{currentAction.cia.a}%</span>
-                                    </div>
-                                    <div className="h-2 bg-black rounded-full overflow-hidden border border-gray-900">
-                                        <div className={`h-full rounded-full transition-all duration-700 ${currentAction.cia.a > 50 ? 'bg-gradient-to-r from-green-500 to-emerald-400 shadow-[0_0_10px_#10b981]' : 'bg-gradient-to-r from-red-600 to-red-400 shadow-[0_0_10px_#ef4444]'}`} style={{ width: `${currentAction.cia.a}%` }}></div>
+                                <div className="bg-black/30 border border-gray-950 p-3 rounded-lg flex items-center gap-2.5">
+                                    <FaLock className="text-cyan-400 flex-shrink-0 text-sm animate-pulse" />
+                                    <div className="text-[9px] font-mono text-gray-500 leading-normal">
+                                        Cumplimiento: <strong className="text-white">ISO 27001</strong> y directivas <strong className="text-white">NIST SP 800-53</strong>.
                                     </div>
                                 </div>
                             </div>
+
+                            {/* 10 Commandments Panel */}
+                            <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-2xl flex flex-col justify-between gap-4">
+                                <div className="space-y-3">
+                                    <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
+                                        <FaRegFileAlt />
+                                        <span>10 Mandamientos de Ética</span>
+                                    </div>
+                                    
+                                    <div className="space-y-2 text-xs font-mono">
+                                        {isEthical ? (
+                                            <>
+                                                <span className="text-[10px] text-green-400 block uppercase font-bold">✔ Respetados:</span>
+                                                <div className="space-y-1.5">
+                                                    {scenario.ethicalAction.respectedCommandments.map((cmd, idx) => (
+                                                        <div key={idx} className="flex items-start gap-2 text-gray-400 p-2 bg-green-500/5 rounded border border-green-500/10 text-[9px] leading-tight">
+                                                            <FaCheckCircle className="text-green-500 mt-0.5 flex-shrink-0" />
+                                                            <span>{cmd}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span className="text-[10px] text-red-500 block uppercase font-bold">⚠ Violados:</span>
+                                                <div className="space-y-1.5">
+                                                    {scenario.unethicalAction.violatedCommandments.map((cmd, idx) => (
+                                                        <div key={idx} className="flex items-start gap-2 text-gray-400 p-2 bg-red-500/5 rounded border border-red-500/10 text-[9px] leading-tight">
+                                                            <FaTimesCircle className="text-red-500 mt-0.5 flex-shrink-0 animate-pulse" />
+                                                            <span>{cmd}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
 
-                    {/* RIGHT PANEL: Threat Context, Detailed Text & Compliance (7 Columns) */}
-                    <div className="xl:col-span-7 flex flex-col gap-6">
+                    {/* RIGHT PANEL: Image, Case details, Technical logs & Specialized Action Paths */}
+                    <div className="flex flex-col gap-6">
                         
                         {/* 1. Cyber Threat Illustration Card */}
                         <div className="relative aspect-[16/6] md:aspect-[16/5] rounded-3xl overflow-hidden border border-cyan-500/20 bg-black/60 group shadow-lg flex items-end p-6">
@@ -726,7 +847,7 @@ const EthicsSimulator = () => {
                         </div>
 
                         {/* 3. Specialized Plans of Action */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow">
                             
                             {/* Ethical path */}
                             <div className="bg-[#070d18] border border-green-500/20 p-5 rounded-2xl flex flex-col justify-between gap-4">
@@ -742,7 +863,7 @@ const EthicsSimulator = () => {
                                         {scenario.ethicalAction.description}
                                     </p>
                                 </div>
-                                <div className="bg-green-950/20 border border-green-500/10 p-3 rounded-lg text-[10px] font-mono text-green-400/80">
+                                <div className="bg-green-950/20 border border-green-500/10 p-3 rounded-lg text-[10px] font-mono text-green-400/80 mt-auto">
                                     POSTURA DE CONTROL DEFENSIVO Y AUDITORÍA TRANSPARENTE
                                 </div>
                             </div>
@@ -761,124 +882,8 @@ const EthicsSimulator = () => {
                                         {scenario.unethicalAction.description}
                                     </p>
                                 </div>
-                                <div className="bg-red-950/20 border border-red-500/10 p-3 rounded-lg text-[10px] font-mono text-red-400/80">
+                                <div className="bg-red-950/20 border border-red-500/10 p-3 rounded-lg text-[10px] font-mono text-red-400/80 mt-auto">
                                     VULNERACIÓN DIRECTA DE NORMAS INTERNAS Y DE LEYES VIGENTES
-                                </div>
-                            </div>
-
-                        </div>
-
-                        {/* 4. Ethical Frameworks Justification & Scores */}
-                        <div className="bg-[#070d18] border border-cyan-500/10 p-6 rounded-2xl space-y-4">
-                            <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-                                <FaBalanceScale />
-                                <span>Justificación desde Marcos Éticos Generales</span>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div className="bg-black/40 p-4 border border-gray-900 rounded-xl space-y-1.5 flex flex-col justify-between">
-                                    <h5 className="text-cyan-300 font-mono text-xs font-bold uppercase">A) Ética Utilitarista</h5>
-                                    <p className="text-gray-400 text-[11px] leading-relaxed flex-grow">
-                                        {isEthical 
-                                            ? "Incorrecto violar la norma. El perjuicio sistémico potencial supera las intenciones preventivas del empleado, rompiendo la confianza." 
-                                            : "Falsa utilidad. Pretender proteger los activos usando canales ilegítimos debilita la seguridad y provoca daños severos colaterales."
-                                        }
-                                    </p>
-                                </div>
-                                <div className="bg-black/40 p-4 border border-gray-900 rounded-xl space-y-1.5 flex flex-col justify-between">
-                                    <h5 className="text-cyan-300 font-mono text-xs font-bold uppercase">B) Enfoque de Derechos</h5>
-                                    <p className="text-gray-400 text-[11px] leading-relaxed flex-grow">
-                                        {isEthical 
-                                            ? "Correcto. Respeta inalienablemente los derechos del director/cliente a la privacidad y el debido proceso de auditoría autorizada." 
-                                            : "Violado. Toda persona tiene derecho a la confidencialidad de sus comunicaciones y a no ser coaccionada o manipulada."
-                                        }
-                                    </p>
-                                </div>
-                                <div className="bg-black/40 p-4 border border-gray-900 rounded-xl space-y-1.5 flex flex-col justify-between">
-                                    <h5 className="text-cyan-300 font-mono text-xs font-bold uppercase">C) Enfoque del Bien Común</h5>
-                                    <p className="text-gray-400 text-[11px] leading-relaxed flex-grow">
-                                        {isEthical 
-                                            ? "Protegido. Fomenta un ambiente corporativo de confianza, reglas claras, gobernanza y transparencia." 
-                                            : "Afectado. Crea un ambiente insostenible de desconfianza mutua y vigilancia arbitraria, destruyendo la cohesión."
-                                        }
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="bg-black/30 rounded-xl p-4 flex flex-wrap gap-4 justify-between items-center text-xs font-mono">
-                                <span className="text-gray-500 uppercase tracking-widest text-[10px]">Evaluación de Marcos (Postura Actual)</span>
-                                <div className="flex gap-4">
-                                    <span className="text-cyan-400">UTILIT: {currentAction.moralFrameworks.util}/100</span>
-                                    <span className="text-cyan-400">DERECH: {currentAction.moralFrameworks.rights}/100</span>
-                                    <span className="text-cyan-400">B_COMUN: {currentAction.moralFrameworks.commonGood}/100</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* 5. Legal Compliance & 10 Commandments */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            
-                            {/* Legal Panel */}
-                            <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-2xl flex flex-col justify-between gap-4">
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-                                        <FaGavel />
-                                        <span>Marco Penal y Regulatorio</span>
-                                    </div>
-                                    <div className="space-y-3 font-mono text-xs">
-                                        <div>
-                                            <span className="text-[10px] text-gray-500 block uppercase">Clasificación Jurídica</span>
-                                            <p className="text-white font-bold mt-0.5 leading-tight">{currentAction.crimeClassification}</p>
-                                        </div>
-                                        <div>
-                                            <span className="text-[10px] text-gray-500 block uppercase">Infracciones y Consecuencias</span>
-                                            <p className="text-gray-400 text-[11px] leading-relaxed mt-0.5">{currentAction.legalImpact}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="bg-black/30 border border-gray-900 p-3 rounded-lg flex items-center gap-2.5">
-                                    <FaLock className="text-cyan-400 flex-shrink-0 text-sm animate-pulse" />
-                                    <div className="text-[9px] font-mono text-gray-500 leading-normal">
-                                        Alineamiento de gobernanza corporativa: <strong className="text-white">ISO 27001</strong> y directivas <strong className="text-white">NIST SP 800-53</strong>.
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* 10 Commandments Panel */}
-                            <div className="bg-[#070d18] border border-cyan-500/10 p-5 rounded-2xl flex flex-col justify-between gap-4">
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider">
-                                        <FaRegFileAlt />
-                                        <span>10 Mandamientos de Ética</span>
-                                    </div>
-                                    
-                                    <div className="space-y-2 text-xs font-mono">
-                                        {isEthical ? (
-                                            <>
-                                                <span className="text-[10px] text-green-400 block uppercase font-bold">✔ Mandamientos Respetados:</span>
-                                                <div className="space-y-1.5">
-                                                    {scenario.ethicalAction.respectedCommandments.map((cmd, idx) => (
-                                                        <div key={idx} className="flex items-start gap-2 text-gray-400 p-2 bg-green-500/5 rounded border border-green-500/10 text-[10px] leading-tight">
-                                                            <FaCheckCircle className="text-green-500 mt-0.5 flex-shrink-0" />
-                                                            <span>{cmd}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <span className="text-[10px] text-red-500 block uppercase font-bold">⚠ Mandamientos Violados:</span>
-                                                <div className="space-y-1.5">
-                                                    {scenario.unethicalAction.violatedCommandments.map((cmd, idx) => (
-                                                        <div key={idx} className="flex items-start gap-2 text-gray-400 p-2 bg-red-500/5 rounded border border-red-500/10 text-[10px] leading-tight">
-                                                            <FaTimesCircle className="text-red-500 mt-0.5 flex-shrink-0 animate-pulse" />
-                                                            <span>{cmd}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </>
-                                        )}
-                                    </div>
                                 </div>
                             </div>
 
