@@ -115,6 +115,7 @@ const CvssCalculator = () => {
         AV: 'N', AC: 'L', PR: 'H', UI: 'N', S: 'U', C: 'L', I: 'L', A: 'L'
     });
     const [selectedQA, setSelectedQA] = useState(null);
+    const [activeJustKey, setActiveJustKey] = useState('AV');
 
     // Apply Case Study variables when mode is set to 'case'
     useEffect(() => {
@@ -821,46 +822,85 @@ const CvssCalculator = () => {
                         </div>
 
                         {/* Parameter Justifications */}
-                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-5 flex flex-col gap-4 flex-grow">
+                        <div className="bg-[#070d18] border border-cyan-500/10 rounded-2xl p-5 flex flex-col gap-4 flex-grow min-h-[340px]">
                             <h5 className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2 border-b border-gray-900 pb-2">
                                 <FaFileAlt />
-                                <span>Justificaciones del Vector</span>
+                                <span>Justificación de Parámetros</span>
                             </h5>
 
-                            <div className="space-y-4 overflow-y-auto max-h-[300px] pr-1.5 scrollbar-thin scrollbar-thumb-gray-900">
+                            {/* Metric grid tabs */}
+                            <div className="grid grid-cols-4 gap-1.5 flex-shrink-0">
                                 {Object.keys(caseJustifications).map((key) => {
-                                    const details = metricsDefinition[key];
                                     const optCode = selectedMetrics[key];
-                                    const opt = details.options.find(o => o.code === optCode);
                                     const defaultJust = caseJustifications[key];
-                                    
                                     const isCaseMatch = optCode === defaultJust.selection;
+                                    const isActive = activeJustKey === key;
 
                                     return (
-                                        <div key={key} className="text-xs space-y-1 border-b border-gray-900/50 pb-2.5 last:border-b-0">
-                                            <div className="flex justify-between items-center">
-                                                <strong className="text-gray-300 font-mono text-[10px] uppercase">{details.name}</strong>
-                                                <span className={`px-1.5 py-0.2 font-mono text-[8px] rounded ${
-                                                    isCaseMatch 
-                                                    ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400' 
-                                                    : 'bg-amber-500/10 border border-amber-500/30 text-amber-400'
-                                                }`}>
-                                                    {key}:{optCode}
-                                                </span>
-                                            </div>
-                                            <p className="text-[10px] text-gray-500 italic">
-                                                Seleccionado: "{opt?.name || opt?.code}"
-                                            </p>
-                                            <p className="text-[10px] text-gray-400 font-mono leading-relaxed bg-black/20 p-2 rounded border border-gray-950 mt-1">
-                                                {isCaseMatch 
-                                                    ? defaultJust.text 
-                                                    : "Simulación libre: El cálculo y severidad de este parámetro se actualiza en tiempo real de acuerdo a la matriz base de CVSS."
-                                                }
-                                            </p>
-                                        </div>
+                                        <button
+                                            key={key}
+                                            onClick={() => setActiveJustKey(key)}
+                                            className={`py-1.5 px-1 rounded-lg border text-center font-mono text-[9px] transition-all flex flex-col items-center justify-center gap-0.5 ${
+                                                isActive
+                                                ? 'bg-cyan-500/15 border-cyan-500/50 text-cyan-300 font-bold shadow-[0_0_10px_rgba(6,182,212,0.1)]'
+                                                : isCaseMatch
+                                                ? 'bg-black/30 border-gray-950 text-gray-400 hover:border-cyan-500/20'
+                                                : 'bg-amber-500/5 border-amber-500/10 text-amber-400 hover:border-amber-500/20'
+                                            }`}
+                                        >
+                                            <span className="opacity-60 text-[8px]">{key}</span>
+                                            <span className="font-bold text-[10px]">{optCode}</span>
+                                        </button>
                                     );
                                 })}
                             </div>
+
+                            {/* Active Metric Justification Detail Box */}
+                            {(() => {
+                                const details = metricsDefinition[activeJustKey];
+                                const optCode = selectedMetrics[activeJustKey];
+                                const opt = details.options.find(o => o.code === optCode);
+                                const defaultJust = caseJustifications[activeJustKey];
+                                const isCaseMatch = optCode === defaultJust.selection;
+
+                                return (
+                                    <div className="bg-black/35 border border-gray-950 rounded-xl p-3 flex flex-col justify-between flex-grow gap-2.5 relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 blur-[40px] rounded-full pointer-events-none" />
+                                        
+                                        <div className="space-y-1">
+                                            <div className="flex justify-between items-center border-b border-gray-900/60 pb-1.5">
+                                                <strong className="text-gray-300 font-mono text-[10px] uppercase tracking-wide truncate max-w-[160px]">
+                                                    {details.name}
+                                                </strong>
+                                                <span className={`px-1.5 py-0.2 font-mono text-[8px] rounded ${
+                                                    isCaseMatch 
+                                                    ? 'bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-bold' 
+                                                    : 'bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold'
+                                                }`}>
+                                                    {activeJustKey}:{optCode}
+                                                </span>
+                                            </div>
+                                            
+                                            <p className="text-[10px] text-gray-500 font-mono leading-relaxed">
+                                                {details.description}
+                                            </p>
+                                            
+                                            <p className="text-[9px] text-cyan-400/80 font-mono mt-1">
+                                                Seleccionado: <strong className="text-white">"{opt?.name || opt?.code}"</strong>
+                                            </p>
+                                        </div>
+
+                                        <div className="bg-[#03060c] p-2.5 rounded-lg border border-cyan-500/5 flex-grow flex items-center justify-center">
+                                            <p className="text-[10px] text-gray-300 font-mono leading-relaxed italic text-center w-full">
+                                                "{isCaseMatch 
+                                                    ? defaultJust.text 
+                                                    : "Simulación libre: El cálculo y severidad de este parámetro se actualiza en tiempo real de acuerdo a la matriz base de CVSS."
+                                                }"
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })()}
                         </div>
 
                     </div>
