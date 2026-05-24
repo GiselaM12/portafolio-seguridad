@@ -1900,7 +1900,45 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 2 PROJECT.</p>
         <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
       </div>
-    `
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">01_</span> RESUMEN EJECUTIVO
+      </h2>
+      <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4 bg-black/40 p-6 rounded border border-gray-800">
+        <p>El presente documento detalla los resultados de la evaluación de seguridad (Pentesting) realizada a la máquina <strong>"My File Server: 1"</strong>, simulando un entorno corporativo de almacenamiento de archivos. Durante el ejercicio, el equipo Red Team logró comprometer totalmente el servidor, obteniendo acceso a nivel de administrador (<strong>root</strong>).</p>
+        <p>El compromiso inicial se originó debido a una mala configuración en los servicios de transferencia de archivos y directorios compartidos, lo que permitió la extracción de credenciales de acceso en texto plano. Posteriormente, se aprovechó una vulnerabilidad crítica de desactualización en el núcleo (Kernel) del sistema operativo para escalar privilegios.</p>
+      </div>
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">02_</span> FASES DEL ATAQUE
+      </h2>
+      <div class="space-y-6 mb-10">
+        <div class="bg-[#0a0f1a] p-6 rounded border border-violet-500/20 hover:border-violet-500/50 transition-colors">
+          <h3 class="text-violet-400 font-bold mb-2">1. Reconocimiento y Enumeración</h3>
+          <p class="text-gray-400 text-sm">Se utilizó <code class="text-pink-400">netdiscover</code> y <code class="text-pink-400">nmap</code> identificando múltiples puertos abiertos: 21 (FTP), 22 (SSH), 80 (HTTP), y 139/445 (SMB). Se alertó sobre la presencia de servicios SMB y FTP abiertos y expuestos.</p>
+        </div>
+        <div class="bg-[#0a0f1a] p-6 rounded border border-blue-500/20 hover:border-blue-500/50 transition-colors">
+          <h3 class="text-blue-400 font-bold mb-2">2. Explotación Inicial (VULN-01)</h3>
+          <p class="text-gray-400 text-sm">Mediante herramientas como <code class="text-pink-400">smbmap</code> y escaneos con <code class="text-pink-400">nikto</code>, se identificó un archivo público (<code class="text-pink-400">readme.txt</code>) que contenía credenciales de acceso válidas en texto plano. Se utilizaron estas credenciales para acceder por SSH y lograr el <em>foothold</em> inicial.</p>
+        </div>
+        <div class="bg-[#0a0f1a] p-6 rounded border border-red-500/20 hover:border-red-500/50 transition-colors">
+          <h3 class="text-red-400 font-bold mb-2">3. Escalada de Privilegios (VULN-02)</h3>
+          <p class="text-gray-400 text-sm">Al enumerar el sistema (<code class="text-pink-400">uname -a</code>), se descubrió que el servidor utilizaba un Kernel desactualizado vulnerable a <strong>CVE-2016-5195 ("Dirty COW")</strong>. Se compiló y ejecutó el exploit correspondiente, obteniendo una consola interactiva con privilegios absolutos (root).</p>
+        </div>
+      </div>
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">03_</span> IMPACTO Y RECOMENDACIONES
+      </h2>
+      <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4 bg-black/40 p-6 rounded border border-gray-800">
+        <p>El impacto sobre el modelo CIA es <strong>CRÍTICO</strong> en confidencialidad, integridad y disponibilidad. Para remediar estas debilidades sistémicas se recomiendan los siguientes controles:</p>
+        <ul class="list-none space-y-2 mt-4">
+          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Gestión de Parches:</strong> Actualizar el Kernel de Linux a una versión superior a 3.9 para erradicar Dirty COW.</span></li>
+          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Hardening de Servicios:</strong> Deshabilitar logins <em>anonymous</em> en FTP y asegurar recursos compartidos SMB con ACLs estrictas.</span></li>
+          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Gestión Segura de Secretos:</strong> Prohibir almacenar contraseñas en archivos de texto plano (VULN-01).</span></li>
+          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Restricción de Accesos:</strong> Reconfigurar SSH para aceptar únicamente conexiones autenticadas mediante llaves criptográficas.</span></li>
+        </ul>
+      </div>
   },
   {
     id: 16,
