@@ -44,7 +44,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: true
         })),
-        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8").map(act => ({
+        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9").map(act => ({
             id: act.id,
             icon: getIconForActivity(act.id),
             title: act.title,

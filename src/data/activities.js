@@ -1887,8 +1887,21 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         <p>El diseño y resolución de esta base experimental (El "Road to Hall of Fame") garantiza no sólo mi capacidad para comprometer el modelo de capas de un servicio moderno usando vectores complejos y evasiones de WAF, sino el factor más importante para un analista de seguridad integral: <strong class="text-green-400">la certeza de poder asesorar e implementar su contramedida total y definitiva.</strong></p>
       </div>
     `
-  }
-,
+  },
+  {
+    id: "9",
+    title: "ACTIVIDAD 09 - Actividad Equipo 1",
+    description: "Actividad en equipo correspondiente al segundo parcial.",
+    date: "2026-04-15",
+    tags: ["Actividad Práctica", "Reporte", "Segundo Parcial"],
+    content: `
+      <div class="border border-green-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-green-400/80 mb-6">
+        <p>[SYSTEM] AUDIT MATRIX CONSOLE INITIALIZED SUCCESSFULLY.</p>
+        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 2 PROJECT.</p>
+        <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
+      </div>
+    `
+  },
   {
     id: 16,
     title: "ACTIVIDAD 16 - Dilemas Éticos en Ciberseguridad",

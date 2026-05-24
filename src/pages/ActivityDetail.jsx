@@ -37,6 +37,7 @@ const ActivityDetail = () => {
             "PR02": "PR02.pdf",
             "PR03": "PR03.pdf",
             8: "parcial2/act08-Equipo1.pdf",
+            9: "parcial2/act09-Equipo1.pdf",
             16: "parcial3/act16-Equipo1.pdf",
             17: "parcial3/act17-Equipo1.pdf",
             18: "parcial3/act18-Equipo1.pdf"
