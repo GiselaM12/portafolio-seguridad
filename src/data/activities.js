@@ -2056,6 +2056,95 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     `
   },
   {
+    id: "10",
+    title: "ACTIVIDAD 10 - Protege tu Tesoro Digital: Datos y Privacidad",
+    description: "Infografía de concientización sobre la protección de datos personales, privacidad y buenas prácticas de seguridad.",
+    date: "2026-05-24",
+    tags: ["Concientización", "Privacidad", "Datos Personales", "Phishing"],
+    content: `
+      <div class="border border-blue-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-blue-400/80 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+        <p class="animate-pulse">[SYSTEM] PRIVACY SHIELD INITIALIZED.</p>
+        <p>[STATUS] SCANNING AWARENESS MODULES.</p>
+        <p>[SECURITY] IDENTITY PROTECTION PROTOCOLS ACTIVE.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-black/40 p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 blur-[50px]"></div>
+            <h3 class="text-blue-400 font-bold mb-4 font-mono text-lg flex items-center gap-2">
+                <span class="text-gray-600">>></span> IDENTIDAD DIGITAL
+            </h3>
+            <ul class="text-sm text-gray-400 space-y-3 font-mono">
+                <li><strong class="text-white">Datos Personales:</strong> Nombre, edad, fotos, ubicación.</li>
+                <li><strong class="text-white">Importancia:</strong> Prevención de engaños y robo de identidad (fraud).</li>
+                <li><strong class="text-white">Privacidad:</strong> Tú decides quién puede ver tus cosas. Control total.</li>
+            </ul>
+        </div>
+        <div class="bg-black/40 p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden flex flex-col justify-center items-center text-center">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-600 to-green-400"></div>
+            <div class="text-5xl font-black text-green-500 mb-2 drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]"><i class="fas fa-shield-alt"></i></div>
+            <h3 class="text-xl font-bold text-gray-200 uppercase tracking-widest">ESCUDO DE SEGURIDAD</h3>
+            <p class="text-gray-500 text-sm mt-3">Protección integral basada en concientización proactiva.</p>
+        </div>
+      </div>
+
+      <h2 class="text-blue-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">01_</span> VECTORES DE RIESGO COMUNES
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+        <div class="bg-[#030712] border-t-2 border-red-500 p-4 rounded shadow">
+            <h4 class="text-red-500 font-bold font-mono mb-1">Phishing</h4>
+            <p class="text-gray-400 text-xs">Correos mentirosos diseñados para engañar y robar credenciales. Ingeniería social.</p>
+        </div>
+        <div class="bg-[#030712] border-t-2 border-orange-500 p-4 rounded shadow">
+            <h4 class="text-orange-500 font-bold font-mono mb-1">Oversharing</h4>
+            <p class="text-gray-400 text-xs">Compartir de más en redes sociales, facilitando perfilado por atacantes.</p>
+        </div>
+        <div class="bg-[#030712] border-t-2 border-yellow-500 p-4 rounded shadow">
+            <h4 class="text-yellow-500 font-bold font-mono mb-1">Claves Débiles</h4>
+            <p class="text-gray-400 text-xs">Uso de passwords predecibles como '1234' o el nombre de una mascota.</p>
+        </div>
+      </div>
+
+      <h2 class="text-blue-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">02_</span> CONTRAMEDIDAS: CÓMO PROTEGERLOS
+      </h2>
+      <div class="bg-black/40 p-6 md:p-8 rounded-xl border border-gray-800 shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <ul class="space-y-4">
+                    <li class="flex gap-3">
+                        <span class="text-green-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Claves Fuertes</strong>
+                            <span class="text-gray-400 text-xs">Claves difíciles: usar letras (mayúsculas y minúsculas), números y símbolos.</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-green-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Autenticación Multifactor (MFA)</strong>
+                            <span class="text-gray-400 text-xs">Doble factor para añadir una capa adicional de seguridad intransferible.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="space-y-4">
+                    <li class="flex gap-3">
+                        <span class="text-green-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Piensa Antes de Publicar</strong>
+                            <span class="text-gray-400 text-xs">Control de exposición de datos. Detente y evalúa antes de hacer clic en 'Compartir'.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    `
+  },
+  {
     id: 16,
     title: "ACTIVIDAD 16 - Dilemas Éticos en Ciberseguridad",
     description: "Análisis y resolución de dilemas éticos en ciberseguridad (Acceso no autorizado, vulnerabilidades críticas y OSINT) evaluados bajo marcos utilitaristas, de derechos, bien común e implicaciones legales.",
