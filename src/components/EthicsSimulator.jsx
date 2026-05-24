@@ -594,6 +594,7 @@ const EthicsSimulator = () => {
                                 />
                             </div>
                         </div>
+                    </div>
 
                         {/* 2. Interactive Toggles (Decisor Posture) & CIA Triad Risk Meters */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

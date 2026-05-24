@@ -1895,162 +1895,296 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     date: "2026-04-15",
     tags: ["Actividad Práctica", "Reporte", "Segundo Parcial"],
     content: `
+      <!-- Cover Banner -->
+      <div class="relative w-full rounded-2xl overflow-hidden border border-violet-500/30 mb-8 bg-black/40 shadow-xl">
+        <img src="/parcial2/act09_images/page_15_img_1.jpeg" alt="Portada de Informe Ciberresiliencia" class="w-full h-auto object-cover opacity-80" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
+          <span class="text-xs font-mono text-violet-400 uppercase tracking-widest bg-violet-900/40 border border-violet-500/30 px-3 py-1 rounded w-fit mb-3">Red Team Cybersecurity Group</span>
+          <h2 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter mb-2">Informe de Prueba de Penetración: My File Server 1</h2>
+          <p class="text-xs text-gray-300 font-mono">Presentado por: Juan Diego Aguilar, Pedro Damián Jasso (AKKU), Gisela Geraldine Moreno, José Armando Palomo, David Zarate, Eduardo Zorrilla</p>
+        </div>
+      </div>
+
+      <!-- System Notification -->
       <div class="border border-green-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-green-400/80 mb-6 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
         <p class="animate-pulse">[SYSTEM] AUDIT MATRIX CONSOLE INITIALIZED SUCCESSFULLY.</p>
         <p>[STATUS] ACTIVE PENTEST REPORT - MY FILE SERVER 1.</p>
         <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-        <div class="bg-black/40 p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-violet-500/10 blur-[50px]"></div>
+      <!-- Executive Summary & Scope -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="md:col-span-2 bg-[#0a0f1a] p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden flex flex-col justify-between">
+          <div>
             <h3 class="text-violet-400 font-bold mb-4 font-mono text-lg flex items-center gap-2">
-                <span class="text-gray-600">>></span> ALCANCE DEL ENGAGEMENT
+              <span class="text-gray-600">>></span> RESUMEN EJECUTIVO
             </h3>
-            <ul class="text-sm text-gray-400 space-y-3 font-mono">
-                <li><strong class="text-white">Objetivo:</strong> My File Server 1</li>
-                <li><strong class="text-white">Tipo de Prueba:</strong> Caja Blanca / Gris (Simulación de atacante interno).</li>
-                <li><strong class="text-white">Metodología:</strong> PTES + Controles OWASP.</li>
-                <li><strong class="text-white">Exclusiones:</strong> Ataques de denegación de servicio (DoS) e ingeniería social.</li>
-            </ul>
+            <p class="text-sm text-gray-300 leading-relaxed mb-4">
+              Este documento detalla los resultados de la evaluación de seguridad (Pentesting) realizada al servidor <strong>"My File Server 1"</strong>, el cual simula un entorno corporativo de almacenamiento de archivos. Durante el ejercicio, el equipo Red Team logró comprometer totalmente el servidor, obteniendo acceso con privilegios de administrador (<strong>root</strong>).
+            </p>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              El compromiso inicial se originó debido a una <strong>mala configuración en los servicios de transferencia de archivos y directorios compartidos</strong>, lo que permitió extraer credenciales de acceso. Posteriormente, se aprovechó una vulnerabilidad crítica de desactualización en el núcleo del sistema operativo (<strong>CVE-2016-5195 / Dirty COW</strong>) para escalar privilegios.
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-gray-800/50 flex flex-wrap gap-2 text-xs font-mono text-gray-500">
+            <span>Objetivo: My File Server: 1</span>
+            <span>|</span>
+            <span>Tipo: Caja Blanca/Gris</span>
+          </div>
         </div>
         <div class="bg-black/40 p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden flex flex-col justify-center items-center text-center">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-400"></div>
-            <div class="text-5xl font-black text-red-500 mb-2 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">100%</div>
-            <h3 class="text-xl font-bold text-gray-200 uppercase tracking-widest">Riesgo General: CRÍTICO</h3>
-            <p class="text-gray-500 text-sm mt-3">Postura de seguridad reactiva con puertas abiertas hacia el secuestro total del servidor.</p>
+          <img src="/parcial2/act09_images/page_16_img_1.jpeg" alt="Contexto de Seguridad" class="w-full h-32 object-cover rounded mb-4 border border-gray-800" />
+          <div class="text-5xl font-black text-red-500 mb-2 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">CRÍTICO</div>
+          <h3 class="text-sm font-bold text-gray-200 uppercase tracking-widest">Nivel de Riesgo General</h3>
+          <p class="text-gray-500 text-xs mt-2">La infraestructura actual presenta "puertas abiertas" que permitirían a un atacante tomar control total.</p>
         </div>
       </div>
 
-      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">01_</span> CADENA DE EXPLOTACIÓN (KILL CHAIN)
-      </h2>
-      <div class="space-y-6 mb-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-700 before:to-transparent">
-        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-          <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#030712] bg-violet-900 text-violet-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">1</div>
-          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#0a0f1a] p-5 rounded-xl border border-violet-500/20 shadow-lg hover:border-violet-500/50 transition-colors">
-            <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-violet-400 text-lg">Reconocimiento y Enumeración</h4>
-            </div>
-            <p class="text-gray-400 text-sm leading-relaxed">Escaneo de red local identificando tráfico broadcast. Uso de <code class="text-pink-400 bg-pink-500/10 px-1 rounded">nmap</code> reveló puertos FTP (21), SSH (22), HTTP (80) y SMB (139/445). Se destacó la presencia de servicios de transferencia de archivos inseguros.</p>
-          </div>
+      <!-- Applied Methodology -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">METODOLOGÍA APLICADA (PTES)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 items-center">
+        <div>
+          <p class="text-sm text-gray-300 leading-relaxed mb-4">
+            Para garantizar la calidad y reproducibilidad de la auditoría, el análisis adoptó el estándar <strong>PTES (Penetration Testing Execution Standard)</strong> en combinación con directrices del marco OWASP. Las fases ejecutadas fueron:
+          </p>
+          <ul class="list-decimal pl-6 space-y-2 text-sm text-gray-300">
+            <li><strong>Reconocimiento (Intelligence Gathering):</strong> Identificación de hosts activos y topología física/lógica.</li>
+            <li><strong>Enumeración Técnica:</strong> Escaneo profundo de puertos, detección de banners y versiones de servicios.</li>
+            <li><strong>Análisis y Explotación:</strong> Identificación de debilidades de autenticación y obtención de acceso inicial.</li>
+            <li><strong>Post-Explotación:</strong> Escalada de privilegios a nivel Root y análisis del impacto empresarial (CIA).</li>
+          </ul>
         </div>
-        
-        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-          <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#030712] bg-blue-900 text-blue-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">2</div>
-          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#0a0f1a] p-5 rounded-xl border border-blue-500/20 shadow-lg hover:border-blue-500/50 transition-colors">
-            <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-blue-400 text-lg">Explotación Inicial (VULN-01)</h4>
-            </div>
-            <p class="text-gray-400 text-sm leading-relaxed">Escaneos automáticos con <code class="text-pink-400 bg-pink-500/10 px-1 rounded">nikto</code> y enumeración SMB con <code class="text-pink-400 bg-pink-500/10 px-1 rounded">smbmap</code> expusieron el archivo <code class="text-pink-400 bg-pink-500/10 px-1 rounded">readme.txt</code> público con credenciales de acceso válidas. Se logró acceso SSH inicial (foothold).</p>
-          </div>
-        </div>
-
-        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-          <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#030712] bg-red-900 text-red-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">3</div>
-          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#0a0f1a] p-5 rounded-xl border border-red-500/20 shadow-lg hover:border-red-500/50 transition-colors">
-            <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-red-400 text-lg">Post-Explotación (VULN-02)</h4>
-            </div>
-            <p class="text-gray-400 text-sm leading-relaxed">Al verificar la arquitectura del sistema, se identificó un kernel desactualizado vulnerable a <strong>CVE-2016-5195 (Dirty COW)</strong>. Al compilar y ejecutar el exploit, se obtuvo acceso total con privilegios Root.</p>
-          </div>
+        <div class="border border-violet-500/20 rounded-xl overflow-hidden shadow-lg">
+          <img src="/parcial2/act09_images/page_17_img_1.jpeg" alt="Gráfico de Metodología de Pentesting" class="w-full h-auto" />
         </div>
       </div>
 
-      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">02_</span> MATRIZ DE RIESGOS E IMPACTO (CIA)
-      </h2>
-      <div class="overflow-x-auto mb-10 border border-gray-800 rounded-xl shadow-2xl">
+      <!-- Phase 1: Reconocimiento -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">FASE 1: RECONOCIMIENTO Y DESCUBRIMIENTO</h2>
+      <p class="text-sm text-gray-300 mb-6">
+        Se inició la auditoría mediante la identificación del objetivo dentro del segmento de red local. Simulando un escenario de atacante interno, se utilizó la herramienta <code>netdiscover</code> para interceptar peticiones ARP y descubrir el host activo <code>192.168.56.104</code> en el rango correspondiente.
+      </p>
+      <div class="w-full bg-[#070b14] border border-gray-800 rounded-xl p-4 mb-10 shadow-lg">
+        <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Captura de netdiscover en consola de Kali Linux</h4>
+        <img src="/parcial2/act09_images/page_4_img_7.png" alt="Captura netdiscover" class="w-full rounded border border-gray-800" />
+      </div>
+
+      <!-- Phase 2: Enumeración -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">FASE 2: ENUMERACIÓN TÉCNICA DE SERVICIOS</h2>
+      <p class="text-sm text-gray-300 mb-6">
+        Una vez identificada la IP objetivo, se ejecutó un escaneo exhaustivo de puertos y servicios con <code>nmap -p- -sV</code>. Esto permitió mapear la superficie de ataque expuesta por el servidor corporativo, detectando múltiples servicios vulnerables activos, incluidos FTP, SSH, Apache Web Server y recursos compartidos de Samba (SMB).
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4">
+          <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Escaneo de Puertos Nmap</h4>
+          <img src="/parcial2/act09_images/page_5_img_7.png" alt="Escaneo Nmap 1" class="w-full rounded border border-gray-800" />
+        </div>
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4">
+          <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Escaneo de Versiones y Scripts de Nmap</h4>
+          <img src="/parcial2/act09_images/page_5_img_8.png" alt="Escaneo Nmap 2" class="w-full rounded border border-gray-800" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4">
+          <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Detalle de Servicios RPC y NFS</h4>
+          <img src="/parcial2/act09_images/page_6_img_8.png" alt="RPC & NFS Info" class="w-full rounded border border-gray-800" />
+        </div>
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4">
+          <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Detección de Sistema Operativo y Host scripts</h4>
+          <img src="/parcial2/act09_images/page_6_img_7.png" alt="OS Detection" class="w-full rounded border border-gray-800" />
+        </div>
+      </div>
+
+      <!-- Phase 3: Explotación -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">FASE 3: ANÁLISIS Y EXPLOTACIÓN INICIAL (ACCESO PERIMETRAL)</h2>
+      <p class="text-sm text-gray-300 mb-6">
+        El análisis crítico reveló que la presencia de servicios SMB (Puertos 139/445) y FTP (Puertos 21/2121) expuestos constituía un riesgo severo. Se usó <code>smbmap</code> para auditar permisos sobre recursos compartidos y <code>nikto</code> para auditar la aplicación web en el puerto 80.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Auditoría SMBMap y FTP anónimo</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              <code>smbmap</code> confirmó acceso de lectura y escritura en el recurso <code>smbdata</code> sin autenticar. Al mismo tiempo, el escaneo de <code>nikto</code> arrojó la presencia de un archivo potencialmente interesante no restringido: <code>/readme.txt</code>.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_7_img_8.png" alt="Auditoría SMBMap" class="w-full rounded border border-gray-800" />
+        </div>
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Exposición de Credenciales en texto plano</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              Al navegar directamente a <code>http://192.168.56.104/readme.txt</code> se descubrió una negligencia de seguridad crítica: el archivo almacenaba credenciales de acceso de forma legible ("My Password is rootroot1").
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_8_img_7.png" alt="Credenciales readme.txt" class="w-full rounded border border-gray-800" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Generación de llaves SSH en máquina atacante</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              Se generó un par de llaves criptográficas <code>ed25519</code> para establecer un acceso persistente sin necesidad de ingresar contraseñas de forma manual en futuros accesos.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_9_img_8.png" alt="SSH Keygen" class="w-full rounded border border-gray-800" />
+        </div>
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Subida de Llave y Foothold</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              Usando las credenciales encontradas (<code>smbuser / rootroot1</code>), se accedió vía FTP al directorio personal, se creó el folder <code>.ssh</code> y se subió la llave pública a <code>authorized_keys</code>, obteniendo foothold estable vía SSH.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_9_img_7.png" alt="FTP SSH Key Upload" class="w-full rounded border border-gray-800" />
+        </div>
+      </div>
+
+      <!-- Phase 4: Escalada -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">FASE 4: POST-EXPLOTACIÓN Y ESCALADA DE PRIVILEGIOS</h2>
+      <p class="text-sm text-gray-300 mb-6">
+        Con una consola interactiva de privilegios estándar (<code>smbuser</code>), se realizó un análisis de enumeración interna. Al ejecutar <code>uname -a</code>, se detectó que el servidor ejecutaba una versión vulnerable de Kernel de Linux (3.10.0-229).
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Detección de Kernel Desactualizado (Dirty COW)</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              La salida del comando <code>uname -a</code> confirmó que el sistema operativo CentOS no poseía parches para la vulnerabilidad <strong>CVE-2016-5195 (Dirty COW)</strong>.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_10_img_7.png" alt="Detección de Kernel" class="w-full rounded border border-gray-800" />
+        </div>
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Transferencia del exploit 40616.c</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              Se levantó un servidor web temporal en Python en la máquina atacante y se transfirió el código del exploit hacia el servidor objetivo utilizando <code>wget</code> en el directorio temporal `/tmp`.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_11_img_7.png" alt="Transferencia de Exploit" class="w-full rounded border border-gray-800" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Compilación del Exploit y Ejecución</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              El exploit fue compilado con <code>gcc 40616.c -o equipo1 -pthread</code>. Al ejecutarlo, se explotó la condición de carrera en memoria para modificar binarios de contraseñas y tomar acceso administrador.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_12_img_7.png" alt="Compilación Exploit" class="w-full rounded border border-gray-800" />
+        </div>
+        <div class="bg-[#070b14] border border-gray-800 rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Confirmación de Root Shell</h4>
+            <p class="text-xs text-gray-400 mb-4 leading-relaxed">
+              Al ejecutar <code>whoami</code> en la terminal, la salida arrojó <code>root</code>, confirmando el compromiso total e irreversible de la máquina.
+            </p>
+          </div>
+          <img src="/parcial2/act09_images/page_26_img_1.png" alt="Acceso Root" class="w-full rounded border border-gray-800" />
+        </div>
+      </div>
+
+      <!-- Matrix of Vulnerabilities -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">TABLA DE HALLAZGOS Y VULNERABILIDADES</h2>
+      <div class="overflow-x-auto mb-10 border border-gray-800 rounded-xl shadow-lg">
         <table class="w-full text-left font-mono">
-            <thead class="bg-gray-900/50 border-b border-gray-800">
-                <tr>
-                    <th class="p-4 text-gray-300 font-bold">Amenaza</th>
-                    <th class="p-4 text-gray-300 font-bold">Probabilidad</th>
-                    <th class="p-4 text-gray-300 font-bold">Impacto</th>
-                    <th class="p-4 text-gray-300 font-bold">Nivel de Riesgo</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-800/50">
-                <tr class="bg-red-900/10 hover:bg-red-900/20 transition-colors">
-                    <td class="p-4 text-gray-400">Escalada a Administrador</td>
-                    <td class="p-4 text-orange-400">Alta</td>
-                    <td class="p-4 text-red-400">Catastrófico</td>
-                    <td class="p-4"><span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold border border-red-500/30">CRÍTICO</span></td>
-                </tr>
-                <tr class="bg-red-900/10 hover:bg-red-900/20 transition-colors">
-                    <td class="p-4 text-gray-400">Robo de Información</td>
-                    <td class="p-4 text-orange-400">Alta</td>
-                    <td class="p-4 text-red-400">Catastrófico</td>
-                    <td class="p-4"><span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold border border-red-500/30">CRÍTICO</span></td>
-                </tr>
-                <tr class="bg-orange-900/10 hover:bg-orange-900/20 transition-colors">
-                    <td class="p-4 text-gray-400">Interrupción de Servicios</td>
-                    <td class="p-4 text-yellow-400">Media</td>
-                    <td class="p-4 text-orange-400">Alto</td>
-                    <td class="p-4"><span class="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs font-bold border border-orange-500/30">ALTO</span></td>
-                </tr>
-            </tbody>
+          <thead class="bg-violet-900/20 border-b border-violet-500/20">
+            <tr>
+              <th class="p-4 text-violet-300 font-bold text-xs uppercase tracking-wider">ID</th>
+              <th class="p-4 text-violet-300 font-bold text-xs uppercase tracking-wider">Vulnerabilidad</th>
+              <th class="p-4 text-violet-300 font-bold text-xs uppercase tracking-wider">Severidad</th>
+              <th class="p-4 text-violet-300 font-bold text-xs uppercase tracking-wider">Impacto</th>
+              <th class="p-4 text-violet-300 font-bold text-xs uppercase tracking-wider">Recomendación</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800 text-sm text-gray-300">
+            <tr>
+              <td class="p-4 font-bold text-orange-400">VULN-01</td>
+              <td class="p-4">Exposición de credenciales en texto plano en servidor web.</td>
+              <td class="p-4"><span class="px-2 py-0.5 bg-orange-500/10 text-orange-400 rounded text-xs border border-orange-500/20">ALTA</span></td>
+              <td class="p-4">Permite la intrusión inicial o Foothold eludiendo cualquier control de seguridad perimetral.</td>
+              <td class="p-4">Eliminar credenciales legibles de la raíz web e implementar bóvedas de secretos (PAM).</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-red-500">VULN-02</td>
+              <td class="p-4">Kernel vulnerable a Privilege Escalation (Dirty COW - CVE-2016-5195).</td>
+              <td class="p-4"><span class="px-2 py-0.5 bg-red-500/10 text-red-400 rounded text-xs border border-red-500/20">CRÍTICA</span></td>
+              <td class="p-4">Pérdida de la integridad, confidencialidad y disponibilidad a nivel del sistema operativo.</td>
+              <td class="p-4">Actualizar el núcleo de Linux a versiones estables y aplicar políticas de parcheo continuo.</td>
+            </tr>
+          </tbody>
         </table>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
-        <div class="bg-[#030712] border-t-2 border-red-500 p-4 rounded shadow">
-            <h4 class="text-red-500 font-bold font-mono mb-1">Confidencialidad</h4>
-            <p class="text-gray-400 text-xs">Afectación total. Un atacante puede extraer y exponer públicamente todos los archivos alojados.</p>
+      <!-- Strategic Recommendations & Road Map -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">RECOMENDACIONES ESTRATÉGICAS DE CIBERRESILIENCIA</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 items-center">
+        <div class="border border-violet-500/20 rounded-xl overflow-hidden shadow-lg">
+          <img src="/parcial2/act09_images/page_21_img_1.jpeg" alt="Impacto Corporativo" class="w-full h-auto" />
         </div>
-        <div class="bg-[#030712] border-t-2 border-red-500 p-4 rounded shadow">
-            <h4 class="text-red-500 font-bold font-mono mb-1">Integridad</h4>
-            <p class="text-gray-400 text-xs">Compromiso severo. Posibilidad de corromper logs, bases de datos o instalar backdoors persistentes.</p>
-        </div>
-        <div class="bg-[#030712] border-t-2 border-orange-500 p-4 rounded shadow">
-            <h4 class="text-orange-500 font-bold font-mono mb-1">Disponibilidad</h4>
-            <p class="text-gray-400 text-xs">Capacidad de ejecutar ransomware, cifrar los datos o interrumpir el servidor por completo.</p>
+        <div class="space-y-4">
+          <div class="bg-[#0a0f1a] p-4 rounded-xl border border-gray-800">
+            <h4 class="text-sm font-bold text-white mb-2 uppercase">1. Gestión de Parches de Kernel</h4>
+            <p class="text-xs text-gray-400">Actualización del sistema operativo de inmediato (Kernel > 3.9) para erradicar por completo Dirty COW.</p>
+          </div>
+          <div class="bg-[#0a0f1a] p-4 rounded-xl border border-gray-800">
+            <h4 class="text-sm font-bold text-white mb-2 uppercase">2. Hardening de Servicios de Archivos</h4>
+            <p class="text-xs text-gray-400">Deshabilitar logins anónimos en FTP, denegar por defecto en Samba e implementar Listas de Control de Acceso (ACLs) granulares.</p>
+          </div>
+          <div class="bg-[#0a0f1a] p-4 rounded-xl border border-gray-800">
+            <h4 class="text-sm font-bold text-white mb-2 uppercase">3. Restricción de SSH por Llaves</h4>
+            <p class="text-xs text-gray-400">Deshabilitar autenticación por password en SSH e implementar uso forzoso de llaves robustas (RSA 4096 / Ed25519).</p>
+          </div>
         </div>
       </div>
 
-      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">03_</span> ROADMAP DE REMEDIACIÓN
-      </h2>
-      <div class="bg-black/40 p-6 md:p-8 rounded-xl border border-gray-800 shadow-lg">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <h4 class="text-violet-400 font-bold uppercase tracking-wider mb-4 border-b border-violet-500/20 pb-2">FASE 1: CONTENCIÓN (Días 1-15)</h4>
-                <ul class="space-y-4">
-                    <li class="flex gap-3">
-                        <span class="text-violet-500 shrink-0">></span>
-                        <div>
-                            <strong class="text-gray-200 block text-sm">Parcheo de Kernel</strong>
-                            <span class="text-gray-400 text-xs">Actualización urgente del núcleo de Linux para neutralizar CVE-2016-5195.</span>
-                        </div>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="text-violet-500 shrink-0">></span>
-                        <div>
-                            <strong class="text-gray-200 block text-sm">Saneamiento de Directorios</strong>
-                            <span class="text-gray-400 text-xs">Eliminación de archivos con credenciales en texto plano.</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-blue-400 font-bold uppercase tracking-wider mb-4 border-b border-blue-500/20 pb-2">FASE 2: ENDURECIMIENTO (Días 16-45)</h4>
-                <ul class="space-y-4">
-                    <li class="flex gap-3">
-                        <span class="text-blue-500 shrink-0">></span>
-                        <div>
-                            <strong class="text-gray-200 block text-sm">Hardening FTP/SMB</strong>
-                            <span class="text-gray-400 text-xs">Deshabilitar accesos anónimos e implementar Listas de Control de Acceso (ACLs).</span>
-                        </div>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="text-blue-500 shrink-0">></span>
-                        <div>
-                            <strong class="text-gray-200 block text-sm">Despliegue de SSH Robusto</strong>
-                            <span class="text-gray-400 text-xs">Reemplazar passwords por llaves criptográficas (RSA 4096 / Ed25519).</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+      <!-- Remediation Road Map -->
+      <h2 class="text-violet-400 font-mono text-xl mb-4">ROADMAP DE REMEDIACIÓN PROPUESTO</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+        <div class="bg-red-950/20 border border-red-500/30 p-5 rounded-xl flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-red-400 uppercase tracking-widest block mb-2">Fase 1 (Días 1-15)</span>
+            <h4 class="font-bold text-white text-sm mb-2">Contención Inmediata</h4>
+            <p class="text-xs text-gray-400 italic">Saneamiento de credenciales expuestas en la raíz del servidor web y parcheo del Kernel.</p>
+          </div>
+        </div>
+        <div class="bg-orange-950/20 border border-orange-500/30 p-5 rounded-xl flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-orange-400 uppercase tracking-widest block mb-2">Fase 2 (Días 16-45)</span>
+            <h4 class="font-bold text-white text-sm mb-2">Robustecimiento Táctico</h4>
+            <p class="text-xs text-gray-400 italic">Hardening de servicios FTP y SMB. Migración de SSH tradicional a un esquema exclusivo de par de llaves.</p>
+          </div>
+        </div>
+        <div class="bg-violet-950/20 border border-violet-500/30 p-5 rounded-xl flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-violet-400 uppercase tracking-widest block mb-2">Fase 3 (Días 46-90)</span>
+            <h4 class="font-bold text-white text-sm mb-2">Gobernanza y Resiliencia</h4>
+            <p class="text-xs text-gray-400 italic">Segmentación de redes críticas (VLANs), implementación de soluciones EDR / SIEM y escaneo de vulnerabilidades mensual.</p>
+          </div>
+        </div>
+        <div class="bg-blue-950/20 border border-blue-500/30 p-5 rounded-xl flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-2">Fase 4 (Post 90 Días)</span>
+            <h4 class="font-bold text-white text-sm mb-2">Madurez Operativa</h4>
+            <p class="text-xs text-gray-400 italic">Evolución hacia arquitectura Zero Trust y planeación de simulacros de incidentes (IRP/Ransomware).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conclusion & Footer image -->
+      <div class="relative w-full rounded-2xl overflow-hidden border border-gray-800 bg-black/60 shadow-xl mb-6">
+        <img src="/parcial2/act09_images/page_27_img_1.jpeg" alt="Cierre del reporte" class="w-full h-48 object-cover opacity-30" />
+        <div class="absolute inset-0 flex flex-col justify-center items-center p-6 text-center">
+          <p class="text-md font-mono text-violet-400 mb-2">"LA CIBERSEGURIDAD NO ES UN GASTO, ES EL SEGURO DE VIDA DE NUESTRA CONTINUIDAD OPERATIVA."</p>
+          <span class="text-xs font-mono text-gray-500">Red Team Cybersecurity Group &copy; 2026</span>
         </div>
       </div>
     `

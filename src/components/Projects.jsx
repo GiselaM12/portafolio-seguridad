@@ -24,6 +24,7 @@ const Projects = () => {
             case "5": return <FaUserSecret />; // Pentesting
             case "6": return <FaNetworkWired />; // VPN
             case "8": return <FaDatabase />; // SQL Injection
+            case "10": return <FaShieldAlt />; // Datos y Privacidad
             case "16": return <FaBalanceScale />; // Dilemas Éticos
             case "17": return <FaShieldAlt />; // CVSS v3.1
             case "18": return <FaProjectDiagram />; // Modelo Diamante
@@ -44,7 +45,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: true
         })),
-        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9").map(act => ({
+        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10").map(act => ({
             id: act.id,
             icon: getIconForActivity(act.id),
             title: act.title,
