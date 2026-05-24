@@ -6,7 +6,7 @@ const Act09Simulator = () => {
     const [terminalInput, setTerminalInput] = useState('');
     const [shellUser, setShellUser] = useState('kali@kali');
     const [shellPath, setShellPath] = useState('~');
-    const terminalEndRef = useRef(null);
+    const terminalContainerRef = useRef(null);
 
     const promptStr = `${shellUser}:~${shellPath === '~' ? '' : shellPath}$ `;
 
@@ -29,7 +29,9 @@ const Act09Simulator = () => {
     }, []);
 
     useEffect(() => {
-        terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (terminalContainerRef.current) {
+            terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
+        }
     }, [terminalHistory]);
 
     const executeCommand = (cmdToExecute) => {
@@ -247,7 +249,7 @@ const Act09Simulator = () => {
 
             {/* Terminal Body */}
             <div className="p-6 bg-[#03060c] h-[450px] flex flex-col font-mono text-xs sm:text-sm shadow-inner relative">
-                <div className="flex-grow overflow-y-auto space-y-1.5 scrollbar-thin scrollbar-thumb-violet-900 pr-2">
+                <div ref={terminalContainerRef} className="flex-grow overflow-y-auto space-y-1.5 scrollbar-thin scrollbar-thumb-violet-900 pr-2">
                     {terminalHistory.map((line, idx) => {
                         let color = "text-gray-300";
                         if (line.includes('┌──') || line.includes('└─$')) color = shellUser.includes('root') ? "text-red-500 font-bold" : "text-violet-400 font-bold";
@@ -263,7 +265,6 @@ const Act09Simulator = () => {
                             </div>
                         );
                     })}
-                    <div ref={terminalEndRef} />
                 </div>
 
                 <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-900">
