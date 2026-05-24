@@ -37,7 +37,7 @@ const Act09Simulator = () => {
 
     useEffect(() => {
         // Focus input on mount instead of using autoFocus prop which can cause scroll jumps
-        inputRef.current?.focus();
+        inputRef.current?.focus({ preventScroll: true });
     }, []);
 
     const executeCommand = (cmdToExecute) => {
@@ -181,17 +181,17 @@ const Act09Simulator = () => {
         setTerminalHistory(prev => [...prev, ...response]);
     };
 
-    const handleCommand = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault(); // Prevents default form submission or scrolling behavior
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Strongly prevent any native browser behavior
+        if (terminalInput) {
             executeCommand(terminalInput);
-            setTerminalInput('');
-            
-            // Re-focus input immediately after command execution
-            setTimeout(() => {
-                inputRef.current?.focus();
-            }, 0);
         }
+        setTerminalInput('');
+        
+        // Re-focus input immediately after command execution
+        setTimeout(() => {
+            inputRef.current?.focus({ preventScroll: true });
+        }, 0);
     };
 
     return (
@@ -216,7 +216,7 @@ const Act09Simulator = () => {
 
             {/* Quick Actions / Helpers */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-violet-500/20">
-                <button onClick={() => { 
+                <button type="button" onClick={() => { 
                     setTerminalInput('netdiscover -r 172.16.0.0/16'); 
                     setTimeout(() => {
                         const fakeEvent = { key: 'Enter' };
@@ -230,7 +230,7 @@ const Act09Simulator = () => {
                 }} className="bg-[#050913] hover:bg-violet-900/20 text-xs font-mono text-gray-400 py-3 flex items-center justify-center gap-2 transition-colors">
                     <FaNetworkWired className="text-violet-500" /> 1. Recon
                 </button>
-                <button onClick={() => { 
+                <button type="button" onClick={() => { 
                     setTerminalInput('smbmap -h 192.168.56.104'); 
                     setTimeout(() => {
                         executeCommand('smbmap -h 192.168.56.104');
@@ -239,7 +239,7 @@ const Act09Simulator = () => {
                 }} className="bg-[#050913] hover:bg-violet-900/20 text-xs font-mono text-gray-400 py-3 flex items-center justify-center gap-2 transition-colors">
                     <FaPlay className="text-blue-500" /> 2. Enum
                 </button>
-                <button onClick={() => { 
+                <button type="button" onClick={() => { 
                     setTerminalInput('ssh smbuser@192.168.56.104'); 
                     setTimeout(() => {
                         executeCommand('ssh smbuser@192.168.56.104');
@@ -248,7 +248,7 @@ const Act09Simulator = () => {
                 }} className="bg-[#050913] hover:bg-violet-900/20 text-xs font-mono text-gray-400 py-3 flex items-center justify-center gap-2 transition-colors">
                     <FaKey className="text-amber-500" /> 3. Foothold
                 </button>
-                <button onClick={() => { 
+                <button type="button" onClick={() => { 
                     setTerminalInput('./equipo1'); 
                     setTimeout(() => {
                         executeCommand('./equipo1');
@@ -279,7 +279,7 @@ const Act09Simulator = () => {
                     })}
                 </div>
 
-                <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-900">
+                <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-900 w-full">
                     <span className={shellUser.includes('root') ? "text-red-500 font-bold" : "text-violet-400 font-bold"}>
                         ┌──({shellUser})-[{shellPath}]<br/>└─$
                     </span>
@@ -288,11 +288,10 @@ const Act09Simulator = () => {
                         type="text"
                         value={terminalInput}
                         onChange={(e) => setTerminalInput(e.target.value)}
-                        onKeyDown={handleCommand}
                         spellCheck="false"
                         className="flex-grow bg-transparent text-white focus:outline-none border-none caret-violet-400 font-mono text-sm self-end pb-0.5"
                     />
-                </div>
+                </form>
             </div>
             <div className="bg-gray-900/50 p-3 text-center border-t border-violet-500/10">
                 <p className="text-[10px] text-gray-500 font-mono uppercase tracking-widest flex items-center justify-center gap-2">

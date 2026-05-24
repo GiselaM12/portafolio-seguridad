@@ -125,7 +125,8 @@ const EthicsSimulator = () => {
     // Terminal Shell State
     const [terminalHistory, setTerminalHistory] = useState([]);
     const [terminalInput, setTerminalInput] = useState('');
-    const terminalEndRef = useRef(null);
+    const terminalContainerRef = useRef(null);
+    const inputRef = useRef(null);
 
     const scenario = scenariosData.find(s => s.id === selectedScenarioId);
     const currentAction = isEthical ? scenario.ethicalAction : scenario.unethicalAction;
@@ -162,91 +163,99 @@ const EthicsSimulator = () => {
 
     // Scroll terminal to bottom
     useEffect(() => {
-        terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (terminalContainerRef.current) {
+            terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
+        }
     }, [terminalHistory]);
 
-    // Handle terminal input commands
-    const handleTerminalCommand = (e) => {
-        if (e.key === 'Enter') {
-            const rawCmd = terminalInput.trim();
-            const cmd = rawCmd.toLowerCase();
-            let response = [];
+    useEffect(() => {
+        inputRef.current?.focus({ preventScroll: true });
+    }, [selectedScenarioId]);
 
-            if (cmd) {
-                response.push(`guest@seops:~/audit$ ${rawCmd}`);
-                
-                if (cmd === 'help') {
-                    response.push(
-                        `Available commands:`,
-                        `  help                           - Show this help directory.`,
-                        `  status                         - Print current CIA metrics and ethical scores.`,
-                        `  decide [ethical | unethical]   - Toggle auditor decision posture.`,
-                        `  cat scenario.txt               - Display full context text of the scenario.`,
-                        `  export                         - Trigger PDF formal audit report download.`,
-                        `  clear                          - Clear terminal history.`,
-                        `  switch [1 | 2 | 3]             - Switch active audit scenario.`
-                    );
-                } else if (cmd === 'status') {
-                    response.push(
-                        `--- COMPLIANCE POSTURE REPORT ---`,
-                        `Target Scenario: 0${scenario.id} - ${scenario.title}`,
-                        `Current Choice:  ${isEthical ? 'ETHICAL (SAFE)' : 'UNETHICAL (VIOLATION)'}`,
-                        `CIA Triad:       C=${currentAction.cia.c}%, I=${currentAction.cia.i}%, A=${currentAction.cia.a}%`,
-                        `Ethical Scores:  Utilitarianism: ${currentAction.moralFrameworks.util}/100`,
-                        `                 Rights Focus:   ${currentAction.moralFrameworks.rights}/100`,
-                        `                 Common Good:    ${currentAction.moralFrameworks.commonGood}/100`,
-                        `Crime Class:     ${currentAction.crimeClassification}`,
-                        `Status:          ${isEthical ? 'SECURE_NOMINAL' : 'COMPROMISED_ALERT'}`
-                    );
-                } else if (cmd === 'decide ethical') {
+    // Handle terminal input commands
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const rawCmd = terminalInput.trim();
+        const cmd = rawCmd.toLowerCase();
+        let response = [];
+
+        if (cmd) {
+            response.push(`guest@seops:~/audit$ ${rawCmd}`);
+            
+            if (cmd === 'help') {
+                response.push(
+                    `Available commands:`,
+                    `  help                           - Show this help directory.`,
+                    `  status                         - Print current CIA metrics and ethical scores.`,
+                    `  decide [ethical | unethical]   - Toggle auditor decision posture.`,
+                    `  cat scenario.txt               - Display full context text of the scenario.`,
+                    `  export                         - Trigger PDF formal audit report download.`,
+                    `  clear                          - Clear terminal history.`,
+                    `  switch [1 | 2 | 3]             - Switch active audit scenario.`
+                );
+            } else if (cmd === 'status') {
+                response.push(
+                    `--- COMPLIANCE POSTURE REPORT ---`,
+                    `Target Scenario: 0${scenario.id} - ${scenario.title}`,
+                    `Current Choice:  ${isEthical ? 'ETHICAL (SAFE)' : 'UNETHICAL (VIOLATION)'}`,
+                    `CIA Triad:       C=${currentAction.cia.c}%, I=${currentAction.cia.i}%, A=${currentAction.cia.a}%`,
+                    `Ethical Scores:  Utilitarianism: ${currentAction.moralFrameworks.util}/100`,
+                    `                 Rights Focus:   ${currentAction.moralFrameworks.rights}/100`,
+                    `                 Common Good:    ${currentAction.moralFrameworks.commonGood}/100`,
+                    `Crime Class:     ${currentAction.crimeClassification}`,
+                    `Status:          ${isEthical ? 'SECURE_NOMINAL' : 'COMPROMISED_ALERT'}`
+                );
+            } else if (cmd === 'decide ethical') {
+                setIsEthical(true);
+                logPostures(true);
+                response.push(
+                    `[AUDIT] Toggling posture to ETHICAL...`,
+                    `[SYS] Re-running compliance scanner...`,
+                    `[SYS] Posture updated to: [ETHICAL_COMPLIANCE]`
+                );
+            } else if (cmd === 'decide unethical') {
+                setIsEthical(false);
+                logPostures(false);
+                response.push(
+                    `[AUDIT] Toggling posture to UNETHICAL...`,
+                    `[SYS] WARNING: Policy breach detected. Staging compliance alerts...`,
+                    `[SYS] Posture updated to: [SECURITY_VIOLATION]`
+                );
+            } else if (cmd === 'cat scenario.txt') {
+                response.push(
+                    `--- SCENARIO_0${scenario.id}_CONTEXT.txt ---`,
+                    ...scenario.description.split('. ')
+                );
+            } else if (cmd === 'clear') {
+                setTerminalHistory([`guest@seops:~/audit$ `]);
+                setTerminalInput('');
+                return;
+            } else if (cmd === 'export') {
+                response.push(`[SYS] Generating PDF report...`, `[SYS] Download initiated.`);
+                setTimeout(() => {
+                    handleExportPDF();
+                }, 500);
+            } else if (cmd.startsWith('switch ')) {
+                const arg = cmd.split(' ')[1];
+                const num = parseInt(arg);
+                if (num >= 1 && num <= 3) {
+                    setSelectedScenarioId(num);
                     setIsEthical(true);
-                    logPostures(true);
-                    response.push(
-                        `[AUDIT] Toggling posture to ETHICAL...`,
-                        `[SYS] Re-running compliance scanner...`,
-                        `[SYS] Posture updated to: [ETHICAL_COMPLIANCE]`
-                    );
-                } else if (cmd === 'decide unethical') {
-                    setIsEthical(false);
-                    logPostures(false);
-                    response.push(
-                        `[AUDIT] Toggling posture to UNETHICAL...`,
-                        `[SYS] WARNING: Policy breach detected. Staging compliance alerts...`,
-                        `[SYS] Posture updated to: [SECURITY_VIOLATION]`
-                    );
-                } else if (cmd === 'cat scenario.txt') {
-                    response.push(
-                        `--- SCENARIO_0${scenario.id}_CONTEXT.txt ---`,
-                        ...scenario.description.split('. ')
-                    );
-                } else if (cmd === 'clear') {
-                    setTerminalHistory([`guest@seops:~/audit$ `]);
-                    setTerminalInput('');
                     return;
-                } else if (cmd === 'export') {
-                    response.push(`[SYS] Generating PDF report...`, `[SYS] Download initiated.`);
-                    setTimeout(() => {
-                        handleExportPDF();
-                    }, 500);
-                } else if (cmd.startsWith('switch ')) {
-                    const arg = cmd.split(' ')[1];
-                    const num = parseInt(arg);
-                    if (num >= 1 && num <= 3) {
-                        setSelectedScenarioId(num);
-                        setIsEthical(true);
-                        return;
-                    } else {
-                        response.push(`[SYS] Invalid scenario index. Select 1, 2, or 3.`);
-                    }
                 } else {
-                    response.push(`sh: command not found: ${cmd}. Type 'help' for support.`);
+                    response.push(`[SYS] Invalid scenario index. Select 1, 2, or 3.`);
                 }
-                
-                response.push(`guest@seops:~/audit$ `);
-                setTerminalHistory(prev => [...prev.slice(0, -1), ...response]);
+            } else {
+                response.push(`sh: command not found: ${cmd}. Type 'help' for support.`);
             }
-            setTerminalInput('');
+            
+            response.push(`guest@seops:~/audit$ `);
+            setTerminalHistory(prev => [...prev.slice(0, -1), ...response]);
         }
+        setTerminalInput('');
+        setTimeout(() => {
+            inputRef.current?.focus({ preventScroll: true });
+        }, 0);
     };
 
     // PDF Report Generator (UPSLP Official format)
@@ -519,6 +528,7 @@ const EthicsSimulator = () => {
                         {scenariosData.map(s => (
                             <button
                                 key={s.id}
+                                type="button"
                                 onClick={() => {
                                     setSelectedScenarioId(s.id);
                                     setIsEthical(true);
@@ -536,6 +546,7 @@ const EthicsSimulator = () => {
                     
                     {/* Dynamic PDF Export */}
                     <button
+                        type="button"
                         onClick={handleExportPDF}
                         className="flex items-center justify-center gap-2 px-4 py-2.5 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 font-mono text-xs rounded-lg transition-all shadow-[0_0_15px_rgba(6,182,212,0.1)] active:scale-95 self-center"
                     >
@@ -552,15 +563,15 @@ const EthicsSimulator = () => {
                         
                         {/* 1. Unix Terminal Shell */}
                         <div className="bg-black/90 rounded-2xl border border-gray-900 p-5 flex flex-col justify-between h-[300px] shadow-inner font-mono text-xs">
-                            <div className="flex items-center justify-between border-b border-gray-900 pb-2 mb-3">
+                        <div className="flex items-center justify-between border-b border-gray-900 pb-2 mb-3">
                                 <span className="text-[10px] text-gray-500 tracking-wider">SHELL_INTEGRATION.log</span>
                                 <span className="flex items-center gap-1.5 text-green-400 text-[10px] font-bold">
                                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                                     ONLINE
                                 </span>
-                            </div>
-                            
-                            <div className="flex-grow overflow-y-auto space-y-1 scrollbar-thin scrollbar-thumb-gray-800 pr-2">
+                        </div>
+                        <div className="p-6 bg-[#03060c] h-[300px] flex flex-col font-mono text-xs sm:text-sm shadow-inner relative">
+                            <div ref={terminalContainerRef} className="flex-grow overflow-y-auto space-y-1.5 scrollbar-thin scrollbar-thumb-cyan-900 pr-2">
                                 {terminalHistory.map((line, idx) => {
                                     let color = "text-green-400";
                                     if (line.includes('[WARN]')) color = "text-amber-500";
@@ -575,20 +586,19 @@ const EthicsSimulator = () => {
                                         </div>
                                     );
                                 })}
-                                <div ref={terminalEndRef} />
                             </div>
 
-                            <div className="flex items-center gap-2 border-t border-gray-900 pt-3 mt-3">
-                                <span className="text-white/70">guest@seops:~/audit$</span>
+                            <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-gray-900 pt-3 mt-3 w-full">
+                                <span className="text-cyan-500/50 mr-2 shrink-0">guest@seops:~/audit$</span>
                                 <input
+                                    ref={inputRef}
                                     type="text"
                                     value={terminalInput}
                                     onChange={(e) => setTerminalInput(e.target.value)}
-                                    onKeyDown={handleTerminalCommand}
-                                    placeholder="Type 'help'..."
+                                    spellCheck="false"
                                     className="flex-grow bg-transparent text-white focus:outline-none border-none caret-cyan-400 font-mono text-xs"
                                 />
-                            </div>
+                            </form>
                         </div>
 
                         {/* 2. Interactive Toggles (Decisor Posture) & CIA Triad Risk Meters */}
@@ -599,6 +609,7 @@ const EthicsSimulator = () => {
                                 <span className="text-[10px] text-gray-500 uppercase tracking-widest block">AUDITOR_DECISION_POSTURE</span>
                                 <div className="flex flex-col gap-2.5">
                                     <button
+                                        type="button"
                                         onClick={() => {
                                             setIsEthical(true);
                                             logPostures(true);
@@ -613,6 +624,7 @@ const EthicsSimulator = () => {
                                         <span>Acción Ética</span>
                                     </button>
                                     <button
+                                        type="button"
                                         onClick={() => {
                                             setIsEthical(false);
                                             logPostures(false);
