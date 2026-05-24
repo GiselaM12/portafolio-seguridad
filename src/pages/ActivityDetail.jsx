@@ -9,6 +9,7 @@ import CvssCalculator from '../components/CvssCalculator';
 import DiamondModel from '../components/DiamondModel';
 import PR03Dashboard from '../components/PR03Dashboard';
 import Act09Simulator from '../components/Act09Simulator';
+import PrivacySecuritySimulator from '../components/PrivacySecuritySimulator';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -394,6 +395,13 @@ const ActivityDetail = () => {
                         {String(activity.id) === '9' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-violet-900/50">
                                 <Act09Simulator />
+                            </div>
+                        )}
+
+                        {/* Interactive Simulator Segment for Act 10 */}
+                        {String(activity.id) === '10' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-blue-900/50">
+                                <PrivacySecuritySimulator />
                             </div>
                         )}
 
