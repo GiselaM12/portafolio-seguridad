@@ -8,6 +8,7 @@ import EthicsSimulator from '../components/EthicsSimulator';
 import CvssCalculator from '../components/CvssCalculator';
 import DiamondModel from '../components/DiamondModel';
 import PR03Dashboard from '../components/PR03Dashboard';
+import Act09Simulator from '../components/Act09Simulator';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -385,6 +386,13 @@ const ActivityDetail = () => {
                                     <span className="relative">Iniciando Entorno de Laboratorios</span>
                                     <FaTerminal className="relative group-hover:translate-x-1 transition-transform" />
                                 </Link>
+                            </div>
+                        )}
+
+                        {/* Interactive Simulator Segment for Act 09 */}
+                        {String(activity.id) === '9' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-violet-900/50">
+                                <Act09Simulator />
                             </div>
                         )}
 
