@@ -1939,6 +1939,7 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
           <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Restricción de Accesos:</strong> Reconfigurar SSH para aceptar únicamente conexiones autenticadas mediante llaves criptográficas.</span></li>
         </ul>
       </div>
+    `
   },
   {
     id: 16,
