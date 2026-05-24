@@ -2196,8 +2196,7 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     date: "2026-05-24",
     tags: ["Concientización", "Privacidad", "Datos Personales", "Phishing"],
     content: `
-      <div class="border border-blue-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-blue-400/80 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-        <!-- Infographic Header Banner -->
+      <!-- Infographic Header Banner -->
       <div class="relative w-full rounded-2xl overflow-hidden border border-blue-500/30 mb-8 bg-[#0a0f1a] shadow-xl">
         <div class="p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-blue-950/40 via-blue-900/10 to-transparent">
           <div class="space-y-4 max-w-2xl">
@@ -2218,17 +2217,17 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
       </div>
 
       <!-- System Notification -->
-      <div class="border border-blue-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-blue-400/80 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+      <div class="border border-blue-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-blue-400/80 mb-8 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
         <p class="animate-pulse">[SYSTEM] PRIVACY SHIELD INITIALIZED AND LOCKS DIAGNOSED.</p>
         <p>[STATUS] AWARENESS INFOGRAPHIC & AUDIT COMPONENT DEPLOYED.</p>
         <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
       </div>
 
       <!-- Infographic Showcase Section -->
-      <h2 class="text-blue-400 font-mono text-xl mb-4">INFOGRAFÍA: PROTEGE TU TESORO DIGITAL</h2>
-      <div class="w-full bg-[#070b14] border border-gray-800 rounded-2xl p-6 mb-10 flex flex-col items-center justify-center shadow-lg">
-        <div class="max-w-4xl w-full border border-blue-500/10 rounded-xl overflow-hidden bg-black/40 shadow-inner p-2">
-          <img src="/parcial2/act10_infographic.png" alt="Infografía Protege tu Tesoro Digital" class="w-full h-auto rounded hover:scale-[1.01] transition-transform duration-500" />
+      <h2 class="text-blue-400 font-mono text-xl mb-4 uppercase tracking-wider">// Infografía Principal</h2>
+      <div class="w-full bg-[#070b14] border border-gray-800 rounded-3xl p-6 mb-12 flex flex-col items-center justify-center shadow-lg">
+        <div class="max-w-4xl w-full border border-blue-500/10 rounded-2xl overflow-hidden bg-black/40 shadow-inner p-2">
+          <img src="/parcial2/act10_infographic.png" alt="Infografía Protege tu Tesoro Digital" class="w-full h-auto rounded-xl hover:scale-[1.01] transition-transform duration-500" />
         </div>
         <p class="text-xs text-gray-500 mt-4 text-center italic">
           Figura 1.1: Infografía oficial diseñada bajo los lineamientos curriculares de Cisco Networking Academy.
@@ -2236,106 +2235,122 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
       </div>
 
       <!-- Core Definitions Grid -->
-      <h2 class="text-blue-400 font-mono text-xl mb-4">CONCEPTOS CLAVE DE SEGURIDAD PERSONAL</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="bg-[#0a0f1a] p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden">
+      <h2 class="text-blue-400 font-mono text-xl mb-6 uppercase tracking-wider">// Conceptos Clave de Seguridad Personal</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-slate-950/40 border border-slate-900 p-6 rounded-2xl shadow-lg relative overflow-hidden group hover:border-blue-900/50 transition-colors duration-300">
           <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-[50px]"></div>
-          <h3 class="text-blue-400 font-bold mb-3 font-mono text-sm uppercase">
+          <h3 class="text-blue-400 font-bold mb-3 font-mono text-sm uppercase tracking-wide">
             &iquest;Qu&eacute; son mis Datos?
           </h3>
-          <p class="text-xs text-gray-300 leading-relaxed font-sans mb-3">
+          <p class="text-xs text-gray-400 leading-relaxed font-sans mb-3">
             Toda aquella información que te identifica o te hace identificable. Incluye tu nombre, edad, dirección, fotos familiares, número de teléfono y contraseñas.
           </p>
           <span class="text-[9px] font-mono text-gray-600 block uppercase">Identidad digital única</span>
         </div>
         
-        <div class="bg-[#0a0f1a] p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden">
+        <div class="bg-slate-950/40 border border-slate-900 p-6 rounded-2xl shadow-lg relative overflow-hidden group hover:border-blue-900/50 transition-colors duration-300">
           <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-[50px]"></div>
-          <h3 class="text-blue-400 font-bold mb-3 font-mono text-sm uppercase">
+          <h3 class="text-blue-400 font-bold mb-3 font-mono text-sm uppercase tracking-wide">
             &iquest;Qu&eacute; es la Privacidad?
           </h3>
-          <p class="text-xs text-gray-300 leading-relaxed font-sans mb-3">
+          <p class="text-xs text-gray-400 leading-relaxed font-sans mb-3">
             El derecho y la capacidad de decidir exactamente <strong>quién, cómo y cuándo</strong> tiene acceso a tu información y a tus cosas personales en el entorno conectado.
           </p>
           <span class="text-[9px] font-mono text-gray-600 block uppercase">Control de exposición</span>
         </div>
 
-        <div class="bg-[#0a0f1a] p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden">
+        <div class="bg-slate-950/40 border border-slate-900 p-6 rounded-2xl shadow-lg relative overflow-hidden group hover:border-blue-900/50 transition-colors duration-300">
           <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-[50px]"></div>
-          <h3 class="text-blue-400 font-bold mb-3 font-mono text-sm uppercase">
+          <h3 class="text-blue-400 font-bold mb-3 font-mono text-sm uppercase tracking-wide">
             &iquest;Por qu&eacute; importan?
           </h3>
-          <p class="text-xs text-gray-300 leading-relaxed font-sans mb-3">
+          <p class="text-xs text-gray-400 leading-relaxed font-sans mb-3">
             Proteger tus datos evita que actores maliciosos los recopilen para realizar fraudes, suplantar tu identidad (Identity Theft) o engañarte mediante estafas personalizadas.
           </p>
           <span class="text-[9px] font-mono text-gray-600 block uppercase">Mitigación de riesgos</span>
         </div>
       </div>
 
-      <!-- Simple Security Shield Deep Dive -->
-      <h2 class="text-blue-400 font-mono text-xl mb-4">EL ESCUDO SIMPLE DE SEGURIDAD</h2>
-      <div class="bg-[#070b14] border border-gray-800 rounded-2xl p-6 md:p-8 mb-10 shadow-lg">
-        <p class="text-sm text-gray-300 mb-6 leading-relaxed">
-          Cisco Networking Academy propone tres defensas fundamentales que cualquier usuario puede implementar de forma inmediata para blindar sus cuentas y activos frente al compromiso externo:
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-5 rounded-xl border border-gray-900 bg-black/40">
-            <h4 class="text-sm font-bold text-white font-mono mb-2 flex items-center gap-2">
-              <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span> 1. Claves Fuertes
-            </h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              Evita passwords comunes como el nombre de tu mascota o fechas de nacimiento. Crea contraseñas de al menos 10-12 caracteres alternando mayúsculas, minúsculas, números y símbolos especiales.
+      <!-- Section 1: Digital Footprint & Mosaic Effect -->
+      <div class="bg-slate-950/40 border border-blue-900/30 p-6 md:p-8 rounded-3xl shadow-lg mb-10 relative overflow-hidden hover:border-blue-500/40 transition-colors duration-500">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4">
+            <h3 class="font-mono font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 uppercase tracking-wider border-b border-blue-950/50 pb-3 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse"></span>
+              La Huella Digital y el "Efecto Mosaico"
+            </h3>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Cada interacción en línea, desde una búsqueda web hasta una publicación en redes sociales o la aceptación de cookies, contribuye a formar tu <strong>huella digital (Digital Footprint)</strong>. Cisco NetAcad clasifica esta huella en <em>activa</em> (datos que compartes deliberadamente) y <em>pasiva</em> (rastros que dejas de forma involuntaria, como tu dirección IP o metadatos de navegación).
             </p>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Uno de los mayores peligros para la privacidad es el llamado <strong>"Efecto Mosaico"</strong>. Los ciberdelincuentes no necesitan que les entregues tus credenciales directamente; en su lugar, recopilan fragmentos aislados de información pública (tu ubicación en una foto, el nombre de tu mascota en un comentario, tu fecha de cumpleaños) y los ensamblan para crear un perfil detallado de ti.
+            </p>
+            <div class="bg-blue-950/20 border border-blue-900/50 rounded-xl p-4 font-mono text-xs text-blue-400">
+              <strong class="text-blue-300 uppercase block mb-1">Riesgo Asociado (OSINT):</strong>
+              Los atacantes usan técnicas de Inteligencia de Fuentes Abiertas (OSINT) para perfilar a sus víctimas, explotando el "oversharing" para deducir respuestas a preguntas de seguridad de cuentas críticas.
+            </div>
           </div>
-          <div class="p-5 rounded-xl border border-gray-900 bg-black/40">
-            <h4 class="text-sm font-bold text-white font-mono mb-2 flex items-center gap-2">
-              <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span> 2. Doble Factor (MFA)
-            </h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              Agrega una capa extra. Si un hacker averigua tu contraseña, no podrá acceder sin el código temporal enviado a tu celular, una llave USB física o tu huella digital.
-            </p>
-          </div>
-          <div class="p-5 rounded-xl border border-gray-900 bg-black/40">
-            <h4 class="text-sm font-bold text-white font-mono mb-2 flex items-center gap-2">
-              <span class="w-1.5 h-1.5 bg-blue-400 rounded-full"></span> 3. Pensar Antes de Actuar
-            </h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              No cedas a la urgencia de correos alarmistas. Tómate el tiempo para auditar el remitente del mensaje, examinar los hipervínculos y evitar compartir de más en tus redes sociales.
-            </p>
+          <div class="relative group overflow-hidden rounded-2xl border border-blue-900/30">
+            <img src="/parcial2/act10_images/digital_footprint.png" alt="Huella Digital e Identidad" class="w-full h-auto object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
+            <span class="absolute bottom-3 left-4 font-mono text-[10px] text-blue-400 uppercase tracking-widest">[FIG. 1.2] Representación holográfica de la huella digital</span>
           </div>
         </div>
       </div>
 
-      <!-- Risk Vectors detailed explanation -->
-      <h2 class="text-blue-400 font-mono text-xl mb-4">ANÁLISIS DE VECTORES DE RIESGOS COMUNES</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div class="bg-[#0a0f1a] border-t-2 border-red-500 p-5 rounded-xl shadow-lg flex flex-col justify-between">
-          <div>
-            <h4 class="text-red-500 font-bold font-mono text-sm mb-2">Correos Mentirosos (Phishing)</h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              Los atacantes envían correos falsos simulando ser servicios legítimos (bancos, streaming, paquetería) para robar claves de acceso y tarjetas de crédito. Se apoyan en el miedo y enlaces falsos.
-            </p>
+      <!-- Section 2: Phishing and Social Engineering -->
+      <div class="bg-slate-950/40 border border-red-950/30 p-6 md:p-8 rounded-3xl shadow-lg mb-10 relative overflow-hidden hover:border-red-500/40 transition-colors duration-500">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div class="order-2 lg:order-1 relative group overflow-hidden rounded-2xl border border-red-950/30">
+            <img src="/parcial2/act10_images/phishing_threat.png" alt="Amenaza de Phishing" class="w-full h-auto object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
+            <span class="absolute bottom-3 left-4 font-mono text-[10px] text-red-400 uppercase tracking-widest">[FIG. 1.3] Simulación de vectores de ataque por Ingeniería Social</span>
           </div>
-          <span class="text-[9px] font-mono text-red-500/60 uppercase tracking-widest mt-4">Táctica: Ingeniería Social</span>
+          <div class="order-1 lg:order-2 space-y-4">
+            <h3 class="font-mono font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-300 uppercase tracking-wider border-b border-red-950/50 pb-3 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
+              Vectores de Amenaza: El Arte de la Manipulación (Phishing)
+            </h3>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              El <strong>phishing</strong> es el vector de intrusión inicial más explotado en el mundo. Consiste en suplantar la identidad de organizaciones legítimas (bancos, plataformas de streaming, instituciones educativas) para engañar al usuario y conseguir que revele información confidencial o descargue malware.
+            </p>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Hoy en día, las campañas son sumamente sofisticadas gracias al auge del <strong>PhaaS (Phishing-as-a-Service)</strong>, donde atacantes novatos pueden rentar plantillas listas que clonan interfaces reales a la perfección. Estos correos explotan sesgos psicológicos como la urgencia (<em>"Tu cuenta será bloqueada en 2 horas"</em>), el miedo a pérdidas financieras o la simulación de autoridad.
+            </p>
+            <div class="bg-red-950/20 border border-red-900/50 rounded-xl p-4 font-mono text-xs text-red-400">
+              <strong class="text-red-300 uppercase block mb-1">Señales de Alerta Clave:</strong>
+              1. Dominios falsos o ligeramente alterados (typosquatting).<br />
+              2. Petición inusual de credenciales o datos financieros.<br />
+              3. Saludos genéricos y redacción inconsistente.
+            </div>
+          </div>
         </div>
-        <div class="bg-[#0a0f1a] border-t-2 border-orange-500 p-5 rounded-xl shadow-lg flex flex-col justify-between">
-          <div>
-            <h4 class="text-orange-500 font-bold font-mono text-sm mb-2">Compartir de Más (Oversharing)</h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              Publicar fotos de viajes en tiempo real, boarding passes, respuestas a tests virales o ubicaciones exactas le da a los ciberdelincuentes los datos necesarios para realizar perfiles de ataque y hackeo.
+      </div>
+
+      <!-- Section 3: MFA and Passwords -->
+      <div class="bg-slate-950/40 border border-cyan-900/30 p-6 md:p-8 rounded-3xl shadow-lg mb-12 relative overflow-hidden hover:border-cyan-500/40 transition-colors duration-500">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4">
+            <h3 class="font-mono font-black text-2xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-300 uppercase tracking-wider border-b border-cyan-950/50 pb-3 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-pulse"></span>
+              Mecanismos de Defensa: Autenticación de Próxima Generación
+            </h3>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Para contrarrestar estas amenazas, no basta con tener contraseñas robustas (que deben poseer alta entropía, longitud de 12+ caracteres y guardarse en gestores). Es obligatorio habilitar la <strong>Autenticación de Múltiples Factores (MFA)</strong> para añadir una segunda barrera física o criptográfica.
             </p>
-          </div>
-          <span class="text-[9px] font-mono text-orange-500/60 uppercase tracking-widest mt-4">Táctica: Recolección OSINT</span>
-        </div>
-        <div class="bg-[#0a0f1a] border-t-2 border-yellow-500 p-5 rounded-xl shadow-lg flex flex-col justify-between">
-          <div>
-            <h4 class="text-yellow-500 font-bold font-mono text-sm mb-2">Passwords Débiles</h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              El uso de palabras simples como '123456', 'contrasena' o nombres de mascotas hace que tus cuentas sean vulnerables a ataques automatizados de fuerza bruta y adivinación en cuestión de segundos.
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Sin embargo, Cisco Talos advierte que el MFA tradicional (SMS o notificaciones Push sencillas) está siendo vulnerado mediante <strong>MFA Fatigue (Prompt Bombing)</strong>, donde el atacante bombardea a la víctima con alertas hasta que aprueba una por cansancio, o mediante <strong>Ataques Adversary-in-the-Middle (AiTM)</strong>, que clonan la sesión web en tiempo real. Por ello, la recomendación actual es migrar a esquemas de <strong>MFA resistente a phishing</strong> basados en estándares <strong>FIDO2 y WebAuthn</strong> (como llaves de seguridad físicas o datos biométricos locales).
             </p>
+            <div class="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-4 font-mono text-xs text-cyan-400">
+              <strong class="text-cyan-300 uppercase block mb-1">Estrategia de Blindaje:</strong>
+              Combina el uso de gestores de contraseñas de confianza con autenticadores TOTP locales (como Google Authenticator) y llaves de paso (Passkeys) para evitar que un robo de credencial comprometa tu cuenta.
+            </div>
           </div>
-          <span class="text-[9px] font-mono text-yellow-500/60 uppercase tracking-widest mt-4">Táctica: Fuerza Bruta / Diccionario</span>
+          <div class="relative group overflow-hidden rounded-2xl border border-cyan-900/30">
+            <img src="/parcial2/act10_images/shield_mfa.png" alt="Protección MFA y Shield" class="w-full h-auto object-cover rounded-2xl transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
+            <span class="absolute bottom-3 left-4 font-mono text-[10px] text-cyan-400 uppercase tracking-widest">[FIG. 1.4] Arquitectura de un esquema defensivo multi-capa</span>
+          </div>
         </div>
       </div>
     `
