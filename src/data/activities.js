@@ -2064,7 +2064,7 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
           <div>
             <h4 class="text-xs font-mono text-gray-500 mb-2 uppercase">// Transferencia del exploit 40616.c</h4>
             <p class="text-xs text-gray-400 mb-4 leading-relaxed">
-              Se levantó un servidor web temporal en Python en la máquina atacante y se transfirió el código del exploit hacia el servidor objetivo utilizando <code>wget</code> en el directorio temporal `/tmp`.
+              Se levantó un servidor web temporal en Python en la máquina atacante y se transfirió el código del exploit hacia el servidor objetivo utilizando <code>wget</code> en el directorio temporal '/tmp'.
             </p>
           </div>
           <img src="/parcial2/act09_images/page_11_img_7.png" alt="Transferencia de Exploit" class="w-full rounded border border-gray-800" />
