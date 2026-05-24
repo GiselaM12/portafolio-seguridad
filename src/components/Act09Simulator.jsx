@@ -7,6 +7,7 @@ const Act09Simulator = () => {
     const [shellUser, setShellUser] = useState('kali@kali');
     const [shellPath, setShellPath] = useState('~');
     const terminalContainerRef = useRef(null);
+    const inputRef = useRef(null);
 
     const promptStr = `${shellUser}:~${shellPath === '~' ? '' : shellPath}$ `;
 
@@ -33,6 +34,11 @@ const Act09Simulator = () => {
             terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
         }
     }, [terminalHistory]);
+
+    useEffect(() => {
+        // Focus input on mount instead of using autoFocus prop which can cause scroll jumps
+        inputRef.current?.focus();
+    }, []);
 
     const executeCommand = (cmdToExecute) => {
         const rawCmd = cmdToExecute.trim();
@@ -177,8 +183,14 @@ const Act09Simulator = () => {
 
     const handleCommand = (e) => {
         if (e.key === 'Enter') {
+            e.preventDefault(); // Prevents default form submission or scrolling behavior
             executeCommand(terminalInput);
             setTerminalInput('');
+            
+            // Re-focus input immediately after command execution
+            setTimeout(() => {
+                inputRef.current?.focus();
+            }, 0);
         }
     };
 
@@ -272,11 +284,11 @@ const Act09Simulator = () => {
                         ┌──({shellUser})-[{shellPath}]<br/>└─$
                     </span>
                     <input
+                        ref={inputRef}
                         type="text"
                         value={terminalInput}
                         onChange={(e) => setTerminalInput(e.target.value)}
                         onKeyDown={handleCommand}
-                        autoFocus
                         spellCheck="false"
                         className="flex-grow bg-transparent text-white focus:outline-none border-none caret-violet-400 font-mono text-sm self-end pb-0.5"
                     />
