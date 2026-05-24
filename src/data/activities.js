@@ -1895,49 +1895,163 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     date: "2026-04-15",
     tags: ["Actividad Práctica", "Reporte", "Segundo Parcial"],
     content: `
-      <div class="border border-green-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-green-400/80 mb-6">
-        <p>[SYSTEM] AUDIT MATRIX CONSOLE INITIALIZED SUCCESSFULLY.</p>
-        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 2 PROJECT.</p>
+      <div class="border border-green-500/30 bg-[#02050b] p-4 rounded-lg font-mono text-xs text-green-400/80 mb-6 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+        <p class="animate-pulse">[SYSTEM] AUDIT MATRIX CONSOLE INITIALIZED SUCCESSFULLY.</p>
+        <p>[STATUS] ACTIVE PENTEST REPORT - MY FILE SERVER 1.</p>
         <p>[SECURITY] CONSOLE INTEGRITY VERIFIED (LEVEL 5 CLEARANCE).</p>
       </div>
 
-      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">01_</span> RESUMEN EJECUTIVO
-      </h2>
-      <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4 bg-black/40 p-6 rounded border border-gray-800">
-        <p>El presente documento detalla los resultados de la evaluación de seguridad (Pentesting) realizada a la máquina <strong>"My File Server: 1"</strong>, simulando un entorno corporativo de almacenamiento de archivos. Durante el ejercicio, el equipo Red Team logró comprometer totalmente el servidor, obteniendo acceso a nivel de administrador (<strong>root</strong>).</p>
-        <p>El compromiso inicial se originó debido a una mala configuración en los servicios de transferencia de archivos y directorios compartidos, lo que permitió la extracción de credenciales de acceso en texto plano. Posteriormente, se aprovechó una vulnerabilidad crítica de desactualización en el núcleo (Kernel) del sistema operativo para escalar privilegios.</p>
-      </div>
-
-      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">02_</span> FASES DEL ATAQUE
-      </h2>
-      <div class="space-y-6 mb-10">
-        <div class="bg-[#0a0f1a] p-6 rounded border border-violet-500/20 hover:border-violet-500/50 transition-colors">
-          <h3 class="text-violet-400 font-bold mb-2">1. Reconocimiento y Enumeración</h3>
-          <p class="text-gray-400 text-sm">Se utilizó <code class="text-pink-400">netdiscover</code> y <code class="text-pink-400">nmap</code> identificando múltiples puertos abiertos: 21 (FTP), 22 (SSH), 80 (HTTP), y 139/445 (SMB). Se alertó sobre la presencia de servicios SMB y FTP abiertos y expuestos.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-black/40 p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-violet-500/10 blur-[50px]"></div>
+            <h3 class="text-violet-400 font-bold mb-4 font-mono text-lg flex items-center gap-2">
+                <span class="text-gray-600">>></span> ALCANCE DEL ENGAGEMENT
+            </h3>
+            <ul class="text-sm text-gray-400 space-y-3 font-mono">
+                <li><strong class="text-white">Objetivo:</strong> My File Server 1</li>
+                <li><strong class="text-white">Tipo de Prueba:</strong> Caja Blanca / Gris (Simulación de atacante interno).</li>
+                <li><strong class="text-white">Metodología:</strong> PTES + Controles OWASP.</li>
+                <li><strong class="text-white">Exclusiones:</strong> Ataques de denegación de servicio (DoS) e ingeniería social.</li>
+            </ul>
         </div>
-        <div class="bg-[#0a0f1a] p-6 rounded border border-blue-500/20 hover:border-blue-500/50 transition-colors">
-          <h3 class="text-blue-400 font-bold mb-2">2. Explotación Inicial (VULN-01)</h3>
-          <p class="text-gray-400 text-sm">Mediante herramientas como <code class="text-pink-400">smbmap</code> y escaneos con <code class="text-pink-400">nikto</code>, se identificó un archivo público (<code class="text-pink-400">readme.txt</code>) que contenía credenciales de acceso válidas en texto plano. Se utilizaron estas credenciales para acceder por SSH y lograr el <em>foothold</em> inicial.</p>
-        </div>
-        <div class="bg-[#0a0f1a] p-6 rounded border border-red-500/20 hover:border-red-500/50 transition-colors">
-          <h3 class="text-red-400 font-bold mb-2">3. Escalada de Privilegios (VULN-02)</h3>
-          <p class="text-gray-400 text-sm">Al enumerar el sistema (<code class="text-pink-400">uname -a</code>), se descubrió que el servidor utilizaba un Kernel desactualizado vulnerable a <strong>CVE-2016-5195 ("Dirty COW")</strong>. Se compiló y ejecutó el exploit correspondiente, obteniendo una consola interactiva con privilegios absolutos (root).</p>
+        <div class="bg-black/40 p-6 rounded-xl border border-gray-800 shadow-lg relative overflow-hidden flex flex-col justify-center items-center text-center">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-400"></div>
+            <div class="text-5xl font-black text-red-500 mb-2 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">100%</div>
+            <h3 class="text-xl font-bold text-gray-200 uppercase tracking-widest">Riesgo General: CRÍTICO</h3>
+            <p class="text-gray-500 text-sm mt-3">Postura de seguridad reactiva con puertas abiertas hacia el secuestro total del servidor.</p>
         </div>
       </div>
 
       <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
-        <span class="text-gray-600">03_</span> IMPACTO Y RECOMENDACIONES
+        <span class="text-gray-600">01_</span> CADENA DE EXPLOTACIÓN (KILL CHAIN)
       </h2>
-      <div class="prose prose-invert max-w-none text-sm text-gray-400 mb-10 space-y-4 bg-black/40 p-6 rounded border border-gray-800">
-        <p>El impacto sobre el modelo CIA es <strong>CRÍTICO</strong> en confidencialidad, integridad y disponibilidad. Para remediar estas debilidades sistémicas se recomiendan los siguientes controles:</p>
-        <ul class="list-none space-y-2 mt-4">
-          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Gestión de Parches:</strong> Actualizar el Kernel de Linux a una versión superior a 3.9 para erradicar Dirty COW.</span></li>
-          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Hardening de Servicios:</strong> Deshabilitar logins <em>anonymous</em> en FTP y asegurar recursos compartidos SMB con ACLs estrictas.</span></li>
-          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Gestión Segura de Secretos:</strong> Prohibir almacenar contraseñas en archivos de texto plano (VULN-01).</span></li>
-          <li class="flex items-start gap-2"><span class="text-red-500 mt-1">></span> <span><strong>Restricción de Accesos:</strong> Reconfigurar SSH para aceptar únicamente conexiones autenticadas mediante llaves criptográficas.</span></li>
-        </ul>
+      <div class="space-y-6 mb-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-700 before:to-transparent">
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#030712] bg-violet-900 text-violet-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">1</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#0a0f1a] p-5 rounded-xl border border-violet-500/20 shadow-lg hover:border-violet-500/50 transition-colors">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-violet-400 text-lg">Reconocimiento y Enumeración</h4>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">Escaneo de red local identificando tráfico broadcast. Uso de <code class="text-pink-400 bg-pink-500/10 px-1 rounded">nmap</code> reveló puertos FTP (21), SSH (22), HTTP (80) y SMB (139/445). Se destacó la presencia de servicios de transferencia de archivos inseguros.</p>
+          </div>
+        </div>
+        
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#030712] bg-blue-900 text-blue-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">2</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#0a0f1a] p-5 rounded-xl border border-blue-500/20 shadow-lg hover:border-blue-500/50 transition-colors">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-blue-400 text-lg">Explotación Inicial (VULN-01)</h4>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">Escaneos automáticos con <code class="text-pink-400 bg-pink-500/10 px-1 rounded">nikto</code> y enumeración SMB con <code class="text-pink-400 bg-pink-500/10 px-1 rounded">smbmap</code> expusieron el archivo <code class="text-pink-400 bg-pink-500/10 px-1 rounded">readme.txt</code> público con credenciales de acceso válidas. Se logró acceso SSH inicial (foothold).</p>
+          </div>
+        </div>
+
+        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+          <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#030712] bg-red-900 text-red-300 font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">3</div>
+          <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#0a0f1a] p-5 rounded-xl border border-red-500/20 shadow-lg hover:border-red-500/50 transition-colors">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-red-400 text-lg">Post-Explotación (VULN-02)</h4>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">Al verificar la arquitectura del sistema, se identificó un kernel desactualizado vulnerable a <strong>CVE-2016-5195 (Dirty COW)</strong>. Al compilar y ejecutar el exploit, se obtuvo acceso total con privilegios Root.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">02_</span> MATRIZ DE RIESGOS E IMPACTO (CIA)
+      </h2>
+      <div class="overflow-x-auto mb-10 border border-gray-800 rounded-xl shadow-2xl">
+        <table class="w-full text-left font-mono">
+            <thead class="bg-gray-900/50 border-b border-gray-800">
+                <tr>
+                    <th class="p-4 text-gray-300 font-bold">Amenaza</th>
+                    <th class="p-4 text-gray-300 font-bold">Probabilidad</th>
+                    <th class="p-4 text-gray-300 font-bold">Impacto</th>
+                    <th class="p-4 text-gray-300 font-bold">Nivel de Riesgo</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800/50">
+                <tr class="bg-red-900/10 hover:bg-red-900/20 transition-colors">
+                    <td class="p-4 text-gray-400">Escalada a Administrador</td>
+                    <td class="p-4 text-orange-400">Alta</td>
+                    <td class="p-4 text-red-400">Catastrófico</td>
+                    <td class="p-4"><span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold border border-red-500/30">CRÍTICO</span></td>
+                </tr>
+                <tr class="bg-red-900/10 hover:bg-red-900/20 transition-colors">
+                    <td class="p-4 text-gray-400">Robo de Información</td>
+                    <td class="p-4 text-orange-400">Alta</td>
+                    <td class="p-4 text-red-400">Catastrófico</td>
+                    <td class="p-4"><span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold border border-red-500/30">CRÍTICO</span></td>
+                </tr>
+                <tr class="bg-orange-900/10 hover:bg-orange-900/20 transition-colors">
+                    <td class="p-4 text-gray-400">Interrupción de Servicios</td>
+                    <td class="p-4 text-yellow-400">Media</td>
+                    <td class="p-4 text-orange-400">Alto</td>
+                    <td class="p-4"><span class="px-2 py-1 bg-orange-500/20 text-orange-400 rounded text-xs font-bold border border-orange-500/30">ALTO</span></td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+        <div class="bg-[#030712] border-t-2 border-red-500 p-4 rounded shadow">
+            <h4 class="text-red-500 font-bold font-mono mb-1">Confidencialidad</h4>
+            <p class="text-gray-400 text-xs">Afectación total. Un atacante puede extraer y exponer públicamente todos los archivos alojados.</p>
+        </div>
+        <div class="bg-[#030712] border-t-2 border-red-500 p-4 rounded shadow">
+            <h4 class="text-red-500 font-bold font-mono mb-1">Integridad</h4>
+            <p class="text-gray-400 text-xs">Compromiso severo. Posibilidad de corromper logs, bases de datos o instalar backdoors persistentes.</p>
+        </div>
+        <div class="bg-[#030712] border-t-2 border-orange-500 p-4 rounded shadow">
+            <h4 class="text-orange-500 font-bold font-mono mb-1">Disponibilidad</h4>
+            <p class="text-gray-400 text-xs">Capacidad de ejecutar ransomware, cifrar los datos o interrumpir el servidor por completo.</p>
+        </div>
+      </div>
+
+      <h2 class="text-green-400 font-mono text-2xl mb-6 flex items-center gap-3">
+        <span class="text-gray-600">03_</span> ROADMAP DE REMEDIACIÓN
+      </h2>
+      <div class="bg-black/40 p-6 md:p-8 rounded-xl border border-gray-800 shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h4 class="text-violet-400 font-bold uppercase tracking-wider mb-4 border-b border-violet-500/20 pb-2">FASE 1: CONTENCIÓN (Días 1-15)</h4>
+                <ul class="space-y-4">
+                    <li class="flex gap-3">
+                        <span class="text-violet-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Parcheo de Kernel</strong>
+                            <span class="text-gray-400 text-xs">Actualización urgente del núcleo de Linux para neutralizar CVE-2016-5195.</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-violet-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Saneamiento de Directorios</strong>
+                            <span class="text-gray-400 text-xs">Eliminación de archivos con credenciales en texto plano.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-blue-400 font-bold uppercase tracking-wider mb-4 border-b border-blue-500/20 pb-2">FASE 2: ENDURECIMIENTO (Días 16-45)</h4>
+                <ul class="space-y-4">
+                    <li class="flex gap-3">
+                        <span class="text-blue-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Hardening FTP/SMB</strong>
+                            <span class="text-gray-400 text-xs">Deshabilitar accesos anónimos e implementar Listas de Control de Acceso (ACLs).</span>
+                        </div>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-blue-500 shrink-0">></span>
+                        <div>
+                            <strong class="text-gray-200 block text-sm">Despliegue de SSH Robusto</strong>
+                            <span class="text-gray-400 text-xs">Reemplazar passwords por llaves criptográficas (RSA 4096 / Ed25519).</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
       </div>
     `
   },
