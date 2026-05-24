@@ -7,7 +7,6 @@ const Act09Simulator = () => {
     const [shellUser, setShellUser] = useState('kali@kali');
     const [shellPath, setShellPath] = useState('~');
     const terminalContainerRef = useRef(null);
-    const inputRef = useRef(null);
 
     const promptStr = `${shellUser}:~${shellPath === '~' ? '' : shellPath}$ `;
 
@@ -34,11 +33,6 @@ const Act09Simulator = () => {
             terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
         }
     }, [terminalHistory]);
-
-    useEffect(() => {
-        // Focus input on mount instead of using autoFocus prop which can cause scroll jumps
-        inputRef.current?.focus({ preventScroll: true });
-    }, []);
 
     const executeCommand = (cmdToExecute) => {
         const rawCmd = cmdToExecute.trim();
@@ -181,17 +175,14 @@ const Act09Simulator = () => {
         setTerminalHistory(prev => [...prev, ...response]);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Strongly prevent any native browser behavior
-        if (terminalInput) {
-            executeCommand(terminalInput);
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Strongly prevent any native browser behavior
+            if (terminalInput) {
+                executeCommand(terminalInput);
+            }
+            setTerminalInput('');
         }
-        setTerminalInput('');
-        
-        // Re-focus input immediately after command execution
-        setTimeout(() => {
-            inputRef.current?.focus({ preventScroll: true });
-        }, 0);
     };
 
     return (
@@ -279,19 +270,19 @@ const Act09Simulator = () => {
                     })}
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-900 w-full">
+                <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-900 w-full">
                     <span className={shellUser.includes('root') ? "text-red-500 font-bold" : "text-violet-400 font-bold"}>
                         ┌──({shellUser})-[{shellPath}]<br/>└─$
                     </span>
                     <input
-                        ref={inputRef}
                         type="text"
                         value={terminalInput}
                         onChange={(e) => setTerminalInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         spellCheck="false"
                         className="flex-grow bg-transparent text-white focus:outline-none border-none caret-violet-400 font-mono text-sm self-end pb-0.5"
                     />
-                </form>
+                </div>
             </div>
             <div className="bg-gray-900/50 p-3 text-center border-t border-violet-500/10">
                 <p className="text-[10px] text-gray-500 font-mono uppercase tracking-widest flex items-center justify-center gap-2">
