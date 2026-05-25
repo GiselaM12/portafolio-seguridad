@@ -10,7 +10,7 @@ import DiamondModel from '../components/DiamondModel';
 import PR03Dashboard from '../components/PR03Dashboard';
 import Act09Simulator from '../components/Act09Simulator';
 import PrivacySecuritySimulator from '../components/PrivacySecuritySimulator';
-import Act12Simulator from '../components/Act12Simulator';
+import Act11Report from '../components/Act11Report';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -419,7 +419,7 @@ const ActivityDetail = () => {
                         {/* Interactive Simulator Segment for Act 11 */}
                         {String(activity.id) === '11' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-emerald-900/50">
-                                <Act12Simulator />
+                                <Act11Report />
                             </div>
                         )}
 
