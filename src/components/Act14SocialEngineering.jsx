@@ -164,11 +164,15 @@ const Act14SocialEngineering = () => {
                         <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-blue-500 text-black font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                             1
                         </div>
-                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-blue-500/30 p-5 rounded-xl shadow-md">
-                            <h4 className="font-bold text-blue-400 mb-2 font-mono">Fase 1: Vishing y Spoofing (Google)</h4>
-                            <p className="text-sm text-gray-300 leading-relaxed">
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-blue-500/30 p-5 rounded-xl shadow-md relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 blur-[30px] rounded-full pointer-events-none" />
+                            <h4 className="font-bold text-blue-400 mb-2 font-mono relative z-10">Fase 1: Vishing y Spoofing (Google)</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed relative z-10">
                                 El atacante apodado <strong>"Wiz" (Chetal Veer)</strong> inició la operación mediante una llamada telefónica (Vishing) falsificando el número de origen (Spoofing) para hacerse pasar por el área de soporte oficial de Google. Alertaron a la víctima sobre un falso inicio de sesión no autorizado, logrando obtener de forma verbal el acceso y control inicial a sus cuentas críticas (Google e iCloud).
                             </p>
+                        </div>
+                        <div className="hidden md:flex w-[calc(50%-2.5rem)] justify-center items-center px-8">
+                            <img src="/portafolio-seguridad/parcial3/act14_images/phase1.png" alt="Spoofed Google Call" className="rounded-2xl opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.2)] object-cover w-full max-h-48" />
                         </div>
                     </div>
 
@@ -177,11 +181,15 @@ const Act14SocialEngineering = () => {
                         <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-yellow-500 text-black font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(234,179,8,0.5)]">
                             2
                         </div>
-                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-yellow-500/30 p-5 rounded-xl shadow-md">
-                            <h4 className="font-bold text-yellow-400 mb-2 font-mono">Fase 2: Tácticas de Miedo (Urgencia)</h4>
-                            <p className="text-sm text-gray-300 leading-relaxed">
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-yellow-500/30 p-5 rounded-xl shadow-md relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-yellow-500/10 blur-[30px] rounded-full pointer-events-none" />
+                            <h4 className="font-bold text-yellow-400 mb-2 font-mono relative z-10">Fase 2: Tácticas de Miedo (Urgencia)</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed relative z-10">
                                 Habiendo penetrado la primera capa, los estafadores explotaron el factor psicológico induciendo pánico extremo. Convencieron a la víctima de que el "hacker" estaba a punto de vaciar todos sus activos en la plataforma criptográfica Gemini, forzando un estado mental de <strong>urgencia</strong> en el que la víctima dejó de verificar la legitimidad de las indicaciones.
                             </p>
+                        </div>
+                        <div className="hidden md:flex w-[calc(50%-2.5rem)] justify-center items-center px-8">
+                            <img src="/portafolio-seguridad/parcial3/act14_images/phase2.png" alt="Urgency Warning" className="rounded-2xl opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 border border-yellow-500/20 shadow-[0_0_20px_rgba(234,179,8,0.2)] object-cover w-full max-h-48" />
                         </div>
                     </div>
 
@@ -190,11 +198,15 @@ const Act14SocialEngineering = () => {
                         <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-orange-500 text-black font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(249,115,22,0.5)]">
                             3
                         </div>
-                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-orange-500/30 p-5 rounded-xl shadow-md">
-                            <h4 className="font-bold text-orange-400 mb-2 font-mono">Fase 3: Tech Support Scam (Gemini)</h4>
-                            <p className="text-sm text-gray-300 leading-relaxed">
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-orange-500/30 p-5 rounded-xl shadow-md relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-orange-500/10 blur-[30px] rounded-full pointer-events-none" />
+                            <h4 className="font-bold text-orange-400 mb-2 font-mono relative z-10">Fase 3: Tech Support Scam (Gemini)</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed relative z-10">
                                 Entra en juego <strong>"Box" (Serrano Jeandiel)</strong>, un segundo actor que fingió ser un especialista en seguridad de la plataforma Gemini. Instruyó a la víctima para resetear el Doble Factor de Autenticación (2FA). Para "ayudarle" a asegurar sus 4,064 BTC, lo convenció de instalar <strong>AnyDesk</strong>, una herramienta legítima de acceso remoto.
                             </p>
+                        </div>
+                        <div className="hidden md:flex w-[calc(50%-2.5rem)] justify-center items-center px-8">
+                            <img src="/portafolio-seguridad/parcial3/act14_images/phase3.png" alt="Anydesk screen share" className="rounded-2xl opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 border border-orange-500/20 shadow-[0_0_20px_rgba(249,115,22,0.2)] object-cover w-full max-h-48" />
                         </div>
                     </div>
 
@@ -203,11 +215,15 @@ const Act14SocialEngineering = () => {
                         <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-red-500 text-white font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(239,68,68,0.5)]">
                             4
                         </div>
-                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-red-500/30 p-5 rounded-xl shadow-md">
-                            <h4 className="font-bold text-red-400 mb-2 font-mono">Fase 4: Screen-sharing & Exfiltración</h4>
-                            <p className="text-sm text-gray-300 leading-relaxed">
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-red-500/30 p-5 rounded-xl shadow-md relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-20 h-20 bg-red-500/10 blur-[30px] rounded-full pointer-events-none" />
+                            <h4 className="font-bold text-red-400 mb-2 font-mono relative z-10">Fase 4: Screen-sharing & Exfiltración</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed relative z-10">
                                 Con AnyDesk activo, los atacantes le pidieron a la víctima que abriera sus carteras para "transferir sus fondos a un entorno seguro". Al compartir la pantalla, los atacantes visualizaron las <strong>Claves Privadas</strong> en texto plano. En cuestión de segundos, tomaron control de las carteras, robaron $243 MDD y comenzaron un rápido proceso de lavado (Mixers y Chain Hopping) para perder el rastro.
                             </p>
+                        </div>
+                        <div className="hidden md:flex w-[calc(50%-2.5rem)] justify-center items-center px-8">
+                            <img src="/portafolio-seguridad/parcial3/act14_images/phase4.png" alt="Bitcoin exfiltration" className="rounded-2xl opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 border border-red-500/20 shadow-[0_0_20px_rgba(239,68,68,0.2)] object-cover w-full max-h-48" />
                         </div>
                     </div>
 
