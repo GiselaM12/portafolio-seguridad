@@ -28,6 +28,7 @@ const Projects = () => {
             case "11": return <FaFileAlt />; // Reporte Napping
             case "12": return <FaTerminal />; // Simulador Napping
             case "13": return <FaKeyboard />; // Keylogger Telegram
+            case "14": return <FaUserSecret />; // Ingeniería Social
             case "16": return <FaBalanceScale />; // Dilemas Éticos
             case "17": return <FaShieldAlt />; // CVSS v3.1
             case "18": return <FaProjectDiagram />; // Modelo Diamante
@@ -61,7 +62,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: act.id !== "PR02"
         })).concat([lockedCard]),
-        parcial3: activities.filter(act => String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03")
+        parcial3: activities.filter(act => String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13" || String(act.id) === "14" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03")
             .sort((a, b) => (String(a.id).startsWith("PR") ? 1 : String(b.id).startsWith("PR") ? -1 : parseInt(a.id) - parseInt(b.id)))
             .map(act => ({
             id: act.id,

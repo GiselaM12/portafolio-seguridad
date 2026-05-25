@@ -13,6 +13,7 @@ import PrivacySecuritySimulator from '../components/PrivacySecuritySimulator';
 import Act11Report from '../components/Act11Report';
 import Act12Simulator from '../components/Act12Simulator';
 import Act13Keylogger from '../components/Act13Keylogger';
+import Act14SocialEngineering from '../components/Act14SocialEngineering';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -436,6 +437,13 @@ const ActivityDetail = () => {
                         {String(activity.id) === '13' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-blue-900/50">
                                 <Act13Keylogger />
+                            </div>
+                        )}
+
+                        {/* Interactive Case File Segment for Act 14 */}
+                        {String(activity.id) === '14' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-red-900/50">
+                                <Act14SocialEngineering />
                             </div>
                         )}
 

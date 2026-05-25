@@ -85,7 +85,7 @@ const Activities = () => {
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {activities.filter(act => act.id === "PR03" || String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18")
+                        {activities.filter(act => act.id === "PR03" || String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13" || String(act.id) === "14" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18")
                             .sort((a, b) => (String(a.id).startsWith("PR") ? 1 : String(b.id).startsWith("PR") ? -1 : parseInt(a.id) - parseInt(b.id)))
                             .map((activity, index) => (
                             <ActivityCard key={activity.id} activity={activity} index={index} />

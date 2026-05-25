@@ -2364,6 +2364,14 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     content: ``
   },
   {
+    id: 14,
+    title: "ACTIVIDAD 14 - Análisis de Caso: Ingeniería Social (El Arte del Engaño)",
+    description: "Análisis técnico y forense de una operación real de ingeniería social multietapa (Vishing y Tech Support Scam) que resultó en el robo de $243 millones de dólares en Bitcoin.",
+    date: "2026-04-15",
+    tags: ["Ingeniería Social", "Phishing", "Vishing", "OSINT", "Criptomonedas"],
+    content: ``
+  },
+  {
     id: 16,
     title: "ACTIVIDAD 16 - Dilemas Éticos en Ciberseguridad",
     description: "Análisis y resolución de dilemas éticos en ciberseguridad (Acceso no autorizado, vulnerabilidades críticas y OSINT) evaluados bajo marcos utilitaristas, de derechos, bien común e implicaciones legales.",
