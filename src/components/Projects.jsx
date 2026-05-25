@@ -52,7 +52,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: true
         })),
-        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10")
+        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10" || String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13")
             .sort((a, b) => (String(a.id).startsWith("PR") ? 1 : String(b.id).startsWith("PR") ? -1 : parseInt(a.id) - parseInt(b.id)))
             .map(act => ({
             id: act.id,
@@ -63,7 +63,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: act.id !== "PR02"
         })).concat([lockedCard]),
-        parcial3: activities.filter(act => String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13" || String(act.id) === "14" || String(act.id) === "15" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03")
+        parcial3: activities.filter(act => String(act.id) === "14" || String(act.id) === "15" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03")
             .sort((a, b) => (String(a.id).startsWith("PR") ? 1 : String(b.id).startsWith("PR") ? -1 : parseInt(a.id) - parseInt(b.id)))
             .map(act => ({
             id: act.id,
