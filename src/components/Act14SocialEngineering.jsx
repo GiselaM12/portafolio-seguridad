@@ -151,24 +151,66 @@ const Act14SocialEngineering = () => {
                 </div>
             </div>
 
-            {/* Kill Chain (Attack Flow) */}
-            <div>
-                <h3 className="text-xl font-bold text-gray-200 font-mono mb-6 flex items-center gap-2">
-                    <FaDesktop className="text-blue-500" /> Línea de Tiempo del Ataque (Kill Chain)
+            {/* Kill Chain (Attack Flow) - Detailed Breakdown */}
+            <div className="bg-[#0a0f1a] border border-gray-800 rounded-2xl p-6 md:p-10 shadow-lg">
+                <h3 className="text-2xl font-bold text-gray-200 font-mono mb-8 flex items-center gap-3 border-b border-gray-800 pb-4">
+                    <FaDesktop className="text-blue-500" /> Anatomía del Ataque (Ingeniería Social Multietapa)
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    {[
-                        { title: '1. Suplantación', desc: 'Llamada falsa haciéndose pasar por Google Support.', color: 'border-blue-500/50' },
-                        { title: '2. Urgencia', desc: 'Crean pánico sobre un falso hackeo en curso.', color: 'border-yellow-500/50' },
-                        { title: '3. Acceso Remoto', desc: 'Convencen a la víctima de instalar AnyDesk.', color: 'border-orange-500/50' },
-                        { title: '4. Exfiltración', desc: 'Roban las claves privadas y desvían los Bitcoins.', color: 'border-red-500/50' }
-                    ].map((step, i) => (
-                        <div key={i} className={`bg-[#0a0f1a] border-t-4 ${step.color} rounded-b-xl p-5 shadow-lg relative`}>
-                            <div className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-gray-800 border border-gray-600 flex items-center justify-center text-xs font-bold text-white">{i+1}</div>
-                            <h4 className="font-bold text-gray-200 mb-2">{step.title}</h4>
-                            <p className="text-xs text-gray-400">{step.desc}</p>
+                
+                <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-800 before:to-transparent">
+                    
+                    {/* Fase 1 */}
+                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-blue-500 text-black font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                            1
                         </div>
-                    ))}
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-blue-500/30 p-5 rounded-xl shadow-md">
+                            <h4 className="font-bold text-blue-400 mb-2 font-mono">Fase 1: Vishing y Spoofing (Google)</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                                El atacante apodado <strong>"Wiz" (Chetal Veer)</strong> inició la operación mediante una llamada telefónica (Vishing) falsificando el número de origen (Spoofing) para hacerse pasar por el área de soporte oficial de Google. Alertaron a la víctima sobre un falso inicio de sesión no autorizado, logrando obtener de forma verbal el acceso y control inicial a sus cuentas críticas (Google e iCloud).
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Fase 2 */}
+                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-yellow-500 text-black font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(234,179,8,0.5)]">
+                            2
+                        </div>
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-yellow-500/30 p-5 rounded-xl shadow-md">
+                            <h4 className="font-bold text-yellow-400 mb-2 font-mono">Fase 2: Tácticas de Miedo (Urgencia)</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                                Habiendo penetrado la primera capa, los estafadores explotaron el factor psicológico induciendo pánico extremo. Convencieron a la víctima de que el "hacker" estaba a punto de vaciar todos sus activos en la plataforma criptográfica Gemini, forzando un estado mental de <strong>urgencia</strong> en el que la víctima dejó de verificar la legitimidad de las indicaciones.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Fase 3 */}
+                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-orange-500 text-black font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(249,115,22,0.5)]">
+                            3
+                        </div>
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-orange-500/30 p-5 rounded-xl shadow-md">
+                            <h4 className="font-bold text-orange-400 mb-2 font-mono">Fase 3: Tech Support Scam (Gemini)</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                                Entra en juego <strong>"Box" (Serrano Jeandiel)</strong>, un segundo actor que fingió ser un especialista en seguridad de la plataforma Gemini. Instruyó a la víctima para resetear el Doble Factor de Autenticación (2FA). Para "ayudarle" a asegurar sus 4,064 BTC, lo convenció de instalar <strong>AnyDesk</strong>, una herramienta legítima de acceso remoto.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Fase 4 */}
+                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0f1a] bg-red-500 text-white font-bold z-10 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+                            4
+                        </div>
+                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#111827] border border-red-500/30 p-5 rounded-xl shadow-md">
+                            <h4 className="font-bold text-red-400 mb-2 font-mono">Fase 4: Screen-sharing & Exfiltración</h4>
+                            <p className="text-sm text-gray-300 leading-relaxed">
+                                Con AnyDesk activo, los atacantes le pidieron a la víctima que abriera sus carteras para "transferir sus fondos a un entorno seguro". Al compartir la pantalla, los atacantes visualizaron las <strong>Claves Privadas</strong> en texto plano. En cuestión de segundos, tomaron control de las carteras, robaron $243 MDD y comenzaron un rápido proceso de lavado (Mixers y Chain Hopping) para perder el rastro.
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
