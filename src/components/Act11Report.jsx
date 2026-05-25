@@ -119,63 +119,47 @@ const Act11Report = () => {
                 </div>
             </div>
 
-            {/* Timeline Sections */}
-            <div className="relative">
-                {/* Vertical Line */}
-                <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gray-800 hidden md:block" />
-                
-                <div className="space-y-16 relative">
-                    {stages.map((stage, idx) => (
-                        <div key={stage.id} className={`flex flex-col md:flex-row gap-8 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''} relative`}>
-                            {/* Connector Node */}
-                            <div className={`hidden md:flex absolute top-8 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full ${stage.bgColor} ${stage.borderColor} border-2 items-center justify-center ${stage.color} text-xl shadow-[0_0_15px_currentColor] z-10 bg-[#030712]`}>
+            {/* Report Sections (Clean Cards Design) */}
+            <div className="grid grid-cols-1 gap-8 mt-6">
+                {stages.map((stage) => (
+                    <div key={stage.id} className="bg-[#0a0f1a]/80 border border-gray-800 rounded-xl overflow-hidden shadow-lg group hover:border-gray-700 transition-all">
+                        <div className={`p-5 border-b border-gray-800 flex items-center gap-4 ${stage.bgColor}`}>
+                            <div className={`${stage.color} text-3xl bg-[#050913] p-3 rounded-lg border border-gray-800 shadow-inner`}>
                                 {stage.icon}
                             </div>
-                            
-                            {/* Content */}
-                            <div className="flex-1 md:w-1/2 md:px-12 pt-2">
-                                <div className={`border ${stage.borderColor} bg-[#0a0f1a]/60 backdrop-blur p-6 rounded-xl relative overflow-hidden group hover:border-opacity-100 transition-colors`}>
-                                    <div className={`absolute top-0 left-0 w-1 h-full ${stage.bgColor.replace('/10', '')}`} />
-                                    
-                                    <h3 className={`text-xl font-bold font-mono mb-3 ${stage.color} flex items-center gap-3`}>
-                                        <span className="md:hidden">{stage.icon}</span>
-                                        {stage.title}
-                                    </h3>
-                                    <p className="text-gray-400 text-sm mb-4 leading-relaxed font-semibold">
-                                        {stage.desc}
-                                    </p>
-                                    <ul className="space-y-2 mb-6">
-                                        {stage.details.map((detail, i) => (
-                                            <li key={i} className="text-gray-500 text-xs flex items-start gap-2">
-                                                <FaChevronRight className={`mt-0.5 text-[8px] flex-shrink-0 ${stage.color}`} />
-                                                <span dangerouslySetInnerHTML={{__html: detail.replace(/`([^`]+)`/g, '<code class="text-gray-300 bg-gray-900 px-1 rounded">$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong class="text-gray-200">$1</strong>')}} />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    
-                                    {/* Mini Image Gallery */}
-                                    <div className="grid grid-cols-2 gap-3 mt-4">
-                                        {stage.images.map((img, i) => (
-                                            <div 
-                                                key={i} 
-                                                className="group/img cursor-pointer relative rounded-lg overflow-hidden border border-gray-800"
-                                                onClick={() => setSelectedImage(img)}
-                                            >
-                                                <img src={img.src} alt={img.caption} className="w-full h-24 object-cover object-top opacity-70 group-hover/img:opacity-100 group-hover/img:scale-105 transition-all duration-500" />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-2">
-                                                    <span className="text-[9px] text-white font-mono truncate">{img.caption}</span>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div>
+                                <h3 className={`text-xl font-bold font-mono ${stage.color}`}>{stage.title}</h3>
+                                <p className="text-gray-400 text-sm mt-1">{stage.desc}</p>
                             </div>
-                            
-                            {/* Empty space for alternating layout */}
-                            <div className="hidden md:block flex-1" />
                         </div>
-                    ))}
-                </div>
+                        <div className="p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+                            <div className="flex-1">
+                                <ul className="space-y-4">
+                                    {stage.details.map((detail, i) => (
+                                        <li key={i} className="text-gray-300 text-sm md:text-base flex items-start gap-3 bg-[#050913]/50 p-3 rounded-lg border border-gray-800/50">
+                                            <FaChevronRight className={`mt-1 flex-shrink-0 ${stage.color}`} />
+                                            <span dangerouslySetInnerHTML={{__html: detail.replace(/`([^`]+)`/g, '<code class="text-emerald-300 bg-[#0a0f1a] px-1.5 py-0.5 rounded border border-gray-800 font-mono text-xs">$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-bold">$1</strong>')}} />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="lg:w-[45%] grid grid-cols-1 sm:grid-cols-2 gap-4 place-content-start">
+                                {stage.images.map((img, i) => (
+                                    <div 
+                                        key={i} 
+                                        className="group/img cursor-pointer relative rounded-lg overflow-hidden border border-gray-700 shadow-md h-40 bg-[#030712]"
+                                        onClick={() => setSelectedImage(img)}
+                                    >
+                                        <img src={img.src} alt={img.caption} className="w-full h-full object-cover object-top opacity-70 group-hover/img:opacity-100 group-hover/img:scale-110 transition-all duration-500" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 flex items-end">
+                                            <span className="text-xs text-gray-200 font-mono line-clamp-2 leading-snug drop-shadow-md">{img.caption}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
 
             {/* Matriz de Impacto y Recomendaciones */}
