@@ -33,6 +33,8 @@ const PdfViewerPage = () => {
             8: "parcial2/act08-Equipo1.pdf",
             9: "parcial2/act09-Equipo1.pdf",
             10: "parcial2/act10-Equipo1.pdf",
+            11: "parcial2/act11-Equipo1.pdf",
+            15: "parcial3/act15-Equipo1.pdf",
             16: "parcial3/act16-Equipo1.pdf",
             17: "parcial3/act17-Equipo1.pdf",
             18: "parcial3/act18-Equipo1.pdf"

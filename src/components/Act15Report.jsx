@@ -22,7 +22,7 @@ const Act15Report = () => {
                     
                     <div className="flex flex-col gap-3 flex-shrink-0 min-w-[200px]">
                         <a 
-                            href="/portafolio-seguridad/#/pdf/parcial3/act15-Equipo1.pdf" 
+                            href="/portafolio-seguridad/#/visor-pdf/15" 
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-3 rounded-xl transition-all flex items-center justify-center gap-3 font-bold shadow-lg shadow-indigo-500/20"
