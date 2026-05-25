@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTerminal, FaShieldAlt, FaServer, FaBug, FaNetworkWired, FaKey, FaSkullCrossbones, FaSearch, FaExclamationTriangle, FaChevronRight, FaTimes } from 'react-icons/fa';
-import Act12Simulator from './Act12Simulator';
 
-const Act12Report = () => {
+const Act11Report = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const stages = [
@@ -236,8 +235,8 @@ const Act12Report = () => {
             </div>
 
             {/* Interactive Simulator Enclosure */}
-            <div className="mt-8">
-                <Act12Simulator />
+            <div className="mt-8 hidden">
+                {/* Removido para independizar la actividad 12 */}
             </div>
 
             {/* Image Lightbox Modal */}
@@ -277,4 +276,4 @@ const Act12Report = () => {
     );
 };
 
-export default Act12Report;
+export default Act11Report;

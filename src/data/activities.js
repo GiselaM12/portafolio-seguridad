@@ -2523,10 +2523,30 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     `
   },
   {
+    id: 11,
+    title: "ACTIVIDAD 11 - Reporte Técnico: Pentesting de Napping 101",
+    description: "Reporte ejecutivo y técnico de la evaluación de vulnerabilidades, documentando el ataque de phishing (Tabnabbing) y abuso de tareas programadas.",
+    date: "2026-03-22",
+    tags: ["Reporte", "Red Team", "Tabnabbing", "Cron", "Phishing"],
+    content: `
+      <div class="border border-emerald-500/30 bg-[#020805] p-4 rounded-lg font-mono text-xs text-emerald-400/80 mb-6 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+        <p>[SYSTEM] DOCUMENTATION MODULE ONLINE.</p>
+        <p>[STATUS] RED TEAM REPORT - NAPPING 101.</p>
+        <p>[AUTHOR] EQUIPO 1 - CNO V.</p>
+      </div>
+      <div class="mb-10 text-gray-300 space-y-6">
+        <p class="leading-relaxed">
+            Este apartado contiene el análisis documental y la línea de tiempo técnica extraída del reporte formal entregado sobre la máquina Napping 101. 
+            A continuación se presenta el desglose interactivo del ataque, las evidencias recabadas y la matriz de impacto.
+        </p>
+      </div>
+    `
+  },
+  {
     id: 12,
     title: "ACTIVIDAD 12 - Laboratorio: Escalada de Privilegios y Movimiento Lateral",
-    description: "Análisis y explotación de vulnerabilidades de configuración en Linux, incluyendo abuso de permisos Sudo en Vim.",
-    date: "2026-03-18",
+    description: "Simulador práctico de explotación de vulnerabilidades de configuración en Linux, incluyendo abuso de permisos Sudo en Vim.",
+    date: "2026-03-22",
     tags: ["Privesc", "Movimiento Lateral", "Vim", "Sudo", "Linux"],
     content: `
       <div class="border border-emerald-500/30 bg-[#020805] p-4 rounded-lg font-mono text-xs text-emerald-400/80 mb-6 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
