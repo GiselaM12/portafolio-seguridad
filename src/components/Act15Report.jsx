@@ -20,15 +20,7 @@ const Act15Report = () => {
                         </p>
                     </div>
                     
-                    <div className="flex flex-col gap-3 flex-shrink-0 min-w-[200px]">
-                        <a 
-                            href="/portafolio-seguridad/#/visor-pdf/15" 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-3 rounded-xl transition-all flex items-center justify-center gap-3 font-bold shadow-lg shadow-indigo-500/20"
-                        >
-                            <FaFilePdf className="text-xl" /> Ver PDF Original
-                        </a>
+                    <div className="flex flex-col gap-3 flex-shrink-0 min-w-[200px] justify-center">
                         <div className="grid grid-cols-2 gap-2">
                             <div className="bg-[#0a0f1a] border border-gray-800 p-2 rounded-lg flex flex-col items-center justify-center text-center">
                                 <span className="text-[10px] text-gray-500 font-mono uppercase">MTA Local</span>

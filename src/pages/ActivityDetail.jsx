@@ -46,6 +46,8 @@ const ActivityDetail = () => {
             8: "parcial2/act08-Equipo1.pdf",
             9: "parcial2/act09-Equipo1.pdf",
             10: "parcial2/act10-Equipo1.pdf",
+            11: "parcial2/act11-Equipo1.pdf",
+            15: "parcial3/act15-Equipo1.pdf",
             16: "parcial3/act16-Equipo1.pdf",
             17: "parcial3/act17-Equipo1.pdf",
             18: "parcial3/act18-Equipo1.pdf"
@@ -200,7 +202,7 @@ const ActivityDetail = () => {
                     </nav>
 
                     <div className="flex items-center gap-3">
-                        {fileUrl ? (
+                        {fileUrl && (
                             <>
                                 {isPdf && (
                                     <Link
@@ -236,11 +238,6 @@ const ActivityDetail = () => {
                                     </a>
                                 )}
                             </>
-                        ) : (
-                            <div className="px-6 py-2 border border-gray-700 text-gray-600 font-mono text-sm tracking-widest rounded cursor-not-allowed opacity-50 flex items-center gap-3">
-                                <FaFilePdf className="text-lg" />
-                                <span>FILE_NOT_FOUND</span>
-                            </div>
                         )}
                     </div>
                 </div>
