@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaTerminal, FaPlay, FaSkullCrossbones, FaNetworkWired, FaKey, FaLinux, FaExclamationTriangle } from 'react-icons/fa';
 
-const Act11Simulator = () => {
+const Act12Simulator = () => {
     const [terminalHistory, setTerminalHistory] = useState([]);
     const [terminalInput, setTerminalInput] = useState('');
     const [shellUser, setShellUser] = useState('gisela@kali');
@@ -244,4 +244,4 @@ const Act11Simulator = () => {
     );
 };
 
-export default Act11Simulator;
+export default Act12Simulator;

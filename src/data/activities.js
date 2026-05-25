@@ -2523,8 +2523,8 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     `
   },
   {
-    id: 11,
-    title: "ACTIVIDAD 11 - Laboratorio: Escalada de Privilegios y Movimiento Lateral",
+    id: 12,
+    title: "ACTIVIDAD 12 - Laboratorio: Escalada de Privilegios y Movimiento Lateral",
     description: "Análisis y explotación de vulnerabilidades de configuración en Linux, incluyendo abuso de permisos Sudo en Vim.",
     date: "2026-03-18",
     tags: ["Privesc", "Movimiento Lateral", "Vim", "Sudo", "Linux"],

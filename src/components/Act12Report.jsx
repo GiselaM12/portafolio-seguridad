@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTerminal, FaShieldAlt, FaServer, FaBug, FaNetworkWired, FaKey, FaSkullCrossbones, FaSearch, FaExclamationTriangle, FaChevronRight, FaTimes } from 'react-icons/fa';
-import Act11Simulator from './Act11Simulator';
+import Act12Simulator from './Act12Simulator';
 
-const Act11Report = () => {
+const Act12Report = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const stages = [
@@ -237,7 +237,7 @@ const Act11Report = () => {
 
             {/* Interactive Simulator Enclosure */}
             <div className="mt-8">
-                <Act11Simulator />
+                <Act12Simulator />
             </div>
 
             {/* Image Lightbox Modal */}
@@ -277,4 +277,4 @@ const Act11Report = () => {
     );
 };
 
-export default Act11Report;
+export default Act12Report;
