@@ -25,6 +25,8 @@ const Projects = () => {
             case "6": return <FaNetworkWired />; // VPN
             case "8": return <FaDatabase />; // SQL Injection
             case "10": return <FaShieldAlt />; // Datos y Privacidad
+            case "11": return <FaSearch />; // OSINT
+            case "12": return <FaTerminal />; // Napping Privesc
             case "16": return <FaBalanceScale />; // Dilemas Éticos
             case "17": return <FaShieldAlt />; // CVSS v3.1
             case "18": return <FaProjectDiagram />; // Modelo Diamante
@@ -45,7 +47,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: true
         })),
-        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10").map(act => ({
+        parcial2: activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10" || String(act.id) === "11").map(act => ({
             id: act.id,
             icon: getIconForActivity(act.id),
             title: act.title,
@@ -54,7 +56,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: act.id !== "PR02"
         })).concat([lockedCard]),
-        parcial3: activities.filter(act => String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03").map(act => ({
+        parcial3: activities.filter(act => String(act.id) === "12" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03").map(act => ({
             id: act.id,
             icon: getIconForActivity(act.id),
             title: act.title,
