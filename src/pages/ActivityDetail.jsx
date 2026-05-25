@@ -14,6 +14,7 @@ import Act11Report from '../components/Act11Report';
 import Act12Simulator from '../components/Act12Simulator';
 import Act13Keylogger from '../components/Act13Keylogger';
 import Act14SocialEngineering from '../components/Act14SocialEngineering';
+import Act15Report from '../components/Act15Report';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -444,6 +445,13 @@ const ActivityDetail = () => {
                         {String(activity.id) === '14' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-red-900/50">
                                 <Act14SocialEngineering />
+                            </div>
+                        )}
+
+                        {/* Interactive Segment for Act 15 */}
+                        {String(activity.id) === '15' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-indigo-900/50">
+                                <Act15Report />
                             </div>
                         )}
 

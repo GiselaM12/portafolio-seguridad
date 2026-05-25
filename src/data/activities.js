@@ -2372,6 +2372,14 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     content: ``
   },
   {
+    id: 15,
+    title: "ACTIVIDAD 15 - Reporte: Simulación de Phishing Evasivo mediante SET y Relay SMTP",
+    description: "Documentación técnica de arquitectura evasiva combinando Social-Engineer Toolkit, Postfix y Brevo para evadir filtros anti-spam mediante reputación criptográfica delegada y Display Name Spoofing.",
+    date: "2026-04-26",
+    tags: ["Phishing", "SET", "Postfix", "SMTP Relay", "Red Teaming"],
+    content: ``
+  },
+  {
     id: 16,
     title: "ACTIVIDAD 16 - Dilemas Éticos en Ciberseguridad",
     description: "Análisis y resolución de dilemas éticos en ciberseguridad (Acceso no autorizado, vulnerabilidades críticas y OSINT) evaluados bajo marcos utilitaristas, de derechos, bien común e implicaciones legales.",
