@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret, FaBalanceScale, FaProjectDiagram, FaFileAlt } from 'react-icons/fa';
+import { FaFolderPlus, FaLock, FaHourglassHalf, FaTerminal, FaDatabase, FaExternalLinkAlt, FaShieldAlt, FaBug, FaNetworkWired, FaServer, FaSearch, FaUserSecret, FaBalanceScale, FaProjectDiagram, FaFileAlt, FaKeyboard } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { activities } from '../data/activities';
 
@@ -27,6 +27,7 @@ const Projects = () => {
             case "10": return <FaShieldAlt />; // Datos y Privacidad
             case "11": return <FaFileAlt />; // Reporte Napping
             case "12": return <FaTerminal />; // Simulador Napping
+            case "13": return <FaKeyboard />; // Keylogger Telegram
             case "16": return <FaBalanceScale />; // Dilemas Éticos
             case "17": return <FaShieldAlt />; // CVSS v3.1
             case "18": return <FaProjectDiagram />; // Modelo Diamante
@@ -60,7 +61,7 @@ const Projects = () => {
             link: `/actividades/${act.id}`,
             isActivity: act.id !== "PR02"
         })).concat([lockedCard]),
-        parcial3: activities.filter(act => String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03")
+        parcial3: activities.filter(act => String(act.id) === "11" || String(act.id) === "12" || String(act.id) === "13" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18" || String(act.id) === "PR03")
             .sort((a, b) => (String(a.id).startsWith("PR") ? 1 : String(b.id).startsWith("PR") ? -1 : parseInt(a.id) - parseInt(b.id)))
             .map(act => ({
             id: act.id,

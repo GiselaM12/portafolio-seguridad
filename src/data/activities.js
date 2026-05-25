@@ -2356,6 +2356,14 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
     `
   },
   {
+    id: 13,
+    title: "ACTIVIDAD 13 - Desarrollo: Keylogger & Exfiltración vía Telegram",
+    description: "Desarrollo de un script en Python (pynput) para la intercepción de eventos de teclado a nivel de SO y exfiltración C&C mediante la Telegram Bot API.",
+    date: "2026-03-25",
+    tags: ["Keylogger", "Python", "Telegram API", "Malware"],
+    content: ``
+  },
+  {
     id: 16,
     title: "ACTIVIDAD 16 - Dilemas Éticos en Ciberseguridad",
     description: "Análisis y resolución de dilemas éticos en ciberseguridad (Acceso no autorizado, vulnerabilidades críticas y OSINT) evaluados bajo marcos utilitaristas, de derechos, bien común e implicaciones legales.",

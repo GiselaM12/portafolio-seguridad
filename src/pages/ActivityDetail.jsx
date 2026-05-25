@@ -12,6 +12,7 @@ import Act09Simulator from '../components/Act09Simulator';
 import PrivacySecuritySimulator from '../components/PrivacySecuritySimulator';
 import Act11Report from '../components/Act11Report';
 import Act12Simulator from '../components/Act12Simulator';
+import Act13Keylogger from '../components/Act13Keylogger';
 
 const ActivityDetail = () => {
     const { id } = useParams();
@@ -428,6 +429,13 @@ const ActivityDetail = () => {
                         {String(activity.id) === '12' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-emerald-900/50">
                                 <Act12Simulator />
+                            </div>
+                        )}
+
+                        {/* Interactive Simulator Segment for Act 13 */}
+                        {String(activity.id) === '13' && (
+                            <div className="mt-16 pt-16 border-t-2 border-dashed border-blue-900/50">
+                                <Act13Keylogger />
                             </div>
                         )}
 
