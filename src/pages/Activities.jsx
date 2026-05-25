@@ -67,7 +67,21 @@ const Activities = () => {
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10" || String(act.id) === "11" || String(act.id) === "12").map((activity, index) => (
+                        {activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10" || String(act.id) === "11").map((activity, index) => (
+                            <ActivityCard key={activity.id} activity={activity} index={index} />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Parcial 3 Section */}
+                <div className="mb-20">
+                    <div className="inline-block px-6 py-3 bg-[#0a0f1a]/80 border border-emerald-500/30 rounded-xl backdrop-blur-md shadow-lg shadow-emerald-500/10 mb-10">
+                        <h2 className="text-emerald-400 font-mono text-sm md:text-base tracking-widest flex items-center justify-center gap-2 uppercase">
+                            <FaLock /> PARCIAL 3: GESTIÓN DE INCIDENTES Y CIBERINTELIGENCIA
+                        </h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {activities.filter(act => act.id === "PR03" || String(act.id) === "12" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18").map((activity, index) => (
                             <ActivityCard key={activity.id} activity={activity} index={index} />
                         ))}
                     </div>
