@@ -67,7 +67,7 @@ const Activities = () => {
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10" || String(act.id) === "11").map((activity, index) => (
+                        {activities.filter(act => act.id === "PR02" || String(act.id) === "8" || String(act.id) === "9" || String(act.id) === "10").map((activity, index) => (
                             <ActivityCard key={activity.id} activity={activity} index={index} />
                         ))}
                     </div>
@@ -81,7 +81,7 @@ const Activities = () => {
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {activities.filter(act => act.id === "PR03" || String(act.id) === "12" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18").map((activity, index) => (
+                        {activities.filter(act => act.id === "PR03" || String(act.id) === "11" || String(act.id) === "16" || String(act.id) === "17" || String(act.id) === "18").map((activity, index) => (
                             <ActivityCard key={activity.id} activity={activity} index={index} />
                         ))}
                     </div>

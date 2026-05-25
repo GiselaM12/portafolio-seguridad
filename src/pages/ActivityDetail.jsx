@@ -416,8 +416,8 @@ const ActivityDetail = () => {
                             </div>
                         )}
 
-                        {/* Interactive Simulator Segment for Act 12 */}
-                        {String(activity.id) === '12' && (
+                        {/* Interactive Simulator Segment for Act 11 */}
+                        {String(activity.id) === '11' && (
                             <div className="mt-16 pt-16 border-t-2 border-dashed border-emerald-900/50">
                                 <Act12Simulator />
                             </div>
