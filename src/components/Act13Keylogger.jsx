@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTerminal, FaTelegramPlane, FaCode, FaKeyboard, FaPaperPlane, FaFileAlt, FaShieldAlt, FaUserSecret } from 'react-icons/fa';
+import { FaTerminal, FaTelegramPlane, FaCode, FaKeyboard, FaPaperPlane, FaFileAlt, FaShieldAlt, FaUserSecret, FaPlay } from 'react-icons/fa';
 
 const Act13Keylogger = () => {
     // Simulator State
