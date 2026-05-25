@@ -2521,6 +2521,100 @@ Switch(config-if-range)# <span class="text-white">switchport port-security mac-a
         </p>
       </div>
     `
+  },
+  {
+    id: 12,
+    title: "ACTIVIDAD 12 - Laboratorio: Escalada de Privilegios y Movimiento Lateral",
+    description: "Análisis y explotación de vulnerabilidades de configuración en Linux, incluyendo abuso de permisos Sudo en Vim.",
+    date: "2026-03-18",
+    tags: ["Privesc", "Movimiento Lateral", "Vim", "Sudo", "Linux"],
+    content: `
+      <div class="border border-emerald-500/30 bg-[#020805] p-4 rounded-lg font-mono text-xs text-emerald-400/80 mb-6 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+        <p>[SYSTEM] PRIVILEGE ESCALATION MODULE ONLINE.</p>
+        <p>[STATUS] ACTIVE PORTAFOLIO SUBMISSION - PARCIAL 2 PROJECT.</p>
+        <p>[METRICS] TARGET: NAPPING | OS: UBUNTU 20.04.3 LTS</p>
+      </div>
+
+      <div class="mb-10 text-gray-300 space-y-6">
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+            <div class="flex-1 space-y-4">
+                <h3 class="text-xl font-bold text-emerald-400 font-mono border-b border-gray-800 pb-2">Contexto del Laboratorio</h3>
+                <p class="leading-relaxed">
+                    Esta actividad documenta la resolución de un escenario de ciberseguridad enfocado en el <strong>Movimiento Lateral</strong> y la <strong>Escalada de Privilegios</strong> dentro de un sistema Linux (identificado como "napping").
+                </p>
+                <p class="leading-relaxed">
+                    Partiendo de un acceso inicial de bajo privilegio, el objetivo es comprometer la confidencialidad e integridad del sistema moviéndose lateralmente hacia otro usuario y, finalmente, abusando de configuraciones defectuosas en los permisos de <code class="bg-gray-800 px-1 rounded text-emerald-300">sudo</code> para obtener acceso root total.
+                </p>
+            </div>
+            <div class="md:w-1/3 flex-shrink-0">
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.15)] relative group bg-emerald-950/20 p-8 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020805] via-transparent to-transparent opacity-80 z-10"></div>
+                    <div class="flex space-x-2 relative z-20">
+                        <div class="w-10 h-10 rounded-full border-2 border-emerald-500 flex items-center justify-center font-bold text-emerald-400">D</div>
+                        <div class="w-8 border-b-2 border-emerald-500/50 self-center"></div>
+                        <div class="w-10 h-10 rounded-full border-2 border-amber-500 flex items-center justify-center font-bold text-amber-400">A</div>
+                        <div class="w-8 border-b-2 border-red-500/50 self-center"></div>
+                        <div class="w-10 h-10 rounded-full border-2 border-red-500 bg-red-900/20 flex items-center justify-center font-bold text-red-500">R</div>
+                    </div>
+                    <div class="absolute bottom-2 left-3 z-20 font-mono text-[9px] text-emerald-400 uppercase">
+                        [FIG. 1] Vector de Privesc (Daniel > Adrian > Root)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-xl font-bold text-emerald-400 font-mono mt-8 border-b border-gray-800 pb-2">Análisis de la Vulnerabilidad (GTFOBins)</h3>
+        <p class="leading-relaxed mb-4">
+            La principal falla de seguridad en este escenario radica en la asignación de permisos Sudo excesivos. El usuario <code>adrian</code> está configurado en el archivo <code>/etc/sudoers</code> para poder ejecutar el editor de texto <strong>Vim</strong> como root sin requerir contraseña (<code>NOPASSWD: /usr/bin/vim</code>).
+        </p>
+        <p class="leading-relaxed mb-4">
+            Vim no es solo un editor de texto; tiene la capacidad de ejecutar comandos del sistema (shell scripts) desde su propia interfaz. Según el proyecto <strong>GTFOBins</strong>, si un usuario puede ejecutar Vim como root vía sudo, puede escapar fácilmente del editor y obtener una shell interactiva como root utilizando el comando: 
+            <code class="bg-red-900/30 border border-red-500/50 text-red-400 px-2 py-1 rounded ml-2 block mt-2 text-center w-fit font-mono">:!/bin/sh</code>
+        </p>
+
+        <h3 class="text-xl font-bold text-emerald-400 font-mono mt-8 border-b border-gray-800 pb-2">Metodología Aplicada</h3>
+        <ul class="list-none space-y-4 font-mono text-sm">
+            <li class="flex gap-4">
+                <span class="text-emerald-500">01.</span>
+                <div>
+                    <strong class="text-gray-200">Acceso Inicial (SSH):</strong> 
+                    <span class="text-gray-400 block mt-1">Conexión exitosa como el usuario <code>daniel</code> en la IP <code>192.168.56.103</code>. Aunque <code>daniel</code> no tenía privilegios para ejecutar sudo, esto sirvió como punto de apoyo (foothold) en la red interna.</span>
+                </div>
+            </li>
+            <li class="flex gap-4">
+                <span class="text-blue-400">02.</span>
+                <div>
+                    <strong class="text-gray-200">Movimiento Lateral (Reverse Shell):</strong> 
+                    <span class="text-gray-400 block mt-1">A través de un vector secundario (probablemente la modificación del script <code>query.py</code> propiedad de <code>adrian</code> ejecutado por una tarea cron), se forzó a la máquina a enviar una conexión reversa. Capturada en Kali mediante <code>nc -lvnp 4444</code>, obteniendo acceso como <code>adrian</code>.</span>
+                </div>
+            </li>
+            <li class="flex gap-4">
+                <span class="text-amber-400">03.</span>
+                <div>
+                    <strong class="text-gray-200">Mejora de la Shell y Enumeración:</strong> 
+                    <span class="text-gray-400 block mt-1">Se estabilizó la shell usando <code>python3 -c 'import pty;pty.spawn("/bin/bash")'</code>. Al enumerar los privilegios con <code>sudo -l</code>, se identificó el vector de ataque en <code>/usr/bin/vim</code>.</span>
+                </div>
+            </li>
+            <li class="flex gap-4">
+                <span class="text-red-500">04.</span>
+                <div>
+                    <strong class="text-gray-200">Explotación y Root:</strong> 
+                    <span class="text-gray-400 block mt-1">Ejecutando <code>sudo /usr/bin/vim -c ':!/bin/sh'</code>, el sistema invocó Vim con permisos de superusuario y de inmediato ejecutó una shell de sistema (sh). El comando <code>whoami</code> confirmó el compromiso total: <code>root</code>.</span>
+                </div>
+            </li>
+        </ul>
+
+        <h3 class="text-xl font-bold text-emerald-400 font-mono mt-8 border-b border-gray-800 pb-2">Remediación y Buenas Prácticas</h3>
+        <div class="bg-gray-900/50 border-l-4 border-emerald-500 p-4">
+            <p class="mb-2 text-sm text-gray-300">Para prevenir este tipo de escalada de privilegios, las organizaciones deben aplicar el <strong>Principio de Privilegio Mínimo (PoLP)</strong>:</p>
+            <ul class="list-disc pl-5 space-y-1 text-sm text-gray-400">
+                <li>Auditar regularmente el archivo <code>/etc/sudoers</code> para detectar directivas <code>NOPASSWD</code> innecesarias.</li>
+                <li>Restringir la ejecución de binarios que permiten la ejecución de subshells (como vim, less, awk, find, nmap, etc.) a través de sudo.</li>
+                <li>Si es necesario editar archivos como root, utilizar <code>sudoedit</code> en lugar de <code>sudo vim</code>, ya que <code>sudoedit</code> copia el archivo, lo edita con los privilegios del usuario normal, y luego lo sobrescribe, evitando la ejecución de comandos con privilegios elevados.</li>
+            </ul>
+        </div>
+      </div>
+    `
   }
 ];
 
